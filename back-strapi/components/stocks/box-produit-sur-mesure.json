@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_stocks_box_produit_sur_mesures",
+  "info": {
+    "name": "BoxProduitSurMesure",
+    "icon": "box-open"
+  },
+  "options": {},
+  "attributes": {
+    "stock": {
+      "type": "biginteger"
+    },
+    "produit": {
+      "model": "produit"
+    }
+  }
+}

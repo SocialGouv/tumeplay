@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/box-sur-mesure",
+      "handler": "box-sur-mesure.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/box-sur-mesure",
+      "handler": "box-sur-mesure.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/box-sur-mesure",
+      "handler": "box-sur-mesure.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

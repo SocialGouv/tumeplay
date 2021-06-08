@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "Question",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text_question": {
+      "type": "string",
+      "required": true
+    },
+    "text_answer": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "responses": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contenus.reponses-textes",
+      "required": true
+    },
+    "theme": {
+      "model": "thematique"
+    }
+  }
+}

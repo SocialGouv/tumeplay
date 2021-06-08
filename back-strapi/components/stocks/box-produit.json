@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_stocks_box_produits",
+  "info": {
+    "name": "BoxProduit",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "produit": {
+      "model": "produit"
+    }
+  }
+}

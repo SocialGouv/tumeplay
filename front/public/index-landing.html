@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#000000">
+
+    <link rel="manifest" href="./manifest.json">    
+    <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Carter+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo&display=swap" rel="stylesheet">
+    
+	<title>Tumeplay</title>
+	<style>
+		html,
+		body 
+		{
+			background: #000000;
+		}
+		
+		body 
+		{
+			position: relative;
+			max-width: 1440px;
+			margin: 0 auto;
+		}
+		.clearfix
+		{
+			clear: both;
+		}
+		.logo-wrapper
+		{
+			float: left;
+			text-align: center;
+			position: relative;
+			top: 50px;
+		}
+		
+		.main-logo
+		{
+			max-width: 50px;
+		}
+		.site-name
+		{
+			font-family: Carter One;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 36px;
+			line-height: 55px;
+			text-align: center;
+			color: #FFFFFF;	
+			margin: 0;
+		}
+		
+		.menu-wrapper
+		{
+			float: right;
+		}
+		
+		.menu-wrapper .menu-item
+		{
+			display: inline-block;
+			margin-left: 50px;
+			margin-top: 55px;
+		}
+		
+		.menu-wrapper .menu-item a
+		{
+			color: #FFFFFF;
+			font-family: Carter One;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 100%;
+			text-decoration: none;
+		}
+		
+		.menu-wrapper .menu-item a:hover
+		{
+			text-decoration: underline;
+		}
+		
+		.col-sm-6
+		{
+			width: 50%;
+			float: left;
+		}
+		
+		.phone-wrapper
+		{
+			text-align: right;
+		} 
+		.color-dot
+		{
+			color: #c80652;	
+			font-size: 17px;
+		}
+		
+		.footer
+		{
+			position: absolute;
+			bottom: 25px;
+		}
+		.footer .legal-logo-wrapper
+		{
+
+			display: inline-block;
+			vertical-align: top;
+			margin-right: 7px;
+		}
+		.footer .legal-logo-wrapper img
+		{
+			max-width: 54px; 
+		}
+		
+		.footer .legal-mentions-wrapper
+		{
+			display: inline-block;
+			vertical-align: bottom;
+			color: #FFFFFF;
+			font-family: Abel;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 127.4%;
+		}     
+		.footer .legal-mentions-wrapper p
+		{
+			margin: 0;
+		}    
+		
+		.description
+		{
+			font-family: Abel;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 24px;
+			line-height: 127.4%;
+			color: #FFFFFF;
+			margin: 0;
+		}  
+		
+		.soon-available
+		{
+			font-family: Carter One;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 32px;
+			line-height: 100%;
+			color: #FFFFFF;
+			margin-bottom: 0;
+			position: relative;
+			display: inline-block;
+			z-index: 1;
+			margin-top: 110px;
+		}
+		
+		.soon-border
+		{
+			height: 6px;
+			background-color: #C80562;
+			position: absolute;
+			bottom: 2px;
+			width: 100%;
+			left: 0;
+			z-index: -1;
+		}
+		
+		.find-us-on-instagram
+		{
+			display: inline-block;
+			font-family: Carter One;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 100%;	
+			color: #FFFFFF;
+            padding: 2px 25px 2px 0px;   
+            background-image: url('./assets/instagram-white-1.png');
+            background-repeat: no-repeat;
+            background-position: right center;
+            margin: 0;
+		}
+		
+		.content-wrapper
+		{
+			margin-top: -25%;
+			padding-top: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<div class="logo-wrapper">
+			<div class="main-logo-wrapper">
+				<img class="main-logo" src="./assets/logo.png" />
+			</div>
+			<h1 class="site-name">Tu<span class="color-dot">.</span>me<span class="color-dot">.</span>play</h1>	
+		</div>
+		<div class="menu-wrapper">
+			<ul>
+				<li class="menu-item">
+					<a href="#">Suis-nous sur Instagram</a>
+				</li>
+				<li class="menu-item">
+					<a href="#">Contacte nous</a>
+				</li>
+				<li class="menu-item">
+					<a href="#">Lis notre charte</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="body">
+		<div class="col-sm-6">
+			<div class="content-wrapper">
+				<p class="title-big"><img src="./assets/title-big.png" /></p>
+				
+				<p class="description">L'app qui te permet d'en apprendre plus sur ta sexualité,</p>
+				<p class="description"> de répondre à des quizz et de commander gratuitement</p>
+				<p class="description"> des préservatifs et autres accessoires !</p>	
+				<p class="soon-available">Bientôt disponible<span class="soon-border"></span></p>
+				<div class="instagram-link-wrapper">
+					<p class="find-us-on-instagram">en attendant retrouve-nous sur Instagram</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 phone-wrapper">
+			<img class="phone-body" src="./assets/phone-body.png" />
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	
+	<div class="footer">
+		<div class="legal-logo-wrapper">
+			<img src="./assets/logo-ministere.png" />
+		</div>
+		<div class="legal-mentions-wrapper">
+			<p>Tumeplay est une initiative du Ministère des Solidarités et de la Santé,</p>
+			<p>elle est réalisée par les équipes de l'Incubateur des Ministères Sociaux.</p>
+		</div>
+	</div>
+</body>
+
+</html>

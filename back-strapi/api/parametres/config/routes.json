@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/parametres",
+      "handler": "parametres.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/parametres",
+      "handler": "parametres.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/parametres",
+      "handler": "parametres.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

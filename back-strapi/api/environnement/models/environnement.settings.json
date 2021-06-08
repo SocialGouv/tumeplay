@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "environnements",
+  "info": {
+    "name": "Zone",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}

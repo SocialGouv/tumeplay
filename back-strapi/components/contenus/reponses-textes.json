@@ -1,0 +1,50 @@
+{
+  "collectionName": "responses",
+  "info": {
+    "name": "responses",
+    "icon": "eye-dropper",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "response_A": {
+      "type": "string",
+      "default": "Oui",
+      "required": true
+    },
+    "response_B": {
+      "type": "string",
+      "default": "Non",
+      "required": true
+    },
+    "response_C": {
+      "type": "string",
+      "default": "Je ne sais pas",
+      "required": true
+    },
+    "response_A_neutral": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "response_B_neutral": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "response_C_neutral": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "right_answer": {
+      "type": "enumeration",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "required": true
+    }
+  }
+}

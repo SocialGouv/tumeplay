@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "Feedback",
+  "info": {
+    "name": "Feedback",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "question": {
+      "model": "question"
+    },
+    "body": {
+      "type": "text"
+    },
+    "appreciation": {
+      "type": "integer",
+      "max": 1,
+      "min": -1,
+      "required": true,
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_commandes_box_sur_mesures",
+  "info": {
+    "name": "Box sur mesure",
+    "icon": "boxes",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "produits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "commandes.box-sur-mesure-produit"
+    }
+  }
+}

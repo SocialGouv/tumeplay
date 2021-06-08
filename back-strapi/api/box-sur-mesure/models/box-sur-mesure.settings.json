@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "box-dynamic",
+  "info": {
+    "name": "Box sur mesure",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "produits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "stocks.box-produit-sur-mesure"
+    }
+  }
+}

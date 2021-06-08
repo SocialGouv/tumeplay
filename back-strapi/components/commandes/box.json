@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_commandes_boxes",
+  "info": {
+    "name": "Box",
+    "icon": "dice-d6"
+  },
+  "options": {},
+  "attributes": {
+    "box": {
+      "model": "box"
+    }
+  }
+}

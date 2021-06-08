@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order",
+  "info": {
+    "name": "Commande",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "delivery": {
+      "type": "enumeration",
+      "enum": [
+        "home",
+        "pickup"
+      ]
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "commandes.box-sur-mesure",
+        "commandes.box"
+      ],
+      "max": 1,
+      "min": 1,
+      "required": true
+    }
+  }
+}

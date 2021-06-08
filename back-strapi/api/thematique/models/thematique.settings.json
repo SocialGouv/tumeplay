@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "themes",
+  "info": {
+    "name": "Thematique",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "image": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "environnement": {
+      "model": "environnement"
+    },
+    "display_quiz": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}

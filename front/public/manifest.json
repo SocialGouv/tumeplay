@@ -1,0 +1,20 @@
+{
+	"short_name": "Tumeplay",
+	"name": "Tumeplay",
+	"icons": [
+	{
+		"src": "favicon.ico",
+		"sizes": "192x192",
+		"type": "image/png"
+	},
+	{
+		"src": "favicon-big.png",
+		"sizes": "512x512",
+		"type": "image/png"
+	}
+	],
+	"start_url": "./index.html",
+	"display": "standalone",
+	"theme_color": "#11070B",
+	"background_color": "#11070B"
+}

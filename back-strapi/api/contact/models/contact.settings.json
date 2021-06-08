@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact",
+  "info": {
+    "name": "Contact",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}

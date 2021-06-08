@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "box",
+  "info": {
+    "name": "Box",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "products": {
+      "type": "component",
+      "repeatable": true,
+      "component": "stocks.box-produit"
+    },
+    "stock": {
+      "type": "biginteger",
+      "required": true,
+      "default": "0"
+    },
+    "environnement": {
+      "model": "environnement"
+    }
+  }
+}

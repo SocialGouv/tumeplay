@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "settings",
+  "info": {
+    "name": "Paramètres"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nb_points_wrong_answer": {
+      "type": "integer",
+      "default": 25,
+      "required": true
+    },
+    "nb_points_neutral_answer": {
+      "type": "integer",
+      "default": 30,
+      "required": true
+    },
+    "nb_points_right_answer": {
+      "type": "integer",
+      "default": 100,
+      "required": true
+    }
+  }
+}

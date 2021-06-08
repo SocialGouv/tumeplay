@@ -1,0 +1,100 @@
+{
+  "name": "tumeplay",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-app-rewired start",
+    "test": "jest",
+    "nativeLint": "eslint .",
+    "webStart": "EXTEND_ESLINT=true react-app-rewired start",
+    "build": "react-app-rewired build",
+    "postinstall": "sed -i.bak 's/module.exports = /export default /g' node_modules/react-native-device-info/src/web/index.js && sed -i.bak 's/module.exports=/export default /g' node_modules/react-native-device-info/lib/module/web/index.js && rm node_modules/react-native-device-info/src/web/index.js.bak"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.18",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@react-native-community/async-storage": "^1.10.3",
+    "@react-native-community/geolocation": "^2.0.2",
+    "@react-navigation/native": "^3.6.2",
+    "@react-navigation/web": "^1.0.0-alpha.9",
+    "@sentry/browser": "^5.12.1",
+    "@sentry/react-native": "^1.2.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "detect-browser": "^4.8.0",
+    "graphql": "^15.5.0",
+    "modal-react-native-web": "^0.2.0",
+    "node-open-geocoder": "^4.0.1",
+    "react": "16.9.0",
+    "react-dom": "^16.12.0",
+    "react-google-maps": "^9.4.5",
+    "react-howler": "^3.7.4",
+    "react-native": "0.61.1",
+    "react-native-crypto-js": "^1.0.0",
+    "react-native-device-info": "^5.3.1",
+    "react-native-event-listeners": "^1.0.3",
+    "react-native-gesture-handler": "^1.5.0",
+    "react-native-htmlview": "^0.15.0",
+    "react-native-maps": "github:expo/react-native-maps",
+    "react-native-modal": "^11.5.3",
+    "react-native-web": "^0.11.7",
+    "react-native-web-maps": "^0.2.0",
+    "react-native-web-swiper": "^2.1.0",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^1.10.3",
+    "react-scripts": "^3.2.0",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/runtime": "^7.7.2",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "@socialgouv/eslint-config-react": "^0.11.0",
+    "@socialgouv/eslint-config-recommended": "^0.11.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.7.2",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.3",
+    "prettier": "^1.19.1",
+    "react-app-rewired": "^2.1.5",
+    "react-dev-utils": "^9.1.0",
+    "react-native-scripts": "^2.0.1",
+    "react-test-renderer": "16.9.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependency": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_commandes_box_sur_mesure_produits",
+  "info": {
+    "name": "BoxSurMesureProduit",
+    "icon": "apple-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "produit": {
+      "model": "produit"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  }
+}
