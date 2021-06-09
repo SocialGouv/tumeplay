@@ -39,6 +39,9 @@
     },
     "environnement": {
       "model": "environnement"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

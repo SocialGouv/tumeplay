@@ -15,7 +15,6 @@ LandingThemeGrid.propTypes = {
 export default function LandingThemeGrid(props) {
   const numColumns = 2;
   let currentIndex = 0;
-  console.log(props.themes)
   return (
     <FlatList
       scrollEnabled={true}
@@ -34,9 +33,8 @@ export default function LandingThemeGrid(props) {
                 props.onPress(item);
               }}>
               <View style={{flex: 1, flexDirection: 'row'}}>
-                {console.log(item.image[0].url)}
                 <Image
-                  source={item.image[0] ? 'http://localhost:1337' + item.image[0].url : null}
+                  source={item.picture ? item.picture : null}
                   style={LandingStyle.gridItemPicture}
                 />
               </View>
@@ -45,7 +43,7 @@ export default function LandingThemeGrid(props) {
                 <TextWithSound
                   style={LandingStyle.gridItemText}
                 >
-                  {item.title}
+                  {item.value}
                 </TextWithSound>
               </View>
             </CustomTouchableOpacity>

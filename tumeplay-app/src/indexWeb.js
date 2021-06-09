@@ -7,7 +7,6 @@ import * as Sentry from '@sentry/browser';
 import * as serviceWorker from './serviceWorker';
 
 import AppStack from './routes/routes';
-import withAppolo from './hooks/withApollo.jsx';
 
 //const AppContainer = createAppContainer(AppStack);
 // If you want your app to work offline and load faster, you can change
@@ -24,6 +23,6 @@ Sentry.init({
 
 const App = createBrowserApp(AppStack);
 
-AppRegistry.registerComponent(appName, () => withAppolo(App));
+AppRegistry.registerComponent(appName, () => App);
 AppRegistry.runApplication(appName, {rootTag: document.getElementById('root')});
 serviceWorker.unregister();
