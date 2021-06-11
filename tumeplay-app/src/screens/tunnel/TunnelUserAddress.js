@@ -236,16 +236,15 @@ export default function TunnelUserAddress(props) {
     }
 
     const _isAllowedFromUser = await UserService.isOrderAllowed();
-    
-    console.log("ALLOWED : " + _isAllowedFromUser );
-    
-    if( !_isAllowedFromUser )
-    {
-		setDisallowOrder(true);
-		
-		return;
+
+    console.log('ALLOWED : ' + _isAllowedFromUser);
+
+    if (!_isAllowedFromUser) {
+      setDisallowOrder(true);
+
+      return;
     }
-    
+
     setDisallowOrder(false);
 
     if (deliveryType === 'home') {
@@ -282,19 +281,18 @@ export default function TunnelUserAddress(props) {
     const localValue = zipCode.replace(/[^0-9]/g, '');
 
     if (!isNaN(localValue)) {
-      if (localAdress['zipCode'] !== zipCode && zipCodeTest.test(localValue)) 
-      {
-        const _foundCity = await AddressValidator.validateZipCodeLocality(localValue);
-        
-        if( _foundCity )
-        {
-            localAdress['city'] = _foundCity.city;
-            localAdress['zipCode'] = localValue;
+      if (localAdress['zipCode'] !== zipCode && zipCodeTest.test(localValue)) {
+        const _foundCity = await AddressValidator.validateZipCodeLocality(
+          localValue,
+        );
 
-            setLocalAdress(localAdress);
-            _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
+        if (_foundCity) {
+          localAdress['city'] = _foundCity.city;
+          localAdress['zipCode'] = localValue;
+
+          setLocalAdress(localAdress);
+          _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
         }
-        
       }
     }
   }

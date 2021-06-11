@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,79 +9,38 @@ import {
 
 import Colors from '../styles/Color';
 import autoScrollToTop from '../hooks/autoScrollToTop';
-import TextLink from './components/global/TextLink';
 import Styles from '../styles/Styles';
 
-export default function GlobalStatisticsScreen(props) {
+const GlobalStatisticsScreen = props => {
   autoScrollToTop(props);
 
-  const contentStyle = {
-    title: {
-      color: Colors.secondaryText,
-      fontFamily: Colors.appTitleFont,
-      fontSize: 30,
-      lineHeight: 34,
-      marginBottom: 20,
-      paddingBottom: 0,
-      flex: 2,
-    },
-    subTitle: {
-      color: Colors.secondaryText,
-      fontFamily: Colors.appTitleFont,
-      fontSize: 20,
-      lineHeight: 25,
-      marginTop: 10,
-      marginBottom: 10,
-      paddingBottom: 0,
-      flex: 2,
-    },
-    text: {
-      color: Colors.secondaryText,
-      fontFamily: Colors.textFont,
-      fontSize: 14,
-      marginBottom: 10,
-      paddingBottom: 0,
-      marginTop: 0,
-      paddingTop: 0,
-      textAlign: 'left',
-      flex: 1,
-    },
-    colorRed: {
-      color: Colors.secondaryButton,
-    },
-    colorOrange: {
-      color: '#FF7228',
-    },
-    middleTitle: {
-      fontSize: 26,
-      textAlign: 'center',
-      fontFamily: Colors.titleCard,
-      marginTop: 40,
-    },
-    testimony: {
-      color: '#FFFFFF',
-      marginBottom: 15,
-      padding: 15,
-      fontSize: 20,
-      fontStyle: 'italic',
-      fontFamily: Colors.titleCard,
-      fontWeight: 300,
-    },
-    star: {
-      width: 30,
-      height: 30,
-    },
-    instagram: {
-      width: 70,
-      height: 70,
-      textAlign: 'center',
-    },
-  };
-
   const instaLink = 'https://www.instagram.com/tumeplay';
+  const instaCountLink = 'https://www.instagram.com/tumeplay/?__a=1';
   const fullStar = require('../assets/pictures/full-star.png');
   const halfStar = require('../assets/pictures/half-star.png');
   const instagram = require('../assets/pictures/instagram.png');
+
+  const matomoLink =
+    'https://matomo.fabrique.social.gouv.fr/index.php?idSite=21&rec1';
+
+  // const getMatomoinfos = async () => {
+  //   await fetch(matomoLink).then(data =>
+  //     console.log(data.json()),
+  //   );
+  // };
+
+  //Instagram followers API Call
+  // const retrieveFollowers = async () => {
+  //   await fetch(instaCountLink).then(data => console.log(data.json()));
+  // };
+
+  // useEffect(() => {
+  //   retrieveFollowers();
+  // }, []);
+
+  // useEffect(() => {
+  //   getMatomoinfos();
+  // }, [getMatomoinfos]);
 
   return (
     <View
@@ -442,7 +400,6 @@ export default function GlobalStatisticsScreen(props) {
                 justifyContent: 'center',
                 alignSelf: 'center',
                 flex: 0.4,
-                alignSelf: 'center',
               },
               Styles.textCenter,
             ]}>
@@ -492,4 +449,69 @@ export default function GlobalStatisticsScreen(props) {
       </ScrollView>
     </View>
   );
-}
+};
+
+const contentStyle = {
+  title: {
+    color: Colors.secondaryText,
+    fontFamily: Colors.appTitleFont,
+    fontSize: 30,
+    lineHeight: 34,
+    marginBottom: 20,
+    paddingBottom: 0,
+    flex: 2,
+  },
+  subTitle: {
+    color: Colors.secondaryText,
+    fontFamily: Colors.appTitleFont,
+    fontSize: 20,
+    lineHeight: 25,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingBottom: 0,
+    flex: 2,
+  },
+  text: {
+    color: Colors.secondaryText,
+    fontFamily: Colors.textFont,
+    fontSize: 14,
+    marginBottom: 10,
+    paddingBottom: 0,
+    marginTop: 0,
+    paddingTop: 0,
+    textAlign: 'left',
+    flex: 1,
+  },
+  colorRed: {
+    color: Colors.secondaryButton,
+  },
+  colorOrange: {
+    color: '#FF7228',
+  },
+  middleTitle: {
+    fontSize: 26,
+    textAlign: 'center',
+    fontFamily: Colors.titleCard,
+    marginTop: 40,
+  },
+  testimony: {
+    color: '#FFFFFF',
+    marginBottom: 15,
+    padding: 15,
+    fontSize: 20,
+    fontStyle: 'italic',
+    fontFamily: Colors.titleCard,
+    fontWeight: 300,
+  },
+  star: {
+    width: 30,
+    height: 30,
+  },
+  instagram: {
+    width: 70,
+    height: 70,
+    textAlign: 'center',
+  },
+};
+
+export default GlobalStatisticsScreen;

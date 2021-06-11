@@ -21,6 +21,7 @@ var Styles = {
     maxHeight: isWeb ? 750 : undefined,
     paddingLeft: 7,
     paddingRight: 7,
+    width: '100%'
   },
   backdrop: {
     position: 'absolute',

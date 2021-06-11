@@ -11,10 +11,10 @@ TextWithSound.propTypes = {
 };
 export default function TextWithSound(props) {
   const [play, setPlay] = useState(false);
-  const targetSound = props.sound
-    ? require('../../../assets/sounds/' + props.sound)
-    : false;
-  const soundPicture = require('../../../assets/pictures/sound.png');
+  // const targetSound = props.sound
+  //   ? require('../../../assets/sounds/' + props.sound)
+  //   : false;
+  // const soundPicture = require('../../../assets/pictures/sound.png');
 
   function onPlayStart() {}
 
@@ -57,14 +57,14 @@ export default function TextWithSound(props) {
                 height: 25,
                 resizeMode: 'contain',
               }}
-              source={soundPicture}
+              // source={soundPicture}
             />
           </CustomTouchableOpacity>
         )}
       </Text>
       {props.sound && (
         <ReactHowler
-          src={targetSound}
+          // src={targetSound}
           onEnd={onPlayStop}
           onStop={onPlayStop}
           playing={play}

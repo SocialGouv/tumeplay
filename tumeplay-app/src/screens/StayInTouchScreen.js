@@ -34,21 +34,22 @@ export default function StayInTouchScreen(props) {
     emailAdress: -1,
     zipCode: -1,
   };
-  const outOfStock = ( props.navigation.state.params && props.navigation.state.params.outOfStock );
+  const outOfStock =
+    props.navigation.state.params && props.navigation.state.params.outOfStock;
   const [invalidZipCode, setInvalidZipCode] = useState(false);
   const [localAdress, setLocalAdress] = useState(defaultUserAdress);
   const [localValid, setLocalValid] = useState({});
   const [mainValidFlag, setMainValidFlag] = useState(false);
   const [disallowOrder, setDisallowOrder] = useState(false);
   const isMounted = useIsMounted();
-  
+
   useEffect(() => {
-  	_checkIsAllowed();	
+    _checkIsAllowed();
   }, [isMounted]);
 
   async function _checkIsAllowed() {
     const _isAllowed = await UserService.isOrderAllowed();
-	setDisallowOrder(!_isAllowed);
+    setDisallowOrder(!_isAllowed);
   }
 
   async function _handleZipCode(zipCode) {
@@ -118,47 +119,43 @@ export default function StayInTouchScreen(props) {
   }
 
   function _goBack() {
-    if( outOfStock )
-    {
-	  props.navigation.navigate('TunnelProductSelect');
-    }
-    else
-    {
+    if (outOfStock) {
+      props.navigation.navigate('TunnelProductSelect');
+    } else {
       props.navigation.navigate('LandingScreen');
-	}
+    }
   }
 
   async function _onDone() {
-    if( disallowOrder )
-    {
-		return;
+    if (disallowOrder) {
+      return;
     }
     const _isValid = _validateFields(CustomTextInput.fieldStatus.INVALID);
 
     // Just in case
-	const _isOrderAllowed = await UserService.isOrderAllowed();
-	
-	if( !_isOrderAllowed )
-	{
-		setMainValidFlag(false);	
-		setDisallowOrder(true);
-		
-		return;
-	}
-	
-	if (outOfStock)
-	{
-		await UserService.setLastOrder();
-	}
-	
+    const _isOrderAllowed = await UserService.isOrderAllowed();
+
+    if (!_isOrderAllowed) {
+      setMainValidFlag(false);
+      setDisallowOrder(true);
+
+      return;
+    }
+
+    if (outOfStock) {
+      await UserService.setLastOrder();
+    }
+
     if (_isValid) {
       await RemoteApi.sendContact(localAdress);
-      props.navigation.navigate('StayInTouchConfirm', { outOfStock : outOfStock });
+      props.navigation.navigate('StayInTouchConfirm', {outOfStock: outOfStock});
     }
   }
-  
-  const _title = ( outOfStock ? 'En rupture de stock !' : 'Tes informations de contact' );
-  
+
+  const _title = outOfStock
+    ? 'En rupture de stock !'
+    : 'Tes informations de contact';
+
   return (
     <ScrollView
       style={[
@@ -173,38 +170,37 @@ export default function StayInTouchScreen(props) {
       <Backlink text={'Retour'} onPress={_goBack} />
 
       <View>
-      	<Text style={Styles.tunnelTitle}>{_title}</Text>
+        <Text style={Styles.tunnelTitle}>{_title}</Text>
       </View>
 
       {outOfStock && (
         <Text
-		    style={{
-		      marginTop: 20,
-		      marginBottom: 10,
-		      fontSize: 14,
-		      color: Colors.secondaryText,
-		      fontFamily: 'Chivo-Regular',
-		    }}>
-		    Laisse nous ton contact pour être prioritaire sur les prochaines commandes.
-		  </Text>
-
+          style={{
+            marginTop: 20,
+            marginBottom: 10,
+            fontSize: 14,
+            color: Colors.secondaryText,
+            fontFamily: 'Chivo-Regular',
+          }}>
+          Laisse nous ton contact pour être prioritaire sur les prochaines
+          commandes.
+        </Text>
       )}
       {!outOfStock && (
-      	<Text
-		    style={{
-		      marginTop: 20,
-		      marginBottom: 10,
-		      fontSize: 14,
-		      color: Colors.secondaryText,
-		      fontFamily: 'Chivo-Regular',
-		    }}>
-		    Pour être informé·e de la sortie de l&apos;app&apos; chez toi,
-		    écris-nous ces informations, nous pourrons te contacter pour te
-		    prévenir.
-		  </Text>
-
+        <Text
+          style={{
+            marginTop: 20,
+            marginBottom: 10,
+            fontSize: 14,
+            color: Colors.secondaryText,
+            fontFamily: 'Chivo-Regular',
+          }}>
+          Pour être informé·e de la sortie de l&apos;app&apos; chez toi,
+          écris-nous ces informations, nous pourrons te contacter pour te
+          prévenir.
+        </Text>
       )}
-      
+
       <CustomTextInput
         inputLabel="Prénom"
         inputPlaceholder="Ton Prénom"
@@ -247,7 +243,8 @@ export default function StayInTouchScreen(props) {
       </Text>
 
       {disallowOrder && (
-        <View style={[TunnelUserAdressStyle.requiredFieldsWrapper, {marginTop: 0}]}>
+        <View
+          style={[TunnelUserAdressStyle.requiredFieldsWrapper, {marginTop: 0}]}>
           <View style={{flex: 1}}>
             <Text
               style={[
@@ -260,7 +257,7 @@ export default function StayInTouchScreen(props) {
           </View>
         </View>
       )}
-      
+
       <View style={Styles.viewopacitytunneletap3}>
         <TouchableOpacity
           style={{

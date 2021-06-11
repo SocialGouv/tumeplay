@@ -13,15 +13,18 @@
     "postinstall": "sed -i.bak 's/module.exports = /export default /g' node_modules/react-native-device-info/src/web/index.js && sed -i.bak 's/module.exports=/export default /g' node_modules/react-native-device-info/lib/module/web/index.js && rm node_modules/react-native-device-info/src/web/index.js.bak"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.16",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@react-native-community/async-storage": "^1.10.3",
     "@react-native-community/geolocation": "^2.0.2",
+    "@react-native-community/picker": "^1.8.1",
     "@react-navigation/native": "^3.6.2",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "@sentry/browser": "^5.12.1",
     "@sentry/react-native": "^1.2.2",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "detect-browser": "^4.8.0",
+    "graphql": "^15.5.0",
     "modal-react-native-web": "^0.2.0",
     "node-open-geocoder": "^4.0.1",
     "react": "16.9.0",

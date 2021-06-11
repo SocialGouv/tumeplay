@@ -28,15 +28,15 @@ export default function ProductContentList(props) {
     if (items !== undefined) {
       return items.map((item, key) => {
         // When shortmode, it's a sub-sub-item
-        var itemText = item.title;
+        var itemText = item.produit.title;
         if (shortMode && typeof item.item !== 'undefined') {
-          if (typeof item.item.shortTitle !== 'undefined') {
-            itemText = item.item.shortTitle;
+          if (typeof item.produit.title !== 'undefined') {
+            itemText = item.produit.title;
           } else {
-            itemText = item.item.shortDescription;
+            itemText = item.produit.title;
           }
         }
-        return renderRow(key, item.qty, itemText);
+        return renderRow(key, item.quantity, itemText);
       });
     } else {
       return <View></View>;

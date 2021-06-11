@@ -34,16 +34,18 @@ export default function LandingThemeGrid(props) {
               }}>
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Image
-                  source={item.picture ? item.picture : null}
+                  source={
+                    item.image[0]
+                      ? 'http://localhost:1337' + item.image[0].url
+                      : null
+                  }
                   style={LandingStyle.gridItemPicture}
                 />
               </View>
 
               <View style={LandingStyle.gridItemTextContainer}>
-                <TextWithSound
-                  style={LandingStyle.gridItemText}
-                >
-                  {item.value}
+                <TextWithSound style={LandingStyle.gridItemText}>
+                  {item.title}
                 </TextWithSound>
               </View>
             </CustomTouchableOpacity>

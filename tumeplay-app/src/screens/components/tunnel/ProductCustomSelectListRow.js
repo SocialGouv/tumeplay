@@ -17,6 +17,8 @@ export default function ProductCustomSelectListRow(props) {
   const [isSelected, setIsSelected] = useState(false);
   const [localQuantity, setLocalQuantity] = useState(0);
 
+  console.log(item);
+
   const localStylesheet = StyleSheet.create({
     picture: {
       marginLeft: 7,

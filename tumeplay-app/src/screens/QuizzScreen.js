@@ -10,20 +10,21 @@ import AnswerScreen from './components/quizz/AnswerScreen';
 import NextButton from './components/quizz/NextButton';
 import AnswerButton from './components/quizz/AnswerButton';
 import QuizService from '../services/Quiz';
-import RemoteApi from '../services/RemoteApi';
+import FeedbacksAPI from '../services/api/feedbacks';
+import {useQuery} from '@apollo/client';
+import {GET_POINTS} from '../services/api/settings';
 
 QuizzScreen.propTypes = {
   questions: PropTypes.array,
-  resetQuestions: PropTypes.bool,
   onFinishedQuizz: PropTypes.func,
 };
 
 export default function QuizzScreen(props) {
   const [displayAnswer, setDisplayAnswer] = useState(false);
   const [isRightAnswer, setIsRightAnswer] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(props.questions);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(questions.length);
   const [lastTokenAmount, setLastTokenAmount] = useState(0);
   const [givenAnswers, setGivenAnswers] = useState([]);
   const [dataFeedback, setDataFeedback] = useState({});
@@ -35,21 +36,26 @@ export default function QuizzScreen(props) {
   useEffect(() => {
     setQuestions(props.questions);
     setTotal(props.questions.length);
-  }, [props.questions]);
-
-  useEffect(() => {
     setCurrentIndex(0);
     setLastTokenAmount(0);
     setDisplayAnswer(false);
     setIsRightAnswer(false);
-  }, [props.resetQuestions]);
+  }, [props.questions]);
 
   async function _addTokens(_tokenAmount) {
     const _newTokens = await UserService.addTokens(_tokenAmount);
-    const updateResultOfBadge = await UserService.updateToLatestBadge();
-    console.log('Updated result of badge:', updateResultOfBadge);
+    await UserService.updateToLatestBadge();
 
     EventRegister.emit('tokensAmountChanged', _newTokens);
+  }
+
+  const {data, loading} = useQuery(GET_POINTS);
+  if (!loading) {
+    QuizService.setAnswersPoints(
+      data.parametre.nb_points_wrong_answer,
+      data.parametre.nb_points_right_answer,
+      data.parametre.nb_points_neutral_answer,
+    );
   }
 
   function _answerQuestion(key) {
@@ -57,23 +63,24 @@ export default function QuizzScreen(props) {
 
     const currentQuestion = questions[currentIndex];
 
-    Tracking.questionAnswered(currentQuestion.id, questionTimer);
-
     const localAnswer = {
       questionId: currentQuestion.id,
-      givenAnswer: currentQuestion.answers[key].id,
+      givenAnswer: key,
     };
 
-    const isRightAnswer =
-      currentQuestion.answers[key].id == currentQuestion.rightAnswer;
+    Tracking.questionAnswered(currentQuestion.id, questionTimer);
+
+    const isRightAnswer = currentQuestion.responses.right_answer === key;
+    const isNeutralAnswer =
+      currentQuestion.responses['response_' + key + '_neutral'];
 
     QuizService.moveQuestion(currentQuestion, isRightAnswer);
 
     setIsRightAnswer(isRightAnswer);
 
     const _tokenAmount = QuizService.getTokenAmount(
-      currentQuestion,
-      currentQuestion.answers[key].id,
+      isRightAnswer,
+      isNeutralAnswer,
     );
     setLastTokenAmount(_tokenAmount);
     _addTokens(_tokenAmount);
@@ -87,7 +94,6 @@ export default function QuizzScreen(props) {
       props.onFinishedQuizz(givenAnswers);
     } else {
       questionTimer = Math.floor(Date.now() / 1000);
-
       setCurrentIndex(currentIndex + 1);
       setIsRightAnswer(false);
       setDisplayAnswer(!displayAnswer);
@@ -97,40 +103,50 @@ export default function QuizzScreen(props) {
       questionContentId: _currentQuestion.id,
       ...dataFeedback,
     };
-
-    console.log(userFeedback);
-    await RemoteApi.sendFeedback(userFeedback);
+    FeedbacksAPI.sendFeedback(userFeedback);
   }
 
-  function _renderAnswersButtons(answers) {
-    return answers.map((item, key) => {
-      return (
+  const _displayAnswersButtons = question => {
+    return (
+      <>
         <AnswerButton
-          item={item}
-          questionKey={key}
-          key={key}
-          onPress={() => _answerQuestion(key)}
+          questionKey="A"
+          questionLabel={question.responses.response_A}
+          onPress={() => _answerQuestion('A')}
         />
-      );
-    });
-  }
-  function setFeedback(isLiked, isDisliked, comment, id) {
+        <AnswerButton
+          questionKey="B"
+          questionLabel={question.responses.response_B}
+          onPress={() => _answerQuestion('B')}
+        />
+        <AnswerButton
+          questionKey="C"
+          questionLabel={question.responses.response_C}
+          onPress={() => _answerQuestion('C')}
+        />
+      </>
+    );
+  };
+
+  function setFeedback(isLiked, title, comment) {
     setDataFeedback({
       isLiked: isLiked,
-      isDisliked: isDisliked,
       comment: comment,
-      feedbackId: id,
+      title: title,
     });
   }
+
   if (_currentQuestion === undefined) {
-    return <View />;
+    return <View style={{backgroundColor: '#FFF'}} />;
   }
   return (
     <ImageBackground
-      imageStyle={{borderRadius: 7}}
+      imageStyle={{borderRadius: 7, backgroundColor: 'white'}}
       style={{width: '100%', height: '100%'}}
       source={
-        _currentQuestion.background ? _currentQuestion.background : undefined
+        _currentQuestion.image
+          ? 'http://localhost:1337' + _currentQuestion.image.url
+          : undefined
       }>
       <ScrollView style={{flex: 1}} contentContainerStyle={{flex: 1}}>
         <View
@@ -142,18 +158,14 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          <Text style={Styles.questionText}>{_currentQuestion.question}</Text>
+          <Text style={Styles.questionText}>
+            {_currentQuestion.text_question}
+          </Text>
         </View>
 
         <View style={{paddingBottom: 50, height: '52%'}}>
           <View style={{flex: 1, flexDirection: 'column'}}>
-            {!displayAnswer && _currentQuestion.answers.length <= 2 && (
-              <View style={Styles.flexOne}></View>
-            )}
-            {!displayAnswer && _renderAnswersButtons(_currentQuestion.answers)}
-            {!displayAnswer && _currentQuestion.answers.length <= 2 && (
-              <View style={Styles.flexOne}></View>
-            )}
+            {!displayAnswer && _displayAnswersButtons(_currentQuestion)}
 
             {displayAnswer && (
               <AnswerScreen
@@ -168,7 +180,7 @@ export default function QuizzScreen(props) {
 
         <View
           style={[
-            {textAlign: 'center', paddingBottom: 10},
+            {paddingBottom: 10},
             displayAnswer
               ? {}
               : {position: 'absolute', bottom: 5, width: '100%'},

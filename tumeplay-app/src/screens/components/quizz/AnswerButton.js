@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 AnswerButton.propTypes = {
   onPress: PropTypes.func,
-  questionKey: PropTypes.number,
-  item: PropTypes.object,
+  questionKey: PropTypes.string,
+  questionLabel: PropTypes.string,
 };
 
 export default function AnswerButton(props) {
@@ -17,7 +17,7 @@ export default function AnswerButton(props) {
       onPress={() => props.onPress(props.questionKey)}>
       <View style={[Styles.bottomButton, {width: '70%'}]}>
         <Text style={[Styles.bottomButtonText, {fontSize: 16}]}>
-          {props.item.text}
+          {props.questionLabel}
         </Text>
       </View>
     </TouchableOpacity>

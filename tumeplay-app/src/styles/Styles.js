@@ -55,6 +55,9 @@ var Styles = {
     justifyContent: 'center',
     flexDirection: 'column',
   },
+  tunnelInput: {
+    marginBottom: 15,
+  },
   viewopacitytunneletap4: {
     flex: 0.2,
     paddingTop: 2,

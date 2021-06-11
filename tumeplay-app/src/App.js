@@ -15,11 +15,7 @@ import localBoarding from './models/defaults/Boarding';
 
 const AppContainer = createAppContainer(AppStack);
 
-App.propTypes = {
-  item: PropTypes.object,
-};
-
-export default function App() {
+const App = () => {
   const [showRealApp, setShowRealApp] = useState(false);
   const [slides, setSlides] = useState([]);
   const isMounted = useIsMounted();
@@ -54,4 +50,6 @@ export default function App() {
   } else {
     return <Onboarding onDone={_onDone} slides={localBoarding} />;
   }
-}
+};
+
+export default App;

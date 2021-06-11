@@ -125,9 +125,6 @@ const User = {
     }
 
     if (localUser) {
-      console.log(
-        `Getting isMoreThan25YearsOld to memory, value: ${localUser.isMoreThan25YearsOld}`,
-      );
       return localUser.isMoreThan25YearsOld;
     }
 
@@ -156,9 +153,6 @@ const User = {
    */
   setlatestBadgeIDWon: async latestBadgeIDWon => {
     let localUser = User.localUser;
-    console.log(
-      `Setting latestBadgeIDWon to memory, value: ${latestBadgeIDWon}`,
-    );
     if (!localUser) {
       localUser = await User.load();
     }
@@ -200,10 +194,10 @@ const User = {
       console.log(`updateToLatestBadge--> tokensAmt: ${tokensAmt}`);
       // Get badges list
       const badgeList = await RemoteApi.fetchBadges();
-      console.log('badges list:', badgeList);
+      // console.log('badges list:', badgeList);
       // Getting latest badge id assigned to the user before the update
       const badgeIDBeforeUpdate = await User.getlatestBadgeIDWon();
-      console.log(`badgeIDBeforeUpdate: ${badgeIDBeforeUpdate}`);
+      // console.log(`badgeIDBeforeUpdate: ${badgeIDBeforeUpdate}`);
 
       const result = {
         updatedBadge: null,
@@ -217,11 +211,11 @@ const User = {
         // Assigning updatedBadge
         if (tokensAmt >= badgeItem.tokenRequired) {
           // Assigning the updatedBadge to badgeItem
-          console.log(
-            `Assigning badge item to updated badge where badgeItem: ${JSON.stringify(
-              badgeItem,
-            )}`,
-          );
+          // console.log(
+          //   `Assigning badge item to updated badge where badgeItem: ${JSON.stringify(
+          //     badgeItem,
+          //   )}`,
+          // );
           result.updatedBadge = badgeItem;
           updatedBadge_index = i;
         }
@@ -244,7 +238,7 @@ const User = {
         await User.setlatestBadgeIDWon(result.updatedBadge.id);
       }
 
-      console.log('Update achieved. Result :', result);
+      // console.log('Update achieved. Result :', result);
 
       return result;
     } catch (e) {
@@ -321,21 +315,19 @@ const User = {
   },
   isOrderAllowed: async () => {
     try {
-    	let localUser = User.localUser;
+      let localUser = User.localUser;
 
-	    if (!localUser) {
-	      localUser = await User.load();
-	    }
+      if (!localUser) {
+        localUser = await User.load();
+      }
 
-        if (localUser) {
+      if (localUser) {
+        if (localUser.lastOrder !== undefined) {
+          var _now = Date.now() / 1000;
+          return _now - localUser.lastOrder > 86400 * 7;
+        }
+      }
 
-          if( localUser.lastOrder !== undefined )
-          {
-			  var _now = Date.now() / 1000;
-			  return ( ( _now - localUser.lastOrder ) > ( 86400 * 7 ));
-          }     
-        }            
-       
       return true;
     } catch (e) {
       throw Error(e);
