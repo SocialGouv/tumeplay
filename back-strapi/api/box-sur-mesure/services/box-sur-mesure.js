@@ -11,5 +11,18 @@ module.exports = {
       qb.where('produit', product_id);
       qb.increment('stock', - quantity);
     }).fetch();
+  },
+  async checkDynamicBoxAvailability(products_box) {
+    const bsm = await strapi.services['box-sur-mesure'].find()
+
+    let available = true;
+    bsm.produits.forEach(product_stock => {
+      const product = products_box.find((_) => _.produit === product_stock.produit.id)
+      if (product && available) {
+        available = (product_stock.stock - product.quantity) >= 0
+      }
+    })
+
+    return available;
   }
 };
