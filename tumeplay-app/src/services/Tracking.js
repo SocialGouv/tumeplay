@@ -42,8 +42,6 @@ const Tracking = {
   },
 
   questionAnswered: (questionId, timeNeeded) => {
-    console.log(' Question :', questionId);
-    console.log(' TIME : ', timeNeeded);
     Tracking.trigger([
       'trackEvent',
       'mobileApp',

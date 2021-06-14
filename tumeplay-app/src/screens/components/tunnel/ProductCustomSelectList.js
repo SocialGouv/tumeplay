@@ -11,7 +11,7 @@ ProductCustomSelectList.propTypes = {
 
 export default function ProductCustomSelectList(props) {
   const [productBox] = useState(props.item);
-  const [allProducts] = useState(props.allProducts);
+  const [allProducts] = useState(props.item.products);
   const [selectAllowed, setSelectAllowed] = useState(true);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [maxRowHeight, setMaxRowHeight] = useState(0);

@@ -5,7 +5,6 @@
  * @format
  * @flow
  */
-
 import {createAppContainer} from 'react-navigation'; //@TODO : Check package lint error
 import React, {useState} from 'react';
 import {View, Text, Image, Dimensions} from 'react-native';
@@ -17,6 +16,7 @@ import Styles from './src/styles/Styles';
 const AppContainer = createAppContainer(AppStack);
 
 export default function App() {
+
   const [showRealApp, setShowRealApp] = useState(false);
 
   function _renderItem({item}) {

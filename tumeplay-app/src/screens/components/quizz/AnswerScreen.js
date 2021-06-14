@@ -32,25 +32,19 @@ export default function AnswerScreen(props) {
   const [activeFilter, setActiveFilter] = useState(0);
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const [chosenComment, setChosenComment] = useState({});
-  const [isLiked, setIsLiked] = useState(false);
-  const [isDisliked, setIsDisliked] = useState(false);
+  const [isLiked, setIsLiked] = useState();
 
   useEffect(() => {
     setContent({
-      text: _currentQuestion.explanation,
+      text: _currentQuestion.text_answer,
       numberOfLines: 3,
     });
-  }, [_currentQuestion.explanation, isMounted]);
+  }, [_currentQuestion.text_answer, isMounted]);
 
-  let _rightAnswer = _currentQuestion.answers.filter(
-    _rightAnswer => _rightAnswer.id === _currentQuestion.rightAnswer,
-  );
-
-  if (_rightAnswer === undefined || _rightAnswer.length === 0) {
-    _rightAnswer = '';
-  } else {
-    _rightAnswer = _rightAnswer[0].text;
-  }
+  const _rightAnswer =
+    _currentQuestion.responses[
+      'response_' + _currentQuestion.responses.right_answer
+    ] || '';
 
   const rightAnswerPicture = require('../../../assets/pictures/answer.right.png');
   const wrongAnswerPicture = require('../../../assets/pictures/answer.wrong.png');
@@ -70,23 +64,24 @@ export default function AnswerScreen(props) {
     setIsCommentModalVisible(!isCommentModalVisible);
   }
 
-  function _writeComment(comment, id) {
-    //const idFeedback = id + 1;
+  function _writeComment(title, comment) {
     setChosenComment({
+      title: title,
       comment: comment,
-      id: id,
     });
-    props.setFeedback(isLiked, isDisliked, comment, id);
+    props.setFeedback(isLiked, title, comment);
   }
 
   function _setContentLiked(clickedItemId) {
-    const liked = clickedItemId != 0 && clickedItemId == 1;
-    const disliked = clickedItemId != 0 && clickedItemId == 2;
-
-    setIsLiked(liked);
-    setIsDisliked(disliked);
-
-    props.setFeedback(liked, disliked, chosenComment.comment, chosenComment.id);
+    let like = 0
+    if (clickedItemId == 1) {
+      like = 1;
+      setIsLiked(like);
+    } else if (clickedItemId == 2) {
+      like = -1;
+      setIsLiked(like);
+    }
+    props.setFeedback(like, chosenComment.title, chosenComment.comment);
   }
 
   return (

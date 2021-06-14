@@ -9,18 +9,18 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-import RemoteApi from '../services/RemoteApi';
 import useIsMounted from '../hooks/isMounted';
 
 import Styles from '../styles/Styles';
 import Colors from '../styles/Color';
+// import {Picker} from '@react-native-community/picker';
 
 AddCommentScreen.propTypes = {
   onWriteComment: PropTypes.func,
   onClose: PropTypes.func,
 };
 export default function AddCommentScreen(props) {
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState(1);
   const [selectedId, setSelectedId] = useState(0);
   const [menuChoices, setMenuChoices] = useState([]);
   const [content, setContent] = useState('');
@@ -29,21 +29,19 @@ export default function AddCommentScreen(props) {
 
   const description =
     "Tu trouves que la question n'est pas claire ? Ou bien la réponse n'est pas compréhensible ? Alors tu peux nous l'indiquer ici pour que nous la modifions.";
-  /*const _menuComments = [
+  const _menuChoices = [
     {id: 1, text: "Je n'ai pas compris la question"},
     {id: 2, text: "La réponse n'est pas claire"},
     {id: 3, text: 'Autre'},
-  ];*/
+  ];
 
   useEffect(() => {
-    async function _fetchChoices() {
+    function _fetchChoices() {
       if (isMounted.current) {
-        const rawChoices = await RemoteApi.fetchFeedbackTypes();
-
-        const choices = rawChoices.map(item => {
+        const choices = _menuChoices.map(item => {
           return {
             id: item.id,
-            text: item.title,
+            text: item.text,
           };
         });
         if (isMounted.current) {
@@ -74,14 +72,14 @@ export default function AddCommentScreen(props) {
 
   function _writeComment() {
     if (content !== '') {
-      props.onWriteComment(content, selectedId);
+      props.onWriteComment(selectedValue, content);
     } else {
-      props.onWriteComment(selectedValue, selectedId);
+      props.onWriteComment(selectedValue);
     }
     props.onClose();
   }
 
-  const _menuButtons = menuChoices.map((item, key) => {
+  const _menuButtons = menuChoices.map(item => {
     return <Picker.Item key={item.id} label={item.text} value={item.text} />;
   });
 

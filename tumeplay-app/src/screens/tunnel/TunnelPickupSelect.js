@@ -262,13 +262,6 @@ export default function TunnelPickupSelect(props) {
 
       <View style={{flex: 0.15, paddingTop: 15}}>
         <Text style={Styles.tunnelTitle}>Choisis le lieu de livraison</Text>
-      </View>
-
-      <View
-        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: -15}}
-        onLayout={event => {
-          adjustMapLayout(event.nativeEvent.layout);
-        }}>
         <CustomTextInput
           inputLabel="Code postal"
           inputPlaceholder="Ton Code Postal"
@@ -278,7 +271,15 @@ export default function TunnelPickupSelect(props) {
           isValid={localValid.userZipCode}
           currentValue={localAdress.userZipCode}
           displayResetButton={displayReset}
+          style={Styles.tunnelInput}
         />
+      </View>
+
+      <View
+        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: -15}}
+        onLayout={event => {
+          adjustMapLayout(event.nativeEvent.layout);
+        }}>
         {invalidZipCode && (
           <View
             style={[

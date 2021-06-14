@@ -19,6 +19,8 @@ import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 
 import Tracking from '../services/Tracking';
+import {GET_THEMES} from '../services/api/themes';
+import {useQuery} from '@apollo/client';
 
 LandingScreen.propTypes = {
   navigation: PropTypes.object,
@@ -41,16 +43,6 @@ export default function LandingScreen(props) {
   };
 
   useEffect(() => {
-    async function _fetchThemes() {
-      if (isMounted.current) {
-        const _themes = await RemoteApi.fetchThemes();
-
-        if (isMounted.current) {
-          setLocalThemes(_themes);
-        }
-      }
-    }
-
     async function _fetchUserOrRegister() {
       if (isMounted.current) {
         const uniqId = await UserService.getUniqueId();
@@ -66,10 +58,8 @@ export default function LandingScreen(props) {
         }
       }
     }
-
     _fetchUserOrRegister();
-    _fetchThemes();
-  }, [isMounted]);
+  }, [_toggleErrorModal, isMounted]);
 
   function _onSelectedTheme(selectedTheme) {
     Tracking.themeSelected(selectedTheme);
@@ -100,6 +90,20 @@ export default function LandingScreen(props) {
     </ProductErrorModal>
   ));
 
+  const ThemesCards = () => {
+    const {data, loading} = useQuery(GET_THEMES);
+
+    if (!loading) {
+      return (
+        <LandingThemeGrid
+          onPress={_onSelectedTheme}
+          themes={data.thematiques}></LandingThemeGrid>
+      );
+    }
+
+    return <View />;
+  };
+
   return (
     <SafeAreaView style={Styles.safeAreaView}>
       <ScrollView>
@@ -108,12 +112,10 @@ export default function LandingScreen(props) {
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
           <Text style={Styles.landingScreenSubtitle}>
             Explore nos thématiques, découvre les questions réponses associées
-            et réponds aux quiz pour recevoir des box gratuitement !
+            et réponds aux quizz pour recevoir des box gratuitement !
           </Text>
           <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row'}}>
-            <LandingThemeGrid
-              onPress={_onSelectedTheme}
-              themes={localThemes}></LandingThemeGrid>
+            {ThemesCards()}
           </View>
         </View>
 

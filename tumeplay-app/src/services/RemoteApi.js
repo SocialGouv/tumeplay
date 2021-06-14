@@ -271,7 +271,7 @@ const RemoteApi = {
       box: selectedItem.id,
       userAdress: userAdress,
     };
-    console.log(postData);
+    
     let result = false;
 
     if (headers) {
@@ -309,7 +309,7 @@ const RemoteApi = {
           deliveryMode: deliveryType,
           selectedPickup: selectedPickup,
         };
-        console.log(postData);
+        
         let result = false;
         if (headers) {
           result = await RemoteApi.protectedPost(

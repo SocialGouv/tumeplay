@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useMemo} from 'react';
 import {ScrollView, SafeAreaView, View} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 
@@ -13,19 +13,21 @@ import BadgeFinishScreen from './BadgeFinishScreen';
 import MoreThan25YearsScreen from './MoreThan25YearsScreen';
 import ContactButton from './components/global/ContactButton';
 import ContentCards from './components/content/ContentCards';
-import TopMenu from './components/content/TopMenu';
 import QuizzButton from './components/content/QuizzButton';
 import ModalCloseButton from './components/global/ModalCloseButton';
-import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 import Tracking from '../services/Tracking';
-import QuizService from '../services/Quiz';
+import QuizzService from '../services/Quiz';
 
 import autoScrollToTop from '../hooks/autoScrollToTop';
 import useIsMounted from '../hooks/isMounted';
 
 import Styles from '../styles/Styles';
 import ModalStyle from '../styles/components/Modal';
+
+import {useQuery} from '@apollo/client';
+import {GET_CONTENTS} from '../services/api/contents';
+import {GET_QUESTIONS} from '../services/api/questions';
 
 ContentScreen.propTypes = {
   navigation: PropTypes.object,
@@ -44,16 +46,16 @@ export default function ContentScreen(props) {
   const [badgeInfoDetails] = useState();
   const [isQuizzButtonVisible, setIsQuizzButtonVisible] = useState(false);
   const [needResultModal, setNeedResultModal] = useState(false);
-  const [localContents, setLocalContents] = useState([]);
-  const [fullContents, setFullContents] = useState([]);
-  const [fullQuestions, setFullQuestions] = useState([]);
+
   const [localQuestions, setLocalQuestions] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState(false);
   const [selectedTheme] = useState(props.navigation.state.params.selectedTheme);
   const [availableTokens, setAvailableTokens] = useState(0);
-  const [resetQuizzQuestions, setResetQuizzQuestions] = useState(false);
   const [activeOpacity, setActiveOpacity] = useState(0.5);
   const isMounted = useIsMounted();
+
+  const {data, loading} = useQuery(GET_QUESTIONS, {
+    variables: {theme_id: selectedTheme.id},
+  });
 
   const opacityTimer = useRef(null);
   autoScrollToTop(props);
@@ -97,53 +99,21 @@ export default function ContentScreen(props) {
     willBlurSubscription.remove();
   });
 
-  useEffect(() => {
-    async function _fetchContents() {
-      const _contents = await RemoteApi.fetchContents(selectedTheme);
-      if (isMounted.current) {
-        setFullContents(_contents);
-        _filterContent(1);
-      }
-    }
+  const DisplayContentCards = () => {
+    const {data, loading} = useQuery(GET_CONTENTS, {
+      variables: {theme_id: selectedTheme.id},
+    });
 
-    async function _fetchQuestions() {
-      const _allQuestions = await RemoteApi.fetchQuestions();
-      if (isMounted.current) {
-        // Ok, so here we have 10 filtered questions after this call
-        await QuizService.setQuestions(_allQuestions);
-
-        const _filteredQuestions = await QuizService.getQuestions(
-          selectedTheme,
-        );
-
-        //  console.log('Filtered : ', _filteredQuestions);
-
-        setLocalQuestions(_filteredQuestions);
-      }
-    }
-
-    _fetchContents();
-    _fetchQuestions();
-  }, [isMounted, selectedTheme]);
-
-  // @TODO : Something weird here, using hooks. React doesn't seems to see changes in first objects, so they're rendered as sames as before.
-  // So we clear it up, and then filter using a very small timer.
-  // Sooooo @TODO : Fix this mess.
-  useEffect(() => {
-    setLocalContents([]);
-
-    setTimeout(() => {
-      var _filtered = fullContents.filter(
-        content => content.category === currentCategory,
+    if (!loading) {
+      return (
+        <ContentCards
+          activeOpacity={activeOpacity}
+          style={{flex: 0.8}}
+          localContents={data.contents}
+        />
       );
-
-      setLocalContents(_filtered);
-    }, 1);
-  }, [currentCategory, fullContents]);
-
-  /*useEffect(() => {
-    setLocalQuestions(fullQuestions);
-  }, [currentCategory, fullQuestions]); */
+    }
+  };
 
   useEffect(() => {
     if (needResultModal) {
@@ -170,27 +140,37 @@ export default function ContentScreen(props) {
     // console.log(`_isAge25: ${_isAge25}`);
 
     setIsAge25(_isAge25 || null);
-
     if (_isAge25 === null || _isAge25 === undefined) {
       // Step 2
       _toggleMoreThan25YearsModal();
     } else {
       // Step 3
       Tracking.quizStarted();
-
       quizTimer = Math.floor(Date.now() / 1000);
 
-      await _shuffleQuestions();
+      _shuffleQuestions();
       _toggleQuizzModal();
     }
   }
 
-  async function _shuffleQuestions() {
-    const _filteredQuestions = await QuizService.getQuestions(selectedTheme);
+  useEffect(() => {
+    if (!loading && data) {
+      QuizzService.setQuestions(data.questions);
+    }
+  }, [loading, data]);
 
-    setLocalQuestions(_filteredQuestions);
+  const displayQuizzScreen = () => {
+    return (
+      <QuizzScreen
+        onFinishedQuizz={_onFinishedQuizz}
+        questions={localQuestions}
+      />
+    );
+  };
 
-    //setLocalQuestions(randomQuestions);
+  function _shuffleQuestions() {
+    const newQuestions = QuizzService.getQuestions();
+    setLocalQuestions(newQuestions);
   }
 
   function _toggleBadgeModal() {
@@ -211,17 +191,11 @@ export default function ContentScreen(props) {
     setIsResultModalVisible(!isResultModalVisible);
   }
 
-  function _filterContent(selectedCategory, categoryText) {
-    Tracking.categorySelected(selectedTheme, categoryText);
-    setCurrentCategory(selectedCategory);
-  }
-
   function _onFinishedQuizz() {
     quizTimer = Math.floor(Date.now() / 1000) - quizTimer;
     Tracking.quizEnded(quizTimer);
 
     _toggleQuizzModal();
-    setResetQuizzQuestions(!resetQuizzQuestions);
     setNeedResultModal(true);
   }
 
@@ -233,7 +207,6 @@ export default function ContentScreen(props) {
   function _onRetry(hideQuizzModal) {
     // Set to invisible, resetup and reopen quizz modal
     _shuffleQuestions();
-    setResetQuizzQuestions(!resetQuizzQuestions);
     setIsBadgeModalVisible(false);
     setIsResultModalVisible(false);
     if (hideQuizzModal) {
@@ -265,6 +238,7 @@ export default function ContentScreen(props) {
     _toggleMoreThan25YearsModal();
     _shuffleQuestions();
     _toggleQuizzModal();
+    Tracking.quizStarted();
   }
 
   function _onContactClick() {
@@ -277,22 +251,10 @@ export default function ContentScreen(props) {
 
   return (
     <SafeAreaView style={[Styles.safeAreaView, {}]}>
-      <TopMenu
-        navigation={props.navigation}
-        selectedTheme={selectedTheme}
-        onPress={_filterContent}
-      />
-
       <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
         <ScrollView style={{flex: 0.8}}>
-          <ContentCards
-            activeOpacity={activeOpacity}
-            style={{flex: 0.8}}
-            localContents={localContents}
-          />
-
+          {DisplayContentCards()}
           <ContactButton />
-
           <CustomFooter
             style={{flex: 0.1}}
             navigation={props.navigation}
@@ -312,12 +274,7 @@ export default function ContentScreen(props) {
         <View style={ModalStyle.backdrop}></View>
         <View style={ModalStyle.innerModal}>
           <ModalCloseButton onClose={_toggleQuizzModal} />
-
-          <QuizzScreen
-            resetQuestions={resetQuizzQuestions}
-            onFinishedQuizz={_onFinishedQuizz}
-            questions={localQuestions}
-          />
+          {displayQuizzScreen()}
         </View>
       </Modal>
 
@@ -351,7 +308,6 @@ export default function ContentScreen(props) {
         <View style={ModalStyle.backdrop}></View>
         <View style={ModalStyle.innerModal}>
           <ModalCloseButton onClose={_toggleResultModal} />
-
           <QuizzFinishScreen
             onRetry={_onRetry}
             availableTokens={availableTokens}
@@ -380,10 +336,9 @@ export default function ContentScreen(props) {
       </Modal>
 
       {/* Fix staying button on web */}
-      {selectedTheme &&
-        !selectedTheme.isSpecial &&
-        isQuizzButtonVisible &&
-        !isQuizzModalVisible && <QuizzButton onClick={_openInitialModal} />}
+      {selectedTheme.display_quiz && (
+        <QuizzButton onClick={_openInitialModal} />
+      )}
     </SafeAreaView>
   );
 }

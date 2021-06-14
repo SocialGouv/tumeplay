@@ -2,6 +2,7 @@ import {name as appName} from './app.json';
 import {AppRegistry} from 'react-native';
 import {createBrowserApp} from '@react-navigation/web';
 import ResizeObserver from 'resize-observer-polyfill';
+import withAppolo from './hooks/withApollo.jsx';
 import * as Sentry from '@sentry/browser';
 
 import * as serviceWorker from './serviceWorker';
@@ -23,6 +24,6 @@ Sentry.init({
 
 const App = createBrowserApp(AppStack);
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => withAppolo(App));
 AppRegistry.runApplication(appName, {rootTag: document.getElementById('root')});
 serviceWorker.unregister();

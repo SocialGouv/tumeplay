@@ -14,7 +14,6 @@ ContentCard.propTypes = {
 export default function ContentCard(props) {
   const [content, setContent] = useState(props.item);
   const [isExpanded, setIsExpanded] = useState(false);
-
   const cardStyle = StyleSheet.create({
     container: {
       flex: 1,
@@ -75,7 +74,12 @@ export default function ContentCard(props) {
           setIsExpanded(!isExpanded);
         }}
         activeOpacity={props.activeOpacity}>
-        <Image source={content.picture} style={cardStyle.picture} />
+        <Image
+          source={
+            content.image ? 'http://localhost:1337' + content.image.url : null
+          }
+          style={cardStyle.picture}
+        />
 
         <ExpandableText
           content={content}

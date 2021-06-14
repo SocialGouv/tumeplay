@@ -32,7 +32,7 @@ ProductModal.propTypes = {
 export default function ProductModal(props) {
   const [productBox] = useState(props.item);
   const [showModal] = useState(props.showModal);
-  const [allProducts] = useState(props.allProducts);
+  const [allProducts] = useState(props.item.products);
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalProducts, setTotalProducts] = useState([]);
 
@@ -111,19 +111,16 @@ export default function ProductModal(props) {
   function stayInTouch() {
     props.onClose();
     props.navigation.navigate('StayInTouch', {
-		outOfStock: true		
+      outOfStock: true,
     });
   }
-  
+
   function onOrder() {
-    if(props.item.available )
-    {
+    if (props.item.available) {
       props.onOrder(selectedItems);
-	}
-	else
-	{
-	  stayInTouch();
-	}
+    } else {
+      stayInTouch();
+    }
   }
 
   function onSelectChange(selectedItems) {
