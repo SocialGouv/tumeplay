@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import requests
 from models.Content import Content
 from models.Theme import Theme
