@@ -32,6 +32,9 @@
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "title_backoffice": {
+      "type": "string"
     }
   }
 }
