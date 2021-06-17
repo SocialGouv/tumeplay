@@ -32,9 +32,7 @@ ProductModal.propTypes = {
 export default function ProductModal(props) {
   const [productBox] = useState(props.item);
   const [showModal] = useState(props.showModal);
-  const [allProducts] = useState(props.item.products);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [totalProducts, setTotalProducts] = useState([]);
 
   const screenWidth = Math.round(Dimensions.get('window').width);
   const cardStyle = StyleSheet.create({
@@ -98,16 +96,6 @@ export default function ProductModal(props) {
     },
   });
 
-  useEffect(() => {
-    let _total = 0;
-
-    for (const localProduct of selectedItems) {
-      _total += localProduct.qty;
-    }
-
-    setTotalProducts(_total);
-  }, [selectedItems]);
-
   function stayInTouch() {
     props.onClose();
     props.navigation.navigate('StayInTouch', {
@@ -116,7 +104,7 @@ export default function ProductModal(props) {
   }
 
   function onOrder() {
-    if (props.item.available) {
+    if (props.item.available || productBox.__typename === 'BoxSurMesure') {
       props.onOrder(selectedItems);
     } else {
       stayInTouch();
@@ -136,6 +124,7 @@ export default function ProductModal(props) {
       isVisible={showModal}
       style={ModalStyle.modal}
       animationType="fade"
+      ariaHideApp={false}
       backdropOpacity={0}
       transparent={true}>
       <View style={ModalStyle.backdrop}></View>
@@ -145,7 +134,10 @@ export default function ProductModal(props) {
 
         <ScrollView style={cardStyle.internalScrollView}>
           <View>
-            <Image style={cardStyle.picture} source={productBox.picture} />
+            <Image
+              style={cardStyle.picture}
+              source={'http://localhost:1337' + productBox.image.url}
+            />
           </View>
           <View
             style={{
@@ -157,22 +149,20 @@ export default function ProductModal(props) {
             <Text style={cardStyle.text}>{productBox.description}</Text>
           </View>
 
-          {productBox && productBox.products.length > 0 && (
+          {productBox.__typename === 'Box' && (
             <View style={{paddingLeft: 15, paddingRight: 15}}>
               <Text style={cardStyle.subtitle}>
                 Ce que tu trouveras dans ta box :
               </Text>
-
               <ProductContentList item={productBox} />
             </View>
           )}
-          {productBox && productBox.products.length === 0 && (
+          {productBox.__typename === 'BoxSurMesure' && (
             <View
               style={{paddingLeft: 15, paddingRight: 15, paddingBottom: 80}}>
               <ProductCustomSelectList
                 onSelectChange={onSelectChange}
-                allProducts={allProducts}
-                item={productBox}
+                allProducts={productBox.produits}
               />
             </View>
           )}

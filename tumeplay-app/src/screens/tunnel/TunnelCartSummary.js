@@ -8,12 +8,12 @@ import Backlink from '../components/tunnel/Backlink';
 import ProductContentList from '../components/tunnel/ProductContentList';
 import ProductErrorModal from '../components/tunnel/ProductErrorModal';
 
-import RemoteApi from '../../services/RemoteApi';
 import UserService from '../../services/User';
 
 import Styles from '../../styles/Styles';
 
 import TunnelCartSummaryStyle from '../../styles/components/TunnelCartSummary';
+import OrdersAPI from '../../services/api/orders';
 
 TunnelCartSummary.propTypes = {
   navigation: PropTypes.object,
@@ -34,25 +34,41 @@ export default function TunnelCartSummary(props) {
   const [userAdress] = useState(props.navigation.state.params.userAdress);
 
   async function _confirmOrder() {
-    const _isSuccess = await RemoteApi.confirmOrder(
-      selectedItem,
-      selectedProducts,
-      userAdress,
-      selectedPickup,
-      deliveryType,
-    );
 
-    if (!_isSuccess || !_isSuccess.success) {
-      setShowErrorModal(true);
-      setIsRunning(false);
-      return;
+    //ORDER STRAPI API
+    let orderPost;
+    if (selectedItem.__typename === 'Box') {
+      orderPost = await OrdersAPI.orderBoxes({
+        first_name: userAdress.firstName,
+        last_name: userAdress.lastName,
+        email: userAdress.emailAdress,
+        delivery: deliveryType,
+        content: [
+          {
+            __component: 'commandes.box',
+            box: selectedItem.id,
+          },
+        ],
+      });
+    } else if (selectedItem.__typename === 'BoxSurMesure') {
+      orderPost = await OrdersAPI.orderBoxes({
+        first_name: userAdress.firstName,
+        last_name: userAdress.lastName,
+        email: userAdress.emailAdress,
+        delivery: deliveryType,
+        content: [
+          {
+            __component: 'commandes.box-sur-mesure',
+            produits: selectedProducts,
+          },
+        ],
+      });
     }
 
-    if (_isSuccess) {
+    if (orderPost) {
       const _newTokens = await UserService.subTokens(1000);
 
       await UserService.setLastOrder();
-      
       EventRegister.emit('tokensAmountChanged', _newTokens);
 
       setIsRunning(false);

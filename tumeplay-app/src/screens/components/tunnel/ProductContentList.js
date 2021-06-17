@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 ProductContentList.propTypes = {
   item: PropTypes.object,
+  products: PropTypes.array,
   shortMode: PropTypes.bool,
 };
 
@@ -36,7 +37,22 @@ export default function ProductContentList(props) {
             itemText = item.produit.title;
           }
         }
-        return renderRow(key, item.quantity, itemText);
+
+        let displayRow = true;
+        let quantity = null;
+        if (productBox.__typename === 'BoxSurMesure') {
+          const customProduct = customProducts.find(
+            _ => _.produit === item.produit.id,
+          );
+          displayRow = !!customProduct;
+          if (displayRow) {
+            quantity = customProduct.quantity;
+          }
+        }
+
+        if (displayRow) {
+          return renderRow(key, quantity, itemText);
+        }
       });
     } else {
       return <View></View>;
@@ -47,8 +63,14 @@ export default function ProductContentList(props) {
     return null;
   }
 
-  const _targetList =
-    productBox.products.length > 0 ? productBox.products : customProducts;
+  let _targetList;
+  if (productBox.__typename === 'BoxSurMesure') {
+    _targetList =
+      productBox.produits.length > 0 ? productBox.produits : customProducts;
+  } else {
+    _targetList =
+      productBox.products.length > 0 ? productBox.products : customProducts;
+  }
 
   return _renderProductList(_targetList);
 }

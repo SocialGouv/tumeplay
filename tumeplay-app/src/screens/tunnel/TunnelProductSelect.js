@@ -17,7 +17,7 @@ import ProductSelectHeader from '../components/tunnel/ProductSelectHeader';
 import useIsMounted from '../../hooks/isMounted';
 import autoScrollToTop from '../../hooks/autoScrollToTop';
 import {useQuery} from '@apollo/client';
-import {GET_BOXES} from '../../services/api/boxes';
+import {GET_BOXES, GET_BOX_MESURES} from '../../services/api/boxes';
 
 TunnelProductSelect.propTypes = {
   navigation: PropTypes.object,
@@ -32,14 +32,28 @@ export default function TunnelProductSelect(props) {
   const neededTokens = 1000;
 
   autoScrollToTop(props);
+ 
+  const {data: box, loading} = useQuery(GET_BOXES);
+  const {data: boxes_sur_mesure, loading2} = useQuery(GET_BOX_MESURES);
 
-  const {data, loading} = useQuery(GET_BOXES);
+  const fetchAllBoxes = () => {
+    if (!loading && box && !loading2 && boxes_sur_mesure) {
+      const boxes = box.boxes;
+      const allBoxes = [...boxes, boxes_sur_mesure.boxSurMesure];
+      setLocalBoxs(allBoxes)
+    }
+  }
 
   useEffect(() => {
-    if (!loading && data) {
-      setLocalBoxs(data.boxes);
-    }
-  }, [data, loading]);
+    fetchAllBoxes();
+  }, [box, boxes_sur_mesure]);
+
+  // useEffect(() => {
+  //   if (!loading && data) {
+  //     setLocalBoxs(data.boxes);
+  //   }
+  // }, [data, loading]);
+
 
   async function _onBoxClicked(selectedItem) {
     const _tokens = await UserService.getTokensAmount();

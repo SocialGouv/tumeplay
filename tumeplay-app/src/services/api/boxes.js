@@ -6,6 +6,7 @@ export const GET_BOXES = gql`
       id
       title
       description
+      available
       products {
         id
         quantity
@@ -17,6 +18,30 @@ export const GET_BOXES = gql`
         url
       }
       stock
+    }
+  }
+`;
+
+export const GET_BOX_MESURES = gql`
+  query GetBoxesMesures {
+    boxSurMesure {
+      id
+      title
+      description
+      produits {
+        produit {
+          id
+          title
+          description
+          image {
+            url
+          }
+        }
+        stock
+      }
+      image {
+        url
+      }
     }
   }
 `;

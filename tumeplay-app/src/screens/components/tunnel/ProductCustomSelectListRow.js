@@ -6,23 +6,21 @@ import Colors from '../../../styles/Color';
 
 ProductCustomSelectListRow.propTypes = {
   item: PropTypes.object,
+  stock: PropTypes.object,
   onPress: PropTypes.func,
   onQtyAdjust: PropTypes.func,
-  rowHeight: PropTypes.number,
-  onLayout: PropTypes.func,
 };
 
 export default function ProductCustomSelectListRow(props) {
   const [item] = useState(props.item);
+  const [stock] = useState(props.stock);
   const [isSelected, setIsSelected] = useState(false);
   const [localQuantity, setLocalQuantity] = useState(0);
 
-  console.log(item);
-
   const localStylesheet = StyleSheet.create({
     picture: {
-      marginLeft: 7,
       marginRight: 7,
+      marginLeft: 7,
       paddingTop: 0,
       resizeMode: 'contain',
     },
@@ -45,11 +43,11 @@ export default function ProductCustomSelectListRow(props) {
       shadowRadius: 5,
       marginBottom: 15,
       borderRadius: 7,
-      padding: 9,
       justifyContent: 'flex-start',
       alignSelf: 'center',
       alignItems: 'stretch',
       minWidth: '100%',
+      opacity: stock <= 0 ? 0.5 : 1,
     },
     selectedRowStyle: {},
   });
@@ -60,7 +58,7 @@ export default function ProductCustomSelectListRow(props) {
 
   function onPress() {
     const _newState = !isSelected;
-    const _selectAllowed = props.onPress(item, _newState);
+    const _selectAllowed = props.onPress(item, stock, _newState);
 
     if (_selectAllowed) {
       setIsSelected(!isSelected);
@@ -70,7 +68,7 @@ export default function ProductCustomSelectListRow(props) {
 
   function adjustQuantity(mode) {
     const newQuantity = mode == 'sub' ? localQuantity - 1 : localQuantity + 1;
-    const _adjustAllowed = props.onQtyAdjust(item, newQuantity, mode);
+    const _adjustAllowed = props.onQtyAdjust(item, newQuantity, stock, mode);
 
     if (_adjustAllowed) {
       setLocalQuantity(newQuantity);
@@ -81,31 +79,40 @@ export default function ProductCustomSelectListRow(props) {
     }
   }
 
-  const _title = item.qty ? item.qty + ' ' + item.title : item.title;
-  const _height = props.rowHeight > 0 ? {minHeight: props.rowHeight} : {};
-
   return (
     <View>
       <TouchableOpacity
         style={[
           localStylesheet.rowStyle,
           isSelected ? localStylesheet.selectedRowStyle : false,
-          _height,
         ]}
         onLayout={props.onLayout}
         onPress={() => {
           onPress(item);
         }}>
-        <View style={{flex: 0.2, justifyContent: 'center'}}>
+        <View
+          style={{
+            flex: 0.2,
+            justifyContent: 'start',
+            borderBottomLeftRadius: 7,
+            borderTopLeftRadius: 7,
+          }}>
           <Image
-            style={{width: '100%', resizeMode: 'contain', height: '100%'}}
-            source={item.picture}
+            style={{
+              width: '100%',
+              resizeMode: 'cover',
+              height: '100%',
+              borderBottomLeftRadius: 7,
+              borderTopLeftRadius: 7,
+            }}
+            source={'http://localhost:1337' + item.image.url}
           />
         </View>
         <View
           style={{
             flex: 0.7,
-            paddingLeft: 5,
+            paddingLeft: 10,
+            paddingVertical: 12,
             justifyContent: 'center',
             alignSelf: 'center',
           }}>
@@ -115,7 +122,7 @@ export default function ProductCustomSelectListRow(props) {
               fontFamily: 'Chivo-Regular',
               fontSize: 15,
             }}>
-            {_title}
+            {item.title}
           </Text>
           <Text
             style={{
@@ -125,17 +132,38 @@ export default function ProductCustomSelectListRow(props) {
             }}>
             {item.description}
           </Text>
+          {stock <= 4 && stock != 0 && (
+            <Text
+              style={{
+                color: '#4F4F4F',
+                fontFamily: 'Chivo-Regular',
+                fontSize: 10,
+              }}>
+              {stock} restants
+            </Text>
+          )}
+          {stock <= 0 && (
+            <Text
+              style={{
+                color: '#F1732E',
+                fontFamily: 'Chivo-Regular',
+                fontSize: 10,
+              }}>
+              indisponible
+            </Text>
+          )}
         </View>
         <Text
           style={{
             flex: 0.1,
             paddingLeft: 5,
+            paddingVertical: 10,
             alignContent: 'flex-end',
             justifyContent: 'flex-end',
             alignItems: 'flex-end',
             alignSelf: 'center',
           }}>
-          {!isSelected && (
+          {!isSelected && stock > 0 && (
             <Image
               style={[localStylesheet.picture, localStylesheet.normalPicture]}
               source={_targetPicture}

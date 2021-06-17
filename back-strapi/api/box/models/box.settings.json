@@ -42,6 +42,11 @@
     },
     "description": {
       "type": "string"
+    },
+    "available": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

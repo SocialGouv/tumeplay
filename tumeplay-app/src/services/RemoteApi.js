@@ -309,7 +309,6 @@ const RemoteApi = {
           deliveryMode: deliveryType,
           selectedPickup: selectedPickup,
         };
-        
         let result = false;
         if (headers) {
           result = await RemoteApi.protectedPost(

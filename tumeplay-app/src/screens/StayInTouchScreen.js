@@ -9,7 +9,6 @@ import Styles from '../styles/Styles';
 import TunnelUserAdressStyle from '../styles/components/TunnelUserAdress';
 import autoScrollToTop from '../hooks/autoScrollToTop';
 import useIsMounted from '../hooks/isMounted';
-import PropTypes from 'prop-types';
 
 import AddressValidator from '../services/AddressValidator';
 import MailValidator from '../services/MailValidator';
@@ -17,6 +16,7 @@ import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 
 import CustomTextInput from './components/tunnel/CustomTextInput';
+import ContactsAPI from '../services/api/contact';
 
 const zipCodeTest = /^[0-9]{5}$/;
 
@@ -43,14 +43,15 @@ export default function StayInTouchScreen(props) {
   const [disallowOrder, setDisallowOrder] = useState(false);
   const isMounted = useIsMounted();
 
-  useEffect(() => {
-    _checkIsAllowed();
-  }, [isMounted]);
+  // useEffect(() => {
+  //   _checkIsAllowed();
+  // }, [isMounted]);
 
-  async function _checkIsAllowed() {
-    const _isAllowed = await UserService.isOrderAllowed();
-    setDisallowOrder(!_isAllowed);
-  }
+  // async function _checkIsAllowed() {
+  //   const _isAllowed = await UserService.isOrderAllowed();
+  //   console.log(_isAllowed)
+  //   setDisallowOrder(!_isAllowed);
+  // }
 
   async function _handleZipCode(zipCode) {
     const localValue = zipCode.replace(/[^0-9]/g, '');
@@ -132,22 +133,22 @@ export default function StayInTouchScreen(props) {
     }
     const _isValid = _validateFields(CustomTextInput.fieldStatus.INVALID);
 
-    // Just in case
-    const _isOrderAllowed = await UserService.isOrderAllowed();
+    // // Just in case
+    // const _isOrderAllowed = await UserService.isOrderAllowed();
 
-    if (!_isOrderAllowed) {
-      setMainValidFlag(false);
-      setDisallowOrder(true);
+    // if (!_isOrderAllowed) {
+    //   setMainValidFlag(false);
+    //   setDisallowOrder(true);
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (outOfStock) {
-      await UserService.setLastOrder();
-    }
-
+    // if (outOfStock) {
+    //   await UserService.setLastOrder();
+    // }
     if (_isValid) {
-      await RemoteApi.sendContact(localAdress);
+      ContactsAPI.postContact(localAdress);
+      // await RemoteApi.sendContact(localAdress);
       props.navigation.navigate('StayInTouchConfirm', {outOfStock: outOfStock});
     }
   }

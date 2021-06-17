@@ -1,6 +1,4 @@
 import Storage from './Storage';
-import {useQuery} from '@apollo/client';
-import {GET_POINTS} from './api/settings';
 
 const QuizzService = {
   storageKey: 'quizzUserData',

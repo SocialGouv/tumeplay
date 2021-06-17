@@ -230,17 +230,18 @@ export default function TunnelUserAddress(props) {
     );
 
     if (!_isOrderAllowed || !_isOrderAllowed.isAllowed) {
-      setDisallowOrder(true);
+      setDisallowOrder(false);
 
       return;
     }
-
-    const _isAllowedFromUser = await UserService.isOrderAllowed();
+    // A DECOMMENTER UNE FOIS LA REQUÊTE VALIDEE
+    // const _isAllowedFromUser = await UserService.isOrderAllowed();
+    const _isAllowedFromUser = true;
 
     console.log('ALLOWED : ' + _isAllowedFromUser);
 
     if (!_isAllowedFromUser) {
-      setDisallowOrder(true);
+      setDisallowOrder(false);
 
       return;
     }
