@@ -33,6 +33,8 @@ export default function TunnelCartSummary(props) {
   );
   const [userAdress] = useState(props.navigation.state.params.userAdress);
 
+  console.log(userAdress)
+
   async function _confirmOrder() {
 
     //ORDER STRAPI API
@@ -42,6 +44,10 @@ export default function TunnelCartSummary(props) {
         first_name: userAdress.firstName,
         last_name: userAdress.lastName,
         email: userAdress.emailAdress,
+        address: userAdress.address,
+        address_region: userAdress.address_region,
+        address_deptcode: userAdress.address_deptcode,
+        address_dept: userAdress.address_dept,
         delivery: deliveryType,
         content: [
           {
@@ -55,6 +61,10 @@ export default function TunnelCartSummary(props) {
         first_name: userAdress.firstName,
         last_name: userAdress.lastName,
         email: userAdress.emailAdress,
+        address: userAdress.address,
+        address_region: userAdress.address_region,
+        address_deptcode: userAdress.address_deptcode,
+        address_dept: userAdress.address_dept,
         delivery: deliveryType,
         content: [
           {
@@ -199,7 +209,7 @@ export default function TunnelCartSummary(props) {
             </Text>
             {deliveryType == 'home' && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
-                {userAdress.adress}
+                {userAdress.address}
                 {'\n'}
                 {userAdress.zipCode} {userAdress.city}
               </Text>

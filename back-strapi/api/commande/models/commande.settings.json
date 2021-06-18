@@ -37,6 +37,19 @@
       "max": 1,
       "min": 1,
       "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "address_deptcode": {
+      "type": "integer"
+    },
+    "address_dept": {
+      "type": "string"
+    },
+    "address_region": {
+      "type": "string"
     }
   }
 }
