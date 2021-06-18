@@ -51,10 +51,13 @@ export default function TunnelUserAddress(props) {
     emailAdress: '',
     emailAdressConfirmation: '',
     phoneNumber: '',
-    adress: '',
+    address: '',
     adressMore: '',
     zipCode: '',
     city: '',
+    address_region: '',
+    address_dept: '',
+    address_deptcode: '',
   };
 
   var defaultIsValid = {
@@ -64,7 +67,7 @@ export default function TunnelUserAddress(props) {
     emailAdressConfirmation: -1,
     emailAdressMismatch: false,
     phoneNumber: -1,
-    adress: -1,
+    address: -1,
     zipCode: -1,
     city: -1,
   };
@@ -94,7 +97,7 @@ export default function TunnelUserAddress(props) {
         emailAdress: userAdress.emailAdress,
         emailAdressConfirmation: userAdress.emailAdressConfirmation,
         phoneNumber: userAdress.phoneNumber,
-        adress: userAdress.adress,
+        address: userAdress.adress,
         adressMore: userAdress.adressMore,
         zipCode: userAdress.zipCode,
         city: userAdress.city,
@@ -114,12 +117,21 @@ export default function TunnelUserAddress(props) {
       .geocode(fullAddress)
       .end((err, res) => {
         let filtered = [];
-
         if (res.length >= 1) {
           filtered = res.filter(place => place.address.country_code === 'fr');
 
           if (filtered.length > 0) {
-            _gotoSummary();
+            if (res[0]) {
+              const deptCode = res[0].address.postcode;
+              if (deptCode.substring(0, 2) === '97') {
+                localAdress['address_deptcode'] = deptCode.substring(0, 3);
+              } else {
+                localAdress['address_deptcode'] = deptCode.substring(0, 2);
+              }
+              localAdress['address_region'] = res[0].address.state;
+              localAdress['address_dept'] = res[0].address.county;
+              _gotoSummary();
+            }
           }
         }
 
@@ -182,8 +194,8 @@ export default function TunnelUserAddress(props) {
     }
 
     if (deliveryType === 'home') {
-      if (localAdress.adress === '') {
-        checkedIsValid.adress = defaultValue;
+      if (localAdress.address === '') {
+        checkedIsValid.address = defaultValue;
         isValid = false;
       }
 
@@ -388,9 +400,9 @@ export default function TunnelUserAddress(props) {
           <CustomTextInput
             inputLabel="Adresse"
             inputPlaceholder="Ton adresse"
-            onChangeText={val => _handleChange('adress', val)}
-            isValid={localValid.adress}
-            currentValue={localAdress.adress}
+            onChangeText={val => _handleChange('address', val)}
+            isValid={localValid.address}
+            currentValue={localAdress.address}
             name="adress"
           />
           <CustomTextInput
