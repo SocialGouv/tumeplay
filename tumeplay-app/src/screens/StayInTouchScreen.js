@@ -146,7 +146,7 @@ export default function StayInTouchScreen(props) {
     // if (outOfStock) {
     //   await UserService.setLastOrder();
     // }
-    
+
     if (_isValid) {
       ContactsAPI.postContact(localAdress);
       props.navigation.navigate('StayInTouchConfirm', {outOfStock: outOfStock});
