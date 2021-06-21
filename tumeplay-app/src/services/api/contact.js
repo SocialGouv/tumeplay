@@ -1,5 +1,6 @@
 const ContactsAPI = {
-  postContact:  async userAdress => {
+  postContact: async userAdress => {
+    console.log(userAdress);
     await fetch('http://localhost:1337/contacts', {
       method: 'POST',
       headers: {
@@ -9,6 +10,7 @@ const ContactsAPI = {
       body: JSON.stringify({
         name: userAdress.firstName,
         email: userAdress.emailAdress,
+        zipcode: userAdress.zipCode,
       }),
     });
   },

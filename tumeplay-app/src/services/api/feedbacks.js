@@ -7,8 +7,8 @@ const FeedbacksAPI = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: feedback.title,
-        body: feedback.comment,
+        title: feedback.title ? feedback.title : '∅',
+        body: feedback.comment ? feedback.comment : '∅',
         appreciation: feedback.isLiked,
         question: feedback.questionContentId,
       }),
