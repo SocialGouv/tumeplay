@@ -103,7 +103,10 @@ export default function QuizzScreen(props) {
       questionContentId: _currentQuestion.id,
       ...dataFeedback,
     };
-    FeedbacksAPI.sendFeedback(userFeedback);
+
+    if (userFeedback.title || userFeedback.comment || userFeedback.isLiked) {
+      FeedbacksAPI.sendFeedback(userFeedback);
+    }
   }
 
   const _displayAnswersButtons = question => {
