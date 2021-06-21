@@ -18,6 +18,9 @@
     },
     "email": {
       "type": "email"
+    },
+    "zipcode": {
+      "type": "integer"
     }
   }
 }
