@@ -41,7 +41,7 @@
       "model": "environnement"
     },
     "description": {
-      "type": "string"
+      "type": "text"
     },
     "available": {
       "type": "boolean",
