@@ -87,7 +87,7 @@ const QuizzService = {
 
     if (selectedQuestions.length < 10) {
       QuizzService.doneIds = QuizzService.doneIds.filter(id => {
-        !QuizzService.currentQuestions.includes(id);
+        return !QuizzService.currentQuestions.includes(id);
       });
     }
 
