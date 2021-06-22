@@ -17,7 +17,7 @@ COPY public ./public
 
 RUN npm run build
 
-FROM docker.pkg.github.com/socialgouv/docker/nginx4spa:0.18.0
+FROM ghcr.io/socialgouv/docker/nginx4spa:6.24.0
 
 COPY --from=builder /build /usr/share/nginx/html
 
