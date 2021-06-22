@@ -21,8 +21,6 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
             )
         )
 
-        product_ids[product['title']] = product['id']
-
     for product in products:
         product_image = product.get_image()
         if product_image and product_image is not None:
@@ -33,11 +31,14 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
             json_response = response.json()
             image_id = json_response[0]['id']
 
-        requests.post(strapi_base_api + "/produits", data={
+        response = requests.post(strapi_base_api + "/produits", data={
             "title": product.title,
             "description": product.description,
             "image": image_id,
         })
+
+        json_response = response.json()
+        product_ids[product.title] = json_response['id']
 
     print(str(len(products)) + ' produits insérés')
 
@@ -49,7 +50,7 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
             for product in box['products']:
                 product_helpers.append(
                     {
-                        "produit": product_ids[product['title']],
+                        "produit": product_ids[product['title'].strip()],
                         "quantity": int(product['qty'])
                     }
                 )
@@ -87,5 +88,4 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
 
     print(str(len(boxes)) + ' boxes insérés')
 
-    print(box_ids)
     return box_ids
