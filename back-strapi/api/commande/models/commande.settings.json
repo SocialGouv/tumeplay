@@ -42,13 +42,25 @@
       "type": "string",
       "required": true
     },
-    "address_deptcode": {
-      "type": "integer"
-    },
     "address_dept": {
       "type": "string"
     },
     "address_region": {
+      "type": "string"
+    },
+    "address_zipcode": {
+      "type": "string"
+    },
+    "poi_name": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "address_deptcode": {
+      "type": "string"
+    },
+    "phone": {
       "type": "string"
     }
   }
