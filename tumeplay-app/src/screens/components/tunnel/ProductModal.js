@@ -71,7 +71,13 @@ export default function ProductModal(props) {
       marginTop: 10,
       lineHeight: 22,
     },
-
+    stockText: {
+      color: '#4F4F4F',
+      fontSize: 10,
+      fontStyle: 'italic',
+      marginTop: 5,
+      marginBottom: 10
+    },
     readMoreWrapper: {
       position: 'absolute',
       right: 15,
@@ -145,7 +151,14 @@ export default function ProductModal(props) {
               paddingLeft: 15,
               paddingRight: 15,
             }}>
-            <Text style={cardStyle.title}>{productBox.title}</Text>
+            {productBox.__typename === 'Box' && productBox.stock <= 30 ?
+              <View>
+                <Text style={cardStyle.title}>{productBox.title}</Text>
+                <Text style={cardStyle.stockText}>Stock restant : {productBox.stock} boites</Text>
+              </View>
+              :
+              <Text style={cardStyle.title}>{productBox.title}</Text>
+            }
             <Text style={cardStyle.text}>{productBox.description}</Text>
           </View>
 
