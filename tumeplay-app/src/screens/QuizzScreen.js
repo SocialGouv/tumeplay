@@ -148,7 +148,7 @@ export default function QuizzScreen(props) {
       style={{width: '100%', height: '100%'}}
       source={
         _currentQuestion.image
-          ? 'http://localhost:1337' + _currentQuestion.image.url
+          ? process.env.REACT_APP_API_URL + _currentQuestion.image.url
           : undefined
       }>
       <ScrollView style={{flex: 1}} contentContainerStyle={{flex: 1}}>

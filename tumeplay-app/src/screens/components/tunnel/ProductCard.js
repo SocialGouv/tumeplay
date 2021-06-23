@@ -99,7 +99,7 @@ export default function ProductCard(props) {
         style={cardStyle.buttonWrapper}
         onPress={props.onPress}>
         <Image
-          source={'http://localhost:1337' + productBox.image.url}
+          source={process.env.REACT_APP_API_URL + productBox.image.url}
           style={cardStyle.picture}
         />
         <View style={cardStyle.textContainer}>

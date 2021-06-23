@@ -15,6 +15,7 @@ LandingThemeGrid.propTypes = {
 export default function LandingThemeGrid(props) {
   const numColumns = 2;
   let currentIndex = 0;
+  console.log(process.env.REACT_APP_API_URL)
   return (
     <FlatList
       scrollEnabled={true}
@@ -36,7 +37,7 @@ export default function LandingThemeGrid(props) {
                 <Image
                   source={
                     item.image[0]
-                      ? 'http://localhost:1337' + item.image[0].url
+                      ? process.env.REACT_APP_API_URL + item.image[0].url
                       : null
                   }
                   style={LandingStyle.gridItemPicture}

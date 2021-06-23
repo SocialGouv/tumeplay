@@ -1,6 +1,6 @@
 const OrdersAPI = {
   orderBoxes: async order => {
-    const res = await fetch('http://localhost:1337/commandes', {
+    const res = await fetch(process.env.REACT_APP_API_URL + '/commandes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

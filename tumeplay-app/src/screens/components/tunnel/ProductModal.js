@@ -136,7 +136,7 @@ export default function ProductModal(props) {
           <View>
             <Image
               style={cardStyle.picture}
-              source={'http://localhost:1337' + productBox.image.url}
+              source={process.env.REACT_APP_API_URL + productBox.image.url}
             />
           </View>
           <View
