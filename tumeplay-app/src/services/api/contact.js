@@ -1,7 +1,7 @@
 const ContactsAPI = {
   postContact: async userAdress => {
     console.log(userAdress);
-    await fetch('http://localhost:1337/contacts', {
+    await fetch(process.env.REACT_APP_API_URL + '/contacts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

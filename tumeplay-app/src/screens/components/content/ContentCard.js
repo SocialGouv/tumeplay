@@ -76,7 +76,7 @@ export default function ContentCard(props) {
         activeOpacity={props.activeOpacity}>
         <Image
           source={
-            content.image ? 'http://localhost:1337' + content.image.url : null
+            content.image ? process.env.REACT_APP_API_URL + content.image.url : null
           }
           style={cardStyle.picture}
         />

@@ -105,7 +105,7 @@ export default function ProductCustomSelectListRow(props) {
               borderBottomLeftRadius: 7,
               borderTopLeftRadius: 7,
             }}
-            source={'http://localhost:1337' + item.image.url}
+            source={process.env.REACT_APP_API_URL + item.image.url}
           />
         </View>
         <View
