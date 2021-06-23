@@ -21,7 +21,6 @@ import PointOfInterestCard from '../components/global/PointOfInterestCard';
 import CustomTextInput from '../components/tunnel/CustomTextInput';
 import AddressValidator from '../../services/AddressValidator';
 import TunnelUserAdressStyle from '../../styles/components/TunnelUserAdress';
-import poiAPI from '../../services/api/poi';
 
 const zipCodeTest = /^[0-9]{5}$/;
 
