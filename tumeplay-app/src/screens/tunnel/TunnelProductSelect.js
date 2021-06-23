@@ -37,9 +37,13 @@ export default function TunnelProductSelect(props) {
   const {data: boxes_sur_mesure, loading2} = useQuery(GET_BOX_MESURES);
 
   const fetchAllBoxes = () => {
-    if (!loading && box && !loading2 && boxes_sur_mesure) {
+    if (process.env.REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
       const boxes = box.boxes;
       const allBoxes = [...boxes, boxes_sur_mesure.boxSurMesure];
+      setLocalBoxs(allBoxes)
+    } else if (!loading && box && !loading2 && boxes_sur_mesure) {
+      const boxes = box.boxes;
+      const allBoxes = [...boxes];
       setLocalBoxs(allBoxes)
     }
   }
