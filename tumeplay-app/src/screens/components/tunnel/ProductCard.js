@@ -20,6 +20,7 @@ export default function ProductCard(props) {
       flex: 1,
       flexDirection: 'row',
       backgroundColor: '#FFFFFF',
+      opacity: productBox.__typename === 'Box' && !productBox.available ? 0.1 : 1,
       borderRadius: 7,
       marginTop: 20,
       position: 'relative',
@@ -93,11 +94,20 @@ export default function ProductCard(props) {
     },
   });
 
+  const handleAvailability = () => {
+    if(productBox.__typename === 'BoxSurMesure') {
+      props.onPress()
+    } else if (productBox.__typename === 'Box' && productBox.available) {
+      props.onPress()
+    } 
+  };
+
   return (
     <View style={cardStyle.container}>
       <CustomTouchableOpacity
         style={cardStyle.buttonWrapper}
-        onPress={props.onPress}>
+        disabled={productBox.__typename === 'Box' && !productBox.available}
+        onPress={() => {handleAvailability()}}>
         <Image
           source={process.env.REACT_APP_API_URL + productBox.image.url}
           style={cardStyle.picture}

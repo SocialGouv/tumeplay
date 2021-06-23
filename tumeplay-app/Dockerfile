@@ -1,5 +1,7 @@
 FROM node:12-alpine as builder
 
+ARG buildenv
+
 WORKDIR /
 
 COPY *.json ./
@@ -14,6 +16,7 @@ RUN sed -i.bak 's/module.exports = /export default /g' node_modules/react-native
 
 COPY src ./src
 COPY public ./public
+COPY environnements/env.$buildenv .env
 
 RUN npm run build
 
