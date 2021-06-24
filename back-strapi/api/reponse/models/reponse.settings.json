@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reponses",
+  "info": {
+    "name": "Reponses",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "string"
+    },
+    "question": {
+      "model": "question"
+    },
+    "quizz_iteration": {
+      "type": "integer"
+    },
+    "response": {
+      "type": "string"
+    }
+  }
+}
