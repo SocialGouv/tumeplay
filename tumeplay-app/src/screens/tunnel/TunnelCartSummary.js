@@ -34,44 +34,56 @@ export default function TunnelCartSummary(props) {
   const [userAdress] = useState(props.navigation.state.params.userAdress);
 
   async function _confirmOrder() {
-
     //ORDER STRAPI API
     let orderPost;
-    if (selectedItem.__typename === 'Box') {
-      orderPost = await OrdersAPI.orderBoxes({
-        first_name: userAdress.firstName,
-        last_name: userAdress.lastName,
-        email: userAdress.emailAdress,
+    let requestBody = {
+      first_name: userAdress.firstName,
+      last_name: userAdress.lastName,
+      email: userAdress.emailAdress
+    };
+
+    if (deliveryType === 'home') {
+      requestBody = {
+        ...requestBody,
+        phone: userAdress.phoneNumber,
         address: userAdress.address,
         address_region: userAdress.address_region,
         address_deptcode: userAdress.address_deptcode,
         address_dept: userAdress.address_dept,
+        address_zipcode: userAdress.zipCode,
         delivery: deliveryType,
+      }
+    } else if (deliveryType === 'pickup') {
+      requestBody = {
+        ...requestBody,
+        address: selectedPickup.street,
+        address_zipcode: selectedPickup.zipCode,
+        poi_name: selectedPickup.name,
+        delivery: deliveryType
+      }
+    }
+    if (selectedItem.__typename === 'Box') {
+      requestBody = {
+        ...requestBody,
         content: [
           {
             __component: 'commandes.box',
             box: selectedItem.id,
           },
         ],
-      });
-    } else if (selectedItem.__typename === 'BoxSurMesure') {
-      orderPost = await OrdersAPI.orderBoxes({
-        first_name: userAdress.firstName,
-        last_name: userAdress.lastName,
-        email: userAdress.emailAdress,
-        address: userAdress.address,
-        address_region: userAdress.address_region,
-        address_deptcode: userAdress.address_deptcode,
-        address_dept: userAdress.address_dept,
-        delivery: deliveryType,
+      }
+    } else if (selectedItem.__typename === 'BoxSurMesure') {
+      requestBody = {
+        ...requestBody,
         content: [
           {
             __component: 'commandes.box-sur-mesure',
             produits: selectedProducts,
           },
         ],
-      });
+      }
     }
+    orderPost = await OrdersAPI.orderBoxes(requestBody);
 
     if (orderPost) {
       const _newTokens = await UserService.subTokens(1000);
