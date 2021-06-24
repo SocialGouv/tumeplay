@@ -13,6 +13,7 @@ import QuizService from '../services/Quiz';
 import FeedbacksAPI from '../services/api/feedbacks';
 import {useQuery} from '@apollo/client';
 import {GET_POINTS} from '../services/api/settings';
+import ResponsesAPI from '../services/api/responses';
 
 QuizzScreen.propTypes = {
   questions: PropTypes.array,
@@ -86,8 +87,18 @@ export default function QuizzScreen(props) {
     _addTokens(_tokenAmount);
 
     setDisplayAnswer(!displayAnswer);
+    handleUserStat(localAnswer);
     setGivenAnswers(prevState => ({...prevState, localAnswer}));
   }
+
+  const handleUserStat = (localAnswer) => {
+    const localStorage = window.localStorage.getItem('local.user');
+    const JsonObject = JSON.parse(localStorage);
+    const userID = JsonObject.uniqueId;
+    const iteration = 1;
+    ResponsesAPI.publishResponses(userID, iteration, localAnswer)
+  }
+
 
   async function _nextQuestion() {
     if (currentIndex + 1 >= total) {
@@ -108,6 +119,7 @@ export default function QuizzScreen(props) {
       FeedbacksAPI.sendFeedback(userFeedback);
     }
   }
+
 
   const _displayAnswersButtons = question => {
     return (
