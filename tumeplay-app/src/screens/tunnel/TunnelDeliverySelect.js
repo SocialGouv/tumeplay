@@ -93,7 +93,7 @@ export default function TunnelDeliverySelect(props) {
             alignSelf: 'center',
             opacity: 0.2
           }}
-          // disabled
+          disabled
           onPress={() => _onDone('pickup')}>
           <View style={Styles.tunnelButton}>
             <Text style={Styles.tunnelButtonText}>En point relais</Text>
