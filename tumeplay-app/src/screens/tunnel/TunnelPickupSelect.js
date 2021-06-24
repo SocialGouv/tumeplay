@@ -81,47 +81,47 @@ export default function TunnelPickupSelect(props) {
   }, [isMounted]);
 
   useEffect(() => {
-    // async function fetchPoints() {
-    //   const rawPickupPoints = await RemoteApi.fetchPickupPoints(
-    //     currentPosition.coords.latitude,
-    //     currentPosition.coords.longitude,
-    //   );
-    //   const pickupPoints = rawPickupPoints.map(function(item) {
-    //     item.isSelected = false;
+    async function fetchPoints() {
+      const rawPickupPoints = await RemoteApi.fetchPickupPoints(
+        currentPosition.coords.latitude,
+        currentPosition.coords.longitude,
+      );
+      const pickupPoints = rawPickupPoints.map(function(item) {
+        item.isSelected = false;
 
-    //     return item;
-    //   });
+        return item;
+      });
 
-    //   let filteredPoints = [];
+      let filteredPoints = [];
 
-    //   if (typeof currentPosition.delta !== 'undefined') {
-    //     const bounds = {
-    //       max_lat:
-    //         currentPosition.coords.latitude + currentPosition.delta.latitude,
-    //       min_lat:
-    //         currentPosition.coords.latitude - currentPosition.delta.latitude,
-    //       max_lon:
-    //         currentPosition.coords.longitude + currentPosition.delta.longitude,
-    //       min_lon:
-    //         currentPosition.coords.longitude - currentPosition.delta.longitude,
-    //     };
+      if (typeof currentPosition.delta !== 'undefined') {
+        const bounds = {
+          max_lat:
+            currentPosition.coords.latitude + currentPosition.delta.latitude,
+          min_lat:
+            currentPosition.coords.latitude - currentPosition.delta.latitude,
+          max_lon:
+            currentPosition.coords.longitude + currentPosition.delta.longitude,
+          min_lon:
+            currentPosition.coords.longitude - currentPosition.delta.longitude,
+        };
 
-    //     filteredPoints = pickupPoints.filter(pickupPoint => {
-    //       return (
-    //         pickupPoint.coordinates.latitude < bounds.max_lat &&
-    //         pickupPoint.coordinates.latitude > bounds.min_lat &&
-    //         pickupPoint.coordinates.longitude < bounds.max_lon &&
-    //         pickupPoint.coordinates.longitude > bounds.min_lon
-    //       );
-    //     });
-    //   } else {
-    //     filteredPoints = pickupPoints;
-    //   }
-    //   setPickupPoints([]);
-    //   setPickupPoints(filteredPoints);
-    // }
+        filteredPoints = pickupPoints.filter(pickupPoint => {
+          return (
+            pickupPoint.coordinates.latitude < bounds.max_lat &&
+            pickupPoint.coordinates.latitude > bounds.min_lat &&
+            pickupPoint.coordinates.longitude < bounds.max_lon &&
+            pickupPoint.coordinates.longitude > bounds.min_lon
+          );
+        });
+      } else {
+        filteredPoints = pickupPoints;
+      }
+      setPickupPoints([]);
+      setPickupPoints(filteredPoints);
+    }
 
-    // fetchPoints();
+    fetchPoints();
   }, [currentPosition]);
 
   function _onDone() {
