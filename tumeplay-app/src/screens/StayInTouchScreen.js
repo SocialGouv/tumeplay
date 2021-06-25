@@ -148,7 +148,12 @@ export default function StayInTouchScreen(props) {
     // }
 
     if (_isValid) {
-      ContactsAPI.postContact(localAdress);
+      let box_id = props.navigation.state.params.box_id;
+      let userAdress = {
+        ...localAdress,
+        box_id: box_id
+      }
+      ContactsAPI.postContact(userAdress);
       props.navigation.navigate('StayInTouchConfirm', {outOfStock: outOfStock});
     }
   }

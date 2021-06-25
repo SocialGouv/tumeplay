@@ -21,6 +21,9 @@
     },
     "zipcode": {
       "type": "integer"
+    },
+    "box": {
+      "model": "box"
     }
   }
 }
