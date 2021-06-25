@@ -5,9 +5,4 @@
  * to customize this service
  */
 
-module.exports = {
-
-  // async checkDynamicBoxAvailability(product_ids) {
-
-  // }
-};
+module.exports = {};
