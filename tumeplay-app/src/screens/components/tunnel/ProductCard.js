@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, Image, StyleSheet} from 'react-native';
+import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Colors from '../../../styles/Color';
 import Styles from '../../../styles/Styles';
@@ -10,6 +10,7 @@ import CustomTouchableOpacity from '../global/CustomTouchableOpacity';
 ProductCard.propTypes = {
   item: PropTypes.object,
   onPress: PropTypes.func,
+  navigation: PropTypes.object
 };
 
 export default function ProductCard(props) {
@@ -67,6 +68,30 @@ export default function ProductCard(props) {
       paddingTop: 0,
       resizeMode: 'contain',
     },
+    descriptionCard: {
+      position: 'absolute',
+      top: '35%',
+      left: '35%',
+      marginHorizontal: 'auto',
+      opacity: 1,
+      zIndex: 10
+    },
+    descriptionTitle: {
+      color: "#FFFF",
+      fontFamily: Colors.appTitleFont,
+      fontSize: 30,
+      marginBottom: 5,
+    },
+    descriptionButton: {
+      backgroundColor: 'rgb(200,3,82)',
+      paddingHorizontal: 10,
+      textAlign: 'center',
+      paddingVertical: 10,
+      borderRadius: 30,
+    },
+    descriptionText: {
+      color: "#FFFF",
+    },
     notAvailableWrapper: {
       position: 'absolute',
       flex: 1,
@@ -102,7 +127,25 @@ export default function ProductCard(props) {
     } 
   };
 
+  const redirectContact = () => {
+   props.navigation.navigate('StayInTouch', {
+     box_id: props.item.id
+   })
+  }
+
   return (
+    <>
+      {
+        !productBox.available ? 
+        <View style={cardStyle.descriptionCard}>
+          <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
+          <CustomTouchableOpacity style={cardStyle.descriptionButton} onPress={() => {redirectContact()}}>
+            <Text style={cardStyle.descriptionText}>Laisse nous tes coordonnées</Text>
+          </CustomTouchableOpacity>
+        </View>
+        :
+          null
+      }
     <View style={cardStyle.container}>
       <CustomTouchableOpacity
         style={cardStyle.buttonWrapper}
@@ -126,5 +169,6 @@ export default function ProductCard(props) {
         </View>
       </CustomTouchableOpacity>
     </View>
+    </>
   );
 }

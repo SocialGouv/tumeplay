@@ -117,13 +117,14 @@ export default function TunnelProductSelect(props) {
       return (
         <ProductCard
           key={key}
+          navigation={props.navigation}
           item={item}
           onPress={() => _onBoxClicked(item)}
         />
       );
     });
   }
-
+  
   return (
     <SafeAreaView style={Styles.safeAreaView}>
       <View style={[Styles.safeAreaViewInner, {flex: 1}]}>
