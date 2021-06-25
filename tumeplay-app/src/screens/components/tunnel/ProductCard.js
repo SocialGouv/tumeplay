@@ -133,8 +133,6 @@ export default function ProductCard(props) {
    })
   }
 
-  console.log(productBox)
-
   return (
     <>
       {
