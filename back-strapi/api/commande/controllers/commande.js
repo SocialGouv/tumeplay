@@ -1,13 +1,5 @@
 'use strict';
 
-const EMAILING = {
-  newOrder : {
-    subject: 'Nouvelle commande effectuée ✔',
-    text: 'Hello world!',
-    html: 'Hello world!',
-  }
-}
-
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -16,6 +8,8 @@ const EMAILING = {
 
 module.exports = {
   async create(ctx) {
+    let entity;
+
     if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
       const products_box = ctx.request.body.content[0].produits 
       const available = await strapi.services['box-sur-mesure'].checkDynamicBoxAvailability(products_box)
@@ -33,28 +27,20 @@ module.exports = {
       
       if (available) {
         strapi.services["box"].decrement(box_id, 1)
-
-        // await strapi.plugins['email'].services.email.send(
-        //   Object.assign(EMAILING.newOrder, {
-        //     to: 'clement@numericite.eu'
-        //   })
-        // );
-
       } else {
         return ctx.badRequest(null, 'Box ' + box_id + ' unavailable');
       }
     }
 
-    let tmpOrder = ctx.request.body
+    let tmp_order = ctx.request.body
 
-    if (tmpOrder.poi_name) {
-      tmpOrder.name = tmpOrder.poi_name
+    if (tmp_order.poi_name) {
+      tmp_order.name = tmp_order.poi_name
     } else {
-      tmpOrder.name = tmpOrder.first_name + ' ' + tmpOrder.last_name
+      tmp_order.name = tmp_order.first_name + ' ' + tmp_order.last_name
     }
 
-
-    let entity = await strapi.services.commande.create(tmpOrder);
+    entity = await strapi.services.commande.create(tmp_order);
 
     return entity;
   }
