@@ -19,15 +19,15 @@ export default function ProductCard(props) {
   const cardStyle = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'row',
       backgroundColor: '#FFFFFF',
-      opacity: productBox.__typename === 'Box' && !productBox.available ? 0.1 : 1,
       borderRadius: 7,
       marginTop: 20,
       position: 'relative',
+      zIndex: 1
     },
     buttonWrapper: {
       flex: 1,
+      zIndex: 2,
     },
     picture: {
       height: 250,
@@ -68,13 +68,20 @@ export default function ProductCard(props) {
       paddingTop: 0,
       resizeMode: 'contain',
     },
+    containerDisable: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: 10,
+      backgroundColor: 'rgba(0,0,0,0.7)'
+    },
     descriptionCard: {
       position: 'absolute',
       top: '35%',
       left: '35%',
       marginHorizontal: 'auto',
-      opacity: 1,
-      zIndex: 10
     },
     descriptionTitle: {
       color: "#FFFF",
@@ -134,27 +141,28 @@ export default function ProductCard(props) {
   }
 
   return (
-    <>
+    <View style={cardStyle.container}>
       {
-        !productBox.available || productBox.stock === 0 ? 
-        <View style={cardStyle.descriptionCard}>
-          <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
-          <CustomTouchableOpacity style={cardStyle.descriptionButton} onPress={() => {redirectContact()}}>
-            <Text style={cardStyle.descriptionText}>Laisse nous tes coordonnées</Text>
-          </CustomTouchableOpacity>
+        !productBox.available || productBox.stock === 0 ?
+        <View style={cardStyle.containerDisable}>
+          <View style={cardStyle.descriptionCard}>
+            <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
+            <CustomTouchableOpacity style={cardStyle.descriptionButton} onPress={() => {redirectContact()}}>
+              <Text style={cardStyle.descriptionText}>Laisse nous tes coordonnées</Text>
+            </CustomTouchableOpacity>
+          </View>
         </View>
         :
           null
       }
-    <View style={cardStyle.container}>
       <CustomTouchableOpacity
         style={cardStyle.buttonWrapper}
-        disabled={productBox.__typename === 'Box' && !productBox.available}
+        disabled={productBox.__typename === 'Box' && (!productBox.available || productBox.stock === 0)}
         onPress={() => {handleAvailability()}}>
         <Image
           source={process.env.REACT_APP_API_URL + productBox.image.url}
           style={cardStyle.picture}
-        />
+          />
         <View style={cardStyle.textContainer}>
           <Text style={cardStyle.title}>{productBox.title}</Text>
           <Text style={cardStyle.text}>{productBox.description}</Text>
@@ -169,6 +177,5 @@ export default function ProductCard(props) {
         </View>
       </CustomTouchableOpacity>
     </View>
-    </>
   );
 }
