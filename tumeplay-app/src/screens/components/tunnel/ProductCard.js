@@ -133,10 +133,12 @@ export default function ProductCard(props) {
    })
   }
 
+  console.log(productBox)
+
   return (
     <>
       {
-        !productBox.available ? 
+        !productBox.available || productBox.stock === 0 ? 
         <View style={cardStyle.descriptionCard}>
           <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
           <CustomTouchableOpacity style={cardStyle.descriptionButton} onPress={() => {redirectContact()}}>
