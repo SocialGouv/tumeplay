@@ -15,7 +15,6 @@ LandingThemeGrid.propTypes = {
 export default function LandingThemeGrid(props) {
   const numColumns = 2;
   let currentIndex = 0;
-  console.log(process.env.REACT_APP_API_URL)
   return (
     <FlatList
       scrollEnabled={true}
@@ -45,7 +44,7 @@ export default function LandingThemeGrid(props) {
               </View>
 
               <View style={LandingStyle.gridItemTextContainer}>
-                <TextWithSound style={LandingStyle.gridItemText}>
+                <TextWithSound style={LandingStyle.gridItemText} sound={item.sound}>
                   {item.title}
                 </TextWithSound>
               </View>
