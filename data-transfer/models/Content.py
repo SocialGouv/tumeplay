@@ -13,7 +13,7 @@ class Content:
         self.text = text.strip()
         self.image_url = image_url.replace(" ", "%20").replace("&amp;", "&")
         self.theme_id = theme_id
-        self.sound_url = sound_url.replace(" ", "%20").replace("&amp;", "&")
+        self.sound_url = sound_url.replace(" ", "%20").replace("&amp;", "&") if sound_url else None
 
     def get_image(self):
         try:
