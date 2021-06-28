@@ -13,7 +13,7 @@ class Content:
         self.text = text.strip()
         self.image_url = image_url.replace(" ", "%20").replace("&amp;", "&")
         self.theme_id = theme_id
-        self.sound_url = sound_url
+        self.sound_url = sound_url.replace(" ", "%20").replace("&amp;", "&")
 
     def get_image(self):
         try:
@@ -60,10 +60,13 @@ class Content:
                         os.rename(tmp_file.name, tmp_file.name + (file_extension if file_extension != '' else '.mp3'))
                         return open(tmp_file.name + (file_extension if file_extension != '' else '.mp3'), 'rb')
                     except (HTTPError, URLError, UnicodeEncodeError) as e:
+                        print('ERROR : ', e)
                         return None
                 else:
+                    print('NOT URL : ', self.sound_url)
                     return open(self.sound_url, 'rb')
             except FileNotFoundError:
+                print('FILE NOT FOUND')
                 return None
         else:
             return None
