@@ -47,58 +47,51 @@ const QuizzService = {
   setQuestions: currentQuestions => {
     QuizzService.currentQuestions = currentQuestions;
   },
-  getQuestions: () => {
+  getQuestions: (reset = false) => {
     let undoneQuestions = [];
-    if (QuizzService.doneIds.length > QuizzService.doneIds.length - 1) {
+
+    if (reset) {
+      QuizzService.doneIds = QuizzService.doneIds.filter(_ => !QuizzService.currentQuestions.map(_ => _.id).includes(_))
       undoneQuestions = QuizzService.currentQuestions;
     } else {
       undoneQuestions = QuizzService.currentQuestions.filter(
         _ => !QuizzService.doneIds.includes(_.id),
       );
     }
+
     const questionIds = undoneQuestions.map(_ => _.id);
     const tmpToImproveIds = QuizzService.toImproveIds.filter(_ =>
       questionIds.includes(_),
     );
-    let selectedQuestions = undoneQuestions.filter(
-      question => !tmpToImproveIds.includes(question.id),
-    );
-    selectedQuestions = QuizzService.shuffleArray(selectedQuestions);
-    if (selectedQuestions.length >= 10 - tmpToImproveIds.length) {
-      selectedQuestions = selectedQuestions.splice(
-        0,
-        10 - tmpToImproveIds.length,
-      );
-    }
 
-    if (tmpToImproveIds.length > 0) {
-      const tmpToImprove = undoneQuestions.filter(_ =>
-        tmpToImproveIds.includes(_.id),
-      );
-      selectedQuestions = selectedQuestions.concat(
-        selectedQuestions,
-        tmpToImprove,
-      );
-      const quizSize = 10;
-      selectedQuestions = selectedQuestions.slice(0, quizSize).map(q => {
-        return q;
-      });
-    }
+    const toImproveQuestions = undoneQuestions.filter(_ => tmpToImproveIds.includes(_.id))
+    const freshQuestions = undoneQuestions.filter(_ => !tmpToImproveIds.includes(_.id))
+    let selectedQuestions = toImproveQuestions
 
     if (selectedQuestions.length < 10) {
-      QuizzService.doneIds = QuizzService.doneIds.filter(id => {
-        return !QuizzService.currentQuestions.includes(id);
-      });
+      const numberToFill = 10 - selectedQuestions.length
+      if (freshQuestions.length >= numberToFill) {
+        selectedQuestions = selectedQuestions.concat(QuizzService.shuffleArray(freshQuestions).slice(0, numberToFill))
+      } else {
+        selectedQuestions = QuizzService.getQuestions(true)
+      }
     }
 
-    return selectedQuestions;
+    return QuizzService.shuffleArray(selectedQuestions);
   },
   moveQuestion: (question, isRightAnswer) => {
     if (isRightAnswer) {
       QuizzService.doneIds.push(question.id);
-    } else {
+
+      if (QuizzService.toImproveIds.includes(question.id)) {
+        QuizzService.toImproveIds = QuizzService.toImproveIds.filter(_ => _ !== question.id)
+      }
+    } else if (!QuizzService.toImproveIds.includes(question.id)) {
       QuizzService.toImproveIds.push(question.id);
     }
+
+    console.log('TO IMPROVE : ', QuizzService.toImproveIds)
+    console.log('DONE : ', QuizzService.doneIds)
     QuizzService.saveUserData();
   },
   shuffleArray: array => {
