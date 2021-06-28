@@ -64,7 +64,6 @@ class Content:
                 else:
                     return open(self.sound_url, 'rb')
             except FileNotFoundError:
-                print('FILE NOT FOUND')
                 return None
         else:
             return None
