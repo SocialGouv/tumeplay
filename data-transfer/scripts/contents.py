@@ -18,6 +18,20 @@ def import_contents(tumeplay_base_url, tumeplay_api, strapi_base_api, theme_ids)
             )
         )
 
+    response = requests.get(tumeplay_api + '/contents?zone=guyane')
+    json_contents = response.json()
+
+    for content in json_contents:
+        contents.append(
+            Content(
+                content['title'],
+                content['text'],
+                tumeplay_base_url + '/' + content['picture'],
+                theme_ids.get(str(content['theme']) + "-guyane"),
+                tumeplay_base_url + '/' + content['sound'] if content['sound'] else None
+            )
+        )
+
     for content in contents:
         sound_id = None
         image_id = None
