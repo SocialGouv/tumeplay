@@ -8,6 +8,9 @@ export const GET_CONTENTS = gql`
       image {
         url
       }
+      sound {
+        url
+      }
     }
   }
 `;

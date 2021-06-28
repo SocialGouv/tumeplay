@@ -46,7 +46,10 @@ export default function ExpandableText(props) {
 
   const soundPicture = require('../../../assets/pictures/sound.png');
 
-  function onPlayStart() {}
+  function onPlayStart() {
+    console.log("start")
+    setPlay(true)
+  }
 
   function onPlayStop() {
     console.log('Stop asked : ' + play);
@@ -217,7 +220,7 @@ export default function ExpandableText(props) {
       }
     }
   }
-
+  
   const NoL =
     measured && !props.isExpanded && !showAllText
       ? props.content.numberOfLines
@@ -240,7 +243,7 @@ export default function ExpandableText(props) {
           }}
           style={[cardStyle.text, {...props.textStyle}]}
         />
-        {props.sound && (
+        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
           <CustomTouchableOpacity
             onPress={e => {
               togglePlay(e);
@@ -260,7 +263,7 @@ export default function ExpandableText(props) {
         )}
         {props.sound && (
           <ReactHowler
-            src={props.sound.uri}
+            src={process.env.REACT_APP_API_URL + props.sound}
             onEnd={onPlayStop}
             onStop={onPlayStop}
             playing={play}

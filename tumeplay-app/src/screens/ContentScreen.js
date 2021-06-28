@@ -103,8 +103,8 @@ export default function ContentScreen(props) {
     const {data, loading} = useQuery(GET_CONTENTS, {
       variables: {theme_id: selectedTheme.id},
     });
-
     if (!loading) {
+
       return (
         <ContentCards
           activeOpacity={activeOpacity}
