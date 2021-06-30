@@ -122,6 +122,7 @@ export default function TunnelPickupSelect(props) {
     }
 
     fetchPoints();
+
   }, [currentPosition]);
 
   function _onDone() {
@@ -276,7 +277,7 @@ export default function TunnelPickupSelect(props) {
       </View>
 
       <View
-        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: -15}}
+        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: 15}}
         onLayout={event => {
           adjustMapLayout(event.nativeEvent.layout);
         }}>
