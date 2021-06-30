@@ -18,7 +18,7 @@ export default function ProductCustomSelectList(props) {
     let _total = 0;
 
     for (const localProduct of selectedProducts) {
-      _total += localProduct.qty;
+      _total += localProduct.quantity;
     }
 
     return _total;
@@ -27,7 +27,7 @@ export default function ProductCustomSelectList(props) {
   function onPress(item, stock, _newState) {
     // not at max OR we were at max, now we deselect one.
     const _limitReached =
-      countProducts() + 1 > 4 || countProducts() + 1 > stock;
+      countProducts() > 4 || countProducts() > stock;
     const _isAllowed = !_limitReached || (_limitReached && !_newState);
 
     setSelectAllowed(_isAllowed);
@@ -54,15 +54,13 @@ export default function ProductCustomSelectList(props) {
     const _totalProducts = countProducts();
     const _newTotal = mode == 'sub' ? _totalProducts - 1 : _totalProducts + 1;
     const _limitReached = _newTotal > 4 || _newQty > stock;
-
     if (!_limitReached) {
       let _newProducts = [...selectedProducts];
-
-      _newProducts = _newProducts.filter(
-        localItem => localItem.item.id !== item.id,
+      _newProducts= _newProducts.filter(
+        localItem =>
+          localItem.item.id !== item.id,
       );
-
-      _newProducts.push({produit: item.id, quantity: _newQty});
+      _newProducts.push({item: {id: item.id}, produit: item.id, quantity: _newQty});
       setSelectedProducts(_newProducts);
       props.onSelectChange(_newProducts);
     }

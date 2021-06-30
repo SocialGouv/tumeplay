@@ -80,14 +80,13 @@ export default function ContentCard(props) {
           }
           style={cardStyle.picture}
         />
-
         <ExpandableText
           content={content}
           isExpanded={isExpanded}
           readMoreLink={content.link}
           lessPicture={'minus-orange.png'}
           morePicture={'plus-orange.png'}
-          sound={content.sound}
+          sound={content.sound !== null ? content.sound.url : " "}
           onReadMore={() => {
             Tracking.knowMoreTriggered('contenu', content.id);
           }}

@@ -143,7 +143,7 @@ export default function ProductCard(props) {
   return (
     <View style={cardStyle.container}>
       {
-        !productBox.available || productBox.stock === 0 ?
+        productBox.__typename === 'Box' && (!productBox.available || productBox.stock === 0) ?
         <View style={cardStyle.containerDisable}>
           <View style={cardStyle.descriptionCard}>
             <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>

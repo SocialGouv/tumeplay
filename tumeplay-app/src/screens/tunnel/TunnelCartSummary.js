@@ -51,6 +51,7 @@ export default function TunnelCartSummary(props) {
         address_deptcode: userAdress.address_deptcode,
         address_dept: userAdress.address_dept,
         address_zipcode: userAdress.zipCode,
+        address_city: userAdress.address_city,
         delivery: deliveryType,
       }
     } else if (deliveryType === 'pickup') {

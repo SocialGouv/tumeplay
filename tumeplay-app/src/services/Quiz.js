@@ -89,9 +89,6 @@ const QuizzService = {
     } else if (!QuizzService.toImproveIds.includes(question.id)) {
       QuizzService.toImproveIds.push(question.id);
     }
-
-    console.log('TO IMPROVE : ', QuizzService.toImproveIds)
-    console.log('DONE : ', QuizzService.doneIds)
     QuizzService.saveUserData();
   },
   shuffleArray: array => {
