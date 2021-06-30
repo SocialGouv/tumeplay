@@ -62,6 +62,10 @@
     },
     "phone": {
       "type": "string"
+    },
+    "address_city": {
+      "type": "string",
+      "private": false
     }
   }
 }
