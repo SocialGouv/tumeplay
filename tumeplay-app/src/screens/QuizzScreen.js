@@ -117,6 +117,7 @@ export default function QuizzScreen(props) {
 
     if (userFeedback.title || userFeedback.comment || userFeedback.isLiked) {
       FeedbacksAPI.sendFeedback(userFeedback);
+      setDataFeedback({});
     }
   }
 
