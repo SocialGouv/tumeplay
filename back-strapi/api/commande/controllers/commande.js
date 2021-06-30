@@ -1,12 +1,78 @@
 'use strict';
 
 const _ = require('lodash');
+const http = require('http');
 const fs = require('fs');
+const soap = require('soap');
+const md5 = require('md5');
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
  */
+
+const buildMrParams = (order) => {
+  const orderMrParams = {
+    mode: '24R',
+    poi_name: order.poi_name,
+    poi_number: order.poi_number,
+    street: order.address,
+    city: order.address_city,
+    zipCode: order.address_zipcode,
+    fullName: order.first_name + ' ' + order.last_name,
+    email: order.email,
+  }
+
+  const mrParams = {
+    Enseigne: strapi.config.get('server.mondialRelay.id'),
+    ModeCol: 'REL',
+    ModeLiv: orderMrParams.mode,
+    
+    Expe_Langage: 'FR',
+    Expe_Ad1: 'M. TUMEPLAY',
+    Expe_Ad3: '106 Boulevard Richard-Lenoir',
+    Expe_Ville: 'Paris',
+    Expe_CP: '75011',
+    Expe_Pays: 'FR',
+    Expe_Tel1: '+33142386040',
+    
+    Dest_Langage: 'FR',
+    Dest_Ad1: 'M. ' + orderMrParams.fullName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
+    Dest_Ad3: orderMrParams.poi_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
+    Dest_Ad4: orderMrParams.street.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
+    Dest_Ville: orderMrParams.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
+    Dest_CP: orderMrParams.zipCode,
+    Dest_Pays: 'FR',
+    Dest_Mail: orderMrParams.email,
+    
+    Poids: '400',
+    NbColis: '1',
+    
+    CRT_Valeur: '0',
+    COL_Rel_Pays: 'FR',
+    COL_Rel: '003490',
+    LIV_Rel_Pays: 'FR',
+    LIV_Rel: orderMrParams.poi_number,
+    Texte: ' '
+  }
+
+  let securityKey = '';
+  for (const prop in mrParams) 
+  {
+    if( prop != 'Texte' )
+    {
+      securityKey += mrParams[prop];	
+    }
+  }
+
+  securityKey += strapi.config.get('server.mondialRelay.secret');
+
+  const hash = md5(securityKey);
+
+  mrParams.Security = hash.toUpperCase();
+
+  return mrParams
+}
 
 module.exports = {
   async create(ctx) {
@@ -37,15 +103,44 @@ module.exports = {
 
     let tmp_order = ctx.request.body
 
-    // FILL NAME
-    if (tmp_order.poi_name) {
+
+    //GENERATE LABEL IF MONDIAL RELAY
+    let mondial_relay_pdf_url;
+    if (tmp_order.delivery === 'pickup') {
       tmp_order.name = tmp_order.poi_name
-    } else {
+      const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
+      const soapClient = await soap.createClientAsync(mondialRelayUrl);
+      const mrParams = buildMrParams(tmp_order)
+
+      const response = await soapClient.WSI2_CreationEtiquetteAsync(mrParams)
+      const response_item = response[0]
+
+      if (response_item && response_item.WSI2_CreationEtiquetteResult) {
+        const mrResult = response_item.WSI2_CreationEtiquetteResult;
+
+        if (mrResult.STAT === "0") {
+          mondial_relay_pdf_url = "http://www.mondialrelay.com" + mrResult.URL_Etiquette.replace('format=A4', 'format=10x15');
+        }
+      }
+    } else if (tmp_order.delivery === 'home') {
       tmp_order.name = tmp_order.first_name + ' ' + tmp_order.last_name
     }
 
     //SAVE ORDER
     entity = await strapi.services.commande.create(tmp_order);
+
+    //SAVE LABEL IF MONDIAL RELAY
+    if (mondial_relay_pdf_url) {
+      const dirpath = 'public/uploads/orders/mondial-relay/'
+      await fs.mkdirSync(dirpath, { recursive: true })
+
+      const filename = dirpath + 'order_mondial_relay_' + entity.id + '.pdf'
+      const file = fs.createWriteStream(filename);
+      http.get(mondial_relay_pdf_url, function(response) {
+        response.pipe(file);
+        strapi.log.info('MONDIAL RELAY PDF CREATED ' + filename)
+      });
+    }
 
     // SEND CONFIRMATION EMAIL TO USER
     if (ctx.request.body.content[0].__component === 'commandes.box' && ctx.request.body.email && !ctx.request.body.no_email) {
