@@ -66,6 +66,9 @@
     "address_city": {
       "type": "string",
       "private": false
+    },
+    "address_more": {
+      "type": "string"
     }
   }
 }

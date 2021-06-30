@@ -159,7 +159,7 @@ module.exports = {
 
       await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
-          to: 'lelong@cymit.fr'
+          to: entity.email
         },
         EMAIL_ORDER_CONFIRM,
         {
