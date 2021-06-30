@@ -13,6 +13,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "csv-writer": "^1.6.0",
     "knex": "0.21.18",
     "pg": "^8.5.1",
     "strapi": "3.6.2",
