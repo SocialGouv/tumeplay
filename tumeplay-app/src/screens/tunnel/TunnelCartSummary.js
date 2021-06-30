@@ -42,11 +42,14 @@ export default function TunnelCartSummary(props) {
       email: userAdress.emailAdress
     };
 
+    console.log(userAdress)
+
     if (deliveryType === 'home') {
       requestBody = {
         ...requestBody,
         phone: userAdress.phoneNumber,
         address: userAdress.address,
+        address_more: userAdress.adressMore,
         address_region: userAdress.address_region,
         address_deptcode: userAdress.address_deptcode,
         address_dept: userAdress.address_dept,

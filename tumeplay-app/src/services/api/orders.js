@@ -13,6 +13,7 @@ const OrdersAPI = {
         phone: order.phone,
         delivery: order.delivery,
         address: order.address,
+        address_more: order.address_more,
         address_region: order.address_region,
         address_deptcode: order.address_deptcode,
         address_dept: order.address_dept,
