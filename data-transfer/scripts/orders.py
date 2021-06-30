@@ -16,6 +16,7 @@ def import_orders(tumeplay_api, strapi_base_api, box_ids):
 
             dept_name, region_name = geo.get_address_infos(order['shippingAddress']['street'], order['shippingAddress']['zipCode'])
 
+            box_id = False
             try:
                 box_id = box_ids[order['boxId']]
             except KeyError:
@@ -87,6 +88,7 @@ def import_orders(tumeplay_api, strapi_base_api, box_ids):
             "address_deptcode": order.address_deptcode,
             "address_dept": order.address_dept,
             "address_region": order.address_region,
+            "no_email": True,
             "content": order.content
         }
 
@@ -94,7 +96,5 @@ def import_orders(tumeplay_api, strapi_base_api, box_ids):
             jsonOrder['poi_name'] = order.poi_name
 
         response = requests.post(strapi_base_api + "/commandes", json=jsonOrder, headers={"Content-Type": "application/json"})
-
-        print(response.json())
 
     print(str(len(orders)) + ' commandes insérées')
