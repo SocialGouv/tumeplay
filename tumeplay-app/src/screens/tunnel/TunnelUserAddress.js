@@ -58,6 +58,7 @@ export default function TunnelUserAddress(props) {
     address_region: '',
     address_dept: '',
     address_deptcode: '',
+    address_city: '',
   };
 
   var defaultIsValid = {
@@ -130,6 +131,7 @@ export default function TunnelUserAddress(props) {
               }
               localAdress['address_region'] = res[0].address.state;
               localAdress['address_dept'] = res[0].address.county;
+              localAdress['address_city'] = res[0].address.city;
               _gotoSummary();
             }
           }

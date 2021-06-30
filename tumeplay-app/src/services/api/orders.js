@@ -18,6 +18,7 @@ const OrdersAPI = {
         address_dept: order.address_dept,
         content: order.content,
         address_zipcode: order.address_zipcode,
+        address_city: order.address_city,
         poi_name: order.poi_name
       }),
     });
