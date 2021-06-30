@@ -108,7 +108,7 @@ export default function TunnelDeliverySelect(props) {
             lineHeight: 22,
             fontFamily: Colors.textFont,
           }}>
-          Actuellement la commande de box est disponible en Seine-et-Marne et en
+          Actuellement la commande de box est disponible en Ile de France et en
           Nouvelle-Aquitaine.{'\n'}
           Si tu n&apos;es pas dans ces zones :{'\n'}
           Pour être informé·e de la sortie de l&apos;app&apos; dans ta région,
