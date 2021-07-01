@@ -12,15 +12,18 @@ import ContactButton from '../components/global/ContactButton';
 import ProductCard from '../components/tunnel/ProductCard';
 import ProductModal from '../components/tunnel/ProductModal';
 import ProductNotEnoughTokensModal from '../components/tunnel/ProductNotEnoughTokensModal';
+import ProductConflictModal from '../components/tunnel/ProductConflictModal';
+import ProductMondialRelayErrorModal from '../components/tunnel/ProductMondialRelayErrorModal';
 import ProductSelectHeader from '../components/tunnel/ProductSelectHeader';
 
 import useIsMounted from '../../hooks/isMounted';
 import autoScrollToTop from '../../hooks/autoScrollToTop';
 import {useQuery} from '@apollo/client';
 import {GET_BOXES, GET_BOX_MESURES} from '../../services/api/boxes';
+import _ from 'lodash'
 
 TunnelProductSelect.propTypes = {
-  navigation: PropTypes.object,
+  navigation: PropTypes.object
 };
 export default function TunnelProductSelect(props) {
   const [selectedItem, setSelectedItem] = useState({});
@@ -28,13 +31,17 @@ export default function TunnelProductSelect(props) {
   const [allProducts, setAllProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showNotEnoughModal, setShowNotEnoughModal] = useState(false);
+  const [showConflictModal, setShowConflictModal] = useState(false);
+  const [showMondialRelayErrorModal, setShowMondialRelayErrorModal] = useState(false);
   const isMounted = useIsMounted();
   const neededTokens = 1000;
 
   autoScrollToTop(props);
- 
-  const {data: box, loading} = useQuery(GET_BOXES);
-  const {data: boxes_sur_mesure, loading2} = useQuery(GET_BOX_MESURES);
+
+  const error = _.get(props.navigation, 'state.params.error', null)
+  
+  const {data: box, loading, refetch: refetchBoxes} = useQuery(GET_BOXES);
+  const {data: boxes_sur_mesure, loading2, refetch: refetchBoxMesure} = useQuery(GET_BOX_MESURES);
 
   const fetchAllBoxes = () => {
     if (process.env.REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
@@ -49,14 +56,27 @@ export default function TunnelProductSelect(props) {
   }
 
   useEffect(() => {
+    if (error) {
+      refetchBoxes();
+      refetchBoxMesure();
+
+      switch (error) {
+        case 409:
+          setShowConflictModal(true);
+          break;
+        case 405:
+        case 500:
+          setShowMondialRelayErrorModal(true);
+          break;
+      }
+
+      props.navigation.state.params.error = null
+    }
+  }, [error])
+
+  useEffect(() => {
     fetchAllBoxes();
   }, [box, boxes_sur_mesure]);
-
-  // useEffect(() => {
-  //   if (!loading && data) {
-  //     setLocalBoxs(data.boxes);
-  //   }
-  // }, [data, loading]);
 
 
   async function _onBoxClicked(selectedItem) {
@@ -85,6 +105,21 @@ export default function TunnelProductSelect(props) {
     />
   ));
 
+
+  const ConflictBoxModal = forwardRef(() => (
+    <ProductConflictModal
+      showModal={showConflictModal}
+      onClose={() => setShowConflictModal(false)}
+    />
+  ));
+  
+  const MondialRelayErrorModal = forwardRef(() => (
+    <ProductMondialRelayErrorModal
+      showModal={showMondialRelayErrorModal}
+      onClose={() => setShowMondialRelayErrorModal(false)}
+    />
+  ));
+
   const ForwardedBoxModal = forwardRef(() => (
     <ProductModal
       navigation={props.navigation}
@@ -103,7 +138,7 @@ export default function TunnelProductSelect(props) {
 
       props.navigation.navigate('TunnelDeliverySelect', {
         selectedItem: selectedItem,
-        selectedProducts: selectedProducts,
+        selectedProducts: selectedProducts
       });
     }
   }
@@ -142,6 +177,8 @@ export default function TunnelProductSelect(props) {
         </ScrollView>
         <ForwardedBoxModal />
         <ForwardedNotEnoughModal />
+        <ConflictBoxModal />
+        <MondialRelayErrorModal />
       </View>
     </SafeAreaView>
   );
