@@ -89,20 +89,29 @@ export default function TunnelCartSummary(props) {
     }
     orderPost = await OrdersAPI.orderBoxes(requestBody);
 
-    if (orderPost) {
-      const _newTokens = await UserService.subTokens(1000);
+    switch (orderPost.status) {
+      case 200:
+        const _newTokens = await UserService.subTokens(1000);
 
-      await UserService.setLastOrder();
-      EventRegister.emit('tokensAmountChanged', _newTokens);
+        await UserService.setLastOrder();
+        EventRegister.emit('tokensAmountChanged', _newTokens);
 
-      setIsRunning(false);
+        setIsRunning(false);
 
-      props.navigation.navigate('TunnelOrderConfirm', {
-        selectedItem: selectedItem,
-        selectedProducts: selectedProducts,
-        userAdress: userAdress,
-        selectedPickup: selectedPickup,
-      });
+        props.navigation.navigate('TunnelOrderConfirm', {
+          selectedItem: selectedItem,
+          selectedProducts: selectedProducts,
+          userAdress: userAdress,
+          selectedPickup: selectedPickup,
+        });
+        break;
+      case 409:
+      case 405:
+      case 500:
+        props.navigation.navigate('TunnelProductSelect', {
+          error: orderPost.status
+        });
+        break;      
     }
   }
 
