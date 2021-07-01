@@ -61,7 +61,8 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
                     box['title'],
                     box['description'],
                     tumeplay_base_url + '/' + box['picture'],
-                    product_helpers
+                    product_helpers,
+                    box['key']
                 )
             )
 
@@ -80,7 +81,8 @@ def import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api):
             "description": box.description,
             "image": image_id,
             "stock": box.stock,
-            "products": box.products
+            "products": box.products,
+            "number": box.number
         }, headers={"Content-Type": "application/json"})
 
         json_response = response.json()
