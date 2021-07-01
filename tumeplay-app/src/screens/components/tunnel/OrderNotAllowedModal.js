@@ -17,8 +17,6 @@ OrderNotAllowedModal.propTypes = {
 export default function OrderNotAllowedModal(props) {
   const {showModal, nbDays} = props
 
-  console.log("Show MODAL", showModal)
-
   const customModal = StyleSheet.create({
     innerModal: {
       backgroundColor: '#000000',
