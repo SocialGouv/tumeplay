@@ -118,7 +118,7 @@ module.exports = {
           strapi.services["box-sur-mesure"].decrement(product_wrapper.produit, product_wrapper.quantity)
         })
       } else {
-        return ctx.badRequest(null, 'Some products unavailable');
+        return ctx.conflict(null, 'Some products unavailable');
       }
     } else if (ctx.request.body.content[0].__component === 'commandes.box') {
       const box_id = ctx.request.body.content[0].box
@@ -127,7 +127,7 @@ module.exports = {
       if (available) {
         strapi.services["box"].decrement(box_id, 1)
       } else {
-        return ctx.badRequest(null, 'Box ' + box_id + ' unavailable');
+        return ctx.conflict(null, 'Box ' + box_id + ' unavailable');
       }
     }
 
@@ -149,7 +149,11 @@ module.exports = {
 
         if (mrResult.STAT === "0") {
           mondial_relay_pdf_url = "http://www.mondialrelay.com" + mrResult.URL_Etiquette.replace('format=A4', 'format=10x15');
+        } else {
+          return ctx.methodNotAllowed(null, 'Error ' + mrResult.STAT + ' while create remote label')
         }
+      } else {
+        return ctx.internal(null, 'Error while calling mondial relay SOAP service')
       }
     } else if (tmp_order.delivery === 'home') {
       tmp_order.name = tmp_order.first_name + ' ' + tmp_order.last_name
