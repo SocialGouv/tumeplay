@@ -13,8 +13,11 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "csv-writer": "^1.6.0",
     "knex": "0.21.18",
+    "md5": "^2.3.0",
     "pg": "^8.5.1",
+    "soap": "^0.39.0",
     "strapi": "3.6.2",
     "strapi-admin": "3.6.2",
     "strapi-connector-bookshelf": "3.6.2",
