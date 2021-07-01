@@ -5,11 +5,41 @@ const http = require('http');
 const fs = require('fs');
 const soap = require('soap');
 const md5 = require('md5');
+const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
  */
+
+const buildSearchPoiParams = (latitude, longitude) => {
+  let searchPoiParams = {
+      Enseigne: strapi.config.get('server.mondialRelay.id'),
+      Pays: 'FR',
+      Ville: '',
+      CP: '',
+      Latitude: latitude.substr(0, 10),
+      Longitude: longitude.substr(0, 9),
+      Taille: '',
+      Poids: '',
+      Action: '',
+      DelaiEnvoi: '0',
+      RayonRecherche: '40',
+  };
+
+  let securityKey = '';
+  for (const prop in searchPoiParams) {
+      securityKey += searchPoiParams[prop];
+  }
+
+  securityKey += strapi.config.get('server.mondialRelay.secret');
+
+  const hash = md5(securityKey);
+
+  searchPoiParams.Security = hash.toUpperCase();
+
+  return searchPoiParams;
+}
 
 const buildMrParams = (order) => {
   const orderMrParams = {
@@ -108,7 +138,6 @@ module.exports = {
     let mondial_relay_pdf_url;
     if (tmp_order.delivery === 'pickup') {
       tmp_order.name = tmp_order.poi_name
-      const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
       const soapClient = await soap.createClientAsync(mondialRelayUrl);
       const mrParams = buildMrParams(tmp_order)
 
@@ -176,5 +205,25 @@ module.exports = {
     }    
 
     return entity;
+  },
+  async searchPOI(ctx) {
+    const { latitude, longitude } = ctx.params
+
+    const searchPoiParams = buildSearchPoiParams(latitude, longitude)
+
+    const soapClient = await soap.createClientAsync(mondialRelayUrl);
+
+    const response = await soapClient.WSI3_PointRelais_RechercheAsync(searchPoiParams);
+    const response_item = response[0]
+
+    if (response_item && response_item.WSI3_PointRelais_RechercheResult) {
+        const mrResults = response_item.WSI3_PointRelais_RechercheResult;
+
+        if (mrResults.STAT == 0) {
+          return _.get(mrResults, 'PointsRelais.PointRelais_Details', [])
+        }
+    }
+
+    return ctx.badRequest(null, 'Error while trying to fetch mondial relais API');
   }
 };
