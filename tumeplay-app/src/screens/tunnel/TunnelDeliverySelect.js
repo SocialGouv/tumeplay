@@ -91,7 +91,6 @@ export default function TunnelDeliverySelect(props) {
             minHeight: 60,
             width: '50%',
             alignSelf: 'center',
-            opacity: 0.2
           }}
           // disabled
           onPress={() => _onDone('pickup')}>
