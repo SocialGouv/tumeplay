@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/mondial-relay/:latitude/:longitude",
+      "handler": "commande.searchPOI",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/commandes/:id",
       "handler": "commande.update",
