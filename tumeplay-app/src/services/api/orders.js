@@ -23,7 +23,7 @@ const OrdersAPI = {
         poi_name: order.poi_name
       }),
     });
-    return res.ok;
+    return res;
   },
 };
 

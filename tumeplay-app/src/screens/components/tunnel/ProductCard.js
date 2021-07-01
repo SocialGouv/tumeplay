@@ -14,7 +14,6 @@ ProductCard.propTypes = {
 };
 
 export default function ProductCard(props) {
-  const [productBox] = useState(props.item);
 
   const cardStyle = StyleSheet.create({
     container: {
@@ -127,9 +126,9 @@ export default function ProductCard(props) {
   });
 
   const handleAvailability = () => {
-    if(productBox.__typename === 'BoxSurMesure') {
+    if(props.item.__typename === 'BoxSurMesure') {
       props.onPress()
-    } else if (productBox.__typename === 'Box' && productBox.available) {
+    } else if (props.item.__typename === 'Box' && props.item.available) {
       props.onPress()
     } 
   };
@@ -143,7 +142,7 @@ export default function ProductCard(props) {
   return (
     <View style={cardStyle.container}>
       {
-        productBox.__typename === 'Box' && (!productBox.available || productBox.stock === 0) ?
+        props.item.__typename === 'Box' && (!props.item.available || props.item.stock === 0) ?
         <View style={cardStyle.containerDisable}>
           <View style={cardStyle.descriptionCard}>
             <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
@@ -157,15 +156,15 @@ export default function ProductCard(props) {
       }
       <CustomTouchableOpacity
         style={cardStyle.buttonWrapper}
-        disabled={productBox.__typename === 'Box' && (!productBox.available || productBox.stock === 0)}
+        disabled={props.item.__typename === 'Box' && (!props.item.available || props.item.stock === 0)}
         onPress={() => {handleAvailability()}}>
         <Image
-          source={process.env.REACT_APP_API_URL + productBox.image.url}
+          source={process.env.REACT_APP_API_URL + props.item.image.url}
           style={cardStyle.picture}
           />
         <View style={cardStyle.textContainer}>
-          <Text style={cardStyle.title}>{productBox.title}</Text>
-          <Text style={cardStyle.text}>{productBox.description}</Text>
+          <Text style={cardStyle.title}>{props.item.title}</Text>
+          <Text style={cardStyle.text}>{props.item.description}</Text>
         </View>
 
         <View style={cardStyle.readMoreWrapper}>
