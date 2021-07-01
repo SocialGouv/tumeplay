@@ -24,6 +24,9 @@
     },
     "box": {
       "model": "box"
+    },
+    "zone": {
+      "model": "environnement"
     }
   }
 }

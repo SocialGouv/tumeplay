@@ -4,6 +4,7 @@ import {EventRegister} from 'react-native-event-listeners';
 
 import PropTypes from 'prop-types';
 import ProductNotEnoughTokensModal from '../tunnel/ProductNotEnoughTokensModal';
+import OrderNotAllowedModal from '../tunnel/OrderNotAllowedModal';
 
 import User from '../../../services/User';
 import Colors from '../../../styles/Color';
@@ -22,6 +23,8 @@ export default function CustomHeaderRight(props) {
   const [isAgeMoreThan25, setIsAgeMoreThan25] = useState(null);
   const [showNotEnoughModal, setShowNotEnoughModal] = useState(false);
   const isMounted = useIsMounted();
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [nbDays, setNbDays] = useState()
 
   const headerStyle = StyleSheet.create({
     container: {
@@ -111,6 +114,22 @@ export default function CustomHeaderRight(props) {
     [isMounted],
   );
 
+  const checkOrderPossible = () => {
+    // 1. Get userlastOrder from localhost
+    const localStorage = window.localStorage.getItem('local.user');
+    const JsonLocalStorage = JSON.parse(localStorage)
+    const userLastOrderDateNumber = JsonLocalStorage.lastOrder;
+    // 2. Convert into date ?
+    const userLastOrderDate = new Date(userLastOrderDateNumber)
+    // 3. Compare if date lastOrder - new Date().now < 7
+    const currentDate = Date.now()
+    let diffTime = Math.abs(currentDate - userLastOrderDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    setNbDays(diffDays)
+    return(!(userLastOrderDateNumber && diffDays < 7))
+  
+  }
+
   function _gotoProductSelect() {
     console.log(
       `In CustomHeaderRight: ---> isAgeMoreThan25: ${isAgeMoreThan25}`,
@@ -121,8 +140,10 @@ export default function CustomHeaderRight(props) {
       } else {
         if (availableTokens < 1000) {
           setShowNotEnoughModal(!showNotEnoughModal);
-        } else {
+        } else if (availableTokens >= 1000 && checkOrderPossible()) {
           props.navigation.navigate('TunnelProductSelect');
+        } else {
+          toggleOrderModal()
         }
       }
     }
@@ -135,6 +156,10 @@ export default function CustomHeaderRight(props) {
     setShowNotEnoughModal(!showNotEnoughModal);
   }
 
+  const toggleOrderModal = () => {
+    setShowOrderModal(!showOrderModal)
+  }
+
   const ForwardedNotEnoughModal = forwardRef(() => (
     <ProductNotEnoughTokensModal
       showModal={showNotEnoughModal}
@@ -142,6 +167,9 @@ export default function CustomHeaderRight(props) {
       onClose={_toggleNotEnoughModal}
     />
   ));
+
+
+
 
   return (
     <View style={headerStyle.container}>
@@ -155,6 +183,11 @@ export default function CustomHeaderRight(props) {
         </TouchableOpacity>
       </View>
       <ForwardedNotEnoughModal />
+      <OrderNotAllowedModal 
+      showModal={showOrderModal}
+      nbDays={nbDays}
+      onClose={toggleOrderModal}
+    />
     </View>
   );
 }

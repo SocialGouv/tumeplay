@@ -304,7 +304,7 @@ const User = {
     }
 
     if (localUser) {
-      localUser.lastOrder = Date.now() / 1000;
+      localUser.lastOrder = Date.now();
 
       await User.save();
 
