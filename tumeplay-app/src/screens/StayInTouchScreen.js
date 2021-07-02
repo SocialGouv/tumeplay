@@ -105,7 +105,6 @@ export default function StayInTouchScreen(props) {
         setInvalidZipCode(false);
 
         localAdress['zipCode'] = value;
-        console.log(localAdress)
         setLocalAdress(localAdress);
         _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
       } else {
@@ -161,8 +160,6 @@ export default function StayInTouchScreen(props) {
   const _title = outOfStock
     ? 'En rupture de stock !'
     : 'Tes informations de contact';
-
-  console.log('local', localAdress)
 
   return (
     <ScrollView
