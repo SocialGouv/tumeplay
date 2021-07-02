@@ -68,7 +68,6 @@ export default function PointOfInterestCard(props) {
         paddingRight: 10,
       }}
       onPress={() => {
-        console.log(item);
         props.onPress(item);
       }}>
       <View
@@ -87,7 +86,7 @@ export default function PointOfInterestCard(props) {
             fontSize: 20,
             marginBottom: 3,
           }}>
-          {item.name}
+          {item.LgAdr1}
         </Text>
         <View
           style={[
@@ -122,28 +121,9 @@ export default function PointOfInterestCard(props) {
                 textStyle,
                 {lineHeight: 18, paddingRight: 10},
               ]}>
-              {item.street}
+              {item.LgAdr3}
               {'\n'}
-              {item.zipCode} {item.city}
-            </Text>
-          </View>
-        </View>
-
-        <View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
-          <View>
-            <Image
-              style={TunnelCartSummaryStyle.pictureAndTextPicture}
-              source={require('../../../assets/pictures/picto-phone.png')}
-            />
-          </View>
-          <View>
-            <Text
-              style={[
-                TunnelCartSummaryStyle.subTitle,
-                TunnelCartSummaryStyle.emailAdress,
-                textStyle,
-              ]}>
-              01 23 45 67 89 00
+              {item.CP} {item.Ville}
             </Text>
           </View>
         </View>

@@ -18,8 +18,8 @@ const buildSearchPoiParams = (latitude, longitude) => {
       Pays: 'FR',
       Ville: '',
       CP: '',
-      Latitude: latitude.substr(0, 10),
-      Longitude: longitude.substr(0, 9),
+      Latitude: latitude,
+      Longitude: longitude,
       Taille: '',
       Poids: '',
       Action: '',
@@ -213,6 +213,9 @@ module.exports = {
   async searchPOI(ctx) {
     const { latitude, longitude } = ctx.params
 
+    strapi.log.info('', latitude)
+    strapi.log.info('', longitude)
+
     const searchPoiParams = buildSearchPoiParams(latitude, longitude)
 
     const soapClient = await soap.createClientAsync(mondialRelayUrl);
@@ -226,6 +229,7 @@ module.exports = {
         if (mrResults.STAT == 0) {
           return _.get(mrResults, 'PointsRelais.PointRelais_Details', [])
         }
+        strapi.log.info('', mrResults.STAT)
     }
 
     return ctx.badRequest(null, 'Error while trying to fetch mondial relais API');
