@@ -47,6 +47,10 @@
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "number": {
+      "type": "integer",
+      "unique": true
     }
   }
 }
