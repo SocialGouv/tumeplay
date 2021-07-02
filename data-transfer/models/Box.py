@@ -8,13 +8,14 @@ import os
 
 class Box:
 
-    def __init__(self, id, title, description, image_url, products):
+    def __init__(self, id, title, description, image_url, products, number):
         self.id = id
         self.title = title.strip()
         self.description = description
         self.image_url = image_url.replace(" ", "%20").replace("&amp;", "&")
         self.stock = 10000
         self.products = products
+        self.number = number
 
     def get_image(self):
         try:
