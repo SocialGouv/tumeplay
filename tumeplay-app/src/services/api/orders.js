@@ -20,7 +20,8 @@ const OrdersAPI = {
         content: order.content,
         address_zipcode: order.address_zipcode,
         address_city: order.address_city,
-        poi_name: order.poi_name
+        poi_name: order.poi_name,
+        poi_number: order.poi_number
       }),
     });
     return res;

@@ -42,8 +42,6 @@ export default function TunnelCartSummary(props) {
       email: userAdress.emailAdress
     };
 
-    console.log(userAdress)
-
     if (deliveryType === 'home') {
       requestBody = {
         ...requestBody,
@@ -60,9 +58,14 @@ export default function TunnelCartSummary(props) {
     } else if (deliveryType === 'pickup') {
       requestBody = {
         ...requestBody,
-        address: selectedPickup.street,
-        address_zipcode: selectedPickup.zipCode,
-        poi_name: selectedPickup.name,
+        address: selectedPickup.LgAdr3,
+        address_zipcode: selectedPickup.CP,
+        address_region: selectedPickup.address_region,
+        address_deptcode: selectedPickup.address_deptcode,
+        address_dept: selectedPickup.address_dept,
+        poi_name: selectedPickup.LgAdr1,
+        address_city: selectedPickup.Ville,
+        poi_number: selectedPickup.Num,
         delivery: deliveryType
       }
     }
@@ -186,7 +189,7 @@ export default function TunnelCartSummary(props) {
           }}>
           <View style={{flex: 0.35}}>
             <Image
-              source={selectedItem.picture}
+              source={process.env.REACT_APP_API_URL + selectedItem.image.url}
               style={{
                 height: 150,
                 borderTopLeftRadius: 7,
@@ -240,11 +243,11 @@ export default function TunnelCartSummary(props) {
             {deliveryType == 'pickup' && (
               <Text
                 style={[TunnelCartSummaryStyle.subTitle, {paddingBottom: 50}]}>
-                {selectedPickup.name}
+                {selectedPickup.LgAdr1}
                 {'\n'}
-                {selectedPickup.street}
+                {selectedPickup.LgAdr3}
                 {'\n'}
-                {selectedPickup.zipCode} {selectedPickup.city}
+                {selectedPickup.CP} {selectedPickup.Ville}
                 {'\n'}
               </Text>
             )}
