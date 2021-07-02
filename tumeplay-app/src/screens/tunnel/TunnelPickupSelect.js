@@ -11,7 +11,6 @@ import Geolocation from '@react-native-community/geolocation';
 import openGeocoder from 'node-open-geocoder';
 
 import useIsMounted from '../../hooks/isMounted';
-import RemoteApi from '../../services/RemoteApi';
 
 import Colors from '../../styles/Color';
 import Styles from '../../styles/Styles';
@@ -21,6 +20,7 @@ import PointOfInterestCard from '../components/global/PointOfInterestCard';
 import CustomTextInput from '../components/tunnel/CustomTextInput';
 import AddressValidator from '../../services/AddressValidator';
 import TunnelUserAdressStyle from '../../styles/components/TunnelUserAdress';
+import POIAPI from '../../services/api/poi';
 
 const zipCodeTest = /^[0-9]{5}$/;
 
@@ -30,13 +30,14 @@ TunnelPickupSelect.propTypes = {
 export default function TunnelPickupSelect(props) {
   const defaultPosition = {
     coords: {
-      latitude: 48.8465464,
-      longitude: 2.2797058999999997,
+      latitude: 48.8566969,
+      longitude: 2.3514616,
     },
     delta: {
       latitude: 0.009,
       longitude: 0.009,
     },
+    isValid: true
   };
   var defaultPickup = {
     userZipCode: '',
@@ -69,9 +70,19 @@ export default function TunnelPickupSelect(props) {
     if (isMounted.current) {
       Geolocation.getCurrentPosition(
         position => {
-          setCurrentPosition(position);
-
-          console.log(position);
+          let coordinates = {lat: position.coords.latitude, long: position.coords.longitude}
+          openGeocoder()
+          .reverse(coordinates.long, coordinates.lat)
+          .end((err, res) => {
+            if (res.address.state === "Île-de-France" || res.address.state === "Aquitaine") {
+              currentPosition.coords.latitude = position.coords.latitude
+              currentPosition.coords.longitude = position.coords.longitude
+              setCurrentPosition({...currentPosition})
+            } else {
+              currentPosition.isValid = false
+              setCurrentPosition({...currentPosition})
+            }
+          })
         },
         error => console.log('Error', JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
@@ -81,19 +92,16 @@ export default function TunnelPickupSelect(props) {
   }, [isMounted]);
 
   useEffect(() => {
-    async function fetchPoints() {
-      const rawPickupPoints = await RemoteApi.fetchPickupPoints(
-        currentPosition.coords.latitude,
-        currentPosition.coords.longitude,
-      );
+     async function fetchPoints() {
+      const rawPickupPoints = await POIAPI.fetchMondialRelaisPOI({
+        lat: currentPosition.coords.latitude,
+        long: currentPosition.coords.longitude
+      });
       const pickupPoints = rawPickupPoints.map(function(item) {
         item.isSelected = false;
-
         return item;
       });
-
       let filteredPoints = [];
-
       if (typeof currentPosition.delta !== 'undefined') {
         const bounds = {
           max_lat:
@@ -107,21 +115,24 @@ export default function TunnelPickupSelect(props) {
         };
 
         filteredPoints = pickupPoints.filter(pickupPoint => {
-          return (
-            pickupPoint.coordinates.latitude < bounds.max_lat &&
-            pickupPoint.coordinates.latitude > bounds.min_lat &&
-            pickupPoint.coordinates.longitude < bounds.max_lon &&
-            pickupPoint.coordinates.longitude > bounds.min_lon
-          );
+          if(
+            parseFloat(pickupPoint.Latitude) < bounds.max_lat ||
+            parseFloat(pickupPoint.Latitude) > bounds.min_lat ||
+            parseFloat(pickupPoint.Longitude) < bounds.max_lon ||
+            parseFloat(pickupPoint.Longitude) > bounds.min_lon
+            ) {
+            return pickupPoint
+          }
         });
       } else {
         filteredPoints = pickupPoints;
       }
       setPickupPoints([]);
-      setPickupPoints(filteredPoints);
+      setPickupPoints([...filteredPoints]);
     }
 
     fetchPoints();
+
   }, [currentPosition]);
 
   function _onDone() {
@@ -133,6 +144,7 @@ export default function TunnelPickupSelect(props) {
       deliveryType: deliveryType,
     });
   }
+
 
   function _goBack() {
     props.navigation.navigate('TunnelDeliverySelect', {
@@ -156,12 +168,11 @@ export default function TunnelPickupSelect(props) {
               const filtered = res.filter(
                 place => place.address.country_code === 'fr',
               );
-
               if (filtered.length > 0) {
                 const localPosition = {
                   coords: {
-                    latitude: parseFloat(filtered[0].lat),
-                    longitude: parseFloat(filtered[0].lon),
+                    latitude: parseFloat(parseFloat(filtered[0].lat).toFixed(7)),
+                    longitude: parseFloat(parseFloat(filtered[0].lon).toFixed(7)),
                   },
                   delta: {
                     latitude:
@@ -174,8 +185,7 @@ export default function TunnelPickupSelect(props) {
                         : 0.09,
                   },
                 };
-
-                setCurrentPosition(localPosition);
+                setCurrentPosition({...localPosition});
               }
             }
           });
@@ -221,15 +231,30 @@ export default function TunnelPickupSelect(props) {
     }, 900);
   }
 
+  const handleAddressMore = (item) => {
+    openGeocoder().reverse(item.coordinates.longitude, item.coordinates.latitude)
+    .end((err, res) => {
+      if(res) {
+        if(res.address.postcode.substring(0, 2) === '97') {
+          item['address_deptcode'] = res.address.postcode.substring(0, 3)
+        } else {
+          item["address_deptcode"] = res.address.postcode.substring(0, 2)
+        }
+        item["address_region"] = res.address.state
+        item["address_dept"] = res.address.county
+        setSelectedPickup({...item})
+      }
+    });
+  }
+
   function onPoiPress(selectedItem) {
     const newItems = pickupPoints.map(function(item) {
-      item.isSelected = item.id == selectedItem.id;
-
+      item.isSelected = item.Num === selectedItem.Num;
       return item;
     });
-
+    handleAddressMore(selectedItem)
     setPickupPoints(newItems);
-    setSelectedPickup(selectedItem);
+    // setSelectedPickup({...selectedItem});
   }
 
   let poiCards = <View></View>;
@@ -276,7 +301,7 @@ export default function TunnelPickupSelect(props) {
       </View>
 
       <View
-        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: -15}}
+        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: 15}}
         onLayout={event => {
           adjustMapLayout(event.nativeEvent.layout);
         }}>

@@ -18,8 +18,8 @@ const buildSearchPoiParams = (latitude, longitude) => {
       Pays: 'FR',
       Ville: '',
       CP: '',
-      Latitude: latitude.substr(0, 10),
-      Longitude: longitude.substr(0, 9),
+      Latitude: latitude,
+      Longitude: longitude,
       Taille: '',
       Poids: '',
       Action: '',
@@ -212,7 +212,6 @@ module.exports = {
   },
   async searchPOI(ctx) {
     const { latitude, longitude } = ctx.params
-
     const searchPoiParams = buildSearchPoiParams(latitude, longitude)
 
     const soapClient = await soap.createClientAsync(mondialRelayUrl);
