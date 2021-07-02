@@ -43,68 +43,90 @@ const getDateFormatted = (date) => {
 }
 
 const createColissimoCsv = async (dirpath, today_7AM, orders, environnement_id) => {
-  const csvColissimoPath = dirpath + 'orders_colissimo_' + today_7AM.getTime() + '.csv'
-  const csvColissimoWriter = createCsvWriter({
-    path: csvColissimoPath,
-    header: [
-      {id: 'date', title: 'Date'},
-      {id: 'id', title: 'ID'}, 
-      {id: 'last_name', title: 'Nom'}, 
-      {id: 'first_name', title: 'Prénom'},
-      {id: 'box_title', title: 'Boîte'}, 
-      {id: 'address', title: 'Adresse'}, 
-      {id: 'address_more', title: 'Complément d\'adresse'}, 
-      {id: 'address_zipcode', title: 'Code postale'}, 
-      {id: 'address_city', title: 'Commune'}, 
-      {id: 'phone', title: 'Téléphone'}
-    ]
-  });
 
-  let csvColissimoOrders = []
+  const box_numbers = _.uniq(
+    orders.map((order) => {
+      var box_number = _.get(order.content, '[0].box.number', null)
+      if (box_number) return box_number
+    })    
+  )
+
+  let csvColissimoOrders = {}
+
+  box_numbers.forEach((number) => csvColissimoOrders[number] = [])
+
   orders.forEach((order) => {
     const box = _.get(order, 'content[0].box', {})
     if (box.environnement === environnement_id) {
       const date = getDateFormatted(_.get(order, 'created_at', ''))
-      csvColissimoOrders.push(
+      csvColissimoOrders[box.number].push(
         {
           ..._.pick(order, ['id', 'last_name', 'first_name', 'address', 'address_more', 'address_zipcode', 'address_city']),
           'phone': '+33' + _.get(order, 'phone', '0').slice(1),
-          'box_title': _.get(order, 'content[0].box.title', 'null'),
+          'box_number': _.get(order, 'content[0].box.number', 'null'),
           'date': date
         }
       )
     }
   })
 
-  await csvColissimoWriter.writeRecords(csvColissimoOrders)
+  let csvColissimoPaths = []
 
-  strapi.log.info('CSV COLISSIMO GENERATED WITH PATH : ', csvColissimoPath)
+  for (const [number, boxOrders] of Object.entries(csvColissimoOrders)) {
+    if (boxOrders.length > 0) {
+      const path = dirpath + 'orders_collisimo_box_' + number + '_' + today_7AM.getTime() + '.csv'
+      const csvColissimoWriter = createCsvWriter({
+        path: path,
+        header: [
+          {id: 'date', title: 'Date'},
+          {id: 'id', title: 'ID'}, 
+          {id: 'last_name', title: 'Nom'}, 
+          {id: 'first_name', title: 'Prénom'},
+          {id: 'box_number', title: 'Boîte'}, 
+          {id: 'address', title: 'Adresse'}, 
+          {id: 'address_more', title: 'Complément d\'adresse'}, 
+          {id: 'address_zipcode', title: 'Code postale'}, 
+          {id: 'address_city', title: 'Commune'}, 
+          {id: 'phone', title: 'Téléphone'}
+        ]
+      });
 
-  return csvColissimoPath
+
+      await csvColissimoWriter.writeRecords(boxOrders)
+
+      csvColissimoPaths.push({
+        number: number,
+        path: path
+      })
+    }
+  }
+
+  strapi.log.info('CSV COLISSIMO GENERATED WITH PATHS : ', csvColissimoPaths.map(r => r.path).join(' / '))
+
+  return csvColissimoPaths
 };
 
 const createMondialRelayCsv = async (dirpath, today_7AM, orders, environnement_id) => {
-  const csvMondialRelayPath = dirpath + 'orders_mondial_relay_' + today_7AM.getTime() + '.csv'
-  const csvMondialRelayWriter = createCsvWriter({
-    path: csvMondialRelayPath,
-    header: [
-      {id: 'date', title: 'Date'},
-      {id: 'id', title: 'ID'},
-      {id: 'box_title', title: 'Boîte'},
-      {id: 'address_poi', title: 'Adresse du point relais'},
-      {id: 'mr_pdf_link', title: 'Lien vers étiquette'}
-    ]
-  });
 
-  let csvMondialRelayOrders = []
+  const box_numbers = _.uniq(
+    orders.map((order) => {
+      var box_number = _.get(order.content, '[0].box.number', null)
+      if (box_number) return box_number
+    })    
+  )
+
+  let csvMondialRelayOrders = {}
+
+  box_numbers.forEach((number) => csvMondialRelayOrders[number] = [])
+
   orders.forEach((order) => {
     const box = _.get(order, 'content[0].box', {})
     if (box.environnement === environnement_id) {
       const date = getDateFormatted(_.get(order, 'created_at', ''))
-      csvMondialRelayOrders.push(
+      csvMondialRelayOrders[box.number].push(
         {
           ..._.pick(order, ['id']),
-          'box_title': _.get(order, 'content[0].box.title', 'null'),
+          'box_number': _.get(order, 'content[0].box.number', 'null'),
           'date': date,
           'address_poi': _.get(order, 'poi_name') + ', ' + _.get(order, 'address') + ', ' + _.get(order, 'address_zipcode') + ' ' + _.get(order, 'address_city'),
           'mr_pdf_link': strapi.config.get('server.api') + 'uploads/orders/mondial-relay/order_mondial_relay_' + order.id + '.pdf'
@@ -113,11 +135,37 @@ const createMondialRelayCsv = async (dirpath, today_7AM, orders, environnement_i
     }
   })
 
-  await csvMondialRelayWriter.writeRecords(csvMondialRelayOrders)
+  let csvMondialRelayPaths = []
 
-  strapi.log.info('CSV MONDIAL RELAY GENERATED WITH PATH : ', csvMondialRelayPath)
+  for (const [number, boxOrders] of Object.entries(csvMondialRelayOrders)) {
+    if (boxOrders.length > 0) {
+      const path = dirpath + 'orders_mondial_relay_box_' + number + '_' + today_7AM.getTime() + '.csv'
+      const csvMondialRelayWriter = createCsvWriter({   
+        path: path,
+        header: [
+          {id: 'date', title: 'Date'},
+          {id: 'id', title: 'ID'},
+          {id: 'box_number', title: 'Boîte'},
+          {id: 'address_poi', title: 'Adresse du point relais'},
+          {id: 'mr_pdf_link', title: 'Lien vers étiquette'}
+        ]
+      });
 
-  return csvMondialRelayPath
+
+      if (boxOrders.length > 0) {
+        await csvMondialRelayWriter.writeRecords(boxOrders)
+
+        csvMondialRelayPaths.push({
+          number: number,
+          path: path
+        })
+      }
+    }
+  }
+
+  strapi.log.info('CSV MONDIAL RELAY GENERATED WITH PATHS : ', csvMondialRelayPaths.map(r => r.path).join(' / '))
+
+  return csvMondialRelayPaths
 };
 
 module.exports = {
@@ -150,17 +198,26 @@ module.exports = {
     const dirpath = 'public/uploads/orders/csv'
     await fs.mkdirSync(dirpath, { recursive: true })
 
-    const csvColissimoPath = await createColissimoCsv(dirpath, today_7AM, ordersColissimo, environnement_metropole.id)
-    const csvMondialRelayPath = await createMondialRelayCsv(dirpath, today_7AM, ordersMondialRelay, environnement_metropole.id)
+    const csvColissimoPaths = await createColissimoCsv(dirpath, today_7AM, ordersColissimo, environnement_metropole.id)
+    const csvMondialRelayPaths = await createMondialRelayCsv(dirpath, today_7AM, ordersMondialRelay, environnement_metropole.id)
+
+    const attachments = []
+    csvColissimoPaths.forEach((csvColissimoPath) => {
+      attachments.push(
+        {filename: 'commandes_colissimo_box_' + csvColissimoPath.number + '_' + yesterdayFormatted.split('/').join('') + '_' + todayFormatted.split('/').join('') + '.csv', content: fs.createReadStream(csvColissimoPath.path)}
+      )
+    })
+    csvMondialRelayPaths.forEach((csvMondialRelayPath) => {
+      attachments.push(
+        {filename: 'commandes_mondial_relay_box_' + csvMondialRelayPath.number + '_' + yesterdayFormatted.split('/').join('') + '_' + todayFormatted.split('/').join('') + '.csv', content: fs.createReadStream(csvMondialRelayPath.path)}
+      )
+    })
 
     await strapi.plugins['email'].services.email.sendTemplatedEmail(
       {
         to: strapi.config.get('server.emails.cat'),
         cc: strapi.config.get('server.emails.admin'),
-        attachments: [
-          {filename: 'commandes_colissimo_' + todayFormatted.split('/').join('') + '.csv', content: fs.createReadStream(csvColissimoPath)},
-          {filename: 'commandes_mondial_relay_' + todayFormatted.split('/').join('') + '.csv', content: fs.createReadStream(csvMondialRelayPath)},
-        ]
+        attachments: attachments
       },
       EMAIL_DAILY_ORDERS,
       {
