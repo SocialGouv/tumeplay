@@ -19,26 +19,29 @@ OpenStreetMap.propTypes = {
   onRegionChange: PropTypes.func,
 };
 export default function OpenStreetMap(props) {
+  const {items, latitude, longitude } = props;
+
   const isMounted = useIsMounted();
   const [region, setRegion] = useState({
-    latitude: props.latitude,
-    longitude: props.longitude,
+    latitude: latitude,
+    longitude: longitude,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
 
+
   useEffect(
     () => {
       const _localRegion = {
-        latitude: props.latitude,
-        longitude: props.longitude,
+        latitude: latitude,
+        longitude: longitude,
         latitudeDelta: region.latitudeDelta,
         longitudeDelta: region.longitudeDelta,
       };
       setRegion(_localRegion);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [props.latitude, props.longitude],
+    [latitude, longitude],
   );
 
   function onRegionChange(region) {
@@ -64,6 +67,13 @@ export default function OpenStreetMap(props) {
   if (!mapHeight || isNaN(mapHeight)) {
     mapHeight = 100;
   }
+  
+  const newItems = items.map((item) => {
+    const latToFloat = parseFloat(item.Latitude.replace(',','.'))
+    const longToFloat = parseFloat(item.Longitude.replace(',','.'))
+    item.coordinates = {...{latitude: latToFloat, longitude: longToFloat}}
+    return item
+  })
 
   return (
     <View style={{marginTop: 5, borderRadius: 7}}>
@@ -75,20 +85,19 @@ export default function OpenStreetMap(props) {
         onRegionChange={onRegionChange}
         style={{width: mapWidth, height: mapHeight}}
         showsUserLocation>
-        {props.items.length > 0 &&
-          props.items.map((item, key) => {
+        {newItems.length > 0 &&
+          newItems.map((item, key) => {
             const markerPin = item.isSelected
               ? require('../../../assets/pictures/pins/pin-selected.png')
               : require('../../../assets/pictures/pins/pin-raw.png');
             return (
               <Marker
                 key={key}
-                title={item.title}
+                title={item.lgAdr1}
                 coordinate={item.coordinates}
-                identifier={item.identifier}
+                identifier={item.Num}
                 item={item}
                 onPress={e => {
-                  console.log(e);
                   props.onPoiPress(e.nativeEvent.sourceTarget.options.item);
                 }}>
                 <Image style={{height: 40, width: 28}} source={markerPin} />
