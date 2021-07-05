@@ -69,8 +69,8 @@ export default function OpenStreetMap(props) {
   }
   
   const newItems = items.map((item) => {
-    const latToFloat = parseFloat(item.Latitude.replace(',','.'))
-    const longToFloat = parseFloat(item.Longitude.replace(',','.'))
+    const latToFloat = item.latitude
+    const longToFloat = item.longitude
     item.coordinates = {...{latitude: latToFloat, longitude: longToFloat}}
     return item
   })
