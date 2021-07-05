@@ -20,6 +20,6 @@ module.exports = {
 
         entity = await strapi.services.reponse.create(ctx.request.body);
 
-        return sanitizeEntity(entity, { model: strapi.models.restaurant });
+        return sanitizeEntity(entity, { model: strapi.models.reponse });
     }
 };
