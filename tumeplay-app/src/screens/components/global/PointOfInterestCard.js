@@ -86,7 +86,7 @@ export default function PointOfInterestCard(props) {
             fontSize: 20,
             marginBottom: 3,
           }}>
-          {item.LgAdr1}
+          {item.LgAdr1 || item.name}
         </Text>
         <View
           style={[
@@ -121,9 +121,9 @@ export default function PointOfInterestCard(props) {
                 textStyle,
                 {lineHeight: 18, paddingRight: 10},
               ]}>
-              {item.LgAdr3}
+              {item.LgAdr3 || item.address}
               {'\n'}
-              {item.CP} {item.Ville}
+              {item.CP || item.address_zipcode} {item.Ville || item.address_city}
             </Text>
           </View>
         </View>
