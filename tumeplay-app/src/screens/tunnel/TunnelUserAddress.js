@@ -82,12 +82,18 @@ export default function TunnelUserAddress(props) {
     props.navigation.state.params.selectedProducts,
   );
 
+  const [selectedReferent] = useState(
+    props.navigation.state.params.selectedReferent,
+  );
+
   const [localAdress, setLocalAdress] = useState(defaultUserAdress);
   const [localValid, setLocalValid] = useState({});
   const [mainValidFlag, setMainValidFlag] = useState(false);
   const [invalidAddress, setInvalidAddress] = useState(false);
   const [invalidZipCode, setInvalidZipCode] = useState(false);
   const [disallowOrder, setDisallowOrder] = useState(false);
+
+  console.log('ADRESS', props)
 
   useEffect(() => {
     if (props.navigation.state.params.userAdress) {
@@ -234,6 +240,7 @@ export default function TunnelUserAddress(props) {
       deliveryType: deliveryType,
       userAdress: localAdress,
       selectedPickup: selectedPickup,
+      selectedReferent: selectedReferent,
     });
   }
 
@@ -282,6 +289,12 @@ export default function TunnelUserAddress(props) {
       props.navigation.navigate('TunnelDeliverySelect', {
         selectedItem: selectedItem,
         selectedProducts: selectedProducts,
+      });
+    } else if (deliveryType === 'referent') {
+      props.navigation.navigate('TunnelReferentSelect', {
+        selectedItem: selectedItem,
+        selectedProducts: selectedProducts,
+        selectedReferent: selectedReferent,
       });
     } else {
       props.navigation.navigate('TunnelPickupSelect', {
