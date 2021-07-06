@@ -20,9 +20,13 @@ import ContactUsScreen from '../screens/ContactUsScreen';
 import StayInTouchScreen from '../screens/StayInTouchScreen';
 import StayInTouchConfirmScreen from '../screens/StayInTouchConfirmScreen';
 import GlobalStatisticsScreen from '../screens/GlobalStatisticsScreen';
+import LandingPage from '../screens/LandingPage';
 
 const AppStack = createStackNavigator(
   {
+    LandingPage: {
+      screen: LandingPage,
+    },
     LandingScreen: {
       screen: LandingScreen,
     },
@@ -112,7 +116,7 @@ const AppStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'LandingScreen',
+    initialRouteName: process.env.REACT_APP_ZONE === 'guyane' ? 'LandingScreen' : 'LandingPage',
     headerLayoutPreset: 'center',
     defaultNavigationOptions: ({navigation}) => ({
       header: <CustomHeader navigation={navigation} />,
