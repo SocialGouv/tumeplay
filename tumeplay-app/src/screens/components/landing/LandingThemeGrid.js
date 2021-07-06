@@ -18,7 +18,7 @@ export default function LandingThemeGrid(props) {
       style={{paddingLeft: 15, paddingRight: 15}}
       renderItem={({item}) => {
         return (
-          <ThemeCard item={item} />
+          <ThemeCard item={item} onPress={props.onPress} />
         );
       }}
       numColumns={numColumns}
