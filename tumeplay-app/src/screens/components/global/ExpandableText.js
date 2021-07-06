@@ -42,6 +42,8 @@ export default function ExpandableText(props) {
   const isMounted = useIsMounted();
   const _text = useRef();
 
+  const soundIconStyle = props.soundStyle || {position: 'absolute', right: 15, top: 20}
+
   const [play, setPlay] = useState(false);
 
   const soundPicture = require('../../../assets/pictures/sound.png');
@@ -249,7 +251,7 @@ export default function ExpandableText(props) {
               togglePlay(e);
               return false;
             }}
-            style={{position: 'absolute', right: 15, top: 20}}>
+            style={soundIconStyle}>
             <Image
               style={{
                 marginLeft: 10,
