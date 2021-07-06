@@ -7,6 +7,7 @@ import {EventRegister} from 'react-native-event-listeners';
 import UserService from '../services/User';
 import Tracking from '../services/Tracking';
 import AnswerScreen from './components/quizz/AnswerScreen';
+import TextWithSound from './components/global/TextWithSound';
 import NextButton from './components/quizz/NextButton';
 import AnswerButton from './components/quizz/AnswerButton';
 import QuizService from '../services/Quiz';
@@ -174,9 +175,7 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          <Text style={Styles.questionText}>
-            {_currentQuestion.text_question}
-          </Text>
+          <TextWithSound sound={process.env.REACT_APP_API_URL + _currentQuestion.sound_question.url} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
         </View>
 
         <View style={{paddingBottom: 50, height: '52%'}}>
@@ -189,6 +188,7 @@ export default function QuizzScreen(props) {
                 question={_currentQuestion}
                 lastTokenAmount={lastTokenAmount}
                 setFeedback={setFeedback}
+                sound={_currentQuestion.sound_answer.url}
               />
             )}
           </View>
