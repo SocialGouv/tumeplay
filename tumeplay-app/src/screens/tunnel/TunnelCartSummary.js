@@ -36,8 +36,6 @@ export default function TunnelCartSummary(props) {
   )
   const [userAdress] = useState(props.navigation.state.params.userAdress);
 
-  console.log('TUNNELSUMMARY', props)
-
   async function _confirmOrder() {
     //ORDER STRAPI API
     let orderPost;

@@ -93,8 +93,6 @@ export default function TunnelUserAddress(props) {
   const [invalidZipCode, setInvalidZipCode] = useState(false);
   const [disallowOrder, setDisallowOrder] = useState(false);
 
-  console.log('ADRESS', props)
-
   useEffect(() => {
     if (props.navigation.state.params.userAdress) {
       const userAdress = props.navigation.state.params.userAdress;
