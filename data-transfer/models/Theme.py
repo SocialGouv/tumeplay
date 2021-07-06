@@ -8,11 +8,12 @@ import os
 
 class Theme:
 
-    def __init__(self, id, title, display_quiz, image_url):
+    def __init__(self, id, title, display_quiz, image_url, sound_url):
         self.id = id
         self.title = title.strip()
         self.display_quiz = display_quiz
         self.image_url = image_url.replace(" ", "%20").replace("&amp;", "&")
+        self.sound_url = sound_url.replace(" ", "%20").replace("&amp;", "&").replace("é", "e%CC%81").replace("è", "e%CC%80") if sound_url else None
 
     def get_image(self):
         try:
@@ -37,5 +38,36 @@ class Theme:
             else:
                 return open(self.image_url, 'rb')
         except FileNotFoundError:
+            return None
+
+    def get_sound(self):
+        if self.sound_url is not None:
+            try:
+                pattern_url = re.compile(
+                    r'^(?:http|ftp)s?://'  # http:// or https://
+                    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+                    r'localhost|'  # localhost...
+                    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+                    r'(?::\d+)?'  # optional port
+                    r'(?:/?|[/?]\S+)$', re.IGNORECASE
+                )
+                if re.match(pattern_url, self.sound_url) is not None:
+                    try:
+                        file_url, file_extension = os.path.splitext(self.sound_url)
+                        response = urllib.request.urlopen(self.sound_url)
+                        tmp_file = tempfile.NamedTemporaryFile(delete=False)
+                        shutil.copyfileobj(response, tmp_file)
+                        os.rename(tmp_file.name, tmp_file.name + (file_extension if file_extension != '' else '.mp3'))
+                        return open(tmp_file.name + (file_extension if file_extension != '' else '.mp3'), 'rb')
+                    except (HTTPError, URLError, UnicodeEncodeError) as e:
+                        print('ERROR : ', e)
+                        return None
+                else:
+                    print('NOT URL : ', self.sound_url)
+                    return open(self.sound_url, 'rb')
+            except FileNotFoundError:
+                print('FILE NOT FOUND')
+                return None
+        else:
             return None
 
