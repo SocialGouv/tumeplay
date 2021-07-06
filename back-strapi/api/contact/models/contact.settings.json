@@ -20,7 +20,7 @@
       "type": "email"
     },
     "zipcode": {
-      "type": "integer"
+      "type": "biginteger"
     },
     "box": {
       "model": "box"
