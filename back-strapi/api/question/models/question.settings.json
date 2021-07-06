@@ -38,6 +38,26 @@
     },
     "theme": {
       "model": "thematique"
+    },
+    "sound_question": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "sound_answer": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
