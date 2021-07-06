@@ -14,7 +14,7 @@ ThemeCard.propTypes = {
 };
 
 export default function ThemeCard(props) {
-    const { item } = props
+    const { item, onPress } = props
 
     let currentIndex = 0;
 
@@ -50,7 +50,7 @@ export default function ThemeCard(props) {
         <CustomTouchableOpacity
           style={LandingStyle.gridItemButton}
           onPress={() => {
-            props.onPress(item);
+            onPress(item);
           }}>
           <View style={{flex: 1, flexDirection: 'row'}}>
             <Image
