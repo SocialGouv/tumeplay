@@ -8,6 +8,9 @@ export const GET_THEMES = gql`
       image {
         url
       }
+      sound {
+        url
+      }
       display_quiz
     }
   }
