@@ -35,6 +35,16 @@
     },
     "title_backoffice": {
       "type": "string"
+    },
+    "sound": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
