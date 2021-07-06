@@ -18,6 +18,12 @@ export const GET_QUESTIONS = gql`
       image {
         url
       }
+      sound_question {
+        url
+      }
+      sound_answer {
+        url
+      }
     }
   }
 `;

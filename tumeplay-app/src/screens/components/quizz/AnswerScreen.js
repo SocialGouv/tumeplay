@@ -155,6 +155,12 @@ export default function AnswerScreen(props) {
             onReadMore={() => {
               Tracking.knowMoreTriggered('question', content.id);
             }}
+            sound={props.sound}
+            soundStyle={{
+              position: 'absolute',
+              bottom: '10px',
+              left: '0'
+            }}
           />
           <CommentLikesView
             onPressComment={_toggleCommentModal}

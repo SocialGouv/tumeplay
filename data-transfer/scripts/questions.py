@@ -31,7 +31,9 @@ def import_questions(tumeplay_base_url, tumeplay_api, strapi_base_api, theme_ids
                 question['neutralAnswer'] == 1,
                 question['neutralAnswer'] == 2,
                 question['neutralAnswer'] == 3,
-                right_answer
+                right_answer,
+                None,
+                None
             )
         )
 
@@ -61,12 +63,19 @@ def import_questions(tumeplay_base_url, tumeplay_api, strapi_base_api, theme_ids
                 question['neutralAnswer'] == 1,
                 question['neutralAnswer'] == 2,
                 question['neutralAnswer'] == 3,
-                right_answer
+                right_answer,
+                tumeplay_base_url + '/' + question['questionSound'] if 'questionSound' in question else None,
+                tumeplay_base_url + '/' + question['answerSound'] if 'answerSound' in question else None
             )
         )
 
     for question in questions:
+        sound_question_id = None
+        sound_answer_id = None
+        image_id = None
+
         question_image = question.get_image()
+
         if question_image and question_image is not None:
             response = requests.post(strapi_base_api + "/upload",
                                      files={'files': (
@@ -75,10 +84,30 @@ def import_questions(tumeplay_base_url, tumeplay_api, strapi_base_api, theme_ids
             json_response = response.json()
             image_id = json_response[0]['id']
 
+        question_sound_question = question.get_sound_question()
+        if question_sound_question and question_sound_question is not None:
+            response = requests.post(strapi_base_api + "/upload",
+                                     files={'files': (
+                                     question_sound_question.name[question_sound_question.name.rindex('/') + 1:], question_sound_question,
+                                     'audio/mpeg"', {'Expires': '0'})})
+            json_response = response.json()
+            sound_question_id = json_response[0]['id']
+
+        question_sound_answer = question.get_sound_answer()
+        if question_sound_answer and question_sound_answer is not None:
+            response = requests.post(strapi_base_api + "/upload",
+                                     files={'files': (
+                                     question_sound_answer.name[question_sound_answer.name.rindex('/') + 1:], question_sound_answer,
+                                     'audio/mpeg"', {'Expires': '0'})})
+            json_response = response.json()
+            sound_answer_id = json_response[0]['id']
+
         requests.post(strapi_base_api + "/questions", data=json.dumps({
             "text_question": question.text_question,
             "text_answer": question.text_answer,
             "image": image_id,
+            "sound_question": sound_question_id,
+            "sound_answer": sound_answer_id,
             "theme": question.theme_id,
             "responses": {
                 "response_A": question.response_A,
