@@ -114,12 +114,12 @@ export default function LandingScreen(props) {
         {/* Title and grid */}
         <View style={{flex: 0.75}}>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
-          {process.env.REACT_APP_ZONE === 'guyane' ? 
+          {process.env.REACT_APP_ZONE === 'guyane' ?
             <TextWithSound
               style={Styles.landingScreenSubtitle}
               sound={'Accueil_1.MP3'}
               useLocal={true}
-              >
+            >
               Explore nos thématiques, découvre les questions réponses associées
               et réponds aux quiz pour recevoir des box gratuitement !
             </TextWithSound>
