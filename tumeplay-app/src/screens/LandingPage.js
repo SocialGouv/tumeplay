@@ -18,7 +18,9 @@ const LandingPage = (props) => {
 
   return(
     <View style={style.container}>
-      <Text style={Styles.appTitle}>D'ou viens tu ?</Text>
+      <View style={style.titleContainer}>
+        <Text style={Styles.appTitle}>D'ou viens tu ?</Text>
+      </View>
       <View style={style.cardContainer}>
         <TouchableOpacity style={style.card} onPress={() => {handleRedirection('metropole')}}>
           <Text style={style.text}>
@@ -44,12 +46,15 @@ const style = StyleSheet.create({
     backgroundColor: Colors.backgroundColor,
     textAlign: 'center'
   },
+  titleContainer: {
+    marginTop: 15
+  },
   title: {
     color: Colors.secondaryText,
     fontFamily: Colors.appTitleFont,
     fontSize: 30,
     lineHeight: 34,
-    marginVertical: 15,
+    marginTop: 15,
     paddingBottom: 0,
     flex: 2,
   },
