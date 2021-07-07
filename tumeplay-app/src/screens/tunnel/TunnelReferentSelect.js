@@ -11,14 +11,14 @@ import PointOfInterestCard from '../components/global/PointOfInterestCard';
 import CustomTextInput from '../components/tunnel/CustomTextInput';
 import AddressValidator from '../../services/AddressValidator';
 import TunnelUserAdressStyle from '../../styles/components/TunnelUserAdress';
+import TextWithSound from '../components/global/TextWithSound';
 
-
-import {   
+import {
     Text,
     View,
     Dimensions,
     TouchableOpacity,
-    ScrollView, 
+    ScrollView,
 } from 'react-native';
 
 const zipCodeTest = /^[0-9]{5}$/;
@@ -107,7 +107,7 @@ const defaultPosition = {
                   min_lon:
                     currentPosition.coords.longitude - currentPosition.delta.longitude,
                 };
-        
+
                 filteredPoints = refPoints.filter(refPoint => {
                   if(
                     parseFloat(refPoint.latitude) < bounds.max_lat ||
@@ -158,10 +158,10 @@ const defaultPosition = {
         const {width} = parentLayout;
         const {height} = Dimensions.get('window');
         const newMapLayout = mapLayout;
-    
+
         newMapLayout.width = width;
         newMapLayout.height = height * 0.4;
-    
+
         setMapLayout(newMapLayout);
     }
 
@@ -196,11 +196,11 @@ const defaultPosition = {
               longitude: region.longitudeDelta,
             },
           };
-    
+
           setCurrentPosition(localRegion);
         }, 900);
       }
-    
+
       const handleAddressMore = (item) => {
         openGeocoder().reverse(item.coordinates.longitude, item.coordinates.latitude)
         .end((err, res) => {
@@ -221,9 +221,9 @@ const defaultPosition = {
         if (AddressValidator.validateZipCode(value)) {
           setInvalidZipCode(false);
           localAdress[`${name}`] = value;
-    
+
           setLocalAdress(localAdress);
-    
+
           if (zipCodeTest.test(value)) {
             openGeocoder()
               .geocode(value)
@@ -259,10 +259,10 @@ const defaultPosition = {
         }
         const _displayReset = value != '';
         setDisplayReset(_displayReset);
-    
+
         return value;
       }
-    
+
 
     return(
         <View
@@ -278,7 +278,7 @@ const defaultPosition = {
       <Backlink step={2} onPress={_goBack} />
 
       <View style={{flex: 0.15, paddingTop: 15}}>
-        <Text style={Styles.tunnelTitle}>Choisis le lieu de livraison</Text>
+        <TextWithSound style={Styles.tunnelTitle} sound={'lieu-de-retrait_XlV9Zth8.mp3'} useLocal={true}>Choisis le lieu de livraison</TextWithSound>
         <CustomTextInput
           inputLabel="Code postal"
           inputPlaceholder="Ton Code Postal"
@@ -354,6 +354,6 @@ const defaultPosition = {
       )}
     </View>
   );
-}   
+}
 
 export default TunnelReferentSelect;
