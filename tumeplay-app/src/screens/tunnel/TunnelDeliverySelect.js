@@ -34,7 +34,7 @@ export default function TunnelDeliverySelect(props) {
       props.navigation.navigate('TunnelUserAddress', _params);
     } else if (deliveryType === 'pickup') {
       props.navigation.navigate('TunnelPickupSelect', _params);
-    } else {
+    } else if (deliveryType === 'referent') {
       props.navigation.navigate('TunnelReferentSelect', _params)
     }
   }
@@ -60,7 +60,7 @@ export default function TunnelDeliverySelect(props) {
 
       <View style={{flex: 0.4}}>
         <Text style={Styles.tunnelTitle}>Choisis le mode de {process.env.REACT_APP_ZONE === 'guyane' ? 'retrait' : 'livraison'}</Text>
-        {process.env.REACT_APP_ZONE === 'guyane' ? 
+        {process.env.REACT_APP_ZONE === 'guyane' ?
             <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
             Choisis le référent chez qui tu souhaites retirer ta box. Le référent est là pour t’écouter et répondre à tes questions. Il te proposera un petit entretien la première fois que tu iras le voir. Pas de panique, 100% confidentialité, 0% stress !
             </Text>
@@ -74,8 +74,8 @@ export default function TunnelDeliverySelect(props) {
 
 
       <View style={{flex: 0.4, marginTop: 30}}>
-        {process.env.REACT_APP_ZONE === 'guyane' ? 
-          <TouchableOpacity 
+        {process.env.REACT_APP_ZONE === 'guyane' ?
+          <TouchableOpacity
             style={{
               flex: 1,
               paddingTop: 2,
