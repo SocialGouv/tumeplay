@@ -11,6 +11,7 @@ import TunnelUserAddress from '../screens/tunnel/TunnelUserAddress';
 import TunnelCartSummary from '../screens/tunnel/TunnelCartSummary';
 import TunnelOrderConfirm from '../screens/tunnel/TunnelOrderConfirm';
 import TunnelPickupSelect from '../screens/tunnel/TunnelPickupSelect';
+import TunnelReferentSelect from '../screens/tunnel/TunnelReferentSelect';
 import LandingScreen from '../screens/LandingScreen';
 import QuizzFinishScreen from '../screens/QuizzFinishScreen';
 import LegalTermsScreen from '../screens/LegalTermsScreen';
@@ -70,6 +71,9 @@ const AppStack = createStackNavigator(
     },
     TunnelPickupSelect: {
       screen: TunnelPickupSelect,
+    },
+    TunnelReferentSelect: {
+      screen: TunnelReferentSelect,
     },
     LegalTerms: {
       screen: LegalTermsScreen,

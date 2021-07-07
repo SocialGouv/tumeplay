@@ -31,6 +31,9 @@ export default function TunnelCartSummary(props) {
   const [selectedProducts] = useState(
     props.navigation.state.params.selectedProducts,
   );
+  const [selectedReferent] = useState(
+    props.navigation.state.params.selectedReferent
+  )
   const [userAdress] = useState(props.navigation.state.params.userAdress);
 
   async function _confirmOrder() {
@@ -67,6 +70,20 @@ export default function TunnelCartSummary(props) {
         address_city: selectedPickup.Ville,
         poi_number: selectedPickup.Num,
         delivery: deliveryType
+      }
+    } else if (deliveryType === 'referent') {
+      requestBody = {
+        ...requestBody, 
+        address: selectedReferent.address,
+        address_city: selectedReferent.address_city,
+        address_dept: selectedReferent.address_dept,
+        address_deptcode: selectedReferent.address_deptcode,
+        address_region: selectedReferent.address_region,
+        address_zipcode: selectedReferent.address_zipcode,
+        phone: selectedReferent.phone_number,
+        poi_name: selectedReferent.name,
+        delivery: deliveryType,
+        referent: selectedReferent.id
       }
     }
     if (selectedItem.__typename === 'Box') {

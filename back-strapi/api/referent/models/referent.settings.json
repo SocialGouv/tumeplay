@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "referents",
+  "info": {
+    "name": "Referent",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "zone": {
+      "model": "environnement"
+    },
+    "address": {
+      "type": "string"
+    },
+    "address_zipcode": {
+      "type": "string"
+    },
+    "address_city": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "float"
+    },
+    "longitude": {
+      "type": "float"
+    }
+  }
+}

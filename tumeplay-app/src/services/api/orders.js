@@ -21,7 +21,8 @@ const OrdersAPI = {
         address_zipcode: order.address_zipcode,
         address_city: order.address_city,
         poi_name: order.poi_name,
-        poi_number: order.poi_number
+        poi_number: order.poi_number,
+        referent: order.referent
       }),
     });
     return res;
