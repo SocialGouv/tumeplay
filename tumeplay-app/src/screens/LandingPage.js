@@ -5,8 +5,6 @@ import Colors from '../styles/Color'
 
 const LandingPage = (props) => {
 
-  console.log('props', props)
-
   const france = require('../assets/pictures/France.png')
   const guyane = require('../assets/pictures/Guyane.png')
 
