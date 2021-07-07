@@ -5,7 +5,7 @@ WORKDIR /
 COPY ./package.json ./
 COPY ./yarn.lock ./
 
-RUN yarn install --production
+RUN yarn install --production --frozen-lockfile --cache-folder /dev/shm/yarn && yarn cache clean
 
 COPY . .
 
