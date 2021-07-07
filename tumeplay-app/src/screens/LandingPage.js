@@ -9,9 +9,17 @@ const LandingPage = (props) => {
   const guyane = require('../assets/pictures/Guyane.png')
 
   const handleRedirection = (name) => {
-    if(name === 'guyane') {
-      window.location.href = 'https://guyane.tumeplay.numericite.fr/'
-    } else {
+    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+    }
+    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
+      props.navigation.navigate('LandingScreen')
+    }
+    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
+      console.log(process.env.REACT_APP_OTHER_ZONE_URL)
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+    }
+    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
       props.navigation.navigate('LandingScreen')
     }
   }
