@@ -112,7 +112,7 @@ const AppStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: process.env.REACT_APP_ZONE === 'guyane' ? 'LandingScreen' : 'LandingPage',
+    initialRouteName: 'LandingPage',
     headerLayoutPreset: 'center',
     defaultNavigationOptions: ({navigation}) => ({
       header: <CustomHeader navigation={navigation} />,
