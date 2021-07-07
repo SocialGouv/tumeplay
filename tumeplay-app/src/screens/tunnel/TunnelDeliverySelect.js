@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, processColor} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
+import TextWithSound from '../components/global/TextWithSound';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/Color';
 import Styles from '../../styles/Styles';
@@ -59,7 +60,11 @@ export default function TunnelDeliverySelect(props) {
       <Backlink step={1} onPress={_goBack} />
 
       <View style={{flex: 0.4}}>
-        <Text style={Styles.tunnelTitle}>Choisis le mode de {process.env.REACT_APP_ZONE === 'guyane' ? 'retrait' : 'livraison'}</Text>
+        {process.env.REACT_APP_ZONE === 'guyane' ?
+          <TextWithSound style={Styles.tunnelTitle} sound={'mode-de-retrait_aEY6eeGr.mp3'} useLocal={true}>Choisis le mode de retrait</TextWithSound>
+         :
+          <Text style={Styles.tunnelTitle}>Choisis le mode de livraison</Text>
+        }
         {process.env.REACT_APP_ZONE === 'guyane' ?
             <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
             Choisis le référent chez qui tu souhaites retirer ta box. Le référent est là pour t’écouter et répondre à tes questions. Il te proposera un petit entretien la première fois que tu iras le voir. Pas de panique, 100% confidentialité, 0% stress !
