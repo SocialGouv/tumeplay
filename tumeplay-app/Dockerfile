@@ -10,7 +10,7 @@ COPY *.lock ./
 
 RUN apk update && apk add --no-cache git
 
-RUN npm install
+RUN npm install --production --frozen-lockfile --cache-folder /dev/shm/yarn && yarn cache clean
 
 RUN sed -i.bak 's/module.exports = /export default /g' node_modules/react-native-device-info/src/web/index.js && sed -i.bak 's/module.exports=/export default /g' node_modules/react-native-device-info/lib/module/web/index.js && rm node_modules/react-native-device-info/src/web/index.js.bak
 
