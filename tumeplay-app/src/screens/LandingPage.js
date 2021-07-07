@@ -92,8 +92,8 @@ const style = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    marginHorizontal: "10%",
-    marginVertical: "10%",
+    marginTop: 30,
+    alignSelf: 'center',
     opacity: 0.6
   }
 })

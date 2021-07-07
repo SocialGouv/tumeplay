@@ -7,8 +7,8 @@ import CustomTouchableOpacity from './CustomTouchableOpacity';
 TextWithSound.propTypes = {
   sound: PropTypes.string,
   useUrl: PropTypes.bool,
-  children: PropTypes.object,
-  style: PropTypes.object,
+  children: PropTypes.object || PropTypes.string,
+  // style: PropTypes.object,
 };
 export default function TextWithSound(props) {
   const [play, setPlay] = useState(false);
