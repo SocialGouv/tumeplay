@@ -1,4 +1,3 @@
-import fnIsValidCoordinates from "is-valid-coordinates"
 
 const POIAPI = {
   fetchMondialRelaisPOI: async (coordinates) => {

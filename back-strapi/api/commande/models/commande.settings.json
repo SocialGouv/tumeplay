@@ -25,7 +25,8 @@
       "type": "enumeration",
       "enum": [
         "home",
-        "pickup"
+        "pickup",
+        "referent"
       ]
     },
     "content": {
@@ -72,6 +73,9 @@
     },
     "poi_number": {
       "type": "string"
+    },
+    "referent": {
+      "model": "referent"
     }
   }
 }
