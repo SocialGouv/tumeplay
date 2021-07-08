@@ -193,6 +193,19 @@ module.exports = {
         html: email_html,
       }
 
+      let delivery_name = ''
+      switch(entity.delivery) {
+        case 'pickup':
+          delivery_name = 'En point relais'
+          break;
+        case 'home':
+          delivery_name = 'À domicile'
+          break;
+        case 'referent':
+          delivery_name = 'Chez un référent'
+          break;
+      }
+
       await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
           to: entity.email
@@ -202,7 +215,7 @@ module.exports = {
           order: Object.assign(
             _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
             {
-              delivery_name: entity.delivery === 'pickup' ? 'En point relais' : 'À domicile',
+              delivery_name: delivery_name,
               box: _.pick(box, ['title'])
             }
           )
