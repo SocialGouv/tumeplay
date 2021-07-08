@@ -78,16 +78,16 @@ const createColissimoCsv = async (dirpath, today_7AM, orders, environnement_id) 
       const csvColissimoWriter = createCsvWriter({
         path: path,
         header: [
-          {id: 'date', title: 'Date'},
-          {id: 'id', title: 'ID'}, 
-          {id: 'last_name', title: 'Nom'}, 
-          {id: 'first_name', title: 'Prénom'},
-          {id: 'box_number', title: 'Boîte'}, 
-          {id: 'address', title: 'Adresse'}, 
-          {id: 'address_more', title: 'Complément d\'adresse'}, 
-          {id: 'address_zipcode', title: 'Code postale'}, 
-          {id: 'address_city', title: 'Commune'}, 
-          {id: 'phone', title: 'Téléphone'}
+          {id: 'date', title: 'date'},
+          {id: 'id', title: 'id'}, 
+          {id: 'last_name', title: 'nom'}, 
+          {id: 'first_name', title: 'prenom'},
+          {id: 'box_number', title: 'numéro boite'}, 
+          {id: 'address', title: 'adresse'}, 
+          {id: 'address_more', title: 'comple'}, 
+          {id: 'address_zipcode', title: 'cp'}, 
+          {id: 'address_city', title: 'ville'}, 
+          {id: 'phone', title: 'tph'}
         ]
       });
 
