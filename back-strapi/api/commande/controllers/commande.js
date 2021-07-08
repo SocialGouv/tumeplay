@@ -157,6 +157,8 @@ module.exports = {
       }
     } else if (tmp_order.delivery === 'home') {
       tmp_order.name = tmp_order.first_name + ' ' + tmp_order.last_name
+    } else if (tmp_order.delivery === 'referent') {
+      tmp_order.name = tmp_order.poi_name
     }
 
     //SAVE ORDER
