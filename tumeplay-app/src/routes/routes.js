@@ -116,7 +116,7 @@ const AppStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'LandingPage',
+    initialRouteName: window.location.search === '?zone_choice=true' ? 'LandingScreen' : 'LandingPage',
     headerLayoutPreset: 'center',
     defaultNavigationOptions: ({navigation}) => ({
       header: <CustomHeader navigation={navigation} />,
