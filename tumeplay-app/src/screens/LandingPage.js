@@ -9,15 +9,15 @@ const LandingPage = (props) => {
   const guyane = require('../assets/pictures/Guyane.png')
 
   const handleRedirection = (name) => {
+    const param = "?zone_choice=true"
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
       props.navigation.navigate('LandingScreen')
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
-      console.log(process.env.REACT_APP_OTHER_ZONE_URL)
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
       props.navigation.navigate('LandingScreen')
@@ -27,7 +27,7 @@ const LandingPage = (props) => {
   return(
     <View style={style.container}>
       <View style={style.titleContainer}>
-        <Text style={Styles.appTitle}>D'ou viens tu ?</Text>
+        <Text style={Styles.appTitle}>D'où viens tu ?</Text>
       </View>
       <View style={style.cardContainer}>
         <TouchableOpacity style={style.card} onPress={() => {handleRedirection('metropole')}}>
