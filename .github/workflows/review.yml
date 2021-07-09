@@ -139,3 +139,46 @@ jobs:
         labels: "${{ steps.docker_meta.outputs.labels }}"
         cache-to: "type=local,dest=/tmp/.buildx-frontend-cache"
         cache-from: "type=local,src=/tmp/.buildx-frontend-cache"
+
+  ##############################################################################
+  ## GENERATE KUBERNETES MANIFESTS
+  ##############################################################################
+  manifests:
+    name: Generate k8s manifests
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Load review environment variables
+      run: |
+        cat ".github/review.env" >> $GITHUB_ENV
+
+    - name: Yarn cache setup
+      uses: c-hive/gha-yarn-cache@v1
+
+    - name: Install kosko-charts dependencies
+      run: yarn --cwd .k8s install --frozen-lockfile --prefer-offline
+
+    - name: Generate k8s manifests
+      run: yarn --cwd .k8s --silent generate:dev > manifests.yml
+      env:
+        SOCIALGOUV_BASE_DOMAIN: ${{ env.SOCIALGOUV_BASE_DOMAIN }}
+
+    - name: Generate k8s namespace
+      run: yarn --cwd .k8s --silent generate:dev _namespace > namespace.yml
+      env:
+        SOCIALGOUV_BASE_DOMAIN: ${{ env.SOCIALGOUV_BASE_DOMAIN }}
+
+    - name: Archive k8s manifests
+      uses: actions/upload-artifact@v2
+      with:
+        name: manifests.yml
+        path: manifests.yml
+
+    - name: Archive k8s namespace
+      uses: actions/upload-artifact@v2
+      with:
+        name: namespace.yml
+        path: namespace.yml
