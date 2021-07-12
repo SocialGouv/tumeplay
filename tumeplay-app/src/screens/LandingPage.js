@@ -5,19 +5,20 @@ import Colors from '../styles/Color'
 
 const LandingPage = (props) => {
 
-  const france = require('../assets/pictures/France.png')
-  const guyane = require('../assets/pictures/Guyane.png')
+  const france = require('../assets/pictures/cartefrance.svg')
+  const guyane = require('../assets/pictures/carteguyane.svg')
+  const logo = require('../assets/pictures/logoTumeplay.svg')
 
   const handleRedirection = (name) => {
-    const param = "?zone_choice=true"
+    console.log(process.env.REACT_APP_OTHER_ZONE_URL)
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
     }
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
       props.navigation.navigate('LandingScreen')
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
       props.navigation.navigate('LandingScreen')
@@ -26,22 +27,27 @@ const LandingPage = (props) => {
 
   return(
     <View style={style.container}>
+      <Image style={style.logo} source={logo} resizeMode='contain'/>
       <View style={style.titleContainer}>
-        <Text style={Styles.appTitle}>D'où viens tu ?</Text>
+        <Text style={style.title}>Hello ! Où es-tu ?</Text>
       </View>
       <View style={style.cardContainer}>
-        <TouchableOpacity style={style.card} onPress={() => {handleRedirection('metropole')}}>
-          <Text style={style.text}>
-            Hexagone
-          </Text>
-          <Image style={style.image} resizeMode='contain' source={france}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.card} onPress={() => {handleRedirection('guyane')}}>
-          <Text style={style.text}>
-            Guyane
-          </Text>
-          <Image style={style.image} resizeMode='contain' source={guyane}/>
-        </TouchableOpacity>
+        <View style={style.column}>
+          <View style={style.card}>
+            <Image style={style.image} resizeMode='contain' source={france}/>
+          </View>
+          <TouchableOpacity style={style.button} >
+            <Text style={style.text} onPress={() => {handleRedirection('metropole')}}>Hexagone</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.column}>
+          <View style={style.card}>
+            <Image style={style.image} resizeMode='contain' source={guyane}/>
+          </View>
+          <TouchableOpacity style={style.button} onPress={() => {handleRedirection('guyane')}}>
+            <Text style={style.text}>Guyane</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -54,47 +60,69 @@ const style = StyleSheet.create({
     backgroundColor: Colors.backgroundColor,
     textAlign: 'center'
   },
-  titleContainer: {
-    marginTop: 15
+  logo: {
+    width: 250,
+    height: 250,
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },
+  appTitle:{
+    color: Colors.secondaryText,
+    fontFamily: Colors.appTitleFont,
+    fontSize: 44,
+    lineHeight: 34,
+    marginBottom: 0,
+    paddingBottom: 0,
+    flex: 2,
+  },
+  dot: {
+    fontSize: 20,
+    color: Colors.mainButton,
   },
   title: {
-    color: Colors.secondaryText,
+    color: Colors.mainButton,
     fontFamily: Colors.appTitleFont,
     fontSize: 30,
     lineHeight: 34,
-    marginTop: 15,
+    marginTop: 5,
     paddingBottom: 0,
     flex: 2,
   },
   cardContainer: {
     flexDirection: 'row',
-    marginVertical: 75,
+    marginVertical: 50,
     height: '25rem',
+  },
+  column: {
+    flexDirection: 'column',
+    width: "50%",
   },
   card: {
     flex: 1,
     marginHorizontal: 5,
-    backgroundColor: Colors.mainColor,
     borderRadius: 15,
-    shadowColor: '#FFFFFF',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.9,
-    shadowRadius: 9,
-    elevation: 1,
   },
   text: {
-    color: Colors.titleCardColor,
+    color: "#FFFF",
     fontFamily: Colors.appTitleFont,
-    fontSize: 30,
+    fontSize: 20,
     marginVertical: 10,
     paddingBottom: 0,
   },
   image: {
-    width: 250,
-    height: 250,
-    marginTop: 30,
+    width: 200,
+    height: 200,
+    position: 'absolute',
+    top: "50%",
+    left: "50%",
+    transform: 'translate(-50%, -50%)',
     alignSelf: 'center',
-    opacity: 0.6
+    opacity: 1
+  },
+  button: {
+    backgroundColor: Colors.mainButton,
+    borderRadius: 35,
+    marginHorizontal: 20,
   }
 })
 
