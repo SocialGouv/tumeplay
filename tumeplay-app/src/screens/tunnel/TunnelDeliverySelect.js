@@ -135,32 +135,37 @@ export default function TunnelDeliverySelect(props) {
           </>
         }
         <Splitter />
-        <Text
-          style={{
-            color: '#FFFFFF',
-            fontSize: 14,
-            marginTop: 15,
-            lineHeight: 22,
-            fontFamily: Colors.textFont,
-          }}>
-          Actuellement la commande de box est disponible en Ile de France et en
-          Nouvelle-Aquitaine.{'\n'}
-          Si tu n&apos;es pas dans ces zones :{'\n'}
-          Pour être informé·e de la sortie de l&apos;app&apos; dans ta région,
-          laisse nous ton adresse mail{' '}
-          <TouchableOpacity
-            onPress={() => {
-              _onContactClick();
+        {process.env.REACT_APP_ZONE === 'guyane' ?
+          <></>
+          :
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 14,
+              marginTop: 15,
+              lineHeight: 22,
+              fontFamily: Colors.textFont,
             }}>
-            <Text
-              style={{
-                textDecorationLine: 'underline',
+            Actuellement la commande de box est disponible en Ile de France et en
+            Nouvelle-Aquitaine.{'\n'}
+            Si tu n&apos;es pas dans ces zones :{'\n'}
+            Pour être informé·e de la sortie de l&apos;app&apos; dans ta région,
+            laisse nous ton adresse mail{' '}
+            <TouchableOpacity
+              onPress={() => {
+                _onContactClick();
               }}>
-              ici
-            </Text>
-          </TouchableOpacity>
-          .
-        </Text>
+              <Text
+                style={{
+                  textDecorationLine: 'underline',
+                }}>
+                ici
+              </Text>
+            </TouchableOpacity>
+            .
+          </Text>
+
+        }
         <Text
           style={{
             color: '#FFFFFF',
