@@ -89,6 +89,7 @@ def import_orders(tumeplay_api, strapi_base_api, box_ids):
             "address_dept": order.address_dept,
             "address_region": order.address_region,
             "no_email": True,
+            "sent": True,
             "content": order.content
         }
 
