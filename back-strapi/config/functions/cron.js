@@ -192,8 +192,8 @@ module.exports = {
     const yesterdayFormatted = String(yesterday_7AM.getDate()).padStart(2, '0') + '/' + String(yesterday_7AM.getMonth() + 1).padStart(2, '0') + '/' + yesterday_7AM.getFullYear()
     const todayFormatted = String(today_7AM.getDate()).padStart(2, '0') + '/' + String(today_7AM.getMonth() + 1).padStart(2, '0') + '/' + today_7AM.getFullYear()
 
-    const ordersColissimo = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'home', _sort: 'created_at:desc'})
-    const ordersMondialRelay = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'pickup', _sort: 'created_at:desc'})
+    const ordersColissimo = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'home', sent: false, _sort: 'created_at:desc'})
+    const ordersMondialRelay = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'pickup', sent: false, _sort: 'created_at:desc'})
 
     const dirpath = 'public/uploads/orders/csv'
     await fs.mkdirSync(dirpath, { recursive: true })
