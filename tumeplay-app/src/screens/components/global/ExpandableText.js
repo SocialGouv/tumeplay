@@ -222,7 +222,7 @@ export default function ExpandableText(props) {
       }
     }
   }
-  
+
   const NoL =
     measured && !props.isExpanded && !showAllText
       ? props.content.numberOfLines
@@ -231,9 +231,11 @@ export default function ExpandableText(props) {
   return (
     <View style={props.containerStyle}>
       <View style={cardStyle.textContainer}>
-        {props.content.title && (
+        {props.content.title ?
           <Text style={cardStyle.title}>{props.content.title}</Text>
-        )}
+          :
+          <></>
+        }
         <HTMLView
           RootComponent={Text}
           renderNode={renderNode}
@@ -263,7 +265,7 @@ export default function ExpandableText(props) {
             />
           </CustomTouchableOpacity>
         )}
-        {props.sound && (
+        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
           <ReactHowler
             src={process.env.REACT_APP_API_URL + props.sound}
             onEnd={onPlayStop}

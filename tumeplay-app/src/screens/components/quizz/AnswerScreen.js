@@ -155,7 +155,7 @@ export default function AnswerScreen(props) {
             onReadMore={() => {
               Tracking.knowMoreTriggered('question', content.id);
             }}
-            sound={props.sound}
+            sound={props.sound ? props.sound : null}
             soundStyle={{
               position: 'absolute',
               bottom: '10px',
