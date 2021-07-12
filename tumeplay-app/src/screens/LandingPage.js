@@ -10,7 +10,6 @@ const LandingPage = (props) => {
   const logo = require('../assets/pictures/logoTumeplay.svg')
 
   const handleRedirection = (name) => {
-    console.log(process.env.REACT_APP_OTHER_ZONE_URL)
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
       window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
     }
