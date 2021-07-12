@@ -38,6 +38,10 @@
     },
     "longitude": {
       "type": "float"
+    },
+    "users": {
+      "plugin": "admin",
+      "collection": "user"
     }
   }
 }
