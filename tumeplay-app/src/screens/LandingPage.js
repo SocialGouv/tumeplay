@@ -1,6 +1,5 @@
 import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
-import Styles from '../styles/Styles'
 import Colors from '../styles/Color'
 
 const LandingPage = (props) => {
@@ -8,16 +7,17 @@ const LandingPage = (props) => {
   const france = require('../assets/pictures/cartefrance.svg')
   const guyane = require('../assets/pictures/carteguyane.svg')
   const logo = require('../assets/pictures/logoTumeplay.svg')
+  const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
       props.navigation.navigate('LandingScreen')
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL
+      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
     if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
       props.navigation.navigate('LandingScreen')
