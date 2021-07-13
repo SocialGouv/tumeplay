@@ -1,4 +1,4 @@
-from scripts import themes, contents, questions, boxes, orders
+from scripts import themes, contents, questions, boxes, orders, referents
 
 tumeplay_base_url = "https://tumeplay-api.fabrique.social.gouv.fr"
 tumeplay_api = tumeplay_base_url + "/api"
@@ -14,3 +14,6 @@ box_ids = boxes.import_boxes(tumeplay_base_url, tumeplay_api, strapi_base_api)
 
 # COMMANDES
 orders.import_orders(tumeplay_api, strapi_base_api, box_ids)
+
+# REFERENTS
+referents.import_referents(strapi_base_api)
