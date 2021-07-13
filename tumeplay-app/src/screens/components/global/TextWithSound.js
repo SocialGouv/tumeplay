@@ -44,7 +44,6 @@ export default function TextWithSound(props) {
     <View>
       <Text style={props.style}>
         {props.children}
-
         {props.sound && (
           <CustomTouchableOpacity
             onPress={e => {

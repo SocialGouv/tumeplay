@@ -15,9 +15,9 @@ module.exports = {
     const roleNames = userRoles.map((_) => _.name)
     let filterEnvironnement = null
 
-    if (roleNames.includes('Référent Guyane')) {
+    if (roleNames.includes('Coordinateur Guyane')) {
       filterEnvironnement = 'guyane'
-    } else if (roleNames.includes('Référent Métropole')) {
+    } else if (roleNames.includes('Coordinateur Métropole')) {
       filterEnvironnement = 'metropole'
     }
 
