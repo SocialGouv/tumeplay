@@ -26,7 +26,6 @@ const TimeTable = (props) => {
          )
        }
       })
-      console.log(hours)
       if(hours[0] === null) {
         hours = <Text style={{marginRight: 40,
                               marginVertical: 5,
