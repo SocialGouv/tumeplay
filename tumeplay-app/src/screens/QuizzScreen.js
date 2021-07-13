@@ -195,7 +195,7 @@ export default function QuizzScreen(props) {
                 question={_currentQuestion}
                 lastTokenAmount={lastTokenAmount}
                 setFeedback={setFeedback}
-                sound={_currentQuestion.sound_answer !== null ? _currentQuestion.sound_answer.url : ""}
+                sound={_currentQuestion.sound_answer ? _currentQuestion.sound_answer.url : ""}
               />
             )}
           </View>
