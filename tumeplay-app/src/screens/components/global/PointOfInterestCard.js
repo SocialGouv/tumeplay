@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, TouchableOpacity, Text, View} from 'react-native';
 
 import TunnelCartSummaryStyle from '../../../styles/components/TunnelCartSummary';
 import Styles from '../../../styles/Styles';
+import TimeTable from './TimeTable';
 
 import PropTypes from 'prop-types';
 
@@ -22,6 +23,24 @@ export default function PointOfInterestCard(props) {
     fontFamily: 'Chivo-Regular',
     flexWrap: 'wrap',
   };
+  const [timeTable, setTimeTable] = useState()
+
+  const createTimeTableObject = (item) => {
+    let tempTimetable = [
+      {day: "Lundi", value: item.Horaires_Lundi.string.slice(0,2).map(k => k)},
+      {day: "Mardi", value: item.Horaires_Mardi.string.slice(0,2).map(k => k)},
+      {day: "Mercredi", value: item.Horaires_Mercredi.string.slice(0,2).map(k => k)},
+      {day: "Jeudi", value: item.Horaires_Jeudi.string.slice(0,2).map(k => k)},
+      {day: "Vendredi", value: item.Horaires_Vendredi.string.slice(0,2).map(k => k)},
+      {day: "Samedi", value: item.Horaires_Samedi.string.slice(0,2).map(k => k)},
+      {day: "Dimanche", value:  item.Horaires_Dimanche.string.slice(0,2).map(k => k)},
+    ];
+    setTimeTable([...tempTimetable]);
+  }
+
+  useEffect(() => {
+    createTimeTableObject(item)
+  }, [])
 
   function renderTimeTable() {
     var _return = [];
@@ -163,7 +182,7 @@ export default function PointOfInterestCard(props) {
             </View>
           </TouchableOpacity>
         </View>
-        {renderTimeTable()}
+        <TimeTable localHeight={localHeight} timeTable={timeTable} />
       </View>
     </TouchableOpacity>
   );
