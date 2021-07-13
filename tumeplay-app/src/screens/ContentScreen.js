@@ -118,7 +118,6 @@ export default function ContentScreen(props) {
   useEffect(() => {
     if (needResultModal) {
       setNeedResultModal(false);
-
       if (isAge25) {
         setIsBadgeModalVisible(!isBadgeModalVisible);
       } else {
@@ -326,7 +325,6 @@ export default function ContentScreen(props) {
         <View style={ModalStyle.backdrop} />
         <View style={ModalStyle.innerModal}>
           <ModalCloseButton onClose={_toggleBadgeModal} />
-
           <BadgeFinishScreen
             badgeInfoDetails={badgeInfoDetails}
             availableTokens={availableTokens}

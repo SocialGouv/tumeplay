@@ -76,6 +76,11 @@
     },
     "referent": {
       "model": "referent"
+    },
+    "sent": {
+      "type": "boolean",
+      "default": false,
+      "private": false
     }
   }
 }

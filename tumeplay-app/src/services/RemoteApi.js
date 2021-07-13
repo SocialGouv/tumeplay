@@ -271,7 +271,7 @@ const RemoteApi = {
       box: selectedItem.id,
       userAdress: userAdress,
     };
-    
+
     let result = false;
 
     if (headers) {

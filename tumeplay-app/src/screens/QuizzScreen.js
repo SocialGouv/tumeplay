@@ -156,6 +156,7 @@ export default function QuizzScreen(props) {
   if (_currentQuestion === undefined) {
     return <View style={{backgroundColor: '#FFF'}} />;
   }
+
   return (
     <ImageBackground
       imageStyle={{borderRadius: 7, backgroundColor: 'white'}}
@@ -175,7 +176,13 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          <TextWithSound sound={process.env.REACT_APP_API_URL + _currentQuestion.sound_question.url} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
+          {process.env.REACT_APP_ZONE === 'guyane' ?
+          <TextWithSound sound={_currentQuestion.sound_question ? process.env.REACT_APP_API_URL + _currentQuestion.sound_question.url : ''} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
+          :
+          <Text style={Styles.questionText}>
+            {_currentQuestion.text_question}
+          </Text>
+          }
         </View>
 
         <View style={{paddingBottom: 50, height: '52%'}}>
@@ -188,7 +195,7 @@ export default function QuizzScreen(props) {
                 question={_currentQuestion}
                 lastTokenAmount={lastTokenAmount}
                 setFeedback={setFeedback}
-                sound={_currentQuestion.sound_answer.url}
+                sound={_currentQuestion.sound_answer ? _currentQuestion.sound_answer.url : ""}
               />
             )}
           </View>
