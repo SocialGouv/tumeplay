@@ -26,47 +26,57 @@ export default function PointOfInterestCard(props) {
   const [timeTable, setTimeTable] = useState()
 
   const createTimeTableObject = (item) => {
-    let tempTimetable = [
-      {day: "Lundi", value: item.Horaires_Lundi.string.slice(0,2).map(k => k)},
-      {day: "Mardi", value: item.Horaires_Mardi.string.slice(0,2).map(k => k)},
-      {day: "Mercredi", value: item.Horaires_Mercredi.string.slice(0,2).map(k => k)},
-      {day: "Jeudi", value: item.Horaires_Jeudi.string.slice(0,2).map(k => k)},
-      {day: "Vendredi", value: item.Horaires_Vendredi.string.slice(0,2).map(k => k)},
-      {day: "Samedi", value: item.Horaires_Samedi.string.slice(0,2).map(k => k)},
-      {day: "Dimanche", value:  item.Horaires_Dimanche.string.slice(0,2).map(k => k)},
-    ];
-    setTimeTable([...tempTimetable]);
+    let timeTable;
+    if(item.timetable) {
+      timeTable = item.timetable.map((i) => {
+        return(
+          {day: i.day, value: [i.openingHours[0].hours]}
+        )
+      })
+      setTimeTable([...timeTable]);
+    } else {
+      tempTimetable = [
+        {day: "Lundi", value: item.Horaires_Lundi.string.slice(0,2).map(k => k)},
+        {day: "Mardi", value: item.Horaires_Mardi.string.slice(0,2).map(k => k)},
+        {day: "Mercredi", value: item.Horaires_Mercredi.string.slice(0,2).map(k => k)},
+        {day: "Jeudi", value: item.Horaires_Jeudi.string.slice(0,2).map(k => k)},
+        {day: "Vendredi", value: item.Horaires_Vendredi.string.slice(0,2).map(k => k)},
+        {day: "Samedi", value: item.Horaires_Samedi.string.slice(0,2).map(k => k)},
+        {day: "Dimanche", value:  item.Horaires_Dimanche.string.slice(0,2).map(k => k)},
+      ];
+      setTimeTable([...tempTimetable]);
+    }
   }
 
   useEffect(() => {
     createTimeTableObject(item)
   }, [])
 
-  function renderTimeTable() {
-    var _return = [];
-    var i = 0;
+  // function renderTimeTable() {
+  //   var _return = [];
+  //   var i = 0;
 
-    for (const timetable in item.horaires) {
-      const dayTable = item.horaires[timetable];
-      let time = dayTable.am;
-      if (dayTable.pm) {
-        time = time + ' ' + dayTable.pm;
-      }
-      i = i + 1;
+  //   for (const timetable in item.horaires) {
+  //     const dayTable = item.horaires[timetable];
+  //     let time = dayTable.am;
+  //     if (dayTable.pm) {
+  //       time = time + ' ' + dayTable.pm;
+  //     }
+  //     i = i + 1;
 
-      _return.push(
-        <Text key={i} style={[textStyle, {textTransform: 'capitalize'}]}>
-          {timetable} : {time}
-        </Text>,
-      );
-    }
+  //     _return.push(
+  //       <Text key={i} style={[textStyle, {textTransform: 'capitalize'}]}>
+  //         {timetable} : {time}
+  //       </Text>,
+  //     );
+  //   }
 
-    return (
-      <View style={{height: localHeight, overflow: 'hidden', paddingLeft: 27}}>
-        {_return}
-      </View>
-    );
-  }
+  //   return (
+  //     <View style={{height: localHeight, overflow: 'hidden', paddingLeft: 27}}>
+  //       {_return}
+  //     </View>
+  //   );
+  // }
 
   function displayTimeTable() {
     if (localHeight > 0) {

@@ -42,6 +42,11 @@
     "users": {
       "plugin": "admin",
       "collection": "user"
+    },
+    "timetable": {
+      "type": "component",
+      "repeatable": true,
+      "component": "referents.time-table"
     }
   }
 }
