@@ -13,17 +13,33 @@ const TimeTable = (props) => {
            null
          )
        } else {
-         return(
-           <Text style={{marginRight: 10,
+         //Manage data coming from BO
+         if(h.length === 11){
+           return (
+             <Text style={{marginRight: 10,
                          marginVertical: 5,
                          lineHeight: 21,
                          color: '#4F4F4F',
                          fontSize: 12,
                          fontFamily: 'Chivo-Regular',
                          flexWrap: 'wrap',}}>
-              {h.substring(0,2) + "h" + h.substring(2, h.length)}
+              {h}
             </Text>
-         )
+           )
+         } else {
+          //Managa data coming from Mondial Relay
+           return(
+             <Text style={{marginRight: 10,
+                           marginVertical: 5,
+                           lineHeight: 21,
+                           color: '#4F4F4F',
+                           fontSize: 12,
+                           fontFamily: 'Chivo-Regular',
+                           flexWrap: 'wrap',}}>
+                {h.substring(0,2) + "h" + h.substring(2, h.length)}
+              </Text>
+           )
+         }
        }
       })
       if(!hours[0]) {

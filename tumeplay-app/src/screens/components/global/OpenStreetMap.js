@@ -67,7 +67,7 @@ export default function OpenStreetMap(props) {
   if (!mapHeight || isNaN(mapHeight)) {
     mapHeight = 100;
   }
-  
+
   const newItems = items.map((item) => {
     let latToFloat;
     let longToFloat;
