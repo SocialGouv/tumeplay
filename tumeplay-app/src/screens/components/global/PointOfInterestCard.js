@@ -56,32 +56,6 @@ export default function PointOfInterestCard(props) {
     createTimeTableObject(item)
   }, [])
 
-  // function renderTimeTable() {
-  //   var _return = [];
-  //   var i = 0;
-
-  //   for (const timetable in item.horaires) {
-  //     const dayTable = item.horaires[timetable];
-  //     let time = dayTable.am;
-  //     if (dayTable.pm) {
-  //       time = time + ' ' + dayTable.pm;
-  //     }
-  //     i = i + 1;
-
-  //     _return.push(
-  //       <Text key={i} style={[textStyle, {textTransform: 'capitalize'}]}>
-  //         {timetable} : {time}
-  //       </Text>,
-  //     );
-  //   }
-
-  //   return (
-  //     <View style={{height: localHeight, overflow: 'hidden', paddingLeft: 27}}>
-  //       {_return}
-  //     </View>
-  //   );
-  // }
-
   function displayTimeTable() {
     if (localHeight > 0) {
       setLocalHeight(0);
