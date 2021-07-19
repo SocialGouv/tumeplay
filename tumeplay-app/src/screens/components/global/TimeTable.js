@@ -4,12 +4,8 @@ import {View, Text} from 'react-native';
 
 const TimeTable = (props) => {
   const {localHeight, timeTable} = props;
-
-  console.log(timeTable)
-
   const displayTimeLines = () => {
    return(timeTable.map((item) => {
-     console.log(item)
      let hours = item.value.map((h) => {
        if(h === "0000") {
          return(
