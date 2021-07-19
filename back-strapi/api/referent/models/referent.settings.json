@@ -43,17 +43,10 @@
       "plugin": "admin",
       "collection": "user"
     },
-<<<<<<< HEAD
     "openingHours": {
       "type": "component",
       "repeatable": false,
       "component": "referents.opening-hours"
-=======
-    "timetable": {
-      "type": "component",
-      "repeatable": true,
-      "component": "referents.time-table"
->>>>>>> c0eaeccabac0776bf433ad2dc9b00e0ef515b6dc
     }
   }
 }
