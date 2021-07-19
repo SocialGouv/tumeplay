@@ -43,10 +43,10 @@
       "plugin": "admin",
       "collection": "user"
     },
-    "timetable": {
+    "openingHours": {
       "type": "component",
-      "repeatable": true,
-      "component": "referents.time-table"
+      "repeatable": false,
+      "component": "referents.opening-hours"
     }
   }
 }

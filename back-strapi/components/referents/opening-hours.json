@@ -2,12 +2,66 @@
   "collectionName": "components_referents_opening_hours",
   "info": {
     "name": "OpeningHours",
-    "icon": "clock"
+    "icon": "clock",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "hours": {
-      "type": "string"
+    "monday_title": {
+      "type": "string",
+      "default": "Lundi"
+    },
+    "monday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "tuesday_title": {
+      "type": "string",
+      "default": "Mardi"
+    },
+    "tuesday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "wednesday_title": {
+      "type": "string",
+      "default": "Mercredi"
+    },
+    "wednesday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "thursday_title": {
+      "type": "string",
+      "default": "Jeudi"
+    },
+    "thursday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "friday_title": {
+      "type": "string",
+      "default": "Vendredi"
+    },
+    "friday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "saturday_title": {
+      "type": "string",
+      "default": "Samedi"
+    },
+    "saturday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
+    },
+    "sunday_title": {
+      "type": "string",
+      "default": "Dimanche"
+    },
+    "sunday_value": {
+      "type": "string",
+      "default": "09h00 - 17h00"
     }
   }
 }

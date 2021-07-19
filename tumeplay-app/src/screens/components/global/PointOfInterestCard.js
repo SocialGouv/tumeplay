@@ -27,12 +27,16 @@ export default function PointOfInterestCard(props) {
 
   const createTimeTableObject = (item) => {
     let timeTable;
-    if(item.timetable) {
-      timeTable = item.timetable.map((i) => {
-        return(
-          {day: i.day, value: [i.openingHours[0].hours]}
-        )
-      })
+    if(item.openingHours) {
+      timeTable = [
+        {day: item.openingHours.monday_title, value: [item.openingHours.monday_value], type: 'referent'},
+        {day: item.openingHours.tuesday_title, value: [item.openingHours.tuesday_value], type: 'referent'},
+        {day: item.openingHours.wednesday_title, value: [item.openingHours.wednesday_value], type: 'referent'},
+        {day: item.openingHours.thursday_title, value: [item.openingHours.thursday_value], type: 'referent'},
+        {day: item.openingHours.friday_title, value: [item.openingHours.friday_value], type: 'referent'},
+        {day: item.openingHours.saturday_title, value: [item.openingHours.saturday_value], type: 'referent'},
+        {day: item.openingHours.sunday_title, value: [item.openingHours.sunday_value], type: 'referent'},
+      ]
       setTimeTable([...timeTable]);
     } else {
       timeTable = [

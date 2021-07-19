@@ -5,29 +5,18 @@ import {View, Text} from 'react-native';
 const TimeTable = (props) => {
   const {localHeight, timeTable} = props;
 
+  console.log(timeTable)
+
   const displayTimeLines = () => {
    return(timeTable.map((item) => {
+     console.log(item)
      let hours = item.value.map((h) => {
        if(h === "0000") {
          return(
            null
          )
-       } else {
-         //Manage data coming from BO
-         if(h.length === 11){
-           return (
-             <Text style={{marginRight: 10,
-                         marginVertical: 5,
-                         lineHeight: 21,
-                         color: '#4F4F4F',
-                         fontSize: 12,
-                         fontFamily: 'Chivo-Regular',
-                         flexWrap: 'wrap',}}>
-              {h}
-            </Text>
-           )
-         } else {
-          //Managa data coming from Mondial Relay
+       } else if (item.type === 'referent') {
+          //Managa data coming from Back Office
            return(
              <Text style={{marginRight: 10,
                            marginVertical: 5,
@@ -36,11 +25,23 @@ const TimeTable = (props) => {
                            fontSize: 12,
                            fontFamily: 'Chivo-Regular',
                            flexWrap: 'wrap',}}>
-                {h.substring(0,2) + "h" + h.substring(2, h.length)}
+                {h}
               </Text>
            )
-         }
-       }
+        } else {
+        //Managa data coming from Mondial Relay
+          return(
+            <Text style={{marginRight: 10,
+                          marginVertical: 5,
+                          lineHeight: 21,
+                          color: '#4F4F4F',
+                          fontSize: 12,
+                          fontFamily: 'Chivo-Regular',
+                          flexWrap: 'wrap',}}>
+              {h.substring(0,2) + "h" + h.substring(2, h.length)}
+            </Text>
+          )
+        }
       })
       if(!hours[0]) {
         hours = <Text style={{marginRight: 40,
