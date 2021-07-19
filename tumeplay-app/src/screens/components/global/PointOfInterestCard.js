@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, TouchableOpacity, Text, View} from 'react-native';
 
 import TunnelCartSummaryStyle from '../../../styles/components/TunnelCartSummary';
 import Styles from '../../../styles/Styles';
+import TimeTable from './TimeTable';
 
 import PropTypes from 'prop-types';
 
@@ -22,32 +23,38 @@ export default function PointOfInterestCard(props) {
     fontFamily: 'Chivo-Regular',
     flexWrap: 'wrap',
   };
+  const [timeTable, setTimeTable] = useState()
 
-  function renderTimeTable() {
-    var _return = [];
-    var i = 0;
-
-    for (const timetable in item.horaires) {
-      const dayTable = item.horaires[timetable];
-      let time = dayTable.am;
-      if (dayTable.pm) {
-        time = time + ' ' + dayTable.pm;
-      }
-      i = i + 1;
-
-      _return.push(
-        <Text key={i} style={[textStyle, {textTransform: 'capitalize'}]}>
-          {timetable} : {time}
-        </Text>,
-      );
+  const createTimeTableObject = (item) => {
+    let timeTable;
+    if(item.openingHours) {
+      timeTable = [
+        {day: item.openingHours.monday_title, value: [item.openingHours.monday_value], type: 'referent'},
+        {day: item.openingHours.tuesday_title, value: [item.openingHours.tuesday_value], type: 'referent'},
+        {day: item.openingHours.wednesday_title, value: [item.openingHours.wednesday_value], type: 'referent'},
+        {day: item.openingHours.thursday_title, value: [item.openingHours.thursday_value], type: 'referent'},
+        {day: item.openingHours.friday_title, value: [item.openingHours.friday_value], type: 'referent'},
+        {day: item.openingHours.saturday_title, value: [item.openingHours.saturday_value], type: 'referent'},
+        {day: item.openingHours.sunday_title, value: [item.openingHours.sunday_value], type: 'referent'},
+      ]
+      setTimeTable([...timeTable]);
+    } else {
+      timeTable = [
+        {day: "Lundi", value: item.Horaires_Lundi.string.slice(0,2).map(k => k)},
+        {day: "Mardi", value: item.Horaires_Mardi.string.slice(0,2).map(k => k)},
+        {day: "Mercredi", value: item.Horaires_Mercredi.string.slice(0,2).map(k => k)},
+        {day: "Jeudi", value: item.Horaires_Jeudi.string.slice(0,2).map(k => k)},
+        {day: "Vendredi", value: item.Horaires_Vendredi.string.slice(0,2).map(k => k)},
+        {day: "Samedi", value: item.Horaires_Samedi.string.slice(0,2).map(k => k)},
+        {day: "Dimanche", value:  item.Horaires_Dimanche.string.slice(0,2).map(k => k)},
+      ];
+      setTimeTable([...timeTable]);
     }
-
-    return (
-      <View style={{height: localHeight, overflow: 'hidden', paddingLeft: 27}}>
-        {_return}
-      </View>
-    );
   }
+
+  useEffect(() => {
+    createTimeTableObject(item)
+  }, [])
 
   function displayTimeTable() {
     if (localHeight > 0) {
@@ -163,7 +170,7 @@ export default function PointOfInterestCard(props) {
             </View>
           </TouchableOpacity>
         </View>
-        {renderTimeTable()}
+        <TimeTable localHeight={localHeight} timeTable={timeTable} />
       </View>
     </TouchableOpacity>
   );

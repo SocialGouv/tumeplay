@@ -42,6 +42,11 @@
     "users": {
       "plugin": "admin",
       "collection": "user"
+    },
+    "openingHours": {
+      "type": "component",
+      "repeatable": false,
+      "component": "referents.opening-hours"
     }
   }
 }

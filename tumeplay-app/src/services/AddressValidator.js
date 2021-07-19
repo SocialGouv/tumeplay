@@ -20,6 +20,7 @@ const AddressValidator = {
     '93',
     '94',
     '95',
+    '97',
   ],
   zipCodeTest: /^[0-9]{5}$/,
   zipCodePartTest: /^[0-9]{2}$/,
@@ -28,11 +29,7 @@ const AddressValidator = {
   validateZipCode: zipCode => {
     try {
       let firstPart;
-      if(zipCode.substring(0, 2) === '97'){
-        firstPart = zipCode.substring(0, 3);
-      } else {
-        firstPart = zipCode.substring(0, 2);
-      }
+      firstPart = zipCode.substring(0, 2);
       return AddressValidator.allowedZipCodes.indexOf(firstPart) >= 0;
     } catch (e) {
       throw Error(e);
