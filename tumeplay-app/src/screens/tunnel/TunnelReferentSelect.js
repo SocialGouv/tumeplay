@@ -221,7 +221,6 @@ const defaultPosition = {
         if (AddressValidator.validateZipCode(value)) {
           setInvalidZipCode(false);
           localAdress[`${name}`] = value;
-
           setLocalAdress(localAdress);
 
           if (zipCodeTest.test(value)) {

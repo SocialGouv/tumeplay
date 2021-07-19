@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_referents_time_tables",
+  "info": {
+    "name": "Time Table",
+    "icon": "calendar-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "day": {
+      "type": "string"
+    },
+    "openingHours": {
+      "type": "component",
+      "repeatable": true,
+      "component": "referents.opening-hours"
+    }
+  }
+}
