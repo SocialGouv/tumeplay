@@ -35,7 +35,7 @@ export default function PointOfInterestCard(props) {
       })
       setTimeTable([...timeTable]);
     } else {
-      tempTimetable = [
+      timeTable = [
         {day: "Lundi", value: item.Horaires_Lundi.string.slice(0,2).map(k => k)},
         {day: "Mardi", value: item.Horaires_Mardi.string.slice(0,2).map(k => k)},
         {day: "Mercredi", value: item.Horaires_Mercredi.string.slice(0,2).map(k => k)},
@@ -44,7 +44,7 @@ export default function PointOfInterestCard(props) {
         {day: "Samedi", value: item.Horaires_Samedi.string.slice(0,2).map(k => k)},
         {day: "Dimanche", value:  item.Horaires_Dimanche.string.slice(0,2).map(k => k)},
       ];
-      setTimeTable([...tempTimetable]);
+      setTimeTable([...timeTable]);
     }
   }
 
