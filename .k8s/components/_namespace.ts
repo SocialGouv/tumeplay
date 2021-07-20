@@ -2,6 +2,10 @@ import { createNamespace } from "@socialgouv/kosko-charts/components/namespace";
 
 const manifests = createNamespace();
 
+if (manifests.metadata) {
+  manifests.metadata.name = manifests.metadata.name?.toLowerCase();
+}
+
 manifests.metadata = {
   ...manifests.metadata,
   annotations: {
