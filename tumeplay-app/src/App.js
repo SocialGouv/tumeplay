@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import AppStack from './routes/routes';
 import Onboarding from './canvas/slider/Onboarding';
 
-import RemoteApi from './services/RemoteApi';
 import UserService from './services/User';
 
 import useIsMounted from './hooks/isMounted';
@@ -21,13 +20,6 @@ const App = () => {
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    async function _fetchSlides() {
-      const _questions = await RemoteApi.fetchBoarding();
-
-      if (isMounted.current) {
-        setSlides(_questions);
-      }
-    }
 
     async function _alreadyRegistered() {
       const _passedOnboarding = await UserService.hasPassedOnboarding();
@@ -37,7 +29,6 @@ const App = () => {
       }
     }
     _alreadyRegistered();
-    _fetchSlides();
   }, [isMounted]);
 
   async function _onDone() {

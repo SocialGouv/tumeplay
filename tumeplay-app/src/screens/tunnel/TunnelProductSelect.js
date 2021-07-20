@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Styles from '../../styles/Styles';
 
 import UserService from '../../services/User';
-import RemoteApi from '../../services/RemoteApi';
 
 import CustomFooter from '../CustomFooter';
 import ContactButton from '../components/global/ContactButton';
@@ -39,7 +38,7 @@ export default function TunnelProductSelect(props) {
   autoScrollToTop(props);
 
   const error = _.get(props.navigation, 'state.params.error', null)
-  
+
   const {data: box, loading, refetch: refetchBoxes} = useQuery(GET_BOXES);
   const {data: boxes_sur_mesure, loading2, refetch: refetchBoxMesure} = useQuery(GET_BOX_MESURES);
 
@@ -112,7 +111,7 @@ export default function TunnelProductSelect(props) {
       onClose={() => setShowConflictModal(false)}
     />
   ));
-  
+
   const MondialRelayErrorModal = forwardRef(() => (
     <ProductMondialRelayErrorModal
       showModal={showMondialRelayErrorModal}
@@ -159,7 +158,7 @@ export default function TunnelProductSelect(props) {
       );
     });
   }
-  
+
   return (
     <SafeAreaView style={Styles.safeAreaView}>
       <View style={[Styles.safeAreaViewInner, {flex: 1}]}>
