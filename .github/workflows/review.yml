@@ -221,9 +221,9 @@ jobs:
       run: |
         cat ".github/review.env" >> $GITHUB_ENV
         echo "project=${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
-        echo "namespace=${NAMESPACE}" >> $GITHUB_ENV
+        echo "namespace=${NAMESPACE}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
       env:
-        NAMESPACE: ${{ steps.namespace.outputs.result.lowercase }}
+        NAMESPACE: ${{ steps.namespace.outputs.result }}
 
     - name: Notify deployment start
       uses: bobheadxi/deployments@v0.4.3
@@ -244,7 +244,7 @@ jobs:
       run: kubectl create -f namespace.yml || true
 
     - name: Deploy application
-      run: kapp --dangerous-override-ownership-of-existing-resources -y deploy -a ${{ env.project.lowercase }} --namespace ${{ env.namespace }} -f manifests.yml
+      run: kapp --dangerous-override-ownership-of-existing-resources -y deploy -a ${{ env.project }} --namespace ${{ env.namespace }} -f manifests.yml
 
     - name: Notify deployment end
       uses: bobheadxi/deployments@v0.4.3
