@@ -209,7 +209,7 @@ jobs:
       uses: mikefarah/yq@master
       id: namespace
       with:
-        cmd: yq eval '.metadata.name' namespace.yml
+        cmd: yq eval '.metadata.name' namespace.yml | tr '[:upper:]' '[:lower:]'
 
     - name: Install Kapp
       uses: vmware-tanzu/carvel-setup-action@v1
@@ -220,7 +220,7 @@ jobs:
     - name: Get project and namespace names
       run: |
         cat ".github/review.env" >> $GITHUB_ENV
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+        echo "project=${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
         echo "namespace=${NAMESPACE}" >> $GITHUB_ENV
       env:
         NAMESPACE: ${{ steps.namespace.outputs.result.lowercase }}
