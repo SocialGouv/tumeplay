@@ -151,6 +151,7 @@ const defaultPosition = {
           return item;
         });
         handleAddressMore(selectedItem)
+        setSelectedReferent({...selectedItem})
         setReferentPoints(newItems);
       }
 
