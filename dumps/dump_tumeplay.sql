@@ -453,6 +453,161 @@ ALTER SEQUENCE public.components_commandes_boxes_id_seq OWNED BY public.componen
 
 
 --
+-- Name: components_referents_opening_hours; Type: TABLE; Schema: public; Owner: db_user
+--
+
+CREATE TABLE public.components_referents_opening_hours (
+    id integer NOT NULL,
+    hours character varying(255),
+    monday_title character varying(255),
+    monday_value character varying(255),
+    tuesday_title character varying(255),
+    tuesday_value character varying(255),
+    wednesday_title character varying(255),
+    wednesday_value character varying(255),
+    thursday_title character varying(255),
+    thursday_value character varying(255),
+    friday_title character varying(255),
+    friday_value character varying(255),
+    saturday_title character varying(255),
+    saturday_value character varying(255),
+    sunday_title character varying(255),
+    sunday_value character varying(255)
+);
+
+
+ALTER TABLE public.components_referents_opening_hours OWNER TO db_user;
+
+--
+-- Name: components_referents_opening_hours_id_seq; Type: SEQUENCE; Schema: public; Owner: db_user
+--
+
+CREATE SEQUENCE public.components_referents_opening_hours_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.components_referents_opening_hours_id_seq OWNER TO db_user;
+
+--
+-- Name: components_referents_opening_hours_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db_user
+--
+
+ALTER SEQUENCE public.components_referents_opening_hours_id_seq OWNED BY public.components_referents_opening_hours.id;
+
+
+--
+-- Name: components_referents_openings; Type: TABLE; Schema: public; Owner: db_user
+--
+
+CREATE TABLE public.components_referents_openings (
+    id integer NOT NULL,
+    monday_title character varying(255),
+    monday_value character varying(255)
+);
+
+
+ALTER TABLE public.components_referents_openings OWNER TO db_user;
+
+--
+-- Name: components_referents_openings_id_seq; Type: SEQUENCE; Schema: public; Owner: db_user
+--
+
+CREATE SEQUENCE public.components_referents_openings_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.components_referents_openings_id_seq OWNER TO db_user;
+
+--
+-- Name: components_referents_openings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db_user
+--
+
+ALTER SEQUENCE public.components_referents_openings_id_seq OWNED BY public.components_referents_openings.id;
+
+
+--
+-- Name: components_referents_time_tables; Type: TABLE; Schema: public; Owner: db_user
+--
+
+CREATE TABLE public.components_referents_time_tables (
+    id integer NOT NULL,
+    day character varying(255)
+);
+
+
+ALTER TABLE public.components_referents_time_tables OWNER TO db_user;
+
+--
+-- Name: components_referents_time_tables_components; Type: TABLE; Schema: public; Owner: db_user
+--
+
+CREATE TABLE public.components_referents_time_tables_components (
+    id integer NOT NULL,
+    field character varying(255) NOT NULL,
+    "order" integer NOT NULL,
+    component_type character varying(255) NOT NULL,
+    component_id integer NOT NULL,
+    components_referents_time_table_id integer NOT NULL
+);
+
+
+ALTER TABLE public.components_referents_time_tables_components OWNER TO db_user;
+
+--
+-- Name: components_referents_time_tables_components_id_seq; Type: SEQUENCE; Schema: public; Owner: db_user
+--
+
+CREATE SEQUENCE public.components_referents_time_tables_components_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.components_referents_time_tables_components_id_seq OWNER TO db_user;
+
+--
+-- Name: components_referents_time_tables_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db_user
+--
+
+ALTER SEQUENCE public.components_referents_time_tables_components_id_seq OWNED BY public.components_referents_time_tables_components.id;
+
+
+--
+-- Name: components_referents_time_tables_id_seq; Type: SEQUENCE; Schema: public; Owner: db_user
+--
+
+CREATE SEQUENCE public.components_referents_time_tables_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.components_referents_time_tables_id_seq OWNER TO db_user;
+
+--
+-- Name: components_referents_time_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db_user
+--
+
+ALTER SEQUENCE public.components_referents_time_tables_id_seq OWNED BY public.components_referents_time_tables.id;
+
+
+--
 -- Name: components_stocks_box_produit_sur_mesures; Type: TABLE; Schema: public; Owner: db_user
 --
 
@@ -536,7 +691,8 @@ CREATE TABLE public.contact (
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     zipcode integer,
     box integer,
-    zone integer
+    zone integer,
+    type character varying(255)
 );
 
 
@@ -961,7 +1117,8 @@ CREATE TABLE public.referents (
     created_by integer,
     updated_by integer,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    environnement integer
 );
 
 
@@ -1000,6 +1157,44 @@ ALTER TABLE public.referents__users_id_seq OWNER TO db_user;
 --
 
 ALTER SEQUENCE public.referents__users_id_seq OWNED BY public.referents__users.id;
+
+
+--
+-- Name: referents_components; Type: TABLE; Schema: public; Owner: db_user
+--
+
+CREATE TABLE public.referents_components (
+    id integer NOT NULL,
+    field character varying(255) NOT NULL,
+    "order" integer NOT NULL,
+    component_type character varying(255) NOT NULL,
+    component_id integer NOT NULL,
+    referent_id integer NOT NULL
+);
+
+
+ALTER TABLE public.referents_components OWNER TO db_user;
+
+--
+-- Name: referents_components_id_seq; Type: SEQUENCE; Schema: public; Owner: db_user
+--
+
+CREATE SEQUENCE public.referents_components_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.referents_components_id_seq OWNER TO db_user;
+
+--
+-- Name: referents_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db_user
+--
+
+ALTER SEQUENCE public.referents_components_id_seq OWNED BY public.referents_components.id;
 
 
 --
@@ -1756,6 +1951,34 @@ ALTER TABLE ONLY public.components_commandes_boxes ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: components_referents_opening_hours id; Type: DEFAULT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_opening_hours ALTER COLUMN id SET DEFAULT nextval('public.components_referents_opening_hours_id_seq'::regclass);
+
+
+--
+-- Name: components_referents_openings id; Type: DEFAULT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_openings ALTER COLUMN id SET DEFAULT nextval('public.components_referents_openings_id_seq'::regclass);
+
+
+--
+-- Name: components_referents_time_tables id; Type: DEFAULT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_time_tables ALTER COLUMN id SET DEFAULT nextval('public.components_referents_time_tables_id_seq'::regclass);
+
+
+--
+-- Name: components_referents_time_tables_components id; Type: DEFAULT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_time_tables_components ALTER COLUMN id SET DEFAULT nextval('public.components_referents_time_tables_components_id_seq'::regclass);
+
+
+--
 -- Name: components_stocks_box_produit_sur_mesures id; Type: DEFAULT; Schema: public; Owner: db_user
 --
 
@@ -1851,6 +2074,13 @@ ALTER TABLE ONLY public.referents ALTER COLUMN id SET DEFAULT nextval('public.re
 --
 
 ALTER TABLE ONLY public.referents__users ALTER COLUMN id SET DEFAULT nextval('public.referents__users_id_seq'::regclass);
+
+
+--
+-- Name: referents_components id; Type: DEFAULT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.referents_components ALTER COLUMN id SET DEFAULT nextval('public.referents_components_id_seq'::regclass);
 
 
 --
@@ -2066,6 +2296,38 @@ COPY public.components_commandes_boxes (id, box) FROM stdin;
 
 
 --
+-- Data for Name: components_referents_opening_hours; Type: TABLE DATA; Schema: public; Owner: db_user
+--
+
+COPY public.components_referents_opening_hours (id, hours, monday_title, monday_value, tuesday_title, tuesday_value, wednesday_title, wednesday_value, thursday_title, thursday_value, friday_title, friday_value, saturday_title, saturday_value, sunday_title, sunday_value) FROM stdin;
+\.
+
+
+--
+-- Data for Name: components_referents_openings; Type: TABLE DATA; Schema: public; Owner: db_user
+--
+
+COPY public.components_referents_openings (id, monday_title, monday_value) FROM stdin;
+\.
+
+
+--
+-- Data for Name: components_referents_time_tables; Type: TABLE DATA; Schema: public; Owner: db_user
+--
+
+COPY public.components_referents_time_tables (id, day) FROM stdin;
+\.
+
+
+--
+-- Data for Name: components_referents_time_tables_components; Type: TABLE DATA; Schema: public; Owner: db_user
+--
+
+COPY public.components_referents_time_tables_components (id, field, "order", component_type, component_id, components_referents_time_table_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: components_stocks_box_produit_sur_mesures; Type: TABLE DATA; Schema: public; Owner: db_user
 --
 
@@ -2085,7 +2347,7 @@ COPY public.components_stocks_box_produits (id, quantity, produit) FROM stdin;
 -- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: db_user
 --
 
-COPY public.contact (id, name, email, created_by, updated_by, created_at, updated_at, zipcode, box, zone) FROM stdin;
+COPY public.contact (id, name, email, created_by, updated_by, created_at, updated_at, zipcode, box, zone, type) FROM stdin;
 \.
 
 
@@ -2117,51 +2379,56 @@ COPY public.core_store (id, key, value, type, environment, tag) FROM stdin;
 12	model_def_plugins::users-permissions.permission	{"uid":"plugins::users-permissions.permission","collectionName":"users-permissions_permission","kind":"collectionType","info":{"name":"permission","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false}},"attributes":{"type":{"type":"string","required":true,"configurable":false},"controller":{"type":"string","required":true,"configurable":false},"action":{"type":"string","required":true,"configurable":false},"enabled":{"type":"boolean","required":true,"configurable":false},"policy":{"type":"string","configurable":false},"role":{"model":"role","via":"permissions","plugin":"users-permissions","configurable":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 17	plugin_content_manager_configuration_content_types::application::environnement.environnement	{"uid":"application::environnement.environnement","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"slug":{"edit":{"label":"Slug","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Slug","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"name","size":6},{"name":"slug","size":6}]],"editRelations":[],"list":["name","slug"]}}	object		
 18	plugin_content_manager_configuration_content_types::application::content.content	{"uid":"application::content.content","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"title","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"title":{"edit":{"label":"Titre","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Titre","searchable":true,"sortable":true}},"text":{"edit":{"label":"Contenu","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Text","searchable":false,"sortable":false}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}},"sound":{"edit":{"label":"Audio","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound","searchable":false,"sortable":false}},"theme":{"edit":{"label":"Thématique","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title_backoffice"},"list":{"label":"Thématique","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"title","size":6}],[{"name":"text","size":12}],[{"name":"image","size":6},{"name":"sound","size":6}]],"editRelations":["theme"],"list":["title","theme","image"]}}	object		
-35	model_def_application::test.test	{"uid":"application::test.test","collectionName":"test","kind":"singleType","info":{"name":"Test"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"test_1":{"type":"string"},"test_2":{"type":"string"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-21	plugin_content_manager_configuration_content_types::application::question.question	{"uid":"application::question.question","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"text_question","defaultSortBy":"text_question","defaultSortOrder":"ASC"},"metadatas":{"theme":{"edit":{"label":"Thématique","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title_backoffice"},"list":{"label":"Theme","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"sound_answer":{"edit":{"label":"Audio réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound_answer","searchable":false,"sortable":false}},"text_answer":{"edit":{"label":"Précision de la réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Text_answer","searchable":true,"sortable":true}},"responses":{"edit":{"label":"Réponses","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Responses","searchable":false,"sortable":false}},"sound_question":{"edit":{"label":"Audio question","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound_question","searchable":false,"sortable":false}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"text_question":{"edit":{"label":"Question","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Question","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}}},"layouts":{"edit":[[{"name":"text_question","size":6}],[{"name":"image","size":6}],[{"name":"responses","size":12}],[{"name":"text_answer","size":6}],[{"name":"sound_question","size":6},{"name":"sound_answer","size":6}]],"editRelations":["theme"],"list":["text_question","image","theme"]}}	object		
 6	model_def_strapi::webhooks	{"uid":"strapi::webhooks","collectionName":"strapi_webhooks","info":{"name":"Strapi webhooks","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string"},"url":{"type":"text"},"headers":{"type":"json"},"events":{"type":"json"},"enabled":{"type":"boolean"}}}	object	\N	\N
+75	plugin_content_manager_configuration_components::referents.opening-hours	{"uid":"referents.opening-hours","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"monday_title","defaultSortBy":"monday_title","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"monday_title":{"edit":{"label":"Monday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Monday_title","searchable":true,"sortable":true}},"monday_value":{"edit":{"label":"Monday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Monday_value","searchable":true,"sortable":true}},"tuesday_title":{"edit":{"label":"Tuesday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Tuesday_title","searchable":true,"sortable":true}},"tuesday_value":{"edit":{"label":"Tuesday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Tuesday_value","searchable":true,"sortable":true}},"wednesday_title":{"edit":{"label":"Wednesday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Wednesday_title","searchable":true,"sortable":true}},"wednesday_value":{"edit":{"label":"Wednesday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Wednesday_value","searchable":true,"sortable":true}},"thursday_title":{"edit":{"label":"Thursday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Thursday_title","searchable":true,"sortable":true}},"thursday_value":{"edit":{"label":"Thursday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Thursday_value","searchable":true,"sortable":true}},"friday_title":{"edit":{"label":"Friday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Friday_title","searchable":true,"sortable":true}},"friday_value":{"edit":{"label":"Friday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Friday_value","searchable":true,"sortable":true}},"saturday_title":{"edit":{"label":"Saturday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Saturday_title","searchable":true,"sortable":true}},"saturday_value":{"edit":{"label":"Saturday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Saturday_value","searchable":true,"sortable":true}},"sunday_title":{"edit":{"label":"Sunday_title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sunday_title","searchable":true,"sortable":true}},"sunday_value":{"edit":{"label":"Sunday_value","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sunday_value","searchable":true,"sortable":true}}},"layouts":{"list":["id","monday_title","monday_value","tuesday_title"],"edit":[[{"name":"monday_title","size":6},{"name":"monday_value","size":6}],[{"name":"tuesday_title","size":6},{"name":"tuesday_value","size":6}],[{"name":"wednesday_title","size":6},{"name":"wednesday_value","size":6}],[{"name":"thursday_title","size":6},{"name":"thursday_value","size":6}],[{"name":"friday_title","size":6},{"name":"friday_value","size":6}],[{"name":"saturday_title","size":6},{"name":"saturday_value","size":6}],[{"name":"sunday_title","size":6},{"name":"sunday_value","size":6}]],"editRelations":[]},"isComponent":true}	object		
+35	model_def_application::test.test	{"uid":"application::test.test","collectionName":"test","kind":"singleType","info":{"name":"Test"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"test_1":{"type":"string"},"test_2":{"type":"string"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 32	core_admin_auth	{"providers":{"autoRegister":false,"defaultRole":null}}	object		
+21	plugin_content_manager_configuration_content_types::application::question.question	{"uid":"application::question.question","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"text_question","defaultSortBy":"text_question","defaultSortOrder":"ASC"},"metadatas":{"theme":{"edit":{"label":"Thématique","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title_backoffice"},"list":{"label":"Theme","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"sound_answer":{"edit":{"label":"Audio réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound_answer","searchable":false,"sortable":false}},"text_answer":{"edit":{"label":"Précision de la réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Text_answer","searchable":true,"sortable":true}},"responses":{"edit":{"label":"Réponses","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Responses","searchable":false,"sortable":false}},"sound_question":{"edit":{"label":"Audio question","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound_question","searchable":false,"sortable":false}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"text_question":{"edit":{"label":"Question","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Question","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}}},"layouts":{"edit":[[{"name":"text_question","size":6}],[{"name":"image","size":6}],[{"name":"responses","size":12}],[{"name":"text_answer","size":6}],[{"name":"sound_question","size":6},{"name":"sound_answer","size":6}]],"editRelations":["theme"],"list":["text_question","image","theme"]}}	object		
 37	model_def_application::answer.answer	{"uid":"application::answer.answer","collectionName":"answer","kind":"collectionType","info":{"name":"Answer"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"text":{"type":"string"},"isCorrect":{"type":"boolean"},"isNeutral":{"type":"boolean"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 46	plugin_content_manager_configuration_components::stocks.box-produit	{"uid":"stocks.box-produit","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"quantity":{"edit":{"label":"Quantité","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Quantity","searchable":true,"sortable":true}},"produit":{"edit":{"label":"Produit","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Produit","searchable":true,"sortable":true}}},"layouts":{"list":["id","quantity","produit"],"edit":[[{"name":"produit","size":6},{"name":"quantity","size":4}]],"editRelations":[]},"isComponent":true}	object		
 50	plugin_content_manager_configuration_content_types::application::parametres.parametres	{"uid":"application::parametres.parametres","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"nb_points_wrong_answer":{"edit":{"label":"Nb points mauvaise réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nb_points_wrong_answer","searchable":true,"sortable":true}},"nb_points_neutral_answer":{"edit":{"label":"Nb points réponse neutre","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nb_points_neutral_answer","searchable":true,"sortable":true}},"nb_points_right_answer":{"edit":{"label":"Nb points bonne réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nb_points_right_answer","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"nb_points_wrong_answer","size":4},{"name":"nb_points_neutral_answer","size":4},{"name":"nb_points_right_answer","size":4}]],"editRelations":[],"list":["id","nb_points_wrong_answer","nb_points_neutral_answer","nb_points_right_answer"]}}	object		
 34	plugin_content_manager_configuration_components::contenus.reponses-textes	{"uid":"contenus.reponses-textes","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"response_A","defaultSortBy":"response_A","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"response_A":{"edit":{"label":"Réponse A","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_A","searchable":true,"sortable":true}},"response_B":{"edit":{"label":"Réponse B","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_B","searchable":true,"sortable":true}},"response_C":{"edit":{"label":"Réponse C","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_C","searchable":true,"sortable":true}},"response_A_neutral":{"edit":{"label":"Est-ce une réponse neutre ?","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_A_neutral","searchable":true,"sortable":true}},"response_B_neutral":{"edit":{"label":"Est-ce une réponse neutre ?","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_B_neutral","searchable":true,"sortable":true}},"response_C_neutral":{"edit":{"label":"Est-ce une réponse neutre ?","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Response_C_neutral","searchable":true,"sortable":true}},"right_answer":{"edit":{"label":"Bonne réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Right_answer","searchable":true,"sortable":true}}},"layouts":{"list":["id","response_A","response_B","response_C"],"edit":[[{"name":"response_A","size":6},{"name":"response_A_neutral","size":4}],[{"name":"response_B","size":6},{"name":"response_B_neutral","size":4}],[{"name":"response_C","size":6},{"name":"response_C_neutral","size":4}],[{"name":"right_answer","size":6}]],"editRelations":[]},"isComponent":true}	object		
+74	plugin_content_manager_configuration_components::referents.time-table	{"uid":"referents.time-table","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"day","defaultSortBy":"day","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"day":{"edit":{"label":"Day","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Day","searchable":true,"sortable":true}},"openingHours":{"edit":{"label":"OpeningHours","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"OpeningHours","searchable":false,"sortable":false}}},"layouts":{"list":["id","day"],"edit":[[{"name":"day","size":6}],[{"name":"openingHours","size":12}]],"editRelations":[]},"isComponent":true}	object		
 42	plugin_content_manager_configuration_content_types::application::feedback.feedback	{"uid":"application::feedback.feedback","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"title","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"title":{"edit":{"label":"Titre","description":"","placeholder":"","visible":true,"editable":false},"list":{"label":"Titre","searchable":true,"sortable":true}},"question":{"edit":{"label":"Question","description":"","placeholder":"","visible":true,"editable":true,"mainField":"text_question"},"list":{"label":"Question","searchable":true,"sortable":true}},"body":{"edit":{"label":"Contenu","description":"","placeholder":"","visible":true,"editable":false},"list":{"label":"Contenu","searchable":true,"sortable":true}},"appreciation":{"edit":{"label":"Appreciation","description":"","placeholder":"","visible":true,"editable":false},"list":{"label":"Appreciation","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Créé le ","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"title","size":6},{"name":"appreciation","size":4}],[{"name":"body","size":6}]],"editRelations":["question"],"list":["title","body","question","appreciation"]}}	object		
 41	model_def_application::feedback.feedback	{"uid":"application::feedback.feedback","collectionName":"Feedback","kind":"collectionType","info":{"name":"Feedback","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"title":{"type":"string"},"question":{"model":"question"},"body":{"type":"text"},"appreciation":{"type":"integer","max":1,"min":-1,"required":true,"default":0},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 48	plugin_content_manager_configuration_content_types::application::produit.produit	{"uid":"application::produit.produit","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"title","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"title":{"edit":{"label":"Title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Titre","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"title","size":6}],[{"name":"description","size":6},{"name":"image","size":6}]],"editRelations":[],"list":["title","image"]}}	object		
 53	plugin_content_manager_configuration_components::stocks.box-produit-sur-mesure	{"uid":"stocks.box-produit-sur-mesure","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"stock":{"edit":{"label":"Quantité disponible","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Stock","searchable":true,"sortable":true}},"produit":{"edit":{"label":"Produit","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Produit","searchable":true,"sortable":true}}},"layouts":{"list":["id","stock","produit"],"edit":[[{"name":"produit","size":6},{"name":"stock","size":4}]],"editRelations":[]},"isComponent":true}	object		
+52	model_def_application::box-sur-mesure.box-sur-mesure	{"uid":"application::box-sur-mesure.box-sur-mesure","collectionName":"box-dynamic","kind":"singleType","info":{"name":"Box sur mesure","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string","required":true},"description":{"type":"text","required":true},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"produits":{"type":"component","repeatable":true,"component":"stocks.box-produit-sur-mesure"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 58	plugin_content_manager_configuration_components::commandes.box-sur-mesure-produit	{"uid":"commandes.box-sur-mesure-produit","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"produit":{"edit":{"label":"Produit","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Produit","searchable":true,"sortable":true}},"quantity":{"edit":{"label":"Quantité","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Quantity","searchable":true,"sortable":true}}},"layouts":{"list":["id","produit","quantity"],"edit":[[{"name":"produit","size":6},{"name":"quantity","size":4}]],"editRelations":[]},"isComponent":true}	object		
 56	plugin_content_manager_configuration_components::commandes.box	{"uid":"commandes.box","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"box":{"edit":{"label":"Box","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Box","searchable":true,"sortable":true}}},"layouts":{"list":["id","box"],"edit":[[{"name":"box","size":6}]],"editRelations":[]},"isComponent":true}	object		
 60	plugin_content_manager_configuration_components::commandes.box-sur-mesure	{"uid":"commandes.box-sur-mesure","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":false,"sortable":false}},"produits":{"edit":{"label":"Produits","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Produits","searchable":false,"sortable":false}}},"layouts":{"list":["id"],"edit":[[{"name":"produits","size":12}]],"editRelations":[]},"isComponent":true}	object		
-7	model_def_strapi::permission	{"uid":"strapi::permission","collectionName":"strapi_permission","kind":"collectionType","info":{"name":"Permission","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"action":{"type":"string","minLength":1,"configurable":false,"required":true},"subject":{"type":"string","minLength":1,"configurable":false,"required":false},"properties":{"type":"json","configurable":false,"required":false,"default":{}},"conditions":{"type":"json","configurable":false,"required":false,"default":[]},"role":{"configurable":false,"model":"role","plugin":"admin"}}}	object	\N	\N
-45	model_def_application::produit.produit	{"uid":"application::produit.produit","collectionName":"produits","kind":"collectionType","info":{"name":"Produit","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"title":{"type":"string","required":true},"description":{"type":"text"},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 63	model_def_application::reponse.reponse	{"uid":"application::reponse.reponse","collectionName":"reponses","kind":"collectionType","info":{"name":"Reponses","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"user_id":{"type":"string"},"question":{"model":"question"},"quizz_iteration":{"type":"integer"},"response":{"type":"string"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+7	model_def_strapi::permission	{"uid":"strapi::permission","collectionName":"strapi_permission","kind":"collectionType","info":{"name":"Permission","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"action":{"type":"string","minLength":1,"configurable":false,"required":true},"subject":{"type":"string","minLength":1,"configurable":false,"required":false},"properties":{"type":"json","configurable":false,"required":false,"default":{}},"conditions":{"type":"json","configurable":false,"required":false,"default":[]},"role":{"configurable":false,"model":"role","plugin":"admin"}}}	object	\N	\N
 54	plugin_content_manager_configuration_content_types::application::box-sur-mesure.box-sur-mesure	{"uid":"application::box-sur-mesure.box-sur-mesure","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"title","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"title":{"edit":{"label":"Titre","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Title","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}},"produits":{"edit":{"label":"Produits","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Produits","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"title","size":6}],[{"name":"description","size":6},{"name":"image","size":6}],[{"name":"produits","size":12}]],"editRelations":[],"list":["id","title","description","image"]}}	object		
 47	plugin_content_manager_configuration_content_types::application::box.box	{"uid":"application::box.box","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"number","defaultSortOrder":"ASC"},"metadatas":{"products":{"edit":{"label":"Produits","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Products","searchable":false,"sortable":false}},"available":{"edit":{"label":"Disponible","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Available","searchable":true,"sortable":true}},"number":{"edit":{"label":"Numéro","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Numéro","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"environnement":{"edit":{"label":"Environnement","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Environnement","searchable":true,"sortable":true}},"stock":{"edit":{"label":"Quantité disponible","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Quantité disponible","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"title":{"edit":{"label":"Titre","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Titre","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"number","size":4},{"name":"title","size":6}],[{"name":"stock","size":4}],[{"name":"available","size":4}],[{"name":"image","size":6},{"name":"description","size":6}],[{"name":"products","size":12}]],"editRelations":["environnement"],"list":["number","title","image","stock"]}}	object		
 65	plugin_content_manager_configuration_content_types::application::reponse.reponse	{"uid":"application::reponse.reponse","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"user_id","defaultSortBy":"user_id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"user_id":{"edit":{"label":"ID utilisateur","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Id Utilisateur","searchable":true,"sortable":true}},"question":{"edit":{"label":"Question","description":"","placeholder":"","visible":true,"editable":true,"mainField":"text_question"},"list":{"label":"Question","searchable":true,"sortable":true}},"quizz_iteration":{"edit":{"label":"Itération","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Itération","searchable":true,"sortable":true}},"response":{"edit":{"label":"Réponse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Réponse","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"user_id","size":6},{"name":"quizz_iteration","size":4}],[{"name":"response","size":6}]],"editRelations":["question"],"list":["id","user_id","question","quizz_iteration","response"]}}	object		
-62	plugin_content_manager_configuration_content_types::application::commande.commande	{"uid":"application::commande.commande","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"first_name","defaultSortBy":"created_at","defaultSortOrder":"DESC"},"metadatas":{"address_more":{"edit":{"label":"Complément d'adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_more","searchable":true,"sortable":true}},"poi_name":{"edit":{"label":"Nom du POI","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Poi_name","searchable":true,"sortable":true}},"address_zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_zipcode","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Date","searchable":true,"sortable":true}},"referent":{"edit":{"label":"Referent","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Referent","searchable":true,"sortable":true}},"name":{"edit":{"label":"Libellé de l'envoi","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom (jeune ou POI)","searchable":true,"sortable":true}},"phone":{"edit":{"label":"Téléphone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Phone","searchable":true,"sortable":true}},"address_dept":{"edit":{"label":"Département","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_dept","searchable":true,"sortable":true}},"last_name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"delivery":{"edit":{"label":"Type de livraison","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type de livraison","searchable":true,"sortable":true}},"address":{"edit":{"label":"Adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"address_city":{"edit":{"label":"Ville","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_city","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"sent":{"edit":{"label":"Sent","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sent","searchable":true,"sortable":true}},"content":{"edit":{"label":"Contenu de la commande","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Content","searchable":false,"sortable":false}},"first_name":{"edit":{"label":"Prénom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Prénom","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"address_deptcode":{"edit":{"label":"Numéro département","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_deptcode","searchable":true,"sortable":true}},"poi_number":{"edit":{"label":"Numéro du POI","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Poi_number","searchable":true,"sortable":true}},"address_region":{"edit":{"label":"Région","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_region","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"last_name","size":6},{"name":"first_name","size":6}],[{"name":"email","size":6},{"name":"delivery","size":6}],[{"name":"name","size":6}],[{"name":"address","size":6},{"name":"address_more","size":6}],[{"name":"address_zipcode","size":6},{"name":"address_city","size":6}],[{"name":"address_dept","size":6},{"name":"address_deptcode","size":6}],[{"name":"address_region","size":6}],[{"name":"poi_name","size":6},{"name":"poi_number","size":6}],[{"name":"phone","size":6}],[{"name":"content","size":12}],[{"name":"sent","size":4}]],"editRelations":["referent"],"list":["id","created_at","last_name","first_name","email","delivery"]}}	object		
-57	model_def_commandes.box-sur-mesure-produit	{"uid":"commandes.box-sur-mesure-produit","collectionName":"components_commandes_box_sur_mesure_produits","info":{"name":"BoxSurMesureProduit","icon":"apple-alt","description":""},"options":{"timestamps":false},"attributes":{"produit":{"model":"produit"},"quantity":{"type":"integer"}}}	object	\N	\N
+62	plugin_content_manager_configuration_content_types::application::commande.commande	{"uid":"application::commande.commande","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"first_name","defaultSortBy":"created_at","defaultSortOrder":"DESC"},"metadatas":{"address_more":{"edit":{"label":"Complément d'adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_more","searchable":true,"sortable":true}},"poi_name":{"edit":{"label":"Nom du POI","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Poi_name","searchable":true,"sortable":true}},"address_zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_zipcode","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Date","searchable":true,"sortable":true}},"referent":{"edit":{"label":"Referent","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Referent","searchable":true,"sortable":true}},"name":{"edit":{"label":"Libellé de l'envoi","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom (jeune ou POI)","searchable":true,"sortable":true}},"phone":{"edit":{"label":"Téléphone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Phone","searchable":true,"sortable":true}},"address_dept":{"edit":{"label":"Département","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_dept","searchable":true,"sortable":true}},"last_name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"delivery":{"edit":{"label":"Type de livraison","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type de livraison","searchable":true,"sortable":true}},"address":{"edit":{"label":"Adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"address_city":{"edit":{"label":"Ville","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_city","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"sent":{"edit":{"label":"Envoyée","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Envoyée","searchable":true,"sortable":true}},"content":{"edit":{"label":"Contenu de la commande","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Content","searchable":false,"sortable":false}},"first_name":{"edit":{"label":"Prénom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Prénom","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"address_deptcode":{"edit":{"label":"Numéro département","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_deptcode","searchable":true,"sortable":true}},"poi_number":{"edit":{"label":"Numéro du POI","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Poi_number","searchable":true,"sortable":true}},"address_region":{"edit":{"label":"Région","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_region","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"sent","size":4}],[{"name":"last_name","size":6},{"name":"first_name","size":6}],[{"name":"email","size":6},{"name":"delivery","size":6}],[{"name":"name","size":6}],[{"name":"address","size":6},{"name":"address_more","size":6}],[{"name":"address_zipcode","size":6},{"name":"address_city","size":6}],[{"name":"address_dept","size":6},{"name":"address_deptcode","size":6}],[{"name":"address_region","size":6}],[{"name":"poi_name","size":6},{"name":"poi_number","size":6}],[{"name":"phone","size":6}],[{"name":"content","size":12}]],"editRelations":["referent"],"list":["id","created_at","last_name","first_name","email","delivery","sent"]}}	object		
 55	model_def_commandes.box	{"uid":"commandes.box","collectionName":"components_commandes_boxes","info":{"name":"Box","icon":"dice-d6"},"options":{"timestamps":false},"attributes":{"box":{"model":"box"}}}	object	\N	\N
-3	model_def_application::environnement.environnement	{"uid":"application::environnement.environnement","collectionName":"environnements","kind":"collectionType","info":{"name":"Zone","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"name":{"type":"string"},"slug":{"type":"string"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+57	model_def_commandes.box-sur-mesure-produit	{"uid":"commandes.box-sur-mesure-produit","collectionName":"components_commandes_box_sur_mesure_produits","info":{"name":"BoxSurMesureProduit","icon":"apple-alt","description":""},"options":{"timestamps":false},"attributes":{"produit":{"model":"produit"},"quantity":{"type":"integer"}}}	object	\N	\N
 59	model_def_commandes.box-sur-mesure	{"uid":"commandes.box-sur-mesure","collectionName":"components_commandes_box_sur_mesures","info":{"name":"Box sur mesure","icon":"boxes","description":""},"options":{"timestamps":false},"attributes":{"produits":{"type":"component","repeatable":true,"component":"commandes.box-sur-mesure-produit"}}}	object	\N	\N
-44	model_def_application::box.box	{"uid":"application::box.box","collectionName":"box","kind":"collectionType","info":{"name":"Box","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string"},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"products":{"type":"component","repeatable":true,"component":"stocks.box-produit"},"stock":{"type":"biginteger","required":true,"default":"0"},"environnement":{"model":"environnement"},"description":{"type":"text"},"available":{"type":"boolean","default":true,"required":true},"number":{"type":"integer","unique":true},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-2	model_def_application::content.content	{"uid":"application::content.content","collectionName":"contents","kind":"collectionType","info":{"name":"Contenu","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string"},"text":{"type":"richtext"},"image":{"model":"file","via":"related","allowedTypes":["images"],"plugin":"upload","required":false,"pluginOptions":{}},"sound":{"model":"file","via":"related","allowedTypes":["files"],"plugin":"upload","required":false,"pluginOptions":{}},"theme":{"model":"thematique"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+45	model_def_application::produit.produit	{"uid":"application::produit.produit","collectionName":"produits","kind":"collectionType","info":{"name":"Produit","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"title":{"type":"string","required":true},"description":{"type":"text"},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+3	model_def_application::environnement.environnement	{"uid":"application::environnement.environnement","collectionName":"environnements","kind":"collectionType","info":{"name":"Zone","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"name":{"type":"string"},"slug":{"type":"string"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 5	model_def_application::thematique.thematique	{"uid":"application::thematique.thematique","collectionName":"themes","kind":"collectionType","info":{"name":"Thematique","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string"},"image":{"collection":"file","via":"related","allowedTypes":["images"],"plugin":"upload","required":false,"pluginOptions":{}},"environnement":{"model":"environnement"},"display_quiz":{"type":"boolean","default":true,"required":true},"title_backoffice":{"type":"string"},"sound":{"model":"file","via":"related","allowedTypes":["files"],"plugin":"upload","required":false,"pluginOptions":{}},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 8	model_def_strapi::role	{"uid":"strapi::role","collectionName":"strapi_role","kind":"collectionType","info":{"name":"Role","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"code":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"description":{"type":"string","configurable":false},"users":{"configurable":false,"collection":"user","via":"roles","plugin":"admin","attribute":"user","column":"id","isVirtual":true},"permissions":{"configurable":false,"plugin":"admin","collection":"permission","via":"role","isVirtual":true}}}	object	\N	\N
-40	plugin_content_manager_configuration_content_types::application::contact.contact	{"uid":"application::contact.contact","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Code postal","searchable":true,"sortable":true}},"box":{"edit":{"label":"Box","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Box","searchable":true,"sortable":true}},"zone":{"edit":{"label":"Zone","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Zone","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["name","email","zipcode","box"],"edit":[[{"name":"name","size":6},{"name":"email","size":6}],[{"name":"zipcode","size":4}]],"editRelations":["box","zone"]}}	object		
-39	model_def_application::contact.contact	{"uid":"application::contact.contact","collectionName":"contact","kind":"collectionType","info":{"name":"Contact","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"name":{"type":"string","required":false},"email":{"type":"email"},"zipcode":{"type":"integer"},"box":{"model":"box"},"zone":{"model":"environnement"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-66	model_def_application::referent.referent	{"uid":"application::referent.referent","collectionName":"referents","kind":"collectionType","info":{"name":"Referent","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"name":{"type":"string"},"email":{"type":"email"},"zone":{"model":"environnement"},"address":{"type":"string"},"address_zipcode":{"type":"string"},"address_city":{"type":"string"},"phone_number":{"type":"string"},"latitude":{"type":"float"},"longitude":{"type":"float"},"users":{"plugin":"admin","collection":"user","attribute":"user","column":"id","isVirtual":true},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+44	model_def_application::box.box	{"uid":"application::box.box","collectionName":"box","kind":"collectionType","info":{"name":"Box","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string"},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"products":{"type":"component","repeatable":true,"component":"stocks.box-produit"},"stock":{"type":"biginteger","required":true,"default":"0"},"environnement":{"model":"environnement"},"description":{"type":"text"},"available":{"type":"boolean","default":true,"required":true},"number":{"type":"integer","unique":true},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+39	model_def_application::contact.contact	{"uid":"application::contact.contact","collectionName":"contact","kind":"collectionType","info":{"name":"Contact","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"name":{"type":"string","required":false},"email":{"type":"email"},"zipcode":{"type":"integer"},"box":{"model":"box"},"zone":{"model":"environnement"},"type":{"type":"string"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 1	model_def_strapi::core-store	{"uid":"strapi::core-store","collectionName":"core_store","info":{"name":"core_store","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"key":{"type":"string"},"value":{"type":"text"},"type":{"type":"string"},"environment":{"type":"string"},"tag":{"type":"string"}}}	object	\N	\N
 33	model_def_contenus.reponses-textes	{"uid":"contenus.reponses-textes","collectionName":"responses","info":{"name":"responses","icon":"eye-dropper","description":""},"options":{"timestamps":false},"attributes":{"response_A":{"type":"string","default":"Oui","required":true},"response_B":{"type":"string","default":"Non","required":true},"response_C":{"type":"string","default":"Je ne sais pas","required":true},"response_A_neutral":{"type":"boolean","default":false,"required":true},"response_B_neutral":{"type":"boolean","default":false,"required":true},"response_C_neutral":{"type":"boolean","default":true,"required":true},"right_answer":{"type":"enumeration","enum":["A","B","C"],"required":true}}}	object	\N	\N
 43	model_def_stocks.box-produit	{"uid":"stocks.box-produit","collectionName":"components_stocks_box_produits","info":{"name":"BoxProduit","icon":"archive","description":""},"options":{"timestamps":false},"attributes":{"quantity":{"type":"integer","required":true},"produit":{"model":"produit"}}}	object	\N	\N
-9	model_def_strapi::user	{"uid":"strapi::user","collectionName":"strapi_administrator","kind":"collectionType","info":{"name":"User","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"firstname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"lastname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"username":{"type":"string","unique":false,"configurable":false,"required":false},"email":{"type":"email","minLength":6,"configurable":false,"required":true,"unique":true,"private":true},"password":{"type":"password","minLength":6,"configurable":false,"required":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"registrationToken":{"type":"string","configurable":false,"private":true},"isActive":{"type":"boolean","default":false,"configurable":false,"private":true},"roles":{"collection":"role","collectionName":"strapi_users_roles","via":"users","dominant":true,"plugin":"admin","configurable":false,"private":true,"attribute":"role","column":"id","isVirtual":true},"blocked":{"type":"boolean","default":false,"configurable":false,"private":true},"preferedLanguage":{"type":"string","configurable":false,"required":false}}}	object	\N	\N
+66	model_def_application::referent.referent	{"uid":"application::referent.referent","collectionName":"referents","kind":"collectionType","info":{"name":"Referent","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"name":{"type":"string"},"email":{"type":"email"},"environnement":{"model":"environnement"},"address":{"type":"string"},"address_zipcode":{"type":"string"},"address_city":{"type":"string"},"phone_number":{"type":"string"},"latitude":{"type":"float"},"longitude":{"type":"float"},"users":{"plugin":"admin","collection":"user","attribute":"user","column":"id","isVirtual":true},"openingHours":{"type":"component","repeatable":false,"component":"referents.opening-hours"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+67	plugin_content_manager_configuration_content_types::application::referent.referent	{"uid":"application::referent.referent","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"address_zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_zipcode","searchable":true,"sortable":true}},"users":{"edit":{"label":"Users","description":"","placeholder":"","visible":true,"editable":true,"mainField":"firstname"},"list":{"label":"Users","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"environnement":{"edit":{"label":"Environnement","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Zone","searchable":true,"sortable":true}},"name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"latitude":{"edit":{"label":"Latitude","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Latitude","searchable":true,"sortable":true}},"longitude":{"edit":{"label":"Longitude","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Longitude","searchable":true,"sortable":true}},"address":{"edit":{"label":"Adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"address_city":{"edit":{"label":"Ville","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_city","searchable":true,"sortable":true}},"openingHours":{"edit":{"label":"OpeningHours","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"OpeningHours","searchable":false,"sortable":false}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"phone_number":{"edit":{"label":"Téléphone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Téléphone","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Téléphone","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"name","size":6},{"name":"email","size":6}],[{"name":"address","size":6},{"name":"address_zipcode","size":6}],[{"name":"address_city","size":6},{"name":"phone_number","size":6}],[{"name":"latitude","size":4},{"name":"longitude","size":4}],[{"name":"openingHours","size":12}]],"editRelations":["users","environnement"],"list":["name","phone_number","users","environnement"]}}	object		
 19	plugin_content_manager_configuration_content_types::application::thematique.thematique	{"uid":"application::thematique.thematique","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"title","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"title":{"edit":{"label":"Nom de la thématique","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Titre","searchable":true,"sortable":true}},"image":{"edit":{"label":"Image","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Image","searchable":false,"sortable":false}},"environnement":{"edit":{"label":"Thème disponible pour","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Disponible pour","searchable":true,"sortable":true}},"display_quiz":{"edit":{"label":"Afficher le quiz","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Afficher le quiz","searchable":true,"sortable":true}},"title_backoffice":{"edit":{"label":"Titre backoffice","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Titre (BO)","searchable":true,"sortable":true}},"sound":{"edit":{"label":"Sound","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sound","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["title_backoffice","image","environnement","display_quiz"],"edit":[[{"name":"title_backoffice","size":6},{"name":"title","size":6}],[{"name":"image","size":6},{"name":"display_quiz","size":4}],[{"name":"sound","size":6}]],"editRelations":["environnement"]}}	object		
-67	plugin_content_manager_configuration_content_types::application::referent.referent	{"uid":"application::referent.referent","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"address_zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_zipcode","searchable":true,"sortable":true}},"users":{"edit":{"label":"Users","description":"","placeholder":"","visible":true,"editable":true,"mainField":"firstname"},"list":{"label":"Users","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"latitude":{"edit":{"label":"Latitude","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Latitude","searchable":true,"sortable":true}},"zone":{"edit":{"label":"Zone","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Zone","searchable":true,"sortable":true}},"longitude":{"edit":{"label":"Longitude","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Longitude","searchable":true,"sortable":true}},"address":{"edit":{"label":"Adresse","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"address_city":{"edit":{"label":"Ville","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address_city","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"phone_number":{"edit":{"label":"Téléphone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Téléphone","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Téléphone","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"name","size":6},{"name":"email","size":6}],[{"name":"address","size":6},{"name":"address_zipcode","size":6}],[{"name":"address_city","size":6},{"name":"phone_number","size":6}],[{"name":"latitude","size":4},{"name":"longitude","size":4}]],"editRelations":["zone","users"],"list":["name","phone_number","zone","users"]}}	object		
-51	model_def_stocks.box-produit-sur-mesure	{"uid":"stocks.box-produit-sur-mesure","collectionName":"components_stocks_box_produit_sur_mesures","info":{"name":"BoxProduitSurMesure","icon":"box-open"},"options":{"timestamps":false},"attributes":{"stock":{"type":"biginteger"},"produit":{"model":"produit"}}}	object	\N	\N
 49	model_def_application::parametres.parametres	{"uid":"application::parametres.parametres","collectionName":"settings","kind":"singleType","info":{"name":"Paramètres"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"nb_points_wrong_answer":{"type":"integer","default":25,"required":true},"nb_points_neutral_answer":{"type":"integer","default":30,"required":true},"nb_points_right_answer":{"type":"integer","default":100,"required":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 10	model_def_plugins::i18n.locale	{"uid":"plugins::i18n.locale","collectionName":"i18n_locales","kind":"collectionType","info":{"name":"locale","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string","min":1,"max":50,"configurable":false},"code":{"type":"string","unique":true,"configurable":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-52	model_def_application::box-sur-mesure.box-sur-mesure	{"uid":"application::box-sur-mesure.box-sur-mesure","collectionName":"box-dynamic","kind":"singleType","info":{"name":"Box sur mesure","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string","required":true},"description":{"type":"text","required":true},"image":{"model":"file","via":"related","allowedTypes":["images","files","videos"],"plugin":"upload","required":false,"pluginOptions":{}},"produits":{"type":"component","repeatable":true,"component":"stocks.box-produit-sur-mesure"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+51	model_def_stocks.box-produit-sur-mesure	{"uid":"stocks.box-produit-sur-mesure","collectionName":"components_stocks_box_produit_sur_mesures","info":{"name":"BoxProduitSurMesure","icon":"box-open"},"options":{"timestamps":false},"attributes":{"stock":{"type":"biginteger"},"produit":{"model":"produit"}}}	object	\N	\N
+2	model_def_application::content.content	{"uid":"application::content.content","collectionName":"contents","kind":"collectionType","info":{"name":"Contenu","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"title":{"type":"string"},"text":{"type":"richtext"},"image":{"model":"file","via":"related","allowedTypes":["images"],"plugin":"upload","required":false,"pluginOptions":{}},"sound":{"model":"file","via":"related","allowedTypes":["files"],"plugin":"upload","required":false,"pluginOptions":{}},"theme":{"model":"thematique"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+69	model_def_referents.time-table	{"uid":"referents.time-table","collectionName":"components_referents_time_tables","info":{"name":"Time Table","icon":"calendar-alt","description":""},"options":{"timestamps":false},"attributes":{"day":{"type":"string"},"openingHours":{"type":"component","repeatable":true,"component":"referents.opening-hours"}}}	object	\N	\N
+40	plugin_content_manager_configuration_content_types::application::contact.contact	{"uid":"application::contact.contact","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"box":{"edit":{"label":"Box","description":"","placeholder":"","visible":true,"editable":true,"mainField":"title"},"list":{"label":"Box","searchable":true,"sortable":true}},"name":{"edit":{"label":"Nom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Nom","searchable":true,"sortable":true}},"zone":{"edit":{"label":"Zone","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Zone","searchable":true,"sortable":true}},"zipcode":{"edit":{"label":"Code postal","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Code postal","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}},"type":{"edit":{"label":"Type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type","searchable":true,"sortable":true}},"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}}},"layouts":{"edit":[[{"name":"name","size":6},{"name":"email","size":6}],[{"name":"zipcode","size":4},{"name":"type","size":6}]],"editRelations":["box","zone"],"list":["name","email","zipcode","type"]}}	object		
+68	model_def_referents.opening-hours	{"uid":"referents.opening-hours","collectionName":"components_referents_opening_hours","info":{"name":"OpeningHours","icon":"clock","description":""},"options":{"timestamps":false},"attributes":{"monday_title":{"type":"string","default":"Lundi"},"monday_value":{"type":"string","default":"09h00 - 17h00"},"tuesday_title":{"type":"string","default":"Mardi"},"tuesday_value":{"type":"string","default":"09h00 - 17h00"},"wednesday_title":{"type":"string","default":"Mercredi"},"wednesday_value":{"type":"string","default":"09h00 - 17h00"},"thursday_title":{"type":"string","default":"Jeudi"},"thursday_value":{"type":"string","default":"09h00 - 17h00"},"friday_title":{"type":"string","default":"Vendredi"},"friday_value":{"type":"string","default":"09h00 - 17h00"},"saturday_title":{"type":"string","default":"Samedi"},"saturday_value":{"type":"string","default":"09h00 - 17h00"},"sunday_title":{"type":"string","default":"Dimanche"},"sunday_value":{"type":"string","default":"09h00 - 17h00"}}}	object	\N	\N
 61	model_def_application::commande.commande	{"uid":"application::commande.commande","collectionName":"order","kind":"collectionType","info":{"name":"Commande","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"pluginOptions":{},"attributes":{"first_name":{"type":"string"},"last_name":{"type":"string"},"email":{"type":"email"},"delivery":{"type":"enumeration","enum":["home","pickup","referent"]},"content":{"type":"dynamiczone","components":["commandes.box-sur-mesure","commandes.box"],"max":1,"min":1,"required":true},"address":{"type":"string","required":true},"address_dept":{"type":"string"},"address_region":{"type":"string"},"address_zipcode":{"type":"string"},"poi_name":{"type":"string"},"name":{"type":"string"},"address_deptcode":{"type":"string"},"phone":{"type":"string"},"address_city":{"type":"string","private":false},"address_more":{"type":"string"},"poi_number":{"type":"string"},"referent":{"model":"referent"},"sent":{"type":"boolean","default":false,"private":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 4	model_def_application::question.question	{"uid":"application::question.question","collectionName":"questions","kind":"collectionType","info":{"name":"Question","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"pluginOptions":{},"attributes":{"text_question":{"type":"string","required":true},"text_answer":{"type":"text","required":true},"image":{"model":"file","via":"related","allowedTypes":["images"],"plugin":"upload","required":false,"pluginOptions":{}},"responses":{"type":"component","repeatable":false,"component":"contenus.reponses-textes","required":true},"theme":{"model":"thematique"},"sound_question":{"model":"file","via":"related","allowedTypes":["files"],"plugin":"upload","required":false,"pluginOptions":{}},"sound_answer":{"model":"file","via":"related","allowedTypes":["files"],"plugin":"upload","required":false,"pluginOptions":{}},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+72	model_def_referents.opening	{"uid":"referents.opening","collectionName":"components_referents_openings","info":{"name":"Opening","icon":"grip-vertical"},"options":{"timestamps":false},"attributes":{"monday_title":{"type":"string","default":"Lundi"},"monday_value":{"type":"string","default":"09H00-17H00"}}}	object	\N	\N
+9	model_def_strapi::user	{"uid":"strapi::user","collectionName":"strapi_administrator","kind":"collectionType","info":{"name":"User","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"firstname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"lastname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"username":{"type":"string","unique":false,"configurable":false,"required":false},"email":{"type":"email","minLength":6,"configurable":false,"required":true,"unique":true,"private":true},"password":{"type":"password","minLength":6,"configurable":false,"required":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"registrationToken":{"type":"string","configurable":false,"private":true},"isActive":{"type":"boolean","default":false,"configurable":false,"private":true},"roles":{"collection":"role","collectionName":"strapi_users_roles","via":"users","dominant":true,"plugin":"admin","configurable":false,"private":true,"attribute":"role","column":"id","isVirtual":true},"blocked":{"type":"boolean","default":false,"configurable":false,"private":true},"preferedLanguage":{"type":"string","configurable":false,"required":false}}}	object	\N	\N
 11	model_def_plugins::upload.file	{"uid":"plugins::upload.file","collectionName":"upload_file","kind":"collectionType","info":{"name":"file","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string","configurable":false,"required":true},"alternativeText":{"type":"string","configurable":false},"caption":{"type":"string","configurable":false},"width":{"type":"integer","configurable":false},"height":{"type":"integer","configurable":false},"formats":{"type":"json","configurable":false},"hash":{"type":"string","configurable":false,"required":true},"ext":{"type":"string","configurable":false},"mime":{"type":"string","configurable":false,"required":true},"size":{"type":"decimal","configurable":false,"required":true},"url":{"type":"string","configurable":false,"required":true},"previewUrl":{"type":"string","configurable":false},"provider":{"type":"string","configurable":false,"required":true},"provider_metadata":{"type":"json","configurable":false},"related":{"collection":"*","filter":"field","configurable":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 \.
 
@@ -2230,7 +2497,7 @@ COPY public.questions_components (id, field, "order", component_type, component_
 -- Data for Name: referents; Type: TABLE DATA; Schema: public; Owner: db_user
 --
 
-COPY public.referents (id, name, email, zone, address, address_zipcode, address_city, phone_number, latitude, longitude, published_at, created_by, updated_by, created_at, updated_at) FROM stdin;
+COPY public.referents (id, name, email, zone, address, address_zipcode, address_city, phone_number, latitude, longitude, published_at, created_by, updated_by, created_at, updated_at, environnement) FROM stdin;
 \.
 
 
@@ -2239,6 +2506,14 @@ COPY public.referents (id, name, email, zone, address, address_zipcode, address_
 --
 
 COPY public.referents__users (id, referent_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: referents_components; Type: TABLE DATA; Schema: public; Owner: db_user
+--
+
+COPY public.referents_components (id, field, "order", component_type, component_id, referent_id) FROM stdin;
 \.
 
 
@@ -2278,7 +2553,8 @@ COPY public.strapi_administrator (id, firstname, lastname, username, email, pass
 1	Clément	Lelong	Clément Lelong	clement@numericite.eu	$2a$10$wx9S1ocwF1hl.ytF8l5UT..AEuvuOizxtXPl0SEZpdATpvl8Bxjcm	\N	\N	t	\N	\N
 4	Brian	Ridolce	Brian Ridolce	brianridolcedev@gmail.com	$2a$10$xXuu5v9Kr86hWxGOq5NK0egQrqK2iCPDCNub96mipvVd3nz5w0Ni2	\N	\N	t	\N	\N
 6	Admin	Tumeplay	Admin Tumeplay	admin@tumeplay.com	$2a$10$TeEp0n7ofkM291hqm6sUnuiDe/hg/2MvPHolb7PqNVPMiFgEhquji	\N	\N	t	\N	\N
-7	Référent	Guyane	Référent Guyane	referent@guyane.loc	$2a$10$ThPZCY4B1KP1hmVhl8yPM.jutZKT076hBozrE6I29BfIudpA/2InS	\N	\N	t	\N	\N
+8	Pilote	Guyane	Pilote Guyane	pilote@guyane.loc	$2a$10$XtQC1Ee/3GrDR3Pf9edpy.HGGwGU4tjHFy1qj.fmPyIp/sCz7vH0W	\N	\N	t	\N	\N
+7	Référent	Guyane	Référent Guyane	referent@guyane.loc	$2a$10$u4DpU1yUfOuay5B8V0hh2eWVuVaTgnFbLu/ZcJCEzJkbaHb0C8xcO	\N	\N	t	\N	\N
 \.
 
 
@@ -2287,82 +2563,77 @@ COPY public.strapi_administrator (id, firstname, lastname, username, email, pass
 --
 
 COPY public.strapi_permission (id, action, subject, properties, conditions, role, created_at, updated_at) FROM stdin;
-1384	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-metropole"]	3	2021-05-18 16:04:44.216+02	2021-05-18 16:04:44.225+02
-1439	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.324+02	2021-05-18 17:04:06.337+02
+8877	plugins::content-manager.explorer.create	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	["admin::simple-zone-guyane"]	6	2021-07-21 14:58:35.148+02	2021-07-21 14:58:35.158+02
 365	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	[]	1	2021-05-18 11:51:49.959+02	2021-05-18 11:51:49.979+02
 1219	plugins::content-manager.explorer.update	application::environnement.environnement	{"fields": ["name", "slug"]}	[]	1	2021-05-18 15:32:49.845+02	2021-05-18 15:32:49.868+02
-7873	plugins::content-manager.explorer.create	application::referent.referent	{"fields": ["name", "email", "zone", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users"]}	[]	1	2021-07-13 11:54:58.426+02	2021-07-13 11:54:58.442+02
-7877	plugins::content-manager.explorer.delete	application::box-sur-mesure.box-sur-mesure	{}	[]	1	2021-07-13 11:54:58.427+02	2021-07-13 11:54:58.449+02
+8011	plugins::content-manager.explorer.delete	application::produit.produit	{}	[]	\N	2021-07-19 11:15:00.621+02	2021-07-19 11:19:17.647+02
+8352	admin::users.create	\N	{}	[]	6	2021-07-21 11:06:14.327+02	2021-07-21 11:06:14.344+02
+8004	plugins::content-manager.explorer.delete	application::box.box	{}	[]	\N	2021-07-19 11:15:00.541+02	2021-07-19 11:19:17.648+02
+8020	plugins::content-manager.explorer.publish	application::referent.referent	{}	[]	\N	2021-07-19 11:15:00.704+02	2021-07-19 11:19:17.662+02
+8016	plugins::content-manager.explorer.publish	application::box.box	{}	[]	\N	2021-07-19 11:15:00.628+02	2021-07-19 11:19:17.662+02
+8008	plugins::content-manager.explorer.delete	application::environnement.environnement	{}	[]	\N	2021-07-19 11:15:00.542+02	2021-07-19 11:19:17.662+02
+8010	plugins::content-manager.explorer.delete	application::parametres.parametres	{}	[]	\N	2021-07-19 11:15:00.621+02	2021-07-19 11:19:17.662+02
+8630	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.745+02	2021-07-21 12:30:10.756+02
 43	plugins::upload.assets.create	\N	{}	[]	3	2021-05-17 17:25:41.682+02	2021-05-17 17:25:41.711+02
-1440	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.332+02	2021-05-18 17:04:06.351+02
-1385	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-metropole"]	3	2021-05-18 16:04:44.216+02	2021-05-18 16:04:44.226+02
-1390	plugins::content-manager.explorer.publish	application::question.question	{}	["admin::zone-metropole"]	3	2021-05-18 16:05:14.835+02	2021-05-18 16:05:14.845+02
+8654	plugins::content-manager.explorer.create	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	["admin::order-zone-guyane"]	6	2021-07-21 12:32:47.689+02	2021-07-21 12:32:47.697+02
 81	plugins::content-manager.components.configure-layout	\N	{}	[]	1	2021-05-17 17:25:42.088+02	2021-05-17 17:25:42.123+02
 103	admin::webhooks.delete	\N	{}	[]	1	2021-05-17 17:25:42.259+02	2021-05-17 17:25:42.286+02
-1386	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-metropole"]	3	2021-05-18 16:04:44.216+02	2021-05-18 16:04:44.226+02
 76	plugins::upload.assets.download	\N	{}	[]	1	2021-05-17 17:25:42.023+02	2021-05-17 17:25:42.054+02
 85	plugins::i18n.locale.delete	\N	{}	[]	1	2021-05-17 17:25:42.108+02	2021-05-17 17:25:42.137+02
 96	admin::marketplace.read	\N	{}	[]	1	2021-05-17 17:25:42.198+02	2021-05-17 17:25:42.229+02
 106	admin::users.delete	\N	{}	[]	1	2021-05-17 17:25:42.287+02	2021-05-17 17:25:42.317+02
-1441	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.332+02	2021-05-18 17:04:06.352+02
-7886	plugins::content-manager.explorer.delete	application::question.question	{}	[]	1	2021-07-13 11:54:58.474+02	2021-07-13 11:54:58.49+02
 44	plugins::upload.assets.update	\N	{}	["admin::is-creator"]	3	2021-05-17 17:25:41.688+02	2021-05-17 17:25:41.717+02
-1442	plugins::content-manager.explorer.delete	application::content.content	{}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.332+02	2021-05-18 17:04:06.356+02
-7887	plugins::content-manager.explorer.delete	application::referent.referent	{}	[]	1	2021-07-13 11:54:58.478+02	2021-07-13 11:54:58.495+02
 71	plugins::content-type-builder.read	\N	{}	[]	1	2021-05-17 17:25:42.001+02	2021-05-17 17:25:42.041+02
 83	plugins::i18n.locale.read	\N	{}	[]	1	2021-05-17 17:25:42.093+02	2021-05-17 17:25:42.123+02
 98	admin::marketplace.plugins.install	\N	{}	[]	1	2021-05-17 17:25:42.246+02	2021-05-17 17:25:42.271+02
 107	admin::roles.create	\N	{}	[]	1	2021-05-17 17:25:42.322+02	2021-05-17 17:25:42.338+02
-1445	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.346+02	2021-05-25 18:09:00.151+02
-1387	plugins::content-manager.explorer.delete	application::content.content	{}	["admin::zone-metropole"]	3	2021-05-18 16:04:44.216+02	2021-05-18 16:04:44.228+02
 45	plugins::upload.assets.download	\N	{}	[]	3	2021-05-17 17:25:41.691+02	2021-05-17 17:25:41.717+02
-1388	plugins::content-manager.explorer.publish	application::content.content	{}	["admin::zone-metropole"]	3	2021-05-18 16:04:44.217+02	2021-05-18 16:04:44.228+02
 4047	plugins::content-manager.explorer.update	application::reponse.reponse	{"fields": ["user_id", "question", "quizz_iteration", "response"]}	[]	1	2021-06-24 18:38:34.16+02	2021-06-24 18:38:34.176+02
 4048	plugins::content-manager.explorer.read	application::reponse.reponse	{"fields": ["user_id", "question", "quizz_iteration", "response"]}	[]	1	2021-06-24 18:38:34.159+02	2021-06-24 18:38:34.183+02
-1443	plugins::content-manager.explorer.publish	application::content.content	{}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.333+02	2021-05-18 17:04:06.356+02
 82	plugins::i18n.locale.create	\N	{}	[]	1	2021-05-17 17:25:42.088+02	2021-05-17 17:25:42.124+02
 102	admin::users.create	\N	{}	[]	1	2021-05-17 17:25:42.259+02	2021-05-17 17:25:42.286+02
-1393	plugins::content-manager.explorer.delete	application::question.question	{}	["admin::zone-metropole"]	3	2021-05-18 16:05:14.836+02	2021-05-18 16:05:14.85+02
 46	plugins::upload.assets.copy-link	\N	{}	[]	3	2021-05-17 17:25:41.744+02	2021-05-17 17:25:41.752+02
 72	plugins::email.settings.read	\N	{}	[]	1	2021-05-17 17:25:42.006+02	2021-05-17 17:25:42.04+02
 79	plugins::content-manager.single-types.configure-view	\N	{}	[]	1	2021-05-17 17:25:42.088+02	2021-05-17 17:25:42.114+02
 97	admin::marketplace.plugins.uninstall	\N	{}	[]	1	2021-05-17 17:25:42.247+02	2021-05-17 17:25:42.27+02
 108	admin::roles.read	\N	{}	[]	1	2021-05-17 17:25:42.323+02	2021-05-17 17:25:42.343+02
-7896	plugins::content-manager.explorer.publish	application::reponse.reponse	{}	[]	1	2021-07-13 11:54:58.522+02	2021-07-13 11:54:58.537+02
+8000	plugins::content-manager.explorer.create	application::referent.referent	{"fields": ["name", "email", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users"]}	[]	\N	2021-07-19 11:15:00.539+02	2021-07-21 11:15:34.424+02
+8592	plugins::content-manager.explorer.delete	application::question.question	{}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.746+02	2021-07-21 12:26:03.772+02
+8598	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.547+02	2021-07-21 12:26:39.569+02
 2502	plugins::content-manager.explorer.read	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	1	2021-06-07 15:14:54.798+02	2021-06-07 15:14:54.821+02
+8005	plugins::content-manager.explorer.delete	application::commande.commande	{}	[]	\N	2021-07-19 11:15:00.541+02	2021-07-19 11:19:17.648+02
 73	plugins::upload.read	\N	{}	[]	1	2021-05-17 17:25:42.007+02	2021-05-17 17:25:42.041+02
 80	plugins::content-manager.collection-types.configure-view	\N	{}	[]	1	2021-05-17 17:25:42.088+02	2021-05-17 17:25:42.114+02
 101	admin::webhooks.update	\N	{}	[]	1	2021-05-17 17:25:42.253+02	2021-05-17 17:25:42.279+02
 75	plugins::upload.assets.update	\N	{}	[]	1	2021-05-17 17:25:42.022+02	2021-05-17 17:25:42.054+02
 105	admin::users.update	\N	{}	[]	1	2021-05-17 17:25:42.279+02	2021-05-17 17:25:42.31+02
-1447	plugins::content-manager.explorer.delete	application::question.question	{}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.346+02	2021-05-18 17:04:06.365+02
 74	plugins::upload.assets.create	\N	{}	[]	1	2021-05-17 17:25:42.013+02	2021-05-17 17:25:42.048+02
 84	plugins::i18n.locale.update	\N	{}	[]	1	2021-05-17 17:25:42.101+02	2021-05-17 17:25:42.13+02
 104	admin::users.read	\N	{}	[]	1	2021-05-17 17:25:42.264+02	2021-05-17 17:25:42.295+02
 1216	plugins::content-manager.explorer.create	application::environnement.environnement	{"fields": ["name", "slug"]}	[]	1	2021-05-18 15:32:49.845+02	2021-05-18 15:32:49.867+02
-1448	plugins::content-manager.explorer.publish	application::question.question	{}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.346+02	2021-05-18 17:04:06.37+02
+8878	plugins::content-manager.explorer.update	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	["admin::simple-zone-guyane"]	6	2021-07-21 14:58:35.148+02	2021-07-21 14:58:35.158+02
 363	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	[]	1	2021-05-18 11:51:49.959+02	2021-05-18 11:51:49.978+02
 78	plugins::upload.settings.read	\N	{}	[]	1	2021-05-17 17:25:42.083+02	2021-05-17 17:25:42.115+02
 99	admin::webhooks.create	\N	{}	[]	1	2021-05-17 17:25:42.247+02	2021-05-17 17:25:42.271+02
 109	admin::roles.update	\N	{}	[]	1	2021-05-17 17:25:42.326+02	2021-05-17 17:25:42.342+02
-1446	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.346+02	2021-05-25 18:09:00.146+02
+8009	plugins::content-manager.explorer.delete	application::feedback.feedback	{}	[]	\N	2021-07-19 11:15:00.542+02	2021-07-19 11:19:17.648+02
 42	plugins::upload.read	\N	{}	["admin::is-creator"]	3	2021-05-17 17:25:41.681+02	2021-05-17 17:25:41.711+02
 77	plugins::upload.assets.copy-link	\N	{}	[]	1	2021-05-17 17:25:42.082+02	2021-05-17 17:25:42.114+02
 100	admin::webhooks.read	\N	{}	[]	1	2021-05-17 17:25:42.247+02	2021-05-17 17:25:42.271+02
 110	admin::roles.delete	\N	{}	[]	1	2021-05-17 17:25:42.326+02	2021-05-17 17:25:42.342+02
 364	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	[]	1	2021-05-18 11:51:49.959+02	2021-05-18 11:51:49.978+02
 1218	plugins::content-manager.explorer.read	application::environnement.environnement	{"fields": ["name", "slug"]}	[]	1	2021-05-18 15:32:49.845+02	2021-05-18 15:32:49.868+02
-7888	plugins::content-manager.explorer.delete	application::reponse.reponse	{}	[]	1	2021-07-13 11:54:58.479+02	2021-07-13 11:54:58.495+02
 7770	plugins::content-manager.explorer.create	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	[]	1	2021-07-01 17:22:45.332+02	2021-07-01 17:22:45.351+02
+8019	plugins::content-manager.explorer.publish	application::question.question	{}	[]	\N	2021-07-19 11:15:00.642+02	2021-07-19 11:19:17.662+02
+8022	plugins::content-manager.explorer.publish	application::thematique.thematique	{}	[]	\N	2021-07-19 11:15:00.704+02	2021-07-19 11:19:17.662+02
+8013	plugins::content-manager.explorer.delete	application::referent.referent	{}	[]	\N	2021-07-19 11:15:00.622+02	2021-07-19 11:19:17.663+02
 4049	plugins::content-manager.explorer.create	application::reponse.reponse	{"fields": ["user_id", "question", "quizz_iteration", "response"]}	[]	1	2021-06-24 18:38:34.159+02	2021-06-24 18:38:34.183+02
-1391	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-metropole"]	3	2021-05-18 16:05:14.835+02	2021-05-25 18:09:00.146+02
+8353	admin::users.update	\N	{}	[]	6	2021-07-21 11:06:14.331+02	2021-07-21 11:06:14.352+02
 2503	plugins::content-manager.explorer.update	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	1	2021-06-07 15:14:54.798+02	2021-06-07 15:14:54.821+02
-7894	plugins::content-manager.explorer.publish	application::referent.referent	{}	[]	1	2021-07-13 11:54:58.519+02	2021-07-13 11:54:58.534+02
-1444	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-guyane"]	4	2021-05-18 17:04:06.337+02	2021-05-25 18:09:00.147+02
-7874	plugins::content-manager.explorer.read	application::referent.referent	{"fields": ["name", "email", "zone", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users"]}	[]	1	2021-07-13 11:54:58.426+02	2021-07-13 11:54:58.442+02
-7641	plugins::content-manager.explorer.create	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone"]}	[]	1	2021-07-01 10:58:14.648+02	2021-07-01 10:58:14.67+02
-7878	plugins::content-manager.explorer.delete	application::commande.commande	{}	[]	1	2021-07-13 11:54:58.431+02	2021-07-13 11:54:58.448+02
-7882	plugins::content-manager.explorer.delete	application::environnement.environnement	{}	[]	1	2021-07-13 11:54:58.473+02	2021-07-13 11:54:58.49+02
+8629	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.745+02	2021-07-21 12:30:10.755+02
+8631	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.745+02	2021-07-21 12:30:10.758+02
+8594	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.546+02	2021-07-21 12:26:39.568+02
+8593	plugins::content-manager.explorer.publish	application::question.question	{}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.752+02	2021-07-21 12:26:03.771+02
 7771	plugins::content-manager.explorer.read	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	[]	1	2021-07-01 17:22:45.332+02	2021-07-01 17:22:45.351+02
 2497	plugins::content-manager.explorer.create	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	1	2021-06-07 15:14:54.797+02	2021-06-07 15:14:54.82+02
 2460	plugins::content-manager.explorer.create	application::parametres.parametres	{"fields": ["nb_points_wrong_answer", "nb_points_neutral_answer", "nb_points_right_answer"]}	[]	1	2021-06-07 12:23:07.816+02	2021-06-07 12:23:07.836+02
@@ -2370,39 +2641,95 @@ COPY public.strapi_permission (id, action, subject, properties, conditions, role
 2462	plugins::content-manager.explorer.update	application::parametres.parametres	{"fields": ["nb_points_wrong_answer", "nb_points_neutral_answer", "nb_points_right_answer"]}	[]	1	2021-06-07 12:23:07.816+02	2021-06-07 12:23:07.836+02
 7872	plugins::content-manager.explorer.read	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	[]	1	2021-07-13 11:54:58.426+02	2021-07-13 11:54:58.442+02
 2779	plugins::content-manager.explorer.read	application::feedback.feedback	{"fields": ["title", "question", "body", "appreciation"]}	[]	1	2021-06-07 16:49:00.118+02	2021-06-07 16:49:00.136+02
-1389	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-metropole"]	3	2021-05-18 16:05:14.834+02	2021-05-25 18:09:00.147+02
 2505	plugins::content-manager.explorer.update	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	1	2021-06-07 15:14:54.799+02	2021-06-07 15:14:54.821+02
+8006	plugins::content-manager.explorer.delete	application::contact.contact	{}	[]	\N	2021-07-19 11:15:00.541+02	2021-07-19 11:19:17.663+02
 2780	plugins::content-manager.explorer.create	application::feedback.feedback	{"fields": ["title", "question", "body", "appreciation"]}	[]	1	2021-06-07 16:49:00.118+02	2021-06-07 16:49:00.136+02
 7875	plugins::content-manager.explorer.update	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	[]	1	2021-07-13 11:54:58.427+02	2021-07-13 11:54:58.443+02
-7879	plugins::content-manager.explorer.delete	application::box.box	{}	[]	1	2021-07-13 11:54:58.431+02	2021-07-13 11:54:58.448+02
+8012	plugins::content-manager.explorer.delete	application::question.question	{}	[]	\N	2021-07-19 11:15:00.622+02	2021-07-19 11:19:17.663+02
+8015	plugins::content-manager.explorer.delete	application::thematique.thematique	{}	[]	\N	2021-07-19 11:15:00.622+02	2021-07-19 11:19:17.663+02
 2499	plugins::content-manager.explorer.create	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	1	2021-06-07 15:14:54.798+02	2021-06-07 15:14:54.82+02
 2781	plugins::content-manager.explorer.update	application::feedback.feedback	{"fields": ["title", "question", "body", "appreciation"]}	[]	1	2021-06-07 16:49:00.118+02	2021-06-07 16:49:00.136+02
-7644	plugins::content-manager.explorer.update	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone"]}	[]	1	2021-07-01 10:58:14.649+02	2021-07-01 10:58:14.671+02
-1392	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "theme", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer"]}	["admin::zone-metropole"]	3	2021-05-18 16:05:14.836+02	2021-05-25 18:09:00.151+02
 2500	plugins::content-manager.explorer.read	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	1	2021-06-07 15:14:54.798+02	2021-06-07 15:14:54.82+02
 7772	plugins::content-manager.explorer.update	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	[]	1	2021-07-01 17:22:45.332+02	2021-07-01 17:22:45.351+02
-7884	plugins::content-manager.explorer.delete	application::parametres.parametres	{}	[]	1	2021-07-13 11:54:58.474+02	2021-07-13 11:54:58.49+02
-7642	plugins::content-manager.explorer.read	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone"]}	[]	1	2021-07-01 10:58:14.649+02	2021-07-01 10:58:14.67+02
-7885	plugins::content-manager.explorer.delete	application::produit.produit	{}	[]	1	2021-07-13 11:54:58.474+02	2021-07-13 11:54:58.49+02
-7889	plugins::content-manager.explorer.delete	application::thematique.thematique	{}	[]	1	2021-07-13 11:54:58.479+02	2021-07-13 11:54:58.495+02
-7893	plugins::content-manager.explorer.publish	application::question.question	{}	[]	1	2021-07-13 11:54:58.518+02	2021-07-13 11:54:58.53+02
+8354	admin::users.delete	\N	{}	[]	6	2021-07-21 11:06:14.335+02	2021-07-21 11:06:14.356+02
+8879	plugins::content-manager.explorer.delete	application::box.box	{}	["admin::simple-zone-guyane"]	6	2021-07-21 14:58:35.149+02	2021-07-21 14:58:35.16+02
+8632	plugins::content-manager.explorer.publish	application::question.question	{}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.75+02	2021-07-21 12:30:10.758+02
+8656	plugins::content-manager.explorer.update	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	["admin::order-zone-guyane"]	6	2021-07-21 12:32:47.696+02	2021-07-21 12:32:47.705+02
+8396	plugins::content-manager.explorer.publish	application::box-sur-mesure.box-sur-mesure	{}	[]	6	2021-07-21 11:06:14.581+02	2021-07-21 11:06:14.595+02
 7792	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	[]	1	2021-07-13 11:23:53.129+02	2021-07-13 11:23:53.144+02
-7895	plugins::content-manager.explorer.publish	application::thematique.thematique	{}	[]	1	2021-07-13 11:54:58.522+02	2021-07-13 11:54:58.533+02
+8595	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.546+02	2021-07-21 12:26:39.568+02
 7871	plugins::content-manager.explorer.create	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	[]	1	2021-07-13 11:54:58.426+02	2021-07-13 11:54:58.442+02
-7876	plugins::content-manager.explorer.update	application::referent.referent	{"fields": ["name", "email", "zone", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users"]}	[]	1	2021-07-13 11:54:58.427+02	2021-07-13 11:54:58.443+02
-7880	plugins::content-manager.explorer.delete	application::contact.contact	{}	[]	1	2021-07-13 11:54:58.431+02	2021-07-13 11:54:58.448+02
+8880	plugins::content-manager.explorer.publish	application::box.box	{}	["admin::simple-zone-guyane"]	6	2021-07-21 14:58:35.15+02	2021-07-21 14:58:35.16+02
+8596	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.546+02	2021-07-21 12:26:39.569+02
+8633	plugins::content-manager.explorer.delete	application::question.question	{}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.75+02	2021-07-21 12:30:10.758+02
 7793	plugins::content-manager.explorer.create	application::thematique.thematique	{"fields": ["title", "image", "environnement", "display_quiz", "title_backoffice", "sound"]}	[]	1	2021-07-13 11:23:53.129+02	2021-07-13 11:23:53.144+02
 7796	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	[]	1	2021-07-13 11:23:53.13+02	2021-07-13 11:23:53.145+02
 7800	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme", "sound_question", "sound_answer"]}	[]	1	2021-07-13 11:23:53.134+02	2021-07-13 11:23:53.149+02
 7799	plugins::content-manager.explorer.read	application::thematique.thematique	{"fields": ["title", "image", "environnement", "display_quiz", "title_backoffice", "sound"]}	[]	1	2021-07-13 11:23:53.134+02	2021-07-13 11:23:53.149+02
-7881	plugins::content-manager.explorer.delete	application::content.content	{}	[]	1	2021-07-13 11:54:58.473+02	2021-07-13 11:54:58.49+02
 7823	plugins::content-manager.explorer.read	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent"]}	[]	5	2021-07-13 11:27:15.139+02	2021-07-13 11:54:43.708+02
 7824	plugins::content-manager.explorer.update	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent"]}	[]	5	2021-07-13 11:27:15.14+02	2021-07-13 11:54:43.709+02
-7883	plugins::content-manager.explorer.delete	application::feedback.feedback	{}	[]	1	2021-07-13 11:54:58.474+02	2021-07-13 11:54:58.49+02
-7890	plugins::content-manager.explorer.publish	application::box-sur-mesure.box-sur-mesure	{}	[]	1	2021-07-13 11:54:58.483+02	2021-07-13 11:54:58.498+02
-7892	plugins::content-manager.explorer.publish	application::content.content	{}	[]	1	2021-07-13 11:54:58.518+02	2021-07-13 11:54:58.53+02
+8657	plugins::content-manager.explorer.delete	application::commande.commande	{}	["admin::order-zone-guyane"]	6	2021-07-21 12:32:47.697+02	2021-07-21 12:32:47.708+02
 7802	plugins::content-manager.explorer.update	application::thematique.thematique	{"fields": ["title", "image", "environnement", "display_quiz", "title_backoffice", "sound"]}	[]	1	2021-07-13 11:23:53.174+02	2021-07-13 11:23:53.195+02
-7891	plugins::content-manager.explorer.publish	application::box.box	{}	[]	1	2021-07-13 11:54:58.518+02	2021-07-13 11:54:58.53+02
+8624	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.707+02	2021-07-21 12:30:10.722+02
+8489	plugins::content-manager.explorer.create	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	[]	1	2021-07-21 11:15:34.197+02	2021-07-21 11:15:34.216+02
+8881	plugins::content-manager.explorer.create	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	["admin::simple-zone-guyane"]	6	2021-07-21 15:06:56.094+02	2021-07-21 15:06:56.105+02
+8886	plugins::content-manager.explorer.create	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone", "type"]}	[]	1	2021-07-22 13:50:45.749+02	2021-07-22 13:50:45.774+02
+8599	plugins::content-manager.explorer.publish	application::content.content	{}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.547+02	2021-07-21 12:26:39.569+02
+8896	plugins::content-manager.explorer.delete	application::parametres.parametres	{}	[]	1	2021-07-22 13:50:45.82+02	2021-07-22 13:50:45.843+02
+8906	plugins::content-manager.explorer.publish	application::referent.referent	{}	[]	1	2021-07-22 13:50:45.889+02	2021-07-22 13:50:45.898+02
+8625	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.707+02	2021-07-21 12:30:10.722+02
+8882	plugins::content-manager.explorer.read	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	["admin::simple-zone-guyane"]	6	2021-07-21 15:06:56.094+02	2021-07-21 15:06:56.108+02
+8887	plugins::content-manager.explorer.read	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone", "type"]}	[]	1	2021-07-22 13:50:45.749+02	2021-07-22 13:50:45.774+02
+8897	plugins::content-manager.explorer.delete	application::produit.produit	{}	[]	1	2021-07-22 13:50:45.82+02	2021-07-22 13:50:45.844+02
+8394	plugins::content-manager.explorer.update	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	6	2021-07-21 11:06:14.578+02	2021-07-21 11:06:14.595+02
+8907	plugins::content-manager.explorer.publish	application::reponse.reponse	{}	[]	1	2021-07-22 13:50:45.889+02	2021-07-22 13:50:45.898+02
+8600	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.547+02	2021-07-21 12:26:39.57+02
+8627	plugins::content-manager.explorer.delete	application::content.content	{}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.707+02	2021-07-21 12:30:10.725+02
+8626	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.707+02	2021-07-21 12:30:10.725+02
+8395	plugins::content-manager.explorer.delete	application::box-sur-mesure.box-sur-mesure	{}	[]	6	2021-07-21 11:06:14.578+02	2021-07-21 11:06:14.596+02
+8883	plugins::content-manager.explorer.update	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	["admin::simple-zone-guyane"]	6	2021-07-21 15:06:56.099+02	2021-07-21 15:06:56.114+02
+8888	plugins::content-manager.explorer.update	application::contact.contact	{"fields": ["name", "email", "zipcode", "box", "zone", "type"]}	[]	1	2021-07-22 13:50:45.749+02	2021-07-22 13:50:45.774+02
+8601	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.547+02	2021-07-21 12:26:39.57+02
+8899	plugins::content-manager.explorer.delete	application::referent.referent	{}	[]	1	2021-07-22 13:50:45.82+02	2021-07-22 13:50:45.844+02
+8628	plugins::content-manager.explorer.publish	application::content.content	{}	["admin::theme-zone-guyane"]	6	2021-07-21 12:30:10.71+02	2021-07-21 12:30:10.725+02
+8492	plugins::content-manager.explorer.read	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	[]	1	2021-07-21 11:15:34.197+02	2021-07-21 11:15:34.216+02
+8493	plugins::content-manager.explorer.update	application::referent.referent	{"fields": ["name", "email", "environnement", "address", "address_zipcode", "address_city", "phone_number", "latitude", "longitude", "users", "openingHours.monday_title", "openingHours.monday_value", "openingHours.tuesday_title", "openingHours.tuesday_value", "openingHours.wednesday_title", "openingHours.wednesday_value", "openingHours.thursday_title", "openingHours.thursday_value", "openingHours.friday_title", "openingHours.friday_value", "openingHours.saturday_title", "openingHours.saturday_value", "openingHours.sunday_title", "openingHours.sunday_value"]}	[]	1	2021-07-21 11:15:34.197+02	2021-07-21 11:15:34.216+02
+8884	plugins::content-manager.explorer.delete	application::referent.referent	{}	["admin::simple-zone-guyane"]	6	2021-07-21 15:06:56.101+02	2021-07-21 15:06:56.114+02
+8889	plugins::content-manager.explorer.delete	application::box-sur-mesure.box-sur-mesure	{}	[]	1	2021-07-22 13:50:45.75+02	2021-07-22 13:50:45.775+02
+8900	plugins::content-manager.explorer.delete	application::reponse.reponse	{}	[]	1	2021-07-22 13:50:45.821+02	2021-07-22 13:50:45.852+02
+8602	plugins::content-manager.explorer.delete	application::question.question	{}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.548+02	2021-07-21 12:26:39.57+02
+8885	plugins::content-manager.explorer.publish	application::referent.referent	{}	["admin::simple-zone-guyane"]	6	2021-07-21 15:06:56.105+02	2021-07-21 15:06:56.118+02
+8890	plugins::content-manager.explorer.delete	application::box.box	{}	[]	1	2021-07-22 13:50:45.75+02	2021-07-22 13:50:45.775+02
+8898	plugins::content-manager.explorer.delete	application::question.question	{}	[]	1	2021-07-22 13:50:45.82+02	2021-07-22 13:50:45.844+02
+8908	plugins::content-manager.explorer.publish	application::thematique.thematique	{}	[]	1	2021-07-22 13:50:45.89+02	2021-07-22 13:50:45.9+02
+8791	plugins::content-manager.explorer.read	application::box.box	{"fields": ["title", "image", "products.quantity", "products.produit", "stock", "environnement", "description", "available", "number"]}	["admin::simple-zone-guyane"]	6	2021-07-21 14:51:00.357+02	2021-07-21 14:51:00.36+02
+8891	plugins::content-manager.explorer.delete	application::contact.contact	{}	[]	1	2021-07-22 13:50:45.75+02	2021-07-22 13:50:45.775+02
+8904	plugins::content-manager.explorer.publish	application::content.content	{}	[]	1	2021-07-22 13:50:45.826+02	2021-07-22 13:50:45.851+02
+8584	plugins::content-manager.explorer.create	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.744+02	2021-07-21 12:26:03.766+02
+8792	plugins::content-manager.explorer.create	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	6	2021-07-21 14:54:08.86+02	2021-07-21 14:54:08.87+02
+8392	plugins::content-manager.explorer.create	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	6	2021-07-21 11:06:14.558+02	2021-07-21 11:06:14.578+02
+8892	plugins::content-manager.explorer.delete	application::commande.commande	{}	[]	1	2021-07-22 13:50:45.75+02	2021-07-22 13:50:45.775+02
+8902	plugins::content-manager.explorer.publish	application::box-sur-mesure.box-sur-mesure	{}	[]	1	2021-07-22 13:50:45.826+02	2021-07-22 13:50:45.851+02
+8393	plugins::content-manager.explorer.read	application::box-sur-mesure.box-sur-mesure	{"fields": ["title", "description", "image", "produits.stock", "produits.produit"]}	[]	6	2021-07-21 11:06:14.578+02	2021-07-21 11:06:14.593+02
+8793	plugins::content-manager.explorer.delete	application::produit.produit	{}	[]	6	2021-07-21 14:54:08.86+02	2021-07-21 14:54:08.872+02
+8893	plugins::content-manager.explorer.delete	application::environnement.environnement	{}	[]	1	2021-07-22 13:50:45.751+02	2021-07-22 13:50:45.775+02
+8585	plugins::content-manager.explorer.read	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.744+02	2021-07-21 12:26:03.766+02
+8901	plugins::content-manager.explorer.delete	application::thematique.thematique	{}	[]	1	2021-07-22 13:50:45.826+02	2021-07-22 13:50:45.85+02
+8794	plugins::content-manager.explorer.read	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	6	2021-07-21 14:54:08.861+02	2021-07-21 14:54:08.872+02
+8894	plugins::content-manager.explorer.delete	application::content.content	{}	[]	1	2021-07-22 13:50:45.751+02	2021-07-22 13:50:45.782+02
+8586	plugins::content-manager.explorer.update	application::content.content	{"fields": ["title", "text", "image", "sound", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.745+02	2021-07-21 12:26:03.766+02
+8905	plugins::content-manager.explorer.publish	application::question.question	{}	[]	1	2021-07-22 13:50:45.832+02	2021-07-22 13:50:45.859+02
+8795	plugins::content-manager.explorer.update	application::produit.produit	{"fields": ["title", "description", "image"]}	[]	6	2021-07-21 14:54:08.863+02	2021-07-21 14:54:08.874+02
+8895	plugins::content-manager.explorer.delete	application::feedback.feedback	{}	[]	1	2021-07-22 13:50:45.758+02	2021-07-22 13:50:45.782+02
+8587	plugins::content-manager.explorer.delete	application::content.content	{}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.745+02	2021-07-21 12:26:03.766+02
+8903	plugins::content-manager.explorer.publish	application::box.box	{}	[]	1	2021-07-22 13:50:45.826+02	2021-07-22 13:50:45.851+02
+8588	plugins::content-manager.explorer.publish	application::content.content	{}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.745+02	2021-07-21 12:26:03.766+02
+8589	plugins::content-manager.explorer.create	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.745+02	2021-07-21 12:26:03.766+02
+8779	plugins::content-manager.explorer.read	application::commande.commande	{"fields": ["first_name", "last_name", "email", "delivery", "content", "address", "address_dept", "address_region", "address_zipcode", "poi_name", "name", "address_deptcode", "phone", "address_city", "address_more", "poi_number", "referent", "sent"]}	["admin::order-zone-guyane"]	6	2021-07-21 12:47:41.819+02	2021-07-21 12:47:41.822+02
+8590	plugins::content-manager.explorer.read	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.746+02	2021-07-21 12:26:03.766+02
+8603	plugins::content-manager.explorer.publish	application::question.question	{}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.548+02	2021-07-21 12:26:39.575+02
+8591	plugins::content-manager.explorer.update	application::question.question	{"fields": ["text_question", "text_answer", "image", "responses.response_A", "responses.response_B", "responses.response_C", "responses.response_A_neutral", "responses.response_B_neutral", "responses.response_C_neutral", "responses.right_answer", "theme"]}	["admin::theme-zone-guyane"]	4	2021-07-21 12:26:03.746+02	2021-07-21 12:26:03.766+02
+8597	plugins::content-manager.explorer.delete	application::content.content	{}	["admin::theme-zone-metropole"]	3	2021-07-21 12:26:39.547+02	2021-07-21 12:26:39.569+02
 \.
 
 
@@ -2413,8 +2740,9 @@ COPY public.strapi_permission (id, action, subject, properties, conditions, role
 COPY public.strapi_role (id, name, code, description, created_at, updated_at) FROM stdin;
 1	Super Admin	strapi-super-admin	Super Admins can access and manage all features and settings.	2021-05-17 17:25:41.301+02	2021-05-17 17:25:41.301+02
 5	Référent	referent-kr1up6yc	Rôle pour les référents	2021-07-13 11:27:15.062+02	2021-07-13 11:33:42.087+02
-3	Coordinateur Métropole	strapi-author	Rôle pour les coordinateurs métropolitains	2021-05-17 17:25:41.344+02	2021-07-13 11:33:51.301+02
 4	Coordinateur Guyane	referent-guyane-kou62om9	Rôle pour les coordinateurs guyanais	2021-05-18 17:04:06.183+02	2021-07-13 11:33:56.334+02
+3	Coordinateur Métropole	strapi-author	Rôle pour les coordinateurs métropolitains	2021-05-17 17:25:41.344+02	2021-07-13 11:33:51.301+02
+6	Pilote guyane	pilote-guyane-krd9gze1	Pilote pour la guyane	2021-07-21 11:06:14.186+02	2021-07-21 12:23:40.669+02
 \.
 
 
@@ -2429,6 +2757,7 @@ COPY public.strapi_users_roles (id, user_id, role_id) FROM stdin;
 7	5	4
 8	6	1
 9	7	5
+10	8	6
 \.
 
 
@@ -2755,28 +3084,28 @@ SELECT pg_catalog.setval('public.answer_id_seq', 1, false);
 -- Name: box-dynamic_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public."box-dynamic_components_id_seq"', 2, true);
+SELECT pg_catalog.setval('public."box-dynamic_components_id_seq"', 5, true);
 
 
 --
 -- Name: box-dynamic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public."box-dynamic_id_seq"', 2, true);
+SELECT pg_catalog.setval('public."box-dynamic_id_seq"', 3, true);
 
 
 --
 -- Name: box_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.box_components_id_seq', 243, true);
+SELECT pg_catalog.setval('public.box_components_id_seq', 320, true);
 
 
 --
 -- Name: box_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.box_id_seq', 34, true);
+SELECT pg_catalog.setval('public.box_id_seq', 43, true);
 
 
 --
@@ -2804,21 +3133,49 @@ SELECT pg_catalog.setval('public.components_commandes_box_sur_mesures_id_seq', 4
 -- Name: components_commandes_boxes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.components_commandes_boxes_id_seq', 2343, true);
+SELECT pg_catalog.setval('public.components_commandes_boxes_id_seq', 2345, true);
+
+
+--
+-- Name: components_referents_opening_hours_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
+--
+
+SELECT pg_catalog.setval('public.components_referents_opening_hours_id_seq', 1, false);
+
+
+--
+-- Name: components_referents_openings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
+--
+
+SELECT pg_catalog.setval('public.components_referents_openings_id_seq', 1, false);
+
+
+--
+-- Name: components_referents_time_tables_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
+--
+
+SELECT pg_catalog.setval('public.components_referents_time_tables_components_id_seq', 1, false);
+
+
+--
+-- Name: components_referents_time_tables_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
+--
+
+SELECT pg_catalog.setval('public.components_referents_time_tables_id_seq', 1, false);
 
 
 --
 -- Name: components_stocks_box_produit_sur_mesures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.components_stocks_box_produit_sur_mesures_id_seq', 2, true);
+SELECT pg_catalog.setval('public.components_stocks_box_produit_sur_mesures_id_seq', 5, true);
 
 
 --
 -- Name: components_stocks_box_produits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.components_stocks_box_produits_id_seq', 243, true);
+SELECT pg_catalog.setval('public.components_stocks_box_produits_id_seq', 320, true);
 
 
 --
@@ -2832,14 +3189,14 @@ SELECT pg_catalog.setval('public.contact_id_seq', 13, true);
 -- Name: contents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.contents_id_seq', 3177, true);
+SELECT pg_catalog.setval('public.contents_id_seq', 3673, true);
 
 
 --
 -- Name: core_store_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.core_store_id_seq', 67, true);
+SELECT pg_catalog.setval('public.core_store_id_seq', 75, true);
 
 
 --
@@ -2860,35 +3217,35 @@ SELECT pg_catalog.setval('public.i18n_locales_id_seq', 2, true);
 -- Name: order_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.order_components_id_seq', 2386, true);
+SELECT pg_catalog.setval('public.order_components_id_seq', 2388, true);
 
 
 --
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.order_id_seq', 2395, true);
+SELECT pg_catalog.setval('public.order_id_seq', 2397, true);
 
 
 --
 -- Name: produits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.produits_id_seq', 170, true);
+SELECT pg_catalog.setval('public.produits_id_seq', 225, true);
 
 
 --
 -- Name: questions_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.questions_components_id_seq', 2198, true);
+SELECT pg_catalog.setval('public.questions_components_id_seq', 2574, true);
 
 
 --
 -- Name: questions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.questions_id_seq', 2188, true);
+SELECT pg_catalog.setval('public.questions_id_seq', 2564, true);
 
 
 --
@@ -2899,10 +3256,17 @@ SELECT pg_catalog.setval('public.referents__users_id_seq', 2, true);
 
 
 --
+-- Name: referents_components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
+--
+
+SELECT pg_catalog.setval('public.referents_components_id_seq', 1, false);
+
+
+--
 -- Name: referents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.referents_id_seq', 1, true);
+SELECT pg_catalog.setval('public.referents_id_seq', 39, true);
 
 
 --
@@ -2916,7 +3280,7 @@ SELECT pg_catalog.setval('public.reponses_id_seq', 83, true);
 -- Name: responses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.responses_id_seq', 2186, true);
+SELECT pg_catalog.setval('public.responses_id_seq', 2562, true);
 
 
 --
@@ -2930,28 +3294,28 @@ SELECT pg_catalog.setval('public.settings_id_seq', 2, true);
 -- Name: strapi_administrator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.strapi_administrator_id_seq', 7, true);
+SELECT pg_catalog.setval('public.strapi_administrator_id_seq', 8, true);
 
 
 --
 -- Name: strapi_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.strapi_permission_id_seq', 7896, true);
+SELECT pg_catalog.setval('public.strapi_permission_id_seq', 8908, true);
 
 
 --
 -- Name: strapi_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.strapi_role_id_seq', 5, true);
+SELECT pg_catalog.setval('public.strapi_role_id_seq', 6, true);
 
 
 --
 -- Name: strapi_users_roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.strapi_users_roles_id_seq', 9, true);
+SELECT pg_catalog.setval('public.strapi_users_roles_id_seq', 10, true);
 
 
 --
@@ -2979,21 +3343,21 @@ SELECT pg_catalog.setval('public.thematiques_id_seq', 3, true);
 -- Name: themes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.themes_id_seq', 60, true);
+SELECT pg_catalog.setval('public.themes_id_seq', 72, true);
 
 
 --
 -- Name: upload_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.upload_file_id_seq', 5775, true);
+SELECT pg_catalog.setval('public.upload_file_id_seq', 7244, true);
 
 
 --
 -- Name: upload_file_morph_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db_user
 --
 
-SELECT pg_catalog.setval('public.upload_file_morph_id_seq', 6135, true);
+SELECT pg_catalog.setval('public.upload_file_morph_id_seq', 7671, true);
 
 
 --
@@ -3114,6 +3478,38 @@ ALTER TABLE ONLY public.components_commandes_boxes
 
 
 --
+-- Name: components_referents_opening_hours components_referents_opening_hours_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_opening_hours
+    ADD CONSTRAINT components_referents_opening_hours_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: components_referents_openings components_referents_openings_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_openings
+    ADD CONSTRAINT components_referents_openings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: components_referents_time_tables_components components_referents_time_tables_components_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_time_tables_components
+    ADD CONSTRAINT components_referents_time_tables_components_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: components_referents_time_tables components_referents_time_tables_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_time_tables
+    ADD CONSTRAINT components_referents_time_tables_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: components_stocks_box_produit_sur_mesures components_stocks_box_produit_sur_mesures_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
 --
 
@@ -3223,6 +3619,14 @@ ALTER TABLE ONLY public.questions
 
 ALTER TABLE ONLY public.referents__users
     ADD CONSTRAINT referents__users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: referents_components referents_components_pkey; Type: CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.referents_components
+    ADD CONSTRAINT referents_components_pkey PRIMARY KEY (id);
 
 
 --
@@ -3426,6 +3830,14 @@ ALTER TABLE ONLY public.components_commandes_box_sur_mesures_components
 
 
 --
+-- Name: components_referents_time_tables_components components_referents_time_table_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.components_referents_time_tables_components
+    ADD CONSTRAINT components_referents_time_table_id_fk FOREIGN KEY (components_referents_time_table_id) REFERENCES public.components_referents_time_tables(id) ON DELETE CASCADE;
+
+
+--
 -- Name: order_components order_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: db_user
 --
 
@@ -3439,6 +3851,14 @@ ALTER TABLE ONLY public.order_components
 
 ALTER TABLE ONLY public.questions_components
     ADD CONSTRAINT question_id_fk FOREIGN KEY (question_id) REFERENCES public.questions(id) ON DELETE CASCADE;
+
+
+--
+-- Name: referents_components referent_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: db_user
+--
+
+ALTER TABLE ONLY public.referents_components
+    ADD CONSTRAINT referent_id_fk FOREIGN KEY (referent_id) REFERENCES public.referents(id) ON DELETE CASCADE;
 
 
 --
