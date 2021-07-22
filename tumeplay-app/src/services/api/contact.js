@@ -10,7 +10,8 @@ const ContactsAPI = {
         name: userAdress.firstName,
         email: userAdress.emailAdress,
         zipcode: userAdress.zipCode,
-        box: userAdress.box_id
+        box: userAdress.box_id,
+        type: userAdress.type
       }),
     });
   },

@@ -55,6 +55,11 @@ var Styles = {
     marginTop: 1,
     resizeMode: 'contain',
   },
+  label: {
+    fontFamily: Colors.textFont,
+    color: Colors.secondaryText,
+    fontSize: 12,
+  }
 };
 
 export default StyleSheet.create(Styles);

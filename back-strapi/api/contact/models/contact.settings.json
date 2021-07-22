@@ -27,6 +27,9 @@
     },
     "zone": {
       "model": "environnement"
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

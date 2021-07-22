@@ -1,5 +1,5 @@
 import React, {useState, forwardRef} from 'react';
-import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {Text, View, TouchableOpacity, Image, ScrollView, CheckBox} from 'react-native';
 import PropTypes from 'prop-types';
 import {EventRegister} from 'react-native-event-listeners';
 
@@ -11,9 +11,11 @@ import ProductErrorModal from '../components/tunnel/ProductErrorModal';
 import UserService from '../../services/User';
 
 import Styles from '../../styles/Styles';
+import Colors from '../../styles/Color'
 
 import TunnelCartSummaryStyle from '../../styles/components/TunnelCartSummary';
 import OrdersAPI from '../../services/api/orders';
+import ContactsAPI from '../../services/api/contact';
 
 TunnelCartSummary.propTypes = {
   navigation: PropTypes.object,
@@ -34,7 +36,9 @@ export default function TunnelCartSummary(props) {
   const [selectedReferent] = useState(
     props.navigation.state.params.selectedReferent
   )
-  const [userAdress] = useState(props.navigation.state.params.userAdress);
+  const [userAdress, setUserAdress] = useState(props.navigation.state.params.userAdress);
+
+  const [isSelected, setIsSelected] = useState(false)
 
   async function _confirmOrder() {
     //ORDER STRAPI API
@@ -73,7 +77,7 @@ export default function TunnelCartSummary(props) {
       }
     } else if (deliveryType === 'referent') {
       requestBody = {
-        ...requestBody, 
+        ...requestBody,
         address: selectedReferent.address,
         address_city: selectedReferent.address_city,
         address_dept: selectedReferent.address_dept,
@@ -108,7 +112,6 @@ export default function TunnelCartSummary(props) {
       }
     }
     orderPost = await OrdersAPI.orderBoxes(requestBody);
-
     switch (orderPost.status) {
       case 200:
         const _newTokens = await UserService.subTokens(1000);
@@ -131,8 +134,21 @@ export default function TunnelCartSummary(props) {
         props.navigation.navigate('TunnelProductSelect', {
           error: orderPost.status
         });
-        break;      
+        break;
     }
+    if (isSelected) {
+      let requestBody = {...userAdress}
+      await ContactsAPI.postContact(requestBody)
+    }
+  }
+
+  const handleContactValidation = (e) => {
+    if (e.target.checked) {
+      userAdress["type"] = "enrollé"
+      userAdress["zipCode"] = selectedReferent.address_zipcode;
+      setUserAdress({...userAdress})
+    }
+    setIsSelected(e.target.checked)
   }
 
   function _toggleErrorModal() {
@@ -268,6 +284,13 @@ export default function TunnelCartSummary(props) {
                 {'\n'}
               </Text>
             )}
+            {deliveryType == 'referent' && (
+               <Text style={[TunnelCartSummaryStyle.subTitle]}>
+                {selectedReferent.address}
+                {'\n'}
+                {selectedReferent.address_zipCode} {selectedReferent.address_city}
+              </Text>
+            )}
           </View>
         </View>
       </View>
@@ -310,6 +333,12 @@ export default function TunnelCartSummary(props) {
           </View>
         )}
 
+        <Splitter />
+              <View style={{flexDirection: 'row'}}>
+                <input onClick={(e) => handleContactValidation(e)} type='checkbox' value={isSelected}></input>
+                <label style={{fontFamily: Colors.textFont,color: Colors.secondaryText,fontSize: 12, marginLeft: 5}}> J 'accepte d'
+    être recontacté par Tumeplay pour améliorer le service et proposer une meilleure expérience aux prochains utilisateurs </label>
+              </View>
         <Splitter />
 
         <Text
