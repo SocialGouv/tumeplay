@@ -3,6 +3,7 @@ import env from "@kosko/env";
 import { create } from "@socialgouv/kosko-charts/components/app";
 // import { getGithubRegistryImagePath } from "../utils/getGithubRegistryImagePath";
 
+
 import { Probe } from "kubernetes-models/v1";
 
 // const project = "fce";
