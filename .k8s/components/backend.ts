@@ -3,7 +3,6 @@ import env from "@kosko/env";
 import { create } from "@socialgouv/kosko-charts/components/app";
 // import { getGithubRegistryImagePath } from "../utils/getGithubRegistryImagePath";
 
-
 import { Probe } from "kubernetes-models/v1";
 
 // const project = "fce";
@@ -23,6 +22,7 @@ const createManifests = async () => {
     config: {
       subdomain: name,
       containerPort: 1337,
+      withPostgres: true,
       // subDomainPrefix: process.env.SOCIALGOUV_PRODUCTION ? "strapi-new-" : "strapi-",
     },
     deployment: {
@@ -47,6 +47,6 @@ const createManifests = async () => {
   });
 
   return manifests;
-}
+};
 
 export default createManifests;

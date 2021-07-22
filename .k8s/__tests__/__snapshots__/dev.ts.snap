@@ -93,6 +93,26 @@ spec:
               path: /_health
               port: http
             initialDelaySeconds: 30
+          envFrom:
+            - secretRef:
+                name: azure-pg-user-0123456
+      initContainers:
+        - env:
+            - name: WAIT_FOR_RETRIES
+              value: '24'
+          envFrom:
+            - secretRef:
+                name: azure-pg-user-0123456
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.26.2
+          imagePullPolicy: Always
+          name: wait-for-postgres
+          resources:
+            limits:
+              cpu: 20m
+              memory: 32Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
 ---
 apiVersion: v1
 kind: Service
