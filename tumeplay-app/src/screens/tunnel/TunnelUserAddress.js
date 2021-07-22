@@ -20,7 +20,6 @@ import useIsMounted from '../../hooks/isMounted';
 import AddressValidator from '../../services/AddressValidator';
 import MailValidator from '../../services/MailValidator';
 import RemoteApi from '../../services/RemoteApi';
-import UserService from '../../services/User';
 
 const zipCodeTest = /^[0-9]{5}$/;
 export const phoneTest = /^0[0-9]{9}$/;
