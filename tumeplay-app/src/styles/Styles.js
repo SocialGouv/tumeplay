@@ -91,7 +91,18 @@ var Styles = {
     borderRadius: 20,
     alignSelf: 'center',
   },
-
+  confirmButton: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: Colors.mainButton,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    borderRadius: 20,
+    alignSelf: 'center',
+  },
   tunnelButtonText: {
     color: '#FFFFFF',
     fontSize: 18,
