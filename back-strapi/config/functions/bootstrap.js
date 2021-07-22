@@ -14,27 +14,71 @@ module.exports = () => {
 
     const tumpeplayConditions = [
         {
-            displayName: 'Zone métropole',
-            category: 'Tumeplay',
-            name: 'zone-metropole',
+            displayName: 'Zone métropole simple',
+            category: 'Tumeplay-Métropole',
+            name: 'simple-zone-metropole',
             plugin: 'admin',
             async handler() { 
                 return {
-                    'theme.environnement': 1
+                    'environnement.id': 1,
                 };
             }
         },
         {
-            displayName: 'Zone guyane',
-            category: 'Tumeplay',
-            name: 'zone-guyane',
+            displayName: 'Zone guyane simple',
+            category: 'Tumeplay-Guyane',
+            name: 'simple-zone-guyane',
             plugin: 'admin',
             async handler() { 
                 return {
-                    'theme.environnement': 2
+                    'environnement.id': 2,
                 };
             }
-        }
+        },
+        {
+            displayName: 'Zone métropole thèmes',
+            category: 'Tumeplay-Métropole',
+            name: 'theme-zone-metropole',
+            plugin: 'admin',
+            async handler() { 
+                return {
+                    'theme.environnement': 1,
+                };
+            }
+        },
+        {
+            displayName: 'Zone guyane thèmes',
+            category: 'Tumeplay-Guyane',
+            name: 'theme-zone-guyane',
+            plugin: 'admin',
+            async handler() { 
+                return {
+                    'theme.environnement': 2,
+                };
+            }
+        },
+        {
+            displayName: 'Zone métropole commandes',
+            category: 'Tumeplay-Métropole',
+            name: 'order-zone-metropole',
+            plugin: 'admin',
+            async handler() { 
+                return {
+                    'address_deptcode_ne': '973',
+                };
+            }
+        },
+        {
+            displayName: 'Zone guyane commandes',
+            category: 'Tumeplay-Guyane',
+            name: 'order-zone-guyane',
+            plugin: 'admin',
+            async handler() { 
+                return {
+                    'address_deptcode': '973',
+                };
+            }
+        },
     ]
 
     strapi.admin.services.permission.conditionProvider.registerMany(tumpeplayConditions);
