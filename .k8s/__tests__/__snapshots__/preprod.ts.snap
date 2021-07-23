@@ -8,19 +8,20 @@ metadata:
   annotations:
     field.cattle.io/creatorId: github
     field.cattle.io/projectId: c-gjtkk:p-m77bc
-    git/branch: v1.2.3
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/tumeplay.git
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    git/branch: refs/tags/v1.2.3
+    git/remote: socialgouv/tumeplay
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     azure-pg-admin-user: tumeplay
-    application: v1-2-3-tumeplay
+    application: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
-  name: tumeplay-85-preprod-dev42
+  name: tumeplay-preprod
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,17 +29,19 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: tumeplay-backend
-    application: v1-2-3-tumeplay
+    application: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
   name: tumeplay-backend
-  namespace: tumeplay-85-preprod-dev42
+  namespace: tumeplay-preprod
 spec:
   replicas: 1
   selector:
@@ -49,18 +52,20 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-tumeplay
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         app: tumeplay-backend
-        application: v1-2-3-tumeplay
+        application: tumeplay
         owner: tumeplay
         team: tumeplay
         cert: wildcard
     spec:
       containers:
-        - image: ghcr.io/socialgouv/tumeplay/backend:sha-undefined
+        - image: ghcr.io/socialgouv/tumeplay/backend:v1.2.3
           livenessProbe:
             httpGet:
               path: /_health
@@ -90,6 +95,21 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user
+          env:
+            - name: DATABASE_CLIENT
+              value: postgres
+            - name: DATABASE_NAME
+              value: $(PGDATABASE)
+            - name: DATABASE_HOST
+              value: $(PGHOST)
+            - name: DATABASE_PORT
+              value: $(PGPORT)
+            - name: DATABASE_USERNAME
+              value: $(PGUSER)
+            - name: DATABASE_PASSWORD
+              value: $(PGPASSWORD)
+            - name: DATABASE_SSL
+              value: 'true'
       initContainers:
         - env:
             - name: WAIT_FOR_RETRIES
@@ -113,7 +133,7 @@ kind: Service
 metadata:
   labels:
     app: tumeplay-backend
-    application: v1-2-3-tumeplay
+    application: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -121,10 +141,12 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
-  namespace: tumeplay-85-preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay-preprod
 spec:
   ports:
     - name: http
@@ -134,36 +156,41 @@ spec:
     app: tumeplay-backend
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: tumeplay-backend
-    application: v1-2-3-tumeplay
+    application: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
   name: tumeplay-backend
-  namespace: tumeplay-85-preprod-dev42
+  namespace: tumeplay-preprod
 spec:
   rules:
-    - host: preprod-tumeplay.dev42.fabrique.social.gouv.fr
+    - host: tumeplay-preprod.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
-              serviceName: tumeplay-backend
-              servicePort: 80
+              service:
+                name: tumeplay-backend
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
-        - preprod-tumeplay.dev42.fabrique.social.gouv.fr
+        - tumeplay-preprod.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: bitnami.com/v1alpha1
@@ -171,13 +198,15 @@ kind: SealedSecret
 metadata:
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   name: azure-pg-user
-  namespace: tumeplay-85-preprod-dev42
+  namespace: tumeplay-preprod
   labels:
-    application: v1-2-3-tumeplay
+    application: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -197,12 +226,14 @@ spec:
     metadata:
       annotations:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
-        app.gitlab.com/app: socialgouv-tumeplay
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: azure-pg-user
       labels:
-        application: v1-2-3-tumeplay
+        application: tumeplay
         owner: tumeplay
         team: tumeplay
         cert: wildcard

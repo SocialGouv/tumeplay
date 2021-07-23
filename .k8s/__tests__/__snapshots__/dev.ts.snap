@@ -96,6 +96,21 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user-0123456
+          env:
+            - name: DATABASE_CLIENT
+              value: postgres
+            - name: DATABASE_NAME
+              value: $(PGDATABASE)
+            - name: DATABASE_HOST
+              value: $(PGHOST)
+            - name: DATABASE_PORT
+              value: $(PGPORT)
+            - name: DATABASE_USERNAME
+              value: $(PGUSER)
+            - name: DATABASE_PASSWORD
+              value: $(PGPASSWORD)
+            - name: DATABASE_SSL
+              value: 'true'
       initContainers:
         - env:
             - name: WAIT_FOR_RETRIES
@@ -142,7 +157,7 @@ spec:
     app: tumeplay-backend
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -168,9 +183,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: tumeplay-backend
-              servicePort: 80
+              service:
+                name: tumeplay-backend
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
         - tumeplay-mybranch.dev2.fabrique.social.gouv.fr

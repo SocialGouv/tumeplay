@@ -8,9 +8,11 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: tumeplay-backend
     application: tumeplay
@@ -28,9 +30,11 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-tumeplay
-        app.gitlab.com/env: prod
-        app.gitlab.com/env.name: prod
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         app: tumeplay-backend
         application: tumeplay
@@ -38,7 +42,7 @@ spec:
         team: tumeplay
     spec:
       containers:
-        - image: ghcr.io/socialgouv/tumeplay/backend:sha-undefined
+        - image: ghcr.io/socialgouv/tumeplay/backend:v1.2.3
           livenessProbe:
             httpGet:
               path: /_health
@@ -68,6 +72,21 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user
+          env:
+            - name: DATABASE_CLIENT
+              value: postgres
+            - name: DATABASE_NAME
+              value: $(PGDATABASE)
+            - name: DATABASE_HOST
+              value: $(PGHOST)
+            - name: DATABASE_PORT
+              value: $(PGPORT)
+            - name: DATABASE_USERNAME
+              value: $(PGUSER)
+            - name: DATABASE_PASSWORD
+              value: $(PGPASSWORD)
+            - name: DATABASE_SSL
+              value: 'true'
       initContainers:
         - env:
             - name: WAIT_FOR_RETRIES
@@ -98,9 +117,11 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   namespace: tumeplay
 spec:
   ports:
@@ -111,7 +132,7 @@ spec:
     app: tumeplay-backend
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -120,9 +141,11 @@ metadata:
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: tumeplay-backend
     application: tumeplay
@@ -136,9 +159,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: tumeplay-backend
-              servicePort: 80
+              service:
+                name: tumeplay-backend
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
         - tumeplay-backend.fabrique.social.gouv.fr
@@ -148,9 +174,11 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    app.gitlab.com/app: socialgouv-tumeplay
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   name: azure-pg-user
   namespace: tumeplay
   labels:
@@ -172,10 +200,49 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-tumeplay
-        app.gitlab.com/env: prod
-        app.gitlab.com/env.name: prod
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: azure-pg-user
+      labels:
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  name: azure-tumeplay-volume
+  namespace: tumeplay
+  labels:
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+spec:
+  encryptedData:
+    azurestorageaccountkey: >-
+      AgBCZ94S0NBkf4kpOzdv/okfFIislG2ZWF9L00kRySBfk8x69PkfIBSvfmVjQlCNCVdQTkd457GBIBONkT58vXPL/QHqhwF+lQJZiu0K9i4KCciVasiWg/WHAa98kZmAU3HXVaN0Lasat2Po+WYvh0IXBWMzEcBOWAZ//HgFPNmqtelfHH0WK8pliypT6BDbewmmP+9+5ZINO1i21H0MBd0tFPc/gJJ3QlbjcWcQOvmhnwgjA44huJnJhXXrphEDf5Qt9Vf0ZuqtpsFZy2AwSJiFAt/49BBHgXymdeWpOKF14lBAWsemIVFm+OEJhk3hR1r+fV/u+KHTD5E7bzXQyKYBWv4LGYkghvXYQsvfszBLCr+fzln8dci5PorymPOPY20mttia72rpTdPLpAlRaybIGExuJ5fIRuEqUjC5qEkmsuMjaH6NRxaG2zxVxrVjn1o1E18k6KCqVdlR8qSvzwwcgeLX1IDDKAjGxhALQY+G/9X5kdurVV7cgq5gk6yZOf/fKohBBFJEWzqEtEQhr5XvueQVN+8dRZgJVWSkny6V1d6Q1Yn7N+zOg1eRfsQFaWEzJj2WDd9iciOTfqtDLMwBM0PV3OzUcbmYQdJ24sr5lHsJivNc7ASL/3rSMNySUrh3RERsE6/BZG//XEYt6HD4AIH5XJjqL2fo5/XdcYXFjBBz21JnGMJDYNsy/OEArqoaJowPPuZgJpQisBR2xvcGOhY04wQJS7XBLOZr97PjygTHAtv8ZCQVZap/tOeFFVQ56tBu2utpS8aiipiyzlpdCZ3SMRsAwqJ+19/MdtItfeVMs7Jz0dg2
+    azurestorageaccountname: >-
+      AgBFQmJrPMSqXhokDwG7DUYxCAwxSQqdDkpJUBqoHynE4Bm7J22lmFjPLG5dnenavw/GUwhobCU2Gi6bjfohRDJZzLC4Gmhv5qWCVEfm1evUHm36Li47vbAFYmsua6v/50eqbuzzquowiyLCsh84XtUQHRu5LsYkFvRZb28XTACU/oRgelIatrmh3DwqWXV+LPbakQRPAoBEKU2uUbenyjiSTivokF5sBrHpNPgW12y2pgKfhp+gwpL/pI4YTt4ql0VK9OiLo16IhV04/pAjovNLAWoQeLOa4TM1rTa7SYlKkBNgtn1szoQJNu8hoeXqLmpoEeOyFzWhKjAm/e6ZNW9z0dD2j0oZb9k6QtVMStcLBDmPEbG66GghLlaaLWInk80onvJzmPYS0tqkmu2M/j/8XXSDGu5wFr+EjoWqoQZ34EwSytmWvk8UbebJYYaW1jJ3ASOj2lXur9tLk39f8kvoDjQa6rGsPfMZLS9u2EHWPx65D8p/vUPHwCrgrtyOFm99R7GnhHQNm/9nkodJEKVoc+0g0W/86/RpNFH+h31/Va0XASAz0USBXCO7njhLfngdxWRP7ag3voNNdQ/gvy2Ij+zvn8MkZPb0XT1XTKiJSZGb0gGWUrz8MQE3KWl4ow4E2mJRyWefGevMrEQjo1sCdBJzn3uEn8G5bBxIn18HWhit7PEAYptNqYu64S6YOUwu5T9N9iMtuuRE5cQ=
+  template:
+    metadata:
+      annotations:
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      name: azure-tumeplay-volume
+      namespace: tumeplay
       labels:
         application: tumeplay
         owner: tumeplay

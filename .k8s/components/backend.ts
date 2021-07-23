@@ -1,11 +1,12 @@
 import env from "@kosko/env";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
-// import { getGithubRegistryImagePath } from "../utils/getGithubRegistryImagePath";
+import { getDeployment } from "@socialgouv/kosko-charts/utils/getDeployment";
+import { addEnvs } from "@socialgouv/kosko-charts/utils/addEnvs";
 
 import { Probe } from "kubernetes-models/v1";
 
-// const project = "fce";
+const project = "tumeplay";
 const name = "tumeplay-backend";
 
 const probe = new Probe({
@@ -16,18 +17,25 @@ const probe = new Probe({
   initialDelaySeconds: 30,
 });
 
+const getGithubRef = (env: Record<string, any>) => {
+  const ref =
+    env.GITHUB_REF && env.GITHUB_REF.startsWith("refs/tags/")
+      ? env.GITHUB_REF.split("/").pop()
+      : `sha-${env.GITHUB_SHA}`;
+  return ref;
+};
+
 const createManifests = async () => {
+  const tag = getGithubRef(process.env);
   const manifests = await create(name, {
     env,
     config: {
       subdomain: name,
       containerPort: 1337,
       withPostgres: true,
-      // subDomainPrefix: process.env.SOCIALGOUV_PRODUCTION ? "strapi-new-" : "strapi-",
     },
     deployment: {
-      // image: getGithubRegistryImagePath(({ project, name })),
-      image: `ghcr.io/socialgouv/tumeplay/backend:sha-${process.env.GITHUB_SHA}`,
+      image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
       container: {
         livenessProbe: probe,
         readinessProbe: probe,
@@ -43,6 +51,20 @@ const createManifests = async () => {
           },
         },
       },
+    },
+  });
+
+  const deployment = getDeployment(manifests);
+  addEnvs({
+    deployment,
+    data: {
+      DATABASE_CLIENT: "postgres",
+      DATABASE_NAME: "$(PGDATABASE)",
+      DATABASE_HOST: "$(PGHOST)",
+      DATABASE_PORT: "$(PGPORT)",
+      DATABASE_USERNAME: "$(PGUSER)",
+      DATABASE_PASSWORD: "$(PGPASSWORD)",
+      DATABASE_SSL: "true",
     },
   });
 
