@@ -14,17 +14,17 @@ metadata:
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    app: tumeplay-backend
+    app: backend
     application: tumeplay
     owner: tumeplay
     team: tumeplay
-  name: tumeplay-backend
+  name: backend
   namespace: tumeplay
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tumeplay-backend
+      app: backend
   template:
     metadata:
       annotations:
@@ -36,7 +36,7 @@ spec:
         app.github.com/run: '1234'
         app.github.com/sha: '0123456'
       labels:
-        app: tumeplay-backend
+        app: backend
         application: tumeplay
         owner: tumeplay
         team: tumeplay
@@ -48,7 +48,7 @@ spec:
               path: /_health
               port: http
             initialDelaySeconds: 30
-          name: tumeplay-backend
+          name: backend
           ports:
             - containerPort: 1337
               name: http
@@ -58,20 +58,25 @@ spec:
               port: http
             initialDelaySeconds: 30
           resources:
-            limits:
-              cpu: 500m
-              memory: 1280Mi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 300m
+              memory: 256Mi
+            limits:
+              cpu: '1'
+              memory: 1Gi
           startupProbe:
             httpGet:
               path: /_health
               port: http
             initialDelaySeconds: 30
+          volumeMounts:
+            - mountPath: /app/public/uploads
+              name: uploads
           envFrom:
             - secretRef:
                 name: azure-pg-user
+            - secretRef:
+                name: backend-sealed-secret
           env:
             - name: DATABASE_CLIENT
               value: postgres
@@ -87,6 +92,10 @@ spec:
               value: $(PGPASSWORD)
             - name: DATABASE_SSL
               value: 'true'
+      volumes:
+        - persistentVolumeClaim:
+            claimName: uploads
+          name: uploads
       initContainers:
         - env:
             - name: WAIT_FOR_RETRIES
@@ -105,15 +114,57 @@ spec:
               cpu: 5m
               memory: 16Mi
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  name: backend-sealed-secret
+  namespace: tumeplay
+  labels:
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+spec:
+  encryptedData:
+    MONDIALRELAY_ID: >-
+      AgBIXbydPau0Vk+AbtrvcX3djGF1uFFQ12PWNOdqff5E2XvQ516WdU5L1Kh3UwikKyqp3PMLw/O7blp2V2Dfo3zVHT3W3ZYKmCtnpN0DzvLAUcN1XdqxkHOdro47IM0tD4DOMx3h4S9qrX0HJHkJb2hAi1ABCwUphXMZYwCCLYsBMVi6vlXGbHIJZe3qUYdMf/N0KypZKKm0Gjh1P6ltbXDypwkQrwbS57m+sRMVV3CL4PLAcrSM7EHEHvSKMa8aptEL6X4KZGM1U9AAbhWM8aQ+8aKGwe5uKGELd5y83xHxbZIjeEyuub4GfO/ZNMLAVSq8IjBt0f1yelMfzLtfHce5FONLr31AimAXsqCc7vzWrS4hDdsWsfu4zpucJiNO76RWsoBBuqo0/jprW++looufA8z18f/lqHfKTc2k58ArvKK+94p2TGw/RjanKj/jFou7PPKBybAFaiiAPdKyUHFRxK0tLgHv3EeZJgwwPeCEpVabskq2VF7XCLKqyutzdavkaJZMNkXnQvDptj4vIklhHx0+RfmJgBNpLyxNf7zpudD9wLyG47Zu/C2ZNIon3Oso3tOMN3Qt9pbDpjEiZKkcnDLu9Yi0Y+Y5mIze+jFrMD2kBTzBAZ3BDbNGj/Yi1U/yrgSKTV2FY3rlChF5HpO1WmcZ0GfIC/cYrkw12YtTOxLi500xlMJI0aFe0EdWNMh/C5hLx25PdA==
+    MONDIALRELAY_SECRET: >-
+      AgB7O4E/qUXYy+qCpsUEmUVwDaiBz6ca1wHcjKzKHHWeZXFlF1hMcY9npr7GI0OP+xt7grSmFvPMFrC1moAliNwIqQTtFWd7ZyMcn31VV6HDQcAEiLDeXWKE2kgjMLydaqF9RNN23ifDngmH6IvkTQTfM1BHtGd0OgGvlLPJoBxFoZCWbWF0b5Q8SxPedYozGMrebkJjgwb7gfB149ftV9b+IJoHGnt57xRdkNicL7Vgd0QRMkJ4AWm6UdTgUfqSs7qKV+QCICn6F5i8fVIhPoQMnDCyiA0Q2yBhe4NCBNfgzvAqMc/PPgAOsqvHOPMc6fuQ06EI3mUFUIWhwqOZR1+m76cTeObhhZxMESnW3bOnUIGEPfFnsRfkmxB0snDmQA0QnhLtgRz+SwY73vLekpyYgAAj627usU8cGxZTerdaho+70MFB1mJ0q9Vf8O4dg0CtTfaZVDo2Iz8TSfcHsxqcuC+eVB1Zk8RZ1rNXZqvyy2o0KZO637fUaoeQTzEctPit6sPIV5Bm5PkRlFrXtNJyfnMMLYcQMUeTulD29SB6yTMS6NkkdBsO6/BOgpd5BCBZSoNaT8HFDiPMzUEP+TcugHlgplvK+QDbM1jjui6Hai9QUjMZPyscGsW8rIiq23THje7dSzDRmRLCRCNeObJtv380Pr8+UWRL4xsHkyPfc4zpzt6g0v3mobkMK77FVWpRBp3QG7ZCIg==
+    EMAIL_PROVIDER_PASSWORD: >-
+      AgBnzI36LhT4NAjEw4h9YFFkoBXPD/v0qqngn6u2tMadi9JNkgsD9kfVm0PiSK1pvwOuqr4QGhARtR+Livo72OoVT5wRgEoGOIsRRCtkilfcraIaFezpbHQnI4ekJCOn5p03cul1ojiv8hVVh9S7jFxa7NQNxp6Bll/1I+PJ4MkPSKy/D7AVWt6475dDZkRobs7yQ8bYHSlcHqk9hljuE7VO36Dawnx8TWaH10TJufgtr+xhSEJu60iwwJJblI9uK2cHvOz57Qu4N3WIMDIYdwsA0jjcy99gPcqaGN5jUwZhwdkW8EUPpzmVV7CqegZHH65p+tZZ4HcxuopRDGEPlKAhYHcaLXLhCErOTPV8Nc4Ngos+sKQaPXPBf5qpyTkI4F0lxR54CP9MnbZVhDYt2lmVYUTGGJH0jAqKVpvtxaPFjk3IuC2e2AcXBlcol/vQNaUnpqwmmWSKHIZKgArX22vjQs8FNHNXzZnGSSCFxK2ImbGk5HTuAphfZ2VPeQeGhj3zXIslb5dCqnbXhhEYLxBP+xlOaQnCWqx9E45sEpp5rvd+OWdRb0usxm30HN+gr26lsfdoGX8k8nrWGBHiUSl1S+3qTmdkGbYj2A5cJu5Tyqm+MGy9v9GfTAcD467yHH+BNxF7Rj25ZpM9XYCrNrbnIAIZHvroyGZAIuPByjsuNt/v+z+U2Cm3zP5XN8l70VdpsSDaso+zmRB5Yg==
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      name: backend-sealed-secret
+      labels:
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+    type: Opaque
+---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: tumeplay-backend
+    app: backend
     application: tumeplay
     owner: tumeplay
     team: tumeplay
-  name: tumeplay-backend
+  name: backend
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -129,7 +180,7 @@ spec:
       port: 80
       targetPort: 1337
   selector:
-    app: tumeplay-backend
+    app: backend
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
@@ -147,11 +198,11 @@ metadata:
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    app: tumeplay-backend
+    app: backend
     application: tumeplay
     owner: tumeplay
     team: tumeplay
-  name: tumeplay-backend
+  name: backend
   namespace: tumeplay
 spec:
   rules:
@@ -160,7 +211,7 @@ spec:
         paths:
           - backend:
               service:
-                name: tumeplay-backend
+                name: backend
                 port:
                   name: http
             path: /
@@ -168,7 +219,80 @@ spec:
   tls:
     - hosts:
         - tumeplay-backend.fabrique.social.gouv.fr
-      secretName: tumeplay-backend-crt
+      secretName: backend-crt
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations: {}
+  name: azure-tumeplay-volume
+  namespace: tumeplay
+spec:
+  encryptedData:
+    azurestorageaccountkey: >-
+      AgBCZ94S0NBkf4kpOzdv/okfFIislG2ZWF9L00kRySBfk8x69PkfIBSvfmVjQlCNCVdQTkd457GBIBONkT58vXPL/QHqhwF+lQJZiu0K9i4KCciVasiWg/WHAa98kZmAU3HXVaN0Lasat2Po+WYvh0IXBWMzEcBOWAZ//HgFPNmqtelfHH0WK8pliypT6BDbewmmP+9+5ZINO1i21H0MBd0tFPc/gJJ3QlbjcWcQOvmhnwgjA44huJnJhXXrphEDf5Qt9Vf0ZuqtpsFZy2AwSJiFAt/49BBHgXymdeWpOKF14lBAWsemIVFm+OEJhk3hR1r+fV/u+KHTD5E7bzXQyKYBWv4LGYkghvXYQsvfszBLCr+fzln8dci5PorymPOPY20mttia72rpTdPLpAlRaybIGExuJ5fIRuEqUjC5qEkmsuMjaH6NRxaG2zxVxrVjn1o1E18k6KCqVdlR8qSvzwwcgeLX1IDDKAjGxhALQY+G/9X5kdurVV7cgq5gk6yZOf/fKohBBFJEWzqEtEQhr5XvueQVN+8dRZgJVWSkny6V1d6Q1Yn7N+zOg1eRfsQFaWEzJj2WDd9iciOTfqtDLMwBM0PV3OzUcbmYQdJ24sr5lHsJivNc7ASL/3rSMNySUrh3RERsE6/BZG//XEYt6HD4AIH5XJjqL2fo5/XdcYXFjBBz21JnGMJDYNsy/OEArqoaJowPPuZgJpQisBR2xvcGOhY04wQJS7XBLOZr97PjygTHAtv8ZCQVZap/tOeFFVQ56tBu2utpS8aiipiyzlpdCZ3SMRsAwqJ+19/MdtItfeVMs7Jz0dg2
+    azurestorageaccountname: >-
+      AgBFQmJrPMSqXhokDwG7DUYxCAwxSQqdDkpJUBqoHynE4Bm7J22lmFjPLG5dnenavw/GUwhobCU2Gi6bjfohRDJZzLC4Gmhv5qWCVEfm1evUHm36Li47vbAFYmsua6v/50eqbuzzquowiyLCsh84XtUQHRu5LsYkFvRZb28XTACU/oRgelIatrmh3DwqWXV+LPbakQRPAoBEKU2uUbenyjiSTivokF5sBrHpNPgW12y2pgKfhp+gwpL/pI4YTt4ql0VK9OiLo16IhV04/pAjovNLAWoQeLOa4TM1rTa7SYlKkBNgtn1szoQJNu8hoeXqLmpoEeOyFzWhKjAm/e6ZNW9z0dD2j0oZb9k6QtVMStcLBDmPEbG66GghLlaaLWInk80onvJzmPYS0tqkmu2M/j/8XXSDGu5wFr+EjoWqoQZ34EwSytmWvk8UbebJYYaW1jJ3ASOj2lXur9tLk39f8kvoDjQa6rGsPfMZLS9u2EHWPx65D8p/vUPHwCrgrtyOFm99R7GnhHQNm/9nkodJEKVoc+0g0W/86/RpNFH+h31/Va0XASAz0USBXCO7njhLfngdxWRP7ag3voNNdQ/gvy2Ij+zvn8MkZPb0XT1XTKiJSZGb0gGWUrz8MQE3KWl4ow4E2mJRyWefGevMrEQjo1sCdBJzn3uEn8G5bBxIn18HWhit7PEAYptNqYu64S6YOUwu5T9N9iMtuuRE5cQ=
+  template:
+    metadata:
+      annotations: {}
+      name: azure-tumeplay-volume
+      namespace: tumeplay
+    type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  namespace: tumeplay
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      usage: tumeplay-uploads
+  storageClassName: ''
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    usage: tumeplay-uploads
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: tumeplay-uploads
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay
+spec:
+  accessModes:
+    - ReadWriteMany
+  azureFile:
+    secretName: azure-tumeplay-volume
+    secretNamespace: tumeplay
+    shareName: uploads
+  capacity:
+    storage: 5Gi
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: ''
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -206,43 +330,6 @@ spec:
         app.github.com/run: '1234'
         app.github.com/sha: '0123456'
       name: azure-pg-user
-      labels:
-        application: tumeplay
-        owner: tumeplay
-        team: tumeplay
-    type: Opaque
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  annotations:
-    app.github.com/job: '5678'
-    app.github.com/ref: refs/tags/v1.2.3
-    app.github.com/repo: socialgouv/tumeplay
-    app.github.com/run: '1234'
-    app.github.com/sha: '0123456'
-  name: azure-tumeplay-volume
-  namespace: tumeplay
-  labels:
-    application: tumeplay
-    owner: tumeplay
-    team: tumeplay
-spec:
-  encryptedData:
-    azurestorageaccountkey: >-
-      AgBCZ94S0NBkf4kpOzdv/okfFIislG2ZWF9L00kRySBfk8x69PkfIBSvfmVjQlCNCVdQTkd457GBIBONkT58vXPL/QHqhwF+lQJZiu0K9i4KCciVasiWg/WHAa98kZmAU3HXVaN0Lasat2Po+WYvh0IXBWMzEcBOWAZ//HgFPNmqtelfHH0WK8pliypT6BDbewmmP+9+5ZINO1i21H0MBd0tFPc/gJJ3QlbjcWcQOvmhnwgjA44huJnJhXXrphEDf5Qt9Vf0ZuqtpsFZy2AwSJiFAt/49BBHgXymdeWpOKF14lBAWsemIVFm+OEJhk3hR1r+fV/u+KHTD5E7bzXQyKYBWv4LGYkghvXYQsvfszBLCr+fzln8dci5PorymPOPY20mttia72rpTdPLpAlRaybIGExuJ5fIRuEqUjC5qEkmsuMjaH6NRxaG2zxVxrVjn1o1E18k6KCqVdlR8qSvzwwcgeLX1IDDKAjGxhALQY+G/9X5kdurVV7cgq5gk6yZOf/fKohBBFJEWzqEtEQhr5XvueQVN+8dRZgJVWSkny6V1d6Q1Yn7N+zOg1eRfsQFaWEzJj2WDd9iciOTfqtDLMwBM0PV3OzUcbmYQdJ24sr5lHsJivNc7ASL/3rSMNySUrh3RERsE6/BZG//XEYt6HD4AIH5XJjqL2fo5/XdcYXFjBBz21JnGMJDYNsy/OEArqoaJowPPuZgJpQisBR2xvcGOhY04wQJS7XBLOZr97PjygTHAtv8ZCQVZap/tOeFFVQ56tBu2utpS8aiipiyzlpdCZ3SMRsAwqJ+19/MdtItfeVMs7Jz0dg2
-    azurestorageaccountname: >-
-      AgBFQmJrPMSqXhokDwG7DUYxCAwxSQqdDkpJUBqoHynE4Bm7J22lmFjPLG5dnenavw/GUwhobCU2Gi6bjfohRDJZzLC4Gmhv5qWCVEfm1evUHm36Li47vbAFYmsua6v/50eqbuzzquowiyLCsh84XtUQHRu5LsYkFvRZb28XTACU/oRgelIatrmh3DwqWXV+LPbakQRPAoBEKU2uUbenyjiSTivokF5sBrHpNPgW12y2pgKfhp+gwpL/pI4YTt4ql0VK9OiLo16IhV04/pAjovNLAWoQeLOa4TM1rTa7SYlKkBNgtn1szoQJNu8hoeXqLmpoEeOyFzWhKjAm/e6ZNW9z0dD2j0oZb9k6QtVMStcLBDmPEbG66GghLlaaLWInk80onvJzmPYS0tqkmu2M/j/8XXSDGu5wFr+EjoWqoQZ34EwSytmWvk8UbebJYYaW1jJ3ASOj2lXur9tLk39f8kvoDjQa6rGsPfMZLS9u2EHWPx65D8p/vUPHwCrgrtyOFm99R7GnhHQNm/9nkodJEKVoc+0g0W/86/RpNFH+h31/Va0XASAz0USBXCO7njhLfngdxWRP7ag3voNNdQ/gvy2Ij+zvn8MkZPb0XT1XTKiJSZGb0gGWUrz8MQE3KWl4ow4E2mJRyWefGevMrEQjo1sCdBJzn3uEn8G5bBxIn18HWhit7PEAYptNqYu64S6YOUwu5T9N9iMtuuRE5cQ=
-  template:
-    metadata:
-      annotations:
-        app.github.com/job: '5678'
-        app.github.com/ref: refs/tags/v1.2.3
-        app.github.com/repo: socialgouv/tumeplay
-        app.github.com/run: '1234'
-        app.github.com/sha: '0123456'
-      name: azure-tumeplay-volume
-      namespace: tumeplay
       labels:
         application: tumeplay
         owner: tumeplay

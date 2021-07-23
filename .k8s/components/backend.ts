@@ -1,21 +1,16 @@
 import env from "@kosko/env";
+import { loadFile } from "@kosko/yaml";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { getDeployment } from "@socialgouv/kosko-charts/utils/getDeployment";
 import { addEnvs } from "@socialgouv/kosko-charts/utils/addEnvs";
-
-import { Probe } from "kubernetes-models/v1";
-
-const project = "tumeplay";
-const name = "tumeplay-backend";
-
-const probe = new Probe({
-  httpGet: {
-    path: "/_health",
-    port: "http",
-  },
-  initialDelaySeconds: 30,
-});
+import { azureProjectVolume } from "@socialgouv/kosko-charts/components/azure-storage/azureProjectVolume";
+import {
+  VolumeMount,
+  Probe,
+  ResourceRequirements,
+  Volume,
+} from "kubernetes-models/v1";
 
 const getGithubRef = (env: Record<string, any>) => {
   const ref =
@@ -25,36 +20,74 @@ const getGithubRef = (env: Record<string, any>) => {
   return ref;
 };
 
-const createManifests = async () => {
+const component = "backend";
+
+const prob = new Probe({
+  httpGet: {
+    path: "/_health",
+    port: "http",
+  },
+  initialDelaySeconds: 30,
+});
+
+const resources = new ResourceRequirements({
+  requests: {
+    cpu: "300m",
+    memory: "256Mi",
+  },
+  limits: {
+    cpu: "1",
+    memory: "1Gi",
+  },
+});
+
+export default async () => {
+  const volumeName = "uploads";
+  const ephemeralVolume = env.env !== "prod"; // dont use fixed storage except in prod. theres no dev storage srv atm
+
   const tag = getGithubRef(process.env);
-  const manifests = await create(name, {
+
+  const [persistentVolumeClaim, persistentVolume] = azureProjectVolume(
+    volumeName,
+    {
+      storage: "5Gi",
+    }
+  );
+  const uploadsVolume = new Volume({
+    persistentVolumeClaim: { claimName: persistentVolumeClaim.metadata!.name! },
+    name: volumeName,
+  });
+
+  const emptyDir = new Volume({ name: volumeName, emptyDir: {} });
+
+  const uploadsVolumeMount = new VolumeMount({
+    mountPath: "/app/public/uploads",
+    name: volumeName,
+  });
+
+  // generate basic strapi manifests
+  const manifests = await create(component, {
     env,
     config: {
-      subdomain: name,
-      containerPort: 1337,
       withPostgres: true,
+      subdomain: "tumeplay-backend",
+      containerPort: 1337,
+      image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
       container: {
-        livenessProbe: probe,
-        readinessProbe: probe,
-        startupProbe: probe,
-        resources: {
-          requests: {
-            cpu: "100m",
-            memory: "128Mi",
-          },
-          limits: {
-            cpu: "500m",
-            memory: "1280Mi",
-          },
-        },
+        livenessProbe: prob,
+        readinessProbe: prob,
+        startupProbe: prob,
+        resources,
+        volumeMounts: [uploadsVolumeMount],
       },
+      volumes: [ephemeralVolume ? emptyDir : uploadsVolume],
     },
   });
 
   const deployment = getDeployment(manifests);
+
   addEnvs({
     deployment,
     data: {
@@ -68,7 +101,10 @@ const createManifests = async () => {
     },
   });
 
-  return manifests;
+  const azureVolume = loadFile(
+    `environments/${env.env}/azure-volume.sealed-secret.yaml`
+  )().catch(() => []);
+  return manifests
+    .concat(azureVolume as any)
+    .concat(ephemeralVolume ? [] : [persistentVolumeClaim, persistentVolume]);
 };
-
-export default createManifests;
