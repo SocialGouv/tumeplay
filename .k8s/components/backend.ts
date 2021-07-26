@@ -43,7 +43,7 @@ const resources = new ResourceRequirements({
 
 export default async () => {
   const volumeName = "uploads";
-  const ephemeralVolume = env.env !== "prod"; // dont use fixed storage except in prod. theres no dev storage srv atm
+  const ephemeralVolume = env.env !== "prod" && env.env !== "preprod"; // dont use fixed storage except in prod. theres no dev storage srv atm
 
   const tag = getGithubRef(process.env);
 
