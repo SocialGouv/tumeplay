@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/SocialGouv/Tumeplay/compare/v1.0.3...v1.0.4) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k8s:** add preprod volume ([1125a93](https://github.com/SocialGouv/Tumeplay/commit/1125a939a12b40963036809942f50dd86268cbcd))
+
 ## [1.0.3](https://github.com/SocialGouv/Tumeplay/compare/v1.0.2...v1.0.3) (2021-07-26)
 
 
