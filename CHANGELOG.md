@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/SocialGouv/Tumeplay/compare/v1.0.2...v1.0.3) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k8s:** fix tag ([f3bd800](https://github.com/SocialGouv/Tumeplay/commit/f3bd8001d0d6171860bc19277f5da0a1b5aee960))
+
 ## [1.0.2](https://github.com/SocialGouv/Tumeplay/compare/v1.0.1...v1.0.2) (2021-07-26)
 
 
