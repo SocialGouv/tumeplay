@@ -1,0 +1,15 @@
+{
+  "name": "tumeplay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:SocialGouv/Tumeplay.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "seal-secrets": "sre-secrets --from=./.secrets.yaml --to=./.k8s",
+    "k8s": "yarn --silent --cwd .k8s"
+  },
+  "devDependencies": {
+    "@socialgouv/sre-secrets": "^1.4.0"
+  }
+}
