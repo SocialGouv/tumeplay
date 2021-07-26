@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/SocialGouv/Tumeplay/compare/v1.0.1...v1.0.2) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k8s:** update secrets ([db32c80](https://github.com/SocialGouv/Tumeplay/commit/db32c8034f6a4ef61debcb6798205a125550e9e3))
+
 ## [1.0.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.0...v1.0.1) (2021-07-26)
 
 
