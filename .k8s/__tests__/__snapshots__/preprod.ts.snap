@@ -116,8 +116,9 @@ spec:
             - name: DATABASE_SSL
               value: 'true'
       volumes:
-        - name: uploads
-          emptyDir: {}
+        - persistentVolumeClaim:
+            claimName: uploads
+          name: uploads
       initContainers:
         - env:
             - name: WAIT_FOR_RETRIES
@@ -267,6 +268,62 @@ spec:
       name: azure-tumeplay-volume
       namespace: tumeplay
     type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  namespace: tumeplay-preprod
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      usage: tumeplay-uploads
+  storageClassName: ''
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    usage: tumeplay-uploads
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: tumeplay-uploads
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay-preprod
+spec:
+  accessModes:
+    - ReadWriteMany
+  azureFile:
+    secretName: azure-tumeplay-volume
+    secretNamespace: tumeplay-preprod
+    shareName: uploads
+  capacity:
+    storage: 5Gi
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: ''
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
