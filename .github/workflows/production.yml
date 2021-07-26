@@ -131,8 +131,8 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           tags: "${{ steps.docker_meta.outputs.tags }}"
           labels: "${{ steps.docker_meta.outputs.labels }}"
-          cache-to: "type=local,dest=/tmp/.buildx-backend-cache"
-          cache-from: "type=local,src=/tmp/.buildx-backend-cache"
+          cache-to: "type=local,dest=/tmp/.buildx-frontend-cache"
+          cache-from: "type=local,src=/tmp/.buildx-frontend-cache"
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
