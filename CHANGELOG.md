@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/SocialGouv/Tumeplay/compare/v1.0.5...v1.0.6) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k8s:** use dev hostname for SSL ([b56b385](https://github.com/SocialGouv/Tumeplay/commit/b56b385c87e6b62d40886e519c09d2bdf9fa312e))
+
 ## [1.0.5](https://github.com/SocialGouv/Tumeplay/compare/v1.0.4...v1.0.5) (2021-07-26)
 
 
