@@ -64,12 +64,13 @@ jobs:
       - name: Image build and register
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./back-strapi
           push: "true"
-          file: packages/backend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           tags: "${{ steps.docker_meta.outputs.tags }}"
           labels: "${{ steps.docker_meta.outputs.labels }}"
+          cache-to: "type=local,dest=/tmp/.buildx-backend-cache"
+          cache-from: "type=local,src=/tmp/.buildx-backend-cache"
 
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND IMAGE
@@ -125,12 +126,13 @@ jobs:
       - name: Image build and register
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./tumeplay-app
           push: "true"
-          file: packages/frontend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           tags: "${{ steps.docker_meta.outputs.tags }}"
           labels: "${{ steps.docker_meta.outputs.labels }}"
+          cache-to: "type=local,dest=/tmp/.buildx-backend-cache"
+          cache-from: "type=local,src=/tmp/.buildx-backend-cache"
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
