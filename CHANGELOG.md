@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.0...v1.0.1) (2021-07-26)
+
+
+### Bug Fixes
+
+* **ci:** fix docker path ([14c14ef](https://github.com/SocialGouv/Tumeplay/commit/14c14ef90895669cc3a1a9f3ca5408b4932d1b38))
+
 # 1.0.0 (2021-07-26)
 
 
