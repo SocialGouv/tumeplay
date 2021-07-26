@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/SocialGouv/Tumeplay/compare/v1.0.6...v1.0.7) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k9s:** uploads path ([34178b9](https://github.com/SocialGouv/Tumeplay/commit/34178b999f9bf20a9ee9522216d36ec2953a03eb))
+
 ## [1.0.6](https://github.com/SocialGouv/Tumeplay/compare/v1.0.5...v1.0.6) (2021-07-26)
 
 
