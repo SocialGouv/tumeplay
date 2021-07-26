@@ -103,7 +103,10 @@ export default async () => {
 
   const azureVolume = loadFile(
     `environments/${env.env}/azure-volume.sealed-secret.yaml`
-  )().catch(() => []);
+  )().catch((e) => {
+    console.error(e);
+    return [];
+  });
   return manifests
     .concat(azureVolume as any)
     .concat(ephemeralVolume ? [] : [persistentVolumeClaim, persistentVolume]);
