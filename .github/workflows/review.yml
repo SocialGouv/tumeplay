@@ -184,7 +184,7 @@ jobs:
   ##############################################################################
   deploy-backend:
     name: Deploy application
-    runs-on: ubuntu-latest
+    runs-on: ghcr.io/socialgouv/docker/ci-deploy:6.36.0
     needs: [register-backend, register-frontend, manifests]
     steps:
       - name: Checkout repository
@@ -200,25 +200,11 @@ jobs:
         with:
           name: namespace.yml
 
-      - name: Get namespace name
-        uses: mikefarah/yq@master
-        id: namespace
-        with:
-          cmd: yq eval '.metadata.name' namespace.yml | tr '[:upper:]' '[:lower:]'
-
-      - name: Install Kapp
-        uses: vmware-tanzu/carvel-setup-action@v1
-        with:
-          only: kapp
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get project and namespace names
         run: |
           cat ".github/review.env" >> $GITHUB_ENV
           echo "project=${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
-          echo "namespace=${NAMESPACE}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
-        env:
-          NAMESPACE: ${{ steps.namespace.outputs.result }}
+          echo "namespace=$(yq eval '.metadata.name' namespace.yml | tr '[:upper:]' '[:lower:]')" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
 
       - name: Notify deployment start
         uses: bobheadxi/deployments@v0.4.3
