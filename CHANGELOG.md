@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/SocialGouv/Tumeplay/compare/v1.0.7...v1.0.8) (2021-07-26)
+
+
+### Bug Fixes
+
+* **ci:** fix prod env url ([2cb814c](https://github.com/SocialGouv/Tumeplay/commit/2cb814cbf84e43233312dd41b70d99ecd4d557d7))
+
 ## [1.0.7](https://github.com/SocialGouv/Tumeplay/compare/v1.0.6...v1.0.7) (2021-07-26)
 
 
