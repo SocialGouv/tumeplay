@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/SocialGouv/Tumeplay/compare/v1.0.4...v1.0.5) (2021-07-26)
+
+
+### Bug Fixes
+
+* **k8s:** preprod volume secret ([0519abe](https://github.com/SocialGouv/Tumeplay/commit/0519abe9f654d360d40e17eb63ff6f4cc60042fa))
+
 ## [1.0.4](https://github.com/SocialGouv/Tumeplay/compare/v1.0.3...v1.0.4) (2021-07-26)
 
 
