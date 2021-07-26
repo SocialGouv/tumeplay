@@ -42,7 +42,7 @@ spec:
         team: tumeplay
     spec:
       containers:
-        - image: ghcr.io/socialgouv/tumeplay/backend:v1.2.3
+        - image: ghcr.io/socialgouv/tumeplay/backend:1.2.3
           livenessProbe:
             httpGet:
               path: /_health
