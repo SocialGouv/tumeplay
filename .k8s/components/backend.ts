@@ -61,7 +61,7 @@ export default async () => {
   const emptyDir = new Volume({ name: volumeName, emptyDir: {} });
 
   const uploadsVolumeMount = new VolumeMount({
-    mountPath: "/app/public/uploads",
+    mountPath: "/public/uploads",
     name: volumeName,
   });
 
