@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/SocialGouv/Tumeplay/compare/v1.0.9...v1.0.10) (2021-07-27)
+
+
+### Bug Fixes
+
+* test tokens ([ff22a51](https://github.com/SocialGouv/Tumeplay/commit/ff22a51e3e5e31e63b417facce9e01776e9358e6))
+
 ## [1.0.9](https://github.com/SocialGouv/Tumeplay/compare/v1.0.8...v1.0.9) (2021-07-27)
 
 
