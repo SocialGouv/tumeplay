@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/SocialGouv/Tumeplay/compare/v1.0.11...v1.0.12) (2021-07-28)
+
+
+### Bug Fixes
+
+* **ci:** fix envs ([25c2823](https://github.com/SocialGouv/Tumeplay/commit/25c28232c4dd2bb378f7a01a4b809fb66f593fa9))
+
 ## [1.0.11](https://github.com/SocialGouv/Tumeplay/compare/v1.0.10...v1.0.11) (2021-07-28)
 
 
