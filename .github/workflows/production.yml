@@ -329,7 +329,7 @@ jobs:
           kapp --dangerous-override-ownership-of-existing-resources \
           -y deploy \
           -a ${{ env.project }} \
-          --namespace domifa \
+          --namespace tumeplay \
           -f manifests-production.yml
 
     # - name: Notify deployment end
