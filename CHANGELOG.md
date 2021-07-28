@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/SocialGouv/Tumeplay/compare/v1.0.10...v1.0.11) (2021-07-28)
+
+
+### Bug Fixes
+
+* **ci:** add RANCHER_PROJECT_ID ([4c9039f](https://github.com/SocialGouv/Tumeplay/commit/4c9039fdfafd6aa050f3761c07c3c2ee8354655f))
+
 ## [1.0.10](https://github.com/SocialGouv/Tumeplay/compare/v1.0.9...v1.0.10) (2021-07-27)
 
 
