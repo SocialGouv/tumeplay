@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/SocialGouv/Tumeplay/compare/v1.0.12...v1.0.13) (2021-07-28)
+
+
+### Bug Fixes
+
+* **ci:** prod namespace ([e5105f5](https://github.com/SocialGouv/Tumeplay/commit/e5105f533b21abb9dd9236113584622fdd024417))
+
 ## [1.0.12](https://github.com/SocialGouv/Tumeplay/compare/v1.0.11...v1.0.12) (2021-07-28)
 
 
