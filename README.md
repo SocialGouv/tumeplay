@@ -19,3 +19,4 @@ yarn k8s generate --env prod
 ```
 
 Generated manifests are snapshotted to prevent regressions, run `yarn k8s test -u` to update the snaphosts.
+
