@@ -1,6 +1,7 @@
 FROM node:12-alpine as builder
 
 ARG buildenv
+ARG REACT_APP_API_URL
 
 WORKDIR /
 

@@ -86,7 +86,9 @@ jobs:
 
       - name: Get project name
         run: |
+          cat ".github/review.env" >> $GITHUB_ENV
           echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
       - name: Create image labels and tags
         id: docker_meta
@@ -125,12 +127,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-frontend
 
+      - name: debug backend URL
+        script: |
+          echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+
       - name: Image build and register
         uses: docker/build-push-action@v2
         with:
           push: "true"
           context: ./tumeplay-app
-          build-args: buildenv=dev.guyane
+          build-args: |
+            buildenv=dev.guyane
+            REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
           builder: ${{ steps.buildx.outputs.name }}
           tags: "${{ steps.docker_meta.outputs.tags }}"
           labels: "${{ steps.docker_meta.outputs.labels }}"
