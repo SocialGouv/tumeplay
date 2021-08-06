@@ -128,7 +128,7 @@ jobs:
             ${{ runner.os }}-buildx-frontend
 
       - name: debug backend URL
-        script: |
+        run: |
           echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
       - name: Image build and register
