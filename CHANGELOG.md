@@ -1,3 +1,10 @@
+## [1.0.14-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.1...v1.0.14-alpha.2) (2021-08-06)
+
+
+### Bug Fixes
+
+* Backend subdomain. ([33072ba](https://github.com/SocialGouv/Tumeplay/commit/33072ba54e7d287c1f3d56023a009a7e6b83242e))
+
 ## [1.0.14-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.13...v1.0.14-alpha.1) (2021-08-06)
 
 
