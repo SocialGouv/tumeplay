@@ -7,13 +7,13 @@ import { ok } from "assert";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { EnvVar } from "kubernetes-models/v1/EnvVar";
 import { getManifests as getBackendManifests } from "./backend";
-// import environments from "@socialgouv/kosko-charts/environments";
+import environments from "@socialgouv/kosko-charts/environments";
 
 export const getManifests = async () => {
   const probesPath = "/";
   const name = "frontend";
-  // const subdomain = "tumeplay";
-  // const ciEnv = environments(process.env);
+  const subdomain = "tumeplay";
+  const ciEnv = environments(process.env);
 
   const tag = process.env.GITHUB_SHA;
 
@@ -34,9 +34,9 @@ export const getManifests = async () => {
 
   const manifests = await create(name, {
     env,
-    // config: {
-    //   subdomain: ciEnv.isProduction ? `fake-${subdomain}` : subdomain,
-    // },
+    config: {
+      subdomain: ciEnv.isProduction ? `fake-${subdomain}` : subdomain,
+    },
     deployment: {
       image: `ghcr.io/socialgouv/tumeplay/frontend:sha-${tag}`,
       ...podProbes,
