@@ -11,6 +11,7 @@ import {
   ResourceRequirements,
   Volume,
 } from "kubernetes-models/v1";
+import environments from "@socialgouv/kosko-charts/environments";
 
 const getGithubRef = (env: Record<string, any>) => {
   const ref =
@@ -51,7 +52,9 @@ const getAzureProjectVolume = () => {
 
 export const getManifests = async () => {
   const volumeName = "uploads";
+  const subdomain = "tumeplay-backend";
   const tag = getGithubRef(process.env);
+  const ciEnv = environments(process.env);
   const [persistentVolumeClaim] = getAzureProjectVolume();
 
   const uploadsVolume = new Volume({
@@ -71,9 +74,11 @@ export const getManifests = async () => {
     env,
     config: {
       withPostgres: true,
-      subdomain: "tumeplay-backend",
+      subdomain,
       containerPort: 1337,
+      ingress: true,
       image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
+      subDomainPrefix: ciEnv.isProduction ? `fake-` : `${subdomain}-`,
     },
     deployment: {
       container: {
