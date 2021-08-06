@@ -1,3 +1,11 @@
+## [1.0.14-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.13...v1.0.14-alpha.1) (2021-08-06)
+
+
+### Bug Fixes
+
+* Add frontend deployment. ([558857f](https://github.com/SocialGouv/Tumeplay/commit/558857fdfe85f1ada8a6c30019337088cf97fb1d))
+* Preprod and prod environment URLs. ([cd96844](https://github.com/SocialGouv/Tumeplay/commit/cd9684401d7ce74e41b8f4ed6c15615aba114cec))
+
 ## [1.0.13](https://github.com/SocialGouv/Tumeplay/compare/v1.0.12...v1.0.13) (2021-07-28)
 
 
