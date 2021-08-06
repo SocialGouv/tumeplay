@@ -2,6 +2,7 @@ FROM node:12-alpine as builder
 
 ARG buildenv
 ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 WORKDIR /
 
@@ -27,4 +28,3 @@ FROM ghcr.io/socialgouv/docker/nginx4spa:6.24.0
 COPY --from=builder /build /usr/share/nginx/html
 
 ENV NGINX_PORT=80
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
