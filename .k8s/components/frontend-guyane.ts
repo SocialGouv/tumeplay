@@ -34,9 +34,7 @@ export const getManifests = async () => {
 
   const manifests = await create(name, {
     env,
-    // config: {
-    //   subdomain: ciEnv.isProduction ? `fake-${subdomain}` : subdomain,
-    // },
+    config: { subdomain: "tumeplay-guyane" },
     deployment: {
       image: `ghcr.io/socialgouv/tumeplay/frontend:sha-${tag}`,
       ...podProbes,
