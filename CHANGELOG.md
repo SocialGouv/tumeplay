@@ -1,3 +1,10 @@
+## [1.0.14-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.6...v1.0.14-alpha.7) (2021-08-06)
+
+
+### Bug Fixes
+
+* Expose REACT_APP_API_URL before build. ([b34e5e2](https://github.com/SocialGouv/Tumeplay/commit/b34e5e2e37ebbc0e676886f6cec87cd18aeaeb65))
+
 ## [1.0.14-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.5...v1.0.14-alpha.6) (2021-08-06)
 
 
