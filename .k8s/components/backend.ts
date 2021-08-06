@@ -73,12 +73,12 @@ export const getManifests = async () => {
   const manifests = await create(component, {
     env,
     config: {
-      withPostgres: true,
       subdomain,
-      containerPort: 1337,
       ingress: true,
+      withPostgres: true,
+      containerPort: 1337,
       image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
-      subDomainPrefix: ciEnv.isProduction ? `fake-` : `${subdomain}-`,
+      subDomainPrefix: ciEnv.isProduction ? `fake-` : `backend-`,
     },
     deployment: {
       container: {
