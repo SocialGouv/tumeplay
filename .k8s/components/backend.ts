@@ -41,18 +41,19 @@ const resources = new ResourceRequirements({
   },
 });
 
-export default async () => {
+// dont use fixed storage except in prod. theres no dev storage srv atm
+const isDev = () => env.env !== "prod" && env.env !== "preprod";
+
+const getAzureProjectVolume = () => {
   const volumeName = "uploads";
-  const ephemeralVolume = env.env !== "prod" && env.env !== "preprod"; // dont use fixed storage except in prod. theres no dev storage srv atm
+  return azureProjectVolume(volumeName, { storage: "5Gi" });
+}
 
+export const getManifests = async () => {
+  const volumeName = "uploads";
   const tag = getGithubRef(process.env);
+  const [persistentVolumeClaim] = getAzureProjectVolume();
 
-  const [persistentVolumeClaim, persistentVolume] = azureProjectVolume(
-    volumeName,
-    {
-      storage: "5Gi",
-    }
-  );
   const uploadsVolume = new Volume({
     persistentVolumeClaim: { claimName: persistentVolumeClaim.metadata!.name! },
     name: volumeName,
@@ -82,10 +83,16 @@ export default async () => {
         resources,
         volumeMounts: [uploadsVolumeMount],
       },
-      volumes: [ephemeralVolume ? emptyDir : uploadsVolume],
+      volumes: [isDev() ? emptyDir : uploadsVolume],
     },
   });
 
+  return manifests;
+}
+
+export default async () => {
+  const [persistentVolumeClaim, persistentVolume] = getAzureProjectVolume();
+  const manifests = await getManifests();
   const deployment = getDeployment(manifests);
 
   addEnvs({
@@ -107,7 +114,8 @@ export default async () => {
     console.error(e);
     return [];
   });
+
   return manifests
     .concat(azureVolume as any)
-    .concat(ephemeralVolume ? [] : [persistentVolumeClaim, persistentVolume]);
+    .concat(isDev() ? [] : [persistentVolumeClaim, persistentVolume]);
 };
