@@ -208,15 +208,6 @@ jobs:
         with:
           name: namespace-preproduction.yml
 
-      # - name: Notify deployment start
-      #   uses: bobheadxi/deployments@v0.4.3
-      #   id: deployment
-      #   with:
-      #     step: start
-      #     env: ${{ env.namespace }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     desc: "Deploying environment: ${{ env.namespace }}"
-
       - name: Install Kapp
         uses: vmware-tanzu/carvel-setup-action@v1
         with:
@@ -234,16 +225,6 @@ jobs:
 
       - name: Deploy application
         run: kapp --dangerous-override-ownership-of-existing-resources -y deploy -a ${{ env.project }} --namespace ${{ env.namespace }} -f manifests-preproduction.yml
-
-    # - name: Notify deployment end
-    #   uses: bobheadxi/deployments@v0.4.3
-    #   if: always()
-    #   with:
-    #     step: finish
-    #     status: ${{ job.status }}
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-    #     env_url: https://${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## GENERATE PROD KUBERNETES MANIFESTS
@@ -287,7 +268,8 @@ jobs:
     needs: manifests-production
     environment:
       name: production
-      url: https://tumeplay-backend.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: https://${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      # url: https://tumeplay-backend.${{ env.SOCIALGOUV_BASE_DOMAIN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -302,15 +284,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: manifests-production.yml
-
-      # - name: Notify deployment start
-      #   uses: bobheadxi/deployments@v0.4.3
-      #   id: deployment
-      #   with:
-      #     step: start
-      #     env: ${{ env.namespace }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     desc: "Deploying environment: ${{ env.namespace }}"
 
       - name: Install Kapp
         uses: vmware-tanzu/carvel-setup-action@v1
@@ -331,13 +304,3 @@ jobs:
           -a ${{ env.project }} \
           --namespace tumeplay \
           -f manifests-production.yml
-
-    # - name: Notify deployment end
-    #   uses: bobheadxi/deployments@v0.4.3
-    #   if: always()
-    #   with:
-    #     step: finish
-    #     status: ${{ job.status }}
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-    #     env_url: https://${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
