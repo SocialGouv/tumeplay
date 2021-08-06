@@ -1,3 +1,10 @@
+## [1.0.14-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.5...v1.0.14-alpha.6) (2021-08-06)
+
+
+### Bug Fixes
+
+* Expose REACT_APP_API_URL within dockerfile ENV. ([3a3ea6b](https://github.com/SocialGouv/Tumeplay/commit/3a3ea6bef834df0df1cb4ceb1afaf1bbe0b12043))
+
 ## [1.0.14-alpha.5](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.4...v1.0.14-alpha.5) (2021-08-06)
 
 
