@@ -11,7 +11,7 @@ import { getManifests as getBackendManifests } from "./backend";
 
 export const getManifests = async () => {
   const probesPath = "/";
-  const name = "frontend";
+  const name = "frontend-guyane";
   // const subdomain = "tumeplay";
   // const ciEnv = environments(process.env);
 
