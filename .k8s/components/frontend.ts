@@ -39,7 +39,7 @@ export const getManifests = async () => {
       subdomain: ciEnv.isProduction ? `fake-${subdomain}` : subdomain,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/domifa/frontend:sha-${tag}`,
+      image: `ghcr.io/socialgouv/tumeplay/frontend:sha-${tag}`,
       ...podProbes,
     },
   });
