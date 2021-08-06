@@ -1,3 +1,10 @@
+## [1.0.14-alpha.8](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.7...v1.0.14-alpha.8) (2021-08-06)
+
+
+### Bug Fixes
+
+* Frontend image build-args. ([a29c6b0](https://github.com/SocialGouv/Tumeplay/commit/a29c6b0ffb4f03ed502508e1509392e078b7b687))
+
 ## [1.0.14-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.6...v1.0.14-alpha.7) (2021-08-06)
 
 
