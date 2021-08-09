@@ -21,6 +21,7 @@ COPY public ./public
 #COPY environnements/env.$buildenv .env
 COPY environnements/env.dev.guyane .env
 
+RUN env
 RUN npm run build
 
 FROM ghcr.io/socialgouv/docker/nginx4spa:6.24.0
