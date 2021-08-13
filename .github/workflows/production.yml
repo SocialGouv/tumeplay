@@ -252,7 +252,7 @@ jobs:
       ]
     environment:
       name: preproduction
-      url: https://${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -333,7 +333,7 @@ jobs:
     needs: manifests-production
     environment:
       name: production
-      url: https://${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
       # url: https://tumeplay-backend.${{ env.SOCIALGOUV_BASE_DOMAIN }}
     steps:
       - name: Checkout repository
