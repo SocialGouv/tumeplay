@@ -1,3 +1,10 @@
+# [1.1.0-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.2...v1.1.0-alpha.3) (2021-08-13)
+
+
+### Bug Fixes
+
+* dockerfile buildenv ([cfbca9b](https://github.com/SocialGouv/Tumeplay/commit/cfbca9b396ef206fab092a3ea6e3dcc4d8351b62))
+
 # [1.1.0-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.1...v1.1.0-alpha.2) (2021-08-13)
 
 
