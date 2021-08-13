@@ -1,6 +1,10 @@
 FROM node:12-alpine as builder
 
 ARG buildenv
+ENV ENVFILE="environnements/env.${buildenv}"
+
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 WORKDIR /
 
@@ -16,8 +20,7 @@ RUN sed -i.bak 's/module.exports = /export default /g' node_modules/react-native
 
 COPY src ./src
 COPY public ./public
-#COPY environnements/env.$buildenv .env
-COPY environnements/env.dev.guyane .env
+COPY ${ENVFILE} .env
 
 RUN npm run build
 

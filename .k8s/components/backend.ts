@@ -11,14 +11,9 @@ import {
   ResourceRequirements,
   Volume,
 } from "kubernetes-models/v1";
+import environments from "@socialgouv/kosko-charts/environments";
 
-const getGithubRef = (env: Record<string, any>) => {
-  const ref =
-    env.GITHUB_REF && env.GITHUB_REF.startsWith("refs/tags/")
-      ? env.GITHUB_REF.split("/").pop().replace(/^v/, "")
-      : `sha-${env.GITHUB_SHA}`;
-  return ref;
-};
+import getImageTag from "../utils/getImageTag";
 
 const component = "backend";
 
@@ -41,18 +36,21 @@ const resources = new ResourceRequirements({
   },
 });
 
-export default async () => {
+// dont use fixed storage except in prod. theres no dev storage srv atm
+const isDev = () => env.env !== "prod" && env.env !== "preprod";
+
+const getAzureProjectVolume = () => {
   const volumeName = "uploads";
-  const ephemeralVolume = env.env !== "prod" && env.env !== "preprod"; // dont use fixed storage except in prod. theres no dev storage srv atm
+  return azureProjectVolume(volumeName, { storage: "5Gi" });
+};
 
-  const tag = getGithubRef(process.env);
+export const getManifests = async () => {
+  const volumeName = "uploads";
+  const subdomain = "backend-tumeplay";
+  const imageTag = getImageTag(process.env);
+  const ciEnv = environments(process.env);
+  const [persistentVolumeClaim] = getAzureProjectVolume();
 
-  const [persistentVolumeClaim, persistentVolume] = azureProjectVolume(
-    volumeName,
-    {
-      storage: "5Gi",
-    }
-  );
   const uploadsVolume = new Volume({
     persistentVolumeClaim: { claimName: persistentVolumeClaim.metadata!.name! },
     name: volumeName,
@@ -69,10 +67,12 @@ export default async () => {
   const manifests = await create(component, {
     env,
     config: {
+      subdomain,
+      ingress: true,
       withPostgres: true,
-      subdomain: "tumeplay-backend",
       containerPort: 1337,
-      image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
+      image: `ghcr.io/socialgouv/tumeplay/backend:${imageTag}`,
+      subDomainPrefix: (!ciEnv.isProduction && `backend-`) || undefined,
     },
     deployment: {
       container: {
@@ -82,10 +82,16 @@ export default async () => {
         resources,
         volumeMounts: [uploadsVolumeMount],
       },
-      volumes: [ephemeralVolume ? emptyDir : uploadsVolume],
+      volumes: [isDev() ? emptyDir : uploadsVolume],
     },
   });
 
+  return manifests;
+};
+
+export default async () => {
+  const [persistentVolumeClaim, persistentVolume] = getAzureProjectVolume();
+  const manifests = await getManifests();
   const deployment = getDeployment(manifests);
 
   addEnvs({
@@ -107,7 +113,8 @@ export default async () => {
     console.error(e);
     return [];
   });
+
   return manifests
     .concat(azureVolume as any)
-    .concat(ephemeralVolume ? [] : [persistentVolumeClaim, persistentVolume]);
+    .concat(isDev() ? [] : [persistentVolumeClaim, persistentVolume]);
 };

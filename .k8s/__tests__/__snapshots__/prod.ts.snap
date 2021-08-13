@@ -103,7 +103,7 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.26.2
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -206,7 +206,7 @@ metadata:
   namespace: tumeplay
 spec:
   rules:
-    - host: tumeplay-backend.fabrique.social.gouv.fr
+    - host: backend-tumeplay.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -218,7 +218,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - tumeplay-backend.fabrique.social.gouv.fr
+        - backend-tumeplay.fabrique.social.gouv.fr
       secretName: backend-crt
 ---
 apiVersion: bitnami.com/v1alpha1
@@ -293,6 +293,298 @@ spec:
     storage: 5Gi
   persistentVolumeReclaimPolicy: Delete
   storageClassName: ''
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    component: nginx
+  name: guyane
+  namespace: tumeplay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guyane
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: guyane
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        component: nginx
+    spec:
+      containers:
+        - image: ghcr.io/socialgouv/tumeplay/frontend-guyane:1.2.3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: guyane
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-tumeplay.fabrique.social.gouv.fr/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: guyane
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: guyane
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: guyane
+  namespace: tumeplay
+spec:
+  rules:
+    - host: guyane-tumeplay.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: guyane
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - guyane-tumeplay.fabrique.social.gouv.fr
+      secretName: guyane-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    component: nginx
+  name: metropole
+  namespace: tumeplay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metropole
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: metropole
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        component: nginx
+    spec:
+      containers:
+        - image: ghcr.io/socialgouv/tumeplay/frontend-metropole:1.2.3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: metropole
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-tumeplay.fabrique.social.gouv.fr/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: metropole
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: metropole
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: metropole
+  namespace: tumeplay
+spec:
+  rules:
+    - host: metropole-tumeplay.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: metropole
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - metropole-tumeplay.fabrique.social.gouv.fr
+      secretName: metropole-crt
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret

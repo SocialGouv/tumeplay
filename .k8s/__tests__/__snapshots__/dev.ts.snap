@@ -2,27 +2,6 @@
 
 exports[`kosko generate --dev 1`] = `
 "---
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    field.cattle.io/creatorId: github
-    field.cattle.io/projectId: c-gjtkk:p-m77bc
-    git/branch: refs/heads/mybranch
-    git/remote: socialgouv/tumeplay
-    app.github.com/job: '5678'
-    app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/tumeplay
-    app.github.com/run: '1234'
-    app.github.com/sha: '0123456'
-  labels:
-    azure-pg-admin-user: tumeplay
-    application: tumeplay
-    owner: tumeplay
-    team: tumeplay
-    cert: wildcard
-  name: tumeplay-mybranch
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -98,7 +77,7 @@ spec:
               name: uploads
           envFrom:
             - secretRef:
-                name: azure-pg-user-0123456
+                name: azure-pg-user-mybranch
             - secretRef:
                 name: backend-sealed-secret
             - configMapRef:
@@ -127,8 +106,8 @@ spec:
               value: '24'
           envFrom:
             - secretRef:
-                name: azure-pg-user-0123456
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.26.2
+                name: azure-pg-user-mybranch
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -256,7 +235,7 @@ metadata:
   namespace: tumeplay-mybranch
 spec:
   rules:
-    - host: tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+    - host: backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -268,7 +247,305 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+        - backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+    component: nginx
+  name: guyane
+  namespace: tumeplay-mybranch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guyane
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: guyane
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        cert: wildcard
+        component: nginx
+    spec:
+      containers:
+        - image: >-
+            ghcr.io/socialgouv/tumeplay/frontend-guyane:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: guyane
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: guyane
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay-mybranch
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: guyane
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: guyane
+  namespace: tumeplay-mybranch
+spec:
+  rules:
+    - host: guyane-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: guyane
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - guyane-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+    component: nginx
+  name: metropole
+  namespace: tumeplay-mybranch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metropole
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: metropole
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        cert: wildcard
+        component: nginx
+    spec:
+      containers:
+        - image: >-
+            ghcr.io/socialgouv/tumeplay/frontend-metropole:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: metropole
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: metropole
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay-mybranch
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: metropole
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: metropole
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: metropole
+  namespace: tumeplay-mybranch
+spec:
+  rules:
+    - host: metropole-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: metropole
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - metropole-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: batch/v1
@@ -282,17 +559,17 @@ spec:
             - create-db-user
           env:
             - name: NEW_DB_NAME
-              value: autodevops_0123456
+              value: autodevops_mybranch
             - name: NEW_USER
-              value: user_0123456
+              value: user_mybranch
             - name: NEW_PASSWORD
-              value: password_0123456
+              value: password_mybranch
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp
           envFrom:
             - secretRef:
                 name: azure-pg-admin-user
-          image: ghcr.io/socialgouv/docker/azure-db:6.26.2
+          image: ghcr.io/socialgouv/docker/azure-db:6.38.3
           imagePullPolicy: IfNotPresent
           name: create-db-user
           resources:
@@ -335,18 +612,18 @@ apiVersion: v1
 kind: Secret
 stringData:
   DATABASE_URL: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   DB_URI: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   HASURA_GRAPHQL_DATABASE_URL: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
-  PGDATABASE: autodevops_0123456
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
+  PGDATABASE: autodevops_mybranch
   PGHOST: tumeplaydevserver.postgres.database.azure.com
-  PGPASSWORD: password_0123456
+  PGPASSWORD: password_mybranch
   PGRST_DB_URI: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   PGSSLMODE: require
-  PGUSER: user_0123456@tumeplaydevserver.postgres.database.azure.com
+  PGUSER: user_mybranch@tumeplaydevserver.postgres.database.azure.com
 metadata:
   annotations:
     app.github.com/job: '5678'
@@ -359,7 +636,7 @@ metadata:
     owner: tumeplay
     team: tumeplay
     cert: wildcard
-  name: azure-pg-user-0123456
+  name: azure-pg-user-mybranch
   namespace: tumeplay-mybranch
 ---
 kind: SealedSecret
