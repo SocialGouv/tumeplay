@@ -298,6 +298,7 @@ jobs:
         run: |
           cat ".github/review.env" >> $GITHUB_ENV
           echo "project=${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
           echo "namespace=${NAMESPACE}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
         env:
           NAMESPACE: ${{ steps.namespace.outputs.result }}
