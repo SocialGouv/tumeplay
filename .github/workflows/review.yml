@@ -242,6 +242,7 @@ jobs:
         run: yarn --cwd .k8s --silent generate:dev _namespace > namespace.yml
         env:
           SOCIALGOUV_BASE_DOMAIN: ${{ env.SOCIALGOUV_BASE_DOMAIN }}
+          RANCHER_PROJECT_ID: $ {{ env.RANCHER_PROJECT_ID }}
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
