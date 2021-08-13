@@ -206,7 +206,7 @@ metadata:
   namespace: tumeplay
 spec:
   rules:
-    - host: fake-tumeplay-backend.fabrique.social.gouv.fr
+    - host: tumeplay-backend.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -218,7 +218,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - fake-tumeplay-backend.fabrique.social.gouv.fr
+        - tumeplay-backend.fabrique.social.gouv.fr
       secretName: backend-crt
 ---
 apiVersion: bitnami.com/v1alpha1
@@ -373,7 +373,7 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://fake-tumeplay-backend.fabrique.social.gouv.fr/
+              value: https://tumeplay-backend.fabrique.social.gouv.fr/
 ---
 apiVersion: v1
 kind: Service
@@ -425,7 +425,7 @@ metadata:
   namespace: tumeplay
 spec:
   rules:
-    - host: guyane-fake-tumeplay.fabrique.social.gouv.fr
+    - host: guyane-tumeplay.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -437,7 +437,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - guyane-fake-tumeplay.fabrique.social.gouv.fr
+        - guyane-tumeplay.fabrique.social.gouv.fr
       secretName: guyane-crt
 ---
 apiVersion: apps/v1
@@ -519,7 +519,7 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://fake-tumeplay-backend.fabrique.social.gouv.fr/
+              value: https://tumeplay-backend.fabrique.social.gouv.fr/
 ---
 apiVersion: v1
 kind: Service
@@ -571,7 +571,7 @@ metadata:
   namespace: tumeplay
 spec:
   rules:
-    - host: metropole-fake-tumeplay.fabrique.social.gouv.fr
+    - host: metropole-tumeplay.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -583,7 +583,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - metropole-fake-tumeplay.fabrique.social.gouv.fr
+        - metropole-tumeplay.fabrique.social.gouv.fr
       secretName: metropole-crt
 ---
 apiVersion: bitnami.com/v1alpha1

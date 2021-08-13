@@ -38,7 +38,7 @@ export default async (name: string) => {
     config: {
       subDomainPrefix: `${name}-`,
       subdomain: ciEnv.isProduction
-        ? `fake-${ciEnv.metadata.subdomain}`
+        ? `${ciEnv.metadata.subdomain}`
         : ciEnv.metadata.subdomain,
     },
     deployment: {
