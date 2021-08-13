@@ -133,6 +133,9 @@ jobs:
           labels: "${{ steps.docker_meta.outputs.labels }}"
           cache-to: "type=local,dest=/tmp/.buildx-frontend-guyane-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-guyane-cache"
+          build-args: |
+            buildenv=preprod.guyane
+            REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   register-frontend-metropole:
     name: Register front-end
@@ -192,6 +195,9 @@ jobs:
           labels: "${{ steps.docker_meta.outputs.labels }}"
           cache-to: "type=local,dest=/tmp/.buildx-frontend-metropole-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-metropole-cache"
+          build-args: |
+            buildenv=preprod.metropole
+            REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
