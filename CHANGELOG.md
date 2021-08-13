@@ -1,3 +1,10 @@
+# [1.1.0-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.1...v1.1.0-alpha.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* upgrade kosko-charts ([549e8c5](https://github.com/SocialGouv/Tumeplay/commit/549e8c597a65be22ffc82e6724b2681d45841410))
+
 # [1.1.0-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.10...v1.1.0-alpha.1) (2021-08-13)
 
 
