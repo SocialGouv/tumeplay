@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/SocialGouv/Tumeplay/compare/v1.0.13...v1.0.14) (2021-08-13)
+
+
+### Bug Fixes
+
+* Add frontend deployments ([#35](https://github.com/SocialGouv/Tumeplay/issues/35)) ([dcf1be4](https://github.com/SocialGouv/Tumeplay/commit/dcf1be4343b5f2ba08290ef3a66fd2de914c6fa1))
+
 # [1.1.0-alpha.9](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.8...v1.1.0-alpha.9) (2021-08-13)
 
 
