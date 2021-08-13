@@ -1,3 +1,10 @@
+# [1.1.0-alpha.9](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.8...v1.1.0-alpha.9) (2021-08-13)
+
+
+### Bug Fixes
+
+* normalize urls ([48061d9](https://github.com/SocialGouv/Tumeplay/commit/48061d92d7074bc7c01b372a0ac02e6bc27210eb))
+
 # [1.1.0-alpha.8](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.7...v1.1.0-alpha.8) (2021-08-13)
 
 
