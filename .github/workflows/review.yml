@@ -141,7 +141,9 @@ jobs:
           labels: "${{ steps.docker_meta.outputs.labels }}"
           cache-to: "type=local,dest=/tmp/.buildx-frontend-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-cache"
-          build-args: "buildenv=dev.guyane,REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}"
+          build-args: |
+            buildenv=dev.guyane
+            REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## GENERATE KUBERNETES MANIFESTS
