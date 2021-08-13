@@ -77,7 +77,7 @@ spec:
               name: uploads
           envFrom:
             - secretRef:
-                name: azure-pg-user-0123456
+                name: azure-pg-user-mybranch
             - secretRef:
                 name: backend-sealed-secret
             - configMapRef:
@@ -106,8 +106,8 @@ spec:
               value: '24'
           envFrom:
             - secretRef:
-                name: azure-pg-user-0123456
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.26.2
+                name: azure-pg-user-mybranch
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -559,17 +559,17 @@ spec:
             - create-db-user
           env:
             - name: NEW_DB_NAME
-              value: autodevops_0123456
+              value: autodevops_mybranch
             - name: NEW_USER
-              value: user_0123456
+              value: user_mybranch
             - name: NEW_PASSWORD
-              value: password_0123456
+              value: password_mybranch
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp
           envFrom:
             - secretRef:
                 name: azure-pg-admin-user
-          image: ghcr.io/socialgouv/docker/azure-db:6.26.2
+          image: ghcr.io/socialgouv/docker/azure-db:6.38.3
           imagePullPolicy: IfNotPresent
           name: create-db-user
           resources:
@@ -612,18 +612,18 @@ apiVersion: v1
 kind: Secret
 stringData:
   DATABASE_URL: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   DB_URI: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   HASURA_GRAPHQL_DATABASE_URL: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
-  PGDATABASE: autodevops_0123456
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
+  PGDATABASE: autodevops_mybranch
   PGHOST: tumeplaydevserver.postgres.database.azure.com
-  PGPASSWORD: password_0123456
+  PGPASSWORD: password_mybranch
   PGRST_DB_URI: >-
-    postgresql://user_0123456%40tumeplaydevserver.postgres.database.azure.com:password_0123456@tumeplaydevserver.postgres.database.azure.com/autodevops_0123456?sslmode=require
+    postgresql://user_mybranch%40tumeplaydevserver.postgres.database.azure.com:password_mybranch@tumeplaydevserver.postgres.database.azure.com/autodevops_mybranch?sslmode=require
   PGSSLMODE: require
-  PGUSER: user_0123456@tumeplaydevserver.postgres.database.azure.com
+  PGUSER: user_mybranch@tumeplaydevserver.postgres.database.azure.com
 metadata:
   annotations:
     app.github.com/job: '5678'
@@ -636,7 +636,7 @@ metadata:
     owner: tumeplay
     team: tumeplay
     cert: wildcard
-  name: azure-pg-user-0123456
+  name: azure-pg-user-mybranch
   namespace: tumeplay-mybranch
 ---
 kind: SealedSecret
