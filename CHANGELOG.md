@@ -1,3 +1,10 @@
+# [1.1.0-alpha.5](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2021-08-13)
+
+
+### Bug Fixes
+
+* **prod:** fix build-args ([af837c2](https://github.com/SocialGouv/Tumeplay/commit/af837c20b53f9d217eccc64f2a0a04718259ece2))
+
 # [1.1.0-alpha.4](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2021-08-13)
 
 
