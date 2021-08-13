@@ -1,3 +1,10 @@
+# [1.1.0-alpha.8](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.7...v1.1.0-alpha.8) (2021-08-13)
+
+
+### Bug Fixes
+
+* prod urls ([076257f](https://github.com/SocialGouv/Tumeplay/commit/076257f34284dcee11010ac513fc7518217c6af7))
+
 # [1.1.0-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.6...v1.1.0-alpha.7) (2021-08-13)
 
 
