@@ -18,8 +18,7 @@ RUN sed -i.bak 's/module.exports = /export default /g' node_modules/react-native
 
 COPY src ./src
 COPY public ./public
-#COPY environnements/env.$buildenv .env
-COPY environnements/env.dev.guyane .env
+COPY environnements/env.$buildenv .env
 
 RUN npm run build
 

@@ -6,12 +6,12 @@ import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByK
 import { ok } from "assert";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { EnvVar } from "kubernetes-models/v1/EnvVar";
-import { getManifests as getBackendManifests } from "./backend";
 import environments from "@socialgouv/kosko-charts/environments";
 
-export const getManifests = async () => {
+import { getManifests as getBackendManifests } from "../components/backend";
+
+export default async (name: string) => {
   const probesPath = "/";
-  const name = "frontend";
   const subdomain = "tumeplay";
   const ciEnv = environments(process.env);
 
@@ -35,19 +35,16 @@ export const getManifests = async () => {
   const manifests = await create(name, {
     env,
     config: {
-      subdomain: ciEnv.isProduction ? `fake-${subdomain}` : subdomain,
+      subDomainPrefix: `${name}-`,
+      subdomain: ciEnv.isProduction
+        ? `fake-${ciEnv.metadata.subdomain}`
+        : ciEnv.metadata.subdomain,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/tumeplay/frontend:sha-${tag}`,
+      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:sha-${tag}`,
       ...podProbes,
     },
   });
-
-  return manifests;
-};
-
-export default async () => {
-  const manifests = await getManifests();
 
   /* pass dynamic deployment URL as env var to the container */
   //@ts-expect-error
