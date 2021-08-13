@@ -8,6 +8,7 @@ import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { EnvVar } from "kubernetes-models/v1/EnvVar";
 import environments from "@socialgouv/kosko-charts/environments";
 
+import getImageTag from "../utils/getImageTag";
 import { getManifests as getBackendManifests } from "../components/backend";
 
 export default async (name: string) => {
@@ -15,7 +16,7 @@ export default async (name: string) => {
   const subdomain = "tumeplay";
   const ciEnv = environments(process.env);
 
-  const tag = process.env.GITHUB_SHA;
+  const imageTag = getImageTag(process.env);
 
   const podProbes = ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
     (probes, probe) => ({
@@ -41,7 +42,7 @@ export default async (name: string) => {
         : ciEnv.metadata.subdomain,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:sha-${tag}`,
+      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:${imageTag}`,
       ...podProbes,
     },
   });

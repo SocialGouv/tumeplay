@@ -348,8 +348,7 @@ spec:
         component: nginx
     spec:
       containers:
-        - image: >-
-            ghcr.io/socialgouv/tumeplay/frontend-guyane:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
+        - image: ghcr.io/socialgouv/tumeplay/frontend-guyane:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -497,8 +496,7 @@ spec:
         component: nginx
     spec:
       containers:
-        - image: >-
-            ghcr.io/socialgouv/tumeplay/frontend-metropole:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
+        - image: ghcr.io/socialgouv/tumeplay/frontend-metropole:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:

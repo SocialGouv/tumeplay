@@ -13,13 +13,7 @@ import {
 } from "kubernetes-models/v1";
 import environments from "@socialgouv/kosko-charts/environments";
 
-const getGithubRef = (env: Record<string, any>) => {
-  const ref =
-    env.GITHUB_REF && env.GITHUB_REF.startsWith("refs/tags/")
-      ? env.GITHUB_REF.split("/").pop().replace(/^v/, "")
-      : `sha-${env.GITHUB_SHA}`;
-  return ref;
-};
+import getImageTag from "../utils/getImageTag";
 
 const component = "backend";
 
@@ -48,12 +42,12 @@ const isDev = () => env.env !== "prod" && env.env !== "preprod";
 const getAzureProjectVolume = () => {
   const volumeName = "uploads";
   return azureProjectVolume(volumeName, { storage: "5Gi" });
-}
+};
 
 export const getManifests = async () => {
   const volumeName = "uploads";
   const subdomain = "tumeplay-backend";
-  const tag = getGithubRef(process.env);
+  const imageTag = getImageTag(process.env);
   const ciEnv = environments(process.env);
   const [persistentVolumeClaim] = getAzureProjectVolume();
 
@@ -77,7 +71,7 @@ export const getManifests = async () => {
       ingress: true,
       withPostgres: true,
       containerPort: 1337,
-      image: `ghcr.io/socialgouv/tumeplay/backend:${tag}`,
+      image: `ghcr.io/socialgouv/tumeplay/backend:${imageTag}`,
       subDomainPrefix: ciEnv.isProduction ? `fake-` : `backend-`,
     },
     deployment: {
@@ -93,7 +87,7 @@ export const getManifests = async () => {
   });
 
   return manifests;
-}
+};
 
 export default async () => {
   const [persistentVolumeClaim, persistentVolume] = getAzureProjectVolume();
