@@ -1,3 +1,137 @@
+# [1.1.0-alpha.9](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.8...v1.1.0-alpha.9) (2021-08-13)
+
+
+### Bug Fixes
+
+* normalize urls ([48061d9](https://github.com/SocialGouv/Tumeplay/commit/48061d92d7074bc7c01b372a0ac02e6bc27210eb))
+
+# [1.1.0-alpha.8](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.7...v1.1.0-alpha.8) (2021-08-13)
+
+
+### Bug Fixes
+
+* prod urls ([076257f](https://github.com/SocialGouv/Tumeplay/commit/076257f34284dcee11010ac513fc7518217c6af7))
+
+# [1.1.0-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.6...v1.1.0-alpha.7) (2021-08-13)
+
+
+### Bug Fixes
+
+* adjust prod hostnames and env ([80b10e9](https://github.com/SocialGouv/Tumeplay/commit/80b10e9395ebdbabbcd0add35ef208fd780cbdc1))
+
+# [1.1.0-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.5...v1.1.0-alpha.6) (2021-08-13)
+
+
+### Bug Fixes
+
+* use tags in preprod/prod ([1ebc147](https://github.com/SocialGouv/Tumeplay/commit/1ebc14790205f4ef572d666f941d0ba9a4ffdf48))
+
+# [1.1.0-alpha.5](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2021-08-13)
+
+
+### Bug Fixes
+
+* **prod:** fix build-args ([af837c2](https://github.com/SocialGouv/Tumeplay/commit/af837c20b53f9d217eccc64f2a0a04718259ece2))
+
+# [1.1.0-alpha.4](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* **review:** missing branch in env_url ([29edeaa](https://github.com/SocialGouv/Tumeplay/commit/29edeaafc772a81b79dd67b6752b916e1a0dbf59))
+
+# [1.1.0-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.2...v1.1.0-alpha.3) (2021-08-13)
+
+
+### Bug Fixes
+
+* dockerfile buildenv ([cfbca9b](https://github.com/SocialGouv/Tumeplay/commit/cfbca9b396ef206fab092a3ea6e3dcc4d8351b62))
+
+# [1.1.0-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.1...v1.1.0-alpha.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* upgrade kosko-charts ([549e8c5](https://github.com/SocialGouv/Tumeplay/commit/549e8c597a65be22ffc82e6724b2681d45841410))
+
+# [1.1.0-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.10...v1.1.0-alpha.1) (2021-08-13)
+
+
+### Features
+
+* double build frontend ([0787634](https://github.com/SocialGouv/Tumeplay/commit/0787634ea1567287b8f6b2f7b420aab397b8c5b4))
+
+## [1.0.14-alpha.10](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.9...v1.0.14-alpha.10) (2021-08-06)
+
+
+### Bug Fixes
+
+* Frontend image build-args on single line, again. ([ae0dbd4](https://github.com/SocialGouv/Tumeplay/commit/ae0dbd4351e3e84fa4374f60574caee10e4f34c5))
+
+## [1.0.14-alpha.9](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.8...v1.0.14-alpha.9) (2021-08-06)
+
+
+### Bug Fixes
+
+* Frontend image build-args on single line. ([e05c9ee](https://github.com/SocialGouv/Tumeplay/commit/e05c9eea7ac735481b7ff1fe36e492c05023b0bc))
+
+## [1.0.14-alpha.8](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.7...v1.0.14-alpha.8) (2021-08-06)
+
+
+### Bug Fixes
+
+* Frontend image build-args. ([a29c6b0](https://github.com/SocialGouv/Tumeplay/commit/a29c6b0ffb4f03ed502508e1509392e078b7b687))
+
+## [1.0.14-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.6...v1.0.14-alpha.7) (2021-08-06)
+
+
+### Bug Fixes
+
+* Expose REACT_APP_API_URL before build. ([b34e5e2](https://github.com/SocialGouv/Tumeplay/commit/b34e5e2e37ebbc0e676886f6cec87cd18aeaeb65))
+
+## [1.0.14-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.5...v1.0.14-alpha.6) (2021-08-06)
+
+
+### Bug Fixes
+
+* Expose REACT_APP_API_URL within dockerfile ENV. ([3a3ea6b](https://github.com/SocialGouv/Tumeplay/commit/3a3ea6bef834df0df1cb4ceb1afaf1bbe0b12043))
+
+## [1.0.14-alpha.5](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.4...v1.0.14-alpha.5) (2021-08-06)
+
+
+### Bug Fixes
+
+* Workflow typo. ([8c9e661](https://github.com/SocialGouv/Tumeplay/commit/8c9e6619de3a00977ae91bd38fb28e93f1ade56f))
+
+## [1.0.14-alpha.4](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.3...v1.0.14-alpha.4) (2021-08-06)
+
+
+### Bug Fixes
+
+* Populate REACT_APP_API_URL. ([39b7f51](https://github.com/SocialGouv/Tumeplay/commit/39b7f511d2bb625557f5724ca686e120b9481618))
+
+## [1.0.14-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.2...v1.0.14-alpha.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* Backend subdomain prefix. ([e68d251](https://github.com/SocialGouv/Tumeplay/commit/e68d251d6fc26b4dedd5c7f717dc8a5a285faa72))
+
+## [1.0.14-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.1...v1.0.14-alpha.2) (2021-08-06)
+
+
+### Bug Fixes
+
+* Backend subdomain. ([33072ba](https://github.com/SocialGouv/Tumeplay/commit/33072ba54e7d287c1f3d56023a009a7e6b83242e))
+
+## [1.0.14-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.13...v1.0.14-alpha.1) (2021-08-06)
+
+
+### Bug Fixes
+
+* Add frontend deployment. ([558857f](https://github.com/SocialGouv/Tumeplay/commit/558857fdfe85f1ada8a6c30019337088cf97fb1d))
+* Preprod and prod environment URLs. ([cd96844](https://github.com/SocialGouv/Tumeplay/commit/cd9684401d7ce74e41b8f4ed6c15615aba114cec))
+
 ## [1.0.13](https://github.com/SocialGouv/Tumeplay/compare/v1.0.12...v1.0.13) (2021-07-28)
 
 
