@@ -1,3 +1,10 @@
+# [1.1.0-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.5...v1.1.0-alpha.6) (2021-08-13)
+
+
+### Bug Fixes
+
+* use tags in preprod/prod ([1ebc147](https://github.com/SocialGouv/Tumeplay/commit/1ebc14790205f4ef572d666f941d0ba9a4ffdf48))
+
 # [1.1.0-alpha.5](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2021-08-13)
 
 
