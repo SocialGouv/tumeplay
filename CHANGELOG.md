@@ -1,3 +1,10 @@
+# [1.1.0-alpha.7](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.6...v1.1.0-alpha.7) (2021-08-13)
+
+
+### Bug Fixes
+
+* adjust prod hostnames and env ([80b10e9](https://github.com/SocialGouv/Tumeplay/commit/80b10e9395ebdbabbcd0add35ef208fd780cbdc1))
+
 # [1.1.0-alpha.6](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0-alpha.5...v1.1.0-alpha.6) (2021-08-13)
 
 
