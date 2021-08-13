@@ -340,7 +340,7 @@ jobs:
     needs: manifests-production
     environment:
       name: production
-      url: https://${{ env.namespace }}-backend.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

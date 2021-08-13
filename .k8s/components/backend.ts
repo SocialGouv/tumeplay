@@ -46,7 +46,7 @@ const getAzureProjectVolume = () => {
 
 export const getManifests = async () => {
   const volumeName = "uploads";
-  const subdomain = "tumeplay-backend";
+  const subdomain = "backend-tumeplay";
   const imageTag = getImageTag(process.env);
   const ciEnv = environments(process.env);
   const [persistentVolumeClaim] = getAzureProjectVolume();
@@ -72,7 +72,7 @@ export const getManifests = async () => {
       withPostgres: true,
       containerPort: 1337,
       image: `ghcr.io/socialgouv/tumeplay/backend:${imageTag}`,
-      subDomainPrefix: ciEnv.isProduction ? `` : `backend-`,
+      subDomainPrefix: (!ciEnv.isProduction && `backend-`) || undefined,
     },
     deployment: {
       container: {

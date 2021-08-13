@@ -206,7 +206,7 @@ metadata:
   namespace: tumeplay
 spec:
   rules:
-    - host: tumeplay-backend.fabrique.social.gouv.fr
+    - host: backend-tumeplay.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -218,7 +218,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - tumeplay-backend.fabrique.social.gouv.fr
+        - backend-tumeplay.fabrique.social.gouv.fr
       secretName: backend-crt
 ---
 apiVersion: bitnami.com/v1alpha1
@@ -373,7 +373,7 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://tumeplay-backend.fabrique.social.gouv.fr/
+              value: https://backend-tumeplay.fabrique.social.gouv.fr/
 ---
 apiVersion: v1
 kind: Service
@@ -519,7 +519,7 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://tumeplay-backend.fabrique.social.gouv.fr/
+              value: https://backend-tumeplay.fabrique.social.gouv.fr/
 ---
 apiVersion: v1
 kind: Service
