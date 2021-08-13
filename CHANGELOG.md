@@ -1,3 +1,10 @@
+# [1.1.0-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.10...v1.1.0-alpha.1) (2021-08-13)
+
+
+### Features
+
+* double build frontend ([0787634](https://github.com/SocialGouv/Tumeplay/commit/0787634ea1567287b8f6b2f7b420aab397b8c5b4))
+
 ## [1.0.14-alpha.10](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14-alpha.9...v1.0.14-alpha.10) (2021-08-06)
 
 
