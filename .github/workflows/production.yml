@@ -340,8 +340,7 @@ jobs:
     needs: manifests-production
     environment:
       name: production
-      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-      # url: https://tumeplay-backend.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: https://fake-backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -350,7 +349,7 @@ jobs:
         run: |
           cat ".github/production.env" >> $GITHUB_ENV
           echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-          echo "namespace=fake-${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "namespace=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
       - name: Download production manifests
         uses: actions/download-artifact@v2
