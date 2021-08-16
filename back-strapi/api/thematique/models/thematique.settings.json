@@ -45,6 +45,14 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "display_content": {
+      "type": "boolean",
+      "default": true
+    },
+    "display_poi_map": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -19,7 +19,7 @@ OpenStreetMap.propTypes = {
   onRegionChange: PropTypes.func,
 };
 export default function OpenStreetMap(props) {
-  const {items, latitude, longitude } = props;
+  const {items, latitude, longitude} = props;
 
   const isMounted = useIsMounted();
   const [region, setRegion] = useState({
@@ -28,7 +28,6 @@ export default function OpenStreetMap(props) {
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
-
 
   useEffect(
     () => {
@@ -68,19 +67,19 @@ export default function OpenStreetMap(props) {
     mapHeight = 100;
   }
 
-  const newItems = items.map((item) => {
+  const newItems = items.map(item => {
     let latToFloat;
     let longToFloat;
     if (item.Latitude) {
-      latToFloat = parseFloat(item.Latitude.replace(',','.'))
-      longToFloat = parseFloat(item.Longitude.replace(',','.'))
+      latToFloat = parseFloat(item.Latitude.replace(',', '.'));
+      longToFloat = parseFloat(item.Longitude.replace(',', '.'));
     } else {
-      latToFloat = item.latitude
-      longToFloat = item.longitude
+      latToFloat = item.latitude;
+      longToFloat = item.longitude;
     }
-    item.coordinates = {...{latitude: latToFloat, longitude: longToFloat}}
-    return item
-  })
+    item.coordinates = {...{latitude: latToFloat, longitude: longToFloat}};
+    return item;
+  });
 
   return (
     <View style={{marginTop: 5, borderRadius: 7}}>

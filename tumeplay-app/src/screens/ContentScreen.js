@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useMemo} from 'react';
-import {ScrollView, SafeAreaView, View} from 'react-native';
+import {ScrollView, SafeAreaView, View, Image} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 
 import Modal from 'react-native-modal';
@@ -28,6 +28,7 @@ import ModalStyle from '../styles/components/Modal';
 import {useQuery} from '@apollo/client';
 import {GET_CONTENTS} from '../services/api/contents';
 import {GET_QUESTIONS} from '../services/api/questions';
+import MapView, {Marker} from 'react-native-maps';
 
 ContentScreen.propTypes = {
   navigation: PropTypes.object,
@@ -52,6 +53,13 @@ export default function ContentScreen(props) {
   const [availableTokens, setAvailableTokens] = useState(0);
   const [activeOpacity, setActiveOpacity] = useState(0.5);
   const isMounted = useIsMounted();
+
+  const [region, setRegion] = useState({
+    latitude: 48.8534,
+    longitude: 2.3488,
+    latitudeDelta: 1,
+    longitudeDelta: 1,
+  });
 
   const {data, loading} = useQuery(GET_QUESTIONS, {
     variables: {theme_id: selectedTheme.id},
@@ -104,7 +112,6 @@ export default function ContentScreen(props) {
       variables: {theme_id: selectedTheme.id},
     });
     if (!loading) {
-
       return (
         <ContentCards
           activeOpacity={activeOpacity}
@@ -248,19 +255,55 @@ export default function ContentScreen(props) {
     props.navigation.navigate('StayInTouch');
   }
 
+  const markersPin = [
+    {title: 'POI #1', coordinates: {latitude: 48.558534, longitude: 2.3516405}},
+    {title: 'POI #2', coordinates: {latitude: 48.258334, longitude: 2.3516415}},
+    {title: 'POI #3', coordinates: {latitude: 48.458354, longitude: 2.3515465}},
+  ];
+
   return (
     <SafeAreaView style={[Styles.safeAreaView, {}]}>
-      <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
-        <ScrollView style={{flex: 0.8}}>
-          {DisplayContentCards()}
-          <ContactButton />
-          <CustomFooter
-            style={{flex: 0.1}}
-            navigation={props.navigation}
-            containerStyle={{paddingLeft: 0, paddingRight: 0}}
-          />
-        </ScrollView>
-      </View>
+      {selectedTheme.display_content ? (
+        <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
+          <ScrollView style={{flex: 0.8}}>
+            {DisplayContentCards()}
+            <ContactButton />
+            <CustomFooter
+              style={{flex: 0.1}}
+              navigation={props.navigation}
+              containerStyle={{paddingLeft: 0, paddingRight: 0}}
+            />
+          </ScrollView>
+        </View>
+      ) : (
+        <></>
+      )}
+      {selectedTheme.display_poi_map ? (
+        <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
+          <MapView
+            style={{width: 'auto', height: 550, borderRadius: 5}}
+            region={region}
+            mapType="none"
+            rotateEnabled={false}>
+            {markersPin.map((item, index) => {
+              return (
+                <Marker
+                  key={index}
+                  title={item.title}
+                  item={item}
+                  coordinate={item.coordinates}>
+                  <Image
+                    style={{height: 40, width: 28}}
+                    source={require('../assets/pictures/pins/pin-raw.png')}
+                  />
+                </Marker>
+              );
+            })}
+          </MapView>
+        </View>
+      ) : (
+        <></>
+      )}
 
       <Modal
         visible={isQuizzModalVisible}

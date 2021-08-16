@@ -439,7 +439,7 @@ var Styles = {
     fontSize: 16,
   },
   landingBottomWrapper: {
-    flex: 0.5,
+    flex: 0.25,
     marginBottom: 10,
     marginTop: 10,
     paddingLeft: 15,
@@ -479,7 +479,7 @@ var Styles = {
     marginBottom: 25,
   },
   safeAreaView: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.backgroundColor,
   },

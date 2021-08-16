@@ -42,7 +42,6 @@ export default function LandingScreen(props) {
     bottomTitle2: 'Échange avec un professionnel',
   };
 
-
   useEffect(() => {
     async function _fetchUserOrRegister() {
       if (isMounted.current) {
@@ -91,8 +90,6 @@ export default function LandingScreen(props) {
     </ProductErrorModal>
   ));
 
-
-
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
 
@@ -107,28 +104,26 @@ export default function LandingScreen(props) {
     return <View />;
   };
 
-
   return (
     <SafeAreaView style={Styles.safeAreaView}>
       <ScrollView>
         {/* Title and grid */}
         <View style={{flex: 0.75}}>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
-          {process.env.REACT_APP_ZONE === 'guyane' ?
+          {process.env.REACT_APP_ZONE === 'guyane' ? (
             <TextWithSound
               style={Styles.landingScreenSubtitle}
               sound={'Accueil_1.MP3'}
-              useLocal={true}
-            >
+              useLocal={true}>
               Explore nos thématiques, découvre les questions réponses associées
               et réponds aux quiz pour recevoir des box gratuitement !
             </TextWithSound>
-          :
-          <Text style={Styles.landingScreenSubtitle}>
-            Explore nos thématiques, découvre les questions réponses associées
-            et réponds aux quizz pour recevoir des box gratuitement !
-          </Text>
-          }
+          ) : (
+            <Text style={Styles.landingScreenSubtitle}>
+              Explore nos thématiques, découvre les questions réponses associées
+              et réponds aux quizz pour recevoir des box gratuitement !
+            </Text>
+          )}
           <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row'}}>
             {ThemesCards()}
           </View>

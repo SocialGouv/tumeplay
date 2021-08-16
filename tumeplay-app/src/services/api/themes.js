@@ -12,6 +12,8 @@ export const GET_THEMES = gql`
         url
       }
       display_quiz
+      display_content
+      display_poi_map
     }
   }
 `;
