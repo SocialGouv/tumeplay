@@ -3,6 +3,7 @@ import Colors from '../Color';
 
 var Styles = {
   container: {
+    flex: 1,
     backgroundColor: Colors.backgroundColor,
     paddingLeft: 15,
     paddingRight: 15,
