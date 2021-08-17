@@ -45,7 +45,8 @@ export default function CustomFooter(props) {
     flexDirection: 'column',
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 15,
+    marginTop: 5,
+    marginBottom: 5,
     paddingBottom: 25,
   };
   return (

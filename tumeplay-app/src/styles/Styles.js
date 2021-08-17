@@ -439,8 +439,7 @@ var Styles = {
     fontSize: 16,
   },
   landingBottomWrapper: {
-    flex: 0.5,
-    marginBottom: 10,
+    // marginBottom: 10,
     marginTop: 10,
     paddingLeft: 15,
     padding: 5,

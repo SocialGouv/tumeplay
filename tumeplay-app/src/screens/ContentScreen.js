@@ -249,13 +249,13 @@ export default function ContentScreen(props) {
   }
 
   return (
-    <SafeAreaView style={[Styles.safeAreaView, {}]}>
+    <SafeAreaView style={[Styles.safeAreaView]}>
       <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
         <ScrollView style={{flex: 0.8}}>
           {DisplayContentCards()}
           <ContactButton />
           <CustomFooter
-            style={{flex: 0.1}}
+            style={{flex: 0.2}}
             navigation={props.navigation}
             containerStyle={{paddingLeft: 0, paddingRight: 0}}
           />
