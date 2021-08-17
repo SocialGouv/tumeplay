@@ -104,12 +104,21 @@ export default function ContentScreen(props) {
       variables: {theme_id: selectedTheme.id},
     });
     if (!loading) {
-
+      const contents = data.contents.map(content => {
+        //changer le content.description pour y insérer des balises a si lien
+        const Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
+        const text = content.text.replace(
+          Rexp,
+          "<a href='$1' target='_blank'>$1</a>",
+        );
+        content = {...content, text};
+        return content;
+      });
       return (
         <ContentCards
           activeOpacity={activeOpacity}
           style={{flex: 0.8}}
-          localContents={data.contents}
+          localContents={contents}
         />
       );
     }
