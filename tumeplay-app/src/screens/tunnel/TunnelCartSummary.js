@@ -212,13 +212,13 @@ export default function TunnelCartSummary(props) {
     <ScrollView style={[Styles.flexOne, TunnelCartSummaryStyle.container]}>
       <Backlink step={4} onPress={_goBack} />
 
-      <View style={{flex: 0.1}}>
+      <View>
         <Text style={Styles.tunnelTitle}>Ton récapitulatif</Text>
       </View>
 
       <Splitter />
 
-      <View style={{flex: 0.2, marginBottom: 15}}>
+      <View style={{marginBottom: 5}}>
         <Text style={TunnelCartSummaryStyle.title}>Tes articles</Text>
         <View
           style={{
@@ -227,7 +227,6 @@ export default function TunnelCartSummary(props) {
             alignItems: 'center',
             backgroundColor: '#FFFFFF',
             borderRadius: 7,
-            height: '100%',
             justifyContent: 'center',
           }}>
           <View style={{flex: 0.35}}>
@@ -257,8 +256,8 @@ export default function TunnelCartSummary(props) {
 
       <Splitter />
 
-      <View style={{flex: 0.2}}>
-        <View style={{flex: 0.2}}>
+      <View>
+        <View>
           <Text style={TunnelCartSummaryStyle.title}>Adresse de livraison</Text>
         </View>
         <View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
@@ -308,7 +307,7 @@ export default function TunnelCartSummary(props) {
 
       <Splitter />
 
-      <View style={{flex: 0.15}}>
+      <View>
         <Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
           Nous t&apos;enverrons un mail pour t&apos;informer de
           l&apos;expédition de ta commande à :
@@ -374,7 +373,7 @@ export default function TunnelCartSummary(props) {
         </Text>
       </View>
 
-      <View style={{flex: 0.25, height: 60, marginTop: 15, marginBottom: 25}}>
+      <View style={{height: 60, marginTop: 15, marginBottom: 25}}>
         <TouchableOpacity
           style={{
             flex: 1,
