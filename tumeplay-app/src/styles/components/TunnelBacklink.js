@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 import Colors from '../Color';
 
 var Styles = {
-
   backlinkButton: {
     flex: 1,
     paddingTop: 2,

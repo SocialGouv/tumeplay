@@ -154,7 +154,10 @@ export default function TunnelCartSummary(props) {
   const handleContactValidation = e => {
     if (e.target.checked) {
       userAdress['type'] = 'enrollé';
-      userAdress['zipCode'] = selectedReferent.address_zipcode;
+      userAdress['zipCode'] =
+        process.env.REACT_APP_ZONE === 'metropole'
+          ? selectedPickup.address_zipCode
+          : selectedReferent.address_zipcode;
       setUserAdress({...userAdress});
     }
     setIsSelected(e.target.checked);
