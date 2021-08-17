@@ -29,9 +29,6 @@ var Styles = {
   emailAdress: {
     fontFamily: Colors.textFontBold,
   },
-  splitterWrapper: {
-    flex: 0.15,
-  },
   splitterPicture: {
     width: 35,
     minHeight: 8,
