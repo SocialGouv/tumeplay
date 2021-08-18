@@ -1,3 +1,19 @@
+# [1.1.0](https://github.com/SocialGouv/Tumeplay/compare/v1.0.14...v1.1.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* fixing consent for statistique usage in metrople ([7095d31](https://github.com/SocialGouv/Tumeplay/commit/7095d3121f5c406cd23b8decd998bf79936cb55f))
+* fixing design issues on tunnelcartsummary ([61acfcd](https://github.com/SocialGouv/Tumeplay/commit/61acfcd350bb49d2c42f8a557845cf9982772daa))
+* fixing layout on landingscreen chrome ([9edf064](https://github.com/SocialGouv/Tumeplay/commit/9edf064388d6427b30234b8090a70b77aca069bd))
+* guyane logo correction ([376e43a](https://github.com/SocialGouv/Tumeplay/commit/376e43a52070bae3e8ff979efae8694ba5ccc08d))
+* ponctuation on links ([ffdc24f](https://github.com/SocialGouv/Tumeplay/commit/ffdc24f9a4756b3401aa9a27f73640161c7204e4))
+
+
+### Features
+
+* adding link interpretation in  SOS page ([60c19dd](https://github.com/SocialGouv/Tumeplay/commit/60c19dd8af21ef8dbc4518720965e008c56562ae))
+
 ## [1.0.14](https://github.com/SocialGouv/Tumeplay/compare/v1.0.13...v1.0.14) (2021-08-13)
 
 
