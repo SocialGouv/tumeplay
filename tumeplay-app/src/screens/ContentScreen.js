@@ -105,12 +105,17 @@ export default function ContentScreen(props) {
     });
     if (!loading) {
       const contents = data.contents.map(content => {
-        //changer le content.description pour y insérer des balises a si lien
         const Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
-        const text = content.text.replace(
+        let text = content.text.replace(
           Rexp,
           "<a href='$1' target='_blank'>$1</a>",
         );
+        text = text.replaceAll('.</a>', '</a>.');
+        text = text.replaceAll(".' target='_blank'", "' target='_blank'");
+        text = text.replaceAll("!' target='_blank'", "' target='_blank'");
+        text = text.replaceAll('!</a>', '</a>!');
+        text = text.replaceAll("?' target='_blank'", "' target='_blank'");
+        text = text.replaceAll('?</a>', '</a>?');
         content = {...content, text};
         return content;
       });
