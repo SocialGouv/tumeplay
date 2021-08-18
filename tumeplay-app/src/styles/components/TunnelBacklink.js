@@ -2,9 +2,6 @@ import {StyleSheet} from 'react-native';
 import Colors from '../Color';
 
 var Styles = {
-  backlinkWrapper: {
-    flex: 0.06,
-  },
   backlinkButton: {
     flex: 1,
     paddingTop: 2,
@@ -13,6 +10,7 @@ var Styles = {
     maxHeight: 70,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginBottom: 10,
   },
   backlinkArrow: {
     width: 17,

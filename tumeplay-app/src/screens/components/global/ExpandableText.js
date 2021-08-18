@@ -42,15 +42,19 @@ export default function ExpandableText(props) {
   const isMounted = useIsMounted();
   const _text = useRef();
 
-  const soundIconStyle = props.soundStyle || {position: 'absolute', right: 15, top: 20}
+  const soundIconStyle = props.soundStyle || {
+    position: 'absolute',
+    right: 15,
+    top: 20,
+  };
 
   const [play, setPlay] = useState(false);
 
   const soundPicture = require('../../../assets/pictures/sound.png');
 
   function onPlayStart() {
-    console.log("start")
-    setPlay(true)
+    console.log('start');
+    setPlay(true);
   }
 
   function onPlayStop() {
@@ -231,11 +235,11 @@ export default function ExpandableText(props) {
   return (
     <View style={props.containerStyle}>
       <View style={cardStyle.textContainer}>
-        {props.content.title ?
+        {props.content.title ? (
           <Text style={cardStyle.title}>{props.content.title}</Text>
-          :
+        ) : (
           <></>
-        }
+        )}
         <HTMLView
           RootComponent={Text}
           renderNode={renderNode}

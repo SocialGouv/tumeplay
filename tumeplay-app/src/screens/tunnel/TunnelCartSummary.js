@@ -1,5 +1,12 @@
 import React, {useState, forwardRef} from 'react';
-import {Text, View, TouchableOpacity, Image, ScrollView, CheckBox} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  CheckBox,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import {EventRegister} from 'react-native-event-listeners';
 
@@ -11,7 +18,7 @@ import ProductErrorModal from '../components/tunnel/ProductErrorModal';
 import UserService from '../../services/User';
 
 import Styles from '../../styles/Styles';
-import Colors from '../../styles/Color'
+import Colors from '../../styles/Color';
 
 import TunnelCartSummaryStyle from '../../styles/components/TunnelCartSummary';
 import OrdersAPI from '../../services/api/orders';
@@ -34,11 +41,13 @@ export default function TunnelCartSummary(props) {
     props.navigation.state.params.selectedProducts,
   );
   const [selectedReferent] = useState(
-    props.navigation.state.params.selectedReferent
-  )
-  const [userAdress, setUserAdress] = useState(props.navigation.state.params.userAdress);
+    props.navigation.state.params.selectedReferent,
+  );
+  const [userAdress, setUserAdress] = useState(
+    props.navigation.state.params.userAdress,
+  );
 
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(false);
 
   async function _confirmOrder() {
     //ORDER STRAPI API
@@ -46,7 +55,7 @@ export default function TunnelCartSummary(props) {
     let requestBody = {
       first_name: userAdress.firstName,
       last_name: userAdress.lastName,
-      email: userAdress.emailAdress
+      email: userAdress.emailAdress,
     };
 
     if (deliveryType === 'home') {
@@ -61,7 +70,7 @@ export default function TunnelCartSummary(props) {
         address_zipcode: userAdress.zipCode,
         address_city: userAdress.address_city,
         delivery: deliveryType,
-      }
+      };
     } else if (deliveryType === 'pickup') {
       requestBody = {
         ...requestBody,
@@ -73,8 +82,8 @@ export default function TunnelCartSummary(props) {
         poi_name: selectedPickup.LgAdr1,
         address_city: selectedPickup.Ville,
         poi_number: selectedPickup.Num,
-        delivery: deliveryType
-      }
+        delivery: deliveryType,
+      };
     } else if (deliveryType === 'referent') {
       requestBody = {
         ...requestBody,
@@ -87,10 +96,10 @@ export default function TunnelCartSummary(props) {
         phone: selectedReferent.phone_number,
         poi_name: selectedReferent.name,
         delivery: deliveryType,
-        referent: selectedReferent.id
-      }
+        referent: selectedReferent.id,
+      };
     }
-    if (selectedItem.__typename === 'Box') {
+    if (selectedItem.__typename === 'Box') {
       requestBody = {
         ...requestBody,
         content: [
@@ -99,7 +108,7 @@ export default function TunnelCartSummary(props) {
             box: selectedItem.id,
           },
         ],
-      }
+      };
     } else if (selectedItem.__typename === 'BoxSurMesure') {
       requestBody = {
         ...requestBody,
@@ -109,7 +118,7 @@ export default function TunnelCartSummary(props) {
             produits: selectedProducts,
           },
         ],
-      }
+      };
     }
     orderPost = await OrdersAPI.orderBoxes(requestBody);
     switch (orderPost.status) {
@@ -132,24 +141,27 @@ export default function TunnelCartSummary(props) {
       case 405:
       case 500:
         props.navigation.navigate('TunnelProductSelect', {
-          error: orderPost.status
+          error: orderPost.status,
         });
         break;
     }
     if (isSelected) {
-      let requestBody = {...userAdress}
-      await ContactsAPI.postContact(requestBody)
+      const requestBody = {...userAdress};
+      await ContactsAPI.postContact(requestBody);
     }
   }
 
-  const handleContactValidation = (e) => {
+  const handleContactValidation = e => {
     if (e.target.checked) {
-      userAdress["type"] = "enrollé"
-      userAdress["zipCode"] = selectedReferent.address_zipcode;
-      setUserAdress({...userAdress})
+      userAdress['type'] = 'enrollé';
+      userAdress['zipCode'] =
+        process.env.REACT_APP_ZONE === 'metropole'
+          ? selectedPickup.address_zipCode
+          : selectedReferent.address_zipcode;
+      setUserAdress({...userAdress});
     }
-    setIsSelected(e.target.checked)
-  }
+    setIsSelected(e.target.checked);
+  };
 
   function _toggleErrorModal() {
     setShowErrorModal(!showErrorModal);
@@ -203,13 +215,13 @@ export default function TunnelCartSummary(props) {
     <ScrollView style={[Styles.flexOne, TunnelCartSummaryStyle.container]}>
       <Backlink step={4} onPress={_goBack} />
 
-      <View style={{flex: 0.1}}>
+      <View>
         <Text style={Styles.tunnelTitle}>Ton récapitulatif</Text>
       </View>
 
       <Splitter />
 
-      <View style={{flex: 0.2, marginBottom: 15}}>
+      <View style={{marginBottom: 5}}>
         <Text style={TunnelCartSummaryStyle.title}>Tes articles</Text>
         <View
           style={{
@@ -247,8 +259,8 @@ export default function TunnelCartSummary(props) {
 
       <Splitter />
 
-      <View style={{flex: 0.2}}>
-        <View style={{flex: 0.2}}>
+      <View>
+        <View>
           <Text style={TunnelCartSummaryStyle.title}>Adresse de livraison</Text>
         </View>
         <View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
@@ -285,10 +297,11 @@ export default function TunnelCartSummary(props) {
               </Text>
             )}
             {deliveryType == 'referent' && (
-               <Text style={[TunnelCartSummaryStyle.subTitle]}>
+              <Text style={[TunnelCartSummaryStyle.subTitle]}>
                 {selectedReferent.address}
                 {'\n'}
-                {selectedReferent.address_zipCode} {selectedReferent.address_city}
+                {selectedReferent.address_zipCode}{' '}
+                {selectedReferent.address_city}
               </Text>
             )}
           </View>
@@ -297,7 +310,7 @@ export default function TunnelCartSummary(props) {
 
       <Splitter />
 
-      <View style={{flex: 0.15}}>
+      <View>
         <Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
           Nous t&apos;enverrons un mail pour t&apos;informer de
           l&apos;expédition de ta commande à :
@@ -334,11 +347,23 @@ export default function TunnelCartSummary(props) {
         )}
 
         <Splitter />
-              <View style={{flexDirection: 'row'}}>
-                <input onClick={(e) => handleContactValidation(e)} type='checkbox' value={isSelected}></input>
-                <label style={{fontFamily: Colors.textFont,color: Colors.secondaryText,fontSize: 12, marginLeft: 5}}> J 'accepte d'
-    être recontacté par Tumeplay pour améliorer le service et proposer une meilleure expérience aux prochains utilisateurs </label>
-              </View>
+        <View style={{flexDirection: 'row'}}>
+          <input
+            onClick={e => handleContactValidation(e)}
+            type="checkbox"
+            value={isSelected}></input>
+          <label
+            style={{
+              fontFamily: Colors.textFont,
+              color: Colors.secondaryText,
+              fontSize: 12,
+              marginLeft: 5,
+            }}>
+            {' '}
+            J 'accepte d' être recontacté par Tumeplay pour améliorer le service
+            et proposer une meilleure expérience aux prochains utilisateurs{' '}
+          </label>
+        </View>
         <Splitter />
 
         <Text
@@ -351,7 +376,7 @@ export default function TunnelCartSummary(props) {
         </Text>
       </View>
 
-      <View style={{flex: 0.25, height: 60, marginTop: 15, marginBottom: 25}}>
+      <View style={{height: 60, marginTop: 15, marginBottom: 25}}>
         <TouchableOpacity
           style={{
             flex: 1,
