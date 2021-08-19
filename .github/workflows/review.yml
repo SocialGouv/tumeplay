@@ -267,10 +267,10 @@ jobs:
         with:
           number: ${{ steps.finder.outputs.pr }}
           message: |
-            Deployment ${{ github.sha }}.
-            ```
-            ${{ steps.debug-manifests.outputs.markdown }}
-            ```
+
+Deployment ${{ github.sha }}.
+
+${{ steps.debug-manifests.outputs.markdown }}
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
