@@ -143,9 +143,9 @@ jobs:
           cache-from: "type=local,src=/tmp/.buildx-frontend-guyane-cache"
           build-args: |
             buildenv=dev.guyane
-            REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-            REACT_APP_ZONE=guyane
-            REACT_OTHER_ZONE_URL=https://metropole-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_API_URL=%%REACT_APP_API_URL%%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   register-frontend-metropole:
     name: Register frontend Metropole
@@ -213,9 +213,9 @@ jobs:
           cache-from: "type=local,src=/tmp/.buildx-frontend-metropole-cache"
           build-args: |
             buildenv=dev.metropole
-            REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-            REACT_APP_ZONE=metropole
-            REACT_OTHER_ZONE_URL=https://guyane-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_API_URL=%%REACT_APP_API_URL%%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   ##############################################################################
   ## GENERATE KUBERNETES MANIFESTS
@@ -258,7 +258,7 @@ jobs:
           MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
           echo "::set-output name=markdown::$MARKDOWN"
 
-      # necessary to find the PR on push evenets
+      # necessary to find the PR on push events
       - uses: jwalton/gh-find-current-pr@v1
         id: finder
 

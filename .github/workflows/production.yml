@@ -134,10 +134,9 @@ jobs:
           cache-to: "type=local,dest=/tmp/.buildx-frontend-guyane-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-guyane-cache"
           build-args: |
-            buildenv=preprod.guyane
-            REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-            REACT_APP_ZONE=guyane
-            REACT_OTHER_ZONE_URL=https://metropole-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_API_URL=%%REACT_APP_API_URL%%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   register-frontend-metropole:
     name: Register front-end
@@ -198,10 +197,9 @@ jobs:
           cache-to: "type=local,dest=/tmp/.buildx-frontend-metropole-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-metropole-cache"
           build-args: |
-            buildenv=preprod.metropole
-            REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-            REACT_APP_ZONE=metropole
-            REACT_OTHER_ZONE_URL=https://guyane-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_API_URL=%%REACT_APP_API_URL%%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
