@@ -144,6 +144,8 @@ jobs:
           build-args: |
             buildenv=dev.guyane
             REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_ZONE=guyane
+            REACT_OTHER_ZONE_URL=https://metropole-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   register-frontend-metropole:
     name: Register frontend Metropole
@@ -212,6 +214,8 @@ jobs:
           build-args: |
             buildenv=dev.metropole
             REACT_APP_API_URL=https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_ZONE=metropole
+            REACT_OTHER_ZONE_URL=https://guyane-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## GENERATE KUBERNETES MANIFESTS

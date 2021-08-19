@@ -136,6 +136,8 @@ jobs:
           build-args: |
             buildenv=preprod.guyane
             REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_ZONE=guyane
+            REACT_OTHER_ZONE_URL=https://metropole-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   register-frontend-metropole:
     name: Register front-end
@@ -198,6 +200,8 @@ jobs:
           build-args: |
             buildenv=preprod.metropole
             REACT_APP_API_URL=https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+            REACT_APP_ZONE=metropole
+            REACT_OTHER_ZONE_URL=https://guyane-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
