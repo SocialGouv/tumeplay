@@ -269,7 +269,7 @@ jobs:
           message: |
             Deployment ${{ github.sha }}.
             ```
-            ${{ steps.test.debug-manifests.markdown }}
+            ${{ steps.debug-manifests.outputs.markdown }}
             ```
 
       - name: Archive k8s manifests
