@@ -135,7 +135,7 @@ jobs:
           cache-from: "type=local,src=/tmp/.buildx-frontend-guyane-cache"
           build-args: |
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
-            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   register-frontend-metropole:
@@ -198,7 +198,7 @@ jobs:
           cache-from: "type=local,src=/tmp/.buildx-frontend-metropole-cache"
           build-args: |
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
-            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   ##############################################################################

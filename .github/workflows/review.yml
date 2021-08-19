@@ -144,7 +144,7 @@ jobs:
           build-args: |
             buildenv=dev.guyane
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
-            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   register-frontend-metropole:
@@ -214,7 +214,7 @@ jobs:
           build-args: |
             buildenv=dev.metropole
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
-            REACT_APP_ZONE=%%REACT_APP_ZONE%
+            REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
   ##############################################################################
