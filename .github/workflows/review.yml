@@ -253,7 +253,6 @@ jobs:
         run: |
           MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
           echo "${MARKDOWN}"
-          MARKDOWN="${MARKDOWN//'%'/'%25'}​【7,6 m】"
           MARKDOWN="${MARKDOWN//$'\n'/'%0A'}"
           MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
           echo "::set-output name=markdown::$MARKDOWN"
