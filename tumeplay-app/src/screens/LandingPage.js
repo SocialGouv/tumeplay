@@ -2,6 +2,10 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import Colors from '../styles/Color'
 
+console.log('process.env.REACT_APP_ZONE', process.env.REACT_APP_ZONE)
+console.log('process.env.REACT_APP_API_URL', process.env.REACT_APP_API_URL)
+console.log('process.env.REACT_APP_OTHER_ZONE_URL', process.env.REACT_APP_OTHER_ZONE_URL)
+
 const LandingPage = (props) => {
 
   const france = require('../assets/pictures/cartefrance.svg')
