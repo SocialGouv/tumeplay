@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import RoutesWithLayout from './layouts/RoutesWithLayout';
 import Dashboard from './views/admin/Dashboard.jsx';
 import Settings from './views/admin/Settings';
@@ -14,6 +14,7 @@ const Routes = () => {
       <RoutesWithLayout component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
       <RoutesWithLayout component={Login} layout={TumeplayDashboardLayout} exact path="/login"/>
       <RoutesWithLayout component={Register} layout={TumeplayDashboardLayout} exact path="/register"/>
+       <Redirect from="*" to="/" />
       <Route />
 
     </Switch>
