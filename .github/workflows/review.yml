@@ -248,6 +248,9 @@ jobs:
           SOCIALGOUV_BASE_DOMAIN: ${{ env.SOCIALGOUV_BASE_DOMAIN }}
           RANCHER_PROJECT_ID: ${{ env.RANCHER_PROJECT_ID }}
 
+      - name: ⛑ Debug manifests ⛑
+        run: cat manifests.yml | npx @socialgouv/parse-manifests --markdown
+
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
         with:
