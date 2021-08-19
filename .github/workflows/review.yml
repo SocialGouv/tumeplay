@@ -253,13 +253,20 @@ jobs:
         run: |
           MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
           echo "${MARKDOWN}"
-          echo "::set-output name=markdown::$(echo $MARKDOWN)"
+          MARKDOWN="${MARKDOWN//'%'/'%25'}​【7,6 m】"
+          MARKDOWN="${MARKDOWN//$'\n'/'%0A'}"
+          MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
+          echo "::set-output name=markdown::$MARKDOWN"
 
       - name: ⛑ Comment PR
-        uses: thollander/actions-comment-pull-request@master
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          message: ${{ steps.debug-manifests.outputs.markdown }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.finder.outputs.pr }}
+          message: |
+            Deployment ${{ github.sha }}.
+            ```
+            ${{ steps.test.outputs.result }}
+            ```
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
