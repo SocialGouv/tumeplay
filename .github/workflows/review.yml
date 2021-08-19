@@ -249,7 +249,18 @@ jobs:
           RANCHER_PROJECT_ID: ${{ env.RANCHER_PROJECT_ID }}
 
       - name: ⛑ Debug manifests ⛑
-        run: cat manifests.yml | npx @socialgouv/parse-manifests --markdown
+        id: debug-manifests
+        run: |
+          MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
+          echo $MARKDOWN
+          echo "::set-output name=markdown::$(echo $MARKDOWN)"
+
+      - name: ⛑ Comment PR
+        uses: thollander/actions-comment-pull-request@master
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          message: ${{ steps.debug-manifests.outputs.markdown }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
