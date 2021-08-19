@@ -271,6 +271,7 @@ jobs:
             Deployment ${{ github.sha }}.
 
             ${{ steps.debug-manifests.outputs.markdown }}
+          GITHUB_TOKEN: ${{ secret.SOCIALGROOVYBOT_BOTO_PAT }}
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
