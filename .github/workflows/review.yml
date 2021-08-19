@@ -258,6 +258,10 @@ jobs:
           MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
           echo "::set-output name=markdown::$MARKDOWN"
 
+      # necessary to find the PR on push evenets
+      - uses: jwalton/gh-find-current-pr@v1
+        id: finder
+
       - name: ⛑ Comment PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
@@ -265,7 +269,7 @@ jobs:
           message: |
             Deployment ${{ github.sha }}.
             ```
-            ${{ steps.test.outputs.result }}
+            ${{ steps.test.debug-manifests.markdown }}
             ```
 
       - name: Archive k8s manifests
