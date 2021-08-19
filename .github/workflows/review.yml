@@ -251,8 +251,9 @@ jobs:
       - name: ⛑ Debug manifests ⛑
         id: debug-manifests
         run: |
+          TEXT=$(cat manifests.yml | npx @socialgouv/parse-manifests --text)
+          echo "${TEXT}"
           MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
-          echo "${MARKDOWN}"
           MARKDOWN="${MARKDOWN//$'\n'/'%0A'}"
           MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
           echo "::set-output name=markdown::$MARKDOWN"
