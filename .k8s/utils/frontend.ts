@@ -59,7 +59,7 @@ export default async (name: string) => {
   addEnvs({
     deployment,
     data: {
-      REACT_APP_API_URL: `https://${getIngressHost(backendManifests)}/`,
+      REACT_APP_API_URL: `https://${getIngressHost(backendManifests)}`,
       REACT_APP_ZONE: name,
       REACT_APP_OTHER_ZONE_URL: `https://${getIngressHost(manifests).replace(
         name,
