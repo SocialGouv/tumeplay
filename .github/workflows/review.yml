@@ -252,7 +252,7 @@ jobs:
         id: debug-manifests
         run: |
           MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
-          echo $MARKDOWN
+          echo "${MARKDOWN}"
           echo "::set-output name=markdown::$(echo $MARKDOWN)"
 
       - name: ⛑ Comment PR
