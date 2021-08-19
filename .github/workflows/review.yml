@@ -257,7 +257,6 @@ jobs:
 
       - name: ⛑ Comment PR
         uses: thollander/actions-comment-pull-request@master
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           message: ${{ steps.debug-manifests.outputs.markdown }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
