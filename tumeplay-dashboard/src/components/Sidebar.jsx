@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCog, faDoorClosed, faTimes, faTv, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -80,14 +80,15 @@ export default function Sidebar() {
                   }
                   to="/dashboard"
                 >
-                  <i
+                  <FontAwesomeIcon
+                    icon={faTv}
                     className={
                       "fas fa-tv mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/dashboard") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
-                  ></i>{" "}
+                  ></FontAwesomeIcon>{" "}
                   Dashboard
                 </Link>
               </li>
@@ -102,14 +103,15 @@ export default function Sidebar() {
                   }
                   to="/settings"
                 >
-                  <i
+                  <FontAwesomeIcon
+                    icon={faCog}
                     className={
                       "fas fa-tools mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/settings") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
-                  ></i>{" "}
+                  ></FontAwesomeIcon>{" "}
                   Paramêtres
                 </Link>
               </li>
@@ -124,15 +126,16 @@ export default function Sidebar() {
                   }
                   to="/Login"
                 >
-                  <i
+                  <FontAwesomeIcon
+                    icon={faUser}
                     className={
                       "fas fa-table mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/tables") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
-                  ></i>{" "}
-                  Tables
+                  ></FontAwesomeIcon>{" "}
+                  Login
                 </Link>
               </li>
 
@@ -146,14 +149,15 @@ export default function Sidebar() {
                   }
                   to="/admin/maps"
                 >
-                  <i
+                  <FontAwesomeIcon
+                    icon={faDoorClosed}
                     className={
                       "fas fa-map-marked mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/maps") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
-                  ></i>{" "}
+                  ></FontAwesomeIcon>{" "}
                   Déconnexion
                 </Link>
               </li>
