@@ -374,6 +374,10 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: https://backend-tumeplay.fabrique.social.gouv.fr/
+            - name: REACT_APP_ZONE
+              value: guyane
+            - name: REACT_APP_OTHER_ZONE_URL
+              value: https://metropole-tumeplay.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
@@ -520,6 +524,10 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: https://backend-tumeplay.fabrique.social.gouv.fr/
+            - name: REACT_APP_ZONE
+              value: metropole
+            - name: REACT_APP_OTHER_ZONE_URL
+              value: https://guyane-tumeplay.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
