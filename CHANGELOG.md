@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.1...v1.1.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* add buildenv ([#62](https://github.com/SocialGouv/Tumeplay/issues/62)) ([a273cf5](https://github.com/SocialGouv/Tumeplay/commit/a273cf571df91a46e5663d2b7865245ee06e841a))
+
 ## [1.1.1](https://github.com/SocialGouv/Tumeplay/compare/v1.1.0...v1.1.1) (2021-08-20)
 
 
