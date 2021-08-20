@@ -134,6 +134,7 @@ jobs:
           cache-to: "type=local,dest=/tmp/.buildx-frontend-guyane-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-guyane-cache"
           build-args: |
+            buildenv=preprod.guyane
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
             REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
@@ -197,6 +198,7 @@ jobs:
           cache-to: "type=local,dest=/tmp/.buildx-frontend-metropole-cache"
           cache-from: "type=local,src=/tmp/.buildx-frontend-metropole-cache"
           build-args: |
+            buildenv=preprod.metropole
             REACT_APP_API_URL=%%REACT_APP_API_URL%%
             REACT_APP_ZONE=%%REACT_APP_ZONE%%
             REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
