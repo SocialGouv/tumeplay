@@ -40,6 +40,9 @@
     },
     "theme": {
       "model": "thematique"
+    },
+    "link": {
+      "type": "string"
     }
   }
 }
