@@ -2,10 +2,6 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import Colors from '../styles/Color'
 
-console.log('process.env.REACT_APP_ZONE', process.env.REACT_APP_ZONE)
-console.log('process.env.REACT_APP_API_URL', process.env.REACT_APP_API_URL)
-console.log('process.env.REACT_APP_OTHER_ZONE_URL', process.env.REACT_APP_OTHER_ZONE_URL)
-
 const LandingPage = (props) => {
 
   const france = require('../assets/pictures/cartefrance.svg')
@@ -14,7 +10,6 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
-    console.log('handleRedirection', process.env.REACT_APP_ZONE, process.env.REACT_APP_OTHER_ZONE_URL, name)
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
       window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
