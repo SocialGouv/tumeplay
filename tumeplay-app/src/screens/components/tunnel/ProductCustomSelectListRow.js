@@ -56,9 +56,9 @@ export default function ProductCustomSelectListRow(props) {
     ? require('../../../assets/pictures/filled-minus.png')
     : require('../../../assets/pictures/filled-plus.png');
 
-  function onPress() {
-    const _newState = !isSelected;
-    const _selectAllowed = props.onPress(item, stock, _newState);
+  function onPress(item) {
+    const touched = !isSelected;
+    const _selectAllowed = props.onPress(item, stock, touched);
 
     if (_selectAllowed) {
       setIsSelected(!isSelected);
