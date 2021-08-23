@@ -57,7 +57,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 	const fetchOrders = async () => {
 		const now = new Date().getTime()
-		const sevenDaysAgo = now - (7 * 24 * 60 * 60)
+		const sevenDaysAgo = now - (7 * 24 * 60 * 60 * 1000)
 		const data = await request('/commandes/count', {
 			method: 'GET',
 			params: {
