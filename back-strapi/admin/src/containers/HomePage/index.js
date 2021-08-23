@@ -50,6 +50,24 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	const [switchZoneTop10Questions, setSwitchZoneTop10Questions] = useState('metropole')
 	const [switchZoneFlop10Questions, setSwitchZoneFlop10Questions] = useState('metropole')
 
+	const [nbResponses, setNbResponses] = useState(0);
+	const [nbCompletedQuiz, setNbCompletedQuiz] = useState(0);
+	const [nbOrders7days, setNbOrders7days] = useState(0);
+	const [percentUserLowQuizTime, setPercentUserLowQuizTime] = useState(0);
+
+	const fetchOrders = async () => {
+		const now = new Date().getTime()
+		const sevenDaysAgo = now - (7 * 24 * 60 * 60)
+		const data = await request('/commandes/count', {
+			method: 'GET',
+			params: {
+				created_at_gte: sevenDaysAgo
+			}
+		})
+
+		setNbOrders7days(data);
+	}
+
   const fetchStocks = async () => {
 		const data = await request('/boxes', {
 			method: 'GET',
@@ -82,6 +100,13 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 			},
 		});
 
+		const count = await request('/reponses/count', {
+			method: 'GET',
+			params: {},
+		});
+
+		setNbResponses(count);
+
 		const data = await request('/reponses', {
 			method: 'GET',
 			params: {
@@ -110,15 +135,15 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 			if (theme.environnement.slug === 'metropole') {
 				tmpResponsesMetropole.push({
 					title: theme.title,
-					right: countRightAnswers,
-					bad: countBadAnswers,
+					bonnes: countRightAnswers,
+					mauvaises: countBadAnswers,
 					percentageRightAnswer: countRightAnswers / (countRightAnswers + countBadAnswers) * 100
 				})
 			} else if (theme.environnement.slug === 'guyane') {
 				tmpResponsesGuyane.push({
 					title: theme.title,
-					right: countRightAnswers,
-					bad: countBadAnswers,
+					bonnes: countRightAnswers,
+					mauvaises: countBadAnswers,
 					percentageRightAnswer: countRightAnswers / (countRightAnswers + countBadAnswers) * 100,
 				})
 			}
@@ -201,12 +226,28 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	}
 
 	const fetchQuizTimes = async () => {
+
+		const count = await request('/quiz-times/count', {
+			method: 'GET',
+			params: {},
+		});
+		const countLowerThan30s = await request('/quiz-times/count', {
+			method: 'GET',
+			params: {
+				nb_seconds_lte: 30
+			},
+		});
+
+		setPercentUserLowQuizTime(countLowerThan30s / count * 100);
+
 		const data = await request('/quiz-times', {
 			method: 'GET',
 			params: {
 				_limit: 10000
 			},
 		});
+
+		setNbCompletedQuiz(data.length);
 
 		const iterations = _(data).map('quizz_iteration').uniq().sortBy().value();
 
@@ -352,6 +393,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
     fetchStocks();
 		fetchResponses();
 		fetchQuizTimes();
+		fetchOrders();
   }, [])
   
   const username = get(auth.getUserInfo(), 'firstname', '');
@@ -372,6 +414,38 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
           <div className="col-12">
             <h1><Wave /> Bonjour {username}!</h1>
           </div>
+          <div className="col-3 text-center">
+						<Block>
+							<h2 className="mt-4">
+								{nbCompletedQuiz}
+							</h2>
+							<p>Quiz complétés</p>
+						</Block>
+					</div>
+          <div className="col-3 text-center">
+						<Block>
+							<h2 className="mt-4">
+								{nbResponses}
+							</h2>
+							<p>Réponses aux questions</p>
+						</Block>
+					</div>
+          <div className="col-3 text-center">
+						<Block>
+							<h2 className="mt-4">
+								{nbOrders7days}
+							</h2>
+							<p>Commandes passées sur 7 jours</p>
+						</Block>
+					</div>
+          <div className="col-3 text-center">
+						<Block>
+							<h2 className="mt-4">
+								{percentUserLowQuizTime.toFixed(2)} %
+							</h2>
+							<p>De quiz complétés sous les 30 secondes</p>
+						</Block>
+					</div>
           <div className="col-6">
 							<Block style={{height: '500px', padding: '4rem 3rem 6rem 3rem'}}>
               	<h2>État des stocks par boxes</h2>
@@ -424,8 +498,8 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<YAxis />
 										<Tooltip />
 										<Legend />
-										<Bar barSize={60} dataKey="right" stackId="a" fill="#007eff" />
-										<Bar barSize={60} dataKey="bad" stackId="a" fill="#e74c3c" />
+										<Bar barSize={60} dataKey="bonnes" stackId="a" fill="#007eff" />
+										<Bar barSize={60} dataKey="mauvaises" stackId="a" fill="#e74c3c" />
 									</BarChart>
 								</ResponsiveContainer>
 							</Block>
