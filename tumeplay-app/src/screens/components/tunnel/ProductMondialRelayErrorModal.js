@@ -60,7 +60,7 @@ export default function ProductMondialRelayErrorModal(props) {
           <View>
             <Text style={customModal.modalTitle}>Oups !</Text>
             <Text style={customModal.text}>
-              Suite à un problème avec mondial relay, ta commande n'a pas pu être validé... Choisi le mode de livraison domicile ou retente ta chance plus tard.
+              Suite à un problème avec mondial relay, ta commande n'a pas pu être validée... Choisi le mode de livraison domicile ou retente ta chance plus tard.
             </Text>
           </View>
         </View>
