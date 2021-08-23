@@ -19,7 +19,6 @@ export default function ProductCustomSelectList(props) {
     for (const localProduct of selectedProducts) {
       _total += localProduct.quantity;
     }
-    console.log(_total)
     return _total;
   }
 
