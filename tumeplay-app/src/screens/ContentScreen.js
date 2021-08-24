@@ -28,6 +28,7 @@ import ModalStyle from '../styles/components/Modal';
 import {useQuery} from '@apollo/client';
 import {GET_CONTENTS} from '../services/api/contents';
 import {GET_QUESTIONS} from '../services/api/questions';
+import QuizTimesAPI from '../services/api/quiz-times';
 
 ContentScreen.propTypes = {
   navigation: PropTypes.object,
@@ -40,6 +41,8 @@ export default function ContentScreen(props) {
   const [isAge25ModalVisible, setIsAge25ModalVisible] = useState(false);
   const [isResultModalVisible, setIsResultModalVisible] = useState(false);
   const [isBadgeModalVisible, setIsBadgeModalVisible] = useState(false);
+	const [startQuizTimestamp, setStartQuizTimestamp] = useState(false);
+	const [countScore, setCountScore] = useState(0);
 
   const [isAge25, setIsAge25] = useState(null);
 
@@ -60,7 +63,6 @@ export default function ContentScreen(props) {
   const opacityTimer = useRef(null);
   autoScrollToTop(props);
 
-  var quizTimer = false;
   // Listeners to fix QuizzButton display on web mode
   const willFocusSubscription = props.navigation.addListener(
     'willFocus',
@@ -89,6 +91,10 @@ export default function ContentScreen(props) {
       };
     }
   }, [isMounted]);
+
+	const incrementScore = () => {
+		setCountScore(countScore + 1);
+	};
 
   const willBlurSubscription = props.navigation.addListener('willBlur', () => {
     if (isQuizzButtonVisible) {
@@ -159,7 +165,7 @@ export default function ContentScreen(props) {
     } else {
       // Step 3
       Tracking.quizStarted();
-      quizTimer = Math.floor(Date.now() / 1000);
+			setStartQuizTimestamp(Math.floor(Date.now() / 1000));
 
       _shuffleQuestions();
       _toggleQuizzModal();
@@ -176,6 +182,7 @@ export default function ContentScreen(props) {
     return (
       <QuizzScreen
         onFinishedQuizz={_onFinishedQuizz}
+				incrementScore={incrementScore}
         questions={localQuestions}
       />
     );
@@ -205,8 +212,15 @@ export default function ContentScreen(props) {
   }
 
   function _onFinishedQuizz() {
-    quizTimer = Math.floor(Date.now() / 1000) - quizTimer;
-    Tracking.quizEnded(quizTimer);
+    const quizTimerDifference = Math.floor(Date.now() / 1000) - startQuizTimestamp;
+    Tracking.quizEnded(quizTimerDifference);
+
+
+    const localStorage = window.localStorage.getItem('local.user');
+    const JsonObject = JSON.parse(localStorage);
+    const userID = JsonObject.uniqueId;
+    const iteration = 1;
+    QuizTimesAPI.publishQuizTime(userID, quizTimerDifference, countScore, isAge25 ? '+25' : '-25', iteration, selectedTheme.id)
 
     _toggleQuizzModal();
     setNeedResultModal(true);
@@ -251,6 +265,7 @@ export default function ContentScreen(props) {
     _toggleMoreThan25YearsModal();
     _shuffleQuestions();
     _toggleQuizzModal();
+		setStartQuizTimestamp(Math.floor(Date.now() / 1000));
     Tracking.quizStarted();
   }
 
