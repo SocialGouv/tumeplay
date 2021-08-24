@@ -19,6 +19,7 @@ import ResponsesAPI from '../services/api/responses';
 QuizzScreen.propTypes = {
   questions: PropTypes.array,
   onFinishedQuizz: PropTypes.func,
+	incrementScore: PropTypes.func,
 };
 
 export default function QuizzScreen(props) {
@@ -102,6 +103,10 @@ export default function QuizzScreen(props) {
 
 
   async function _nextQuestion() {
+		if (_currentQuestion.responses.right_answer === givenAnswers.localAnswer.givenAnswer) {
+			props.incrementScore();
+		}
+
     if (currentIndex + 1 >= total) {
       props.onFinishedQuizz(givenAnswers);
     } else {
