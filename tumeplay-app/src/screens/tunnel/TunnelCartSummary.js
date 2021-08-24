@@ -350,14 +350,17 @@ export default function TunnelCartSummary(props) {
         <View style={{flexDirection: 'row'}}>
           <input
             onClick={e => handleContactValidation(e)}
+            id="checkconsent"
             type="checkbox"
             value={isSelected}></input>
           <label
+            htmlFor="checkconsent"
             style={{
               fontFamily: Colors.textFont,
               color: Colors.secondaryText,
               fontSize: 12,
               marginLeft: 5,
+              cursor: 'pointer',
             }}>
             {' '}
             J 'accepte d' être recontacté par Tumeplay pour améliorer le service
