@@ -505,7 +505,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 							</Block>
           </div>
           <div className="col-7">
-							<Block style={{height: '501px', padding: '4rem 3rem 6rem 3rem'}}>
+							<Block style={{height: '500px', padding: '4rem 3rem 6rem 3rem'}}>
               	<h2>Temps de complétion des quizz par itérations</h2>
 								<div className="zone-switcher">
 									{ZoneSwitcher(switchZoneQuizTimeByIteration, setSwitchZoneQuizTimeByIteration)}
