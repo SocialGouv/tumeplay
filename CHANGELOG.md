@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/SocialGouv/Tumeplay/compare/v1.3.0...v1.3.1) (2021-08-24)
+
+
+### Bug Fixes
+
+* add stroke width to lines in linecharts ([8d98525](https://github.com/SocialGouv/Tumeplay/commit/8d985254d4d512d5e68197a85dfb542a27382c19))
+* reset count score on quiz start ([35f9e70](https://github.com/SocialGouv/Tumeplay/commit/35f9e70d1dac10368d91009575925d62e1e60152))
+
 # [1.3.0](https://github.com/SocialGouv/Tumeplay/compare/v1.2.0...v1.3.0) (2021-08-24)
 
 
