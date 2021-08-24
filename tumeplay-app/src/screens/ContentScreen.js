@@ -151,6 +151,7 @@ export default function ContentScreen(props) {
     } else {
       // Step 3
       Tracking.quizStarted();
+			setCountScore(0);
 			setStartQuizTimestamp(Math.floor(Date.now() / 1000));
 
       _shuffleQuestions();
