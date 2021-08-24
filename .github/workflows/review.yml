@@ -251,7 +251,7 @@ jobs:
       - name: ⛑ Debug manifests ⛑
         uses: socialgouv/actions/k8s-manifests-debug@master
         with:
-          path: manifests.yaml
+          path: manifests.yml
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           RANCHER_PROJECT_ID: ${{ env.RANCHER_PROJECT_ID }}
