@@ -1,3 +1,19 @@
+# [1.3.0](https://github.com/SocialGouv/Tumeplay/compare/v1.2.0...v1.3.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* 7 days ago filte ([d3c4a86](https://github.com/SocialGouv/Tumeplay/commit/d3c4a864912cf6b4a540a4438f1413c229d13792))
+* move recharts.js dependencie to right package.json ([7f8da14](https://github.com/SocialGouv/Tumeplay/commit/7f8da1468a0024bee3498b2f6628c4fdb5a42656))
+* update package-lock json ([db8e6ae](https://github.com/SocialGouv/Tumeplay/commit/db8e6aed638b9e33b5930865bad0102fe7e9015b))
+* update yarn.lock ([400dc9f](https://github.com/SocialGouv/Tumeplay/commit/400dc9ff485aea57573d273ed52cc8d625fac77c))
+
+
+### Features
+
+* add kpis to strapi home page ([183d423](https://github.com/SocialGouv/Tumeplay/commit/183d423f27a7fa042c06f5ee3f89348a97221111))
+* stats page & front quiz data saving ([226718b](https://github.com/SocialGouv/Tumeplay/commit/226718b7580f044ed9a2a903aad165e9640f8d18))
+
 # [1.2.0](https://github.com/SocialGouv/Tumeplay/compare/v1.1.2...v1.2.0) (2021-08-24)
 
 
