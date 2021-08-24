@@ -11,8 +11,5 @@
   },
   "devDependencies": {
     "@socialgouv/sre-secrets": "^1.4.0"
-  },
-  "dependencies": {
-    "recharts": "^2.1.0"
   }
 }
