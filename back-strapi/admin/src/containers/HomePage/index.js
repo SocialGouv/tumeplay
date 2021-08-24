@@ -529,7 +529,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<Legend />
 										{
 											(switchZoneQuizTimeByIteration === 'metropole' ? quizTimeUsedThemesMetropole : quizTimeUsedThemesGuyane).map((theme_name) => {
-												return(<Line key={theme_name} type="monotone" dataKey={theme_name} stroke={getRandomColor()} activeDot={{ r: 8 }} />)
+												return(<Line key={theme_name} type="monotone" dataKey={theme_name} stroke={getRandomColor()} strokeWidth={2} activeDot={{ r: 8 }} />)
 											})
 										}
 									</LineChart>
@@ -544,6 +544,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 								</div>
 								<ResponsiveContainer width="100%" height="100%">
 									<LineChart
+									max={12}
 										width={500}
 										height={300}
 										data={switchZoneQuizAverageScoreByIteration === 'metropole' ? quizAverageScoreByIterationMetropole : quizAverageScoreByIterationGuyane}
@@ -557,7 +558,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<CartesianGrid strokeDasharray="3 3" />
 										<XAxis dataKey="name" />
 										<YAxis />
-										<Line type="monotone" dataKey="score" stroke="#007eff" activeDot={{ r: 8 }} />
+										<Line type="monotone" dataKey="score" stroke="#007eff" strokeWidth={2} activeDot={{ r: 8 }} />
 										<Tooltip />
 									</LineChart>
 								</ResponsiveContainer>
@@ -640,7 +641,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 														{q.question}
 													</div>
 													<div className="simple-table-col question-average">
-														{q.percentageRightAnswers}
+														{q.percentageRightAnswers.toFixed(2)}
 													</div>
 												</div>
 											)
@@ -672,7 +673,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 														{q.question}
 													</div>
 													<div className="simple-table-col question-average">
-														{q.percentageRightAnswers}
+														{q.percentageRightAnswers.toFixed(2)}
 													</div>
 												</div>
 											)
