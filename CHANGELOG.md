@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/SocialGouv/Tumeplay/compare/v1.1.2...v1.2.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* clickable label on cartsummary regarding max demand ([df1ad4c](https://github.com/SocialGouv/Tumeplay/commit/df1ad4cd737ee78b90c7cad64d2afe21a9ca27f0))
+
+
+### Features
+
+* positionning guyane map on Saint Laurent and fixing small style issue ([1d94f19](https://github.com/SocialGouv/Tumeplay/commit/1d94f19c52eaeb3280300b532c4f40fd695e3908))
+
 ## [1.1.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.1...v1.1.2) (2021-08-20)
 
 
