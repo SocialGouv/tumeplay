@@ -5,18 +5,17 @@ import Dashboard from './views/admin/Dashboard.jsx';
 import Settings from './views/admin/Settings';
 import Login from './views/auth/Login';
 import Register from './views/auth/Register';
-import TumeplayDashboardLayout from './layouts/TumeplayDashboard'
+import TumeplayDashboardLayout from './layouts/TumeplayDashboard';
+import AuthenticationLayout from './layouts/AuthenticationLayout.jsx'
 
 const Routes = () => {
   return (
     <Switch>
+      <RoutesWithLayout component={Login} layout={AuthenticationLayout} exact path="/login"/>
+      <RoutesWithLayout component={Register} layout={AuthenticationLayout} exact path="/register"/>
       <RoutesWithLayout component={Dashboard} layout={TumeplayDashboardLayout} exact path="/"/>
       <RoutesWithLayout component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
-      <RoutesWithLayout component={Login} layout={TumeplayDashboardLayout} exact path="/login"/>
-      <RoutesWithLayout component={Register} layout={TumeplayDashboardLayout} exact path="/register"/>
-       <Redirect from="*" to="/" />
-      <Route />
-
+      <Redirect from="*" to="/" />
     </Switch>
   )
 }
