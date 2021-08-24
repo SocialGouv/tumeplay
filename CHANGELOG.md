@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/SocialGouv/Tumeplay/compare/v1.3.2...v1.3.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* charts height to 500px ([2af3291](https://github.com/SocialGouv/Tumeplay/commit/2af3291f78d03d2af2017211a1301c144d642c24))
+
 ## [1.3.2](https://github.com/SocialGouv/Tumeplay/compare/v1.3.1...v1.3.2) (2021-08-24)
 
 
