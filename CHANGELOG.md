@@ -1,3 +1,12 @@
+## [1.3.4](https://github.com/SocialGouv/Tumeplay/compare/v1.3.3...v1.3.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* typo ([54a09e8](https://github.com/SocialGouv/Tumeplay/commit/54a09e80305566090f3d700e2868e403a0bbd31d))
+* **ci:** add backend.env.STRAPI_LICENSE ([8150504](https://github.com/SocialGouv/Tumeplay/commit/81505040821a53c867b2cea8426fa186b6ecc1ed))
+* **ci:** deploy comments on PR ([a99563b](https://github.com/SocialGouv/Tumeplay/commit/a99563becc3c80648ac6c8616a0f4f148661a0ef))
+
 ## [1.3.3](https://github.com/SocialGouv/Tumeplay/compare/v1.3.2...v1.3.3) (2021-08-24)
 
 
