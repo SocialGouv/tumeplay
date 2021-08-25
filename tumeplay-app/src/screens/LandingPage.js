@@ -10,6 +10,7 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
+		console.log(process.env);
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
       window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
     }
