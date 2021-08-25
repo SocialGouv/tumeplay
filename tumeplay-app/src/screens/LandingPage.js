@@ -10,15 +10,24 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
+    const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+    const {REACT_APP_ZONE: REACT_APP_ZONE1} = process.env;
+
+    console.log({REACT_APP_ZONE, REACT_APP_ZONE1})
     console.log("window._env", window._env=process.env)
 		console.log(process.env);
     console.log('-------------')
+
     console.log({
       REACT_APP_ZONE: process.env.REACT_APP_ZONE,
       isGuyane: process.env.REACT_APP_ZONE==="guyane",
       isMetropole: process.env.REACT_APP_ZONE==="metropole",
       name,
     })
+
+
+
+
     console.log('-------------')
 		console.log('==== name ====')
 		console.log(name);
