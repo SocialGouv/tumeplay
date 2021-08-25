@@ -11,11 +11,16 @@ const LandingPage = (props) => {
 
   const handleRedirection = (name) => {
 		console.log(process.env);
+		console.log('==== name ====')
 		console.log(name);
+		console.log('name === \'metropole\'')
 		console.log(name === 'metropole');
+		console.log('==== REACT_APP_ZONE ====')
 		console.log(process.env.REACT_APP_ZONE);
-		console.log(typeof process.env.REACT_APP_ZONE);
+
+		console.log('process.env.REACT_APP_ZONE === \'metropole\'')
 		console.log(process.env.REACT_APP_ZONE === 'metropole')
+		console.log('process.env.REACT_APP_ZONE === name')
 		console.log(process.env.REACT_APP_ZONE === name)
 
     if(process.env.REACT_APP_ZONE === name) {
