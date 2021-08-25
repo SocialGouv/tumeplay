@@ -1,6 +1,8 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 const FeedbacksAPI = {
   sendFeedback: async feedback => {
-    await fetch(process.env.REACT_APP_API_URL + '/feedbacks', {
+    await fetch(REACT_APP_API_URL + '/feedbacks', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

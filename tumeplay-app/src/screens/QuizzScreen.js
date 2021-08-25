@@ -22,6 +22,9 @@ QuizzScreen.propTypes = {
 	incrementScore: PropTypes.func,
 };
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 export default function QuizzScreen(props) {
   const [displayAnswer, setDisplayAnswer] = useState(false);
   const [isRightAnswer, setIsRightAnswer] = useState(false);
@@ -168,7 +171,7 @@ export default function QuizzScreen(props) {
       style={{width: '100%', height: '100%'}}
       source={
         _currentQuestion.image
-          ? process.env.REACT_APP_API_URL + _currentQuestion.image.url
+          ? REACT_APP_API_URL + _currentQuestion.image.url
           : undefined
       }>
       <ScrollView style={{flex: 1}} contentContainerStyle={{flex: 1}}>
@@ -181,8 +184,8 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          {process.env.REACT_APP_ZONE === 'guyane' ?
-          <TextWithSound sound={_currentQuestion.sound_question ? process.env.REACT_APP_API_URL + _currentQuestion.sound_question.url : ''} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
+          {REACT_APP_ZONE === 'guyane' ?
+          <TextWithSound sound={_currentQuestion.sound_question ? REACT_APP_API_URL + _currentQuestion.sound_question.url : ''} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
           :
           <Text style={Styles.questionText}>
             {_currentQuestion.text_question}
