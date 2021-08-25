@@ -16,7 +16,7 @@ const LandingPage = (props) => {
 		console.log(process.env.REACT_APP_ZONE);
 		console.log(typeof process.env.REACT_APP_ZONE);
 		console.log(process.env.REACT_APP_ZONE === 'metropole')
-		console.log(process.env.REACT_APP_ZONE === "metropole")
+		console.log(process.env.REACT_APP_ZONE === name)
     if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
 			console.log('redirect to other url : ', process.env.REACT_APP_OTHER_ZONE_URL)
       window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
