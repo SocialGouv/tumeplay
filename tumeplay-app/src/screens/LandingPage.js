@@ -17,19 +17,13 @@ const LandingPage = (props) => {
 		console.log(typeof process.env.REACT_APP_ZONE);
 		console.log(process.env.REACT_APP_ZONE === 'metropole')
 		console.log(process.env.REACT_APP_ZONE === name)
-    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
-			console.log('redirect to other url : ', process.env.REACT_APP_OTHER_ZONE_URL)
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
-    }
-    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
+
+    if(process.env.REACT_APP_ZONE === name) {
       console.log('go to landing screen')
 			props.navigation.navigate('LandingScreen')
     }
-    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
+    if(process.env.REACT_APP_ZONE !== name) {
       window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
-    }
-    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
-      props.navigation.navigate('LandingScreen')
     }
   }
 
