@@ -10,6 +10,7 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
+    console.log("window._env", window._env=process.env)
 		console.log(process.env);
     console.log('-------------')
     console.log({
@@ -30,7 +31,7 @@ const LandingPage = (props) => {
 		console.log(process.env.REACT_APP_ZONE === 'metropole')
 		console.log('process.env.REACT_APP_ZONE === name')
 		console.log(process.env.REACT_APP_ZONE === name)
-
+    return;
     if(process.env.REACT_APP_ZONE === name) {
       console.log('go to landing screen')
 			props.navigation.navigate('LandingScreen')
