@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import Colors from '../../../styles/Color';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 ProductCustomSelectListRow.propTypes = {
   item: PropTypes.object,
   stock: PropTypes.object,
@@ -105,7 +107,7 @@ export default function ProductCustomSelectListRow(props) {
               borderBottomLeftRadius: 7,
               borderTopLeftRadius: 7,
             }}
-            source={process.env.REACT_APP_API_URL + item.image.url}
+            source={REACT_APP_API_URL + item.image.url}
           />
         </View>
         <View

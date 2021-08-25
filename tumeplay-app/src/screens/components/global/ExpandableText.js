@@ -20,6 +20,9 @@ import Colors from '../../../styles/Color';
 import ReactHowler from 'react-howler';
 import CustomTouchableOpacity from './CustomTouchableOpacity';
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 ExpandableText.propTypes = {
   isExpanded: PropTypes.bool,
   onReady: PropTypes.func,
@@ -251,7 +254,7 @@ export default function ExpandableText(props) {
           }}
           style={[cardStyle.text, {...props.textStyle}]}
         />
-        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
+        {props.sound && REACT_APP_ZONE === 'guyane' && (
           <CustomTouchableOpacity
             onPress={e => {
               togglePlay(e);
@@ -269,9 +272,9 @@ export default function ExpandableText(props) {
             />
           </CustomTouchableOpacity>
         )}
-        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
+        {props.sound && REACT_APP_ZONE === 'guyane' && (
           <ReactHowler
-            src={process.env.REACT_APP_API_URL + props.sound}
+            src={REACT_APP_API_URL + props.sound}
             onEnd={onPlayStop}
             onStop={onPlayStop}
             playing={play}

@@ -6,6 +6,8 @@ import ExpandableText from '../global/ExpandableText';
 import CustomTouchableOpacity from '../global/CustomTouchableOpacity';
 import Tracking from '../../../services/Tracking';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 ContentCard.propTypes = {
   item: PropTypes.object,
   activeOpacity: PropTypes.number,
@@ -76,7 +78,7 @@ export default function ContentCard(props) {
         activeOpacity={props.activeOpacity}>
         <Image
           source={
-            content.image ? process.env.REACT_APP_API_URL + content.image.url : null
+            content.image ? REACT_APP_API_URL + content.image.url : null
           }
           style={cardStyle.picture}
         />

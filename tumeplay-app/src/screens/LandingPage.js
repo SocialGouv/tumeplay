@@ -2,6 +2,9 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import Colors from '../styles/Color'
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+const REACT_APP_OTHER_ZONE_URL = process.env.REACT_APP_OTHER_ZONE_URL;
+
 const LandingPage = (props) => {
 
   const france = require('../assets/pictures/cartefrance.svg')
@@ -10,43 +13,14 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
-    const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+    
     const {REACT_APP_ZONE: REACT_APP_ZONE1} = process.env;
 
-    console.log({REACT_APP_ZONE, REACT_APP_ZONE1})
-    console.log("window._env", window._env=process.env)
-		console.log(process.env);
-    console.log('-------------')
-
-    console.log({
-      REACT_APP_ZONE: process.env.REACT_APP_ZONE,
-      isGuyane: REACT_APP_ZONE==="guyane",
-      isMetropole: REACT_APP_ZONE==="metropole",
-      name,
-    })
-
-
-
-
-    console.log('-------------')
-		console.log('==== name ====')
-		console.log(name);
-		console.log('name === \'metropole\'')
-		console.log(name === 'metropole');
-		console.log('==== REACT_APP_ZONE ====')
-		console.log(process.env.REACT_APP_ZONE);
-
-		console.log('process.env.REACT_APP_ZONE === \'metropole\'')
-		console.log(process.env.REACT_APP_ZONE === 'metropole')
-		console.log('process.env.REACT_APP_ZONE === name')
-		console.log(process.env.REACT_APP_ZONE === name)
-    return;
-    if(process.env.REACT_APP_ZONE === name) {
+    if(REACT_APP_ZONE === name) {
       console.log('go to landing screen')
 			props.navigation.navigate('LandingScreen')
-    }
-    if(process.env.REACT_APP_ZONE !== name) {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
+    } else {
+      window.location.href = REACT_APP_OTHER_ZONE_URL + param
     }
   }
 
