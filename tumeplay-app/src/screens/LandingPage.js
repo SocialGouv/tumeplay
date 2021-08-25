@@ -11,6 +11,14 @@ const LandingPage = (props) => {
 
   const handleRedirection = (name) => {
 		console.log(process.env);
+    console.log('-------------')
+    console.log({
+      name,
+      REACT_APP_ZONE: process.env.REACT_APP_ZONE,
+      isMetropole: process.env.REACT_APP_ZONE==="metropole",
+      isGuyane: process.env.REACT_APP_ZONE==="guyane"
+    })
+    console.log('-------------')
 		console.log('==== name ====')
 		console.log(name);
 		console.log('name === \'metropole\'')
