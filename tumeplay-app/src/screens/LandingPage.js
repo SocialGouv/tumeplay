@@ -14,8 +14,6 @@ const LandingPage = (props) => {
 
   const handleRedirection = (name) => {
     
-    const {REACT_APP_ZONE: REACT_APP_ZONE1} = process.env;
-
     if(REACT_APP_ZONE === name) {
       console.log('go to landing screen')
 			props.navigation.navigate('LandingScreen')
