@@ -336,7 +336,7 @@ spec:
             - name: REACT_APP_API_URL
               value: https://backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
             - name: REACT_APP_ZONE
-              value: 'guyane'
+              value: guyane
             - name: REACT_APP_OTHER_ZONE_URL
               value: https://metropole-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
 ---
@@ -489,7 +489,7 @@ spec:
             - name: REACT_APP_API_URL
               value: https://backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
             - name: REACT_APP_ZONE
-              value: 'metropole'
+              value: metropole
             - name: REACT_APP_OTHER_ZONE_URL
               value: https://guyane-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
 ---

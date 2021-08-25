@@ -14,10 +14,10 @@ const LandingPage = (props) => {
 		console.log(process.env);
     console.log('-------------')
     console.log({
-      name,
       REACT_APP_ZONE: process.env.REACT_APP_ZONE,
+      isGuyane: process.env.REACT_APP_ZONE==="guyane",
       isMetropole: process.env.REACT_APP_ZONE==="metropole",
-      isGuyane: process.env.REACT_APP_ZONE==="guyane"
+      name,
     })
     console.log('-------------')
 		console.log('==== name ====')
