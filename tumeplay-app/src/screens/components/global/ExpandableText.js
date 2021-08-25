@@ -84,11 +84,11 @@ export default function ExpandableText(props) {
     } else {
       setLines(5);
     }
-  }, [showAllText])
+  }, [showAllText]);
 
   useEffect(() => {
     setShowAllText(props.isExpanded);
-  }, [props.isExpanded])
+  }, [props.isExpanded]);
 
   function renderNode(node, index, siblings, parent, defaultRenderer) {
     if (node.name === 'a') {
@@ -109,8 +109,6 @@ export default function ExpandableText(props) {
       );
     }
   }
-
-  // console.log(props.isExpanded);
 
   function _handlePressReadMore() {
     setShowAllText(true);
