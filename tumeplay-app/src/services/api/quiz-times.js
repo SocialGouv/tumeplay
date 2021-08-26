@@ -1,6 +1,8 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 const QuizTimesAPI = {
   publishQuizTime: async (user_id, nb_seconds, score, age, iteration, thematique_id) => {
-    const res = await fetch(process.env.REACT_APP_API_URL + '/quiz-times', {
+    const res = await fetch(REACT_APP_API_URL + '/quiz-times', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
