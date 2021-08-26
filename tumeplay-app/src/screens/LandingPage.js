@@ -14,7 +14,6 @@ const LandingPage = (props) => {
 
   const handleRedirection = (name) => {
     if(REACT_APP_ZONE === name) {
-      console.log('go to landing screen')
       props.navigation.navigate('LandingScreen')
     } else {
       window.location.href = REACT_APP_OTHER_ZONE_URL + param
