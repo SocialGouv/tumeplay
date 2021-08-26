@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/SocialGouv/Tumeplay/compare/v1.3.4...v1.3.5) (2021-08-26)
+
+
+### Bug Fixes
+
+* remove console logs used for fix env deploy ([e4a39da](https://github.com/SocialGouv/Tumeplay/commit/e4a39da0fee32d2d5bb20c61d6cdc55731e1bbad))
+
 ## [1.3.4](https://github.com/SocialGouv/Tumeplay/compare/v1.3.3...v1.3.4) (2021-08-25)
 
 
