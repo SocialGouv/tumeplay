@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/SocialGouv/Tumeplay/compare/v1.3.5...v1.4.0) (2021-08-26)
+
+
+### Features
+
+* **bo:** date-range picker on stats ([5a81de6](https://github.com/SocialGouv/Tumeplay/commit/5a81de6644fa80ce128a0173cf1c7e7469e9243f))
+
 ## [1.3.5](https://github.com/SocialGouv/Tumeplay/compare/v1.3.4...v1.3.5) (2021-08-26)
 
 
