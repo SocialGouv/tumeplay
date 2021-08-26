@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import './App.css';
+ import './styles/index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
 import Cookie from "js-cookie";

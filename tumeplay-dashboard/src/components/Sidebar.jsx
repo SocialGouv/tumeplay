@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import { faBars, faCog, faDoorClosed, faTimes, faTv, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCog, faDoorClosed, faTimes, faTv, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
@@ -66,23 +66,33 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/dashboard") !== -1
-                      ? "text-sky-500 hover:text-sky-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                    "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
                   to="/dashboard"
                 >
                   <FontAwesomeIcon
                     icon={faTv}
                     className={
-                      "fas fa-tv mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/dashboard") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                      "fas fa-tv mr-2 text-sm text-blueGray-300"
                     }
                   ></FontAwesomeIcon>{" "}
-                  Dashboard
+                  Gestion des commandes
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                  }
+                  to="/bilan"
+                >
+                  <FontAwesomeIcon
+                    icon={faClipboard}
+                    className={
+                      "fas fa-tv mr-2 text-sm text-blueGray-300"
+                    }
+                  ></FontAwesomeIcon>{" "}
+                  Bilans quotidiens
                 </Link>
               </li>
 
@@ -114,7 +124,6 @@ export default function Sidebar() {
                     "text-xs uppercase py-2 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
                   onClick={() => context.logOut()}
-
                 >
                   <FontAwesomeIcon
                     icon={faDoorClosed}
