@@ -6,6 +6,10 @@ import { auth } from 'strapi-helper-plugin';
 import _ from 'lodash';
 import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { request } from 'strapi-helper-plugin';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { addDays } from 'date-fns';
+import { DateRange } from 'react-date-range';
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -55,14 +59,32 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	const [nbOrders7days, setNbOrders7days] = useState(0);
 	const [percentUserLowQuizTime, setPercentUserLowQuizTime] = useState(0);
 
+	const [showRangeModal, setShowRangeModal] = useState(false);
+
+	const default_range_date = {
+		startDate: new Date(),
+		endDate: addDays(new Date(), 7),
+		key: 'selection'
+	}
+	const null_range_date = {
+		startDate: undefined,
+		endDate: undefined,
+		key: 'selection'
+	}
+
+	const [dateRanges, setDateRanges] = useState([null_range_date]);
+	const [tmpDateRanges, setTmpDateRanges] = useState([default_range_date]);
+
+	const default_params = {
+		created_at_gte: dateRanges[0].startDate && dateRanges[0].startDate.getTime(),
+		created_at_lte: dateRanges[0].endDate && dateRanges[0].endDate.getTime()
+	};
+	
+
 	const fetchOrders = async () => {
-		const now = new Date().getTime()
-		const sevenDaysAgo = now - (7 * 24 * 60 * 60 * 1000)
 		const data = await request('/commandes/count', {
 			method: 'GET',
-			params: {
-				created_at_gte: sevenDaysAgo
-			}
+			params: default_params.created_at_gte ? default_params : {}
 		})
 
 		setNbOrders7days(data);
@@ -71,7 +93,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
   const fetchStocks = async () => {
 		const data = await request('/boxes', {
 			method: 'GET',
-			params: {},
+			params: default_params.created_at_gte ? default_params : {}
 		});
 		setBoxes(
 			orderBy(
@@ -95,23 +117,19 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	const fetchResponses = async () => {
 		const themes = await request('/thematiques', {
 			method: 'GET',
-			params: {
-				'display_quiz': true
-			},
+			params: default_params.created_at_gte ? Object.assign({'display_quiz': true}, default_params) : {'display_quiz': true}
 		});
 
 		const count = await request('/reponses/count', {
 			method: 'GET',
-			params: {},
+			params: default_params.created_at_gte ? default_params : {}
 		});
 
 		setNbResponses(count);
 
 		const data = await request('/reponses', {
 			method: 'GET',
-			params: {
-				_limit: 10000
-			},
+			params: default_params.created_at_gte ? Object.assign({'_limit': 10000}, default_params) : {'_limit': 10000}
 		});
 
 		const tmpResponsesMetropole = []
@@ -229,22 +247,18 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 		const count = await request('/quiz-times/count', {
 			method: 'GET',
-			params: {},
+			params: default_params.created_at_gte ? default_params : {}
 		});
 		const countLowerThan30s = await request('/quiz-times/count', {
 			method: 'GET',
-			params: {
-				nb_seconds_lte: 30
-			},
+			params: default_params.created_at_gte ? Object.assign({'nb_seconds_lte': 30}, default_params) : {'nb_seconds_lte': 30}
 		});
 
 		setPercentUserLowQuizTime(countLowerThan30s / count * 100);
 
 		const data = await request('/quiz-times', {
 			method: 'GET',
-			params: {
-				_limit: 10000
-			},
+			params: default_params.created_at_gte ? Object.assign({'_limit': 10000}, default_params) : {'_limit': 10000}
 		});
 
 		setNbCompletedQuiz(data.length);
@@ -389,15 +403,39 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 		setQuizAverageScoreByIterationGuyane(tmpAverageScoreByIterationGuyane)
 	}
 
-  useEffect(() => {
+	const fetchAll = () => {
     fetchStocks();
 		fetchResponses();
 		fetchQuizTimes();
 		fetchOrders();
+	}
+
+  useEffect(() => {
+		fetchAll();
   }, [])
+
+
+  useEffect(() => {
+		if (dateRanges[0].startDate && dateRanges[0].endDate) {
+			fetchAll();
+		}
+  }, [dateRanges])
+
+	useEffect(() => {
+		if (showRangeModal) 
+			setTmpDateRanges(dateRanges[0].startDate ? dateRanges : [default_range_date])
+	}, [showRangeModal])
   
   const username = get(auth.getUserInfo(), 'firstname', '');
 
+	const formatDate = (date) => {
+		const day = date.getUTCDate();
+		const month = date.getUTCMonth() + 1;
+		const year = date.getUTCFullYear();
+
+		return (day.toString().length < 2 ? '0' + day : day) + '/' + (month.toString().length < 2 ? '0' + month : month) + '/' + year;
+	}
+ 
 	const ZoneSwitcher = (variable, setter) => {
 		return(
 			<>
@@ -414,6 +452,54 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
           <div className="col-12">
             <h1><Wave /> Bonjour {username}!</h1>
           </div>
+					<div className="col-12 mb-5">
+						{
+							!dateRanges[0].startDate && (
+								<button className="button button-primary" onClick={() => setShowRangeModal(true)}>
+									Sélectionner une période
+								</button>
+							)
+						}
+						{
+							dateRanges[0].startDate && dateRanges[0].endDate && (
+								<>
+									<div className="selected-date-preview">Du {formatDate(dateRanges[0].startDate)} au {formatDate(dateRanges[0].endDate)}</div>
+									<button className="button button-default" onClick={() => setDateRanges([null_range_date])}>
+										Annuler la période
+									</button>
+								</>
+							)
+						}
+						{
+							showRangeModal && (
+								<div className="tm-modal-backdrop" onClick={() => setShowRangeModal(false)}>
+									<div className="tm-modal" onClick={(e) => e.stopPropagation()}>
+										<DateRange
+											editableDateInputs={false}
+											onChange={item => setTmpDateRanges([item.selection])}
+											moveRangeOnFirstSelection={false}
+											months={1}
+											ranges={tmpDateRanges}
+										/>
+										<div className="tm-modal-footer">
+											<button className="button button-default" onClick={() => {
+												setDateRanges([null_range_date]);
+												setShowRangeModal(false);
+											}}>
+												Fermer
+											</button>
+											<button className="button button-primary" onClick={() => {
+												setDateRanges(tmpDateRanges)
+												setShowRangeModal(false);
+											}}>
+												Valider
+											</button>
+										</div>
+									</div>
+								</div>
+							)
+						}
+					</div>
           <div className="col-3 text-center">
 						<Block>
 							<h2 className="mt-4">
@@ -427,7 +513,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 							<h2 className="mt-4">
 								{nbResponses}
 							</h2>
-							<p>Réponses aux questions</p>
+						<p>Réponses aux questions</p>
 						</Block>
 					</div>
           <div className="col-3 text-center">
@@ -435,15 +521,15 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 							<h2 className="mt-4">
 								{nbOrders7days}
 							</h2>
-							<p>Commandes passées sur 7 jours</p>
+							<p>Commandes passées</p>
 						</Block>
 					</div>
           <div className="col-3 text-center">
 						<Block>
 							<h2 className="mt-4">
-								{percentUserLowQuizTime.toFixed(2)} %
+								{percentUserLowQuizTime ? percentUserLowQuizTime.toFixed(2) : 0} %
 							</h2>
-							<p>De quiz complétés sous les 30 secondes</p>
+							<p>Quiz complétés sans serieux (&lt;30sec)</p>
 						</Block>
 					</div>
           <div className="col-6">
