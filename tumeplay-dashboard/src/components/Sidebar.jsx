@@ -1,11 +1,14 @@
 /*eslint-disable*/
 import { faBars, faCog, faDoorClosed, faTimes, faTv, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+import AppContext from "../AppContext";
 
 
 export default function Sidebar() {
+  const context = useContext(AppContext)
+
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
@@ -105,39 +108,13 @@ export default function Sidebar() {
                   Paramêtres
                 </Link>
               </li>
-
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/tables") !== -1
-                      ? "text-sky-500 hover:text-sky-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                    "text-xs uppercase py-2 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
-                  to="/Login"
-                >
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className={
-                      "fas fa-table mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/tables") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></FontAwesomeIcon>{" "}
-                  Login
-                </Link>
-              </li>
+                  onClick={() => context.logOut()}
 
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-2 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-sky-500 hover:text-sky-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/maps"
                 >
                   <FontAwesomeIcon
                     icon={faDoorClosed}

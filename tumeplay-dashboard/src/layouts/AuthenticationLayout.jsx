@@ -3,7 +3,7 @@ import React from 'react'
 const AuthenticationLayout = (props) => {
     const { children } = props;
   return(
-    <main>
+    <main className='container'>
       <div>
         {children}
       </div>
