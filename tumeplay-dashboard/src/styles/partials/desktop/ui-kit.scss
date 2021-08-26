@@ -1,14 +1,13 @@
 html {
   @apply h-screen;
   body{
-    @apply bg-white-light tracking-tighter;
-
+    @apply tracking-tighter;
     h1,
     h2,
     h3,
     h4,
     h5 {
-      @apply mb-4 mt-4;
+      @apply bg-gray-50 mb-4 mt-4;
     }
      h1 {
        @apply text-4xl;
