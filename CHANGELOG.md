@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/SocialGouv/Tumeplay/compare/v1.4.1...v1.4.2) (2021-08-27)
+
+
+### Bug Fixes
+
+* **ci:** change preprod db ([85909ca](https://github.com/SocialGouv/Tumeplay/commit/85909ca2618c5b6567582a4656864f5205c38b35))
+
 ## [1.4.1](https://github.com/SocialGouv/Tumeplay/compare/v1.4.0...v1.4.1) (2021-08-27)
 
 
