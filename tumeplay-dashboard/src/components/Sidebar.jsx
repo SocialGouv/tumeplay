@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../AppContext";
+import logo from "../assets/pictures/LOGO.png"
 
 
 export default function Sidebar() {
@@ -27,7 +28,9 @@ export default function Sidebar() {
             className="md:block text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
-            Tu.me.play
+            <div className="flex mx-auto justify-center">
+              <img className="w-24 h-24" src={logo}/>
+            </div>
           </Link>
           {/* Collapse */}
           <div

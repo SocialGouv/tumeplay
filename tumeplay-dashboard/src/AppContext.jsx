@@ -4,6 +4,7 @@ const AppContext = React.createContext({
   isAuthenticated: false,
   verifyAuthentication: () => {},
   user: {},
+  token: '',
   logOut: () => {}
 })
 
