@@ -6,7 +6,7 @@ import RoutesWithLayout from "../RoutesWithLayout";
 const PublicRoute = (props) => {
     const context = useContext(AppContext)
     const isAuthenticated = context.isAuthenticated
-    if (isAuthenticated) return <Redirect to='/dashboard' />
+    if (isAuthenticated) return <Redirect to='/orders' />
     return (
         <RoutesWithLayout {...props}/>
     )

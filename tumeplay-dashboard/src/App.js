@@ -5,13 +5,11 @@ import Routes from './Routes';
 import Cookie from "js-cookie";
 import AppContext from './AppContext';
 import { createBrowserHistory } from 'history';
-import login from './lib/auth';
-
-
 
 function App() {
 
   const [user, setUser] = useState(null)
+  const [token, setToken] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const history = createBrowserHistory()
 
@@ -19,10 +17,11 @@ function App() {
 
   const verifyAuthentication = (user) => {
     const token = Cookie.get("token");
+    setToken(token);
     if(token) {
       setUser(user)
       setIsAuthenticated(true)
-      history.push('/')
+      history.push(`/orders/box/1`)
     } else {
       Cookie.remove('token')
     }
@@ -37,10 +36,12 @@ function App() {
     verifyAuthentication()
   }, [])
 
+
   return (
     <AppContext.Provider value={
       {
         user: user,
+        token: token,
         isAuthenticated: isAuthenticated,
         verifyAuthentication: verifyAuthentication,
         logOut: logOut

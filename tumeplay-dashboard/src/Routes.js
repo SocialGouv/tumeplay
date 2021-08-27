@@ -15,10 +15,10 @@ const Routes = () => {
     <Switch>
       <PublicRoute component={Login} layout={AuthenticationLayout} exact path="/login"/>
       <PublicRoute component={Register} layout={AuthenticationLayout} exact path="/register"/>
-      <PrivateRoute component={Dashboard} layout={TumeplayDashboardLayout} exact path="/"/>
+      <PrivateRoute component={Dashboard} layout={TumeplayDashboardLayout} exact path="/orders/box/:box_num"/>
       <PrivateRoute component={Bilan} layout={TumeplayDashboardLayout} exact path="/bilan"/>
       <PrivateRoute component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
-      <Redirect from="*" to="/" />
+      <Redirect from="*" to="/orders/box/1" />
     </Switch>
   )
 }
