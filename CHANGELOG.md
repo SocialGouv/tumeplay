@@ -1,3 +1,13 @@
+## [1.4.1](https://github.com/SocialGouv/Tumeplay/compare/v1.4.0...v1.4.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **ci:** config map variables to string ([fbb1499](https://github.com/SocialGouv/Tumeplay/commit/fbb14992b6af2b55f32e91af06b0afc8f8a7a679))
+* **ci:** production mondial relay credentials ([431d121](https://github.com/SocialGouv/Tumeplay/commit/431d1219013832365d88d1641d9950efcb58c2ae))
+* **ci:** public environnement variables + secret password for prod ([92c6e31](https://github.com/SocialGouv/Tumeplay/commit/92c6e31691e5f36ca35d17d07af15a45c9ad1407))
+* **ci:** remove rancher project id from preprod & prod ([807f7cf](https://github.com/SocialGouv/Tumeplay/commit/807f7cfb3f9fa5917809c490142ba273ad68444c))
+
 # [1.4.0](https://github.com/SocialGouv/Tumeplay/compare/v1.3.5...v1.4.0) (2021-08-26)
 
 
