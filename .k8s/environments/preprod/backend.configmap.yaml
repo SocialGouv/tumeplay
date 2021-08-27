@@ -3,13 +3,13 @@ apiVersion: v1
 metadata:
   name: backend-configmap
 data:
-  CRON_ENABLE: true
-  EMAIL_PROVIDER_HOST: smtp.gmail.com
-  EMAIL_PROVIDER_PORT: 465
-  EMAIL_PROVIDER_SECURE: true
-  EMAIL_PROVIDER_USERNAME: cymittest@gmail.com
-  EMAIL_PROVIDER_TLS: false
-  EMAIL_PROVIDER_FROM: 'Tumeplay <cymittest@gmail.com>'
-  EMAIL_PROVIDER_REPLY_TO: cymittest@gmail.com
-  EMAIL_CONFIG_ADMIN: clement@numericite.eu
-  EMAIL_CONFIG_CAT: maxime.lecoq@benextcompany.com
+  CRON_ENABLE: "true"
+  EMAIL_PROVIDER_HOST: "smtp.gmail.com"
+  EMAIL_PROVIDER_PORT: "465"
+  EMAIL_PROVIDER_SECURE: "true"
+  EMAIL_PROVIDER_USERNAME: "cymittest@gmail.com"
+  EMAIL_PROVIDER_TLS: "false"
+  EMAIL_PROVIDER_FROM: "Tumeplay <cymittest@gmail.com>"
+  EMAIL_PROVIDER_REPLY_TO: "cymittest@gmail.com"
+  EMAIL_CONFIG_ADMIN: "clement@numericite.eu"
+  EMAIL_CONFIG_CAT: "maxime.lecoq@benextcompany.com"
