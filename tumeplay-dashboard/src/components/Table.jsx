@@ -1,8 +1,7 @@
-import React from 'react'
-import TableRow from './ui/TableRow'
+import React, {useEffect, useState} from 'react';
+import TableRow from './ui/TableRow';
 
-
-const Table = ({items, titles, count}) => {
+const Table = ({items, titles, numberPerPage}) => {
 
   const titlesToDisplay = titles.map((title,index) => {
     return(
@@ -17,14 +16,14 @@ const Table = ({items, titles, count}) => {
           <table className="tmp-table-ext items-center w-full ">
             <thead>
               <tr>
-                <th className="px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-800">
+                <th className="px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-700">
                   <input type='checkbox' />
                 </th>
                 {titlesToDisplay}
               </tr>
             </thead>
             <tbody>
-              <TableRow items={items} />
+              <TableRow items={items} numberPerPage={numberPerPage} />
             </tbody>
           </table>
       </div>
