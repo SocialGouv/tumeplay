@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/SocialGouv/Tumeplay/compare/v1.4.5...v1.4.6) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** prod smtp settings ([56c5468](https://github.com/SocialGouv/Tumeplay/commit/56c5468671074b24d983efd36c8e2e5932364781))
+
 ## [1.4.5](https://github.com/SocialGouv/Tumeplay/compare/v1.4.4...v1.4.5) (2021-08-30)
 
 
