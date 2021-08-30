@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, Image, StyleSheet} from 'react-native';
 
 import Colors from '../../../styles/Color';
-import Styles from '../../../styles/Styles';
-import UnderlineText from '../global/UnderlineText';
 import CustomTouchableOpacity from '../global/CustomTouchableOpacity';
+
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 ProductCard.propTypes = {
   item: PropTypes.object,
@@ -159,7 +159,7 @@ export default function ProductCard(props) {
         disabled={props.item.__typename === 'Box' && (!props.item.available || props.item.stock === 0)}
         onPress={() => {handleAvailability()}}>
         <Image
-          source={process.env.REACT_APP_API_URL + props.item.image.url}
+          source={REACT_APP_API_URL + props.item.image.url}
           style={cardStyle.picture}
           />
         <View style={cardStyle.textContainer}>

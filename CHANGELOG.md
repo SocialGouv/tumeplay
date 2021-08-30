@@ -1,3 +1,137 @@
+## [1.4.9](https://github.com/SocialGouv/Tumeplay/compare/v1.4.8...v1.4.9) (2021-08-30)
+
+
+### Bug Fixes
+
+* clean code ([7814a1e](https://github.com/SocialGouv/Tumeplay/commit/7814a1e9ab6e2ecd72b428785e87994be22e7c87))
+* fixing the expandable text on cards in the sos à qui t'adresser section ([7aa9985](https://github.com/SocialGouv/Tumeplay/commit/7aa99856bc09b8df2fd4dbf6fd277b02df4ea8bc))
+
+## [1.4.8](https://github.com/SocialGouv/Tumeplay/compare/v1.4.7...v1.4.8) (2021-08-30)
+
+
+### Bug Fixes
+
+* disable cron on preprod & review ([12b5334](https://github.com/SocialGouv/Tumeplay/commit/12b53341b5e5bb8d74e87a050dc1e2639f8458c0))
+
+## [1.4.7](https://github.com/SocialGouv/Tumeplay/compare/v1.4.6...v1.4.7) (2021-08-30)
+
+
+### Bug Fixes
+
+* no mondial relay generation on insert data ([edcf53a](https://github.com/SocialGouv/Tumeplay/commit/edcf53a97b121f1ccba3e933f844da425d253047))
+* react app zone declaration ([b80047a](https://github.com/SocialGouv/Tumeplay/commit/b80047a62861b9a69a18d8df3458a0a403c55811))
+
+## [1.4.6](https://github.com/SocialGouv/Tumeplay/compare/v1.4.5...v1.4.6) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** prod smtp settings ([56c5468](https://github.com/SocialGouv/Tumeplay/commit/56c5468671074b24d983efd36c8e2e5932364781))
+
+## [1.4.5](https://github.com/SocialGouv/Tumeplay/compare/v1.4.4...v1.4.5) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** change port stmp for production ([08f2780](https://github.com/SocialGouv/Tumeplay/commit/08f2780f7b7c5090607fa28c5b9fabf76aad89b2))
+
+## [1.4.4](https://github.com/SocialGouv/Tumeplay/compare/v1.4.3...v1.4.4) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** change db uri ([8e7c35b](https://github.com/SocialGouv/Tumeplay/commit/8e7c35b722181e038229c46f07ee3bd387f1caea))
+
+## [1.4.2](https://github.com/SocialGouv/Tumeplay/compare/v1.4.1...v1.4.2) (2021-08-27)
+
+
+### Bug Fixes
+
+* **ci:** change preprod db ([85909ca](https://github.com/SocialGouv/Tumeplay/commit/85909ca2618c5b6567582a4656864f5205c38b35))
+
+## [1.4.1](https://github.com/SocialGouv/Tumeplay/compare/v1.4.0...v1.4.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **ci:** config map variables to string ([fbb1499](https://github.com/SocialGouv/Tumeplay/commit/fbb14992b6af2b55f32e91af06b0afc8f8a7a679))
+* **ci:** production mondial relay credentials ([431d121](https://github.com/SocialGouv/Tumeplay/commit/431d1219013832365d88d1641d9950efcb58c2ae))
+* **ci:** public environnement variables + secret password for prod ([92c6e31](https://github.com/SocialGouv/Tumeplay/commit/92c6e31691e5f36ca35d17d07af15a45c9ad1407))
+* **ci:** remove rancher project id from preprod & prod ([807f7cf](https://github.com/SocialGouv/Tumeplay/commit/807f7cfb3f9fa5917809c490142ba273ad68444c))
+
+# [1.4.0](https://github.com/SocialGouv/Tumeplay/compare/v1.3.5...v1.4.0) (2021-08-26)
+
+
+### Features
+
+* **bo:** date-range picker on stats ([5a81de6](https://github.com/SocialGouv/Tumeplay/commit/5a81de6644fa80ce128a0173cf1c7e7469e9243f))
+
+## [1.3.5](https://github.com/SocialGouv/Tumeplay/compare/v1.3.4...v1.3.5) (2021-08-26)
+
+
+### Bug Fixes
+
+* remove console logs used for fix env deploy ([e4a39da](https://github.com/SocialGouv/Tumeplay/commit/e4a39da0fee32d2d5bb20c61d6cdc55731e1bbad))
+
+## [1.3.4](https://github.com/SocialGouv/Tumeplay/compare/v1.3.3...v1.3.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* typo ([54a09e8](https://github.com/SocialGouv/Tumeplay/commit/54a09e80305566090f3d700e2868e403a0bbd31d))
+* **ci:** add backend.env.STRAPI_LICENSE ([8150504](https://github.com/SocialGouv/Tumeplay/commit/81505040821a53c867b2cea8426fa186b6ecc1ed))
+* **ci:** deploy comments on PR ([a99563b](https://github.com/SocialGouv/Tumeplay/commit/a99563becc3c80648ac6c8616a0f4f148661a0ef))
+
+## [1.3.3](https://github.com/SocialGouv/Tumeplay/compare/v1.3.2...v1.3.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* charts height to 500px ([2af3291](https://github.com/SocialGouv/Tumeplay/commit/2af3291f78d03d2af2017211a1301c144d642c24))
+
+## [1.3.2](https://github.com/SocialGouv/Tumeplay/compare/v1.3.1...v1.3.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* chart height ([127ded5](https://github.com/SocialGouv/Tumeplay/commit/127ded5c29d38c54801f9639fcf56af62ee5f41b))
+
+## [1.3.1](https://github.com/SocialGouv/Tumeplay/compare/v1.3.0...v1.3.1) (2021-08-24)
+
+
+### Bug Fixes
+
+* add stroke width to lines in linecharts ([8d98525](https://github.com/SocialGouv/Tumeplay/commit/8d985254d4d512d5e68197a85dfb542a27382c19))
+* reset count score on quiz start ([35f9e70](https://github.com/SocialGouv/Tumeplay/commit/35f9e70d1dac10368d91009575925d62e1e60152))
+
+# [1.3.0](https://github.com/SocialGouv/Tumeplay/compare/v1.2.0...v1.3.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* 7 days ago filte ([d3c4a86](https://github.com/SocialGouv/Tumeplay/commit/d3c4a864912cf6b4a540a4438f1413c229d13792))
+* move recharts.js dependencie to right package.json ([7f8da14](https://github.com/SocialGouv/Tumeplay/commit/7f8da1468a0024bee3498b2f6628c4fdb5a42656))
+* update package-lock json ([db8e6ae](https://github.com/SocialGouv/Tumeplay/commit/db8e6aed638b9e33b5930865bad0102fe7e9015b))
+* update yarn.lock ([400dc9f](https://github.com/SocialGouv/Tumeplay/commit/400dc9ff485aea57573d273ed52cc8d625fac77c))
+
+
+### Features
+
+* add kpis to strapi home page ([183d423](https://github.com/SocialGouv/Tumeplay/commit/183d423f27a7fa042c06f5ee3f89348a97221111))
+* stats page & front quiz data saving ([226718b](https://github.com/SocialGouv/Tumeplay/commit/226718b7580f044ed9a2a903aad165e9640f8d18))
+
+# [1.2.0](https://github.com/SocialGouv/Tumeplay/compare/v1.1.2...v1.2.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* clickable label on cartsummary regarding max demand ([df1ad4c](https://github.com/SocialGouv/Tumeplay/commit/df1ad4cd737ee78b90c7cad64d2afe21a9ca27f0))
+
+
+### Features
+
+* positionning guyane map on Saint Laurent and fixing small style issue ([1d94f19](https://github.com/SocialGouv/Tumeplay/commit/1d94f19c52eaeb3280300b532c4f40fd695e3908))
+
 ## [1.1.2](https://github.com/SocialGouv/Tumeplay/compare/v1.1.1...v1.1.2) (2021-08-20)
 
 

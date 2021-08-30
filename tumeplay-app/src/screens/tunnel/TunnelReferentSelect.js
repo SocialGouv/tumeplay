@@ -26,8 +26,8 @@ const zipCodeTest = /^[0-9]{5}$/;
 const TunnelReferentSelect = props => {
   const defaultPosition = {
     coords: {
-      latitude: 48.8566969,
-      longitude: 2.3514616,
+      latitude: 5.495556,
+      longitude: -54.030833,
     },
     delta: {
       latitude: 0.009,
@@ -95,7 +95,6 @@ const TunnelReferentSelect = props => {
 
   useEffect(() => {
     const fetchReferent = async () => {
-      console.log('fetch referents')
       const rawReferents = await referentAPI.fetchReferents();
       const refPoints = rawReferents.map(function(item) {
         item.isSelected = false;
