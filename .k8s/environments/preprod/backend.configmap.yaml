@@ -4,7 +4,7 @@ metadata:
   name: backend-configmap
 data:
   CRON_ENABLE: "false"
-  HOST: "https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr"
+  URL: "https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr"
   EMAIL_PROVIDER_HOST: "smtp.gmail.com"
   EMAIL_PROVIDER_PORT: "465"
   EMAIL_PROVIDER_SECURE: "true"
