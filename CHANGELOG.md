@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/SocialGouv/Tumeplay/compare/v1.4.7...v1.4.8) (2021-08-30)
+
+
+### Bug Fixes
+
+* disable cron on preprod & review ([12b5334](https://github.com/SocialGouv/Tumeplay/commit/12b53341b5e5bb8d74e87a050dc1e2639f8458c0))
+
 ## [1.4.7](https://github.com/SocialGouv/Tumeplay/compare/v1.4.6...v1.4.7) (2021-08-30)
 
 
