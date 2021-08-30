@@ -91,7 +91,7 @@ const TunnelReferentSelect = props => {
       );
       setDisplayMap(true);
     }
-  }, [currentPosition, isMounted]);
+  }, [isMounted]);
 
   useEffect(() => {
     const fetchReferent = async () => {
@@ -130,7 +130,7 @@ const TunnelReferentSelect = props => {
       setReferentPoints([...filteredPoints]);
     };
     fetchReferent();
-  }, [currentPosition, referentPoints]);
+  }, []);
 
   const _onDone = () => {
     setDisplayMap(false);
