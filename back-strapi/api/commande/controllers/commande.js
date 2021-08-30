@@ -138,23 +138,25 @@ module.exports = {
     let mondial_relay_pdf_url;
     if (tmp_order.delivery === 'pickup') {
       tmp_order.name = tmp_order.poi_name
-      const soapClient = await soap.createClientAsync(mondialRelayUrl);
-      const mrParams = buildMrParams(tmp_order)
+			if (!ctx.request.body.no_email) {
+				const soapClient = await soap.createClientAsync(mondialRelayUrl);
+				const mrParams = buildMrParams(tmp_order)
 
-      const response = await soapClient.WSI2_CreationEtiquetteAsync(mrParams)
-      const response_item = response[0]
+      	const response = await soapClient.WSI2_CreationEtiquetteAsync(mrParams)
+				const response_item = response[0]
 
-      if (response_item && response_item.WSI2_CreationEtiquetteResult) {
-        const mrResult = response_item.WSI2_CreationEtiquetteResult;
+				if (response_item && response_item.WSI2_CreationEtiquetteResult) {
+					const mrResult = response_item.WSI2_CreationEtiquetteResult;
 
-        if (mrResult.STAT === "0") {
-          mondial_relay_pdf_url = "http://www.mondialrelay.com" + mrResult.URL_Etiquette.replace('format=A4', 'format=10x15');
-        } else {
-          return ctx.methodNotAllowed(null, 'Error ' + mrResult.STAT + ' while create remote label')
-        }
-      } else {
-        return ctx.internal(null, 'Error while calling mondial relay SOAP service')
-      }
+					if (mrResult.STAT === "0") {
+						mondial_relay_pdf_url = "http://www.mondialrelay.com" + mrResult.URL_Etiquette.replace('format=A4', 'format=10x15');
+					} else {
+						return ctx.methodNotAllowed(null, 'Error ' + mrResult.STAT + ' while create remote label')
+					}
+				} else {
+					return ctx.internal(null, 'Error while calling mondial relay SOAP service')
+				}
+			}
     } else if (tmp_order.delivery === 'home') {
       tmp_order.name = tmp_order.first_name + ' ' + tmp_order.last_name
     } else if (tmp_order.delivery === 'referent') {

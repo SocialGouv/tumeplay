@@ -21,6 +21,8 @@ import {useQuery} from '@apollo/client';
 import {GET_BOXES, GET_BOX_MESURES} from '../../services/api/boxes';
 import _ from 'lodash'
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 TunnelProductSelect.propTypes = {
   navigation: PropTypes.object
 };
@@ -43,7 +45,7 @@ export default function TunnelProductSelect(props) {
   const {data: boxes_sur_mesure, loading2, refetch: refetchBoxMesure} = useQuery(GET_BOX_MESURES);
 
   const fetchAllBoxes = () => {
-    if (process.env.REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
+    if (REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
       const boxes = box.boxes;
       const allBoxes = [...boxes, boxes_sur_mesure.boxSurMesure];
       setLocalBoxs(allBoxes)
