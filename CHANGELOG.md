@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/SocialGouv/Tumeplay/compare/v1.5.2...v1.5.3) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** host name ([221f96a](https://github.com/SocialGouv/Tumeplay/commit/221f96a5ccd3c70f366595d0940a61d334e77471))
+
 ## [1.5.2](https://github.com/SocialGouv/Tumeplay/compare/v1.5.1...v1.5.2) (2021-08-30)
 
 
