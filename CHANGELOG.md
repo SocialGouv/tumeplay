@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/SocialGouv/Tumeplay/compare/v1.4.11...v1.4.12) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** set host for prod & preprod ([3be7afe](https://github.com/SocialGouv/Tumeplay/commit/3be7afe34afa851422be17ce5a6a8cb60a644b78))
+
 ## [1.4.11](https://github.com/SocialGouv/Tumeplay/compare/v1.4.10...v1.4.11) (2021-08-30)
 
 
