@@ -4,7 +4,6 @@ module.exports = ({ env }) => ({
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
   api: env('DOMAIN_API'),
-  url: env('URL'),
   admin: {
 		forgotPassword: {
       emailTemplate: forgotPasswordTemplate,
