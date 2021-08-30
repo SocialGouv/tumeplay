@@ -18,9 +18,9 @@ const Dashboard = () => {
   const [fullOrders, setFullOrders] = useState([])
   const [countOrders, setCountOrders] = useState(1)
   const [filteredorders, setFilteredOrders] = useState([])
+  const [pageItems, setPageItems] = useState([])
   const [openTab, setOpenTab] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [pages, setPages] = useState(1)
   const [numberPerPage, setNumberPerPage] = useState(5)
 
 
@@ -34,7 +34,6 @@ const Dashboard = () => {
         return(order.content[0].box.number === num)
     })
     setFilteredOrders(tmpFilterOrders)
-    setCountOrders(tmpFilterOrders.length)
   }
 
   const retrieveOrders = async () => {
@@ -62,11 +61,16 @@ const Dashboard = () => {
   }, [fullOrders, openTab])
 
   const onPageChange = (event) => {
-    const offset = (currentPage - 1) * filteredorders.length;
-    let tmpFiltered = filteredorders.slice(offset, offset + numberPerPage)
     setCurrentPage(event)
-    setFilteredOrders(tmpFiltered)
+    console.log(currentPage)
   }
+
+  useEffect(() => {
+    const offset = (currentPage - 1) * numberPerPage;
+    let tmpFiltered = filteredorders.slice(offset, offset + numberPerPage)
+    setPageItems([...tmpFiltered])
+  }, [filteredorders, currentPage])
+
   const renderTabs = boxes.map((box) => {
     return(
       <div key={box.id} className="flex flex-wrap">
@@ -100,7 +104,7 @@ const Dashboard = () => {
         <div className="w-full flex justify-around mb-12 px-4">
           {renderTabs}
         </div>
-        <Table items={filteredorders} titles={tabletitles} numberPerPage={numberPerPage}  />
+        <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage}  />
         <div className="absolute text-lg my-2 right-14">
           <Pagination
             currentPage={currentPage}
