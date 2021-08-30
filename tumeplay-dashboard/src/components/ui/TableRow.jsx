@@ -3,7 +3,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TableRow = (props) => {
-  const { items } = props;
+  const { items, numberPerPage } = props;
 
   const linesToDisplay = items.map((item) => {
     item.printed = false;
