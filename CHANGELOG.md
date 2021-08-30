@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/SocialGouv/Tumeplay/compare/v1.5.1...v1.5.2) (2021-08-30)
+
+
+### Bug Fixes
+
+* add url to server config ([d82dde4](https://github.com/SocialGouv/Tumeplay/commit/d82dde4a884a00d9113fa5cb16d322589165ec0d))
+
 ## [1.5.1](https://github.com/SocialGouv/Tumeplay/compare/v1.5.0...v1.5.1) (2021-08-30)
 
 
