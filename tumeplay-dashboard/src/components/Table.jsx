@@ -2,26 +2,24 @@ import React from 'react'
 import TableRow from './ui/TableRow'
 
 
-const Table = ({items, color, titles}) => {
+const Table = ({items, titles, count}) => {
 
-  const titlesToDisplay = titles.map(title => {
+  const titlesToDisplay = titles.map((title,index) => {
     return(
-      <th className={
-        `px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center ${color === "blue" ?
-          'text-white bg-lightBlue-800 border-lightBlue-700'
-          :
-          'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-        }`}>
+      <th key={index} className="tmp-table-th">
         {title}
       </th>
     )
   })
 
   return (
-     <div className="tmp-table-container">
-          <table className="items-center w-full tmp-table-ext">
+     <div className="tmp-table-container shadow-md rounded-xl">
+          <table className="tmp-table-ext items-center w-full ">
             <thead>
               <tr>
+                <th className="px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-800">
+                  <input type='checkbox' />
+                </th>
                 {titlesToDisplay}
               </tr>
             </thead>
