@@ -1,3 +1,11 @@
+## [1.4.9](https://github.com/SocialGouv/Tumeplay/compare/v1.4.8...v1.4.9) (2021-08-30)
+
+
+### Bug Fixes
+
+* clean code ([7814a1e](https://github.com/SocialGouv/Tumeplay/commit/7814a1e9ab6e2ecd72b428785e87994be22e7c87))
+* fixing the expandable text on cards in the sos à qui t'adresser section ([7aa9985](https://github.com/SocialGouv/Tumeplay/commit/7aa99856bc09b8df2fd4dbf6fd277b02df4ea8bc))
+
 ## [1.4.8](https://github.com/SocialGouv/Tumeplay/compare/v1.4.7...v1.4.8) (2021-08-30)
 
 
