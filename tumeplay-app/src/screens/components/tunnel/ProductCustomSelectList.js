@@ -24,7 +24,7 @@ export default function ProductCustomSelectList(props) {
 
   function onPress(item, stock, touched) {
     // not at max OR we were at max, now we deselect one.
-    const _limitReached = countProducts() > 4 || countProducts() > stock;
+    const _limitReached = countProducts() >= 4 || countProducts() > stock;
     const _isAllowed = !_limitReached || (_limitReached && !touched);
     setSelectAllowed(_isAllowed);
 
@@ -36,7 +36,11 @@ export default function ProductCustomSelectList(props) {
           localItem => localItem.item.id !== item.id,
         );
       } else {
-        _newProducts.push({item: item, quantity: 1});
+        _newProducts.push({
+          item: item,
+          produit: item.id,
+          quantity: 1,
+        });
       }
       setSelectedProducts(_newProducts);
       props.onSelectChange(_newProducts);
