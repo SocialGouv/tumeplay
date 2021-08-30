@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/SocialGouv/Tumeplay/compare/v1.5.3...v1.5.4) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** define url ([cb2db00](https://github.com/SocialGouv/Tumeplay/commit/cb2db0022396bcc4db57a9cd9d4f70f1d08faf3b))
+
 ## [1.5.3](https://github.com/SocialGouv/Tumeplay/compare/v1.5.2...v1.5.3) (2021-08-30)
 
 
