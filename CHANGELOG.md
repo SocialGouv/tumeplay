@@ -1,3 +1,11 @@
+## [1.4.7](https://github.com/SocialGouv/Tumeplay/compare/v1.4.6...v1.4.7) (2021-08-30)
+
+
+### Bug Fixes
+
+* no mondial relay generation on insert data ([edcf53a](https://github.com/SocialGouv/Tumeplay/commit/edcf53a97b121f1ccba3e933f844da425d253047))
+* react app zone declaration ([b80047a](https://github.com/SocialGouv/Tumeplay/commit/b80047a62861b9a69a18d8df3458a0a403c55811))
+
 ## [1.4.6](https://github.com/SocialGouv/Tumeplay/compare/v1.4.5...v1.4.6) (2021-08-30)
 
 
