@@ -18,7 +18,7 @@ export default function ContentCard(props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const cardStyle = StyleSheet.create({
     container: {
-      flex: 1,
+      flexShrink: 1,
       flexDirection: 'row',
       backgroundColor: '#FFFFFF',
       borderRadius: 7,
@@ -78,7 +78,9 @@ export default function ContentCard(props) {
         activeOpacity={props.activeOpacity}>
         <Image
           source={
-            content.image ? REACT_APP_API_URL + content.image.url : null
+            content.image
+              ? process.env.REACT_APP_API_URL + content.image.url
+              : null
           }
           style={cardStyle.picture}
         />
@@ -88,7 +90,7 @@ export default function ContentCard(props) {
           readMoreLink={content.link}
           lessPicture={'minus-orange.png'}
           morePicture={'plus-orange.png'}
-          sound={content.sound !== null ? content.sound.url : " "}
+          sound={content.sound !== null ? content.sound.url : ' '}
           onReadMore={() => {
             Tracking.knowMoreTriggered('contenu', content.id);
           }}
