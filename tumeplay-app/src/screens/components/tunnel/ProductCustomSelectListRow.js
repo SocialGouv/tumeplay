@@ -67,7 +67,13 @@ export default function ProductCustomSelectListRow(props) {
   }
 
   function adjustQuantity(mode) {
-    const newQuantity = mode === 'sub' ? localQuantity - 1 : localQuantity + 1;
+    let newQuantity = 0;
+    if (mode === 'sub') {
+      newQuantity = localQuantity ? localQuantity - 1 : localQuantity;
+    } else {
+      newQuantity = localQuantity + 1;
+    }
+    // const newQuantity = mode === 'sub' ? localQuantity - 1 : localQuantity + 1;
     const _adjustAllowed = props.onQtyAdjust(item, newQuantity, stock, mode);
 
     if (_adjustAllowed) {
