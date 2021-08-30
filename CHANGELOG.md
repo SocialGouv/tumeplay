@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/SocialGouv/Tumeplay/compare/v1.4.3...v1.4.4) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** change db uri ([8e7c35b](https://github.com/SocialGouv/Tumeplay/commit/8e7c35b722181e038229c46f07ee3bd387f1caea))
+
 ## [1.4.2](https://github.com/SocialGouv/Tumeplay/compare/v1.4.1...v1.4.2) (2021-08-27)
 
 
