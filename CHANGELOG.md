@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/SocialGouv/Tumeplay/compare/v1.4.4...v1.4.5) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** change port stmp for production ([08f2780](https://github.com/SocialGouv/Tumeplay/commit/08f2780f7b7c5090607fa28c5b9fabf76aad89b2))
+
 ## [1.4.4](https://github.com/SocialGouv/Tumeplay/compare/v1.4.3...v1.4.4) (2021-08-30)
 
 
