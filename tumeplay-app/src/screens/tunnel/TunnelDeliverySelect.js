@@ -7,7 +7,7 @@ import Styles from '../../styles/Styles';
 import Backlink from '../components/tunnel/Backlink';
 import Splitter from '../components/tunnel/Splitter';
 
-const REACT_APP_ZONE = REACT_APP_ZONE;
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 TunnelDeliverySelect.propTypes = {
   navigation: PropTypes.object,
