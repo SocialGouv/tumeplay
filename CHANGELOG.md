@@ -1,3 +1,10 @@
+## [1.4.11](https://github.com/SocialGouv/Tumeplay/compare/v1.4.10...v1.4.11) (2021-08-30)
+
+
+### Bug Fixes
+
+* box-sur-mesure products selection ([5f22938](https://github.com/SocialGouv/Tumeplay/commit/5f2293817c823f791bb25fc382b18c560afe64d1))
+
 ## [1.4.10](https://github.com/SocialGouv/Tumeplay/compare/v1.4.9...v1.4.10) (2021-08-30)
 
 
