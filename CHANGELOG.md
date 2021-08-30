@@ -1,3 +1,10 @@
+## [1.4.13](https://github.com/SocialGouv/Tumeplay/compare/v1.4.12...v1.4.13) (2021-08-30)
+
+
+### Bug Fixes
+
+* **ci:** fix mondial relay secret for prod ([82c0210](https://github.com/SocialGouv/Tumeplay/commit/82c02107301eb376952d789561a259151da172eb))
+
 ## [1.4.12](https://github.com/SocialGouv/Tumeplay/compare/v1.4.11...v1.4.12) (2021-08-30)
 
 
