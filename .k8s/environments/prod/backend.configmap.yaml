@@ -4,7 +4,7 @@ metadata:
   name: backend-configmap
 data:
   CRON_ENABLE: "true"
-  HOST: "backend-tumeplay.fabrique.social.gouv.fr"
+  URL: "https://backend-tumeplay.fabrique.social.gouv.fr"
   EMAIL_PROVIDER_HOST: "pro2.mail.ovh.net"
   EMAIL_PROVIDER_PORT: "587"
   EMAIL_PROVIDER_SECURE: "false"
