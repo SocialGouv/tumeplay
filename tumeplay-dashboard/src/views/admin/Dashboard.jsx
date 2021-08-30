@@ -1,13 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react'
 import Table from '../../components/Table'
-import getOrders from '../../services/api/orders'
+import OrdersAPI from '../../services/api/orders'
 import AppContext from '../../AppContext'
 import { useHistory } from 'react-router'
 import getAllBoxes from "../../services/api/boxes.js"
 
 const Dashboard = () => {
 
-  const [color, setColor] = useState("blue");
   const history = useHistory();
 
 
@@ -15,6 +14,7 @@ const Dashboard = () => {
   const token = context.token
   const [boxes, setBoxes] = useState([])
   const [fullOrders, setFullOrders] = useState([])
+  const [countOrders, setCountOrders] = useState(0)
   const [filteredorders, setFilteredOrders] = useState([])
   const [openTab, setOpenTab] = useState()
 
@@ -24,8 +24,10 @@ const Dashboard = () => {
   }
 
   const retrieveOrders = async () => {
-    let response = await getOrders(token)
+    let response = await OrdersAPI.getOrders(token)
     setFullOrders(response.data)
+    response = await OrdersAPI.countOrders(token)
+    setCountOrders(response.data)
   }
 
   const handleChangeTab = (e, box_number) => {
@@ -78,14 +80,14 @@ const Dashboard = () => {
     )
   })
 
-  const tabletitles = ["ID", "Date", "Transporteur", "Statut impression", "Statut Envoie"]
+  const tabletitles = ["ID", "Date", "Transporteur", "Statut impression", "Statut Envoi"]
 
   return(
      <div className="container mt-10 px-4 mx-auto">
-        <div className="w-full flex justify-around  mb-12 px-4">
+        <div className="w-full flex justify-around mb-12 px-4">
           {renderTabs}
         </div>
-        <Table color={color} items={filteredorders} titles={tabletitles} />
+        <Table items={filteredorders} titles={tabletitles} count={countOrders}  />
       </div>
   )
 }

@@ -1,11 +1,14 @@
 html {
   body {
-    .tmp-table-container{
-      @apply w-full h-screen flex rounded-xl;
+    .tmp-table-container {
+      @apply w-full flex rounded-xl;
       .tmp-table-ext {
-        @apply bg-transparent text-center border-collapse mx-auto rounded-xl;
+        @apply text-center border-collapse mx-auto rounded-xl;
         .tmp-table-th {
-          @apply px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center;
+          @apply px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-800;
+        }
+        .tmp-table-td {
+          @apply px-6 align-middle text-sm whitespace-nowrap p-4 items-center;
         }
       }
     }

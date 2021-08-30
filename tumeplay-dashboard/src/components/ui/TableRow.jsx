@@ -1,22 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TableRow = (props) => {
   const { items } = props;
 
   const linesToDisplay = items.map((item) => {
+    item.printed = false;
     return(
       <tr key={item.id} className="text-center">
-        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 text-bold flex items-center">{item.id}</td>
-        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">{new Date(item.created_at).toLocaleDateString()}</td>
-        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">{item.delivery === 'home' ? "Colissimo" : "Mondial Relay"}</td>
-        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">{item.sent}</td>
-        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"></td>
+        <td>
+          <input type='checkbox' />
+        </td>
+        <td className="tmp-table-td">{item.id}</td>
+        <td className="tmp-table-td">{new Date(item.created_at).toLocaleDateString()}</td>
+        <td className="tmp-table-td">{item.delivery === 'home' ? "Colissimo" : "Mondial Relay"}</td>
+        <td className="tmp-table-td">{item.printed ? <FontAwesomeIcon icon={faCheck} color="green" /> : <FontAwesomeIcon icon={faTimes} color='red' /> }</td>
+        <td className="tmp-table-td">{item.printed ? <FontAwesomeIcon icon={faCheck} color="green" /> : <FontAwesomeIcon icon={faTimes} color='red' /> }</td>
       </tr>
     )
   })
 
   return(
-    linesToDisplay
+    <>
+      {linesToDisplay}
+    </>
   )
 }
 
