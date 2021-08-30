@@ -62,7 +62,7 @@ export default function ProductCustomSelectListRow(props) {
     const touched = !isSelected;
     const _selectAllowed = props.onPress(item, stock, touched);
 
-    if (_selectAllowed) {
+    if (_selectAllowed && localQuantity === 0) {
       setIsSelected(!isSelected);
       setLocalQuantity(1);
     }
@@ -75,6 +75,7 @@ export default function ProductCustomSelectListRow(props) {
     } else {
       newQuantity = localQuantity + 1;
     }
+
     // const newQuantity = mode === 'sub' ? localQuantity - 1 : localQuantity + 1;
     const _adjustAllowed = props.onQtyAdjust(item, newQuantity, stock, mode);
 
@@ -82,7 +83,7 @@ export default function ProductCustomSelectListRow(props) {
       setLocalQuantity(newQuantity);
 
       if (newQuantity <= 0) {
-        onPress();
+				setIsSelected(false);
       }
     }
   }

@@ -51,7 +51,7 @@ export default function ProductCustomSelectList(props) {
   function onQuantityAdjust(item, _newQty, stock, mode) {
     const _totalProducts = countProducts();
     const _newTotal = mode == 'sub' ? _totalProducts - 1 : _totalProducts + 1;
-    const _limitReached = _newTotal > 4 || _newQty > stock;
+    const _limitReached = _newTotal >= 4 || _newQty > stock;
 
     if (!_limitReached) {
       let _newProducts = [...selectedProducts];
