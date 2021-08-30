@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SocialGouv/Tumeplay/compare/v1.4.13...v1.5.0) (2021-08-30)
+
+
+### Features
+
+* add table dumps ([7f79969](https://github.com/SocialGouv/Tumeplay/commit/7f79969a80c47b32f118a66e8d6b199f914a254b))
+
 ## [1.4.13](https://github.com/SocialGouv/Tumeplay/compare/v1.4.12...v1.4.13) (2021-08-30)
 
 
