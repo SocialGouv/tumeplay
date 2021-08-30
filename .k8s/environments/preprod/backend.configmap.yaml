@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: backend-configmap
 data:
-  CRON_ENABLE: "true"
+  CRON_ENABLE: "false"
   EMAIL_PROVIDER_HOST: "smtp.gmail.com"
   EMAIL_PROVIDER_PORT: "465"
   EMAIL_PROVIDER_SECURE: "true"
