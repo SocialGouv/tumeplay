@@ -138,7 +138,7 @@ export default function TunnelPickupSelect(props) {
     }
 
     fetchPoints();
-  }, []);
+  }, [currentPosition]);
 
   function _onDone() {
     setDisplayMap(false);
