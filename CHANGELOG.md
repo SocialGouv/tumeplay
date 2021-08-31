@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/SocialGouv/Tumeplay/compare/v1.6.0...v1.6.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* wording for metropole ([cbf5b88](https://github.com/SocialGouv/Tumeplay/commit/cbf5b88bdab42b1c08e1e620392a96e78e055205))
+
 # [1.6.0](https://github.com/SocialGouv/Tumeplay/compare/v1.5.6...v1.6.0) (2021-08-31)
 
 
