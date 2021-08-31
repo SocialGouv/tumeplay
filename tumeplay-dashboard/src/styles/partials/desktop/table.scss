@@ -8,7 +8,7 @@ html {
           @apply px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-700;
         }
         .tmp-table-td {
-          @apply px-6 align-middle text-sm whitespace-nowrap p-4 items-center;
+          @apply px-6 align-middle text-sm md:text-base whitespace-nowrap p-4 items-center text-lightBlue-900;
         }
       }
     }
