@@ -67,7 +67,8 @@ export default function LandingScreen(props) {
   }
 
   function _onSelected_lieuxUtiles() {
-    props.navigation.navigate('ContentScreen', {selectedTheme: localThemes[3]});
+    console.log(localThemes)
+    // props.navigation.navigate('ContentScreen', {selectedTheme: localThemes[3]});
   }
 
   function _onSelected_echangeProfessionnel() {
@@ -108,7 +109,7 @@ export default function LandingScreen(props) {
     <SafeAreaView style={Styles.safeAreaView}>
       <ScrollView>
         {/* Title and grid */}
-        <View style={{flex: 1}}>
+        <View>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
           {process.env.REACT_APP_ZONE === 'guyane' ? (
             <TextWithSound
@@ -135,7 +136,7 @@ export default function LandingScreen(props) {
         </View>
 
         {/* Bottom part */}
-        <View style={{marginTop: 35, marginLeft: 15, marginRight: 15}}>
+        <View style={{marginLeft: 15, marginRight: 15}}>
           <CustomTouchableOpacity
             style={[Styles.landingBottomWrapper]}
             onPress={_onSelected_lieuxUtiles}>
