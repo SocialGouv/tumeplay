@@ -129,7 +129,7 @@ const createMondialRelayCsv = async (dirpath, today_7AM, orders, environnement_i
           'box_number': _.get(order, 'content[0].box.number', 'null'),
           'date': date,
           'address_poi': _.get(order, 'poi_name') + ', ' + _.get(order, 'address') + ', ' + _.get(order, 'address_zipcode') + ' ' + _.get(order, 'address_city'),
-          'mr_pdf_link': strapi.config.get('server.api') + 'uploads/orders/mondial-relay/order_mondial_relay_' + order.id + '.pdf'
+          'mr_pdf_link': strapi.config.get('server.url') + '/uploads/orders/mondial-relay/order_mondial_relay_' + order.id + '.pdf'
         }
       )
     }
