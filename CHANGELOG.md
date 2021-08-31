@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/SocialGouv/Tumeplay/compare/v1.6.1...v1.6.2) (2021-08-31)
+
+
+### Bug Fixes
+
+* Add http redirections. ([4015680](https://github.com/SocialGouv/Tumeplay/commit/40156801be10941591d672d06ac8ecbaad0f63f3))
+
 ## [1.6.1](https://github.com/SocialGouv/Tumeplay/compare/v1.6.0...v1.6.1) (2021-08-31)
 
 
