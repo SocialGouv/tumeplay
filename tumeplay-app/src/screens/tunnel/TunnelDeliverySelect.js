@@ -7,6 +7,8 @@ import Styles from '../../styles/Styles';
 import Backlink from '../components/tunnel/Backlink';
 import Splitter from '../components/tunnel/Splitter';
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 TunnelDeliverySelect.propTypes = {
   navigation: PropTypes.object,
 };
@@ -56,6 +58,7 @@ export default function TunnelDeliverySelect(props) {
       }}>
       <Backlink step={1} onPress={_goBack} />
 
+
       <View>
         {process.env.REACT_APP_ZONE === 'guyane' ? (
           <TextWithSound
@@ -84,6 +87,7 @@ export default function TunnelDeliverySelect(props) {
 
       <View style={{marginTop: 30}}>
         {process.env.REACT_APP_ZONE === 'guyane' ? (
+
           <TouchableOpacity
             style={{
               flex: 1,
@@ -138,7 +142,7 @@ export default function TunnelDeliverySelect(props) {
           </>
         )}
         <Splitter />
-        {process.env.REACT_APP_ZONE === 'guyane' ? (
+        {REACT_APP_ZONE === 'guyane' ?
           <></>
         ) : (
           <Text

@@ -11,6 +11,7 @@ export const GET_CONTENTS = gql`
       sound {
         url
       }
+      external_link
     }
   }
 `;

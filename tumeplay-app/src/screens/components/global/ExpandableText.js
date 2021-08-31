@@ -13,12 +13,14 @@ import PropTypes from 'prop-types';
 
 import TextLink from './TextLink';
 import useIsMounted from '../../../hooks/isMounted';
-import Tracking from '../../../services/Tracking';
 
 import Colors from '../../../styles/Color';
 
 import ReactHowler from 'react-howler';
 import CustomTouchableOpacity from './CustomTouchableOpacity';
+
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 ExpandableText.propTypes = {
   isExpanded: PropTypes.bool,
@@ -41,6 +43,8 @@ export default function ExpandableText(props) {
   const [showAllText, setShowAllText] = useState(props.isExpanded);
   const isMounted = useIsMounted();
   const _text = useRef();
+  const [lines, setLines] = useState(0);
+  const [cardHeight, setCardHeight] = useState();
 
   const soundIconStyle = props.soundStyle || {
     position: 'absolute',
@@ -78,55 +82,16 @@ export default function ExpandableText(props) {
   }
 
   useEffect(() => {
-    async function nextFrameAsync() {
-      return new Promise(resolve => requestAnimationFrame(() => resolve()));
+    if (showAllText) {
+      setLines(15);
+    } else {
+      setLines(5);
     }
+  }, [showAllText]);
 
-    async function measureHeightAsync(component) {
-      return new Promise(resolve => {
-        UIManager.measure(
-          findNodeHandle(_text.current),
-          (x, y, width, height) => {
-            resolve(height);
-          },
-        );
-      });
-    }
-
-    async function handleHeight(_text) {
-      await nextFrameAsync();
-
-      if (!isMounted.current) {
-        return;
-      }
-
-      // Get the height of the text with no restriction on number of lines
-      const fullHeight = await measureHeightAsync(_text);
-
-      if (!isMounted.current) {
-        return;
-      }
-
-      setMeasured(true);
-
-      await nextFrameAsync();
-
-      if (!isMounted.current) {
-        return;
-      }
-      // Get the height of the text now that number of lines has been set
-      const limitedHeight = await measureHeightAsync(_text);
-
-      if (fullHeight > limitedHeight) {
-        setShouldShowReadMore(true);
-      }
-      if (props.onReady) {
-        props.onReady();
-      }
-    }
-
-    handleHeight(_text);
-  }, [_text, isMounted, props]);
+  useEffect(() => {
+    setShowAllText(props.isExpanded);
+  }, [props.isExpanded]);
 
   function renderNode(node, index, siblings, parent, defaultRenderer) {
     if (node.name === 'a') {
@@ -158,7 +123,7 @@ export default function ExpandableText(props) {
   }
 
   function _maybeRenderReadMore() {
-    if (shouldShowReadMore && !props.isExpanded && !showAllText) {
+    if (!showAllText) {
       if (props.renderTruncatedFooter) {
         return props.renderTruncatedFooter(_handlePressReadMore);
       }
@@ -180,57 +145,50 @@ export default function ExpandableText(props) {
           </Text>
         </TouchableOpacity>
       );
-    } else if (shouldShowReadMore && (props.isExpanded || showAllText)) {
+    } else if (showAllText && props.content.external_link) {
       if (props.renderRevealedFooter) {
         return props.renderRevealedFooter(_handlePressReadLess);
       }
 
-      if (props.readMoreLink) {
-        return (
-          <TouchableOpacity
-            style={cardStyle.readMoreWrapper}
-            onPress={_handlePressReadLess}>
-            <Image
-              style={cardStyle.readMorePicture}
-              source={
-                props.purpleMode
-                  ? require('../../../assets/pictures/external-purple.png')
-                  : require('../../../assets/pictures/external-orange.png')
-              }
-            />
-            <TextLink
-              style={[cardStyle.readMore, {...props.readMoreStyle}]}
-              targetUrl={props.readMoreLink}>
-              En savoir plus
-            </TextLink>
-          </TouchableOpacity>
-        );
-      } else {
-        return (
-          <TouchableOpacity
-            style={cardStyle.readMoreWrapper}
-            onPress={_handlePressReadLess}>
-            <Image
-              style={cardStyle.readMorePicture}
-              source={
-                props.purpleMode
-                  ? require('../../../assets/pictures/minus-purple.png')
-                  : require('../../../assets/pictures/minus-orange.png')
-              }
-            />
-            <Text style={[cardStyle.readMore, {...props.readMoreStyle}]}>
-              Refermer
-            </Text>
-          </TouchableOpacity>
-        );
-      }
+      return (
+        <TouchableOpacity
+          style={cardStyle.readMoreWrapper}
+          onPress={_handlePressReadLess}>
+          <Image
+            style={cardStyle.readMorePicture}
+            source={
+              props.purpleMode
+                ? require('../../../assets/pictures/external-purple.png')
+                : require('../../../assets/pictures/external-orange.png')
+            }
+          />
+          <TextLink
+            style={[cardStyle.readMore, {...props.readMoreStyle}]}
+            targetUrl={props.content.external_link}>
+            En savoir plus
+          </TextLink>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={cardStyle.readMoreWrapper}
+          onPress={_handlePressReadLess}>
+          <Image
+            style={cardStyle.readMorePicture}
+            source={
+              props.purpleMode
+                ? require('../../../assets/pictures/minus-purple.png')
+                : require('../../../assets/pictures/minus-orange.png')
+            }
+          />
+          <Text style={[cardStyle.readMore, {...props.readMoreStyle}]}>
+            Refermer
+          </Text>
+        </TouchableOpacity>
+      );
     }
   }
-
-  const NoL =
-    measured && !props.isExpanded && !showAllText
-      ? props.content.numberOfLines
-      : 0;
 
   return (
     <View style={props.containerStyle}>
@@ -243,15 +201,14 @@ export default function ExpandableText(props) {
         <HTMLView
           RootComponent={Text}
           renderNode={renderNode}
-          ref={_text}
           value={`<p>${props.content.text}</p>`}
           rootComponentProps={{
-            numberOfLines: NoL,
+            numberOfLines: lines,
             style: [cardStyle.text, {...props.textStyle}],
           }}
           style={[cardStyle.text, {...props.textStyle}]}
         />
-        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
+        {props.sound && REACT_APP_ZONE === 'guyane' && (
           <CustomTouchableOpacity
             onPress={e => {
               togglePlay(e);
@@ -269,9 +226,9 @@ export default function ExpandableText(props) {
             />
           </CustomTouchableOpacity>
         )}
-        {props.sound && process.env.REACT_APP_ZONE === 'guyane' && (
+        {props.sound && REACT_APP_ZONE === 'guyane' && (
           <ReactHowler
-            src={process.env.REACT_APP_API_URL + props.sound}
+            src={REACT_APP_API_URL + props.sound}
             onEnd={onPlayStop}
             onStop={onPlayStop}
             playing={play}

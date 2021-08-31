@@ -1,0 +1,122 @@
+h1 {
+	font-size: 3.5rem;
+	margin-bottom: 3rem;
+}
+
+h2 {
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+}
+
+h1 div {
+	display: inline-block;
+}
+
+.button {
+	padding: 5px 10px;
+	color: white;
+	border: 1px solid transparent;
+}
+
+.button.button-primary {
+	background-color: #007EFF;
+	border-color: #007EFF;
+}
+
+.button.button-default {
+	background-color: white;
+	border-color: #dadada;
+	color: black;
+}
+
+h1 div::before {
+	position: static !important;
+	top: unset !important;
+	right: unset !important;
+	font-size: 35px !important;
+}
+
+.zone-switcher {
+	text-align: right;
+}
+
+.switcher-button {
+	border: 1xp solid #007eff;
+	background: #0080ff98;
+	padding: 10px 15px;
+	color: white;
+	border-radius: 15px;
+	margin-right: 10px;
+	font-size: 1.5rem;
+}
+
+.switcher-button:hover, .switcher-button.active {
+	background: #007eff;
+}
+
+.simple-table {
+	margin-top: 3rem;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.simple-table .simple-table-row {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.simple-table .simple-table-row .simple-table-col {
+	padding: 5px;
+	border-bottom: 1px solid black;
+}
+
+.simple-table .simple-table-row .simple-table-col:not(:last-child) {
+	border-right: 1px solid black;
+}
+
+.simple-table .simple-table-row .simple-table-col.question-text {
+	width: 90%;
+}
+
+.simple-table .simple-table-row .simple-table-col.question-average {
+	width: 10%;
+	text-align: center;
+}
+
+/* .rdrDateDisplayWrapper, .rdrMonthAndYearWrapper {
+	display: none !important;
+} */
+
+.tm-modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 9999;
+}
+
+.tm-modal-backdrop .tm-modal {
+	background: white;
+	padding: 10px;
+	border: 1px solid #dadada;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%)translateY(-50%);
+}
+
+.tm-modal-backdrop .tm-modal .tm-modal-footer {
+	text-align: right;
+}
+
+.tm-modal-backdrop .tm-modal .tm-modal-footer .button {
+	margin-left: 5px;
+}
+
+.selected-date-preview {
+	font-weight: bold;
+	margin-bottom: 10px;
+}

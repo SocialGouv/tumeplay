@@ -249,29 +249,12 @@ jobs:
           RANCHER_PROJECT_ID: ${{ env.RANCHER_PROJECT_ID }}
 
       - name: ⛑ Debug manifests ⛑
-        id: debug-manifests
-        run: |
-          TEXT=$(cat manifests.yml | npx @socialgouv/parse-manifests --text)
-          echo "${TEXT}"
-          MARKDOWN=$(cat manifests.yml | npx @socialgouv/parse-manifests --markdown)
-          MARKDOWN="${MARKDOWN//$'\n'/'%0A'}"
-          MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
-          echo "::set-output name=markdown::$MARKDOWN"
-
-      # necessary to find the PR on push events
-      - uses: jwalton/gh-find-current-pr@v1
-        id: finder
-
-      - name: ⛑ Comment PR
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: socialgouv/actions/k8s-manifests-debug@master
         with:
-          number: ${{ steps.finder.outputs.pr }}
-          message: |
-
-            Deployment ${{ github.sha }}.
-
-            ${{ steps.debug-manifests.outputs.markdown }}
-          GITHUB_TOKEN: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+          path: manifests.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          RANCHER_PROJECT_ID: ${{ env.RANCHER_PROJECT_ID }}
 
       - name: Archive k8s manifests
         uses: actions/upload-artifact@v2
