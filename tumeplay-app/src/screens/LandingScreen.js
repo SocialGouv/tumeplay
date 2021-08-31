@@ -64,7 +64,6 @@ export default function LandingScreen(props) {
   }, [_toggleErrorModal, isMounted]);
 
   function _onSelectedTheme(selectedTheme) {
-    console.log("selected", selectedTheme)
     Tracking.themeSelected(selectedTheme);
     props.navigation.navigate('ContentScreen', {selectedTheme: selectedTheme});
   }
