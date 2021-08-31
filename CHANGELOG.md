@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/SocialGouv/Tumeplay/compare/v1.5.5...v1.5.6) (2021-08-31)
+
+
+### Bug Fixes
+
+* cron mondial relay url ([9d4c9b0](https://github.com/SocialGouv/Tumeplay/commit/9d4c9b090c79b70921f1dca39069f66e3cd9fa45))
+
 ## [1.5.5](https://github.com/SocialGouv/Tumeplay/compare/v1.5.4...v1.5.5) (2021-08-31)
 
 
