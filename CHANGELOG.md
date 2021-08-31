@@ -1,3 +1,14 @@
+## [1.6.3](https://github.com/SocialGouv/Tumeplay/compare/v1.6.2...v1.6.3) (2021-08-31)
+
+
+### Bug Fixes
+
+* fix map adjustement ([5a2537d](https://github.com/SocialGouv/Tumeplay/commit/5a2537db7d4d48cf5c4b0f85a06badef1195e263))
+* fixing home screen know more link ([2d036ae](https://github.com/SocialGouv/Tumeplay/commit/2d036aec25fc3c3718c2da2554db91d92d02545b))
+* fixing size of container to avoid bad display and missing infos ([e6f44c3](https://github.com/SocialGouv/Tumeplay/commit/e6f44c31e26e19065847582b19db5879b9b8c4e3))
+* fixing text in modal 25yo and fixing footer position and Find usefull place banner ([507c267](https://github.com/SocialGouv/Tumeplay/commit/507c2671f6a30756b0a3cf53e0ce6e5a228a5e32))
+* reviewing bottom part on large screen ([53d407c](https://github.com/SocialGouv/Tumeplay/commit/53d407c82d2014e242c383c4a171159230ca1eb5))
+
 ## [1.6.2](https://github.com/SocialGouv/Tumeplay/compare/v1.6.1...v1.6.2) (2021-08-31)
 
 
