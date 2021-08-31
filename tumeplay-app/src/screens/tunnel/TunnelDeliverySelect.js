@@ -57,28 +57,35 @@ export default function TunnelDeliverySelect(props) {
         paddingBottom: 15,
       }}>
       <Backlink step={1} onPress={_goBack} />
-
-      <View style={{flex: 0.4}}>
-        {REACT_APP_ZONE === 'guyane' ?
-          <TextWithSound style={Styles.tunnelTitle} sound={'mode-de-retrait_aEY6eeGr.mp3'} useLocal={true}>Choisis le mode de retrait</TextWithSound>
-         :
+      <View>
+        {REACT_APP_ZONE === 'guyane' ? (
+          <TextWithSound
+            style={Styles.tunnelTitle}
+            sound={'mode-de-retrait_aEY6eeGr.mp3'}
+            useLocal={true}>
+            Choisis le mode de retrait
+          </TextWithSound>
+        ) : (
           <Text style={Styles.tunnelTitle}>Choisis le mode de livraison</Text>
-        }
-        {REACT_APP_ZONE === 'guyane' ?
-            <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
-            Choisis le référent chez qui tu souhaites retirer ta box. Le référent est là pour t’écouter et répondre à tes questions. Il te proposera un petit entretien la première fois que tu iras le voir. Pas de panique, 100% confidentialité, 0% stress !
-            </Text>
-          :
-            <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
-              Nous ferons de notre mieux pour te livrer au plus vite ! Nos box sont
-              100% discrètes ;)
-            </Text>
-        }
+        )}
+        {REACT_APP_ZONE === 'guyane' ? (
+          <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
+            Choisis le référent chez qui tu souhaites retirer ta box. Le
+            référent est là pour t’écouter et répondre à tes questions. Il te
+            proposera un petit entretien la première fois que tu iras le voir.
+            Pas de panique, 100% confidentialité, 0% stress !
+          </Text>
+        ) : (
+          <Text style={{color: '#FFFFFF', fontSize: 16, marginTop: 15}}>
+            Nous ferons de notre mieux pour te livrer au plus vite ! Nos box
+            sont 100% discrètes ;)
+          </Text>
+        )}
       </View>
 
+      <View style={{marginTop: 30}}>
+        {REACT_APP_ZONE === 'guyane' ? (
 
-      <View style={{flex: 0.4, marginTop: 30}}>
-        {REACT_APP_ZONE === 'guyane' ?
           <TouchableOpacity
             style={{
               flex: 1,
@@ -133,11 +140,7 @@ export default function TunnelDeliverySelect(props) {
           </>
         )}
         <Splitter />
-<<<<<<< HEAD
-        {process.env.REACT_APP_ZONE === 'guyane' ? (
-=======
-        {REACT_APP_ZONE === 'guyane' ?
->>>>>>> 0fe8bbc2b226a95cdacc3fc363ac74e940cb6761
+        {REACT_APP_ZONE === 'guyane' ? (
           <></>
         ) : (
           <Text
