@@ -135,7 +135,7 @@ export default function LandingScreen(props) {
         </View>
 
         {/* Bottom part */}
-        <View style={{marginLeft: 15, marginRight: 15}}>
+        <View style={{marginTop: 35, marginLeft: 15, marginRight: 15}}>
           <CustomTouchableOpacity
             style={[Styles.landingBottomWrapper]}
             onPress={_onSelected_lieuxUtiles}>

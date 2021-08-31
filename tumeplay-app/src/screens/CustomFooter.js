@@ -41,7 +41,7 @@ export default function CustomFooter(props) {
     },
   });
   const containerStyle = {
-    flex: 0.1,
+    flex: 0.2,
     flexDirection: 'column',
     paddingLeft: 15,
     paddingRight: 15,
