@@ -37,7 +37,7 @@ export default function TunnelPickupSelect(props) {
       latitude: 0.009,
       longitude: 0.009,
     },
-    isValid: true
+    isValid: true,
   };
   var defaultPickup = {
     userZipCode: '',
@@ -70,19 +70,25 @@ export default function TunnelPickupSelect(props) {
     if (isMounted.current) {
       Geolocation.getCurrentPosition(
         position => {
-          let coordinates = {lat: position.coords.latitude, long: position.coords.longitude}
+          const coordinates = {
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+          };
           openGeocoder()
-          .reverse(coordinates.long, coordinates.lat)
-          .end((err, res) => {
-            if (res.address.state === "Île-de-France" || res.address.state === "Aquitaine") {
-              currentPosition.coords.latitude = position.coords.latitude
-              currentPosition.coords.longitude = position.coords.longitude
-              setCurrentPosition({...currentPosition})
-            } else {
-              currentPosition.isValid = false
-              setCurrentPosition({...currentPosition})
-            }
-          })
+            .reverse(coordinates.long, coordinates.lat)
+            .end((err, res) => {
+              if (
+                res.address.state === 'Île-de-France' ||
+                res.address.state === 'Aquitaine'
+              ) {
+                currentPosition.coords.latitude = position.coords.latitude;
+                currentPosition.coords.longitude = position.coords.longitude;
+                setCurrentPosition({...currentPosition});
+              } else {
+                currentPosition.isValid = false;
+                setCurrentPosition({...currentPosition});
+              }
+            });
         },
         error => console.log('Error', JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
@@ -92,10 +98,10 @@ export default function TunnelPickupSelect(props) {
   }, [isMounted]);
 
   useEffect(() => {
-     async function fetchPoints() {
+    async function fetchPoints() {
       const rawPickupPoints = await POIAPI.fetchMondialRelaisPOI({
         lat: currentPosition.coords.latitude,
-        long: currentPosition.coords.longitude
+        long: currentPosition.coords.longitude,
       });
       const pickupPoints = rawPickupPoints.map(function(item) {
         item.isSelected = false;
@@ -115,13 +121,13 @@ export default function TunnelPickupSelect(props) {
         };
 
         filteredPoints = pickupPoints.filter(pickupPoint => {
-          if(
+          if (
             parseFloat(pickupPoint.Latitude) < bounds.max_lat ||
             parseFloat(pickupPoint.Latitude) > bounds.min_lat ||
             parseFloat(pickupPoint.Longitude) < bounds.max_lon ||
             parseFloat(pickupPoint.Longitude) > bounds.min_lon
-            ) {
-            return pickupPoint
+          ) {
+            return pickupPoint;
           }
         });
       } else {
@@ -132,8 +138,7 @@ export default function TunnelPickupSelect(props) {
     }
 
     fetchPoints();
-
-  }, [currentPosition]);
+  }, []);
 
   function _onDone() {
     setDisplayMap(false);
@@ -144,7 +149,6 @@ export default function TunnelPickupSelect(props) {
       deliveryType: deliveryType,
     });
   }
-
 
   function _goBack() {
     props.navigation.navigate('TunnelDeliverySelect', {
@@ -171,8 +175,12 @@ export default function TunnelPickupSelect(props) {
               if (filtered.length > 0) {
                 const localPosition = {
                   coords: {
-                    latitude: parseFloat(parseFloat(filtered[0].lat).toFixed(7)),
-                    longitude: parseFloat(parseFloat(filtered[0].lon).toFixed(7)),
+                    latitude: parseFloat(
+                      parseFloat(filtered[0].lat).toFixed(7),
+                    ),
+                    longitude: parseFloat(
+                      parseFloat(filtered[0].lon).toFixed(7),
+                    ),
                   },
                   delta: {
                     latitude:
@@ -231,28 +239,29 @@ export default function TunnelPickupSelect(props) {
     }, 900);
   }
 
-  const handleAddressMore = (item) => {
-    openGeocoder().reverse(item.coordinates.longitude, item.coordinates.latitude)
-    .end((err, res) => {
-      if(res) {
-        if(res.address.postcode.substring(0, 2) === '97') {
-          item['address_deptcode'] = res.address.postcode.substring(0, 3)
-        } else {
-          item["address_deptcode"] = res.address.postcode.substring(0, 2)
+  const handleAddressMore = item => {
+    openGeocoder()
+      .reverse(item.coordinates.longitude, item.coordinates.latitude)
+      .end((err, res) => {
+        if (res) {
+          if (res.address.postcode.substring(0, 2) === '97') {
+            item['address_deptcode'] = res.address.postcode.substring(0, 3);
+          } else {
+            item['address_deptcode'] = res.address.postcode.substring(0, 2);
+          }
+          item['address_region'] = res.address.state;
+          item['address_dept'] = res.address.county;
+          setSelectedPickup({...item});
         }
-        item["address_region"] = res.address.state
-        item["address_dept"] = res.address.county
-        setSelectedPickup({...item})
-      }
-    });
-  }
+      });
+  };
 
   function onPoiPress(selectedItem) {
     const newItems = pickupPoints.map(function(item) {
       item.isSelected = item.Num === selectedItem.Num;
       return item;
     });
-    handleAddressMore(selectedItem)
+    handleAddressMore(selectedItem);
     setPickupPoints(newItems);
     // setSelectedPickup({...selectedItem});
   }
@@ -285,7 +294,7 @@ export default function TunnelPickupSelect(props) {
       ]}>
       <Backlink step={2} onPress={_goBack} />
 
-      <View style={{flex: 0.15, paddingTop: 15}}>
+      <View style={{paddingTop: 15}}>
         <Text style={Styles.tunnelTitle}>Choisis le lieu de livraison</Text>
         <CustomTextInput
           inputLabel="Code postal"
