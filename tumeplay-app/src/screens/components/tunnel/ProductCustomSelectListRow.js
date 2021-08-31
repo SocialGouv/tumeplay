@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import Colors from '../../../styles/Color';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 ProductCustomSelectListRow.propTypes = {
   item: PropTypes.object,
   stock: PropTypes.object,
@@ -56,25 +58,32 @@ export default function ProductCustomSelectListRow(props) {
     ? require('../../../assets/pictures/filled-minus.png')
     : require('../../../assets/pictures/filled-plus.png');
 
-  function onPress() {
-    const _newState = !isSelected;
-    const _selectAllowed = props.onPress(item, stock, _newState);
+  function onPress(item) {
+    const touched = !isSelected;
+    const _selectAllowed = props.onPress(item, stock, touched);
 
-    if (_selectAllowed) {
+    if (_selectAllowed && localQuantity === 0) {
       setIsSelected(!isSelected);
       setLocalQuantity(1);
     }
   }
 
   function adjustQuantity(mode) {
-    const newQuantity = mode === 'sub' ? localQuantity - 1 : localQuantity + 1;
+    let newQuantity = 0;
+    if (mode === 'sub') {
+      newQuantity = localQuantity ? localQuantity - 1 : localQuantity;
+    } else {
+      newQuantity = localQuantity + 1;
+    }
+
+    // const newQuantity = mode === 'sub' ? localQuantity - 1 : localQuantity + 1;
     const _adjustAllowed = props.onQtyAdjust(item, newQuantity, stock, mode);
 
     if (_adjustAllowed) {
       setLocalQuantity(newQuantity);
 
       if (newQuantity <= 0) {
-        onPress();
+				setIsSelected(false);
       }
     }
   }
@@ -105,7 +114,7 @@ export default function ProductCustomSelectListRow(props) {
               borderBottomLeftRadius: 7,
               borderTopLeftRadius: 7,
             }}
-            source={process.env.REACT_APP_API_URL + item.image.url}
+            source={REACT_APP_API_URL + item.image.url}
           />
         </View>
         <View
