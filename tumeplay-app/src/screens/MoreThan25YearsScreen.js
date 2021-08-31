@@ -69,7 +69,7 @@ export default function MoreThan25YearsScreen(props) {
           padding: 15,
         }}>
         <Text style={textStyle}>
-          Actuellement la commande de box est disponible en Seine-et-Marne et en
+          Actuellement la commande de box est disponible en Ile de France et en
           Nouvelle-Aquitaine.
         </Text>
         <Text style={textStyle}>――――</Text>
