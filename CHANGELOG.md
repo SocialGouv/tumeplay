@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/SocialGouv/Tumeplay/compare/v1.5.4...v1.5.5) (2021-08-31)
+
+
+### Bug Fixes
+
+* cron handle GTM hour ([0ac712c](https://github.com/SocialGouv/Tumeplay/commit/0ac712c82ce8051017ba06048c7ad586a20cb1ff))
+
 ## [1.5.4](https://github.com/SocialGouv/Tumeplay/compare/v1.5.3...v1.5.4) (2021-08-30)
 
 
