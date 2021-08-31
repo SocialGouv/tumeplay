@@ -75,7 +75,7 @@ export default function MoreThan25YearsScreen(props) {
 						<Text style={textStyle}>
 							Actuellement la commande de box est disponible en Nouvelle-Aquitaine et en Île de France.
 						</Text>
-					)	
+					)
 				}
         <Text style={textStyle}>――――</Text>
         <Text style={textStyle}>

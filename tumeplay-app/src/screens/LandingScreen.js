@@ -69,7 +69,8 @@ export default function LandingScreen(props) {
   }
 
   function _onSelected_lieuxUtiles() {
-    props.navigation.navigate('ContentScreen', {selectedTheme: localThemes[3]});
+    console.log(localThemes)
+    props.navigation.navigate('ContentScreen', {selectedTheme: {id: "91"}});
   }
 
   function _onSelected_echangeProfessionnel() {
@@ -92,9 +93,9 @@ export default function LandingScreen(props) {
     </ProductErrorModal>
   ));
 
+
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
-
     if (!loading) {
       return (
         <LandingThemeGrid
@@ -110,7 +111,7 @@ export default function LandingScreen(props) {
     <SafeAreaView style={Styles.safeAreaView}>
       <ScrollView>
         {/* Title and grid */}
-        <View style={{flex: 1}}>
+        <View>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
           {REACT_APP_ZONE === 'guyane' ? (
             <TextWithSound
