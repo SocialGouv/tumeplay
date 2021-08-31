@@ -1,6 +1,8 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 const ResponsesAPI = {
   publishResponses: async (id, iteration, answer) => {
-    const res = await fetch(process.env.REACT_APP_API_URL + '/reponses', {
+    const res = await fetch(REACT_APP_API_URL + '/reponses', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

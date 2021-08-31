@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_times",
+  "info": {
+    "name": "QuizTime",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nb_seconds": {
+      "type": "biginteger"
+    },
+    "quizz_iteration": {
+      "type": "integer"
+    },
+    "thematique": {
+      "model": "thematique"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "age": {
+      "type": "string"
+    }
+  }
+}

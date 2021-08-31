@@ -20,6 +20,8 @@ import Styles from '../../../styles/Styles';
 import Colors from '../../../styles/Color';
 import ModalStyle from '../../../styles/components/Modal';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 ProductModal.propTypes = {
   navigation: PropTypes.object,
   item: PropTypes.object,
@@ -142,7 +144,7 @@ export default function ProductModal(props) {
           <View>
             <Image
               style={cardStyle.picture}
-              source={process.env.REACT_APP_API_URL + productBox.image.url}
+              source={REACT_APP_API_URL + productBox.image.url}
             />
           </View>
           <View

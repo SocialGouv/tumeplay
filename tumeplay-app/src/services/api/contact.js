@@ -1,6 +1,8 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 const ContactsAPI = {
   postContact: async userAdress => {
-    await fetch(process.env.REACT_APP_API_URL + '/contacts', {
+    await fetch(REACT_APP_API_URL + '/contacts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

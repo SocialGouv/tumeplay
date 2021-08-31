@@ -22,6 +22,8 @@ import Tracking from '../services/Tracking';
 import {GET_THEMES} from '../services/api/themes';
 import {useQuery} from '@apollo/client';
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 LandingScreen.propTypes = {
   navigation: PropTypes.object,
 };
@@ -112,7 +114,7 @@ export default function LandingScreen(props) {
         {/* Title and grid */}
         <View>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
-          {process.env.REACT_APP_ZONE === 'guyane' ? (
+          {REACT_APP_ZONE === 'guyane' ? (
             <TextWithSound
               style={Styles.landingScreenSubtitle}
               sound={'Accueil_1.MP3'}

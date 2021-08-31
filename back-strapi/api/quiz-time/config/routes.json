@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/quiz-times",
+      "handler": "quiz-time.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/quiz-times/count",
+      "handler": "quiz-time.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/quiz-times/:id",
+      "handler": "quiz-time.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/quiz-times",
+      "handler": "quiz-time.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/quiz-times/:id",
+      "handler": "quiz-time.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/quiz-times/:id",
+      "handler": "quiz-time.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
