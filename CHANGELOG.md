@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/SocialGouv/Tumeplay/compare/v1.5.6...v1.6.0) (2021-08-31)
+
+
+### Features
+
+* **ci:** add matomo ID in CI ([625ae73](https://github.com/SocialGouv/Tumeplay/commit/625ae734fcadaf2753bcf8e7b66052bbe3d63fd1))
+
 ## [1.5.6](https://github.com/SocialGouv/Tumeplay/compare/v1.5.5...v1.5.6) (2021-08-31)
 
 
