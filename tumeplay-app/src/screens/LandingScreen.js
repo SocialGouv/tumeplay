@@ -62,13 +62,14 @@ export default function LandingScreen(props) {
   }, [_toggleErrorModal, isMounted]);
 
   function _onSelectedTheme(selectedTheme) {
+    console.log("selected", selectedTheme)
     Tracking.themeSelected(selectedTheme);
     props.navigation.navigate('ContentScreen', {selectedTheme: selectedTheme});
   }
 
   function _onSelected_lieuxUtiles() {
     console.log(localThemes)
-    // props.navigation.navigate('ContentScreen', {selectedTheme: localThemes[3]});
+    props.navigation.navigate('ContentScreen', {selectedTheme: {id: "91"}});
   }
 
   function _onSelected_echangeProfessionnel() {
@@ -91,9 +92,9 @@ export default function LandingScreen(props) {
     </ProductErrorModal>
   ));
 
+
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
-
     if (!loading) {
       return (
         <LandingThemeGrid
