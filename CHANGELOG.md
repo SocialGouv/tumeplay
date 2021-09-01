@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/SocialGouv/Tumeplay/compare/v1.6.5...v1.7.0) (2021-09-01)
+
+
+### Features
+
+* add user-permissions to project ([12b0057](https://github.com/SocialGouv/Tumeplay/commit/12b005740a3beede2869895473adfa8dcbbb4e7c))
+
 ## [1.6.5](https://github.com/SocialGouv/Tumeplay/compare/v1.6.4...v1.6.5) (2021-09-01)
 
 
