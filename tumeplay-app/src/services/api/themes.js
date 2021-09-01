@@ -17,3 +17,15 @@ export const GET_THEMES = gql`
     }
   }
 `;
+
+export const GET_SOSTHEME = gql`
+  query {
+    thematiques(where: {environnement: {slug: "${REACT_APP_ZONE}"} title: "SOS à qui t'adresser"}) {
+      id
+      title
+      image {
+        url
+      }
+    }
+  }
+`;
