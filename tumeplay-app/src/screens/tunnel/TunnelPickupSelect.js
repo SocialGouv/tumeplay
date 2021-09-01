@@ -134,6 +134,7 @@ export default function TunnelPickupSelect(props) {
         filteredPoints = pickupPoints;
       }
       setPickupPoints([]);
+      filteredPoints = filteredPoints.sort((a, b) => b.CP - a.CP)
       setPickupPoints([...filteredPoints]);
     }
 
