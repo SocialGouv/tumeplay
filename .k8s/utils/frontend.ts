@@ -46,6 +46,13 @@ export default async (name: string) => {
     },
   });
 
+	const getMatomoId = (name: string) => {
+		return ciEnv.isProduction ?
+		name === 'metropole' ? '21' : '45'
+		:
+		name === 'metropole' ? '48' : '49'
+	}
+
   /* pass dynamic deployment URL as env var to the container */
   //@ts-expect-error
   const deployment = getManifestByKind(manifests, Deployment) as Deployment;
@@ -65,6 +72,7 @@ export default async (name: string) => {
         name,
         otherZone
       )}`,
+			REACT_APP_MATOMO_ID: getMatomoId(name)
     },
   });
 
