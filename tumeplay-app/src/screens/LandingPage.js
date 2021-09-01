@@ -28,17 +28,17 @@ const LandingPage = (props) => {
       </View>
       <View style={style.cardContainer}>
         <View style={style.column}>
-          <View style={style.card}>
+          <TouchableOpacity style={style.card} onPress={() => {handleRedirection('metropole')}}>
             <Image style={style.image} resizeMode='contain' source={france}/>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity style={style.button} >
             <Text style={style.text} onPress={() => {handleRedirection('metropole')}}>Hexagone</Text>
           </TouchableOpacity>
         </View>
         <View style={style.column}>
-          <View style={style.card}>
+          <TouchableOpacity style={style.card} onPress={() => {handleRedirection('guyane')}}>
             <Image style={style.image} resizeMode='contain' source={guyane}/>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity style={style.button} onPress={() => {handleRedirection('guyane')}}>
             <Text style={style.text}>Guyane</Text>
           </TouchableOpacity>
@@ -112,6 +112,7 @@ const style = StyleSheet.create({
     left: "50%",
     transform: 'translate(-50%, -50%)',
     alignSelf: 'center',
+		cursor: 'pointer',
     opacity: 1
   },
   button: {
