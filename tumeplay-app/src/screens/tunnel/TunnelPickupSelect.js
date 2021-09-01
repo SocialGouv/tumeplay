@@ -134,7 +134,11 @@ export default function TunnelPickupSelect(props) {
         filteredPoints = pickupPoints;
       }
       setPickupPoints([]);
-      filteredPoints = filteredPoints.sort((a, b) => b.CP - a.CP)
+      if (localAdress.userZipCode) {
+        filteredPoints = filteredPoints.filter(
+          point => point.CP === localAdress.userZipCode,
+        ).concat(filteredPoints.filter(point => point.CP !== localAdress.userZipCode))
+      }
       setPickupPoints([...filteredPoints]);
     }
 
