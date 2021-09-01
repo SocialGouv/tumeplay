@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/SocialGouv/Tumeplay/compare/v1.6.3...v1.6.4) (2021-09-01)
+
+
+### Bug Fixes
+
+* fixing redirection to SOS à qui s'adresser ([0271ac3](https://github.com/SocialGouv/Tumeplay/commit/0271ac330a020c1b32828d88a809c686ca4c84af))
+
 ## [1.6.3](https://github.com/SocialGouv/Tumeplay/compare/v1.6.2...v1.6.3) (2021-08-31)
 
 
