@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/SocialGouv/Tumeplay/compare/v1.7.2...v1.7.3) (2021-09-01)
+
+
+### Bug Fixes
+
+* landing maps images clickable ([6e6ba76](https://github.com/SocialGouv/Tumeplay/commit/6e6ba765a6fc5aba9a55298555bb79e57f2db85f))
+
 ## [1.7.2](https://github.com/SocialGouv/Tumeplay/compare/v1.7.1...v1.7.2) (2021-09-01)
 
 
