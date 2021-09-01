@@ -6,6 +6,10 @@ import { useHistory } from 'react-router'
 import getAllBoxes from "../../services/api/boxes.js";
 import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 const Dashboard = () => {
@@ -22,6 +26,7 @@ const Dashboard = () => {
   const [openTab, setOpenTab] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [numberPerPage, setNumberPerPage] = useState(5)
+  const [tmpSelectedItems, setTmpSelectedItems] = useState([])
 
 
   const retrieveBoxes = async () => {
@@ -49,6 +54,18 @@ const Dashboard = () => {
     history.push(`/orders/box/${box_number}`)
   }
 
+  const handleSelection = (e) => {
+  let order = filteredorders.find(order => order.id === parseInt(e.target.id))
+  if(e.target.checked) {
+    tmpSelectedItems.push(order)
+    setTmpSelectedItems([...tmpSelectedItems])
+  } else {
+    let array = tmpSelectedItems.filter(item => item.id !== order.id);
+    setTmpSelectedItems([...array])
+  }
+  }
+
+
   useEffect(() => {
     retrieveBoxes()
     retrieveOrders()
@@ -62,7 +79,6 @@ const Dashboard = () => {
 
   const onPageChange = (event) => {
     setCurrentPage(event)
-    console.log(currentPage)
   }
 
   useEffect(() => {
@@ -101,11 +117,19 @@ const Dashboard = () => {
 
   return(
      <div className="container mt-10 px-4 mx-auto relative">
-        <div className="w-full flex justify-around mb-12 px-4">
+        <div className="tmp-tabs-container">
           {renderTabs}
         </div>
-        <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage}  />
-        <div className="absolute text-lg my-2 right-14">
+        <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage} handleSelection={handleSelection}  />
+            <div className="tmp-bottom-buttons-container">
+              <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0}>
+                <FontAwesomeIcon icon={faPaperPlane} color="white" />
+              </button>
+              <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0}>
+                <FontAwesomeIcon icon={faPrint} color="white" />
+              </button>
+            </div>
+        <div className="tmp-pagination-container">
           <Pagination
             currentPage={currentPage}
             totalSize={filteredorders.length}

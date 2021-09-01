@@ -1,0 +1,19 @@
+html {
+  body{
+    .tmp-tabs-container {
+      @apply w-full flex justify-around mb-12 px-4;
+    }
+    .tmp-bottom-buttons-container {
+      @apply absolute w-1/6 flex justify-around my-3;
+      .tmp-bottom-buttons {
+        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm;
+        &:first-child {
+          @apply mr-2
+        }
+      }
+    }
+    .tmp-pagination-container {
+      @apply absolute text-lg my-2 right-14;
+    }
+  }
+}

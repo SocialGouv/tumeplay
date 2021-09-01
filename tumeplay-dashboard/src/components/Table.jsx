@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TableRow from './ui/TableRow';
 
-const Table = ({items, titles, numberPerPage}) => {
+const Table = ({items, titles, numberPerPage, handleSelection}) => {
 
   const titlesToDisplay = titles.map((title,index) => {
     return(
@@ -23,7 +23,7 @@ const Table = ({items, titles, numberPerPage}) => {
               </tr>
             </thead>
             <tbody>
-              <TableRow items={items} numberPerPage={numberPerPage} />
+              <TableRow items={items} numberPerPage={numberPerPage} handleSelection={handleSelection} />
             </tbody>
           </table>
       </div>
