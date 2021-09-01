@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/SocialGouv/Tumeplay/compare/v1.7.3...v1.8.0) (2021-09-01)
+
+
+### Features
+
+* handle matomo id env preprod & prod ([095551a](https://github.com/SocialGouv/Tumeplay/commit/095551aa2348bd2e9c37d87810fb9e2c71d129d4))
+
 ## [1.7.3](https://github.com/SocialGouv/Tumeplay/compare/v1.7.2...v1.7.3) (2021-09-01)
 
 
