@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/SocialGouv/Tumeplay/compare/v1.7.0...v1.7.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* Cert annotation. ([66e8975](https://github.com/SocialGouv/Tumeplay/commit/66e8975958c6d16f2ea1f925467a5c5d86b96ac4))
+
 # [1.7.0](https://github.com/SocialGouv/Tumeplay/compare/v1.6.5...v1.7.0) (2021-09-01)
 
 
