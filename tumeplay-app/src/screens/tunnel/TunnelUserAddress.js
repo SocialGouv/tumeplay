@@ -496,26 +496,10 @@ export default function TunnelUserAddress(props) {
           </Text>
         </View>
       </View>
-      <View style={Styles.viewopacitytunneletap3}>
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            paddingTop: 15,
-            paddingBottom: 2,
-            width: '40%',
-            height: 75,
-          }}
-          onPress={_onDone}>
-          <View style={Styles.tunnelButton}>
-            <Text
-              style={
-                mainValidFlag
-                  ? Styles.tunnelButtonText
-                  : Styles.tunnelButtonTextOpaque
-              }>
-              Suivant
-            </Text>
-          </View>
+
+      <View>
+        <TouchableOpacity style={Styles.tunnelButton} onPress={_onDone}>
+          <Text style={Styles.tunnelButtonText}>Suivant</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
