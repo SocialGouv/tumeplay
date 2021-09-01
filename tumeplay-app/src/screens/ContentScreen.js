@@ -238,6 +238,7 @@ export default function ContentScreen(props) {
     setIsBadgeModalVisible(false);
     setIsResultModalVisible(false);
     if (hideQuizzModal) {
+			setCountScore(0);
       _toggleQuizzModal();
     }
   }
