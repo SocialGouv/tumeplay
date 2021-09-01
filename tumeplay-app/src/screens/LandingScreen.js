@@ -19,7 +19,7 @@ import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 
 import Tracking from '../services/Tracking';
-import {GET_THEMES} from '../services/api/themes';
+import {GET_THEMES, GET_SOSTHEME} from '../services/api/themes';
 import {useQuery} from '@apollo/client';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
@@ -28,7 +28,6 @@ LandingScreen.propTypes = {
   navigation: PropTypes.object,
 };
 export default function LandingScreen(props) {
-  const [localThemes, setLocalThemes] = useState([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   const isMounted = useIsMounted();
@@ -68,9 +67,13 @@ export default function LandingScreen(props) {
     props.navigation.navigate('ContentScreen', {selectedTheme: selectedTheme});
   }
 
+  const {data, loading} = useQuery(GET_SOSTHEME);
   function _onSelected_lieuxUtiles() {
-    console.log(localThemes)
-    props.navigation.navigate('ContentScreen', {selectedTheme: {id: "91"}});
+    if (!loading) {
+      props.navigation.navigate('ContentScreen', {
+        selectedTheme: data.thematiques[0],
+      });
+    }
   }
 
   function _onSelected_echangeProfessionnel() {
@@ -92,7 +95,6 @@ export default function LandingScreen(props) {
       </Text>
     </ProductErrorModal>
   ));
-
 
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
