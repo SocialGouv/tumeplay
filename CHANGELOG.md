@@ -1,3 +1,10 @@
+## [1.6.5](https://github.com/SocialGouv/Tumeplay/compare/v1.6.4...v1.6.5) (2021-09-01)
+
+
+### Bug Fixes
+
+* fix button userAdress ([7beb83e](https://github.com/SocialGouv/Tumeplay/commit/7beb83e0decd23991dcac93987c79f9eca39f865))
+
 ## [1.6.4](https://github.com/SocialGouv/Tumeplay/compare/v1.6.3...v1.6.4) (2021-09-01)
 
 
