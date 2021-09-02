@@ -1,3 +1,12 @@
+## [1.8.1](https://github.com/SocialGouv/Tumeplay/compare/v1.8.0...v1.8.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* fix order of poi by zipcode ([65ba278](https://github.com/SocialGouv/Tumeplay/commit/65ba278841b09f793b4023f29a52d95bba716f14))
+* missing city in home orders ([82a9bf1](https://github.com/SocialGouv/Tumeplay/commit/82a9bf1808a169165a44bb4b4a63ab7b1be45e97))
+* ordering poi by zipcode ([1bde6cb](https://github.com/SocialGouv/Tumeplay/commit/1bde6cbb187f5ce7c90878b15723fd2a254919cc))
+
 # [1.8.0](https://github.com/SocialGouv/Tumeplay/compare/v1.7.3...v1.8.0) (2021-09-01)
 
 
