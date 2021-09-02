@@ -4,9 +4,11 @@ const _ = require('lodash');
 const http = require('http');
 const fs = require('fs');
 const soap = require('soap');
+const path = require('path');
 const md5 = require('md5');
 const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
-
+const PDFMerger = require('pdf-merger-js');
+const axios = require("axios")
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -57,7 +59,7 @@ const buildMrParams = (order) => {
     Enseigne: strapi.config.get('server.mondialRelay.id'),
     ModeCol: 'REL',
     ModeLiv: orderMrParams.mode,
-    
+
     Expe_Langage: 'FR',
     Expe_Ad1: 'M. TUMEPLAY',
     Expe_Ad3: '106 Boulevard Richard-Lenoir',
@@ -65,7 +67,7 @@ const buildMrParams = (order) => {
     Expe_CP: '75011',
     Expe_Pays: 'FR',
     Expe_Tel1: '+33142386040',
-    
+
     Dest_Langage: 'FR',
     Dest_Ad1: 'M. ' + orderMrParams.fullName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
     Dest_Ad3: orderMrParams.poi_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
@@ -74,10 +76,10 @@ const buildMrParams = (order) => {
     Dest_CP: orderMrParams.zipCode,
     Dest_Pays: 'FR',
     Dest_Mail: orderMrParams.email,
-    
+
     Poids: '400',
     NbColis: '1',
-    
+
     CRT_Valeur: '0',
     COL_Rel_Pays: 'FR',
     COL_Rel: '003490',
@@ -87,11 +89,11 @@ const buildMrParams = (order) => {
   }
 
   let securityKey = '';
-  for (const prop in mrParams) 
+  for (const prop in mrParams)
   {
     if( prop != 'Texte' )
     {
-      securityKey += mrParams[prop];	
+      securityKey += mrParams[prop];
     }
   }
 
@@ -110,7 +112,7 @@ module.exports = {
 
     // CHECK AVAILABILITY & DECREMENT STOCK
     if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
-      const products_box = ctx.request.body.content[0].produits 
+      const products_box = ctx.request.body.content[0].produits
       const available = await strapi.services['box-sur-mesure'].checkDynamicBoxAvailability(products_box)
 
       if (available) {
@@ -123,7 +125,7 @@ module.exports = {
     } else if (ctx.request.body.content[0].__component === 'commandes.box') {
       const box_id = ctx.request.body.content[0].box
       const available = await strapi.services.box.checkBoxAvailability(box_id)
-      
+
       if (available) {
         strapi.services["box"].decrement(box_id, 1)
       } else {
@@ -221,7 +223,7 @@ module.exports = {
           )
         }
       )
-    }    
+    }
 
     return entity;
   },
@@ -243,5 +245,16 @@ module.exports = {
     }
 
     return ctx.badRequest(null, 'Error while trying to fetch mondial relais API');
+  },
+  async generateMergePDF(ctx) {
+    const ids = ctx.request.body.ids
+    const merger = new PDFMerger();
+    ids.forEach(async (id) =>
+      merger.add(path.relative('.', `public/uploads/orders/mondial-relay/order_mondial_relay_${id}.pdf`))
+    )
+    const merge_pdf_path = 'uploads/orders/mondial-relay/merged_' + new Date().getTime() + '.pdf'
+    const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+    await merger.save(merge_pdf_save_path);
+    return process.env.DOMAIN_API + merge_pdf_path;
   }
 };

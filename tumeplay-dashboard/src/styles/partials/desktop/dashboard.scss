@@ -3,12 +3,29 @@ html {
     .tmp-tabs-container {
       @apply w-full flex justify-around mb-12 px-4;
     }
+    .tmp-top-buttons-container {
+      @apply absolute w-1/6 flex justify-around -my-9;
+      .tmp-top-buttons {
+        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600;
+
+        &:first-child {
+          @apply mr-2;
+        }
+
+        &:disabled {
+          @apply bg-gray-200;
+        }
+      }
+    }
     .tmp-bottom-buttons-container {
       @apply absolute w-1/6 flex justify-around my-3;
       .tmp-bottom-buttons {
-        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm;
+        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600;
         &:first-child {
-          @apply mr-2
+          @apply mr-2;
+        }
+        &:disabled {
+          @apply bg-gray-200;
         }
       }
     }

@@ -11,8 +11,12 @@ const OrdersAPI = {
     return axios.get(`${URL}/commandes/count`, {headers: {
       Authorization: `Bearer ${token}`
     }});
+  },
+  printMondialRelayPDF: (token, ids) => {
+    return axios.post(`${URL}/mondial-relay/merge-pdf`, {ids: ids}, {headers: {
+      Authorization: `Bearer ${token}`
+    }});
   }
-
 }
 
 export default OrdersAPI;

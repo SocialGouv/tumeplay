@@ -7,7 +7,7 @@ import mondialRelay from "../../assets/pictures/mondial-relay.jpeg"
 const TableRow = ({ items, handleSelection }) => {
 
   const linesToDisplay = items.map((item) => {
-    item.printed = false;
+    item.printed = true;
     item.selected = false;
     return(
       <tr key={item.id} className="text-center">
@@ -22,7 +22,7 @@ const TableRow = ({ items, handleSelection }) => {
             <p className="my-auto">{item.delivery === 'home' ? "Colissimo" : "Mondial Relay"}</p>
           </div>
         </td>
-        <td className="tmp-table-td">{item.printed ? <FontAwesomeIcon icon={faPrint} color="green" /> : <FontAwesomeIcon icon={faTimes} color='red' /> }</td>
+        {/* <td className="tmp-table-td">{item.printed ? <FontAwesomeIcon icon={faPrint} color="green" /> : <FontAwesomeIcon icon={faTimes} color='red' /> }</td> */}
         <td className="tmp-table-td">{item.sent ? <FontAwesomeIcon icon={faPaperPlane} color="green" /> : <FontAwesomeIcon icon={faTimes} color='red' /> }</td>
       </tr>
     )

@@ -11,12 +11,17 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "fs": "0.0.1-security",
     "isomorphic-fetch": "^3.0.0",
     "js-cookie": "^3.0.0",
+    "pdf-merger-js": "^3.2.1",
+    "pdfassembler": "0.1.0-beta.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-pagination-js": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.39.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
