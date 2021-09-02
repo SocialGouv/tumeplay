@@ -8,11 +8,14 @@ import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
-
+import axios from 'axios';
+import PDFMerger from 'pdf-merger-js';
 
 
 
 const Dashboard = () => {
+
+  var fs = require('fs')
 
   const history = useHistory();
 
@@ -20,13 +23,15 @@ const Dashboard = () => {
   const token = context.token
   const [boxes, setBoxes] = useState([])
   const [fullOrders, setFullOrders] = useState([])
-  const [countOrders, setCountOrders] = useState(1)
   const [filteredorders, setFilteredOrders] = useState([])
   const [pageItems, setPageItems] = useState([])
   const [openTab, setOpenTab] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [numberPerPage, setNumberPerPage] = useState(5)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
+  const [pdfFilesArray, setPdfFilesArray] = useState([])
+  const [mergedPdfArray, setMergedPdfArray] = useState([])
+
 
 
   const retrieveBoxes = async () => {
@@ -44,8 +49,6 @@ const Dashboard = () => {
   const retrieveOrders = async () => {
     let response = await OrdersAPI.getOrders(token)
     setFullOrders(response.data)
-    // response = await OrdersAPI.countOrders(token)
-    // setCountOrders(response.data)
   }
 
   const handleChangeTab = (event, box_number) => {
@@ -55,16 +58,52 @@ const Dashboard = () => {
   }
 
   const handleSelection = (e) => {
-  let order = filteredorders.find(order => order.id === parseInt(e.target.id))
-  if(e.target.checked) {
-    tmpSelectedItems.push(order)
-    setTmpSelectedItems([...tmpSelectedItems])
-  } else {
-    let array = tmpSelectedItems.filter(item => item.id !== order.id);
-    setTmpSelectedItems([...array])
-  }
+    let order = filteredorders.find(order => order.id === parseInt(e.target.id))
+    if(e.target.checked) {
+      tmpSelectedItems.push(order)
+      setTmpSelectedItems([...tmpSelectedItems])
+    } else {
+      let array = tmpSelectedItems.filter(item => item.id !== order.id);
+      setTmpSelectedItems([...array])
+    }
   }
 
+  const printColissimoSticker = (items) => {
+    alert("COLISSIMO")
+  }
+
+  const printMRStickers = async (items) => {
+    const response = await OrdersAPI.printMondialRelayPDF(token, items)
+    console.log(response)
+    const a = document.createElement("a");
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.href = response.data
+    a.target= 'blank'
+    a.setAttribute("download", 'Mondial Relay')
+    a.click()
+    document.body.removeChild(a)
+  }
+
+  const handlePrintClick = (e) => {
+    const colissimoItems = tmpSelectedItems.filter(item => item.delivery === "home")
+    const mondialRelayItems = tmpSelectedItems.filter(item => item.delivery === "pickup")
+    if(colissimoItems.length > 0) {
+      printColissimoSticker(colissimoItems)
+    }
+
+    if (mondialRelayItems.length > 0) {
+      const ids = mondialRelayItems.map((item) => {
+        return item.id
+      })
+        printMRStickers(ids)
+    }
+
+  }
+
+  const handleSendClick = (e) => {
+
+  }
 
   useEffect(() => {
     retrieveBoxes()
@@ -113,22 +152,30 @@ const Dashboard = () => {
     )
   })
 
-  const tabletitles = ["ID", "Date", "Transporteur", "Statut impression", "Statut Envoi"]
+  const tabletitles = ["ID", "Date", "Transporteur", "Statut Envoi"]
 
   return(
      <div className="container mt-10 px-4 mx-auto relative">
         <div className="tmp-tabs-container">
           {renderTabs}
         </div>
+        <div className="tmp-top-buttons-container">
+          <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
+            <FontAwesomeIcon icon={faPrint} color="white" />
+          </button>
+            <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
+            <FontAwesomeIcon icon={faPaperPlane} color="white" />
+          </button>
+        </div>
         <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage} handleSelection={handleSelection}  />
-            <div className="tmp-bottom-buttons-container">
-              <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0}>
-                <FontAwesomeIcon icon={faPaperPlane} color="white" />
-              </button>
-              <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0}>
-                <FontAwesomeIcon icon={faPrint} color="white" />
-              </button>
-            </div>
+        <div className="tmp-bottom-buttons-container">
+          <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
+            <FontAwesomeIcon icon={faPrint} color="white" />
+          </button>
+            <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
+            <FontAwesomeIcon icon={faPaperPlane} color="white" />
+          </button>
+        </div>
         <div className="tmp-pagination-container">
           <Pagination
             currentPage={currentPage}

@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/mondial-relay/merge-pdf",
+      "handler": "commande.generateMergePDF",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/commandes/:id",
       "handler": "commande.update",
