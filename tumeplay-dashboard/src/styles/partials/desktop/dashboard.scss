@@ -29,6 +29,9 @@ html {
         }
       }
     }
+    .tmp-dropdown-container {
+      @apply absolute my-3 right-56;
+    }
     .tmp-pagination-container {
       @apply absolute text-lg my-2 right-14;
     }
