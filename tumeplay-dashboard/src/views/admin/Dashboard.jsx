@@ -8,9 +8,7 @@ import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import PDFMerger from 'pdf-merger-js';
-
+import Dropdown from "react-dropdown";
 
 
 const Dashboard = () => {
@@ -74,7 +72,6 @@ const Dashboard = () => {
 
   const printMRStickers = async (items) => {
     const response = await OrdersAPI.printMondialRelayPDF(token, items)
-    console.log(response)
     const a = document.createElement("a");
     a.style.display = "none";
     document.body.appendChild(a);
@@ -102,6 +99,11 @@ const Dashboard = () => {
   }
 
   const handleSendClick = (e) => {
+    //CALL API TO SEND ORDER
+  }
+
+
+  const handleChangeNumPerPage = (e) => {
 
   }
 
@@ -153,6 +155,7 @@ const Dashboard = () => {
   })
 
   const tabletitles = ["ID", "Date", "Transporteur", "Statut Envoi"]
+  const dropdownOptions = ['10', '50', '100', 'Tout']
 
   return(
      <div className="container mt-10 px-4 mx-auto relative">
@@ -175,6 +178,9 @@ const Dashboard = () => {
             <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
             <FontAwesomeIcon icon={faPaperPlane} color="white" />
           </button>
+        </div>
+        <div className="tmp-dropdown-container" >
+          <Dropdown cursor='pointer' options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
         </div>
         <div className="tmp-pagination-container">
           <Pagination
