@@ -19,12 +19,31 @@ const login = (identifier, password) => {
   } )
 }
 
-const forgotPassword = (identifier) => {
+const forgotPassword = (email) => {
   if(typeof window === "undefined"){
     return;
   }
   return new Promise((resolve, reject) => {
-    axios.post(`${API_URL}/auth/forgot-password/`, {email: identifier})
+    axios.post(`${API_URL}/auth/forgot-password/`, {email: email})
+    .then((res) => {
+      resolve(res)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+  } )
+}
+
+const resetPassword = (password, passwordConfirmation, code) => {
+  if(typeof window === "undefined"){
+    return;
+  }
+  return new Promise((resolve, reject) => {
+    axios.post(`${API_URL}/auth/reset-password/`, {
+			code,
+			password,
+			passwordConfirmation,
+		})
     .then((res) => {
       resolve(res)
     })
@@ -36,5 +55,6 @@ const forgotPassword = (identifier) => {
 
 export {
 	login,
-	forgotPassword
+	forgotPassword,
+	resetPassword
 };
