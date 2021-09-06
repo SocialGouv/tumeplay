@@ -104,7 +104,7 @@ const Dashboard = () => {
 
 
   const handleChangeNumPerPage = (e) => {
-
+    setNumberPerPage(parseInt(e.value))
   }
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const Dashboard = () => {
     const offset = (currentPage - 1) * numberPerPage;
     let tmpFiltered = filteredorders.slice(offset, offset + numberPerPage)
     setPageItems([...tmpFiltered])
-  }, [filteredorders, currentPage])
+  }, [filteredorders, currentPage, numberPerPage])
 
   const renderTabs = boxes.map((box) => {
     return(
@@ -155,7 +155,7 @@ const Dashboard = () => {
   })
 
   const tabletitles = ["ID", "Date", "Transporteur", "Statut Envoi"]
-  const dropdownOptions = ['10', '50', '100', 'Tout']
+  const dropdownOptions = ['5', '10', '50', '100', {value: filteredorders.length, label: 'Tout'}]
 
   return(
      <div className="container mt-10 px-4 mx-auto relative">
@@ -170,6 +170,9 @@ const Dashboard = () => {
             <FontAwesomeIcon icon={faPaperPlane} color="white" />
           </button>
         </div>
+        <div className="tmp-dropdown-container" >
+          <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
+        </div>
         <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage} handleSelection={handleSelection}  />
         <div className="tmp-bottom-buttons-container">
           <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
@@ -178,9 +181,6 @@ const Dashboard = () => {
             <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
             <FontAwesomeIcon icon={faPaperPlane} color="white" />
           </button>
-        </div>
-        <div className="tmp-dropdown-container" >
-          <Dropdown cursor='pointer' options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
         </div>
         <div className="tmp-pagination-container">
           <Pagination
