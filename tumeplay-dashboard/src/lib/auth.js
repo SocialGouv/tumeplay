@@ -19,4 +19,22 @@ const login = (identifier, password) => {
   } )
 }
 
-export default login;
+const forgotPassword = (identifier) => {
+  if(typeof window === "undefined"){
+    return;
+  }
+  return new Promise((resolve, reject) => {
+    axios.post(`${API_URL}/auth/forgot-password/`, {email: identifier})
+    .then((res) => {
+      resolve(res)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+  } )
+}
+
+export {
+	login,
+	forgotPassword
+};
