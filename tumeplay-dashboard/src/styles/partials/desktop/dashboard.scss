@@ -29,6 +29,18 @@ html {
         }
       }
     }
+    .tmp-dropdown-container {
+      @apply absolute -my-11 right-5;
+      .tmp-dropdown {
+        @apply w-20 cursor-pointer rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
+      }
+      .tmp-dropdown-menu {
+        @apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+        .Dropdown-option {
+          @apply px-2 py-1 hover:bg-gray-50;
+        }
+      }
+    }
     .tmp-pagination-container {
       @apply absolute text-lg my-2 right-14;
     }
