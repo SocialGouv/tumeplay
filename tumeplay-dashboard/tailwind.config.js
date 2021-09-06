@@ -6,6 +6,7 @@ module.exports = {
    theme: {
     colors: {
       ...colors,
+			error: '#e74c3c'
     },
     extend: {
       minHeight: {
