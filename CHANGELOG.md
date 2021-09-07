@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/SocialGouv/Tumeplay/compare/v1.8.1...v1.8.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* email CAT to real one ([2c641d1](https://github.com/SocialGouv/Tumeplay/commit/2c641d1ed847cf1fcd08145c503c9b715acaadb7))
+
 ## [1.8.1](https://github.com/SocialGouv/Tumeplay/compare/v1.8.0...v1.8.1) (2021-09-02)
 
 
