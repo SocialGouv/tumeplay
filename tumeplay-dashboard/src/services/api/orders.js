@@ -16,6 +16,11 @@ const OrdersAPI = {
     return axios.post(`${URL}/mondial-relay/merge-pdf`, {ids: ids}, {headers: {
       Authorization: `Bearer ${token}`
     }});
+  },
+  printColissimoPDF: (token, ids) => {
+    return axios.post(`${URL}/colissimo/generate-pdf`, {ids: ids}, {headers: {
+      Authorization: `Bearer ${token}`
+    }});
   }
 }
 

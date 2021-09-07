@@ -27,10 +27,6 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [numberPerPage, setNumberPerPage] = useState(5)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
-  const [pdfFilesArray, setPdfFilesArray] = useState([])
-  const [mergedPdfArray, setMergedPdfArray] = useState([])
-
-
 
   const retrieveBoxes = async () => {
     let response = await getAllBoxes(token)
@@ -66,8 +62,17 @@ const Dashboard = () => {
     }
   }
 
-  const printColissimoSticker = (items) => {
-    alert("COLISSIMO")
+  const printColissimoSticker = async (items) => {
+    const response = await OrdersAPI.printColissimoPDF(token, items)
+    const a = document.createElement("a");
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.href = response.data
+    a.id = "#Coli"
+    a.target= '_blank'
+    a.setAttribute("download", 'Colissimo')
+    a.click()
+    document.body.removeChild(a)
   }
 
   const printMRStickers = async (items) => {
@@ -76,7 +81,8 @@ const Dashboard = () => {
     a.style.display = "none";
     document.body.appendChild(a);
     a.href = response.data
-    a.target= 'blank'
+    a.id = "#MR"
+    a.target= '_blank'
     a.setAttribute("download", 'Mondial Relay')
     a.click()
     document.body.removeChild(a)
@@ -86,16 +92,17 @@ const Dashboard = () => {
     const colissimoItems = tmpSelectedItems.filter(item => item.delivery === "home")
     const mondialRelayItems = tmpSelectedItems.filter(item => item.delivery === "pickup")
     if(colissimoItems.length > 0) {
-      printColissimoSticker(colissimoItems)
+      const ids = colissimoItems.map((item) => {
+        return item.id
+      })
+      printColissimoSticker(ids)
     }
-
     if (mondialRelayItems.length > 0) {
       const ids = mondialRelayItems.map((item) => {
         return item.id
       })
         printMRStickers(ids)
     }
-
   }
 
   const handleSendClick = (e) => {
