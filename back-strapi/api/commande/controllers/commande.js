@@ -9,6 +9,7 @@ const md5 = require('md5');
 const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
 const PDFMerger = require('pdf-merger-js');
 const axios = require("axios")
+const html_to_pdf = require('html-pdf-node');
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -256,5 +257,49 @@ module.exports = {
     const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
     await merger.save(merge_pdf_save_path);
     return process.env.DOMAIN_API + merge_pdf_path;
+  },
+  async createColissimo(ctx) {
+    const ids = ctx.request.body.ids;
+    let orders = await strapi.query('commande').find({id_in: ids})
+    orders = orders.concat(orders)
+    orders = orders.concat(orders)
+    orders = orders.concat(orders)
+    const dirPath = 'uploads/orders/colissimo/'
+    const relativeDirPath = path.relative('.', `public/${dirPath}`)
+    const filename = 'colissimo_' + new Date().getTime() + '.pdf';
+    await fs.mkdirSync(relativeDirPath, { recursive: true })
+    const options = {
+      format: 'A4',
+      path: relativeDirPath + '/' + filename,
+      margin: {
+        top: "10px",
+        bottom: "15px",
+      }
+    };
+    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
+    const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
+    let gridItems = ""
+    orders.forEach((order, index) => {
+      gridItems = gridItems + (`
+                          ${index%16 === 0 ? `<div style="height: ${index !== 0 ? "250px" : "0px"}"></div><div style="height: ${index !== 0 ? "250px" : "0px"}"></div>` : ""}
+                          <div style="${gridItemStyle}">
+                            <p>${order.name}</p>
+                            <p>${order.address}</p>
+                            <p>${order.phone}</p>
+                         </div>
+                         `)
+
+      return(gridItems)
+    })
+    const skeleton = `<div style="${skeletonStyle}">
+                  ${gridItems}
+                </div>`
+
+    const file = {
+      content: skeleton
+    }
+    const pdf = await html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+    });
+     return process.env.DOMAIN_API + dirPath + filename
   }
 };

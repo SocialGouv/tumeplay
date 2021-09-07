@@ -49,6 +49,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/colissimo/generate-pdf",
+      "handler": "commande.createColissimo",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/commandes/:id",
       "handler": "commande.update",

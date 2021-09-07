@@ -14,6 +14,7 @@
   "devDependencies": {},
   "dependencies": {
     "csv-writer": "^1.6.0",
+    "html-pdf-node": "^1.0.7",
     "knex": "0.21.18",
     "md5": "^2.3.0",
     "pdf-merger-js": "^3.2.1",
