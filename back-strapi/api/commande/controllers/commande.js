@@ -107,7 +107,7 @@ const buildMrParams = (order) => {
   return mrParams
 }
 
-const colissimoTmpPdf = async (orders) => {
+const colissimoTmpPdf = async (orders, promises) => {
   strapi.log.info('BEGIN')
   let remainingOrders;
   let count;
@@ -147,14 +147,19 @@ const colissimoTmpPdf = async (orders) => {
     const file = {
       content: skeleton
     }
-    const pdf = html_to_pdf.generatePdf(file, options)
-    strapi.log.info("PDF", pdf)
-    // return process.env.DOMAIN_API + dirPath + filename
+    promises.push(
+			new Promise((resolve) => {
+				html_to_pdf.generatePdf(file, options).then(() => {
+					resolve();
+				})
+			})
+		)
   };
   if(remainingOrders.length > 0) {
-    colissimoTmpPdf(remainingOrders)
+    colissimoTmpPdf(remainingOrders, promises)
   }
-  strapi.log.info('TMP CREATION')
+	
+	return Promise.all(promises)
 }
 const countTmpFolderColissimo = async () => {
   const dirPath = 'uploads/orders/colissimo/tmp'
@@ -320,13 +325,13 @@ module.exports = {
     const ids = ctx.request.body.ids;
     let orders = await strapi.query('commande').find({id_in: ids})
     orders = orders.concat(orders)
-    colissimoTmpPdf(orders)
-    strapi.log.info('TMP CREATION END')
+    colissimoTmpPdf(orders, []).then(() => {
+			strapi.log.info('TMP CREATION END')
 
-    let count = countTmpFolderColissimo()
-    strapi.log.info("COUNT", count)
-    const merger = new PDFMerger();
-
+			// let count = countTmpFolderColissimo()
+			// strapi.log.info("COUNT", count)
+			// const merger = new PDFMerger();
+		})
     // merger.add(path.relative('.', '' ))
   //    return process.env.DOMAIN_API + dirPath + filename
   }
