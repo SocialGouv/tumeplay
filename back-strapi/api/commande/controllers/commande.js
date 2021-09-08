@@ -107,6 +107,64 @@ const buildMrParams = (order) => {
   return mrParams
 }
 
+const colissimoTmpPdf = async (orders) => {
+  strapi.log.info('BEGIN')
+  let remainingOrders;
+  let count;
+  if (orders.length > 0) {
+    let first16orders = orders.slice(0, 16)
+    remainingOrders = orders.slice(16, orders.length)
+    const dirPath = 'uploads/orders/colissimo/tmp'
+    const relativeDirPath = path.relative('.', `public/${dirPath}`)
+    const filename = 'colissimo_' + new Date().getTime() + '.pdf';
+    await fs.mkdirSync(relativeDirPath, { recursive: true })
+    const options = {
+      format: 'A4',
+      path: relativeDirPath + '/' + filename,
+      margin: {
+        top: "10px",
+        bottom: "15px",
+      }
+    };
+    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
+    const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
+    let gridItems = ""
+    first16orders.forEach((order, index) => {
+      gridItems = gridItems + (`
+                          <div style="${gridItemStyle}">
+                            <p>${order.name}</p>
+                            <p>${order.address}</p>
+                            <p>${order.phone}</p>
+                         </div>
+                         `)
+
+      return(gridItems)
+    })
+    const skeleton = `<div style="${skeletonStyle}">
+                  ${gridItems}
+                </div>`
+
+    const file = {
+      content: skeleton
+    }
+    const pdf = html_to_pdf.generatePdf(file, options)
+    strapi.log.info("PDF", pdf)
+    // return process.env.DOMAIN_API + dirPath + filename
+  };
+  if(remainingOrders.length > 0) {
+    colissimoTmpPdf(remainingOrders)
+  }
+  strapi.log.info('TMP CREATION')
+}
+const countTmpFolderColissimo = async () => {
+  const dirPath = 'uploads/orders/colissimo/tmp'
+  const relativeDirPath = path.relative('.', `public/${dirPath}`)
+  const count = await fs.readdir(relativeDirPath, (err, files) => {
+    return (files.length)
+  })
+ return(count)
+}
+
 module.exports = {
   async create(ctx) {
     let entity;
@@ -262,44 +320,14 @@ module.exports = {
     const ids = ctx.request.body.ids;
     let orders = await strapi.query('commande').find({id_in: ids})
     orders = orders.concat(orders)
-    orders = orders.concat(orders)
-    orders = orders.concat(orders)
-    const dirPath = 'uploads/orders/colissimo/'
-    const relativeDirPath = path.relative('.', `public/${dirPath}`)
-    const filename = 'colissimo_' + new Date().getTime() + '.pdf';
-    await fs.mkdirSync(relativeDirPath, { recursive: true })
-    const options = {
-      format: 'A4',
-      path: relativeDirPath + '/' + filename,
-      margin: {
-        top: "10px",
-        bottom: "15px",
-      }
-    };
-    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
-    const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
-    let gridItems = ""
-    orders.forEach((order, index) => {
-      gridItems = gridItems + (`
-                          ${index%16 === 0 ? `<div style="height: ${index !== 0 ? "250px" : "0px"}"></div><div style="height: ${index !== 0 ? "250px" : "0px"}"></div>` : ""}
-                          <div style="${gridItemStyle}">
-                            <p>${order.name}</p>
-                            <p>${order.address}</p>
-                            <p>${order.phone}</p>
-                         </div>
-                         `)
+    colissimoTmpPdf(orders)
+    strapi.log.info('TMP CREATION END')
 
-      return(gridItems)
-    })
-    const skeleton = `<div style="${skeletonStyle}">
-                  ${gridItems}
-                </div>`
+    let count = countTmpFolderColissimo()
+    strapi.log.info("COUNT", count)
+    const merger = new PDFMerger();
 
-    const file = {
-      content: skeleton
-    }
-    const pdf = await html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-    });
-     return process.env.DOMAIN_API + dirPath + filename
+    // merger.add(path.relative('.', '' ))
+  //    return process.env.DOMAIN_API + dirPath + filename
   }
 };
