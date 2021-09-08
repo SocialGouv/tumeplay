@@ -6,7 +6,7 @@ import RoutesWithLayout from '../RoutesWithLayout'
 const PrivateRoute = (props) => {
   const context = useContext(AppContext)
   const isAuthenticated = context.isAuthenticated
-  if(!isAuthenticated) {return <Redirect to='/Login' />}
+  if(!isAuthenticated) {return <Redirect to='/login' />}
   else{
     return(
       <RoutesWithLayout {...props} />
