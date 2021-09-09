@@ -434,7 +434,7 @@ jobs:
   deploy-production:
     name: Deploy production
     runs-on: ubuntu-latest
-    needs: manifests-production
+    needs: [deploy-preproduction, manifests-production]
     environment:
       name: production
       url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
