@@ -320,15 +320,18 @@ module.exports = {
     const merge_pdf_path = 'uploads/orders/colissimo/merged_colissimo_' + new Date().getTime() + '.pdf';
     const dirPath = 'uploads/orders/colissimo/tmp'
     const relativeDirPath = path.relative('.', `public/${dirPath}`)
-    colissimoTmpPdf(orders, []).then(async () => {
-      fs.readdir(relativeDirPath, async (err, files) => {
-        files.forEach(file => {
-          merger.add(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
-        })
-        const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
-        await merger.save(merge_pdf_save_path);
-        files.forEach(file => {
-          fs.unlinkSync(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+    await new Promise((resolve) => {
+      colissimoTmpPdf(orders, []).then(async () => {
+        fs.readdir(relativeDirPath, async (err, files) => {
+          files.forEach(file => {
+            merger.add(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+          })
+          const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+          await merger.save(merge_pdf_save_path);
+          files.forEach(file => {
+            fs.unlinkSync(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+          })
+          resolve();
         })
       })
     })

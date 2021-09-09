@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TableRow from './ui/TableRow';
 
-const Table = ({items, titles, numberPerPage, handleSelection}) => {
+const Table = ({items, titles, numberPerPage, handleSpecificSelection, handleSelectAll}) => {
 
   const titlesToDisplay = titles.map((title,index) => {
     return(
@@ -17,13 +17,13 @@ const Table = ({items, titles, numberPerPage, handleSelection}) => {
             <thead>
               <tr>
                 <th className="px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-700">
-                  <input type='checkbox' />
+                  <input type='checkbox' id="all" onClick={(e) =>{handleSelectAll(e)}}/>
                 </th>
                 {titlesToDisplay}
               </tr>
             </thead>
             <tbody>
-              <TableRow items={items} numberPerPage={numberPerPage} handleSelection={handleSelection} />
+              <TableRow items={items} numberPerPage={numberPerPage} handleSpecificSelection={handleSpecificSelection} />
             </tbody>
           </table>
       </div>

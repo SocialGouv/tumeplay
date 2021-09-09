@@ -4,15 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import chronoLogo from "../../assets/pictures/Apps-Colissimo.jpeg"
 import mondialRelay from "../../assets/pictures/mondial-relay.jpeg"
 
-const TableRow = ({ items, handleSelection }) => {
+const TableRow = ({ items, handleSpecificSelection }) => {
 
   const linesToDisplay = items.map((item) => {
-    item.printed = true;
-    item.selected = false;
     return(
       <tr key={item.id} className="text-center">
         <td>
-          <input type='checkbox' id={item.id} value={item.selected} onClick={(e) => {handleSelection(e)}} />
+          <input type='checkbox' id={item.id} value={item.selected} checked={item.selected} onChange={(e) => {handleSpecificSelection(e)}} />
         </td>
         <td className="tmp-table-td">{item.id}</td>
         <td className="tmp-table-td">{new Date(item.created_at).toLocaleDateString()}</td>

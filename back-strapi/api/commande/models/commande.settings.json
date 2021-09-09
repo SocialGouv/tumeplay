@@ -81,6 +81,9 @@
       "type": "boolean",
       "default": false,
       "private": false
+    },
+    "date_sent": {
+      "type": "datetime"
     }
   }
 }

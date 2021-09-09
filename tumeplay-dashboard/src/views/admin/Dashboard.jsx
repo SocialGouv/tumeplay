@@ -13,8 +13,6 @@ import Dropdown from "react-dropdown";
 
 const Dashboard = () => {
 
-  var fs = require('fs')
-
   const history = useHistory();
 
   const context = useContext(AppContext)
@@ -42,7 +40,11 @@ const Dashboard = () => {
 
   const retrieveOrders = async () => {
     let response = await OrdersAPI.getOrders(token)
-    setFullOrders(response.data)
+    let orders = response.data
+    orders.map(order => {
+      order.selected = false
+    })
+    setFullOrders(orders)
   }
 
   const handleChangeTab = (event, box_number) => {
@@ -51,12 +53,24 @@ const Dashboard = () => {
     history.push(`/orders/box/${box_number}`)
   }
 
-  const handleSelection = (e) => {
+  const handleSelectAll = (e) => {
+    if(e.target.checked) {
+      filteredorders.forEach(order => order.selected = e.target.checked)
+      setTmpSelectedItems([...filteredorders])
+    } else {
+       filteredorders.forEach(order => order.selected = e.target.checked)
+      setTmpSelectedItems([])
+    }
+  }
+
+  const handleSpecificSelection = (e) => {
     let order = filteredorders.find(order => order.id === parseInt(e.target.id))
     if(e.target.checked) {
+      order.selected = e.target.checked
       tmpSelectedItems.push(order)
       setTmpSelectedItems([...tmpSelectedItems])
     } else {
+      order.selected = false
       let array = tmpSelectedItems.filter(item => item.id !== order.id);
       setTmpSelectedItems([...array])
     }
@@ -70,9 +84,7 @@ const Dashboard = () => {
     a.href = response.data
     a.target= '_blank'
     a.setAttribute("download", 'Colissimo')
-    setTimeout(() => {
-      a.click()
-    }, 1000);
+    a.click()
     document.body.removeChild(a)
   }
 
@@ -111,6 +123,7 @@ const Dashboard = () => {
 
 
   const handleChangeNumPerPage = (e) => {
+    setTmpSelectedItems([])
     setNumberPerPage(parseInt(e.value))
   }
 
@@ -133,6 +146,7 @@ const Dashboard = () => {
     const offset = (currentPage - 1) * numberPerPage;
     let tmpFiltered = filteredorders.slice(offset, offset + numberPerPage)
     setPageItems([...tmpFiltered])
+    setTmpSelectedItems([])
   }, [filteredorders, currentPage, numberPerPage])
 
   const renderTabs = boxes.map((box) => {
@@ -180,7 +194,11 @@ const Dashboard = () => {
         <div className="tmp-dropdown-container" >
           <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
         </div>
-        <Table items={pageItems} titles={tabletitles} numberPerPage={numberPerPage} handleSelection={handleSelection}  />
+        <Table items={pageItems}
+               titles={tabletitles}
+               numberPerPage={numberPerPage}
+               handleSpecificSelection={handleSpecificSelection}
+               handleSelectAll={handleSelectAll}  />
         <div className="tmp-bottom-buttons-container">
           <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
             <FontAwesomeIcon icon={faPrint} color="white" />
