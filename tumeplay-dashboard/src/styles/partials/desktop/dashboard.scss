@@ -29,6 +29,18 @@ html {
         }
       }
     }
+    .tmp-switch-container {
+      @apply absolute -my-11 right-32;
+      .tmp-switch-label {
+        @apply flex align-middle my-2 text-sm italic text-lightBlue-900;
+        p {
+          @apply mr-3 self-center;
+        }
+        .tmp-switch-input{
+          @apply self-center mb-1.5;
+        }
+      }
+    }
     .tmp-dropdown-container {
       @apply absolute -my-11 right-5;
       .tmp-dropdown {
