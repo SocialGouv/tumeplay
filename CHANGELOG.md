@@ -1,3 +1,15 @@
+# [1.9.0](https://github.com/SocialGouv/Tumeplay/compare/v1.8.2...v1.9.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* date-range selector not fetching good data ([109dee0](https://github.com/SocialGouv/Tumeplay/commit/109dee0a885a9c5086dd9f185ff74e1c52cad098))
+
+
+### Features
+
+* add occurences to flop10 & top10 questions ([e561a79](https://github.com/SocialGouv/Tumeplay/commit/e561a798b9dbec6efa0476c01cf7ffc8d6867ca1))
+
 ## [1.8.2](https://github.com/SocialGouv/Tumeplay/compare/v1.8.1...v1.8.2) (2021-09-07)
 
 
