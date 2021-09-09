@@ -68,10 +68,11 @@ const Dashboard = () => {
     a.style.display = "none";
     document.body.appendChild(a);
     a.href = response.data
-    a.id = "#Coli"
     a.target= '_blank'
     a.setAttribute("download", 'Colissimo')
-    a.click()
+    setTimeout(() => {
+      a.click()
+    }, 1000);
     document.body.removeChild(a)
   }
 
@@ -81,7 +82,6 @@ const Dashboard = () => {
     a.style.display = "none";
     document.body.appendChild(a);
     a.href = response.data
-    a.id = "#MR"
     a.target= '_blank'
     a.setAttribute("download", 'Mondial Relay')
     a.click()
