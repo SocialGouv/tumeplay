@@ -1,3 +1,10 @@
+## [1.8.3-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.8.3-alpha.1...v1.8.3-alpha.2) (2021-09-09)
+
+
+### Bug Fixes
+
+* Use SocialGouv actions within production workflow. ([59789df](https://github.com/SocialGouv/Tumeplay/commit/59789df5fcc6fcd92ef21fa3ef2a03ed2d45d6e2))
+
 ## [1.8.3-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.8.2...v1.8.3-alpha.1) (2021-09-09)
 
 
