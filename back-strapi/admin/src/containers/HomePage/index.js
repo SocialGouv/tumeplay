@@ -8,7 +8,7 @@ import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Cell, XAxis, YAxis
 import { request } from 'strapi-helper-plugin';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { addDays } from 'date-fns';
+import { subDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
 
 function getRandomColor() {
@@ -63,7 +63,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 	const default_range_date = {
 		startDate: new Date(),
-		endDate: addDays(new Date(), 7),
+		endDate: subDays(new Date(), 7),
 		key: 'selection'
 	}
 	const null_range_date = {
@@ -92,8 +92,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
   const fetchStocks = async () => {
 		const data = await request('/boxes', {
-			method: 'GET',
-			params: default_params.created_at_gte ? default_params : {}
+			method: 'GET'
 		});
 		setBoxes(
 			orderBy(
@@ -117,7 +116,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	const fetchResponses = async () => {
 		const themes = await request('/thematiques', {
 			method: 'GET',
-			params: default_params.created_at_gte ? Object.assign({'display_quiz': true}, default_params) : {'display_quiz': true}
+			params: {'display_quiz': true}
 		});
 
 		const count = await request('/reponses/count', {
@@ -190,18 +189,19 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 			return {
 				question: key,
+				occurences: value.length,
 				percentageRightAnswers: countRightAnswers / (countRightAnswers + countBadAnswers) * 100
 			}
 		});
 
 		setTop10QuestionsMetropole(orderedQuestionsMetropole
-			.orderBy(['percentageRightAnswers', 'question'], ['desc', 'asc'])
+			.orderBy(['percentageRightAnswers', 'occurences', 'question'], ['desc', 'desc', 'asc'])
 			.splice(0, 9)
 			.value()
 		)
 
 		setFlop10QuestionsMetropole(orderedQuestionsMetropole
-			.orderBy(['percentageRightAnswers', 'question'], ['asc', 'asc'])
+			.orderBy(['percentageRightAnswers', 'occurences', 'question'], ['asc', 'desc', 'asc'])
 			.splice(0, 9)
 			.value()
 		)
@@ -226,6 +226,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 			return {
 				question: key,
+				occurences: value.length,
 				percentageRightAnswers: countRightAnswers / (countRightAnswers + countBadAnswers) * 100
 			}
 		});
@@ -429,9 +430,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
   const username = get(auth.getUserInfo(), 'firstname', '');
 
 	const formatDate = (date) => {
-		const day = date.getUTCDate();
-		const month = date.getUTCMonth() + 1;
-		const year = date.getUTCFullYear();
+		const day = date.getDate();
+		const month = date.getMonth() + 1;
+		const year = date.getFullYear();
 
 		return (day.toString().length < 2 ? '0' + day : day) + '/' + (month.toString().length < 2 ? '0' + month : month) + '/' + year;
 	}
@@ -718,6 +719,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<div className="simple-table-col question-average">
 											<b>%</b>
 										</div>
+										<div className="simple-table-col question-occurences">
+											<b>Nb</b>
+										</div>
 									</div>
 									{
 										(switchZoneTop10Questions === 'metropole' ? top10QuestionsMetropole : top10QuestionsGuyane).map((q) => {
@@ -728,6 +732,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 													</div>
 													<div className="simple-table-col question-average">
 														{q.percentageRightAnswers.toFixed(2)}
+													</div>
+													<div className="simple-table-col question-occurences">
+														{q.occurences}
 													</div>
 												</div>
 											)
@@ -750,6 +757,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<div className="simple-table-col question-average">
 											<b>%</b>
 										</div>
+										<div className="simple-table-col question-occurences">
+											<b>Nb</b>
+										</div>
 									</div>
 									{
 										(switchZoneFlop10Questions === 'metropole' ? flop10QuestionsMetropole : flop10QuestionsGuyane).map((q) => {
@@ -760,6 +770,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 													</div>
 													<div className="simple-table-col question-average">
 														{q.percentageRightAnswers.toFixed(2)}
+													</div>
+													<div className="simple-table-col question-occurences">
+														{q.occurences}
 													</div>
 												</div>
 											)
