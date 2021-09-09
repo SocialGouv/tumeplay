@@ -189,18 +189,19 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 			return {
 				question: key,
+				occurences: value.length,
 				percentageRightAnswers: countRightAnswers / (countRightAnswers + countBadAnswers) * 100
 			}
 		});
 
 		setTop10QuestionsMetropole(orderedQuestionsMetropole
-			.orderBy(['percentageRightAnswers', 'question'], ['desc', 'asc'])
+			.orderBy(['percentageRightAnswers', 'occurences', 'question'], ['desc', 'desc', 'asc'])
 			.splice(0, 9)
 			.value()
 		)
 
 		setFlop10QuestionsMetropole(orderedQuestionsMetropole
-			.orderBy(['percentageRightAnswers', 'question'], ['asc', 'asc'])
+			.orderBy(['percentageRightAnswers', 'occurences', 'question'], ['asc', 'desc', 'asc'])
 			.splice(0, 9)
 			.value()
 		)
@@ -225,6 +226,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 			return {
 				question: key,
+				occurences: value.length,
 				percentageRightAnswers: countRightAnswers / (countRightAnswers + countBadAnswers) * 100
 			}
 		});
@@ -717,6 +719,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<div className="simple-table-col question-average">
 											<b>%</b>
 										</div>
+										<div className="simple-table-col question-occurences">
+											<b>Nb</b>
+										</div>
 									</div>
 									{
 										(switchZoneTop10Questions === 'metropole' ? top10QuestionsMetropole : top10QuestionsGuyane).map((q) => {
@@ -727,6 +732,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 													</div>
 													<div className="simple-table-col question-average">
 														{q.percentageRightAnswers.toFixed(2)}
+													</div>
+													<div className="simple-table-col question-occurences">
+														{q.occurences}
 													</div>
 												</div>
 											)
@@ -749,6 +757,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 										<div className="simple-table-col question-average">
 											<b>%</b>
 										</div>
+										<div className="simple-table-col question-occurences">
+											<b>Nb</b>
+										</div>
 									</div>
 									{
 										(switchZoneFlop10Questions === 'metropole' ? flop10QuestionsMetropole : flop10QuestionsGuyane).map((q) => {
@@ -759,6 +770,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 													</div>
 													<div className="simple-table-col question-average">
 														{q.percentageRightAnswers.toFixed(2)}
+													</div>
+													<div className="simple-table-col question-occurences">
+														{q.occurences}
 													</div>
 												</div>
 											)
