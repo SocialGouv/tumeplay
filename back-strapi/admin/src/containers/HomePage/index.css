@@ -76,10 +76,15 @@ h1 div::before {
 }
 
 .simple-table .simple-table-row .simple-table-col.question-text {
-	width: 90%;
+	width: 80%;
 }
 
 .simple-table .simple-table-row .simple-table-col.question-average {
+	width: 10%;
+	text-align: center;
+}
+
+.simple-table .simple-table-row .simple-table-col.question-occurences {
 	width: 10%;
 	text-align: center;
 }
