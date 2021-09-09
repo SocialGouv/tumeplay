@@ -8,7 +8,7 @@ import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Cell, XAxis, YAxis
 import { request } from 'strapi-helper-plugin';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { addDays } from 'date-fns';
+import { subDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
 
 function getRandomColor() {
@@ -63,7 +63,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
 	const default_range_date = {
 		startDate: new Date(),
-		endDate: addDays(new Date(), 7),
+		endDate: subDays(new Date(), 7),
 		key: 'selection'
 	}
 	const null_range_date = {
@@ -92,8 +92,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
   const fetchStocks = async () => {
 		const data = await request('/boxes', {
-			method: 'GET',
-			params: default_params.created_at_gte ? default_params : {}
+			method: 'GET'
 		});
 		setBoxes(
 			orderBy(
@@ -117,7 +116,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 	const fetchResponses = async () => {
 		const themes = await request('/thematiques', {
 			method: 'GET',
-			params: default_params.created_at_gte ? Object.assign({'display_quiz': true}, default_params) : {'display_quiz': true}
+			params: {'display_quiz': true}
 		});
 
 		const count = await request('/reponses/count', {
@@ -429,9 +428,9 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
   const username = get(auth.getUserInfo(), 'firstname', '');
 
 	const formatDate = (date) => {
-		const day = date.getUTCDate();
-		const month = date.getUTCMonth() + 1;
-		const year = date.getUTCFullYear();
+		const day = date.getDate();
+		const month = date.getMonth() + 1;
+		const year = date.getFullYear();
 
 		return (day.toString().length < 2 ? '0' + day : day) + '/' + (month.toString().length < 2 ? '0' + month : month) + '/' + year;
 	}
