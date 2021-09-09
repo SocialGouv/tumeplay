@@ -1,3 +1,10 @@
+## [1.8.3-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.8.3-alpha.2...v1.8.3-alpha.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* Add prod deployment constrains. ([ecae0bc](https://github.com/SocialGouv/Tumeplay/commit/ecae0bc4bdf5bf5adb677d4c1446c5b7675b6de6))
+
 ## [1.8.3-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.8.3-alpha.1...v1.8.3-alpha.2) (2021-09-09)
 
 
