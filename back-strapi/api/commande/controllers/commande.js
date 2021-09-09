@@ -322,17 +322,13 @@ module.exports = {
     colissimoTmpPdf(orders, []).then(async () => {
       const dirPath = 'uploads/orders/colissimo/tmp'
       const relativeDirPath = path.relative('.', `public/${dirPath}`)
-      fs.readdir(relativeDirPath, (err, files) => {
-        strapi.log.info('ENTER READDIR')
-        files.forEach(file => {
-          strapi.log.info('ENTER FOREACH')
+      fs.readdir(relativeDirPath, async (err, files) => {
+        files.map(file => {
           merger.add(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
-          strapi.log.info('AFTER MERGER')
         })
-        strapi.log.info('EXIT FOR EACH')
+        const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+        await merger.save(merge_pdf_save_path);
       })
-      const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
-      await merger.save(merge_pdf_save_path);
     })
     return process.env.DOMAIN_API + merge_pdf_path
   }
