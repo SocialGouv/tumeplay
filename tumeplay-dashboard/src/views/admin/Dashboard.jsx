@@ -9,6 +9,7 @@ import "react-pagination-js/dist/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from "react-dropdown";
+import Switch from 'react-switch'
 
 
 const Dashboard = () => {
@@ -17,6 +18,7 @@ const Dashboard = () => {
 
   const context = useContext(AppContext)
   const token = context.token
+  const [viewAll, setViewAll] = useState(false)
   const [boxes, setBoxes] = useState([])
   const [fullOrders, setFullOrders] = useState([])
   const [filteredorders, setFilteredOrders] = useState([])
@@ -38,8 +40,8 @@ const Dashboard = () => {
     setFilteredOrders(tmpFilterOrders)
   }
 
-  const retrieveOrders = async () => {
-    let response = await OrdersAPI.getOrders(token)
+  const retrieveOrders = async (params) => {
+    let response = await OrdersAPI.getOrders(token, params)
     let orders = response.data
     orders.map(order => {
       order.selected = false
@@ -117,10 +119,27 @@ const Dashboard = () => {
     }
   }
 
-  const handleSendClick = (e) => {
-    //CALL API TO SEND ORDER
+  const handleSendClick = async (e) => {
+    e.preventDefault()
+    let ordersToSend = tmpSelectedItems.map(item => {
+      item.sent = true;
+      item.date_sent = new Date().getTime()
+      return item
+    })
+    console.log(ordersToSend)
   }
 
+  const displayAllOrders = () => {
+    setViewAll(!viewAll)
+  }
+
+  useEffect(() => {
+    if (viewAll === true) {
+      retrieveOrders(' ')
+    } else {
+      retrieveOrders('&sent_ne=true')
+    }
+  }, [viewAll])
 
   const handleChangeNumPerPage = (e) => {
     setTmpSelectedItems([])
@@ -129,7 +148,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     retrieveBoxes()
-    retrieveOrders()
+    retrieveOrders('&sent_ne=true')
     setOpenTab(1)
    }, [])
 
@@ -175,7 +194,7 @@ const Dashboard = () => {
     )
   })
 
-  const tabletitles = ["ID", "Date", "Transporteur", "Statut Envoi"]
+  const tabletitles = ["ID", "Date", "Transporteur", "Statut Traitement"]
   const dropdownOptions = ['5', '10', '50', '100', {value: filteredorders.length, label: 'Tout'}]
 
   return(
@@ -190,6 +209,19 @@ const Dashboard = () => {
             <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
             <FontAwesomeIcon icon={faPaperPlane} color="white" />
           </button>
+        </div>
+        <div className='tmp-switch-container'>
+          <label className='tmp-switch-label'>
+            <p>Voir toutes les commandes</p>
+            <Switch className='tmp-switch-input'
+                    width={35}
+                    height={16}
+                    handleDiameter={12}
+                    checkedIcon={false}
+                    uncheckedIcon	={false}
+                    checked={viewAll}
+                    onChange={displayAllOrders} />
+          </label>
         </div>
         <div className="tmp-dropdown-container" >
           <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
