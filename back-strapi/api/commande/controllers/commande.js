@@ -158,16 +158,8 @@ const colissimoTmpPdf = async (orders, promises) => {
   if(remainingOrders.length > 0) {
     colissimoTmpPdf(remainingOrders, promises)
   }
-	
+
 	return Promise.all(promises)
-}
-const countTmpFolderColissimo = async () => {
-  const dirPath = 'uploads/orders/colissimo/tmp'
-  const relativeDirPath = path.relative('.', `public/${dirPath}`)
-  const count = await fs.readdir(relativeDirPath, (err, files) => {
-    return (files.length)
-  })
- return(count)
 }
 
 module.exports = {
@@ -325,14 +317,23 @@ module.exports = {
     const ids = ctx.request.body.ids;
     let orders = await strapi.query('commande').find({id_in: ids})
     orders = orders.concat(orders)
-    colissimoTmpPdf(orders, []).then(() => {
-			strapi.log.info('TMP CREATION END')
-
-			// let count = countTmpFolderColissimo()
-			// strapi.log.info("COUNT", count)
-			// const merger = new PDFMerger();
-		})
-    // merger.add(path.relative('.', '' ))
-  //    return process.env.DOMAIN_API + dirPath + filename
+    const merger = new PDFMerger();
+    const merge_pdf_path = 'uploads/orders/colissimo/merged_colissimo_' + new Date().getTime() + '.pdf';
+    colissimoTmpPdf(orders, []).then(async () => {
+      const dirPath = 'uploads/orders/colissimo/tmp'
+      const relativeDirPath = path.relative('.', `public/${dirPath}`)
+      fs.readdir(relativeDirPath, (err, files) => {
+        strapi.log.info('ENTER READDIR')
+        files.forEach(file => {
+          strapi.log.info('ENTER FOREACH')
+          merger.add(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+          strapi.log.info('AFTER MERGER')
+        })
+        strapi.log.info('EXIT FOR EACH')
+      })
+      const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+      await merger.save(merge_pdf_save_path);
+    })
+    return process.env.DOMAIN_API + merge_pdf_path
   }
 };
