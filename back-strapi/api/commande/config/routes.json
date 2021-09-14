@@ -65,6 +65,14 @@
       }
     },
     {
+      "method": "PUT",
+      "path": "/commandes/bulk/",
+      "handler": "commande.buckUpdate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "DELETE",
       "path": "/commandes/:id",
       "handler": "commande.delete",

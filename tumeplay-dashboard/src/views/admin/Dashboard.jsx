@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [pageItems, setPageItems] = useState([])
   const [openTab, setOpenTab] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [numberPerPage, setNumberPerPage] = useState(5)
+  const [numberPerPage, setNumberPerPage] = useState(10)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
 
   const retrieveBoxes = async () => {
@@ -126,7 +126,7 @@ const Dashboard = () => {
       item.date_sent = new Date().getTime()
       return item
     })
-    console.log(ordersToSend)
+    await OrdersAPI.setOrdersToSent(token, ordersToSend)
   }
 
   const displayAllOrders = () => {

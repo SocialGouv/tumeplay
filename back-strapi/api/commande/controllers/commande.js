@@ -10,6 +10,7 @@ const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
 const PDFMerger = require('pdf-merger-js');
 const axios = require("axios")
 const html_to_pdf = require('html-pdf-node');
+const { sanitizeEntity } = require('strapi-utils')
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -336,5 +337,16 @@ module.exports = {
       })
     })
     return process.env.DOMAIN_API + merge_pdf_path
+  },
+  async buckUpdate(ctx) {
+    const body = ctx.request.body
+    if(body) {
+      await Promise.all(
+        body.orders.map(async order => {
+          strapi.services.commande.update({ id: order.id }, order )
+        })
+      );
+    }
+    return body.orders.map(o => o.id)
   }
 };

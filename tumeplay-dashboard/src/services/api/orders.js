@@ -21,7 +21,12 @@ const OrdersAPI = {
     return axios.post(`${URL}/colissimo/generate-pdf`, {ids: ids}, {headers: {
       Authorization: `Bearer ${token}`
     }});
-  }
+  },
+  setOrdersToSent: (token, orders) => {
+    return axios.put(`${URL}/orders/bulks`, {orders: orders}, {headers: {
+      Authorization: `Bearer ${token}`
+    }});
+  },
 }
 
 export default OrdersAPI;
