@@ -66,8 +66,8 @@
     },
     {
       "method": "PUT",
-      "path": "/commandes/bulk/",
-      "handler": "commande.buckUpdate",
+      "path": "/commandes/update/multiple",
+      "handler": "commande.bulkUpdate",
       "config": {
         "policies": []
       }

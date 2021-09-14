@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from "react-dropdown";
 import Switch from 'react-switch'
+import ConfirmModal from '../../components/ui/ConfirmModal';
 
 
 const Dashboard = () => {
@@ -27,6 +28,7 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [numberPerPage, setNumberPerPage] = useState(10)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
+  const [show, setShow] = useState(false)
 
   const retrieveBoxes = async () => {
     let response = await getAllBoxes(token)
@@ -126,7 +128,10 @@ const Dashboard = () => {
       item.date_sent = new Date().getTime()
       return item
     })
-    await OrdersAPI.setOrdersToSent(token, ordersToSend)
+    const res = await OrdersAPI.setOrdersToSent(token, ordersToSend)
+    if (res.status === 200) {
+      setShow(true)
+    }
   }
 
   const displayAllOrders = () => {
@@ -139,7 +144,7 @@ const Dashboard = () => {
     } else {
       retrieveOrders('&sent_ne=true')
     }
-  }, [viewAll])
+  }, [viewAll, show === false])
 
   const handleChangeNumPerPage = (e) => {
     setTmpSelectedItems([])
@@ -198,58 +203,69 @@ const Dashboard = () => {
   const dropdownOptions = ['5', '10', '50', '100', {value: filteredorders.length, label: 'Tout'}]
 
   return(
-     <div className="container mt-10 px-4 mx-auto relative">
-        <div className="tmp-tabs-container">
-          {renderTabs}
-        </div>
-        <div className="tmp-top-buttons-container">
-          <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
-            <FontAwesomeIcon icon={faPrint} color="white" />
-          </button>
-            <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
-            <FontAwesomeIcon icon={faPaperPlane} color="white" />
-          </button>
-        </div>
-        <div className='tmp-switch-container'>
-          <label className='tmp-switch-label'>
-            <p>Voir toutes les commandes</p>
-            <Switch className='tmp-switch-input'
-                    width={35}
-                    height={16}
-                    handleDiameter={12}
-                    checkedIcon={false}
-                    uncheckedIcon	={false}
-                    checked={viewAll}
-                    onChange={displayAllOrders} />
-          </label>
-        </div>
-        <div className="tmp-dropdown-container" >
-          <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
-        </div>
-        <Table items={pageItems}
-               titles={tabletitles}
-               numberPerPage={numberPerPage}
-               handleSpecificSelection={handleSpecificSelection}
-               handleSelectAll={handleSelectAll}  />
-        <div className="tmp-bottom-buttons-container">
-          <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
-            <FontAwesomeIcon icon={faPrint} color="white" />
-          </button>
-            <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
-            <FontAwesomeIcon icon={faPaperPlane} color="white" />
-          </button>
-        </div>
-        <div className="tmp-pagination-container">
-          <Pagination
-            currentPage={currentPage}
-            totalSize={filteredorders.length}
-            sizePerPage={numberPerPage}
-            numberOfPagesNextToActivePage={3}
-            changeCurrentPage={(event) => onPageChange(event)}
-            theme="border-bottom"
-          />
-        </div>
+  <>
+    <div className="container mt-10 px-4 mx-auto relative z-10">
+      <div className={`fixed ${show ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+          id="my-modal"
+      >
+        {show ?
+          <ConfirmModal setShow={setShow} />
+          :
+          <></>
+        }
       </div>
+      <div className="tmp-tabs-container">
+        {renderTabs}
+      </div>
+      <div className="tmp-top-buttons-container">
+        <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
+          <FontAwesomeIcon icon={faPrint} color="white" />
+        </button>
+          <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
+          <FontAwesomeIcon icon={faPaperPlane} color="white" />
+        </button>
+      </div>
+      <div className='tmp-switch-container'>
+        <label className='tmp-switch-label'>
+          <p>Voir toutes les commandes</p>
+          <Switch className='tmp-switch-input'
+                  width={35}
+                  height={16}
+                  handleDiameter={12}
+                  checkedIcon={false}
+                  uncheckedIcon	={false}
+                  checked={viewAll}
+                  onChange={displayAllOrders} />
+        </label>
+      </div>
+      <div className="tmp-dropdown-container" >
+        <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
+      </div>
+      <Table items={pageItems}
+              titles={tabletitles}
+              numberPerPage={numberPerPage}
+              handleSpecificSelection={handleSpecificSelection}
+              handleSelectAll={handleSelectAll}  />
+      <div className="tmp-bottom-buttons-container">
+        <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
+          <FontAwesomeIcon icon={faPrint} color="white" />
+        </button>
+          <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
+          <FontAwesomeIcon icon={faPaperPlane} color="white" />
+        </button>
+      </div>
+      <div className="tmp-pagination-container">
+        <Pagination
+          currentPage={currentPage}
+          totalSize={filteredorders.length}
+          sizePerPage={numberPerPage}
+          numberOfPagesNextToActivePage={3}
+          changeCurrentPage={(event) => onPageChange(event)}
+          theme="border-bottom"
+        />
+      </div>
+    </div>
+  </>
   )
 }
 
