@@ -1,3 +1,10 @@
+## [1.9.1-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.9.1-alpha.1...v1.9.1-alpha.2) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** upgrade kosko for cert-manager annotations ([2aa20a0](https://github.com/SocialGouv/Tumeplay/commit/2aa20a02fcb86e523d5f4b853e2b50ae1a6b33e9))
+
 ## [1.9.1-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.9.0...v1.9.1-alpha.1) (2021-09-09)
 
 
