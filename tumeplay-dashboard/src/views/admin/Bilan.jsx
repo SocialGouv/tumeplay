@@ -9,9 +9,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Bilan = () => {
 
-  // 1. Retrieve les orders traitées par jour sent===true et date_sent === currentDate
-  // 2. Mettre en place un date picker
-  // 3. Update la table en fonction de la date selectionnée
+  // 1. Retrieve les orders traitées par jour sent===true et date_sent === currentDate OK
+  // 2. Mettre en place un date picker OK
+  // 3. Update la table en fonction de la date selectionnée OK
   // 4. Bouton pour générer un CSV ou PDF à la volée
 
   const [dailyOrders, setDailyOrders] = useState([])

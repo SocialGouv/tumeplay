@@ -125,7 +125,7 @@ const Dashboard = () => {
     e.preventDefault()
     let ordersToSend = tmpSelectedItems.map(item => {
       item.sent = true;
-      item.date_sent = new Date().getTime()
+      item.date_sent = new Date()
       return item
     })
     const res = await OrdersAPI.setOrdersToSent(token, ordersToSend)

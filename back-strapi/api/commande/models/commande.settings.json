@@ -83,7 +83,7 @@
       "private": false
     },
     "date_sent": {
-      "type": "datetime"
+      "type": "date"
     }
   }
 }
