@@ -199,12 +199,21 @@ const Dashboard = () => {
     )
   })
 
-  const tabletitles = ["ID", "Date", "Transporteur", "Statut Traitement"]
+  const dataToDisplay = {
+    headers: [
+     {name: "ID", fieldName: 'id'},
+     {name: "Date", fieldName: 'created_at' },
+     {name: "Transporteur", fieldName: 'delivery'},
+     {name: "Statut Traitement", fieldName: 'sent'}
+    ],
+    items: pageItems
+  }
+
   const dropdownOptions = ['5', '10', '50', '100', {value: filteredorders.length, label: 'Tout'}]
 
   return(
   <>
-    <div className="container mt-10 px-4 mx-auto relative z-10">
+    <div className="container mt-10 px-4 mx-auto relative">
       <div className={`fixed ${show ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
           id="my-modal"
       >
@@ -241,8 +250,7 @@ const Dashboard = () => {
       <div className="tmp-dropdown-container" >
         <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
       </div>
-      <Table items={pageItems}
-              titles={tabletitles}
+      <Table  dataToDisplay={dataToDisplay}
               numberPerPage={numberPerPage}
               handleSpecificSelection={handleSpecificSelection}
               handleSelectAll={handleSelectAll}  />
