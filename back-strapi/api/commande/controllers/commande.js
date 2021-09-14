@@ -338,15 +338,13 @@ module.exports = {
     })
     return process.env.DOMAIN_API + merge_pdf_path
   },
-  async buckUpdate(ctx) {
+  async bulkUpdate(ctx) {
     const body = ctx.request.body
-    if(body) {
-      await Promise.all(
-        body.orders.map(async order => {
-          strapi.services.commande.update({ id: order.id }, order )
-        })
-      );
-    }
+    let entities = await Promise.all(
+      body.orders.map(order => {
+        strapi.services.commande.update({ id: order.id }, order )
+      })
+    );
     return body.orders.map(o => o.id)
   }
 };

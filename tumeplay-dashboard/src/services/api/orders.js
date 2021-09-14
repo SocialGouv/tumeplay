@@ -23,7 +23,7 @@ const OrdersAPI = {
     }});
   },
   setOrdersToSent: (token, orders) => {
-    return axios.put(`${URL}/orders/bulks`, {orders: orders}, {headers: {
+    return axios.put(`${URL}/commandes/update/multiple`, {orders: orders}, {headers: {
       Authorization: `Bearer ${token}`
     }});
   },
