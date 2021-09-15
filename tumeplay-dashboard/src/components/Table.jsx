@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import chronoLogo from "../assets/pictures/Apps-Colissimo.jpeg"
 import mondialRelay from "../assets/pictures/mondial-relay.jpeg"
 
-const Table = ({dataToDisplay, numberPerPage, handleSpecificSelection, handleSelectAll}) => {
+const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll}) => {
 
   const titlesToDisplay = dataToDisplay.headers.map((item,index) => {
     return(
@@ -52,7 +52,7 @@ const Table = ({dataToDisplay, numberPerPage, handleSpecificSelection, handleSel
 
 
   return (
-     <div className="tmp-table-container shadow-md rounded-xl">
+     <div className="tmp-table-container shadow-md rounded-xl flex flex-col">
           <table className="tmp-table-ext items-center w-full ">
             <thead>
               <tr>
@@ -63,9 +63,19 @@ const Table = ({dataToDisplay, numberPerPage, handleSpecificSelection, handleSel
               </tr>
             </thead>
             <tbody>
-              {Rows}
+              {dataToDisplay.items.length > 0 ?
+              Rows :
+              <></>
+              }
             </tbody>
           </table>
+          {dataToDisplay.items.length > 0 ?
+            <></>
+            :
+            <div className="text-center py-4 text-lightBlue-800">
+              Aucune donnée à afficher
+            </div>
+          }
       </div>
   )
 }

@@ -6,7 +6,6 @@ const TumeplayDashboardLayout = (props) => {
   const { children } = props;
   return (
     <>
-      <Navbar />
       <Sidebar />
       <div className="relative h-full md:ml-64">
         {children}

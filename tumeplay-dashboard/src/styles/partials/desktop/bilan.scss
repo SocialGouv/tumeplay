@@ -1,0 +1,7 @@
+html {
+  body{
+    .tmp-date-picker {
+      @apply w-1/5 border border-lightBlue-900 rounded-md text-center shadow-xl cursor-pointer hover:bg-lightBlue-100;
+    }
+  }
+}
