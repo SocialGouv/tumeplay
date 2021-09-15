@@ -251,7 +251,6 @@ const Dashboard = () => {
         <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
       </div>
       <Table  dataToDisplay={dataToDisplay}
-              numberPerPage={numberPerPage}
               handleSpecificSelection={handleSpecificSelection}
               handleSelectAll={handleSelectAll}  />
       <div className="tmp-bottom-buttons-container">

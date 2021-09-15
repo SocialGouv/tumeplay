@@ -8,7 +8,7 @@ const Navbar = () => {
     <>
       {/* Navbar */}
       <nav className="w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center">
-        <div className="w-full bg-lightBlue-500 mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
+        <div className="w-full bg-lightBlue-800 mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           {/* Brand */}
           <span
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
