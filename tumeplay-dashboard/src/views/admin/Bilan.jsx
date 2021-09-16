@@ -8,6 +8,8 @@ import Pagination from "react-pagination-js";
 import Dropdown from "react-dropdown";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { CSVLink } from "react-csv";
+
 
 const Bilan = () => {
 
@@ -121,10 +123,10 @@ const Bilan = () => {
         />
       </div>
       {tmpSelected.length > 0 ?
-        <button className="mx-auto my-5 flex justify-between bg-lightBlue-700 p-2 rounded-md shadow-md">
+        <CSVLink data={tmpSelected} className="w-1/5 my-5 flex justify-self-center justify-around bg-lightBlue-700 p-2 rounded-md shadow-md">
           <FontAwesomeIcon icon={faFileExcel} color='white' size="lg" className='mr-2 mt-1'/>
           <p className="text-white my-1">Exporter en CSV</p>
-        </button>
+        </CSVLink>
         :
         <></>
       }
