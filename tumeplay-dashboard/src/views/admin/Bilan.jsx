@@ -64,7 +64,7 @@ const Bilan = () => {
     headers: [
      {name: "Date", fieldName: 'date_sent'},
      {name: "Id", fieldName: 'id' },
-     {name: "Box", fieldName: "box_num"},
+     {name: "Numéro de boite", fieldName: "box_num"},
      {name: "Transporteur", fieldName: 'delivery'}
     ],
     items: dailyOrders
