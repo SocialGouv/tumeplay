@@ -36,13 +36,13 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll}) => {
 
   const Rows = dataToDisplay.items.map((item) => {
     return(
-      <tr className="text-center">
+      <tr key={item.id} className="text-center">
         <td>
          <input type='checkbox' id={item.id} value={item.selected} checked={item.selected} onChange={(e) => {handleSpecificSelection(e)}} />
       </td>
-        {dataToDisplay.headers.map(h => {
+        {dataToDisplay.headers.map((h, i) => {
           return(
-            <td className="tmp-table-td">
+            <td key={i} className="tmp-table-td">
               {formatDisplay(item[h.fieldName], h.fieldName)}
             </td>  )
         })}
