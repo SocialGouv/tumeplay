@@ -19,7 +19,7 @@ import ResponsesAPI from '../services/api/responses';
 QuizzScreen.propTypes = {
   questions: PropTypes.array,
   onFinishedQuizz: PropTypes.func,
-	incrementScore: PropTypes.func,
+  incrementScore: PropTypes.func,
 };
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -96,19 +96,21 @@ export default function QuizzScreen(props) {
     setGivenAnswers(prevState => ({...prevState, localAnswer}));
   }
 
-  const handleUserStat = (localAnswer) => {
+  const handleUserStat = localAnswer => {
     const localStorage = window.localStorage.getItem('local.user');
     const JsonObject = JSON.parse(localStorage);
     const userID = JsonObject.uniqueId;
     const iteration = 1;
-    ResponsesAPI.publishResponses(userID, iteration, localAnswer)
-  }
-
+    ResponsesAPI.publishResponses(userID, iteration, localAnswer);
+  };
 
   async function _nextQuestion() {
-		if (_currentQuestion.responses.right_answer === givenAnswers.localAnswer.givenAnswer) {
-			props.incrementScore();
-		}
+    if (
+      _currentQuestion.responses.right_answer ===
+      givenAnswers.localAnswer.givenAnswer
+    ) {
+      props.incrementScore();
+    }
 
     if (currentIndex + 1 >= total) {
       props.onFinishedQuizz(givenAnswers);
@@ -129,7 +131,6 @@ export default function QuizzScreen(props) {
       setDataFeedback({});
     }
   }
-
 
   const _displayAnswersButtons = question => {
     return (
@@ -184,13 +185,22 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          {REACT_APP_ZONE === 'guyane' ?
-          <TextWithSound sound={_currentQuestion.sound_question ? REACT_APP_API_URL + _currentQuestion.sound_question.url : ''} style={Styles.questionText} useUrl>{_currentQuestion.text_question}</TextWithSound>
-          :
-          <Text style={Styles.questionText}>
-            {_currentQuestion.text_question}
-          </Text>
-          }
+          {REACT_APP_ZONE === 'guyane' ? (
+            <TextWithSound
+              sound={
+                _currentQuestion.sound_question
+                  ? REACT_APP_API_URL + _currentQuestion.sound_question.url
+                  : ''
+              }
+              style={Styles.questionText}
+              useUrl>
+              {_currentQuestion.text_question}
+            </TextWithSound>
+          ) : (
+            <Text style={Styles.questionText}>
+              {_currentQuestion.text_question}
+            </Text>
+          )}
         </View>
 
         <View style={{paddingBottom: 50, height: '52%'}}>
@@ -203,7 +213,11 @@ export default function QuizzScreen(props) {
                 question={_currentQuestion}
                 lastTokenAmount={lastTokenAmount}
                 setFeedback={setFeedback}
-                sound={_currentQuestion.sound_answer ? _currentQuestion.sound_answer.url : ""}
+                sound={
+                  _currentQuestion.sound_answer
+                    ? _currentQuestion.sound_answer.url
+                    : ''
+                }
               />
             )}
           </View>
