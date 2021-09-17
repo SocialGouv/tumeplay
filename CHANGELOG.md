@@ -1,3 +1,20 @@
+## [1.9.1-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.9.1-alpha.1...v1.9.1-alpha.2) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** upgrade kosko for cert-manager annotations ([2aa20a0](https://github.com/SocialGouv/Tumeplay/commit/2aa20a02fcb86e523d5f4b853e2b50ae1a6b33e9))
+
+## [1.9.1-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.9.0...v1.9.1-alpha.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* Add prod deployment constrains. ([ecae0bc](https://github.com/SocialGouv/Tumeplay/commit/ecae0bc4bdf5bf5adb677d4c1446c5b7675b6de6))
+* Production image build args. ([f8a956f](https://github.com/SocialGouv/Tumeplay/commit/f8a956f8ad93673fc3d8c68eb4f975dd941038e4))
+* Use SocialGouv actions within production workflow. ([59789df](https://github.com/SocialGouv/Tumeplay/commit/59789df5fcc6fcd92ef21fa3ef2a03ed2d45d6e2))
+* Use SocialGouv actions. ([c6292e5](https://github.com/SocialGouv/Tumeplay/commit/c6292e5d85dd1d2103b9484453df5c3545d9d7a2))
+
 # [1.9.0](https://github.com/SocialGouv/Tumeplay/compare/v1.8.2...v1.9.0) (2021-09-09)
 
 
