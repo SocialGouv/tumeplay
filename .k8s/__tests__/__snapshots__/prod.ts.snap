@@ -16,6 +16,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -38,6 +39,7 @@ spec:
       labels:
         app: backend
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     spec:
@@ -105,7 +107,7 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.45.0
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -131,6 +133,7 @@ metadata:
   namespace: tumeplay
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
 spec:
@@ -156,6 +159,7 @@ spec:
       name: backend-sealed-secret
       labels:
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     type: Opaque
@@ -174,6 +178,7 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   namespace: tumeplay
@@ -188,7 +193,7 @@ data:
   EMAIL_PROVIDER_FROM: Tumeplay <contact.tumeplay@fabrique.social.gouv.fr>
   EMAIL_PROVIDER_REPLY_TO: contact.tumeplay@fabrique.social.gouv.fr
   EMAIL_CONFIG_ADMIN: contact.tumeplay@fabrique.social.gouv.fr
-  EMAIL_CONFIG_CAT: maxime.lecoq@benextcompany.com
+  EMAIL_CONFIG_CAT: esat.benext@gmail.com
 ---
 apiVersion: v1
 kind: Service
@@ -196,6 +201,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -222,7 +228,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -234,6 +240,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -286,6 +293,7 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   namespace: tumeplay
@@ -306,6 +314,7 @@ metadata:
   labels:
     usage: tumeplay-uploads
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: tumeplay-uploads
@@ -342,9 +351,9 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
-    component: nginx
   name: guyane
   namespace: tumeplay
 spec:
@@ -365,9 +374,9 @@ spec:
       labels:
         app: guyane
         application: tumeplay
+        component: nginx
         owner: tumeplay
         team: tumeplay
-        component: nginx
     spec:
       containers:
         - image: ghcr.io/socialgouv/tumeplay/frontend-guyane:1.2.3
@@ -412,6 +421,8 @@ spec:
               value: guyane
             - name: REACT_APP_OTHER_ZONE_URL
               value: https://metropole-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_MATOMO_ID
+              value: '45'
 ---
 apiVersion: v1
 kind: Service
@@ -419,6 +430,7 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: guyane
@@ -445,7 +457,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -457,6 +469,7 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: guyane
@@ -492,9 +505,9 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
-    component: nginx
   name: metropole
   namespace: tumeplay
 spec:
@@ -515,9 +528,9 @@ spec:
       labels:
         app: metropole
         application: tumeplay
+        component: nginx
         owner: tumeplay
         team: tumeplay
-        component: nginx
     spec:
       containers:
         - image: ghcr.io/socialgouv/tumeplay/frontend-metropole:1.2.3
@@ -562,6 +575,8 @@ spec:
               value: metropole
             - name: REACT_APP_OTHER_ZONE_URL
               value: https://guyane-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_MATOMO_ID
+              value: '21'
 ---
 apiVersion: v1
 kind: Service
@@ -569,6 +584,7 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: metropole
@@ -595,7 +611,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -607,6 +623,7 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: metropole
@@ -641,6 +658,7 @@ metadata:
   namespace: tumeplay
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
 spec:
@@ -674,6 +692,7 @@ spec:
       name: azure-pg-user
       labels:
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     type: Opaque
@@ -684,7 +703,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/permanent-redirect: https://metropole-tumeplay.fabrique.social.gouv.fr$request_uri
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     app.github.com/job: '5678'
     app.github.com/ref: refs/tags/v1.2.3
@@ -695,6 +714,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: metropole-tumeplay
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: metropole-tumeplay-redirect
@@ -713,7 +733,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/permanent-redirect: https://guyane-tumeplay.fabrique.social.gouv.fr$request_uri
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     app.github.com/job: '5678'
     app.github.com/ref: refs/tags/v1.2.3
@@ -724,6 +744,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: guyane-tumeplay
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: guyane-tumeplay-redirect
