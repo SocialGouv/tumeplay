@@ -5,7 +5,8 @@ const AppContext = React.createContext({
   verifyAuthentication: () => {},
   user: {},
   token: '',
-  logOut: () => {}
+  role: '',
+  logOut: () => {},
 })
 
 export default AppContext;

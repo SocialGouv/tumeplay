@@ -52,7 +52,7 @@ const Login = () => {
 									if(res.status === 200) {
 										context.verifyAuthentication(res.data.user)
 									} else {
-										// TODO : growl error 
+										// TODO : growl error
 									}
 									setSubmitting(false);
 								}}

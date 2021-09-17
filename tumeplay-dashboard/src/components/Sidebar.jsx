@@ -71,7 +71,7 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
-                  to="/dashboard"
+                  to="/orders/box/1"
                 >
                   <FontAwesomeIcon
                     icon={faTv}
@@ -127,6 +127,7 @@ export default function Sidebar() {
                     "text-xs uppercase py-2 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
                   onClick={() => context.logOut()}
+                  to='/login'
                 >
                   <FontAwesomeIcon
                     icon={faDoorClosed}
