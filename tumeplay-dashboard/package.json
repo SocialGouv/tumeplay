@@ -22,6 +22,7 @@
     "react-datepicker": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-dropdown": "^1.9.2",
+    "react-loader-spinner": "^4.0.0",
     "react-pagination-js": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

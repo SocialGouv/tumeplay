@@ -4,23 +4,46 @@ import Routes from './Routes';
 import Cookie from "js-cookie";
 import AppContext from './AppContext';
 import { createBrowserHistory } from 'history';
+import UserApi from './services/api/user';
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 
 function App() {
 
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState(null)
+  const [user, setUser] = useState()
+  const [token, setToken] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [role, setRole] = useState()
+  const [loading, setLoading] = useState(true)
   const history = createBrowserHistory()
 
+  const getUserInfos = async () => {
+    let token = Cookie.get('token')
+    setToken(token)
+    let res = await UserApi.retrieveUser(token)
+    if(res.status === 200) {
+      setUser({...res.data})
+      setRole(res.data.role.name)
+      setIsAuthenticated(true)
+      setLoading(false)
+    }
+  }
 
+
+  useEffect(() => {
+    getUserInfos()
+  }, [])
 
   const verifyAuthentication = (user) => {
-    const token = Cookie.get("token");
+    const token = Cookie.get('token');
     setToken(token);
     if(token) {
-      setUser(user)
+      setUser({...user})
+      if(user) {
+        setRole(user.role.name)
+      }
       setIsAuthenticated(true)
-      history.push(`/orders/box/1`)
     } else {
       Cookie.remove('token')
     }
@@ -31,24 +54,32 @@ function App() {
     setIsAuthenticated(false)
   }
 
-  useEffect(() => {
-    verifyAuthentication()
-  }, [])
-
-
   return (
     <AppContext.Provider value={
       {
         user: user,
         token: token,
+        role: role,
         isAuthenticated: isAuthenticated,
         verifyAuthentication: verifyAuthentication,
         logOut: logOut
       }
     }>
-      <Router history={history}>
-        <Routes />
-      </Router>
+      {loading ?
+        <div className="justify-center text-center">
+          <h1 className="absolute top-1/4 left-1/3 mx-44 text-xl text-lightBlue-800">En cours de chargement...</h1>
+            <Loader className="absolute top-1/3 left-1/3 mx-44"
+                    type="Puff"
+                    color='#105985'
+                    height={200}
+                    width={200}
+            />
+        </div>
+      :
+        <Router history={history}>
+          <Routes />
+        </Router>
+      }
     </AppContext.Provider>
   );
 }
