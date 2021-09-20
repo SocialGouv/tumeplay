@@ -15,7 +15,7 @@ function App() {
   const [token, setToken] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [role, setRole] = useState()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const history = createBrowserHistory()
 
   const getUserInfos = async () => {

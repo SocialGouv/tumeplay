@@ -1,58 +1,51 @@
 html {
   body{
     .tmp-tabs-container {
-      @apply w-full flex justify-around mb-12 px-4;
+      @apply w-full flex mb-2;
     }
-    .tmp-top-buttons-container {
-      @apply absolute w-1/6 flex justify-around -my-9;
-      .tmp-top-buttons {
-        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600;
 
-        &:first-child {
-          @apply mr-2;
-        }
+		.tmp-table-option {
+			@apply flex items-center mb-2;
 
-        &:disabled {
-          @apply bg-gray-200;
-        }
-      }
-    }
-    .tmp-bottom-buttons-container {
-      @apply absolute w-1/6 flex justify-around my-3;
-      .tmp-bottom-buttons {
-        @apply w-1/2 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600;
-        &:first-child {
-          @apply mr-2;
-        }
-        &:disabled {
-          @apply bg-gray-200;
-        }
-      }
-    }
-    .tmp-switch-container {
-      @apply absolute -my-11 right-32;
-      .tmp-switch-label {
-        @apply flex align-middle my-2 text-sm italic text-lightBlue-900;
-        p {
-          @apply mr-3 self-center;
-        }
-        .tmp-switch-input{
-          @apply self-center mb-1.5;
-        }
-      }
-    }
-    .tmp-dropdown-container {
-      @apply absolute -my-11 right-5;
-      .tmp-dropdown {
-        @apply w-20 cursor-pointer rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
-      }
-      .tmp-dropdown-menu {
-        @apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
-        .Dropdown-option {
-          @apply px-2 py-1 hover:bg-gray-50;
-        }
-      }
-    }
+
+			.tmp-switch-container {
+				.tmp-switch-label {
+					@apply flex align-middle text-white;
+					p {
+						@apply mr-3 mb-0 self-center;
+					}
+					.tmp-switch-input{
+						@apply self-center;
+					}
+				}
+			}
+
+			.tmp-top-buttons-container {
+				@apply flex flex-1;
+				.tmp-top-buttons {
+					@apply mr-2 px-4 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600 text-white;
+
+					&.disabled {
+						@apply bg-gray-300;
+					}
+				}
+			}
+
+
+			.tmp-dropdown-container {
+				@apply ml-6;
+				.tmp-dropdown {
+					@apply w-20 cursor-pointer rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
+				}
+				.tmp-dropdown-menu {
+					@apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+					.Dropdown-option {
+						@apply px-2 py-1 hover:bg-gray-50;
+					}
+				}
+			}
+		}
+
     .tmp-pagination-container {
       @apply absolute text-lg my-2 right-14;
     }
