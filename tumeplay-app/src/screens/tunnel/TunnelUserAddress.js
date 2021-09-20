@@ -379,34 +379,51 @@ export default function TunnelUserAddress(props) {
         currentValue={localAdress.firstName}
         name="firstName"
       />
-      <CustomTextInput
-        inputLabel="Nom"
-        inputPlaceholder="Ton Nom"
-        onChangeText={val => _handleChange('lastName', val)}
-        isValid={localValid.lastName}
-        currentValue={localAdress.lastName}
-        name="lastName"
-      />
-      <CustomTextInput
-        inputLabel="Adresse e-mail"
-        inputPlaceholder="Ton adresse e-mail"
-        onChangeText={val => _handleChange('emailAdress', val)}
-        isValid={localValid.emailAdress}
-        emailAdressWrongFormat={localValid.emailAdressWrongFormat}
-        currentValue={localAdress.emailAdress}
-        name="emailAdress"
-      />
+      {process.env.REACT_APP_ZONE === 'guyane' ? (
+        <CustomTextInput
+          inputLabel="Numéro de téléphone"
+          inputPlaceholder="Ton numéro de téléphone"
+          onChangeText={val => _handleChange('phoneNumber', val)}
+          isValid={localValid.phoneNumber}
+          currentValue={localAdress.phoneNumber}
+          phoneNumberWrongFormat={localValid.phoneNumberWrongFormat}
+          name="phoneNumber"
+          filterNumbers={true}
+        />
+      ) : (
+        <>
+          <CustomTextInput
+            inputLabel="Nom"
+            inputPlaceholder="Ton Nom"
+            onChangeText={val => _handleChange('lastName', val)}
+            isValid={localValid.lastName}
+            currentValue={localAdress.lastName}
+            name="lastName"
+          />
+          <CustomTextInput
+            inputLabel="Adresse e-mail"
+            inputPlaceholder="Ton adresse e-mail"
+            onChangeText={val => _handleChange('emailAdress', val)}
+            isValid={localValid.emailAdress}
+            emailAdressWrongFormat={localValid.emailAdressWrongFormat}
+            currentValue={localAdress.emailAdress}
+            name="emailAdress"
+          />
 
-      <CustomTextInput
-        inputLabel="Confirmation adresse e-mail"
-        inputPlaceholder="Confirme ton adresse e-mail"
-        onChangeText={val => _handleChange('emailAdressConfirmation', val)}
-        isValid={localValid.emailAdressConfirmation}
-        emailAdressWrongFormat={localValid.emailAdressConfirmationWrongFormat}
-        emailAdressMismatch={localValid.emailAdressMismatch}
-        currentValue={localAdress.emailAdressConfirmation}
-        name="emailAdressConfirmation"
-      />
+          <CustomTextInput
+            inputLabel="Confirmation adresse e-mail"
+            inputPlaceholder="Confirme ton adresse e-mail"
+            onChangeText={val => _handleChange('emailAdressConfirmation', val)}
+            isValid={localValid.emailAdressConfirmation}
+            emailAdressWrongFormat={
+              localValid.emailAdressConfirmationWrongFormat
+            }
+            emailAdressMismatch={localValid.emailAdressMismatch}
+            currentValue={localAdress.emailAdressConfirmation}
+            name="emailAdressConfirmation"
+          />
+        </>
+      )}
 
       {deliveryType === 'home' && (
         <CustomTextInput
