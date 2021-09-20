@@ -87,7 +87,7 @@ const Bilan = () => {
   })
 
   return(
-    <div className="container mt-10 mx-auto relative">
+    <div className="relative">
       <div className="my-3">
         <DatePicker className="tmp-date-picker"
                     selected={currentDate}

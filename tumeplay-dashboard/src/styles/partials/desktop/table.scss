@@ -1,14 +1,14 @@
 html {
   body {
     .tmp-table-container {
-      @apply w-full flex rounded-xl;
+      @apply w-full flex rounded-md;
       .tmp-table-ext {
-        @apply text-center border-collapse mx-auto rounded-xl;
+        @apply border-collapse mx-auto rounded-xl;
         .tmp-table-th {
           @apply px-6 align-middle border border-white border-solid py-3 text-sm uppercase whitespace-nowrap font-semibold text-center text-white bg-lightBlue-700;
         }
         .tmp-table-td {
-          @apply px-6 align-middle text-sm md:text-base whitespace-nowrap p-4 items-center text-lightBlue-900;
+          @apply px-6 align-middle text-sm md:text-base whitespace-nowrap p-4 text-lightBlue-900;
         }
       }
     }
