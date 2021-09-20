@@ -15,7 +15,7 @@ function App() {
   const [token, setToken] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [role, setRole] = useState()
-  const [loading, setLoading] = useState(true)
+  const [userRetrieved, setUserRetrieved] = useState(false)
   const history = createBrowserHistory()
 
   const getUserInfos = async () => {
@@ -26,8 +26,8 @@ function App() {
       setUser({...res.data})
       setRole(res.data.role.name)
       setIsAuthenticated(true)
-      setLoading(false)
     }
+    setUserRetrieved(true)
   }
 
 
@@ -62,25 +62,15 @@ function App() {
         role: role,
         isAuthenticated: isAuthenticated,
         verifyAuthentication: verifyAuthentication,
-        logOut: logOut
-      }
-    }>
-      {loading ?
-        <div className="justify-center text-center">
-          <h1 className="absolute top-1/4 left-1/3 mx-44 text-xl text-lightBlue-800">En cours de chargement...</h1>
-            <Loader className="absolute top-1/3 left-1/3 mx-44"
-                    type="Puff"
-                    color='#105985'
-                    height={200}
-                    width={200}
-            />
-        </div>
-      :
-        <Router history={history}>
-          <Routes />
-        </Router>
-      }
+        logOut: logOut,
+        userRetrieved: userRetrieved
+        }
+      }>
+      <Router history={history}>
+        <Routes />
+      </Router>
     </AppContext.Provider>
+
   );
 }
 
