@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/SocialGouv/Tumeplay/compare/v1.9.1...v1.9.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* fixing size of questionText for small mobile devices ([992a288](https://github.com/SocialGouv/Tumeplay/commit/992a2883aaf044dd6c9f42c59c7b7a5d2baee251))
+
 ## [1.9.1](https://github.com/SocialGouv/Tumeplay/compare/v1.9.0...v1.9.1) (2021-09-17)
 
 
