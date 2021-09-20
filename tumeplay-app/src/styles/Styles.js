@@ -117,7 +117,7 @@ var Styles = {
   questionText: {
     color: Colors.secondaryText,
     fontFamily: Colors.appTitleFont,
-    fontSize: 30,
+    fontSize: screenWidth <= 420 ? 25 : 30,
     marginBottom: 0,
     paddingBottom: 0,
     marginTop: 0,
