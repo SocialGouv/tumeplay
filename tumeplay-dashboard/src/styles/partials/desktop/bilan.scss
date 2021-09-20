@@ -1,10 +1,7 @@
 html {
   body{
     .tmp-date-picker {
-      @apply w-1/5 border border-lightBlue-900 rounded-md text-center shadow-xl cursor-pointer hover:bg-lightBlue-100;
-    }
-    .tmp-csv-button {
-      @apply w-1/5 my-5 flex justify-self-center justify-around bg-lightBlue-700 p-2 rounded-md shadow-md;
+      @apply border border-lightBlue-900 rounded-md text-center shadow-xl cursor-pointer hover:bg-lightBlue-100;
     }
   }
 }

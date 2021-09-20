@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 import { CSVLink } from "react-csv";
+import ReactTooltip from 'react-tooltip';
 
 
 const Bilan = () => {
@@ -62,8 +63,10 @@ const Bilan = () => {
 
   const dataToDisplay = {
     headers: [
-     {name: "Date", fieldName: 'date_sent'},
+     {name: "Date de traitement", fieldName: 'date_sent'},
+     {name: "Date de création", fieldName: 'created_at'},
      {name: "Id", fieldName: 'id' },
+     {name: "Prénom", fieldName: 'first_name' },
      {name: "Numéro de boite", fieldName: "box_num"},
      {name: "Transporteur", fieldName: 'delivery'}
     ],
@@ -87,30 +90,36 @@ const Bilan = () => {
   })
 
   return(
-    <div className="relative">
-      <div className="my-3">
-        <DatePicker className="tmp-date-picker"
-                    selected={currentDate}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => setCurrentDate(date)}
-                    showPopperArrow={false}
-        />
-      </div>
+    <div className="px-4 relative">
+			<ReactTooltip id="export-tooltip" />
+			<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
+				Gestion des bilans de traitement
+			</div>
+			<div className="flex justify-between mb-2 mt-10">
+				<div className="flex">
+					<CSVLink data={csvData}
+										headers={csvHeaders}
+										filename={`Export-${new Date().toLocaleDateString()}`}
+										data-for="export-tooltip"
+										data-tip={`${tmpSelected.length === 0 ? 'Sélectionnez des commandes afin d\'extraire un bilan' : ''}`} 
+										className={`tmp-button ${tmpSelected.length === 0 && 'disabled'}`}>
+						<FontAwesomeIcon icon={faFileExcel} color='white' className='mr-2'/> Exporter le bilan en CSV
+					</CSVLink>
+				</div>
+				<div className="flex">
+					<DatePicker className="tmp-date-picker"
+											selected={currentDate}
+											dateFormat="dd/MM/yyyy"
+											onChange={(date) => setCurrentDate(date)}
+											showPopperArrow={false}
+					/>
+				</div>
+			</div>
       <Table dataToDisplay={dataToDisplay}
              handleSpecificSelection={handleSpecificSelection}
              handleSelectAll={handleSelectAll}
+						 title="Mon bilan quotidien"
        />
-      {tmpSelected.length > 0 ?
-        <CSVLink data={csvData}
-                 headers={csvHeaders}
-                 filename={`Export-${new Date().toLocaleDateString()}`}
-                 className="tmp-csv-button">
-          <FontAwesomeIcon icon={faFileExcel} color='white' size="lg" className='mr-2 mt-1'/>
-          <p className="text-white my-1">Exporter en CSV</p>
-        </CSVLink>
-        :
-        <></>
-      }
 
     </div>
   )
