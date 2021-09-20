@@ -1,8 +1,8 @@
 /*eslint-disable*/
-import { faBars, faCog, faDoorClosed, faTimes, faTv, faClipboard } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCog, faDoorClosed, faTimes, faTable, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useContext} from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import AppContext from "../AppContext";
 import logo from "../assets/pictures/full-logo.png"
 
@@ -46,12 +46,13 @@ export default function Sidebar() {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <Link
+                  <NavLink
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+										activeClassName="tmp-active-nav-link"
                     to="/"
                   >
                     Tu me play
-                  </Link>
+                  </NavLink>
                 </div>
                 <div className="w-6/12 flex justify-end">
                   <button
@@ -70,40 +71,42 @@ export default function Sidebar() {
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
-                <Link
+                <NavLink
                   className={
                     "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
+									activeClassName="tmp-active-nav-link"
                   to="/orders/box/1"
                 >
                   <FontAwesomeIcon
-                    icon={faTv}
+                    icon={faTable}
                     className={
-                      "fas fa-tv mr-2 text-sm text-blueGray-300"
+                      "fas fa-tv mr-2 text-sm"
                     }
                   ></FontAwesomeIcon>{" "}
                   Gestion des commandes
-                </Link>
+                </NavLink>
               </li>
               <li className="items-center">
-                <Link
+                <NavLink
                   className={
                     "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                   }
+									activeClassName="tmp-active-nav-link"
                   to="/bilan"
                 >
                   <FontAwesomeIcon
                     icon={faClipboard}
                     className={
-                      "fas fa-tv mr-2 text-sm text-blueGray-300"
+                      "fas fa-tv mr-2 text-sm"
                     }
                   ></FontAwesomeIcon>{" "}
                   Bilans quotidiens
-                </Link>
+                </NavLink>
               </li>
 
               <li className="items-center">
-                <Link
+                <NavLink
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/settings") !== -1
@@ -111,18 +114,16 @@ export default function Sidebar() {
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
                   to="/settings"
+									activeClassName="tmp-active-nav-link"
                 >
                   <FontAwesomeIcon
                     icon={faCog}
                     className={
-                      "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/settings") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                      "fas fa-tools mr-2 text-sm"
                     }
                   ></FontAwesomeIcon>{" "}
                   Paramêtres
-                </Link>
+                </NavLink>
               </li>
               <li className="items-center">
                 <Link
@@ -135,10 +136,7 @@ export default function Sidebar() {
                   <FontAwesomeIcon
                     icon={faDoorClosed}
                     className={
-                      "fas fa-map-marked mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                      "fas fa-map-marked mr-2 text-sm"
                     }
                   ></FontAwesomeIcon>{" "}
                   Déconnexion

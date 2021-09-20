@@ -41,5 +41,13 @@ html {
 				}
 			}
 
+			.tmp-active-nav-link {
+				@apply text-indigo-500;
+
+				svg {
+					@apply fill-current text-indigo-500;
+				}
+			}
+
   }
 }
