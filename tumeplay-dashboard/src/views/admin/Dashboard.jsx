@@ -7,10 +7,11 @@ import getAllBoxes from "../../services/api/boxes.js";
 import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faPrint, faChartBar, faHourglass, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from "react-dropdown";
 import Switch from 'react-switch'
 import ConfirmModal from '../../components/ui/ConfirmModal';
+import ReactTooltip from 'react-tooltip';
 
 
 const Dashboard = () => {
@@ -26,9 +27,29 @@ const Dashboard = () => {
   const [pageItems, setPageItems] = useState([])
   const [openTab, setOpenTab] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [numberPerPage, setNumberPerPage] = useState(10)
+  const [numberPerPage, setNumberPerPage] = useState(50)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [show, setShow] = useState(false)
+	const [kpisData, setKpisData] = useState([
+		{
+			title: 'Commandes en attente',
+			value: '...',
+			color: 'green-500',
+			icon: faHourglass,
+			isPositive: true,
+			evolutionValue: '...',
+			evolutionWording: 'Depuis hier'
+		},
+		{
+			title: 'Commandes cette semaine',
+			value: '...',
+			color: 'red-500',
+			icon: faChartBar,
+			isPositive: true,
+			evolutionValue: '...',
+			evolutionWording: 'Depuis la semaine dernière'
+		},
+	])
 
   const retrieveBoxes = async () => {
     let response = await getAllBoxes(token)
@@ -41,6 +62,49 @@ const Dashboard = () => {
     })
     setFilteredOrders(tmpFilterOrders)
   }
+
+	const retrieveKpisData = async () => {
+		let response = await OrdersAPI.countThisWeekOrders(token)
+		const thisWeekOrders = response.data;
+		response = await OrdersAPI.countLastWeekOrders(token)
+		const lastWeekOrders = response.data;
+		let evolution = 0
+		let evolutionPositive = true
+		if (lastWeekOrders < thisWeekOrders) {
+			evolution = thisWeekOrders / lastWeekOrders * 100
+		} else if (lastWeekOrders > thisWeekOrders) {
+			evolution = lastWeekOrders / thisWeekOrders * 100
+			evolutionPositive = false
+		} else {
+			evolution = 0
+		}
+		
+		response = await OrdersAPI.countPendingOrders(token)
+		const pendingOrders = response.data;
+		response = await OrdersAPI.countTodayPendingOrders(token)
+		const todayPendingOrders = response.data;
+
+		setKpisData([
+			{
+				title: 'Commandes en attente',
+				value: pendingOrders,
+				color: 'green-500',
+				icon: faHourglass,
+				isPositive: true,
+				evolutionValue: todayPendingOrders,
+				evolutionWording: 'Depuis hier'
+			},
+			{
+				title: 'Commandes cette semaine',
+				value: thisWeekOrders,
+				color: 'red-500',
+				icon: faChartBar,
+				isPositive: evolutionPositive,
+				evolutionValue: evolution + '%',
+				evolutionWording: 'Depuis la semaine dernière'
+			},
+		])
+	}
 
   const retrieveOrders = async (params) => {
     let response = await OrdersAPI.getOrders(token, params)
@@ -138,6 +202,11 @@ const Dashboard = () => {
     setViewAll(!viewAll)
   }
 
+	const getCurentBoxTitle = () => {
+		const box = boxes.find((b) => b.number === openTab)
+		return box && box.title || ''
+	}
+
   useEffect(() => {
     if (viewAll === true) {
       retrieveOrders(' ')
@@ -152,6 +221,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
+		retrieveKpisData()
     retrieveBoxes()
     retrieveOrders('&sent_ne=true')
     setOpenTab(1)
@@ -173,36 +243,78 @@ const Dashboard = () => {
     setTmpSelectedItems([])
   }, [filteredorders, currentPage, numberPerPage])
 
-  const renderTabs = boxes.map((box) => {
+  const renderTabs = () => {
     return(
-      <div key={box.id} className="flex flex-wrap">
+      <div className="flex flex-wrap">
         <div className="w-full">
             <ul
-              className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+              className="flex mb-0 list-none flex-wrap mt-4 mb-3 flex-row rounded-xl overflow-hidden"
               role="tablist"
             >
-              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <button cursor='pointer' className={
-                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-                  (openTab === box.number
-                    ? "text-white bg-lightBlue-600"
-                    : "text-lightBlue-600 bg-white")
-                }
-                onClick={(event) => handleChangeTab(event, box.number)}
-                >
-                  {box.title}
-                </button>
-              </li>
+							{
+								boxes.map((box) => {
+									return (
+										<li key={box.id}>
+											<button cursor='pointer' className={`text-xs font-bold uppercase px-5 py-3 shadow-lg block leading-normal ${openTab === box.number ? 'bg-red-400 text-white' : 'bg-lightBlue-100 text-blueGray-500'}`}
+															onClick={(event) => handleChangeTab(event, box.number)}
+											>
+												{box.title}
+											</button>
+										</li>
+									)
+								})
+							}
             </ul>
         </div>
       </div>
     )
-  })
+	}
+
+	const renderKPIs = () => {
+		return(
+			<div class="flex flex-wrap -mx-4 mt-4 mb-8">
+				{
+					kpisData.map((kpi) => {
+						return (
+							<div class="w-full lg:w-1/4 px-4">
+								<div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+									<div class="flex-auto p-4">
+											<div class="flex flex-wrap">
+												<div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+														<h5 class="text-blueGray-400 uppercase font-bold text-xs my-0 mb-2">{kpi.title}</h5>
+														<span class="font-semibold text-2xl text-blueGray-700">{kpi.value}</span>
+												</div>
+												<div class="relative w-auto pl-4 flex-initial">
+														<div class={`text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-${kpi.color}`}>
+															<FontAwesomeIcon icon={kpi.icon} color="white" />
+														</div>
+												</div>
+											</div>
+											{ 
+												kpi.evolutionWording && (
+													<p class="text-sm text-blueGray-400 mt-4 mb-0">
+														<span class="text-emerald-500 mr-2">
+															<FontAwesomeIcon icon={kpi.isPositive ? faArrowUp : faArrowDown} color={kpi.isPositive ? 'green' : ' red'}/> {kpi.evolutionValue}
+														</span>
+														<span class="whitespace-nowrap">{kpi.evolutionWording}</span>
+													</p>
+												)
+											}
+									</div>
+								</div>
+							</div>
+						)
+					})
+				}
+			</div>
+		)
+	}
 
   const dataToDisplay = {
     headers: [
      {name: "ID", fieldName: 'id'},
      {name: "Date", fieldName: 'created_at' },
+     {name: "Prénom", fieldName: 'first_name' },
      {name: "Transporteur", fieldName: 'delivery'},
      {name: "Statut Traitement", fieldName: 'sent'}
     ],
@@ -213,7 +325,15 @@ const Dashboard = () => {
 
   return(
   <>
-    <div className="container mt-10 px-4 mx-auto relative">
+    <div className="px-4 relative">
+			<ReactTooltip id="print-tooltip" />
+			<ReactTooltip id="send-tooltip" />
+			<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
+				Gestion des commandes
+			</div>
+			<div>
+				{renderKPIs()}
+			</div>
       <div className={`fixed ${show ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
           id="my-modal"
       >
@@ -224,43 +344,50 @@ const Dashboard = () => {
         }
       </div>
       <div className="tmp-tabs-container">
-        {renderTabs}
+        {renderTabs()}
       </div>
-      <div className="tmp-top-buttons-container">
-        <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
-          <FontAwesomeIcon icon={faPrint} color="white" />
-        </button>
-          <button className="tmp-top-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
-          <FontAwesomeIcon icon={faPaperPlane} color="white" />
-        </button>
-      </div>
-      <div className='tmp-switch-container'>
-        <label className='tmp-switch-label'>
-          <p>Voir toutes les commandes</p>
-          <Switch className='tmp-switch-input'
-                  width={35}
-                  height={16}
-                  handleDiameter={12}
-                  checkedIcon={false}
-                  uncheckedIcon	={false}
-                  checked={viewAll}
-                  onChange={displayAllOrders} />
-        </label>
-      </div>
-      <div className="tmp-dropdown-container" >
-        <Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
-      </div>
+			<div className="tmp-table-option">
+				<div className="tmp-top-buttons-container">
+					<button className={`tmp-top-buttons ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+									data-for="print-tooltip"
+									data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin d\'en imprimer les étiquettes' : ''}`} 
+									onClick={(e) => {
+										if (tmpSelectedItems.length > 0)
+											handlePrintClick(e)
+									}}>
+						<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer les étiquettes
+					</button>
+						<button className={`tmp-top-buttons ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+										data-for="send-tooltip"
+										data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin de les marquer comme traitées' : ''}`}
+										onClick={(e) => {
+											if (tmpSelectedItems.length > 0) 
+												handleSendClick(e)
+										}}>
+						<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Marquer comme traité
+					</button>
+				</div>
+				<div className='tmp-switch-container'>
+					<label className='tmp-switch-label'>
+						<p>Voir toutes les commandes</p>
+						<Switch className='tmp-switch-input'
+										width={35}
+										height={16}
+										handleDiameter={12}
+										checkedIcon={false}
+										uncheckedIcon	={false}
+										checked={viewAll}
+										onChange={displayAllOrders} />
+					</label>
+				</div>
+				<div className="tmp-dropdown-container" >
+					<Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
+				</div>
+			</div>
       <Table  dataToDisplay={dataToDisplay}
               handleSpecificSelection={handleSpecificSelection}
-              handleSelectAll={handleSelectAll}  />
-      <div className="tmp-bottom-buttons-container">
-        <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handlePrintClick(e)}}>
-          <FontAwesomeIcon icon={faPrint} color="white" />
-        </button>
-          <button className="tmp-bottom-buttons" disabled={tmpSelectedItems.length === 0} onClick={(e) => {handleSendClick(e)}}>
-          <FontAwesomeIcon icon={faPaperPlane} color="white" />
-        </button>
-      </div>
+              handleSelectAll={handleSelectAll}
+							title={getCurentBoxTitle()}  />
       <div className="tmp-pagination-container">
         <Pagination
           currentPage={currentPage}
