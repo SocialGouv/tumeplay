@@ -15,17 +15,14 @@ function App() {
   const [token, setToken] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [role, setRole] = useState()
-  const [userRetrieved, setUserRetrieved] = useState(false)
   const [loading, setLoading] = useState(true)
   const history = createBrowserHistory()
 
   const getUserInfos = async () => {
     let token = Cookie.get('token')
     if (!token) {
-      setLoading(false);
       <Redirect to="/login" />
-    }
-    if(token) {
+    } else {
       setToken(token)
       let res = await UserApi.retrieveUser(token)
       if(res.status === 200) {
@@ -34,7 +31,7 @@ function App() {
         setIsAuthenticated(true)
       }
     }
-    setUserRetrieved(true)
+		setLoading(false)
   }
 
 
@@ -61,10 +58,6 @@ function App() {
     setIsAuthenticated(false)
   }
 
-  console.log(loading)
-
-  useEffect(() => {setLoading(!loading)}, [userRetrieved])
-
   return (
     <AppContext.Provider value={
       {
@@ -73,24 +66,23 @@ function App() {
         role: role,
         isAuthenticated: isAuthenticated,
         verifyAuthentication: verifyAuthentication,
-        logOut: logOut,
-        userRetrieved: userRetrieved
-        }
-      }>
-        {loading ?
-          <Router history={history}>
-            <Routes />
-          </Router>
-          :
-          <div className="justify-center text-center">
-            <h1 className="absolute top-1/4 left-1/3 mx-44 text-xl text-lightBlue-800">En cours de chargement...</h1>
-              <Loader className="absolute top-1/3 left-1/3 mx-44"
-                      type="Puff"
-                      color='#105985'
-                      height={200}
-                      width={200}
-                      />
-          </div>
+        logOut: logOut
+			}
+		}>
+        {
+					loading ?
+						<div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center text-center bg-white z-50">
+							<h1 className="text-xl text-lightBlue-800">En cours de chargement...</h1>
+							<Loader type="Puff"
+											color='#105985'
+											height={200}
+											width={200}
+											/>
+						</div>
+						:
+						<Router history={history}>
+							<Routes />
+						</Router>
         }
     </AppContext.Provider>
 
