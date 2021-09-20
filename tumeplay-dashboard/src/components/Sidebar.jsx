@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../AppContext";
-import logo from "../assets/pictures/LOGO.png"
+import logo from "../assets/pictures/full-logo.png"
 
 
 export default function Sidebar() {
@@ -29,10 +29,13 @@ export default function Sidebar() {
             to="/"
           >
             <div className="flex mx-auto justify-center">
-              <img className="w-24 h-24" src={logo}/>
+              <img className="h-10 px-4" src={logo}/>
             </div>
           </Link>
           {/* Collapse */}
+					<div className="mt-4 -mb-2 text-center text-blueGray-600 font-bold">
+						{context.user.username}
+					</div>
           <div
             className={
               "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
