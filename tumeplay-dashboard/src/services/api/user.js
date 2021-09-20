@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const URL = 'http://localhost:1337';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const UserApi = {
   retrieveUser: (token) => {
-    return axios.get(`${URL}/users/me`,
+    return axios.get(`${API_URL}/users/me`,
      {headers: {
       Authorization: `Bearer ${token}`
     }});

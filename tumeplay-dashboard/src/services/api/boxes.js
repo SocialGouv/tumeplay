@@ -1,10 +1,9 @@
 import axios from "axios";
 
-const URL = 'http://localhost:1337'
-
+const API_URL = process.env.REACT_APP_API_URL;
 
 const getAllBoxes = (token) => {
-  return axios.get(`${URL}/boxes?environnement.name=Métropole`, {headers: {
+  return axios.get(`${API_URL}/boxes?environnement.name=Métropole`, {headers: {
     Authorization: `Bearer ${token}`
   }});
 }
