@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import Routes from './Routes';
 import Cookie from "js-cookie";
 import AppContext from './AppContext';
@@ -16,16 +16,23 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [role, setRole] = useState()
   const [userRetrieved, setUserRetrieved] = useState(false)
+  const [loading, setLoading] = useState(true)
   const history = createBrowserHistory()
 
   const getUserInfos = async () => {
     let token = Cookie.get('token')
-    setToken(token)
-    let res = await UserApi.retrieveUser(token)
-    if(res.status === 200) {
-      setUser({...res.data})
-      setRole(res.data.role.name)
-      setIsAuthenticated(true)
+    if (!token) {
+      setLoading(false);
+      <Redirect to="/login" />
+    }
+    if(token) {
+      setToken(token)
+      let res = await UserApi.retrieveUser(token)
+      if(res.status === 200) {
+        setUser({...res.data})
+        setRole(res.data.role.name)
+        setIsAuthenticated(true)
+      }
     }
     setUserRetrieved(true)
   }
@@ -54,6 +61,10 @@ function App() {
     setIsAuthenticated(false)
   }
 
+  console.log(loading)
+
+  useEffect(() => {setLoading(!loading)}, [userRetrieved])
+
   return (
     <AppContext.Provider value={
       {
@@ -66,9 +77,21 @@ function App() {
         userRetrieved: userRetrieved
         }
       }>
-      <Router history={history}>
-        <Routes />
-      </Router>
+        {loading ?
+          <Router history={history}>
+            <Routes />
+          </Router>
+          :
+          <div className="justify-center text-center">
+            <h1 className="absolute top-1/4 left-1/3 mx-44 text-xl text-lightBlue-800">En cours de chargement...</h1>
+              <Loader className="absolute top-1/3 left-1/3 mx-44"
+                      type="Puff"
+                      color='#105985'
+                      height={200}
+                      width={200}
+                      />
+          </div>
+        }
     </AppContext.Provider>
 
   );
