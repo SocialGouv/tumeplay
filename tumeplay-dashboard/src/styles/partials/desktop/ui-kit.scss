@@ -33,5 +33,13 @@ html {
        @apply mb-2;
      }
 
+		 .tmp-button {
+				@apply mr-2 px-4 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600 text-white;
+
+				&.disabled {
+					@apply bg-gray-300;
+				}
+			}
+
   }
 }

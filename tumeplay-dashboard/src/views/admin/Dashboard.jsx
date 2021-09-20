@@ -348,7 +348,7 @@ const Dashboard = () => {
       </div>
 			<div className="tmp-table-option">
 				<div className="tmp-top-buttons-container">
-					<button className={`tmp-top-buttons ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
 									data-for="print-tooltip"
 									data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin d\'en imprimer les étiquettes' : ''}`} 
 									onClick={(e) => {
@@ -357,7 +357,7 @@ const Dashboard = () => {
 									}}>
 						<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer les étiquettes
 					</button>
-						<button className={`tmp-top-buttons ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
 										data-for="send-tooltip"
 										data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin de les marquer comme traitées' : ''}`}
 										onClick={(e) => {
