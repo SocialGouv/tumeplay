@@ -61,8 +61,6 @@ function App() {
     setIsAuthenticated(false)
   }
 
-  console.log(loading)
-
   useEffect(() => {setLoading(!loading)}, [userRetrieved])
 
   return (
@@ -89,7 +87,7 @@ function App() {
                       color='#105985'
                       height={200}
                       width={200}
-                      />
+              />
           </div>
         }
     </AppContext.Provider>
