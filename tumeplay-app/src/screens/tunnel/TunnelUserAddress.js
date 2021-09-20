@@ -26,6 +26,8 @@ export const phoneTest = /^0[0-9]{9}$/;
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 let flexstyletext; // @TODO: Delete if useless
 
 if (screenWidth <= 420) {
@@ -379,7 +381,7 @@ export default function TunnelUserAddress(props) {
         currentValue={localAdress.firstName}
         name="firstName"
       />
-      {process.env.REACT_APP_ZONE === 'guyane' ? (
+      {REACT_APP_ZONE === 'guyane' ? (
         <CustomTextInput
           inputLabel="Numéro de téléphone"
           inputPlaceholder="Ton numéro de téléphone"
