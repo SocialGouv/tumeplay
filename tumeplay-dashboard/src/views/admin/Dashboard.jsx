@@ -255,7 +255,7 @@ const Dashboard = () => {
 								boxes.map((box) => {
 									return (
 										<li key={box.id}>
-											<button cursor='pointer' className={`text-xs font-bold uppercase px-5 py-3 shadow-lg block leading-normal ${openTab === box.number ? 'bg-red-400 text-white' : 'bg-lightBlue-100 text-blueGray-500'}`}
+											<button cursor='pointer' className={`text-xs font-bold uppercase px-5 py-3 shadow-lg block leading-normal ${openTab === box.number ? 'bg-indigo-800 text-white' : 'bg-indigo-100 text-blueGray-500'}`}
 															onClick={(event) => handleChangeTab(event, box.number)}
 											>
 												{box.title}
