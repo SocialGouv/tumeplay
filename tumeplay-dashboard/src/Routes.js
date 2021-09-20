@@ -17,7 +17,8 @@ import AppContext from './AppContext.jsx';
 const Routes = () => {
 
   const context = useContext(AppContext)
-  const role = context.role
+  const {token, role } = context
+
 
   return (
     <Switch>
@@ -28,7 +29,7 @@ const Routes = () => {
       <PrivateRoute component={Dashboard} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/orders/box/:box_num"/>
       <PrivateRoute component={Bilan} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/bilan"/>
       <PrivateRoute component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
-      <Redirect from="*" to={role ? ROLES[role].redirectPath : '/login'}  />
+      <Redirect from="*" to={role && token ? ROLES[role].redirectPath : '/login'}  />
     </Switch>
   )
 }
