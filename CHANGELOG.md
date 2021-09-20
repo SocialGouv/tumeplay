@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/SocialGouv/Tumeplay/compare/v1.9.2...v1.9.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* fixing geocoder Region for orders in Ile de france ([9a75597](https://github.com/SocialGouv/Tumeplay/commit/9a75597d74e56546049b18ba48c2b3f797d6f1c2))
+
 ## [1.9.2](https://github.com/SocialGouv/Tumeplay/compare/v1.9.1...v1.9.2) (2021-09-20)
 
 
