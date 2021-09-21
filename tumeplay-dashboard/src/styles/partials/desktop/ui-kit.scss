@@ -1,0 +1,53 @@
+html {
+  @apply h-screen;
+  body{
+    @apply tracking-tighter;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      @apply mb-4 mt-4;
+    }
+     h1 {
+       @apply text-4xl;
+     }
+
+     h2 {
+       @apply text-3xl;
+     }
+
+     h3 {
+       @apply text-2xl;
+     }
+
+     h4 {
+       @apply text-xl;
+     }
+
+     h5 {
+       @apply text-xl;
+     }
+
+     p {
+       @apply mb-2;
+     }
+
+		 .tmp-button {
+				@apply mr-2 px-4 bg-lightBlue-500 rounded-lg py-1 text-sm hover:bg-lightBlue-600 text-white;
+
+				&.disabled {
+					@apply bg-gray-300;
+				}
+			}
+
+			.tmp-active-nav-link {
+				@apply text-indigo-500;
+
+				svg {
+					@apply fill-current text-indigo-500;
+				}
+			}
+
+  }
+}
