@@ -49,13 +49,7 @@ export default function LandingScreen(props) {
         const uniqId = await UserService.getUniqueId();
 
         if (uniqId !== undefined && uniqId) {
-          const {token} = await RemoteApi.registerUser(uniqId);
-
-          if (token) {
-            await UserService.setJWT(token);
-          } else {
-            _toggleErrorModal();
-          }
+					await UserService.setJWT('');
         }
       }
     }
