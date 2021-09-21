@@ -41,9 +41,33 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/mondial-relay/merge-pdf",
+      "handler": "commande.generateMergePDF",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/colissimo/generate-pdf",
+      "handler": "commande.createColissimo",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/commandes/:id",
       "handler": "commande.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/commandes/update/multiple",
+      "handler": "commande.bulkUpdate",
       "config": {
         "policies": []
       }

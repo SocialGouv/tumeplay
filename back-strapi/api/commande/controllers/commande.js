@@ -4,9 +4,13 @@ const _ = require('lodash');
 const http = require('http');
 const fs = require('fs');
 const soap = require('soap');
+const path = require('path');
 const md5 = require('md5');
 const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
-
+const PDFMerger = require('pdf-merger-js');
+const axios = require("axios")
+const html_to_pdf = require('html-pdf-node');
+const { sanitizeEntity } = require('strapi-utils')
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -57,7 +61,7 @@ const buildMrParams = (order) => {
     Enseigne: strapi.config.get('server.mondialRelay.id'),
     ModeCol: 'REL',
     ModeLiv: orderMrParams.mode,
-    
+
     Expe_Langage: 'FR',
     Expe_Ad1: 'M. TUMEPLAY',
     Expe_Ad3: '106 Boulevard Richard-Lenoir',
@@ -65,7 +69,7 @@ const buildMrParams = (order) => {
     Expe_CP: '75011',
     Expe_Pays: 'FR',
     Expe_Tel1: '+33142386040',
-    
+
     Dest_Langage: 'FR',
     Dest_Ad1: 'M. ' + orderMrParams.fullName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
     Dest_Ad3: orderMrParams.poi_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace('-', ' ').toUpperCase(),
@@ -74,10 +78,10 @@ const buildMrParams = (order) => {
     Dest_CP: orderMrParams.zipCode,
     Dest_Pays: 'FR',
     Dest_Mail: orderMrParams.email,
-    
+
     Poids: '400',
     NbColis: '1',
-    
+
     CRT_Valeur: '0',
     COL_Rel_Pays: 'FR',
     COL_Rel: '003490',
@@ -87,11 +91,11 @@ const buildMrParams = (order) => {
   }
 
   let securityKey = '';
-  for (const prop in mrParams) 
+  for (const prop in mrParams)
   {
     if( prop != 'Texte' )
     {
-      securityKey += mrParams[prop];	
+      securityKey += mrParams[prop];
     }
   }
 
@@ -104,13 +108,68 @@ const buildMrParams = (order) => {
   return mrParams
 }
 
+const colissimoTmpPdf = async (orders, promises) => {
+  strapi.log.info('BEGIN')
+  let remainingOrders;
+  let count;
+  if (orders.length > 0) {
+    let first16orders = orders.slice(0, 16)
+    remainingOrders = orders.slice(16, orders.length)
+    const dirPath = 'uploads/orders/colissimo/tmp'
+    const relativeDirPath = path.relative('.', `public/${dirPath}`)
+    const filename = 'colissimo_' + new Date().getTime() + '.pdf';
+    await fs.mkdirSync(relativeDirPath, { recursive: true })
+    const options = {
+      format: 'A4',
+      path: relativeDirPath + '/' + filename,
+      margin: {
+        top: "10px",
+        bottom: "15px",
+      }
+    };
+    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
+    const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
+    let gridItems = ""
+    first16orders.forEach((order, index) => {
+      gridItems = gridItems + (`
+                          <div style="${gridItemStyle}">
+                            <p>${order.name}</p>
+                            <p>${order.address}</p>
+                            <p>${order.phone}</p>
+                         </div>
+                         `)
+
+      return(gridItems)
+    })
+    const skeleton = `<div style="${skeletonStyle}">
+                  ${gridItems}
+                </div>`
+
+    const file = {
+      content: skeleton
+    }
+    promises.push(
+			new Promise((resolve) => {
+				html_to_pdf.generatePdf(file, options).then(() => {
+					resolve();
+				})
+			})
+		)
+  };
+  if(remainingOrders.length > 0) {
+    colissimoTmpPdf(remainingOrders, promises)
+  }
+
+	return Promise.all(promises)
+}
+
 module.exports = {
   async create(ctx) {
     let entity;
 
     // CHECK AVAILABILITY & DECREMENT STOCK
     if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
-      const products_box = ctx.request.body.content[0].produits 
+      const products_box = ctx.request.body.content[0].produits
       const available = await strapi.services['box-sur-mesure'].checkDynamicBoxAvailability(products_box)
 
       if (available) {
@@ -123,7 +182,7 @@ module.exports = {
     } else if (ctx.request.body.content[0].__component === 'commandes.box') {
       const box_id = ctx.request.body.content[0].box
       const available = await strapi.services.box.checkBoxAvailability(box_id)
-      
+
       if (available) {
         strapi.services["box"].decrement(box_id, 1)
       } else {
@@ -223,7 +282,7 @@ module.exports = {
           )
         }
       )
-    }    
+    }
 
     return entity;
   },
@@ -245,5 +304,49 @@ module.exports = {
     }
 
     return ctx.badRequest(null, 'Error while trying to fetch mondial relais API');
+  },
+  async generateMergePDF(ctx) {
+    const ids = ctx.request.body.ids
+    const merger = new PDFMerger();
+    ids.forEach(async (id) =>
+      merger.add(path.relative('.', `public/uploads/orders/mondial-relay/order_mondial_relay_${id}.pdf`))
+    )
+    const merge_pdf_path = 'uploads/orders/mondial-relay/merged_' + new Date().getTime() + '.pdf'
+    const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+    await merger.save(merge_pdf_save_path);
+    return process.env.DOMAIN_API + merge_pdf_path;
+  },
+  async createColissimo(ctx) {
+    const ids = ctx.request.body.ids;
+    let orders = await strapi.query('commande').find({id_in: ids})
+    const merger = new PDFMerger();
+    const merge_pdf_path = 'uploads/orders/colissimo/merged_colissimo_' + new Date().getTime() + '.pdf';
+    const dirPath = 'uploads/orders/colissimo/tmp'
+    const relativeDirPath = path.relative('.', `public/${dirPath}`)
+    await new Promise((resolve) => {
+      colissimoTmpPdf(orders, []).then(async () => {
+        fs.readdir(relativeDirPath, async (err, files) => {
+          files.forEach(file => {
+            merger.add(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+          })
+          const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
+          await merger.save(merge_pdf_save_path);
+          files.forEach(file => {
+            fs.unlinkSync(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
+          })
+          resolve();
+        })
+      })
+    })
+    return process.env.DOMAIN_API + merge_pdf_path
+  },
+  async bulkUpdate(ctx) {
+    const body = ctx.request.body
+    let entities = await Promise.all(
+      body.orders.map(order => {
+        strapi.services.commande.update({ id: order.id }, order )
+      })
+    );
+    return body.orders.map(o => o.id)
   }
 };

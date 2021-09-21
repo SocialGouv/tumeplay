@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,SAAS,CAAT,IAAS",
+    "sources": [
+        "before.scss"
+    ],
+    "names": [],
+    "file": "before.css"
+}
