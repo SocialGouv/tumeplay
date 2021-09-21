@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/SocialGouv/Tumeplay/compare/v1.9.4...v1.9.5) (2021-09-21)
+
+
+### Bug Fixes
+
+* Use harbor-build-register within prod workflows ([7e0b6e0](https://github.com/SocialGouv/Tumeplay/commit/7e0b6e04a64588feddce5848653fd07aaea4f79a))
+
 ## [1.9.4](https://github.com/SocialGouv/Tumeplay/compare/v1.9.3...v1.9.4) (2021-09-21)
 
 
