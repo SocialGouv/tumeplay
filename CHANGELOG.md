@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/SocialGouv/Tumeplay/compare/v1.9.5...v1.9.6) (2021-09-21)
+
+
+### Bug Fixes
+
+* Set Harbor registry creds ([1a6da1b](https://github.com/SocialGouv/Tumeplay/commit/1a6da1bf5baf2875146dafbbdafbab83f5e043d4))
+
 ## [1.9.5](https://github.com/SocialGouv/Tumeplay/compare/v1.9.4...v1.9.5) (2021-09-21)
 
 
