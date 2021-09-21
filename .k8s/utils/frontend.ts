@@ -41,7 +41,7 @@ export default async (name: string) => {
         : ciEnv.metadata.subdomain,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:${imageTag}`,
+      image: `harbor.fabrique.social.gouv.fr/tumeplay/frontend-${name}:${imageTag}`,
       ...podProbes,
     },
   });

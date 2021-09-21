@@ -71,7 +71,7 @@ export const getManifests = async () => {
       ingress: true,
       withPostgres: true,
       containerPort: 1337,
-      image: `ghcr.io/socialgouv/tumeplay/backend:${imageTag}`,
+      image: `harbor.fabrique.social.gouv.fr/tumeplay/backend:${imageTag}`,
       subDomainPrefix: (!ciEnv.isProduction && `backend-`) || undefined,
     },
     deployment: {
