@@ -2,6 +2,9 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import Colors from '../styles/Color'
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+const REACT_APP_OTHER_ZONE_URL = process.env.REACT_APP_OTHER_ZONE_URL;
+
 const LandingPage = (props) => {
 
   const france = require('../assets/pictures/cartefrance.svg')
@@ -10,17 +13,10 @@ const LandingPage = (props) => {
   const param = "?zone_choice=true"
 
   const handleRedirection = (name) => {
-    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'guyane') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
-    }
-    if(process.env.REACT_APP_ZONE === 'metropole' && name === 'metropole') {
+    if(REACT_APP_ZONE === name) {
       props.navigation.navigate('LandingScreen')
-    }
-    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'metropole') {
-      window.location.href = process.env.REACT_APP_OTHER_ZONE_URL + param
-    }
-    if(process.env.REACT_APP_ZONE === 'guyane' && name === 'guyane') {
-      props.navigation.navigate('LandingScreen')
+    } else {
+      window.location.href = REACT_APP_OTHER_ZONE_URL + param
     }
   }
 
@@ -32,17 +28,17 @@ const LandingPage = (props) => {
       </View>
       <View style={style.cardContainer}>
         <View style={style.column}>
-          <View style={style.card}>
+          <TouchableOpacity style={style.card} onPress={() => {handleRedirection('metropole')}}>
             <Image style={style.image} resizeMode='contain' source={france}/>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity style={style.button} >
             <Text style={style.text} onPress={() => {handleRedirection('metropole')}}>Hexagone</Text>
           </TouchableOpacity>
         </View>
         <View style={style.column}>
-          <View style={style.card}>
+          <TouchableOpacity style={style.card} onPress={() => {handleRedirection('guyane')}}>
             <Image style={style.image} resizeMode='contain' source={guyane}/>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity style={style.button} onPress={() => {handleRedirection('guyane')}}>
             <Text style={style.text}>Guyane</Text>
           </TouchableOpacity>
@@ -116,6 +112,7 @@ const style = StyleSheet.create({
     left: "50%",
     transform: 'translate(-50%, -50%)',
     alignSelf: 'center',
+		cursor: 'pointer',
     opacity: 1
   },
   button: {

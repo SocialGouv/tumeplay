@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://metropole-tumeplay.fabrique.social.gouv.fr$request_uri
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/component: redirect
+    app.kubernetes.io/name: metropole-tumeplay
+  name: metropole-tumeplay-redirect
+  namespace: incubateur
+spec:
+  rules:
+    - host: tumeplay.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+      - tumeplay.fabrique.social.gouv.fr
+      secretName: metropole-tumeplay-redirect
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://guyane-tumeplay.fabrique.social.gouv.fr$request_uri
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/component: redirect
+    app.kubernetes.io/name: guyane-tumeplay
+  name: guyane-tumeplay-redirect
+  namespace: incubateur
+spec:
+  rules:
+    - host: guyane.tumeplay.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+      - guyane.tumeplay.fabrique.social.gouv.fr
+      secretName: guyane-tumeplay-redirect

@@ -24,6 +24,9 @@ import TunnelCartSummaryStyle from '../../styles/components/TunnelCartSummary';
 import OrdersAPI from '../../services/api/orders';
 import ContactsAPI from '../../services/api/contact';
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 TunnelCartSummary.propTypes = {
   navigation: PropTypes.object,
 };
@@ -49,6 +52,8 @@ export default function TunnelCartSummary(props) {
 
   const [isSelected, setIsSelected] = useState(false);
 
+  console.log("USER", userAdress);
+
   async function _confirmOrder() {
     //ORDER STRAPI API
     let orderPost;
@@ -68,7 +73,7 @@ export default function TunnelCartSummary(props) {
         address_deptcode: userAdress.address_deptcode,
         address_dept: userAdress.address_dept,
         address_zipcode: userAdress.zipCode,
-        address_city: userAdress.address_city,
+        address_city: userAdress.city,
         delivery: deliveryType,
       };
     } else if (deliveryType === 'pickup') {
@@ -155,7 +160,7 @@ export default function TunnelCartSummary(props) {
     if (e.target.checked) {
       userAdress['type'] = 'enrollé';
       userAdress['zipCode'] =
-        process.env.REACT_APP_ZONE === 'metropole'
+        REACT_APP_ZONE === 'metropole'
           ? selectedPickup.address_zipCode
           : selectedReferent.address_zipcode;
       setUserAdress({...userAdress});
@@ -234,7 +239,7 @@ export default function TunnelCartSummary(props) {
           }}>
           <View style={{flex: 0.35}}>
             <Image
-              source={process.env.REACT_APP_API_URL + selectedItem.image.url}
+              source={REACT_APP_API_URL + selectedItem.image.url}
               style={{
                 height: 150,
                 borderTopLeftRadius: 7,
@@ -350,14 +355,17 @@ export default function TunnelCartSummary(props) {
         <View style={{flexDirection: 'row'}}>
           <input
             onClick={e => handleContactValidation(e)}
+            id="checkconsent"
             type="checkbox"
             value={isSelected}></input>
           <label
+            htmlFor="checkconsent"
             style={{
               fontFamily: Colors.textFont,
               color: Colors.secondaryText,
               fontSize: 12,
               marginLeft: 5,
+              cursor: 'pointer',
             }}>
             {' '}
             J 'accepte d' être recontacté par Tumeplay pour améliorer le service

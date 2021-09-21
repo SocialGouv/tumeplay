@@ -132,9 +132,23 @@ export default function TunnelUserAddress(props) {
               } else {
                 localAdress['address_deptcode'] = deptCode.substring(0, 2);
               }
-              localAdress['address_region'] = res[0].address.state;
+              if (
+                //OpenGeocode do not send address.state for Ile de France
+                deptCode.substring(0, 2) === '75' ||
+                deptCode.substring(0, 2) === '77' ||
+                deptCode.substring(0, 2) === '78' ||
+                deptCode.substring(0, 2) === '92' ||
+                deptCode.substring(0, 2) === '93' ||
+                deptCode.substring(0, 2) === '94' ||
+                deptCode.substring(0, 2) === '95'
+              ) {
+                localAdress['address_region'] = 'Île-de-France';
+              } else {
+                localAdress['address_region'] = res[0].address.state;
+              }
               localAdress['address_dept'] = res[0].address.county;
               localAdress['address_city'] = res[0].address.city;
+              console.log(localAdress);
               _gotoSummary();
             }
           }
@@ -496,26 +510,10 @@ export default function TunnelUserAddress(props) {
           </Text>
         </View>
       </View>
-      <View style={Styles.viewopacitytunneletap3}>
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            paddingTop: 15,
-            paddingBottom: 2,
-            width: '40%',
-            height: 75,
-          }}
-          onPress={_onDone}>
-          <View style={Styles.tunnelButton}>
-            <Text
-              style={
-                mainValidFlag
-                  ? Styles.tunnelButtonText
-                  : Styles.tunnelButtonTextOpaque
-              }>
-              Suivant
-            </Text>
-          </View>
+
+      <View>
+        <TouchableOpacity style={Styles.tunnelButton} onPress={_onDone}>
+          <Text style={Styles.tunnelButtonText}>Suivant</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

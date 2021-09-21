@@ -19,14 +19,15 @@ import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 
 import Tracking from '../services/Tracking';
-import {GET_THEMES} from '../services/api/themes';
+import {GET_THEMES, GET_SOSTHEME} from '../services/api/themes';
 import {useQuery} from '@apollo/client';
+
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 LandingScreen.propTypes = {
   navigation: PropTypes.object,
 };
 export default function LandingScreen(props) {
-  const [localThemes, setLocalThemes] = useState([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   const isMounted = useIsMounted();
@@ -66,8 +67,13 @@ export default function LandingScreen(props) {
     props.navigation.navigate('ContentScreen', {selectedTheme: selectedTheme});
   }
 
+  const {data, loading} = useQuery(GET_SOSTHEME);
   function _onSelected_lieuxUtiles() {
-    props.navigation.navigate('ContentScreen', {selectedTheme: localThemes[3]});
+    if (!loading) {
+      props.navigation.navigate('ContentScreen', {
+        selectedTheme: data.thematiques[0],
+      });
+    }
   }
 
   function _onSelected_echangeProfessionnel() {
@@ -92,7 +98,6 @@ export default function LandingScreen(props) {
 
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
-
     if (!loading) {
       return (
         <LandingThemeGrid
@@ -108,9 +113,9 @@ export default function LandingScreen(props) {
     <SafeAreaView style={Styles.safeAreaView}>
       <ScrollView>
         {/* Title and grid */}
-        <View style={{flex: 1}}>
+        <View>
           <Text style={Styles.landingScreenTitle}>{item.title}</Text>
-          {process.env.REACT_APP_ZONE === 'guyane' ? (
+          {REACT_APP_ZONE === 'guyane' ? (
             <TextWithSound
               style={Styles.landingScreenSubtitle}
               sound={'Accueil_1.MP3'}

@@ -9,6 +9,9 @@ import LandingStyle from '../../../styles/components/LandingScreen';
 
 import ReactHowler from 'react-howler';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE
+
 ThemeCard.propTypes = {
   item: PropTypes.any,
 };
@@ -57,7 +60,7 @@ export default function ThemeCard(props) {
           <Image
             source={
               item.image[0]
-                ? process.env.REACT_APP_API_URL + item.image[0].url
+                ? REACT_APP_API_URL + item.image[0].url
                 : null
             }
             style={LandingStyle.gridItemPicture}
@@ -66,7 +69,7 @@ export default function ThemeCard(props) {
 
         <View style={LandingStyle.gridItemTextContainer}>
           <Text style={LandingStyle.gridItemText}>{item.title}</Text>
-          {item.sound && process.env.REACT_APP_ZONE === 'guyane' && (
+          {item.sound && REACT_APP_ZONE === 'guyane' && (
             <CustomTouchableOpacity
               onPress={e => {
                 togglePlay(e);
@@ -86,7 +89,7 @@ export default function ThemeCard(props) {
           )}
           {item.sound && item.sound.url && (
             <ReactHowler
-              src={process.env.REACT_APP_API_URL + item.sound.url}
+              src={REACT_APP_API_URL + item.sound.url}
               onEnd={onPlayStop}
               onStop={onPlayStop}
               playing={play}
