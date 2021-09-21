@@ -25,11 +25,11 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
 
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND IMAGE
@@ -46,11 +46,11 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         dockerbuildargs: |
           buildenv=preprod.guyane
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
@@ -73,11 +73,11 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         dockerbuildargs: |
           buildenv=preprod.metropole
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
