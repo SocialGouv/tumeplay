@@ -24,14 +24,22 @@ jobs:
       run: |
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
+    # - name: Use autodevops build and register
+    #   uses: SocialGouv/actions/autodevops-build-register@master
+    #   with:
+    #     project: ${{ env.project }}
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     imageName: ${{ env.project }}/backend
+    #     dockercontext: ./back-strapi
+    #     dockerfile: ./back-strapi/Dockerfile
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
 
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND GUYANE
@@ -45,14 +53,28 @@ jobs:
       run: |
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
+    # - name: Use autodevops build and register
+    #   uses: SocialGouv/actions/autodevops-build-register@master
+    #   with:
+    #     project: ${{ env.project }}
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     imageName: ${{ env.project }}/frontend-guyane
+    #     dockercontext: ./tumeplay-app
+    #     dockerfile: ./tumeplay-app/Dockerfile
+    #     dockerbuildargs: |
+    #       buildenv=dev.guyane
+    #       REACT_APP_API_URL=%%REACT_APP_API_URL%%
+    #       REACT_APP_ZONE=%%REACT_APP_ZONE%%
+    #       REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
+
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         dockerbuildargs: |
           buildenv=dev.guyane
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
@@ -75,14 +97,28 @@ jobs:
       run: |
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
+    # - name: Use autodevops build and register
+    #   uses: SocialGouv/actions/autodevops-build-register@master
+    #   with:
+    #     project: ${{ env.project }}
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     imageName: ${{ env.project }}/frontend-metropole
+    #     dockercontext: ./tumeplay-app
+    #     dockerfile: ./tumeplay-app/Dockerfile
+    #     dockerbuildargs: |
+    #       buildenv=dev.metropole
+    #       REACT_APP_API_URL=%%REACT_APP_API_URL%%
+    #       REACT_APP_ZONE=%%REACT_APP_ZONE%%
+    #       REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
+
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@master
       with:
-        project: ${{ env.project }}
-        token: ${{ secrets.GITHUB_TOKEN }}
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
+        harborUsername: ${{ secrets.HARBOR_USERNAME }}
+        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         dockerbuildargs: |
           buildenv=dev.metropole
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
