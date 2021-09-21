@@ -1,3 +1,61 @@
+# [1.10.0](https://github.com/SocialGouv/Tumeplay/compare/v1.9.6...v1.10.0) (2021-09-21)
+
+
+### Bug Fixes
+
+* Adding keys to avoir React warning on List redenring ([1049cce](https://github.com/SocialGouv/Tumeplay/commit/1049ccecc4e794beb810ee8ce459146000e94ab8))
+* async pdf creator and then ([c1a19e8](https://github.com/SocialGouv/Tumeplay/commit/c1a19e83b51ccb40ac14bd0534d8752984f3e54b))
+* bilan design ([d898e8b](https://github.com/SocialGouv/Tumeplay/commit/d898e8bb6e0563e2559e20a8fba1ad40818b9bd2))
+* correct user retrieve loader ([dee59f8](https://github.com/SocialGouv/Tumeplay/commit/dee59f8519df74f8ffe5b11d79e569b69ce54b95))
+* favicon / sidebar activelinks ([6f7b294](https://github.com/SocialGouv/Tumeplay/commit/6f7b294b682a12f3d4a80e115a83817c4496b43d))
+* fixinf public route redirection according to role ([9b19028](https://github.com/SocialGouv/Tumeplay/commit/9b1902824f947238d94297508448a584397e5481))
+* fixing date format to ensure correct api call for send request ([68aca3f](https://github.com/SocialGouv/Tumeplay/commit/68aca3ffc468bd9fdcb194f97dfd5ebcff880425))
+* fixing update on commandes ([48b3d2f](https://github.com/SocialGouv/Tumeplay/commit/48b3d2f24729f76d9c691c1c8e3fb6b7ea6d1d50))
+* integrating modal component ([4e44ceb](https://github.com/SocialGouv/Tumeplay/commit/4e44cebd1a28c65adbdbf3a059c17985b9d4cf69))
+* login page design ([963e127](https://github.com/SocialGouv/Tumeplay/commit/963e127ceceb118ca1508262e8a786c9eadfa963))
+* logo tumeplay & username ([3eea06f](https://github.com/SocialGouv/Tumeplay/commit/3eea06fa3f66ed7a8dbb9dfcf49fb6dee14a042d))
+* managing authentication redirection in public and private routes ([7752983](https://github.com/SocialGouv/Tumeplay/commit/7752983234455942fb02bb90fc7d428109c4a6e6))
+* margin in sidebar ([dbcfef3](https://github.com/SocialGouv/Tumeplay/commit/dbcfef33c0be4f56d841a8ee958ffcccaa61ba81))
+* merge ([e1b112f](https://github.com/SocialGouv/Tumeplay/commit/e1b112f5e5498dd07b3aaa146dde7b304719d633))
+* removing loader for now ([0e07c40](https://github.com/SocialGouv/Tumeplay/commit/0e07c40b704793266d6c5d461b25c3c0cb8520c2))
+* removing pagination ([009475b](https://github.com/SocialGouv/Tumeplay/commit/009475bb7d92a44f8478e5c8f9a3f786debac44d))
+* tabs color ([4bb00f9](https://github.com/SocialGouv/Tumeplay/commit/4bb00f99675ef3843aa0a21405367c675793aae3))
+* yarn.lock updated ([33c8f7c](https://github.com/SocialGouv/Tumeplay/commit/33c8f7c46906906b03d8cfa6aea7cdc32abd230e))
+
+
+### Features
+
+* adding bulkupdate for orders in Strapi + integration in front dashboard ([ee1c99f](https://github.com/SocialGouv/Tumeplay/commit/ee1c99ff3ecb66f9cc4a2fa551eb13eb2aea084d))
+* Adding filter on order request to handle the display all ([ebeced0](https://github.com/SocialGouv/Tumeplay/commit/ebeced0f7d26be15d5f9410508b554785cfbebd9))
+* adding sidebar + responsivness management ([533475d](https://github.com/SocialGouv/Tumeplay/commit/533475d6dd6b71495bcf60fc3d9a7e7c16323c2d))
+* CSV FileName + Headers // Box number display ([935c434](https://github.com/SocialGouv/Tumeplay/commit/935c4340f82b839f964663d235a28ef30f59c05b))
+* dashboard multiple selection for orders + add Date_Sent in strapi ([e204d83](https://github.com/SocialGouv/Tumeplay/commit/e204d8333ec2d6a51453f4ffca3c1aedcac47258))
+* design layout & orders ([3bff2d3](https://github.com/SocialGouv/Tumeplay/commit/3bff2d3f8dea298bce9467dd90e27cfbc8c539d9))
+* finishing merger + empty tempFolder ([549c07d](https://github.com/SocialGouv/Tumeplay/commit/549c07d2874bc581466c45e60e3b0663f65e17a4))
+* finishing PDF Merger for Colissimo ([e3b66ad](https://github.com/SocialGouv/Tumeplay/commit/e3b66ad29b99ce01275e729beab44159eef2ef92))
+* handling print for Colissimo stickers in back + integration in front ([4db973a](https://github.com/SocialGouv/Tumeplay/commit/4db973a13b79ad17a77b6a1294777225eb351529))
+* handling routing by roles for each users ([fad1fea](https://github.com/SocialGouv/Tumeplay/commit/fad1feab359717633f3152ba0a0d5a9a47a1d479))
+* init colissimo pdf merger ([3140e64](https://github.com/SocialGouv/Tumeplay/commit/3140e641310b5ab4eafa30731731db8444e5e0f8))
+* Init dashboard with create react app and tailwind config ([a77d243](https://github.com/SocialGouv/Tumeplay/commit/a77d243711a7b0060519e6fbba1f7a8790e6ac52))
+* init multiple selection ([81654ee](https://github.com/SocialGouv/Tumeplay/commit/81654ee8c9d6682d47d58c1df974c6a3c09d356e))
+* init private layout for routing ([7f5875d](https://github.com/SocialGouv/Tumeplay/commit/7f5875d25b39ee215bcbf8fe9a59d0f62f790517))
+* init table design / integration sass module / getOrdersbyBoxes ([c88f452](https://github.com/SocialGouv/Tumeplay/commit/c88f45258cfdb512089b5bffb072244adcc3c0cd))
+* install formik & finish forgot password page ([5d0881b](https://github.com/SocialGouv/Tumeplay/commit/5d0881ba677f38e81977371846179421460b5ad2))
+* integrating CSV Generator ([81b6e02](https://github.com/SocialGouv/Tumeplay/commit/81b6e022086b2de11cd116b81b406845d52dba2f))
+* login page design integration ([4451f12](https://github.com/SocialGouv/Tumeplay/commit/4451f12495258655aa91d1a735ff424e0cb3352e))
+* managing authication / routing / logout ([a5a2b59](https://github.com/SocialGouv/Tumeplay/commit/a5a2b59f7983f01294de2658021033630bc05ce9))
+* merging pdf colissimo adding flatten pdf to try merge ([389bc1b](https://github.com/SocialGouv/Tumeplay/commit/389bc1b68f4e59a9113faa30427b9d9ae76b8e59))
+* order page + table and filter manangment init + api call to Strapi ([3d9fed1](https://github.com/SocialGouv/Tumeplay/commit/3d9fed1eaf4c4d4706fdad791a77059adfb11de4))
+* pagination ok ([06f3efc](https://github.com/SocialGouv/Tumeplay/commit/06f3efc803880f8a76f53d765172b5ecd659475b))
+* pagination on summary page + export to csv module installation ([954ccbc](https://github.com/SocialGouv/Tumeplay/commit/954ccbcdce599f8030fc6be1facd6d871ef49fc5))
+* pdf merger in strapi + route to get the final PDF + Implem in front Dashboard ([67deae8](https://github.com/SocialGouv/Tumeplay/commit/67deae8ef9e33294dc2c0294ebbef295415b215e))
+* pluging merged colissimo into dashboard ([5f079f6](https://github.com/SocialGouv/Tumeplay/commit/5f079f6644d37bc67d261babb2772f287b85844e))
+* prerequisite for pipe integration ([fbe35b7](https://github.com/SocialGouv/Tumeplay/commit/fbe35b790dc96b93f9da8ac43739f1aba9719d25))
+* reset password ([7117167](https://github.com/SocialGouv/Tumeplay/commit/7117167f59e0d35eedcb1cbf120475c876f0f630))
+* revamping table component for reusable purpose + Orders Summary componnent initiation + react datePicker ([742b2ea](https://github.com/SocialGouv/Tumeplay/commit/742b2eaca4e9c768099ee38630c958fc06e6783a))
+* Setting up Router with Layout ([476d248](https://github.com/SocialGouv/Tumeplay/commit/476d248964b101148251842c09beae5869267c93))
+* Tailwind CSS config + integration in App.js / Creating Bilan component and routing ([8c54720](https://github.com/SocialGouv/Tumeplay/commit/8c54720f103fc0be1c6c6093c200fd7ada086d3a))
+
 ## [1.9.6](https://github.com/SocialGouv/Tumeplay/compare/v1.9.5...v1.9.6) (2021-09-21)
 
 
