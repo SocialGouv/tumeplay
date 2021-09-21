@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/SocialGouv/Tumeplay/compare/v1.9.3...v1.9.4) (2021-09-21)
+
+
+### Bug Fixes
+
+* Use Harbor as registry ([a0aeb05](https://github.com/SocialGouv/Tumeplay/commit/a0aeb05207013f10422475d4e7c71338816f8b0d))
+
 ## [1.9.3](https://github.com/SocialGouv/Tumeplay/compare/v1.9.2...v1.9.3) (2021-09-20)
 
 
