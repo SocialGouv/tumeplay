@@ -1,3 +1,13 @@
+## [1.10.1](https://github.com/SocialGouv/Tumeplay/compare/v1.10.0...v1.10.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* declare REACT_APP_ZONE before using it ([b0720a6](https://github.com/SocialGouv/Tumeplay/commit/b0720a69f62308d1a087035b4abfb69648b63d55))
+* fix tunnelUserAdress for Guyane ([97501dc](https://github.com/SocialGouv/Tumeplay/commit/97501dc4c557045b270b9936d67a332d756e4196))
+* old user api call ([4a27b69](https://github.com/SocialGouv/Tumeplay/commit/4a27b69a66a17496e89441d4ad04d4f49add9281))
+* remove token usage ([3260a1f](https://github.com/SocialGouv/Tumeplay/commit/3260a1f180ecd3a29029d87aa4be129345b33183))
+
 # [1.10.0](https://github.com/SocialGouv/Tumeplay/compare/v1.9.6...v1.10.0) (2021-09-21)
 
 
