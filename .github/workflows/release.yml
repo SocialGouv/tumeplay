@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [main, alpha, beta, next]
+    tags-ignore:
+      - v*
 
 jobs:
   release:

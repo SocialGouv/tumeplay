@@ -20,6 +20,8 @@ export default function MoreThan25YearsScreen(props) {
     fontFamily: Colors.textFont,
   };
 
+	const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
   return (
     <View
       style={{
@@ -68,10 +70,13 @@ export default function MoreThan25YearsScreen(props) {
           width: '100%',
           padding: 15,
         }}>
-        <Text style={textStyle}>
-          Actuellement la commande de box est disponible en Seine-et-Marne et en
-          Nouvelle-Aquitaine.
-        </Text>
+        {
+					REACT_APP_ZONE === 'metropole' && (
+						<Text style={textStyle}>
+							Actuellement la commande de box est disponible en Nouvelle-Aquitaine et en Île de France.
+						</Text>
+					)
+				}
         <Text style={textStyle}>――――</Text>
         <Text style={textStyle}>
           Pour être informé·e de la sortie de l&apos;app&apos; dans ta région,

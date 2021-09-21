@@ -16,6 +16,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -38,6 +39,7 @@ spec:
       labels:
         app: backend
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     spec:
@@ -77,6 +79,8 @@ spec:
                 name: azure-pg-user
             - secretRef:
                 name: backend-sealed-secret
+            - configMapRef:
+                name: backend-configmap
           env:
             - name: DATABASE_CLIENT
               value: postgres
@@ -103,7 +107,7 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.45.0
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -129,16 +133,19 @@ metadata:
   namespace: tumeplay
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
 spec:
   encryptedData:
     MONDIALRELAY_ID: >-
-      AgBIXbydPau0Vk+AbtrvcX3djGF1uFFQ12PWNOdqff5E2XvQ516WdU5L1Kh3UwikKyqp3PMLw/O7blp2V2Dfo3zVHT3W3ZYKmCtnpN0DzvLAUcN1XdqxkHOdro47IM0tD4DOMx3h4S9qrX0HJHkJb2hAi1ABCwUphXMZYwCCLYsBMVi6vlXGbHIJZe3qUYdMf/N0KypZKKm0Gjh1P6ltbXDypwkQrwbS57m+sRMVV3CL4PLAcrSM7EHEHvSKMa8aptEL6X4KZGM1U9AAbhWM8aQ+8aKGwe5uKGELd5y83xHxbZIjeEyuub4GfO/ZNMLAVSq8IjBt0f1yelMfzLtfHce5FONLr31AimAXsqCc7vzWrS4hDdsWsfu4zpucJiNO76RWsoBBuqo0/jprW++looufA8z18f/lqHfKTc2k58ArvKK+94p2TGw/RjanKj/jFou7PPKBybAFaiiAPdKyUHFRxK0tLgHv3EeZJgwwPeCEpVabskq2VF7XCLKqyutzdavkaJZMNkXnQvDptj4vIklhHx0+RfmJgBNpLyxNf7zpudD9wLyG47Zu/C2ZNIon3Oso3tOMN3Qt9pbDpjEiZKkcnDLu9Yi0Y+Y5mIze+jFrMD2kBTzBAZ3BDbNGj/Yi1U/yrgSKTV2FY3rlChF5HpO1WmcZ0GfIC/cYrkw12YtTOxLi500xlMJI0aFe0EdWNMh/C5hLx25PdA==
+      AgBMj9CdbIvrLfGAs5QxwrOHKp2PawBNV4lHZeXBlnBq+PErY6QzsYvM2geQIH1asTt+N0a+OZQrF3UOiKWNDH07FdFIMgrSxHlvuGTCruILVo9v6GrmFBdlmAe5bSDEmkgkKaxB7md5dm01E56ggS1Thz3QnPkdLVvLFlUBeC9HRgRFYtui2PIrCRGM1KCkT+9ZeU7sy4dFgS4WWXLCoKc71x3zaRzkONCugcF1Mzn4xofZ3B61KsaQXOSPQgbelabRxPgbB3artUQUv+hW6VrfMaVKtp+02Fxml6bX+TZl0yK/H+EkUKtaScCx5IR72iL/4vrXrW6vBF3acn6bctnK7xfMc/8zgAfzAZuVxmgVQyAFZCBG11Uug+1oPV3sn+n7S3ELJOddQ1HIgxlDDyaBCKEzeyrzp+t0iCU46haq9KlRQnBGKpSnEsV5tfbJlg1cj+GCq9R4lwp39Cu/Xcym1LkSfIsCaR55F1/X5g2VntpADJVp2zL8PGtanGdSsEEWZO9iFf+RmI/JmMK7Et/SflF+gaxPcd/2UYeUk98i+CAs4xhvn3ZTkVesQv+5JjfPyIrXWbANJLXAZWZs0TBcNrw7qmAivCZywCe6dQIuUsLOmrAlCHzBbEVl2DQUQ81dTGiGI09WHhdWl08yvsB1mYodhQPj7zYd74FoW3Kc6yPQzNECzR+DFk0w0B5nCb9antyS9fEDOg==
     MONDIALRELAY_SECRET: >-
-      AgB7O4E/qUXYy+qCpsUEmUVwDaiBz6ca1wHcjKzKHHWeZXFlF1hMcY9npr7GI0OP+xt7grSmFvPMFrC1moAliNwIqQTtFWd7ZyMcn31VV6HDQcAEiLDeXWKE2kgjMLydaqF9RNN23ifDngmH6IvkTQTfM1BHtGd0OgGvlLPJoBxFoZCWbWF0b5Q8SxPedYozGMrebkJjgwb7gfB149ftV9b+IJoHGnt57xRdkNicL7Vgd0QRMkJ4AWm6UdTgUfqSs7qKV+QCICn6F5i8fVIhPoQMnDCyiA0Q2yBhe4NCBNfgzvAqMc/PPgAOsqvHOPMc6fuQ06EI3mUFUIWhwqOZR1+m76cTeObhhZxMESnW3bOnUIGEPfFnsRfkmxB0snDmQA0QnhLtgRz+SwY73vLekpyYgAAj627usU8cGxZTerdaho+70MFB1mJ0q9Vf8O4dg0CtTfaZVDo2Iz8TSfcHsxqcuC+eVB1Zk8RZ1rNXZqvyy2o0KZO637fUaoeQTzEctPit6sPIV5Bm5PkRlFrXtNJyfnMMLYcQMUeTulD29SB6yTMS6NkkdBsO6/BOgpd5BCBZSoNaT8HFDiPMzUEP+TcugHlgplvK+QDbM1jjui6Hai9QUjMZPyscGsW8rIiq23THje7dSzDRmRLCRCNeObJtv380Pr8+UWRL4xsHkyPfc4zpzt6g0v3mobkMK77FVWpRBp3QG7ZCIg==
+      AgB6sKDgkonPNnlkopmsbJsAHktotiOPA5adziwujfcAg1I6EZumI04jp/yqH7OlWwsqe1HkLmCgMG6No/eoxkwgfsCtVMHODCtt3UPt0YQn9zM9xpkW2gVNqyO1ET/Xyi/3e8HFvBX6glSIF6uGNZU7v0V558eTSCHSSu3jsiriVrREKR9x2Kc4sOs83bKisoIlMTequk7+BKdsQ2U0UbgAtjp9ekUSI3wfWwIxI4sX/ekJgVu27KY1BwdDf32wkKpn46h4oEzGTVjO0gJHcXIuJWueKhFZp5EgbpD6D8lG63ygXJicV1pTELa0wcdkA79f9HFXP3rjbg1Jk+7Eu2VVKnzytM0IPxMV+GeXn0/M53l+MITROKDfl4opKNLcon3IpifSrK6f1rs0YoITVpVB6qlAmoMSHxcXQMeUIU6v5RF668VC6Kp1A3BPMYDrEmKEMYM1UYxYFuDTd4FxYtKqHCA61Dg3WFAhwdxm9Wr1Xvk4+UXVXldB3JGypLCW5VsWHvnlpG8KGlF9sDkVo2cPmrajmRyPKztkbc15UgK2bvQuAYq95fN9uHh8UwA0uEjtOhRcAA3CYGppttXrmy5kqmvYIeorR9Btt5lzDJvZRa9CITbXOqNKfjIEXs6/APHofDrM2NwjAMqpG+BfW9GUs2rTPzxS52P9j7LLphYYXghXXMXh6E+pYvMIn3VNf7N3nF/yPcdoKg==
     EMAIL_PROVIDER_PASSWORD: >-
-      AgBnzI36LhT4NAjEw4h9YFFkoBXPD/v0qqngn6u2tMadi9JNkgsD9kfVm0PiSK1pvwOuqr4QGhARtR+Livo72OoVT5wRgEoGOIsRRCtkilfcraIaFezpbHQnI4ekJCOn5p03cul1ojiv8hVVh9S7jFxa7NQNxp6Bll/1I+PJ4MkPSKy/D7AVWt6475dDZkRobs7yQ8bYHSlcHqk9hljuE7VO36Dawnx8TWaH10TJufgtr+xhSEJu60iwwJJblI9uK2cHvOz57Qu4N3WIMDIYdwsA0jjcy99gPcqaGN5jUwZhwdkW8EUPpzmVV7CqegZHH65p+tZZ4HcxuopRDGEPlKAhYHcaLXLhCErOTPV8Nc4Ngos+sKQaPXPBf5qpyTkI4F0lxR54CP9MnbZVhDYt2lmVYUTGGJH0jAqKVpvtxaPFjk3IuC2e2AcXBlcol/vQNaUnpqwmmWSKHIZKgArX22vjQs8FNHNXzZnGSSCFxK2ImbGk5HTuAphfZ2VPeQeGhj3zXIslb5dCqnbXhhEYLxBP+xlOaQnCWqx9E45sEpp5rvd+OWdRb0usxm30HN+gr26lsfdoGX8k8nrWGBHiUSl1S+3qTmdkGbYj2A5cJu5Tyqm+MGy9v9GfTAcD467yHH+BNxF7Rj25ZpM9XYCrNrbnIAIZHvroyGZAIuPByjsuNt/v+z+U2Cm3zP5XN8l70VdpsSDaso+zmRB5Yg==
+      AgBjnxfFg2iNSekZSm62TohCHr0NjflPmanAIxrUe3C/FEyqPuh6+18RBm6ElfeCzxVG5AKyRONFaJvh48xO7OQ0EfR9dUGsL3r4GSmky/EajeQgQr+9prKWGLfdZLdhPui5HkU7wKSe5/2xXtDBeUNzmUAB+K+7o2t9Mtpz88pI14Qxa/ngXUVA2z9wM2kl6xaaHN46FiG6cKbCAFHRva3OJ9mTY2lNDQt8Yu9x4B/CfwbbZQH0KZOG9w0V/XpffTYCYWpajsPBxjesHN8HOuvCZ41pVGzUiLnQrEoKgiZFY0KrVhk4YfcwEaxnMwHadue3F4LJv6tPeYP+UPErXWSwp0hmrNMuc5ot8J9oQZPP02IkwEbQXkKYnwYYvfW/sUtTxqJrPkm751/FBasgrXO8c3PicYvZMSSKFcgYuYdv37Hsh49qOR6bMO+cxPsZSM84zsfeqwwBqhk05P5CZROL/3sQDx3/UX76fXz9T8KwcYj9P5c4iNiO/gxiRxTQFuFyr0GTkdl5J9Lqh5pyC3U9/EMn/spU3V2nF/JD0BbiByoz4M7HBgasVLZ32WauticPVazk0SKkRS2oA2rpWtGpzEgGxE4XpdW9tYUgwsYFYMzfAY7r3joWC4UL+jSFM7k9JbFSUmYNoqa27PON6AdX8hvwW6pl903C6JKadc7Gmsfsf6khjWy5QDSI+D9M72nT4s0D+e45wWf6jh48M+7mQJUO7rQ1tQhJV4aFxZw3Jsc=
+    STRAPI_LICENSE: >-
+      AgB5F+Ux84TMSbHTkSN/gd77YDvKNx3SDsXCfLGzPzdbD/AGihMrywXnnKhBkR+QklWd8o4bQr+K2AVZh1AntAc+1DouW9bUDm4QIq/4SPjftqhee2YRadtBfgBXe+qBWdKk0fqwgG9mr/Z1o6PqYsjmLgYqejU2Jjg7OAdlYAvvi06+0wOpFE44oaUOnf3cNCnZpJVjsPOSAq8xPA1cV2ShdJN4ScmxBeodd5FXu27IPa+1za+cjsXzGd1G06TnsiXL/A3dbBn+aUOM46A+/vTkC4qEkRwG1WLdaU9LoJdS95Bbx2H4uREb4A85Rols7fSQnstjn0jdhGaevD4H+dFXbvIEvRoXRKRYS1kbaiXjXDzykZhU0mkbPUk0tshTg/UFIancvwMN2NBWCbb8MIuOFz3AireMVEjp/W2wmeG0ryqCry/DWRXplYjKe1eqb9DbieX4A8PPPV4Z2Ty77YubKPaCx0OGj1Jhoyx1giXzFkCU9sXU0RSi5wnzkHKqsBMgj5K8cewXuO4+kjQUiN4xma1eCXPrycFnoWjAii/Qmt2j0MEgP047xXEHpAuuoM7GhqFxsLzqD3LTfWgpxlK9Ze6LVSBtDATtGp0PcCytfF2fmyvwo+At91+SLTfG7rsS182jw6ECKrLZmXDyqikSaqMd28n2Wbj0BGAB0DsSnWDBCbA3nQJeVKk/Pj8KwIoHz5GYOBe08xPcIR+xDLHBZPtlYnCxAalhqABri/DvBGwX+NGxROPjqjLF24BRa1/hhSyhIFD/Mj9CC9jCEi/LFu+/S5N/T8ILHIcmEbxrj8RO1nop/DVfMlPdJPh8exGKFxo2AbEN1hI4e+pXaAsdXmdYPBswZfs3rYNq4heeXDWduuEAD9RwFZ7yBQkgzT5jgdLIhwn6oJcXppL+1KkPYY2Rp+QXXqUrfIvr+YBAz8gKUO+r3RRvOlVM3upHsWVWsxcn+6Y9bX/5s0I++0kiING4Xex+a+P62hgtt/F7p0vudhLAO6vUHb0ZAXRFLQ90MH1KlwTyyxdqogdi9rgBqeK1bGTO46WTokKx14jf59j6UiDisFReeWzlw9Dus4SbgsDNFJnmEF1VdbaC3LvRsdVtJYcr3/LYD7Zmrvs5zSP5i+VAo92iYSyIHAKEP9JJi32VJnCK90pTTLN8hqvbMeAh8Zj23zQP8iTPNPJmhsEvOadmr17j171wo22QyA1sO8E/v0nHL7GZpE7oUaaHcrlblo6A++Q1VhbJAGgRlm+++WpqD5j8Vvm2AvOGxIW67tzu+vCqidUm/WDV2nR4IJqNpetp95i7/XNLNe72Dy8M/yDdPKBIcEq7aWozhpSou4XVbkotlBnajYyYioRSqwdXiJZU7fH4BR3O4YMXVV5mU8glcQ06+cF7wF9k2c3cwliw0KipDiU0AsQW/ppzcx6cdTYv94tY+KLs4R5KB3j166kodjdDHy+O/wC/oiwHFwARz47pqWweOC40Sfb6wow9bBOw/SzmuKA2OGlH+/l8dmKlMuElYJw9ISMN1niA7MPkVLA3rnueQB/CLfzYe73hQYDGw9z+CKTYeLUOOjLwzo47Gp1XhecQOaoQPNU2cEBd2AT0aP0z42a81VVrgSAbyOaueOGrqb02SlxK+JNvmsunMydAOHF/rbD/VcMYCg0sgdeiGLRiLjq2Jlv9/dvdS/AIXqDd5Su/OFGeHGegNY8zRKmgaCTGwA==
   template:
     metadata:
       annotations:
@@ -152,9 +159,41 @@ spec:
       name: backend-sealed-secret
       labels:
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     type: Opaque
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-configmap
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    application: tumeplay
+    component: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  namespace: tumeplay
+data:
+  CRON_ENABLE: 'true'
+  URL: https://backend-tumeplay.fabrique.social.gouv.fr
+  EMAIL_PROVIDER_HOST: pro2.mail.ovh.net
+  EMAIL_PROVIDER_PORT: '587'
+  EMAIL_PROVIDER_SECURE: 'false'
+  EMAIL_PROVIDER_USERNAME: contact.tumeplay@fabrique.social.gouv.fr
+  EMAIL_PROVIDER_TLS: 'false'
+  EMAIL_PROVIDER_FROM: Tumeplay <contact.tumeplay@fabrique.social.gouv.fr>
+  EMAIL_PROVIDER_REPLY_TO: contact.tumeplay@fabrique.social.gouv.fr
+  EMAIL_CONFIG_ADMIN: contact.tumeplay@fabrique.social.gouv.fr
+  EMAIL_CONFIG_CAT: esat.benext@gmail.com
 ---
 apiVersion: v1
 kind: Service
@@ -162,6 +201,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -188,7 +228,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -200,6 +240,7 @@ metadata:
   labels:
     app: backend
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: backend
@@ -252,6 +293,7 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   namespace: tumeplay
@@ -272,6 +314,7 @@ metadata:
   labels:
     usage: tumeplay-uploads
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
   name: tumeplay-uploads
@@ -308,9 +351,9 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
-    component: nginx
   name: guyane
   namespace: tumeplay
 spec:
@@ -331,9 +374,9 @@ spec:
       labels:
         app: guyane
         application: tumeplay
+        component: nginx
         owner: tumeplay
         team: tumeplay
-        component: nginx
     spec:
       containers:
         - image: ghcr.io/socialgouv/tumeplay/frontend-guyane:1.2.3
@@ -373,7 +416,13 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://backend-tumeplay.fabrique.social.gouv.fr/
+              value: https://backend-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_ZONE
+              value: guyane
+            - name: REACT_APP_OTHER_ZONE_URL
+              value: https://metropole-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_MATOMO_ID
+              value: '45'
 ---
 apiVersion: v1
 kind: Service
@@ -381,6 +430,7 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: guyane
@@ -407,7 +457,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -419,6 +469,7 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: guyane
@@ -454,9 +505,9 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
-    component: nginx
   name: metropole
   namespace: tumeplay
 spec:
@@ -477,9 +528,9 @@ spec:
       labels:
         app: metropole
         application: tumeplay
+        component: nginx
         owner: tumeplay
         team: tumeplay
-        component: nginx
     spec:
       containers:
         - image: ghcr.io/socialgouv/tumeplay/frontend-metropole:1.2.3
@@ -519,7 +570,13 @@ spec:
             periodSeconds: 5
           env:
             - name: REACT_APP_API_URL
-              value: https://backend-tumeplay.fabrique.social.gouv.fr/
+              value: https://backend-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_ZONE
+              value: metropole
+            - name: REACT_APP_OTHER_ZONE_URL
+              value: https://guyane-tumeplay.fabrique.social.gouv.fr
+            - name: REACT_APP_MATOMO_ID
+              value: '21'
 ---
 apiVersion: v1
 kind: Service
@@ -527,6 +584,7 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: metropole
@@ -553,7 +611,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -565,6 +623,7 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
+    component: nginx
     owner: tumeplay
     team: tumeplay
   name: metropole
@@ -599,6 +658,7 @@ metadata:
   namespace: tumeplay
   labels:
     application: tumeplay
+    component: tumeplay
     owner: tumeplay
     team: tumeplay
 spec:
@@ -632,8 +692,69 @@ spec:
       name: azure-pg-user
       labels:
         application: tumeplay
+        component: tumeplay
         owner: tumeplay
         team: tumeplay
     type: Opaque
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://metropole-tumeplay.fabrique.social.gouv.fr$request_uri
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app.kubernetes.io/component: redirect
+    app.kubernetes.io/name: metropole-tumeplay
+    application: tumeplay
+    component: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: metropole-tumeplay-redirect
+  namespace: tumeplay
+spec:
+  rules:
+    - host: tumeplay.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+        - tumeplay.fabrique.social.gouv.fr
+      secretName: metropole-tumeplay-redirect
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://guyane-tumeplay.fabrique.social.gouv.fr$request_uri
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app.kubernetes.io/component: redirect
+    app.kubernetes.io/name: guyane-tumeplay
+    application: tumeplay
+    component: tumeplay
+    owner: tumeplay
+    team: tumeplay
+  name: guyane-tumeplay-redirect
+  namespace: tumeplay
+spec:
+  rules:
+    - host: guyane.tumeplay.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+        - guyane.tumeplay.fabrique.social.gouv.fr
+      secretName: guyane-tumeplay-redirect
 "
 `;

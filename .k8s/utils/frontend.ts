@@ -1,6 +1,6 @@
 import env from "@kosko/env";
 import { create } from "@socialgouv/kosko-charts/components/nginx";
-import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
+import { addEnvs } from "@socialgouv/kosko-charts/utils/addEnvs";
 import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { ok } from "assert";
@@ -13,7 +13,6 @@ import { getManifests as getBackendManifests } from "../components/backend";
 
 export default async (name: string) => {
   const probesPath = "/";
-  const subdomain = "tumeplay";
   const ciEnv = environments(process.env);
 
   const imageTag = getImageTag(process.env);
@@ -47,6 +46,13 @@ export default async (name: string) => {
     },
   });
 
+	const getMatomoId = (name: string) => {
+		return ciEnv.isProduction ?
+		name === 'metropole' ? '21' : '45'
+		:
+		name === 'metropole' ? '48' : '49'
+	}
+
   /* pass dynamic deployment URL as env var to the container */
   //@ts-expect-error
   const deployment = getManifestByKind(manifests, Deployment) as Deployment;
@@ -55,12 +61,20 @@ export default async (name: string) => {
 
   const backendManifests = await getBackendManifests();
 
-  const backendUrl = new EnvVar({
-    name: "REACT_APP_API_URL",
-    value: `https://${getIngressHost(backendManifests)}/`,
-  });
+  const otherZone = name === "metropole" ? "guyane" : "metropole";
 
-  addEnv({ deployment, data: backendUrl });
+  addEnvs({
+    deployment,
+    data: {
+      REACT_APP_API_URL: `https://${getIngressHost(backendManifests)}`,
+      REACT_APP_ZONE: name,
+      REACT_APP_OTHER_ZONE_URL: `https://${getIngressHost(manifests).replace(
+        name,
+        otherZone
+      )}`,
+			REACT_APP_MATOMO_ID: getMatomoId(name)
+    },
+  });
 
   return manifests;
 };
