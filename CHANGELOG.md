@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/SocialGouv/Tumeplay/compare/v1.10.2...v1.10.3) (2021-09-22)
+
+
+### Bug Fixes
+
+* fields verification only for metropole ([94ebbbf](https://github.com/SocialGouv/Tumeplay/commit/94ebbbfb704bd2bbcd88eb56a332780a2910d684))
+
 ## [1.10.2](https://github.com/SocialGouv/Tumeplay/compare/v1.10.1...v1.10.2) (2021-09-22)
 
 
