@@ -46,7 +46,7 @@ const component = "dashboard";
 
 export const getManifests = async () => {
   // const volumeName = "uploads";
-  const subdomain = "backend-dashboard";
+  // const subdomain = "dashboard";
   // const imageTag = getImageTag(process.env);
   const ciEnv = environments(process.env);
   // const [persistentVolumeClaim] = getAzureProjectVolume();
@@ -67,12 +67,12 @@ export const getManifests = async () => {
   const manifests = await create(component, {
     env,
     config: {
-      subdomain,
+      // subdomain,
       // ingress: true,
       // withPostgres: true,
       // containerPort: 1337,
       // image: `harbor.fabrique.social.gouv.fr/tumeplay/dashboard:${ciEnv.tag || ciEnv.sha}`,
-      // subDomainPrefix: (!ciEnv.isProduction && `backend-`) || undefined,
+      subDomainPrefix: component,
     },
     deployment: {
       image: `harbor.fabrique.social.gouv.fr/tumeplay/dashboard:${ciEnv.tag || ciEnv.sha}`,
