@@ -173,15 +173,15 @@ export default function TunnelUserAddress(props) {
       isValid = false;
     }
 
-    if (localAdress.lastName === '') {
+    if (localAdress.lastName === '' && REACT_APP_ZONE === 'metropole') {
       checkedIsValid.lastName = defaultValue;
       isValid = false;
     }
 
-    if (localAdress.emailAdress === '') {
+    if (localAdress.emailAdress === '' && REACT_APP_ZONE === 'metropole') {
       checkedIsValid.emailAdress = defaultValue;
       isValid = false;
-    } else {
+    } else if (REACT_APP_ZONE === 'metropole') {
       if (!MailValidator.validateMail(localAdress.emailAdress)) {
         checkedIsValid.emailAdress = CustomTextInput.fieldStatus.INVALID;
         checkedIsValid.emailAdressWrongFormat = true;
@@ -189,10 +189,10 @@ export default function TunnelUserAddress(props) {
       }
     }
 
-    if (localAdress.emailAdressConfirmation === '') {
+    if (localAdress.emailAdressConfirmation === '' && REACT_APP_ZONE === 'metropole') {
       checkedIsValid.emailAdressConfirmation = defaultValue;
       isValid = false;
-    } else {
+    } else if (REACT_APP_ZONE === 'metropole') {
       if (!MailValidator.validateMail(localAdress.emailAdressConfirmation)) {
         checkedIsValid.emailAdressConfirmation =
           CustomTextInput.fieldStatus.INVALID;
