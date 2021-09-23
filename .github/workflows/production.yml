@@ -23,13 +23,13 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@v1
       with:
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
-        harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND IMAGE
@@ -44,13 +44,13 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@v1
       with:
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
           buildenv=preprod.guyane
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
@@ -71,19 +71,42 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@v1
       with:
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        harborPassword: ${{ secrets.HARBOR_PASSWORD }}
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
           buildenv=preprod.metropole
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
           REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
+
+  ##############################################################################
+  ## BUILD AND REGISTER DASHBOARD
+  ##############################################################################
+  register-dashboard:
+    name: Register dashboard
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Get project name
+      run: |
+        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
+    - name: Use autodevops build and register
+      uses: SocialGouv/actions/autodevops-build-register@v1
+      with:
+        imageName: ${{ env.project }}/dashboard
+        dockercontext: ./tumeplay-dashboard
+        dockerfile: ./tumeplay-dashboard/Dockerfile
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        dockerbuildargs: |
+          REACT_APP_API_URL=%%REACT_APP_API_URL%%
 
   ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
@@ -107,6 +130,7 @@ jobs:
     needs:
       [
         register-backend,
+        register-dashboard,
         register-frontend-guyane,
         register-frontend-metropole,
         manifests-preproduction,
