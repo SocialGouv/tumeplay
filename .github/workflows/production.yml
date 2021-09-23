@@ -28,8 +28,6 @@ jobs:
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
-        # harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        # harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -51,8 +49,6 @@ jobs:
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        # harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        # harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
@@ -80,8 +76,6 @@ jobs:
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        # harborUsername: ${{ secrets.HARBOR_USERNAME }}
-        # harborPassword: ${{ secrets.HARBOR_PASSWORD }}
         project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
