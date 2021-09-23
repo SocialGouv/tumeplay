@@ -1,3 +1,10 @@
+## [1.11.1-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.11.0...v1.11.1-alpha.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* Use ghcr instead of Harbor registry ([c8069fa](https://github.com/SocialGouv/Tumeplay/commit/c8069faff530a8ef42650ef2539dfef73bbe1af3))
+
 # [1.11.0](https://github.com/SocialGouv/Tumeplay/compare/v1.10.3...v1.11.0) (2021-09-23)
 
 
