@@ -1,3 +1,10 @@
+## [1.11.1-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1-alpha.2...v1.11.1-alpha.3) (2021-09-23)
+
+
+### Bug Fixes
+
+* Register image from tag ([34941ae](https://github.com/SocialGouv/Tumeplay/commit/34941ae9d3a46b7c411c560b9358268f8d3b9be0))
+
 ## [1.11.1-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1-alpha.1...v1.11.1-alpha.2) (2021-09-23)
 
 
