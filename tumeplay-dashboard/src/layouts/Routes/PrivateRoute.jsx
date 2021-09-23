@@ -11,7 +11,7 @@ const PrivateRoute = (props) => {
   const role = context.role
 
   if(!isAuthenticated) {return <Redirect to='/login' />}
-  else if(requiredRole === role){
+  else if(!requiredRole || requiredRole === role){
     return(
       <RoutesWithLayout {...props} />
     )
