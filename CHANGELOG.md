@@ -1,3 +1,10 @@
+## [1.11.1-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1-alpha.1...v1.11.1-alpha.2) (2021-09-23)
+
+
+### Bug Fixes
+
+* Update image url within .k8s components ([ee70b35](https://github.com/SocialGouv/Tumeplay/commit/ee70b3582a45f9f593b9cadfd67e3d1a0576f929))
+
 ## [1.11.1-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.11.0...v1.11.1-alpha.1) (2021-09-23)
 
 
