@@ -104,27 +104,31 @@ export default function Sidebar() {
                   Bilans quotidiens
                 </NavLink>
               </li>
-
-              <li className="items-center">
-                <NavLink
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/settings") !== -1
-                      ? "text-sky-500 hover:text-sky-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/settings"
-									activeClassName="tmp-active-nav-link"
-                >
-                  <FontAwesomeIcon
-                    icon={faCog}
-                    className={
-                      "fas fa-tools mr-2 text-sm"
-                    }
-                  ></FontAwesomeIcon>{" "}
-                  Paramêtres
-                </NavLink>
-              </li>
+							{
+								false && (
+									<li className="items-center">
+										<NavLink
+											className={
+												"text-xs uppercase py-3 font-bold block " +
+												(window.location.href.indexOf("/admin/settings") !== -1
+													? "text-sky-500 hover:text-sky-600"
+													: "text-blueGray-700 hover:text-blueGray-500")
+											}
+											to="/settings"
+											activeClassName="tmp-active-nav-link"
+										>
+											<FontAwesomeIcon
+												icon={faCog}
+												className={
+													"fas fa-tools mr-2 text-sm"
+												}
+											></FontAwesomeIcon>{" "}
+											Paramêtres
+										</NavLink>
+									</li>
+								)
+							}
+              
               <li className="items-center">
                 <Link
                   className={

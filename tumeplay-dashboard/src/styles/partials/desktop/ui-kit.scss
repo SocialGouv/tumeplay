@@ -49,5 +49,9 @@ html {
 				}
 			}
 
+			.tmp-box {
+				@apply shadow-md rounded-lg bg-white px-4 py-2;
+			}
+
   }
 }
