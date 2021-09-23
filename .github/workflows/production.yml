@@ -86,6 +86,29 @@ jobs:
           REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
 
   ##############################################################################
+  ## BUILD AND REGISTER DASHBOARD
+  ##############################################################################
+  register-dashboard:
+    name: Register dashboard
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Get project name
+      run: |
+        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
+    - name: Use autodevops build and register
+      uses: SocialGouv/actions/autodevops-build-register@v1
+      with:
+        imageName: ${{ env.project }}/dashboard
+        dockercontext: ./tumeplay-dashboard
+        dockerfile: ./tumeplay-dashboard/Dockerfile
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        dockerbuildargs: |
+          REACT_APP_API_URL=%%REACT_APP_API_URL%%
+
+  ##############################################################################
   ## GENERATE PREPROD KUBERNETES MANIFESTS
   ##############################################################################
   manifests-preproduction:
@@ -107,6 +130,7 @@ jobs:
     needs:
       [
         register-backend,
+        register-dashboard,
         register-frontend-guyane,
         register-frontend-metropole,
         manifests-preproduction,
