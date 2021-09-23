@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/SocialGouv/Tumeplay/compare/v1.10.3...v1.11.0) (2021-09-23)
+
+
+### Features
+
+* settings page ([27bfcb9](https://github.com/SocialGouv/Tumeplay/commit/27bfcb9cd9e7fdd6f2e34236995c53c76c257763))
+
 ## [1.10.3](https://github.com/SocialGouv/Tumeplay/compare/v1.10.2...v1.10.3) (2021-09-22)
 
 
