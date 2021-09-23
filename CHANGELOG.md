@@ -1,3 +1,24 @@
+## [1.11.1-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1-alpha.2...v1.11.1-alpha.3) (2021-09-23)
+
+
+### Bug Fixes
+
+* Register image from tag ([34941ae](https://github.com/SocialGouv/Tumeplay/commit/34941ae9d3a46b7c411c560b9358268f8d3b9be0))
+
+## [1.11.1-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1-alpha.1...v1.11.1-alpha.2) (2021-09-23)
+
+
+### Bug Fixes
+
+* Update image url within .k8s components ([ee70b35](https://github.com/SocialGouv/Tumeplay/commit/ee70b3582a45f9f593b9cadfd67e3d1a0576f929))
+
+## [1.11.1-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.11.0...v1.11.1-alpha.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* Use ghcr instead of Harbor registry ([c8069fa](https://github.com/SocialGouv/Tumeplay/commit/c8069faff530a8ef42650ef2539dfef73bbe1af3))
+
 # [1.11.0](https://github.com/SocialGouv/Tumeplay/compare/v1.10.3...v1.11.0) (2021-09-23)
 
 

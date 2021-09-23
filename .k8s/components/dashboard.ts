@@ -6,7 +6,7 @@ export default async () => {
   const subdomain = "bo-tumeplay";
   const ciEnv = environments(process.env);
   const subDomainPrefix = (!ciEnv.isProduction && `bo-`) || undefined;
-  const image = `harbor.fabrique.social.gouv.fr/tumeplay/dashboard:${ciEnv.tag || ciEnv.sha}`;
+  const image = `ghcr.io/socialgouv/tumeplay/dashboard:${ciEnv.tag || ciEnv.sha}`;
 
   const manifests = await create("dashboard", {
     env,
