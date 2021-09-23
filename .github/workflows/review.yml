@@ -25,7 +25,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@v1
+      uses: SocialGouv/actions/harbor-build-register@registry-cache
       with:
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
