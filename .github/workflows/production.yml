@@ -23,7 +23,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@v1
       with:
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
@@ -44,7 +44,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@v1
       with:
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
@@ -71,7 +71,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/harbor-build-register@master
+      uses: SocialGouv/actions/harbor-build-register@v1
       with:
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
@@ -94,7 +94,7 @@ jobs:
     steps:
 
     - name: Use autodevops manifests generation
-      uses: SocialGouv/actions/k8s-manifests@master
+      uses: SocialGouv/actions/k8s-manifests@v1
       with:
         environment: "preprod"
 
@@ -117,7 +117,7 @@ jobs:
     steps:
 
     - name: Use autodevops deployment
-      uses: SocialGouv/actions/autodevops-deploy@master
+      uses: SocialGouv/actions/autodevops-deploy@v1
       with:
         environment: "preprod"
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -132,7 +132,7 @@ jobs:
     steps:
 
     - name: Use autodevops manifests generation
-      uses: SocialGouv/actions/k8s-manifests@master
+      uses: SocialGouv/actions/k8s-manifests@v1
       with:
         environment: "prod"
 
@@ -149,7 +149,7 @@ jobs:
     steps:
 
     - name: Use autodevops deployment
-      uses: SocialGouv/actions/autodevops-deploy@master
+      uses: SocialGouv/actions/autodevops-deploy@v1
       with:
         environment: "prod"
         token: ${{ secrets.GITHUB_TOKEN }}
