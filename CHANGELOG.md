@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/SocialGouv/Tumeplay/compare/v1.11.3...v1.11.4) (2021-09-24)
+
+
+### Bug Fixes
+
+* **ci:** correct DOMAIN_API ([ff74cd4](https://github.com/SocialGouv/Tumeplay/commit/ff74cd4f82c80cf28f455895793813c69e84b0f2))
+
 ## [1.11.3](https://github.com/SocialGouv/Tumeplay/compare/v1.11.2...v1.11.3) (2021-09-24)
 
 
