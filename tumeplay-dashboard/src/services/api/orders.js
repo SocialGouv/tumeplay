@@ -3,12 +3,17 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const OrdersAPI = {
-  getOrders: (token, params) => {
+	getLogisticsOrders: (token, params) => {
     return axios.get(`${API_URL}/commandes`, {
       params: Object.assign({
         delivery: ['pickup', 'home'],
       }, params),
       headers: {
+      Authorization: `Bearer ${token}`
+    }});
+  },
+  getDeliveryOrders: (token, searchParam) => {
+    return axios.get(`${API_URL}/commandes?delivery=referent${searchParam}`, {headers: {
       Authorization: `Bearer ${token}`
     }});
   },

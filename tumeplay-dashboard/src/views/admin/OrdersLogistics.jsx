@@ -14,7 +14,7 @@ import ConfirmModal from '../../components/ui/ConfirmModal';
 import ReactTooltip from 'react-tooltip';
 
 
-const Dashboard = () => {
+const OrdersLogistics = () => {
 
   const history = useHistory();
 
@@ -398,4 +398,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default OrdersLogistics
