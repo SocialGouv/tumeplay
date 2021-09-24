@@ -1,3 +1,10 @@
+## [1.11.2-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1...v1.11.2-alpha.1) (2021-09-24)
+
+
+### Bug Fixes
+
+* Expose REACT_APP_API_URL within dashboard k8s component ([d13c125](https://github.com/SocialGouv/Tumeplay/commit/d13c12560e5bf8b41105b954b475b280db9678ee))
+
 ## [1.11.1](https://github.com/SocialGouv/Tumeplay/compare/v1.11.0...v1.11.1) (2021-09-23)
 
 
