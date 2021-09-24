@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/SocialGouv/Tumeplay/compare/v1.11.2...v1.11.3) (2021-09-24)
+
+
+### Bug Fixes
+
+* **ci:** DOMAIN_API for back-strapi ([e1af2d2](https://github.com/SocialGouv/Tumeplay/commit/e1af2d24c93ea95cba322d598ec171f86d21c27c))
+
 ## [1.11.2](https://github.com/SocialGouv/Tumeplay/compare/v1.11.1...v1.11.2) (2021-09-24)
 
 
