@@ -5,6 +5,7 @@ metadata:
 data:
   CRON_ENABLE: "false"
   URL: "https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr"
+  DOMAIN_API: "https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr/"
   EMAIL_PROVIDER_HOST: "smtp.gmail.com"
   EMAIL_PROVIDER_PORT: "465"
   EMAIL_PROVIDER_SECURE: "true"
