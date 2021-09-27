@@ -47,12 +47,9 @@ export default function TunnelProductSelect(props) {
   const fetchAllBoxes = () => {
     if (REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
       const boxes = box.boxes;
-      if (boxes_sur_mesure.boxSurMesure !== null) {
-        const allBoxes = [...boxes, boxes_sur_mesure.boxSurMesure];
-        setLocalBoxs(allBoxes);
-      } else {
-        setLocalBoxs([...boxes]);
-      }
+      boxes_sur_mesure.boxSurMesure !== null
+        ? setLocalBoxs([...boxes, boxes_sur_mesure.boxSurMesure])
+        : setLocalBoxs([...boxes]);
     } else if (!loading && box && !loading2 && boxes_sur_mesure) {
       const boxes = box.boxes;
       const allBoxes = [...boxes];
