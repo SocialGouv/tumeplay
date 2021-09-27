@@ -1,3 +1,10 @@
+## [1.11.9](https://github.com/SocialGouv/Tumeplay/compare/v1.11.8...v1.11.9) (2021-09-27)
+
+
+### Bug Fixes
+
+* fixing boxes list in guyane when box sur mesure is unpublished ([#133](https://github.com/SocialGouv/Tumeplay/issues/133)) ([6996fd1](https://github.com/SocialGouv/Tumeplay/commit/6996fd1bf1b271dd265c9ae6d69b4b0798753499))
+
 ## [1.11.8](https://github.com/SocialGouv/Tumeplay/compare/v1.11.7...v1.11.8) (2021-09-27)
 
 
