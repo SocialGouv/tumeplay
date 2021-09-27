@@ -10,11 +10,10 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 ProductCard.propTypes = {
   item: PropTypes.object,
   onPress: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 };
 
 export default function ProductCard(props) {
-
   const cardStyle = StyleSheet.create({
     container: {
       flex: 1,
@@ -22,7 +21,7 @@ export default function ProductCard(props) {
       borderRadius: 7,
       marginTop: 20,
       position: 'relative',
-      zIndex: 1
+      zIndex: 1,
     },
     buttonWrapper: {
       flex: 1,
@@ -74,7 +73,7 @@ export default function ProductCard(props) {
       width: '100%',
       height: '100%',
       zIndex: 10,
-      backgroundColor: 'rgba(0,0,0,0.7)'
+      backgroundColor: 'rgba(0,0,0,0.7)',
     },
     descriptionCard: {
       position: 'absolute',
@@ -83,7 +82,7 @@ export default function ProductCard(props) {
       marginHorizontal: 'auto',
     },
     descriptionTitle: {
-      color: "#FFFF",
+      color: '#FFFF',
       fontFamily: Colors.appTitleFont,
       fontSize: 30,
       marginBottom: 5,
@@ -96,7 +95,7 @@ export default function ProductCard(props) {
       borderRadius: 30,
     },
     descriptionText: {
-      color: "#FFFF",
+      color: '#FFFF',
     },
     notAvailableWrapper: {
       position: 'absolute',
@@ -126,42 +125,51 @@ export default function ProductCard(props) {
   });
 
   const handleAvailability = () => {
-    if(props.item.__typename === 'BoxSurMesure') {
-      props.onPress()
+    if (props.item.__typename === 'BoxSurMesure') {
+      props.onPress();
     } else if (props.item.__typename === 'Box' && props.item.available) {
-      props.onPress()
-    } 
+      props.onPress();
+    }
   };
 
   const redirectContact = () => {
-   props.navigation.navigate('StayInTouch', {
-     box_id: props.item.id
-   })
-  }
+    props.navigation.navigate('StayInTouch', {
+      box_id: props.item.id,
+    });
+  };
 
   return (
     <View style={cardStyle.container}>
-      {
-        props.item.__typename === 'Box' && (!props.item.available || props.item.stock === 0) ?
+      {props.item.__typename === 'Box' &&
+      (!props.item.available || props.item.stock === 0) ? (
         <View style={cardStyle.containerDisable}>
           <View style={cardStyle.descriptionCard}>
             <Text style={cardStyle.descriptionTitle}>Box indisponible</Text>
-            <CustomTouchableOpacity style={cardStyle.descriptionButton} onPress={() => {redirectContact()}}>
-              <Text style={cardStyle.descriptionText}>Laisse nous tes coordonnées</Text>
+            <CustomTouchableOpacity
+              style={cardStyle.descriptionButton}
+              onPress={() => {
+                redirectContact();
+              }}>
+              <Text style={cardStyle.descriptionText}>
+                Laisse nous tes coordonnées
+              </Text>
             </CustomTouchableOpacity>
           </View>
         </View>
-        :
-          null
-      }
+      ) : null}
       <CustomTouchableOpacity
         style={cardStyle.buttonWrapper}
-        disabled={props.item.__typename === 'Box' && (!props.item.available || props.item.stock === 0)}
-        onPress={() => {handleAvailability()}}>
+        disabled={
+          props.item.__typename === 'Box' &&
+          (!props.item.available || props.item.stock === 0)
+        }
+        onPress={() => {
+          handleAvailability();
+        }}>
         <Image
           source={REACT_APP_API_URL + props.item.image.url}
           style={cardStyle.picture}
-          />
+        />
         <View style={cardStyle.textContainer}>
           <Text style={cardStyle.title}>{props.item.title}</Text>
           <Text style={cardStyle.text}>{props.item.description}</Text>
