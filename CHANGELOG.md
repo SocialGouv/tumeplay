@@ -1,3 +1,10 @@
+## [1.11.5](https://github.com/SocialGouv/Tumeplay/compare/v1.11.4...v1.11.5) (2021-09-27)
+
+
+### Bug Fixes
+
+* Add puppeteer dependencies to strapi image ([#130](https://github.com/SocialGouv/Tumeplay/issues/130)) ([ad46fd0](https://github.com/SocialGouv/Tumeplay/commit/ad46fd0818970241d3399237e0262441cdd531df))
+
 ## [1.11.4](https://github.com/SocialGouv/Tumeplay/compare/v1.11.3...v1.11.4) (2021-09-24)
 
 
