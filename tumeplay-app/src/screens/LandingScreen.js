@@ -15,7 +15,6 @@ import ProductErrorModal from './components/tunnel/ProductErrorModal';
 import CustomFooter from './CustomFooter';
 import Styles from '../styles/Styles';
 
-import RemoteApi from '../services/RemoteApi';
 import UserService from '../services/User';
 
 import Tracking from '../services/Tracking';
@@ -43,24 +42,24 @@ export default function LandingScreen(props) {
     bottomTitle2: 'Échange avec un professionnel',
   };
 
-  useEffect(() => {
-    async function _fetchUserOrRegister() {
-      if (isMounted.current) {
-        const uniqId = await UserService.getUniqueId();
+  // useEffect(() => {
+  //   async function _fetchUserOrRegister() {
+  //     if (isMounted.current) {
+  //       const uniqId = await UserService.getUniqueId();
 
-        if (uniqId !== undefined && uniqId) {
-					const {token} = await RemoteApi.registerUser(uniqId);
+  //       if (uniqId !== undefined && uniqId) {
+	// 				// const {token} = await RemoteApi.registerUser(uniqId);
 
-          if (token) {
-            await UserService.setJWT(token);
-          } else {
-            _toggleErrorModal();
-          }
-        }
-      }
-    }
-    _fetchUserOrRegister();
-  }, [_toggleErrorModal, isMounted]);
+  //         // if (token) {
+  //         //   await UserService.setJWT(token);
+  //         // } else {
+  //         //   _toggleErrorModal();
+  //         // }
+  //       }
+  //     }
+  //   }
+  //   _fetchUserOrRegister();
+  // }, [_toggleErrorModal, isMounted]);
 
   function _onSelectedTheme(selectedTheme) {
     Tracking.themeSelected(selectedTheme);

@@ -24,7 +24,7 @@ export default function CustomHeaderRight(props) {
   const [showNotEnoughModal, setShowNotEnoughModal] = useState(false);
   const isMounted = useIsMounted();
   const [showOrderModal, setShowOrderModal] = useState(false);
-  const [nbDays, setNbDays] = useState()
+  const [nbDays, setNbDays] = useState();
 
   const headerStyle = StyleSheet.create({
     container: {
@@ -117,18 +117,17 @@ export default function CustomHeaderRight(props) {
   const checkOrderPossible = () => {
     // 1. Get userlastOrder from localhost
     const localStorage = window.localStorage.getItem('local.user');
-    const JsonLocalStorage = JSON.parse(localStorage)
+    const JsonLocalStorage = JSON.parse(localStorage);
     const userLastOrderDateNumber = JsonLocalStorage.lastOrder;
     // 2. Convert into date ?
-    const userLastOrderDate = new Date(userLastOrderDateNumber)
+    const userLastOrderDate = new Date(userLastOrderDateNumber);
     // 3. Compare if date lastOrder - new Date().now < 7
-    const currentDate = Date.now()
-    let diffTime = Math.abs(currentDate - userLastOrderDate);
+    const currentDate = Date.now();
+    const diffTime = Math.abs(currentDate - userLastOrderDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setNbDays(diffDays)
-    return(!(userLastOrderDateNumber && diffDays < 7))
-  
-  }
+    setNbDays(diffDays);
+    return !(userLastOrderDateNumber && diffDays < 7);
+  };
 
   function _gotoProductSelect() {
     console.log(
@@ -143,7 +142,7 @@ export default function CustomHeaderRight(props) {
         } else if (availableTokens >= 1000 && checkOrderPossible()) {
           props.navigation.navigate('TunnelProductSelect');
         } else {
-          toggleOrderModal()
+          toggleOrderModal();
         }
       }
     }
@@ -157,8 +156,8 @@ export default function CustomHeaderRight(props) {
   }
 
   const toggleOrderModal = () => {
-    setShowOrderModal(!showOrderModal)
-  }
+    setShowOrderModal(!showOrderModal);
+  };
 
   const ForwardedNotEnoughModal = forwardRef(() => (
     <ProductNotEnoughTokensModal
@@ -167,9 +166,6 @@ export default function CustomHeaderRight(props) {
       onClose={_toggleNotEnoughModal}
     />
   ));
-
-
-
 
   return (
     <View style={headerStyle.container}>
@@ -183,11 +179,11 @@ export default function CustomHeaderRight(props) {
         </TouchableOpacity>
       </View>
       <ForwardedNotEnoughModal />
-      <OrderNotAllowedModal 
-      showModal={showOrderModal}
-      nbDays={nbDays}
-      onClose={toggleOrderModal}
-    />
+      <OrderNotAllowedModal
+        showModal={showOrderModal}
+        nbDays={nbDays}
+        onClose={toggleOrderModal}
+      />
     </View>
   );
 }

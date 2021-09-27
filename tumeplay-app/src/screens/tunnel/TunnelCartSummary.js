@@ -1,12 +1,5 @@
 import React, {useState, forwardRef} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  CheckBox,
-} from 'react-native';
+import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
 import {EventRegister} from 'react-native-event-listeners';
 
@@ -52,8 +45,6 @@ export default function TunnelCartSummary(props) {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  console.log("USER", userAdress);
-
   async function _confirmOrder() {
     //ORDER STRAPI API
     let orderPost;
@@ -75,6 +66,8 @@ export default function TunnelCartSummary(props) {
         address_zipcode: userAdress.zipCode,
         address_city: userAdress.city,
         delivery: deliveryType,
+        box_name: selectedItem.title,
+        environnement: REACT_APP_ZONE,
       };
     } else if (deliveryType === 'pickup') {
       requestBody = {
@@ -88,6 +81,8 @@ export default function TunnelCartSummary(props) {
         address_city: selectedPickup.Ville,
         poi_number: selectedPickup.Num,
         delivery: deliveryType,
+        box_name: selectedItem.title,
+        environnement: REACT_APP_ZONE,
       };
     } else if (deliveryType === 'referent') {
       requestBody = {
@@ -102,6 +97,8 @@ export default function TunnelCartSummary(props) {
         poi_name: selectedReferent.name,
         delivery: deliveryType,
         referent: selectedReferent.id,
+        box_name: selectedItem.title,
+        environnement: REACT_APP_ZONE,
       };
     }
     if (selectedItem.__typename === 'Box') {
