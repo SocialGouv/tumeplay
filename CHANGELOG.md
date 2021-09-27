@@ -1,3 +1,10 @@
+## [1.11.6](https://github.com/SocialGouv/Tumeplay/compare/v1.11.5...v1.11.6) (2021-09-27)
+
+
+### Bug Fixes
+
+* Give permissions to write files within strapi public folder ([4f51b91](https://github.com/SocialGouv/Tumeplay/commit/4f51b91fd76ca9b0c8b4989fc6326bb9b306b75e))
+
 ## [1.11.5](https://github.com/SocialGouv/Tumeplay/compare/v1.11.4...v1.11.5) (2021-09-27)
 
 
