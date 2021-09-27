@@ -1,3 +1,10 @@
+## [1.11.7](https://github.com/SocialGouv/Tumeplay/compare/v1.11.6...v1.11.7) (2021-09-27)
+
+
+### Bug Fixes
+
+* Remove ref to register-scope action ([adf631b](https://github.com/SocialGouv/Tumeplay/commit/adf631b4fd13d218728cda6fb59c9ab635a1f4c1))
+
 ## [1.11.6](https://github.com/SocialGouv/Tumeplay/compare/v1.11.5...v1.11.6) (2021-09-27)
 
 
