@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/SocialGouv/Tumeplay/compare/v1.12.3...v1.12.4) (2021-09-28)
+
+
+### Bug Fixes
+
+* colissimo generated tickets format ([#141](https://github.com/SocialGouv/Tumeplay/issues/141)) ([2d55ef6](https://github.com/SocialGouv/Tumeplay/commit/2d55ef665321405643df3bb613008496b7e6004f))
+
 ## [1.12.3](https://github.com/SocialGouv/Tumeplay/compare/v1.12.2...v1.12.3) (2021-09-28)
 
 
