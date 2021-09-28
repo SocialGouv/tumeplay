@@ -23,7 +23,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@disable-cache
       with:
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
@@ -44,7 +44,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@disable-cache
       with:
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
@@ -71,7 +71,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@disable-cache
       with:
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
@@ -98,7 +98,7 @@ jobs:
         echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
     - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
+      uses: SocialGouv/actions/autodevops-build-register@disable-cache
       with:
         imageName: ${{ env.project }}/dashboard
         dockercontext: ./tumeplay-dashboard
