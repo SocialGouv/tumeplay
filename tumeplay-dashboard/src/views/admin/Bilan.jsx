@@ -99,9 +99,9 @@ const Bilan = () => {
 				<div className="flex">
 					<CSVLink data={csvData}
 										headers={csvHeaders}
-										filename={`Export-${new Date().toLocaleDateString()}`}
+										filename={`export_${new Date().toLocaleDateString()}.csv`}
 										data-for="export-tooltip"
-										data-tip={`${tmpSelected.length === 0 ? 'Sélectionnez des commandes afin d\'extraire un bilan' : ''}`} 
+										data-tip={`${tmpSelected.length === 0 ? 'Sélectionnez des commandes afin d\'extraire un bilan' : ''}`}
 										className={`tmp-button ${tmpSelected.length === 0 && 'disabled'}`}>
 						<FontAwesomeIcon icon={faFileExcel} color='white' className='mr-2'/> Exporter le bilan en CSV
 					</CSVLink>
