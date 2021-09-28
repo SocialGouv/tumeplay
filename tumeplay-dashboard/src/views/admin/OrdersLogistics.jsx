@@ -51,7 +51,7 @@ const OrdersLogistics = () => {
 	])
 
   const retrieveBoxes = async () => {
-    let response = await getAllBoxes(token)
+    let response = await getAllBoxes(token, 'metropole')
     setBoxes(response.data)
   }
 

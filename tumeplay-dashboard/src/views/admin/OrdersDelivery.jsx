@@ -7,9 +7,11 @@ import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
 import Dropdown from "react-dropdown";
 import ConfirmModal from '../../components/ui/ConfirmModal';
+import UserDataModal from '../../components/ui/UserDataModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faPen, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
+import ReferentAPI from "../../services/api/referents.js";
 
 
 
@@ -19,12 +21,14 @@ const OrdersLogistics = () => {
 
   const [filteredorders, setFilteredOrders] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [currentOrder, setCurrentOrder] = useState({})
   const [numberPerPage, setNumberPerPage] = useState(50)
   const [pageItems, setPageItems] = useState([])
   const [orders, setOrders] = useState([])
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [boxes, setBoxes] = useState([])
-  const [show, setShow] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showUserData, setShowUserData] = useState(false)
 
   const dataToDisplay = {
     headers: [
@@ -39,10 +43,20 @@ const OrdersLogistics = () => {
 
   const dropdownOptions = ['5', '10', '50', '100', {value: orders.length, label: 'Tout'}]
 
-	const test = () => {
-		console.log('test')
+	const updateReceivedOrder = async (order) => {
+		order.received = true;
+		order.date_received = new Date();
+		await OrdersAPI.update(token, order)
+    retrieveOrders(`&referent=${user.referent}`);
 	}
 
+	const undoReceivedOrder = async (order) => {
+		order.received = false;
+		delete order.date_received;
+		await OrdersAPI.update(token, order)
+    retrieveOrders(`&referent=${user.referent}`);
+	}
+	
   const retrieveOrders = async (params) => {
     let response = await OrdersAPI.getDeliveryOrders(token, params)
     let orders = response.data
@@ -50,23 +64,40 @@ const OrdersLogistics = () => {
       order.selected = false
 			order.actions = (
 				<div className="tmp-table-actions">
-					<button className="tmp-button">
+					<button onClick={() => {
+						setCurrentOrder(order);
+						setShowUserData(true);
+					}} className="tmp-button">
 						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Information anonymes
 					</button>
 					<button className="tmp-button">
 						<FontAwesomeIcon icon={faPen} color="white" className="mr-2" /> Modifier le contenu
 					</button>
-					<button className="tmp-button">
-						<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Délivrée
-					</button>
+					{
+						!order.received ? (
+							<button onClick={() => {
+								updateReceivedOrder(order)
+							}} className="tmp-button">
+								<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Délivrée
+							</button>
+						) : (
+							<button onClick={() => {
+								undoReceivedOrder(order)
+							}} className="tmp-button">
+								<FontAwesomeIcon icon={faUndo} color="white" className="mr-2" /> Annuler la distribution
+							</button>
+						)
+					}
 				</div>
 			)
     })
     setOrders(orders)
   }
 
-  const retrieveBoxes = async () => {
-    let response = await getAllBoxes(token)
+	const retrieveBoxes = async () => {
+		let response = await ReferentAPI.findOne(token, {id: user.referent})
+		const referent = response.data
+		response = await getAllBoxes(token, referent.environnement.slug)
     setBoxes(response.data)
   }
 
@@ -111,13 +142,13 @@ const OrdersLogistics = () => {
     })
     const res = await OrdersAPI.bulkUpdate(token, ordersToSend)
     if (res.status === 200) {
-      setShow(true)
+      setShowConfirm(true)
     }
   }
 
   useEffect(() => {
     retrieveBoxes()
-    retrieveOrders(`&received_ne=true&referent=${user.referent}`)
+    retrieveOrders(`&referent=${user.referent}`)
    }, [])
 
 
@@ -134,13 +165,17 @@ const OrdersLogistics = () => {
 				<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
 					Vos commandes
 				</div>
-				<div className={`fixed ${show ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
-						id="my-modal"
+				<div className={`fixed ${showConfirm ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
 				>
-					{show ?
-						<ConfirmModal setShow={setShow} />
-						:
-						<></>
+					{showConfirm &&
+						<ConfirmModal setShow={setShowConfirm} />
+					}
+				</div>
+				<div className={`fixed ${showUserData ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+				>
+					{
+						showUserData  &&
+						<UserDataModal setShow={setShowUserData} boxes={boxes} order={currentOrder} />
 					}
 				</div>
 				<div className="tmp-table-option">

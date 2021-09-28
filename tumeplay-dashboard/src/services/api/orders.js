@@ -44,6 +44,11 @@ const OrdersAPI = {
     }
     );
   },
+	update: (token, order) => {
+		return axios.put(`${API_URL}/commandes/${order.id}`, order, {headers: {
+      Authorization: `Bearer ${token}`
+    }});
+	},
   bulkUpdate: (token, orders) => {
     return axios.put(`${API_URL}/commandes/update/multiple`, {orders: orders}, {headers: {
       Authorization: `Bearer ${token}`

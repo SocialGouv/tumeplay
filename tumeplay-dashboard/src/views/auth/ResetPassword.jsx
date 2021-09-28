@@ -80,7 +80,7 @@ const ResetPassword = () => {
 
 									return errors;
 								}}
-								onSubmit={async (values, { setSubmitting }) => {
+								onSubmit={(values, { setSubmitting }) => {
 									resetPassword(
 										values.password,
 										values.password2,

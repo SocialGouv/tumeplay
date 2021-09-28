@@ -2,7 +2,7 @@ import React from 'react'
 
 const ConfirmModal = ({setShow}) => {
  return(
-  <div className="relative top-80 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+  <div className="relative top-1/2 transform -translate-y-1/2 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
     <div className="mt-3 text-center">
       <div
         className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
