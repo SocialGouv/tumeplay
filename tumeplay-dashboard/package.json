@@ -15,6 +15,7 @@
     "fs": "0.0.1-security",
     "isomorphic-fetch": "^3.0.0",
     "js-cookie": "^3.0.0",
+    "lodash": "^4.17.21",
     "pdf-merger-js": "^3.2.1",
     "pdfassembler": "0.1.0-beta.8",
     "react": "^17.0.2",
