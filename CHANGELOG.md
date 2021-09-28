@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/SocialGouv/Tumeplay/compare/v1.11.9...v1.12.0) (2021-09-28)
+
+
+### Features
+
+* Adding maxLimit to the API for orders call in dashboard ([#135](https://github.com/SocialGouv/Tumeplay/issues/135)) ([b084da4](https://github.com/SocialGouv/Tumeplay/commit/b084da46f476bd452d77129cb0fa3a437ae2c8e3))
+
 ## [1.11.9](https://github.com/SocialGouv/Tumeplay/compare/v1.11.8...v1.11.9) (2021-09-27)
 
 
