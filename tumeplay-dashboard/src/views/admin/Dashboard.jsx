@@ -113,7 +113,6 @@ const Dashboard = () => {
       order.selected = false
     })
     orders =  _.sortBy(orders, ["created_at"])
-    console.log(orders)
     setFullOrders(orders)
   }
 
