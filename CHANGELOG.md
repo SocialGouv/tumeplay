@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/SocialGouv/Tumeplay/compare/v1.12.0...v1.12.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* **workflows:** Use autodevops-build-register@disable-cache to avoid image caching problem ([#139](https://github.com/SocialGouv/Tumeplay/issues/139)) ([9cf951d](https://github.com/SocialGouv/Tumeplay/commit/9cf951d50caef58c568014b64d450e8333cfe373))
+
 # [1.12.0](https://github.com/SocialGouv/Tumeplay/compare/v1.11.9...v1.12.0) (2021-09-28)
 
 
