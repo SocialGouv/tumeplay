@@ -84,6 +84,12 @@
     },
     "date_sent": {
       "type": "date"
+    },
+    "box_number": {
+      "type": "integer"
+    },
+    "environnement": {
+      "model": "environnement"
     }
   }
 }
