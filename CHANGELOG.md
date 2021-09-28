@@ -1,3 +1,10 @@
+## [1.12.5](https://github.com/SocialGouv/Tumeplay/compare/v1.12.4...v1.12.5) (2021-09-28)
+
+
+### Bug Fixes
+
+* Change backend volume mount path ([#142](https://github.com/SocialGouv/Tumeplay/issues/142)) ([0102b79](https://github.com/SocialGouv/Tumeplay/commit/0102b7914bfd02880ade04f64c061cd7118014d3))
+
 ## [1.12.5-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.12.4...v1.12.5-alpha.1) (2021-09-28)
 
 
