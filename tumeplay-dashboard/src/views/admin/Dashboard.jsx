@@ -22,11 +22,10 @@ const Dashboard = () => {
   const token = context.token
   const [viewAll, setViewAll] = useState(false)
   const [boxes, setBoxes] = useState([])
-  const [fullOrders, setFullOrders] = useState([])
-  const [filteredorders, setFilteredOrders] = useState([])
-  const [pageItems, setPageItems] = useState([])
-  const [openTab, setOpenTab] = useState(0)
+  const [orders, setOrders] = useState([])
+  const [openTab, setOpenTab] = useState()
   const [currentPage, setCurrentPage] = useState(1)
+  const [count, setCount] = useState()
   const [numberPerPage, setNumberPerPage] = useState(50)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [show, setShow] = useState(false)
@@ -54,13 +53,6 @@ const Dashboard = () => {
   const retrieveBoxes = async () => {
     let response = await getAllBoxes(token)
     setBoxes(response.data)
-  }
-
-  const handleChangeBox = (num) => {
-    const tmpFilterOrders =  fullOrders.filter(order => {
-        return(order.content[0].box.number === num)
-    })
-    setFilteredOrders(tmpFilterOrders)
   }
 
 	const retrieveKpisData = async () => {
@@ -106,33 +98,40 @@ const Dashboard = () => {
 		])
 	}
 
-  const retrieveOrders = async (params) => {
-    let response = await OrdersAPI.getOrders(token, params)
+  const retrieveOrders = async (searchParams) => {
+    let response = await OrdersAPI.countOrders(token, searchParams);
+    setCount(response.data)
+    response = await OrdersAPI.getOrders(token, Object.assign({
+      _limit: numberPerPage,
+      _start: numberPerPage * (currentPage - 1)
+    }, searchParams))
     let orders = response.data
     orders.map(order => {
       order.selected = false
     })
-    setFullOrders(orders)
+    setOrders(orders)
   }
+
 
   const handleChangeTab = (event, box_number) => {
     event.preventDefault()
     setOpenTab(box_number)
+    retrieveOrders({sent_ne: true, box_number})
     history.push(`/orders/box/${box_number}`)
   }
 
   const handleSelectAll = (e) => {
     if(e.target.checked) {
-      filteredorders.forEach(order => order.selected = e.target.checked)
-      setTmpSelectedItems([...filteredorders])
+      orders.forEach(order => order.selected = e.target.checked)
+      setTmpSelectedItems([...orders])
     } else {
-       filteredorders.forEach(order => order.selected = e.target.checked)
+       orders.forEach(order => order.selected = e.target.checked)
       setTmpSelectedItems([])
     }
   }
 
   const handleSpecificSelection = (e) => {
-    let order = filteredorders.find(order => order.id === parseInt(e.target.id))
+    let order = orders.find(order => order.id === parseInt(e.target.id))
     if(e.target.checked) {
       order.selected = e.target.checked
       tmpSelectedItems.push(order)
@@ -208,12 +207,15 @@ const Dashboard = () => {
 	}
 
   useEffect(() => {
-    if (viewAll === true) {
-      retrieveOrders(' ')
-    } else {
-      retrieveOrders('&sent_ne=true')
-    }
-  }, [viewAll, show === false])
+    retrieveOrders(viewAll ? {
+      box_number: openTab,
+      _sort: 'created_at:DESC',
+    } : {
+      box_number: openTab,
+      sent_ne: true,
+      _sort: 'created_at:ASC',
+    })
+  }, [viewAll])
 
   const handleChangeNumPerPage = (e) => {
     setTmpSelectedItems([])
@@ -223,25 +225,17 @@ const Dashboard = () => {
   useEffect(() => {
 		retrieveKpisData()
     retrieveBoxes()
-    retrieveOrders('&sent_ne=true')
     setOpenTab(1)
    }, [])
-
-
-  useEffect(() => {
-    handleChangeBox(openTab)
-  }, [fullOrders, openTab])
 
   const onPageChange = (event) => {
     setCurrentPage(event)
   }
 
   useEffect(() => {
-    const offset = (currentPage - 1) * numberPerPage;
-    let tmpFiltered = filteredorders.slice(offset, offset + numberPerPage)
-    setPageItems([...tmpFiltered])
-    setTmpSelectedItems([])
-  }, [filteredorders, currentPage, numberPerPage])
+    if (openTab)
+      retrieveOrders({sent_ne: true, box_number: openTab, _sort: 'created_at:ASC'})
+  }, [currentPage, numberPerPage, openTab])
 
   const renderTabs = () => {
     return(
@@ -318,10 +312,10 @@ const Dashboard = () => {
      {name: "Transporteur", fieldName: 'delivery'},
      {name: "Statut Traitement", fieldName: 'sent'}
     ],
-    items: pageItems
+    items: orders
   }
 
-  const dropdownOptions = ['5', '10', '50', '100', {value: filteredorders.length, label: 'Tout'}]
+  const dropdownOptions = ['5', '10', '50', '100', {value: orders.length, label: 'Tout'}]
 
   return(
   <>
@@ -391,7 +385,7 @@ const Dashboard = () => {
       <div className="tmp-pagination-container">
         <Pagination
           currentPage={currentPage}
-          totalSize={filteredorders.length}
+          totalSize={count}
           sizePerPage={numberPerPage}
           numberOfPagesNextToActivePage={3}
           changeCurrentPage={(event) => onPageChange(event)}

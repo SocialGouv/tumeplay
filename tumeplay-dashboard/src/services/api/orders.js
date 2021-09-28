@@ -3,15 +3,27 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const OrdersAPI = {
-  getOrders: (token, searchParam) => {
-    return axios.get(`${API_URL}/commandes?_limit=1000&_sort=created_at:ASC&delivery=pickup&delivery=home${searchParam}`, {headers: {
+  getOrders: (token, params) => {
+    return axios.get(`${API_URL}/commandes`, {
+      params: Object.assign({
+        delivery: ['pickup', 'home'],
+      }, params),
+      headers: {
       Authorization: `Bearer ${token}`
     }});
   },
-  countOrders: (token) => {
-    return axios.get(`${API_URL}/commandes/count`, {headers: {
-      Authorization: `Bearer ${token}`
-    }});
+  countOrders: (token, params) => {
+    return axios.get(`${API_URL}/commandes/count`,
+      {
+        params: Object.assign({
+          delivery: ['pickup', 'home'],
+        }, params),
+        headers:
+          {
+            Authorization: `Bearer ${token}`
+          }
+      }
+    );
   },
   printMondialRelayPDF: (token, ids) => {
     return axios.post(`${API_URL}/mondial-relay/merge-pdf`, {ids: ids}, {headers: {
@@ -19,9 +31,13 @@ const OrdersAPI = {
     }});
   },
   printColissimoPDF: (token, ids) => {
-    return axios.post(`${API_URL}/colissimo/generate-pdf`, {ids: ids}, {headers: {
-      Authorization: `Bearer ${token}`
-    }});
+    return axios.post(`${API_URL}/colissimo/generate-pdf`, {ids: ids},
+    {headers:
+      {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    );
   },
   setOrdersToSent: (token, orders) => {
     return axios.put(`${API_URL}/commandes/update/multiple`, {orders: orders}, {headers: {
