@@ -16,7 +16,6 @@ metadata:
   labels:
     app: backend
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -40,7 +39,6 @@ spec:
       labels:
         app: backend
         application: tumeplay
-        component: tumeplay
         owner: tumeplay
         team: tumeplay
         cert: wildcard
@@ -75,7 +73,7 @@ spec:
               port: http
             initialDelaySeconds: 30
           volumeMounts:
-            - mountPath: /public/uploads
+            - mountPath: /app/public/uploads
               name: uploads
           envFrom:
             - secretRef:
@@ -109,7 +107,7 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-user-mybranch
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.45.0
+          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.38.3
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -136,7 +134,6 @@ metadata:
   namespace: tumeplay-mybranch
   labels:
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -164,7 +161,6 @@ spec:
       name: backend-sealed-secret
       labels:
         application: tumeplay
-        component: tumeplay
         owner: tumeplay
         team: tumeplay
         cert: wildcard
@@ -184,7 +180,6 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -208,7 +203,6 @@ metadata:
   labels:
     app: backend
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -246,7 +240,6 @@ metadata:
   labels:
     app: backend
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -281,12 +274,161 @@ metadata:
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    app: guyane
+    app: dashboard
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
+    component: nginx
+  name: dashboard
+  namespace: tumeplay-mybranch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: dashboard
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        cert: wildcard
+        component: nginx
+    spec:
+      containers:
+        - image: >-
+            ghcr.io/socialgouv/tumeplay/dashboard:0123456789abcdefghijklmnopqrstuvwxyz0123
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: dashboard
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dashboard
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: dashboard
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: tumeplay-mybranch
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: dashboard
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: dashboard
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+  name: dashboard
+  namespace: tumeplay-mybranch
+spec:
+  rules:
+    - host: bo-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: dashboard
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - bo-tumeplay-mybranch.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/tumeplay
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: guyane
+    application: tumeplay
+    owner: tumeplay
+    team: tumeplay
+    cert: wildcard
+    component: nginx
   name: guyane
   namespace: tumeplay-mybranch
 spec:
@@ -307,10 +449,10 @@ spec:
       labels:
         app: guyane
         application: tumeplay
-        component: nginx
         owner: tumeplay
         team: tumeplay
         cert: wildcard
+        component: nginx
     spec:
       containers:
         - image: >-
@@ -365,7 +507,6 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -403,7 +544,6 @@ metadata:
   labels:
     app: guyane
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -440,10 +580,10 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
+    component: nginx
   name: metropole
   namespace: tumeplay-mybranch
 spec:
@@ -464,10 +604,10 @@ spec:
       labels:
         app: metropole
         application: tumeplay
-        component: nginx
         owner: tumeplay
         team: tumeplay
         cert: wildcard
+        component: nginx
     spec:
       containers:
         - image: >-
@@ -522,7 +662,6 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -560,7 +699,6 @@ metadata:
   labels:
     app: metropole
     application: tumeplay
-    component: nginx
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -604,7 +742,7 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-admin-user
-          image: ghcr.io/socialgouv/docker/azure-db:6.45.0
+          image: ghcr.io/socialgouv/docker/azure-db:6.38.3
           imagePullPolicy: IfNotPresent
           name: create-db-user
           resources:
@@ -615,10 +753,21 @@ spec:
               cpu: 100m
               memory: 64Mi
       restartPolicy: Never
+    metadata:
+      annotations:
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/tumeplay
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        application: tumeplay
+        owner: tumeplay
+        team: tumeplay
+        cert: wildcard
   ttlSecondsAfterFinished: 86400
 metadata:
   annotations:
-    kapp.k14s.io/update-strategy: skip
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/tumeplay
@@ -626,11 +775,10 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
-  name: create-db-job-mybranch
+  name: create-db-job-0123456
   namespace: tumeplay-mybranch
 ---
 apiVersion: v1
@@ -651,7 +799,6 @@ stringData:
   PGUSER: user_mybranch@tumeplaydevserver.postgres.database.azure.com
 metadata:
   annotations:
-    kapp.k14s.io/update-strategy: skip
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/tumeplay
@@ -659,7 +806,6 @@ metadata:
     app.github.com/sha: '0123456'
   labels:
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -680,7 +826,6 @@ metadata:
   namespace: tumeplay-mybranch
   labels:
     application: tumeplay
-    component: tumeplay
     owner: tumeplay
     team: tumeplay
     cert: wildcard
@@ -697,7 +842,6 @@ spec:
         app.github.com/sha: '0123456'
       labels:
         application: tumeplay
-        component: tumeplay
         owner: tumeplay
         team: tumeplay
         cert: wildcard

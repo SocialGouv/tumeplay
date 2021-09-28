@@ -59,7 +59,7 @@ export const getManifests = async () => {
   const emptyDir = new Volume({ name: volumeName, emptyDir: {} });
 
   const uploadsVolumeMount = new VolumeMount({
-    mountPath: "/public/uploads",
+    mountPath: "/app/public/uploads",
     name: volumeName,
   });
 
