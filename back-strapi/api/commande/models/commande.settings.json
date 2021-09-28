@@ -90,6 +90,13 @@
     },
     "environnement": {
       "model": "environnement"
+		},
+    "received": {
+      "type": "boolean",
+      "default": false
+    },
+    "date_received": {
+      "type": "datetime"
     }
   }
 }

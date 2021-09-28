@@ -191,7 +191,7 @@ const OrdersLogistics = () => {
       item.date_sent = new Date()
       return item
     })
-    const res = await OrdersAPI.setOrdersToSent(token, ordersToSend)
+    const res = await OrdersAPI.bulkUpdate(token, ordersToSend)
     if (res.status === 200) {
       setShow(true)
     }
