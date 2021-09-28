@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/SocialGouv/Tumeplay/compare/v1.12.2...v1.12.3) (2021-09-28)
+
+
+### Bug Fixes
+
+* order api calls for dashboard and pagination improvements ([#140](https://github.com/SocialGouv/Tumeplay/issues/140)) ([0294d17](https://github.com/SocialGouv/Tumeplay/commit/0294d17bbf88faa16fe73bd11425e870c8d53d2e))
+
 ## [1.12.2](https://github.com/SocialGouv/Tumeplay/compare/v1.12.1...v1.12.2) (2021-09-28)
 
 
