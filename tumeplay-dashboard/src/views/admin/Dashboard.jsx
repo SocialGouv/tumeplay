@@ -78,7 +78,7 @@ const Dashboard = () => {
 		} else {
 			evolution = 0
 		}
-		
+
 		response = await OrdersAPI.countPendingOrders(token)
 		const pendingOrders = response.data;
 		response = await OrdersAPI.countTodayPendingOrders(token)
@@ -290,7 +290,7 @@ const Dashboard = () => {
 														</div>
 												</div>
 											</div>
-											{ 
+											{
 												kpi.evolutionWording && (
 													<p class="text-sm text-blueGray-400 mt-4 mb-0">
 														<span class="text-emerald-500 mr-2">
@@ -348,20 +348,20 @@ const Dashboard = () => {
       </div>
 			<div className="tmp-table-option">
 				<div className="tmp-top-buttons-container">
-					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`}
 									data-for="print-tooltip"
-									data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin d\'en imprimer les étiquettes' : ''}`} 
+									data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin d\'en imprimer les étiquettes' : ''}`}
 									onClick={(e) => {
 										if (tmpSelectedItems.length > 0)
 											handlePrintClick(e)
 									}}>
 						<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer les étiquettes
 					</button>
-					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
+					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`}
 										data-for="send-tooltip"
 										data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin de les marquer comme traitées' : ''}`}
 										onClick={(e) => {
-											if (tmpSelectedItems.length > 0) 
+											if (tmpSelectedItems.length > 0)
 												handleSendClick(e)
 										}}>
 						<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Marquer comme traité
