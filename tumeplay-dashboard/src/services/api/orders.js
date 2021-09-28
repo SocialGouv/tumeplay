@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const OrdersAPI = {
   getOrders: (token, searchParam) => {
-    return axios.get(`${API_URL}/commandes?delivery=pickup&delivery=home${searchParam}`, {headers: {
+    return axios.get(`${API_URL}/commandes?_limit=1000&delivery=pickup&delivery=home${searchParam}`, {headers: {
       Authorization: `Bearer ${token}`
     }});
   },
