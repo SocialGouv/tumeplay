@@ -109,7 +109,6 @@ const buildMrParams = (order) => {
 }
 
 const colissimoTmpPdf = async (orders, promises) => {
-  strapi.log.info('BEGIN')
   let remainingOrders;
   let count;
   if (orders.length > 0) {
@@ -129,12 +128,18 @@ const colissimoTmpPdf = async (orders, promises) => {
     };
     const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
     const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
+    const addressStyle='display: flex; text-align: center; justify-content: space-around;'
     let gridItems = ""
     first16orders.forEach((order, index) => {
       gridItems = gridItems + (`
                           <div style="${gridItemStyle}">
                             <p>${order.name}</p>
                             <p>${order.address}</p>
+                            <p>${order.address_more}</p>
+                            <div style="${addressStyle}">
+                              <p>${order.address_zipcode}</p>
+                              <p>${order.address_city}</p>
+                            </div>
                             <p>${order.phone}</p>
                          </div>
                          `)
