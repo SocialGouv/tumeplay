@@ -1,3 +1,11 @@
+## [1.12.2](https://github.com/SocialGouv/Tumeplay/compare/v1.12.1...v1.12.2) (2021-09-28)
+
+
+### Bug Fixes
+
+* display adress_zipcode and adress_city in colissimo ([#137](https://github.com/SocialGouv/Tumeplay/issues/137)) ([4e3e6f5](https://github.com/SocialGouv/Tumeplay/commit/4e3e6f5d21d89ed6081a12930a39c8ef7450d68f))
+* fixing csv extension ([#138](https://github.com/SocialGouv/Tumeplay/issues/138)) ([30194ff](https://github.com/SocialGouv/Tumeplay/commit/30194ff10c07a8a6ab8e07466cd56b1939e779bf))
+
 ## [1.12.1](https://github.com/SocialGouv/Tumeplay/compare/v1.12.0...v1.12.1) (2021-09-28)
 
 
