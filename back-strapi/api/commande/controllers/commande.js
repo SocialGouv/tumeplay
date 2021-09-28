@@ -166,6 +166,7 @@ const colissimoTmpPdf = async (orders, promises) => {
 module.exports = {
   async create(ctx) {
     let entity;
+    let tmp_order = ctx.request.body
 
     // CHECK AVAILABILITY & DECREMENT STOCK
     if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
@@ -179,6 +180,8 @@ module.exports = {
       } else {
         return ctx.conflict(null, 'Some products unavailable');
       }
+      const environnement = await strapi.services.environnement.findOne({'slug': 'guyane'})
+      tmp_order.environnement = environnement.id
     } else if (ctx.request.body.content[0].__component === 'commandes.box') {
       const box_id = ctx.request.body.content[0].box
       const available = await strapi.services.box.checkBoxAvailability(box_id)
@@ -188,10 +191,10 @@ module.exports = {
       } else {
         return ctx.conflict(null, 'Box ' + box_id + ' unavailable');
       }
+      const box = await strapi.services.box.findOne({'id': box_id})
+      tmp_order.box_number = box.number
+      tmp_order.environnement = box.environnement
     }
-
-    let tmp_order = ctx.request.body
-
 
     //GENERATE LABEL IF MONDIAL RELAY
     let mondial_relay_pdf_url;
