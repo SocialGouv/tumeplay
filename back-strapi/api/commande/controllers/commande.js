@@ -122,25 +122,20 @@ const colissimoTmpPdf = async (orders, promises) => {
       format: 'A4',
       path: relativeDirPath + '/' + filename,
       margin: {
-        top: "10px",
-        bottom: "15px",
+        top: "25px",
+        bottom: "25px",
       }
     };
-    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr);"
-    const gridItemStyle='color:black; text-align: center; border: solid 1px black; min-height:35Opx'
-    const addressStyle='display: flex; text-align: center; justify-content: space-around;'
+    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr); margin-left: -10px; margin-right: -10px;"
+    const gridItemStyle='color:black; text-align: left; border: solid 1px #dadada; height: 133px; padding-left: 10px; padding-right: 10px;'
     let gridItems = ""
     first16orders.forEach((order, index) => {
       gridItems = gridItems + (`
                           <div style="${gridItemStyle}">
-                            <p>${order.name}</p>
-                            <p>${order.address}</p>
-                            <p>${order.address_more}</p>
-                            <div style="${addressStyle}">
-                              <p>${order.address_zipcode}</p>
-                              <p>${order.address_city}</p>
-                            </div>
-                            <p>${order.phone}</p>
+                            <span style="display: block; padding-top: 10px;">${order.name.toUpperCase()}</span>
+                            <span>${order.address.toUpperCase()}${order.address_more && ', ' + order.address_more.toUpperCase()}</span><br><br>
+														<span>${order.address_zipcode} ${order.address_city.toUpperCase()}</span><br>
+                            <span>${order.phone}</span>
                          </div>
                          `)
 
