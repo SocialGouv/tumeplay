@@ -72,13 +72,13 @@ const OrdersLogistics = () => {
 						setCurrentOrder(order);
 						setShowUserData(true);
 					}} className="tmp-button">
-						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Information anonymes
+						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Informations
 					</button>
 					<button onClick={() => {
 						setCurrentOrder(order);
 						setShowUpdateOrderContent(true);
 					}} className="tmp-button">
-						<FontAwesomeIcon icon={faPen} color="white" className="mr-2" /> Modifier le contenu
+						<FontAwesomeIcon icon={faPen} color="white" className="mr-2" /> Modifier la box
 					</button>
 					{
 						!order.received ? (
