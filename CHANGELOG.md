@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/SocialGouv/Tumeplay/compare/v1.13.2...v1.13.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* **dashboard:** handling selector in table for multiselect ([#147](https://github.com/SocialGouv/Tumeplay/issues/147)) ([443ada8](https://github.com/SocialGouv/Tumeplay/commit/443ada8b2726b45ea1ccf93298f462643051b786))
+
 ## [1.13.2](https://github.com/SocialGouv/Tumeplay/compare/v1.13.1...v1.13.2) (2021-09-29)
 
 
