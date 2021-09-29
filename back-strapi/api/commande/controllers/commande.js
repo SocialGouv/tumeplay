@@ -320,12 +320,17 @@ module.exports = {
     return process.env.DOMAIN_API + merge_pdf_path;
   },
   async createColissimo(ctx) {
+    const dirPath = 'uploads/orders/colissimo/tmp'
+    const relativeDirPath = path.relative('.', `public/${dirPath}`)
+
+		if (fs.existsSync(relativeDirPath)) {
+			await fs.rmdirSync(relativeDirPath, { recursive: true });
+		}
+
     const ids = ctx.request.body.ids;
     let orders = await strapi.query('commande').find({id_in: ids})
     const merger = new PDFMerger();
     const merge_pdf_path = 'uploads/orders/colissimo/merged_colissimo_' + new Date().getTime() + '.pdf';
-    const dirPath = 'uploads/orders/colissimo/tmp'
-    const relativeDirPath = path.relative('.', `public/${dirPath}`)
     await new Promise((resolve) => {
       colissimoTmpPdf(orders, []).then(async () => {
         fs.readdir(relativeDirPath, async (err, files) => {
@@ -334,9 +339,6 @@ module.exports = {
           })
           const merge_pdf_save_path = path.relative('.', `public/${merge_pdf_path}`);
           await merger.save(merge_pdf_save_path);
-          files.forEach(file => {
-            fs.unlinkSync(path.relative('.', `public/uploads/orders/colissimo/tmp/${file}`))
-          })
           resolve();
         })
       })

@@ -207,14 +207,15 @@ const Dashboard = () => {
 	}
 
   useEffect(() => {
-    retrieveOrders(viewAll ? {
-      box_number: openTab,
-      _sort: 'created_at:DESC',
-    } : {
-      box_number: openTab,
-      sent_ne: true,
-      _sort: 'created_at:ASC',
-    })
+		if (openTab)
+			retrieveOrders(viewAll ? {
+				box_number: openTab,
+				_sort: 'created_at:DESC',
+			} : {
+				box_number: openTab,
+				sent_ne: true,
+				_sort: 'created_at:ASC',
+			})
   }, [viewAll])
 
   const handleChangeNumPerPage = (e) => {
