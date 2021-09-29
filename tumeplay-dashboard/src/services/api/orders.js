@@ -13,7 +13,7 @@ const OrdersAPI = {
     }});
   },
   getDeliveryOrders: (token, searchParam) => {
-    return axios.get(`${API_URL}/commandes?delivery=referent${searchParam}`, {headers: {
+    return axios.get(`${API_URL}/commandes?_limit=1000&delivery=referent${searchParam}`, {headers: {
       Authorization: `Bearer ${token}`
     }});
   },

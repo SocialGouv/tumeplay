@@ -218,7 +218,7 @@ const OrdersLogistics = () => {
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
 								title="Les commandes à traiter"  />
-				<div className="tmp-pagination-container">
+				{/* <div className="tmp-pagination-container">
 					<Pagination
 						currentPage={currentPage}
 						totalSize={filteredorders.length}
@@ -227,7 +227,7 @@ const OrdersLogistics = () => {
 						changeCurrentPage={(event) => onPageChange(event)}
 						theme="border-bottom"
 					/>
-				</div>
+				</div> */}
 			</div>
 		</>
 		)
