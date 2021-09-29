@@ -9,6 +9,7 @@ import logo from "../assets/pictures/full-logo.png"
 
 export default function Sidebar() {
   const context = useContext(AppContext)
+	const userRole = context.user.role.name
 
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
@@ -70,40 +71,69 @@ export default function Sidebar() {
             <hr className="mb-4 md:min-w-full" />
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              <li className="items-center">
-                <NavLink
-                  className={
-                    "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
-                  }
-									activeClassName="tmp-active-nav-link"
-                  to="/orders/box/1"
-                >
-                  <FontAwesomeIcon
-                    icon={faTable}
-                    className={
-                      "fas fa-tv mr-2 text-sm"
-                    }
-                  ></FontAwesomeIcon>{" "}
-                  Gestion des commandes
-                </NavLink>
-              </li>
-              <li className="items-center">
-                <NavLink
-                  className={
-                    "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
-                  }
-									activeClassName="tmp-active-nav-link"
-                  to="/bilan"
-                >
-                  <FontAwesomeIcon
-                    icon={faClipboard}
-                    className={
-                      "fas fa-tv mr-2 text-sm"
-                    }
-                  ></FontAwesomeIcon>{" "}
-                  Bilans quotidiens
-                </NavLink>
-              </li>
+							{
+								userRole.includes('Referent') && (
+								<li className="items-center">
+									<NavLink
+										className={
+											"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+										}
+										activeClassName="tmp-active-nav-link"
+										to="/orders/referent"
+									>
+										<FontAwesomeIcon
+											icon={faTable}
+											className={
+												"fas fa-tv mr-2 text-sm"
+											}
+										></FontAwesomeIcon>{" "}
+										Gestion des commandes
+									</NavLink>
+								</li>
+								)
+							}
+							{
+								userRole.includes('CAT') && (
+								<li className="items-center">
+									<NavLink
+										className={
+											"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+										}
+										activeClassName="tmp-active-nav-link"
+										to="/orders/box/1"
+									>
+										<FontAwesomeIcon
+											icon={faTable}
+											className={
+												"fas fa-tv mr-2 text-sm"
+											}
+										></FontAwesomeIcon>{" "}
+										Gestion des commandes
+									</NavLink>
+								</li>
+								)
+							}
+							{
+								userRole.includes('CAT') && (
+								<li className="items-center">
+									<NavLink
+										className={
+											"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+										}
+										activeClassName="tmp-active-nav-link"
+										to="/bilan"
+									>
+										<FontAwesomeIcon
+											icon={faClipboard}
+											className={
+												"fas fa-tv mr-2 text-sm"
+											}
+										></FontAwesomeIcon>{" "}
+										Bilans quotidiens
+									</NavLink>
+								</li>
+								)
+							}
 							{
 								false && (
 									<li className="items-center">

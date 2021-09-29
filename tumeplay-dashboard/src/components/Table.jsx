@@ -15,7 +15,7 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title})
   })
 
   const formatDisplay = (item, fieldName) => {
-    if (fieldName === "created_at" || fieldName === "date_sent") {
+    if (fieldName === "created_at" || fieldName === "date_sent" || fieldName === "date_received") {
       item = new Date(item).toLocaleDateString()
     }
     if (fieldName === "delivery") {
@@ -25,17 +25,17 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title})
         </div>
       )
     }
-    if (fieldName === "sent") {
+    if (fieldName === 'sent' || fieldName === 'received') {
       return (
 				item ? 
 					<>
 						<FontAwesomeIcon icon={faPaperPlane} color="green" />
-						<span className="ml-2">Commande traitée</span>
+						<span className="ml-2">{fieldName === 'sent' && 'Commande traitée'}{fieldName === 'received' && 'Commande distrbuée'}</span>
 					</>
 					: 
 					<>
 						<FontAwesomeIcon icon={faTimes} color='red' />
-						<span className="ml-2">Commande non traitée</span>
+						<span className="ml-2">{fieldName === 'sent' && 'Commande non traitée'}{fieldName === 'received' && 'Commande non distrbuée'}</span>
 					</>
 			)
     }

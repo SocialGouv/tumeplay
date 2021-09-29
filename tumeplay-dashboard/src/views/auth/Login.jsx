@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import AppContext from '../../AppContext';
-import { login } from '../../lib/auth';
+import { login } from '../../services/api/auth';
 import logo from '../../assets/pictures/full-logo.png'
 import { Link } from "react-router-dom";
 import { Formik } from 'formik';

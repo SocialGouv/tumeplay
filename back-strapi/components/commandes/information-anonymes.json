@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_commandes_information_anonymes",
+  "info": {
+    "name": "Information anonymes",
+    "icon": "mobile-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sex": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "string"
+    },
+    "schooling": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "text"
+    },
+    "old_box": {
+      "type": "string"
+    },
+    "first_box": {
+      "type": "string"
+    }
+  }
+}

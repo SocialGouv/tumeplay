@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import AppContext from '../../AppContext';
-import { forgotPassword } from '../../lib/auth';
+import { forgotPassword } from '../../services/api/auth';
 import logo from '../../assets/pictures/full-logo.png';
 import checkIcon from '../../assets/pictures/check-icon.png';
 import Loader from '../../components/ui/Loader';

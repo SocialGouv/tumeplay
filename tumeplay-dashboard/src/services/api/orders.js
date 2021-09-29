@@ -3,12 +3,17 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const OrdersAPI = {
-  getOrders: (token, params) => {
+	getLogisticsOrders: (token, params) => {
     return axios.get(`${API_URL}/commandes`, {
       params: Object.assign({
         delivery: ['pickup', 'home'],
       }, params),
       headers: {
+      Authorization: `Bearer ${token}`
+    }});
+  },
+  getDeliveryOrders: (token, searchParam) => {
+    return axios.get(`${API_URL}/commandes?_limit=1000&delivery=referent${searchParam}`, {headers: {
       Authorization: `Bearer ${token}`
     }});
   },
@@ -39,7 +44,12 @@ const OrdersAPI = {
     }
     );
   },
-  setOrdersToSent: (token, orders) => {
+	update: (token, order) => {
+		return axios.put(`${API_URL}/commandes/${order.id}`, order, {headers: {
+      Authorization: `Bearer ${token}`
+    }});
+	},
+  bulkUpdate: (token, orders) => {
     return axios.put(`${API_URL}/commandes/update/multiple`, {orders: orders}, {headers: {
       Authorization: `Bearer ${token}`
     }});

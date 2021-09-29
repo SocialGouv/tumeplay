@@ -14,7 +14,7 @@ import ConfirmModal from '../../components/ui/ConfirmModal';
 import ReactTooltip from 'react-tooltip';
 
 
-const Dashboard = () => {
+const OrdersLogistics = () => {
 
   const history = useHistory();
 
@@ -51,7 +51,7 @@ const Dashboard = () => {
 	])
 
   const retrieveBoxes = async () => {
-    let response = await getAllBoxes(token)
+    let response = await getAllBoxes(token, 'metropole')
     setBoxes(response.data)
   }
 
@@ -191,7 +191,7 @@ const Dashboard = () => {
       item.date_sent = new Date()
       return item
     })
-    const res = await OrdersAPI.setOrdersToSent(token, ordersToSend)
+    const res = await OrdersAPI.bulkUpdate(token, ordersToSend)
     if (res.status === 200) {
       setShow(true)
     }
@@ -398,4 +398,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default OrdersLogistics

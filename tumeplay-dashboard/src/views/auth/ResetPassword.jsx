@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import AppContext from '../../AppContext';
-import { resetPassword } from '../../lib/auth';
+import { resetPassword } from '../../services/api/auth';
 import logo from '../../assets/pictures/full-logo.png';
 import checkIcon from '../../assets/pictures/check-icon.png';
 import Loader from '../../components/ui/Loader';
@@ -80,7 +80,7 @@ const ResetPassword = () => {
 
 									return errors;
 								}}
-								onSubmit={async (values, { setSubmitting }) => {
+								onSubmit={(values, { setSubmitting }) => {
 									resetPassword(
 										values.password,
 										values.password2,
