@@ -126,15 +126,15 @@ const colissimoTmpPdf = async (orders, promises) => {
         bottom: "25px",
       }
     };
-    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr); margin-left: -10px; margin-right: -10px;"
-    const gridItemStyle='color:black; text-align: left; border: solid 1px #dadada; height: 133px; padding-left: 10px; padding-right: 10px;'
+    const skeletonStyle = "display: grid; grid-template-columns: repeat(2, 1fr); margin-left: 0px; margin-right: 0px;"
+    const gridItemStyle='color:black; text-align: left; border: solid 1px #dadada; height: 129px; padding-left: 10px; padding-right: 10px;'
     let gridItems = ""
     first16orders.forEach((order, index) => {
       gridItems = gridItems + (`
                           <div style="${gridItemStyle}">
                             <span style="display: block; padding-top: 10px;">${order.name.toUpperCase()}</span>
                             <span>${order.address.toUpperCase()}${order.address_more && ', ' + order.address_more.toUpperCase()}</span><br><br>
-														<span>${order.address_zipcode} ${order.address_city.toUpperCase()}</span><br>
+														<span>${order.address_zipcode} ${order.address_city && order.address_city.toUpperCase()}</span><br>
                             <span>${order.phone}</span>
                          </div>
                          `)
