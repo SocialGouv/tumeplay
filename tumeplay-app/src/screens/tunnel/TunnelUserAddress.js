@@ -151,7 +151,6 @@ export default function TunnelUserAddress(props) {
               }
               localAdress['address_dept'] = res[0].address.county;
               localAdress['address_city'] = res[0].address.city;
-              console.log(localAdress);
               _gotoSummary();
             }
           }
