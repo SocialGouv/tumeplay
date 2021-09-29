@@ -169,7 +169,7 @@ const OrdersLogistics = () => {
 	return(
 		<>
 			<div className="px-4 relative">
-				<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold">
+				<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold mb-8">
 					Vos commandes
 				</div>
 				<div className={`fixed ${showConfirm ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
