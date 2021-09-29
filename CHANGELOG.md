@@ -1,3 +1,11 @@
+## [1.13.2](https://github.com/SocialGouv/Tumeplay/compare/v1.13.1...v1.13.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* **dashboard:** order name request modification ([028ce84](https://github.com/SocialGouv/Tumeplay/commit/028ce84c359cfcc8935153a869a2323956d31fc9))
+* **dashboard-referent:** small margin ([bae7c66](https://github.com/SocialGouv/Tumeplay/commit/bae7c66bb20a9b137cfc06d05f2120bbdc783b6b))
+
 ## [1.13.1](https://github.com/SocialGouv/Tumeplay/compare/v1.13.0...v1.13.1) (2021-09-29)
 
 
