@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/SocialGouv/Tumeplay/compare/v1.13.0...v1.13.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** wording ([eac25b6](https://github.com/SocialGouv/Tumeplay/commit/eac25b688b09d56fe9b2a6d0c9aa0c879b7d1b37))
+
 # [1.13.0](https://github.com/SocialGouv/Tumeplay/compare/v1.12.6...v1.13.0) (2021-09-29)
 
 
