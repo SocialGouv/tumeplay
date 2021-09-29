@@ -20,6 +20,7 @@ const Dashboard = () => {
 
   const context = useContext(AppContext)
   const token = context.token
+  const [checked, setChecked] = useState(false)
   const [viewAll, setViewAll] = useState(false)
   const [boxes, setBoxes] = useState([])
   const [orders, setOrders] = useState([])
@@ -117,14 +118,17 @@ const Dashboard = () => {
     event.preventDefault()
     setOpenTab(box_number)
     retrieveOrders({sent_ne: true, box_number})
+    setChecked(false)
     history.push(`/orders/box/${box_number}`)
   }
 
   const handleSelectAll = (e) => {
     if(e.target.checked) {
+      setChecked(e.target.checked)
       orders.forEach(order => order.selected = e.target.checked)
       setTmpSelectedItems([...orders])
     } else {
+      setChecked(false)
        orders.forEach(order => order.selected = e.target.checked)
       setTmpSelectedItems([])
     }
@@ -380,6 +384,7 @@ const Dashboard = () => {
 			</div>
       <Table  dataToDisplay={dataToDisplay}
               handleSpecificSelection={handleSpecificSelection}
+              checked={checked}
               handleSelectAll={handleSelectAll}
 							title={getCurentBoxTitle()}  />
       <div className="tmp-pagination-container">
