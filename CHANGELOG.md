@@ -1,3 +1,10 @@
+## [1.12.6](https://github.com/SocialGouv/Tumeplay/compare/v1.12.5...v1.12.6) (2021-09-29)
+
+
+### Bug Fixes
+
+* fixing colissimo sticker size ([#144](https://github.com/SocialGouv/Tumeplay/issues/144)) ([d5caf94](https://github.com/SocialGouv/Tumeplay/commit/d5caf9422d7a9e794551a8a24ef32bd9d95c1857))
+
 ## [1.12.5](https://github.com/SocialGouv/Tumeplay/compare/v1.12.4...v1.12.5) (2021-09-28)
 
 
