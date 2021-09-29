@@ -139,6 +139,7 @@ export default function TunnelUserAddress(props) {
                 deptCode.substring(0, 2) === '75' ||
                 deptCode.substring(0, 2) === '77' ||
                 deptCode.substring(0, 2) === '78' ||
+                deptCode.substring(0, 2) === '91' ||
                 deptCode.substring(0, 2) === '92' ||
                 deptCode.substring(0, 2) === '93' ||
                 deptCode.substring(0, 2) === '94' ||
@@ -150,7 +151,6 @@ export default function TunnelUserAddress(props) {
               }
               localAdress['address_dept'] = res[0].address.county;
               localAdress['address_city'] = res[0].address.city;
-              console.log(localAdress);
               _gotoSummary();
             }
           }
