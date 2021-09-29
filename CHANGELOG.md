@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/SocialGouv/Tumeplay/compare/v1.12.6...v1.13.0) (2021-09-29)
+
+
+### Features
+
+* dashboard referent ([#136](https://github.com/SocialGouv/Tumeplay/issues/136)) ([b5b7d74](https://github.com/SocialGouv/Tumeplay/commit/b5b7d7496134b71bef20ec84894d901c203fab7c))
+
 ## [1.12.6](https://github.com/SocialGouv/Tumeplay/compare/v1.12.5...v1.12.6) (2021-09-29)
 
 
