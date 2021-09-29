@@ -139,11 +139,13 @@ export default function TunnelUserAddress(props) {
                 deptCode.substring(0, 2) === '75' ||
                 deptCode.substring(0, 2) === '77' ||
                 deptCode.substring(0, 2) === '78' ||
+                deptCode.substring(0, 2) === '91' ||
                 deptCode.substring(0, 2) === '92' ||
                 deptCode.substring(0, 2) === '93' ||
                 deptCode.substring(0, 2) === '94' ||
                 deptCode.substring(0, 2) === '95'
               ) {
+                console.log(localAdress.address_region)
                 localAdress['address_region'] = 'Île-de-France';
               } else {
                 localAdress['address_region'] = res[0].address.state;
