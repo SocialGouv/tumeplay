@@ -2,12 +2,10 @@ import React, { useContext, useEffect } from 'react'
 import Loader from '../../components/ui/Loader';
 import { Formik } from 'formik';
 import FormErrorMessage from '../../components/ui/FormErrorMessage';
-import ErrorMessage from '../../components/ui/ErrorMessage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OrdersAPI from '../../services/api/orders';
 import AppContext from '../../AppContext';
 
-const ConfirmModal = ({setShow, order, boxes}) => {
+const ConfirmModal = ({closeModal, order, boxes}) => {
   const context = useContext(AppContext)
   const {token} = context
 
@@ -44,7 +42,7 @@ const ConfirmModal = ({setShow, order, boxes}) => {
 
 						OrdersAPI.update(token, order).then(() => {
 							setSubmitting(false);
-							setShow(false);
+							closeModal();
 						}, (e) => {
 							setSubmitting(false);
 							console.log(e)
@@ -213,7 +211,7 @@ const ConfirmModal = ({setShow, order, boxes}) => {
 							<div className="flex space-around items-center mt-8">
 								<button
 									className="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full mr-1 shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
-									onClick={() => setShow(false)}
+									onClick={() => closeModal()}
 								>
 									Annuler
 								</button>

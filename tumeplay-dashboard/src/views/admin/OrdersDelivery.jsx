@@ -8,6 +8,7 @@ import "react-pagination-js/dist/styles.css";
 import Dropdown from "react-dropdown";
 import ConfirmModal from '../../components/ui/ConfirmModal';
 import UserDataModal from '../../components/ui/UserDataModal';
+import UpdateOrderContentModal from '../../components/ui/UpdateOrderContentModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
@@ -29,12 +30,14 @@ const OrdersLogistics = () => {
   const [boxes, setBoxes] = useState([])
   const [showConfirm, setShowConfirm] = useState(false)
   const [showUserData, setShowUserData] = useState(false)
+  const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
 
   const dataToDisplay = {
     headers: [
      {name: "ID", fieldName: 'id'},
      {name: "Date", fieldName: 'created_at' },
      {name: "Prénom", fieldName: 'first_name' },
+     {name: "Box", fieldName: 'box_name' },
      {name: "Statut Traitement", fieldName: 'received'},
      {name: "Actions", fieldName: 'actions'}
     ],
@@ -62,6 +65,7 @@ const OrdersLogistics = () => {
     let orders = response.data
     orders.map(order => {
       order.selected = false
+			order.box_name = order.content[0].__component === 'commandes.box' ? order.content[0].box.title : 'Box sur mesure'
 			order.actions = (
 				<div className="tmp-table-actions">
 					<button onClick={() => {
@@ -70,7 +74,10 @@ const OrdersLogistics = () => {
 					}} className="tmp-button">
 						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Information anonymes
 					</button>
-					<button className="tmp-button">
+					<button onClick={() => {
+						setCurrentOrder(order);
+						setShowUpdateOrderContent(true);
+					}} className="tmp-button">
 						<FontAwesomeIcon icon={faPen} color="white" className="mr-2" /> Modifier le contenu
 					</button>
 					{
@@ -175,7 +182,20 @@ const OrdersLogistics = () => {
 				>
 					{
 						showUserData  &&
-						<UserDataModal setShow={setShowUserData} boxes={boxes} order={currentOrder} />
+						<UserDataModal closeModal={() => {
+							setShowUserData(false)
+							retrieveOrders(`&referent=${user.referent}`)
+						}} boxes={boxes} order={currentOrder} />
+					}
+				</div>
+				<div className={`fixed ${showUpdateOrderContent ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+				>
+					{
+						showUpdateOrderContent  &&
+						<UpdateOrderContentModal closeModal={() => {
+							setShowUpdateOrderContent(false)
+							retrieveOrders(`&referent=${user.referent}`)
+						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
 				<div className="tmp-table-option">
