@@ -1,3 +1,10 @@
+## [1.13.4](https://github.com/SocialGouv/Tumeplay/compare/v1.13.3...v1.13.4) (2021-09-29)
+
+
+### Bug Fixes
+
+* **front:** fixing 91 region integration ([#146](https://github.com/SocialGouv/Tumeplay/issues/146)) ([8e7d647](https://github.com/SocialGouv/Tumeplay/commit/8e7d6474585c9e0e473d0516b8dd8cb8655dd974))
+
 ## [1.13.3](https://github.com/SocialGouv/Tumeplay/compare/v1.13.2...v1.13.3) (2021-09-29)
 
 
