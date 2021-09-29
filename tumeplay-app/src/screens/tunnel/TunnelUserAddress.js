@@ -145,7 +145,6 @@ export default function TunnelUserAddress(props) {
                 deptCode.substring(0, 2) === '94' ||
                 deptCode.substring(0, 2) === '95'
               ) {
-                console.log(localAdress.address_region)
                 localAdress['address_region'] = 'Île-de-France';
               } else {
                 localAdress['address_region'] = res[0].address.state;
