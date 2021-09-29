@@ -29,7 +29,7 @@ const Settings = () => {
 				
 									return errors;
 								}}
-								onSubmit={async (values, { setSubmitting }) => {
+								onSubmit={(values, { setSubmitting }) => {
 									
 								}}
 							>
@@ -119,7 +119,7 @@ const Settings = () => {
 
 									return errors;
 								}}
-								onSubmit={async (values, { setSubmitting }) => {
+								onSubmit={(values, { setSubmitting }) => {
 									
 								}}
 							>

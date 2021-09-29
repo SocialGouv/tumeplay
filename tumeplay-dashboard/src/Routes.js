@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Switch, Redirect} from 'react-router-dom';
-import Dashboard from './views/admin/Dashboard.jsx';
+import OrdersLogistics from './views/admin/OrdersLogistics.jsx';
+import OrdersDelivery from './views/admin/OrdersDelivery.jsx';
 import Settings from './views/admin/Settings';
 import Login from './views/auth/Login';
 import ForgotPassword from './views/auth/ForgotPassword';
@@ -26,7 +27,8 @@ const Routes = () => {
       <PublicRoute component={ForgotPassword} layout={AuthenticationLayout} exact path="/forgot-password"/>
       <PublicRoute component={ResetPassword} layout={AuthenticationLayout} exact path="/reset-password"/>
       <PublicRoute component={Register} layout={AuthenticationLayout} exact path="/register"/>
-      <PrivateRoute component={Dashboard} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/orders/box/:box_num"/>
+      <PrivateRoute component={OrdersLogistics} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/orders/box/:box_num"/>
+      <PrivateRoute component={OrdersDelivery} layout={TumeplayDashboardLayout} requiredRole={ROLES.Referent.name} exact path="/orders/referent"/>
       <PrivateRoute component={Bilan} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/bilan"/>
       <PrivateRoute component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
       <Redirect from="*" to={role && token ? ROLES[role].redirectPath : '/login'}  />

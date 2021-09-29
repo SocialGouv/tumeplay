@@ -25,7 +25,7 @@ const Bilan = () => {
   const {token} = useContext(AppContext)
 
   const retriveOrdersByDate = async (params) => {
-    const res = await OrdersAPI.getOrders(token, params)
+    const res = await OrdersAPI.getLogisticsOrders(token, params)
     let tmpOrders = res.data;
     tmpOrders.map(o => {
       o.selected = false
