@@ -35,7 +35,10 @@ const Bilan = () => {
   }
 
   useEffect(() => {
-    retriveOrdersByDate(`&date_sent=${(currentDate.toISOString().split('T', 1).toString())}`)
+    retriveOrdersByDate({
+			date_sent: currentDate.toISOString().split('T', 1).toString(),
+			_limit: 1000
+		})
   },[currentDate])
 
   const handleSpecificSelection = (e) => {
