@@ -1,3 +1,10 @@
+## [1.13.5](https://github.com/SocialGouv/Tumeplay/compare/v1.13.4...v1.13.5) (2021-09-30)
+
+
+### Bug Fixes
+
+* **dashboard:** adding filter ASC to orders display ([#149](https://github.com/SocialGouv/Tumeplay/issues/149)) ([70e358e](https://github.com/SocialGouv/Tumeplay/commit/70e358e021e2656f9361c6d5db5cd5f30f780706))
+
 ## [1.13.4](https://github.com/SocialGouv/Tumeplay/compare/v1.13.3...v1.13.4) (2021-09-29)
 
 
