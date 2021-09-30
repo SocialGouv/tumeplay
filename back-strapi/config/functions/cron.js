@@ -229,10 +229,25 @@ module.exports = {
     strapi.log.info('EMAIL SENT / CRON OVER at ', new Date().toISOString())
   },
   '0 5 * * *': async () => {
+
+    let yesterday_7AM  = new Date();
+      yesterday_7AM.setDate(yesterday_7AM.getDate() - 1);
+      yesterday_7AM.setHours(5);
+      yesterday_7AM.setMinutes(0);
+      yesterday_7AM.setMilliseconds(0);
+
+    let today_7AM  = new Date();
+      today_7AM.setHours(5);
+      today_7AM.setMinutes(0);
+      today_7AM.setMilliseconds(0);
+
     const cat_users = await strapi.query('user', 'users-permissions').find({'role.type': 'cat'})
+    const ordersColissimo = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'home', sent: false, _sort: 'created_at:desc'})
+    const ordersMondialRelay = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'pickup', sent: false, _sort: 'created_at:desc'})
+
     await cat_users.forEach((user) => {
-      const cat_template = {
-      subject: "Bienvenue sur l'outil de pilotage des commandes",
+      const CAT_TEMPLATE = {
+      subject: `Tumeplay: ${ordersColissimo.length + ordersMondialRelay.length} nouvelle(s) commande(s) prête(s) à être traitées`,
       text: `Bienvenue, pour rappel vous pouvez maintenant traiter les commandes ici :
         https://bo-tumeplay.fabrique.social.gouv.fr/orders/box/1
         Pour toutes informations complémentaires merci de contacter l'équipe Tumeplay
@@ -247,7 +262,7 @@ module.exports = {
         {
           to: user.email
         },
-        cat_template
+        CAT_TEMPLATE
       )
     })
   }
