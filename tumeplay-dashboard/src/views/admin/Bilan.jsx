@@ -37,6 +37,7 @@ const Bilan = () => {
   useEffect(() => {
     retriveOrdersByDate({
 			date_sent: currentDate.toISOString().split('T', 1).toString(),
+      _sort: 'created_at:ASC',
 			_limit: 1000
 		})
   },[currentDate])
