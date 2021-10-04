@@ -1,3 +1,10 @@
+## [1.13.9](https://github.com/SocialGouv/Tumeplay/compare/v1.13.8...v1.13.9) (2021-10-04)
+
+
+### Bug Fixes
+
+* login & color feedback user_data filled ([#153](https://github.com/SocialGouv/Tumeplay/issues/153)) ([2800bc9](https://github.com/SocialGouv/Tumeplay/commit/2800bc9c34a8bc41578e9e36964f3fde6a2994ed))
+
 ## [1.13.8](https://github.com/SocialGouv/Tumeplay/compare/v1.13.7...v1.13.8) (2021-10-04)
 
 
