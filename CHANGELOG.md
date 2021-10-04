@@ -1,3 +1,10 @@
+## [1.13.8](https://github.com/SocialGouv/Tumeplay/compare/v1.13.7...v1.13.8) (2021-10-04)
+
+
+### Bug Fixes
+
+* **front:** adding IDF logic to pickup orders for Regions ([#151](https://github.com/SocialGouv/Tumeplay/issues/151)) ([1a2754a](https://github.com/SocialGouv/Tumeplay/commit/1a2754a83a78cdc11c47e42ea50ac9a6a7146c5d))
+
 ## [1.13.7](https://github.com/SocialGouv/Tumeplay/compare/v1.13.6...v1.13.7) (2021-10-04)
 
 
