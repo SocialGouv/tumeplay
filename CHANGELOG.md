@@ -1,3 +1,39 @@
+## [1.13.6](https://github.com/SocialGouv/Tumeplay/compare/v1.13.5...v1.13.6) (2021-10-04)
+
+
+### Bug Fixes
+
+* remove old api calls and deleting RemoteAPI file ([#131](https://github.com/SocialGouv/Tumeplay/issues/131)) ([4b87faf](https://github.com/SocialGouv/Tumeplay/commit/4b87fafecff8d3479cff6e7c4a3b869840f6c0f6))
+
+## [1.13.5](https://github.com/SocialGouv/Tumeplay/compare/v1.13.4...v1.13.5) (2021-09-30)
+
+
+### Bug Fixes
+
+* **dashboard:** adding filter ASC to orders display ([#149](https://github.com/SocialGouv/Tumeplay/issues/149)) ([70e358e](https://github.com/SocialGouv/Tumeplay/commit/70e358e021e2656f9361c6d5db5cd5f30f780706))
+
+## [1.13.4](https://github.com/SocialGouv/Tumeplay/compare/v1.13.3...v1.13.4) (2021-09-29)
+
+
+### Bug Fixes
+
+* **front:** fixing 91 region integration ([#146](https://github.com/SocialGouv/Tumeplay/issues/146)) ([8e7d647](https://github.com/SocialGouv/Tumeplay/commit/8e7d6474585c9e0e473d0516b8dd8cb8655dd974))
+
+## [1.13.3](https://github.com/SocialGouv/Tumeplay/compare/v1.13.2...v1.13.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* **dashboard:** handling selector in table for multiselect ([#147](https://github.com/SocialGouv/Tumeplay/issues/147)) ([443ada8](https://github.com/SocialGouv/Tumeplay/commit/443ada8b2726b45ea1ccf93298f462643051b786))
+
+## [1.13.2](https://github.com/SocialGouv/Tumeplay/compare/v1.13.1...v1.13.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* **dashboard:** order name request modification ([028ce84](https://github.com/SocialGouv/Tumeplay/commit/028ce84c359cfcc8935153a869a2323956d31fc9))
+* **dashboard-referent:** small margin ([bae7c66](https://github.com/SocialGouv/Tumeplay/commit/bae7c66bb20a9b137cfc06d05f2120bbdc783b6b))
+
 ## [1.13.1](https://github.com/SocialGouv/Tumeplay/compare/v1.13.0...v1.13.1) (2021-09-29)
 
 

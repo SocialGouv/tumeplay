@@ -2,7 +2,6 @@ import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Storage from './Storage';
 import UserModel from '../models/User';
-import RemoteApi from './RemoteApi';
 import CryptoJS from 'react-native-crypto-js';
 
 const User = {
@@ -193,7 +192,7 @@ const User = {
       const tokensAmt = await User.getTokensAmount();
       console.log(`updateToLatestBadge--> tokensAmt: ${tokensAmt}`);
       // Get badges list
-      const badgeList = await RemoteApi.fetchBadges();
+      // const badgeList = await RemoteApi.fetchBadges();
       // console.log('badges list:', badgeList);
       // Getting latest badge id assigned to the user before the update
       const badgeIDBeforeUpdate = await User.getlatestBadgeIDWon();
@@ -203,40 +202,40 @@ const User = {
         updatedBadge: null,
         nextBadge: null,
       };
-      let updatedBadge_index = null;
+      // let updatedBadge_index = null;
       // Search in the list and compare the tokens to a badge
-      for (let i = 0; i < badgeList.length; i++) {
-        const badgeItem = badgeList[i];
+      // for (let i = 0; i < badgeList.length; i++) {
+      //   const badgeItem = badgeList[i];
 
-        // Assigning updatedBadge
-        if (tokensAmt >= badgeItem.tokenRequired) {
-          // Assigning the updatedBadge to badgeItem
-          // console.log(
-          //   `Assigning badge item to updated badge where badgeItem: ${JSON.stringify(
-          //     badgeItem,
-          //   )}`,
-          // );
-          result.updatedBadge = badgeItem;
-          updatedBadge_index = i;
-        }
-      }
+      //   // Assigning updatedBadge
+      //   if (tokensAmt >= badgeItem.tokenRequired) {
+      //     // Assigning the updatedBadge to badgeItem
+      //     // console.log(
+      //     //   `Assigning badge item to updated badge where badgeItem: ${JSON.stringify(
+      //     //     badgeItem,
+      //     //   )}`,
+      //     // );
+      //     result.updatedBadge = badgeItem;
+      //     updatedBadge_index = i;
+      //   }
+      // }
 
-      if (result.updatedBadge) {
-        if (result.updatedBadge.id === badgeIDBeforeUpdate) {
-          // If nothing changed, return null
-          return {
-            updatedBadge: null,
-            nextBadge: null,
-          };
-        }
-        // Else set next badge and return the result
-        const nextBadge_index_temp = updatedBadge_index + 1;
-        result.nextBadge =
-          nextBadge_index_temp < badgeList.length
-            ? badgeList[nextBadge_index_temp]
-            : null;
-        await User.setlatestBadgeIDWon(result.updatedBadge.id);
-      }
+      // if (result.updatedBadge) {
+      //   if (result.updatedBadge.id === badgeIDBeforeUpdate) {
+      //     // If nothing changed, return null
+      //     return {
+      //       updatedBadge: null,
+      //       nextBadge: null,
+      //     };
+      //   }
+      //   // Else set next badge and return the result
+      //   const nextBadge_index_temp = updatedBadge_index + 1;
+      //   result.nextBadge =
+      //     nextBadge_index_temp < badgeList.length
+      //       ? badgeList[nextBadge_index_temp]
+      //       : null;
+      //   await User.setlatestBadgeIDWon(result.updatedBadge.id);
+      // }
 
       // console.log('Update achieved. Result :', result);
 
