@@ -12,8 +12,12 @@ const OrdersAPI = {
       Authorization: `Bearer ${token}`
     }});
   },
-  getDeliveryOrders: (token, searchParam) => {
-    return axios.get(`${API_URL}/commandes?_limit=1000&delivery=referent${searchParam}`, {headers: {
+  getDeliveryOrders: (token, params) => {
+    return axios.get(`${API_URL}/commandes`, {
+			params: Object.assign({
+				_limit: 1000
+			}, params),
+			headers: {
       Authorization: `Bearer ${token}`
     }});
   },

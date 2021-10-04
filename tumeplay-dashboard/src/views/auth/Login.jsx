@@ -50,7 +50,9 @@ const Login = () => {
 								onSubmit={async (values, { setSubmitting }) => {
 									const res = await login(values.email, values.password)
 									if(res.status === 200) {
-										context.verifyAuthentication(res.data.user)
+										const user = res.data.user
+										user.referent = user.referent.id
+										context.verifyAuthentication(user)
 									} else {
 										// TODO : growl error
 									}
