@@ -1,3 +1,10 @@
+## [1.13.7](https://github.com/SocialGouv/Tumeplay/compare/v1.13.6...v1.13.7) (2021-10-04)
+
+
+### Bug Fixes
+
+* update sealed secred for dev/preprod email smtp password ([3593015](https://github.com/SocialGouv/Tumeplay/commit/35930154f6327a9436f2595ce97e121b5f5e1f45))
+
 ## [1.13.6](https://github.com/SocialGouv/Tumeplay/compare/v1.13.5...v1.13.6) (2021-10-04)
 
 
