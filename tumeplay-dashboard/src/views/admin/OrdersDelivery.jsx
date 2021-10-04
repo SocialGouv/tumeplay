@@ -50,14 +50,18 @@ const OrdersLogistics = () => {
 		order.received = true;
 		order.date_received = new Date();
 		await OrdersAPI.update(token, order)
-    retrieveOrders(`&referent=${user.referent}`);
+    retrieveOrders({
+      referent: user.referent
+    });
 	}
 
 	const undoReceivedOrder = async (order) => {
 		order.received = false;
 		delete order.date_received;
 		await OrdersAPI.update(token, order)
-    retrieveOrders(`&referent=${user.referent}`);
+    retrieveOrders({
+      referent: user.referent
+    });
 	}
 	
   const retrieveOrders = async (params) => {
@@ -71,7 +75,9 @@ const OrdersLogistics = () => {
 					<button onClick={() => {
 						setCurrentOrder(order);
 						setShowUserData(true);
-					}} className="tmp-button">
+					}} className="tmp-button" style={{
+						backgroundColor: order.user_data.sex && order.user_data.age && order.user_data.zipcode ? 'green' : 'red'
+					}}>
 						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Informations
 					</button>
 					<button onClick={() => {
@@ -155,7 +161,9 @@ const OrdersLogistics = () => {
 
   useEffect(() => {
     retrieveBoxes()
-    retrieveOrders(`&referent=${user.referent}`)
+    retrieveOrders({
+      referent: user.referent
+    })
    }, [])
 
 
@@ -184,7 +192,9 @@ const OrdersLogistics = () => {
 						showUserData  &&
 						<UserDataModal closeModal={() => {
 							setShowUserData(false)
-							retrieveOrders(`&referent=${user.referent}`)
+							retrieveOrders({
+								referent: user.referent
+							})
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
@@ -194,7 +204,9 @@ const OrdersLogistics = () => {
 						showUpdateOrderContent  &&
 						<UpdateOrderContentModal closeModal={() => {
 							setShowUpdateOrderContent(false)
-							retrieveOrders(`&referent=${user.referent}`)
+							retrieveOrders({
+								referent: user.referent
+							})
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
