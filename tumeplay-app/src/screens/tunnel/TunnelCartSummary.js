@@ -52,6 +52,8 @@ export default function TunnelCartSummary(props) {
 
   const [isSelected, setIsSelected] = useState(false);
 
+  console.log("FINAL SELECTED", selectedPickup)
+
   async function _confirmOrder() {
     //ORDER STRAPI API
     let orderPost;

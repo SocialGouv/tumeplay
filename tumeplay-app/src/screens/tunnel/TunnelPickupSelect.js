@@ -162,6 +162,8 @@ export default function TunnelPickupSelect(props) {
     });
   }
 
+  console.log("SELECtED", selectedPickup)
+
   function _handleChange(name, value) {
     if (AddressValidator.validateZipCode(value)) {
       setInvalidZipCode(false);
@@ -249,6 +251,8 @@ export default function TunnelPickupSelect(props) {
       .reverse(item.coordinates.longitude, item.coordinates.latitude)
       .end((err, res) => {
         if (res) {
+          const deptCode = res.address.postcode;
+          console.log("dept", deptCode)
           if (res.address.postcode.substring(0, 2) === '97') {
             item['address_deptcode'] = res.address.postcode.substring(0, 3);
           } else {
@@ -265,9 +269,10 @@ export default function TunnelPickupSelect(props) {
             deptCode.substring(0, 2) === '94' ||
             deptCode.substring(0, 2) === '95'
           ) {
-            localAdress['address_region'] = 'Île-de-France';
+            item['address_region'] = 'Île-de-France';
+            console.log("REGION", item)
           } else {
-            localAdress['address_region'] = res[0].address.state;
+            item['address_region'] = res[0].address.state;
           }
           item['address_dept'] = res.address.county;
           setSelectedPickup({...item});
