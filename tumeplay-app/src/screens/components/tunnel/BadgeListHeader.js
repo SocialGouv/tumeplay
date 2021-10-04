@@ -7,7 +7,6 @@ import LandingStyle from '../../../styles/components/LandingScreen';
 
 import useIsMounted from '../../../hooks/isMounted';
 import User from '../../../services/User';
-import RemoteApi from '../../../services/RemoteApi';
 
 export default function BadgeListHeader() {
   const [availableTokens, setAvailableToken] = useState(0);
@@ -22,15 +21,15 @@ export default function BadgeListHeader() {
       }
     }
 
-    async function _fetchBadgeList() {
-      const _badges = await RemoteApi.fetchBadges();
-      if (isMounted.current) {
-        setBadgeList(_badges);
-      }
-    }
+    // async function _fetchBadgeList() {
+    //   const _badges = await RemoteApi.fetchBadges();
+    //   if (isMounted.current) {
+    //     setBadgeList(_badges);
+    //   }
+    // }
 
     _fetchTokens();
-    _fetchBadgeList();
+    // _fetchBadgeList();
   }, [isMounted]);
 
   function BadgeGrid() {
