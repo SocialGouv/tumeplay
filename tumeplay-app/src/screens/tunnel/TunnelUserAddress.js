@@ -19,7 +19,6 @@ import CustomTextInput from '../components/tunnel/CustomTextInput';
 import useIsMounted from '../../hooks/isMounted';
 import AddressValidator from '../../services/AddressValidator';
 import MailValidator from '../../services/MailValidator';
-import RemoteApi from '../../services/RemoteApi';
 
 const zipCodeTest = /^[0-9]{5}$/;
 export const phoneTest = /^0[0-9]{9}$/;
@@ -115,7 +114,7 @@ export default function TunnelUserAddress(props) {
 
   function _validateAddressBeforeGoto() {
     const fullAddress =
-      localAdress.adress + ' ' + localAdress.zipCode + ' ' + localAdress.city;
+      localAdress.address + ' ' + localAdress.zipCode + ' ' + localAdress.city;
 
     setInvalidAddress(false);
 
@@ -139,6 +138,7 @@ export default function TunnelUserAddress(props) {
                 deptCode.substring(0, 2) === '75' ||
                 deptCode.substring(0, 2) === '77' ||
                 deptCode.substring(0, 2) === '78' ||
+                deptCode.substring(0, 2) === '91' ||
                 deptCode.substring(0, 2) === '92' ||
                 deptCode.substring(0, 2) === '93' ||
                 deptCode.substring(0, 2) === '94' ||
@@ -150,14 +150,13 @@ export default function TunnelUserAddress(props) {
               }
               localAdress['address_dept'] = res[0].address.county;
               localAdress['address_city'] = res[0].address.city;
-              console.log(localAdress);
               _gotoSummary();
             }
           }
         }
 
         if (filtered.length === 0 || res.length === 0) {
-          setInvalidAddress(true);
+          setInvalidAddress(false);
         }
       });
   }
@@ -189,7 +188,10 @@ export default function TunnelUserAddress(props) {
       }
     }
 
-    if (localAdress.emailAdressConfirmation === '' && REACT_APP_ZONE === 'metropole') {
+    if (
+      localAdress.emailAdressConfirmation === '' &&
+      REACT_APP_ZONE === 'metropole'
+    ) {
       checkedIsValid.emailAdressConfirmation = defaultValue;
       isValid = false;
     } else if (REACT_APP_ZONE === 'metropole') {
@@ -258,25 +260,11 @@ export default function TunnelUserAddress(props) {
   }
 
   async function _checkBeforeGotoSummary() {
-    const _isOrderAllowed = await RemoteApi.isAllowedOrder(
-      selectedItem,
-      localAdress,
-    );
-
-    if (!_isOrderAllowed || !_isOrderAllowed.isAllowed) {
-      setDisallowOrder(false);
-
-      return;
-    }
     // A DECOMMENTER UNE FOIS LA REQUÊTE VALIDEE
     // const _isAllowedFromUser = await UserService.isOrderAllowed();
     const _isAllowedFromUser = true;
-
-    console.log('ALLOWED : ' + _isAllowedFromUser);
-
     if (!_isAllowedFromUser) {
       setDisallowOrder(false);
-
       return;
     }
 

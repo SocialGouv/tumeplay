@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import chronoLogo from "../assets/pictures/colissimo.png"
 import mondialRelay from "../assets/pictures/mondial-relay.png"
 
-const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title}) => {
+const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, checked}) => {
 
   const titlesToDisplay = dataToDisplay.headers.map((item,index) => {
     return(
@@ -27,12 +27,12 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title})
     }
     if (fieldName === 'sent' || fieldName === 'received') {
       return (
-				item ? 
+				item ?
 					<>
 						<FontAwesomeIcon icon={faPaperPlane} color="green" />
 						<span className="ml-2">{fieldName === 'sent' && 'Commande traitée'}{fieldName === 'received' && 'Commande distrbuée'}</span>
 					</>
-					: 
+					:
 					<>
 						<FontAwesomeIcon icon={faTimes} color='red' />
 						<span className="ml-2">{fieldName === 'sent' && 'Commande non traitée'}{fieldName === 'received' && 'Commande non distrbuée'}</span>
@@ -68,7 +68,7 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title})
 				<thead>
 					<tr>
 						<th className="w-20 px-6 align-middle text-center border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-80">
-							<input type='checkbox' id="all" onClick={(e) =>{handleSelectAll(e)}}/>
+							<input type='checkbox' id="all" checked={checked} onClick={(e) =>{handleSelectAll(e)}}/>
 						</th>
 						{titlesToDisplay}
 					</tr>
