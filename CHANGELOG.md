@@ -1,3 +1,10 @@
+## [1.13.6](https://github.com/SocialGouv/Tumeplay/compare/v1.13.5...v1.13.6) (2021-10-04)
+
+
+### Bug Fixes
+
+* remove old api calls and deleting RemoteAPI file ([#131](https://github.com/SocialGouv/Tumeplay/issues/131)) ([4b87faf](https://github.com/SocialGouv/Tumeplay/commit/4b87fafecff8d3479cff6e7c4a3b869840f6c0f6))
+
 ## [1.13.5](https://github.com/SocialGouv/Tumeplay/compare/v1.13.4...v1.13.5) (2021-09-30)
 
 
