@@ -76,7 +76,7 @@ const OrdersLogistics = () => {
 						setCurrentOrder(order);
 						setShowUserData(true);
 					}} className="tmp-button" style={{
-						backgroundColor: order.user_data.sex && order.user_data.age && order.user_data.zipcode ? 'green' : 'red'
+						backgroundColor: order.user_data && order.user_data.sex && order.user_data.age && order.user_data.zipcode ? 'green' : 'red'
 					}}>
 						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Informations
 					</button>
