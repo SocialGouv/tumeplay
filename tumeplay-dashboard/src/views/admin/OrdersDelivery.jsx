@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
+import ReactTooltip from 'react-tooltip';
 
 
 
@@ -37,8 +38,9 @@ const OrdersLogistics = () => {
      {name: "ID", fieldName: 'id'},
      {name: "Date", fieldName: 'created_at' },
      {name: "Prénom", fieldName: 'first_name' },
+     {name: "Téléphone", fieldName: 'phone' },
      {name: "Box", fieldName: 'box_name' },
-     {name: "Statut Traitement", fieldName: 'received'},
+     {name: "Délivrée", fieldName: 'received'},
      {name: "Actions", fieldName: 'actions'}
     ],
     items: pageItems
@@ -72,26 +74,34 @@ const OrdersLogistics = () => {
 			order.box_name = order.content[0].__component === 'commandes.box' ? order.content[0].box.title : 'Box sur mesure'
 			order.actions = (
 				<div className="tmp-table-actions">
+					<ReactTooltip id="user-data-tooltip" />
+					<ReactTooltip id="update-tooltip" />
 					<button onClick={() => {
 						setCurrentOrder(order);
 						setShowUserData(true);
-					}} className="tmp-button" style={{
+					}}
+					data-for="user-data-tooltip"
+					data-tip="Informations anonymes"
+					className="tmp-button" style={{
 						backgroundColor: order.user_data && order.user_data.sex && order.user_data.age && order.user_data.zipcode ? 'green' : 'red'
 					}}>
-						<FontAwesomeIcon icon={faUserCircle} color="white" className="mr-2" /> Informations
+						<FontAwesomeIcon icon={faUserCircle} color="white" />
 					</button>
 					<button onClick={() => {
 						setCurrentOrder(order);
 						setShowUpdateOrderContent(true);
-					}} className="tmp-button">
-						<FontAwesomeIcon icon={faPen} color="white" className="mr-2" /> Modifier la box
+					}} 
+					data-for="update-tooltip"
+					data-tip="Éditer"
+					className="tmp-button">
+						<FontAwesomeIcon icon={faPen} color="white" />
 					</button>
 					{
 						!order.received ? (
 							<button onClick={() => {
 								updateReceivedOrder(order)
 							}} className="tmp-button">
-								<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Délivrée
+								<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Délivrer
 							</button>
 						) : (
 							<button onClick={() => {

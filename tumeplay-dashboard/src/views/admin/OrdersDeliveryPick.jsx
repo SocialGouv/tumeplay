@@ -37,6 +37,7 @@ const OrdersLogistics = () => {
      {name: "ID", fieldName: 'id'},
      {name: "Date", fieldName: 'created_at' },
      {name: "Prénom", fieldName: 'first_name' },
+     {name: "Téléphone", fieldName: 'phone' },
      {name: "Box", fieldName: 'box_name' },
      {name: "Référent", fieldName: 'referent_name'},
      {name: "Actions", fieldName: 'actions'}
