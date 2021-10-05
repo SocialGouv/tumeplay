@@ -52,6 +52,17 @@ html {
 			.tmp-box {
 				@apply shadow-md rounded-lg bg-white px-4 py-2;
 			}
-
+			.react-confirm-alert {
+				.react-confirm-alert-body {
+					h1 {
+						@apply uppercase text-xl font-bold;
+					}
+					.react-confirm-alert-button-group {
+						> button {
+							@apply bg-lightBlue-500;
+						}
+					}
+				}
+			}
   }
 }
