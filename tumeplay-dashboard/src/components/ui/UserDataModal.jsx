@@ -21,7 +21,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 							district: '',
 							city: '',
 							schooling: '',
-							first_box: true,
+							first_box: 'oui',
 							comment: '',
 							old_box: undefined
 						}
