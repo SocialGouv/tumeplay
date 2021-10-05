@@ -229,7 +229,7 @@ const OrdersLogistics = () => {
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
-								title="Les commandes à traiter"  />
+								title="Mes commandes"  />
 				{/* <div className="tmp-pagination-container">
 					<Pagination
 						currentPage={currentPage}

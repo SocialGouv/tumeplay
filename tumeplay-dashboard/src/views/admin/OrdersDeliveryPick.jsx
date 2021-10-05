@@ -13,8 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
-
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const OrdersLogistics = () => {
   const context = useContext(AppContext)
@@ -73,7 +73,19 @@ const OrdersLogistics = () => {
 			order.actions = (
 				<div className="tmp-table-actions">
 					<button onClick={() => {
-						updateOrderReferent(order)
+						confirmAlert({
+							title: 'Confirmation',
+							message: `Êtes vous sûr de vouloir reprendre la commande ${order.id} ?`,
+							buttons: [
+								{
+									label: 'Oui',
+									onClick: () => updateOrderReferent(order)
+								},
+								{
+									label: 'Non'
+								}
+							]
+						});
 					}} className="tmp-button">
 						<FontAwesomeIcon icon={faUndo} color="white" className="mr-2" /> Récupérer la commande
 					</button>
@@ -186,26 +198,10 @@ const OrdersLogistics = () => {
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
-				<div className="tmp-table-option">
-					<div className="tmp-top-buttons-container">
-						<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
-											data-for="send-tooltip"
-											data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin de les marquer comme traitées' : ''}`}
-											onClick={(e) => {
-												if (tmpSelectedItems.length > 0) 
-													handleSendClick(e)
-											}}>
-							<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Marquer comme délivrée(s)
-						</button>
-					</div>
-					<div className="tmp-dropdown-container" >
-						<Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
-					</div>
-				</div>
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
-								title="Les commandes à traiter"  />
+								title="Les commandes des autres référents"  />
 				<div className="tmp-pagination-container">
 					<Pagination
 						currentPage={currentPage}
