@@ -1,3 +1,11 @@
+## [1.14.1](https://github.com/SocialGouv/Tumeplay/compare/v1.14.0...v1.14.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* **dashboard-referents:** numberPerpage selection on other orders ([83d1841](https://github.com/SocialGouv/Tumeplay/commit/83d18419633f5b71af24e6da7b7e874d876abcfa))
+* **dashboard-referents:** user data bad request ([fa03536](https://github.com/SocialGouv/Tumeplay/commit/fa03536c9db0e2008512a14c3b4e08b70396c0dd))
+
 # [1.14.0](https://github.com/SocialGouv/Tumeplay/compare/v1.13.10...v1.14.0) (2021-10-05)
 
 
