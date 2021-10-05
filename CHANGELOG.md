@@ -1,3 +1,10 @@
+## [1.13.10](https://github.com/SocialGouv/Tumeplay/compare/v1.13.9...v1.13.10) (2021-10-05)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** user_date check ([a223f2b](https://github.com/SocialGouv/Tumeplay/commit/a223f2b4de54c086b35299a615284aa131b0f451))
+
 ## [1.13.9](https://github.com/SocialGouv/Tumeplay/compare/v1.13.8...v1.13.9) (2021-10-04)
 
 
