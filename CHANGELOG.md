@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/SocialGouv/Tumeplay/compare/v1.13.10...v1.14.0) (2021-10-05)
+
+
+### Features
+
+* dashboard referents pick orders ([#161](https://github.com/SocialGouv/Tumeplay/issues/161)) ([95ec1ef](https://github.com/SocialGouv/Tumeplay/commit/95ec1ef2ebc882735a28414f57ecb3e906125eaa))
+
 ## [1.13.10](https://github.com/SocialGouv/Tumeplay/compare/v1.13.9...v1.13.10) (2021-10-05)
 
 
