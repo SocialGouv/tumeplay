@@ -199,6 +199,12 @@ const OrdersLogistics = () => {
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
+				<div className="tmp-table-option">
+					<div className="tmp-top-buttons-container" />
+					<div className="tmp-dropdown-container" >
+						<Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
+					</div>
+				</div>
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
