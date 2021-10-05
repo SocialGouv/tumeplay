@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Switch, Redirect} from 'react-router-dom';
 import OrdersLogistics from './views/admin/OrdersLogistics.jsx';
 import OrdersDelivery from './views/admin/OrdersDelivery.jsx';
+import OrdersDeliveryPick from './views/admin/OrdersDeliveryPick.jsx';
 import Settings from './views/admin/Settings';
 import Login from './views/auth/Login';
 import ForgotPassword from './views/auth/ForgotPassword';
@@ -29,6 +30,7 @@ const Routes = () => {
       <PublicRoute component={Register} layout={AuthenticationLayout} exact path="/register"/>
       <PrivateRoute component={OrdersLogistics} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/orders/box/:box_num"/>
       <PrivateRoute component={OrdersDelivery} layout={TumeplayDashboardLayout} requiredRole={ROLES.Referent.name} exact path="/orders/referent"/>
+      <PrivateRoute component={OrdersDeliveryPick} layout={TumeplayDashboardLayout} requiredRole={ROLES.Referent.name} exact path="/orders/referents"/>
       <PrivateRoute component={Bilan} layout={TumeplayDashboardLayout} requiredRole={ROLES.CAT.name} exact path="/bilan"/>
       <PrivateRoute component={Settings} layout={TumeplayDashboardLayout} exact path="/settings"/>
       <Redirect from="*" to={role && token ? ROLES[role].redirectPath : '/login'}  />

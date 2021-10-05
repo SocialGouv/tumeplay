@@ -100,7 +100,7 @@ const OrdersLogistics = () => {
 	}
 
   const retrieveOrders = async (searchParams) => {
-    let response = await OrdersAPI.countOrders(token, searchParams);
+    let response = await OrdersAPI.countLogisticsOrders(token, searchParams);
     setCount(response.data)
     response = await OrdersAPI.getLogisticsOrders(token, Object.assign({
       _limit: numberPerPage,

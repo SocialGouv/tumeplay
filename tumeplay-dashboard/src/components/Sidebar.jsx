@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import { faBars, faCog, faDoorClosed, faTimes, faTable, faClipboard } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCog, faDoorClosed, faTimes, faTable, faClipboard, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useContext} from "react";
 import { NavLink, Link } from "react-router-dom";
@@ -73,23 +73,42 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
 							{
 								userRole.includes('Referent') && (
-								<li className="items-center">
-									<NavLink
-										className={
-											"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
-										}
-										activeClassName="tmp-active-nav-link"
-										to="/orders/referent"
-									>
-										<FontAwesomeIcon
-											icon={faTable}
+									<>
+									<li className="items-center">
+										<NavLink
 											className={
-												"fas fa-tv mr-2 text-sm"
+												"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
 											}
-										></FontAwesomeIcon>{" "}
-										Gestion des commandes
-									</NavLink>
-								</li>
+											activeClassName="tmp-active-nav-link"
+											to="/orders/referent"
+										>
+											<FontAwesomeIcon
+												icon={faTable}
+												className={
+													"fas fa-tv mr-2 text-sm"
+												}
+											></FontAwesomeIcon>{" "}
+											Mes commandes
+										</NavLink>
+									</li>
+									<li className="items-center">
+										<NavLink
+											className={
+												"text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+											}
+											activeClassName="tmp-active-nav-link"
+											to="/orders/referents"
+										>
+											<FontAwesomeIcon
+												icon={faGlobe}
+												className={
+													"fas fa-tv mr-2 text-sm"
+												}
+											></FontAwesomeIcon>{" "}
+											Les autres commandes
+										</NavLink>
+									</li>
+								</>
 								)
 							}
 							{

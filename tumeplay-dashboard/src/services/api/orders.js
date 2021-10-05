@@ -21,11 +21,24 @@ const OrdersAPI = {
       Authorization: `Bearer ${token}`
     }});
   },
-  countOrders: (token, params) => {
+  countLogisticsOrders: (token, params) => {
     return axios.get(`${API_URL}/commandes/count`,
       {
         params: Object.assign({
           delivery: ['pickup', 'home'],
+        }, params),
+        headers:
+          {
+            Authorization: `Bearer ${token}`
+          }
+      }
+    );
+  },
+  countDeliveryOrders: (token, params) => {
+    return axios.get(`${API_URL}/commandes/count`,
+      {
+        params: Object.assign({
+          delivery: ['referent'],
         }, params),
         headers:
           {
