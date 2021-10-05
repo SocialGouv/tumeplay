@@ -13,15 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
-import ReactTooltip from 'react-tooltip';
-
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const OrdersLogistics = () => {
   const context = useContext(AppContext)
   const {token, user} = context
 
-  const [filteredorders, setFilteredOrders] = useState([])
+	const [count, setCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [currentOrder, setCurrentOrder] = useState({})
   const [numberPerPage, setNumberPerPage] = useState(50)
@@ -40,7 +39,7 @@ const OrdersLogistics = () => {
      {name: "Prénom", fieldName: 'first_name' },
      {name: "Téléphone", fieldName: 'phone' },
      {name: "Box", fieldName: 'box_name' },
-     {name: "Délivrée", fieldName: 'received'},
+     {name: "Référent", fieldName: 'referent_name'},
      {name: "Actions", fieldName: 'actions'}
     ],
     items: pageItems
@@ -48,69 +47,49 @@ const OrdersLogistics = () => {
 
   const dropdownOptions = ['5', '10', '50', '100', {value: orders.length, label: 'Tout'}]
 
-	const updateReceivedOrder = async (order) => {
-		order.received = true;
-		order.date_received = new Date();
+	const updateOrderReferent = async (order) => {
+		order.referent = user.referent;
 		await OrdersAPI.update(token, order)
     retrieveOrders({
-      referent: user.referent
-    });
-	}
-
-	const undoReceivedOrder = async (order) => {
-		order.received = false;
-		delete order.date_received;
-		await OrdersAPI.update(token, order)
-    retrieveOrders({
-      referent: user.referent
+      referent_ne: user.referent
     });
 	}
 	
   const retrieveOrders = async (params) => {
-    let response = await OrdersAPI.getDeliveryOrders(token, params)
+    let response = await OrdersAPI.countDeliveryOrders(token, params);
+    setCount(response.data)
+    
+		response = await OrdersAPI.getDeliveryOrders(
+			token, 
+			Object.assign({
+				_limit: numberPerPage,
+				_start: numberPerPage * (currentPage - 1)
+			}, params)
+		)
     let orders = response.data
     orders.map(order => {
       order.selected = false
 			order.box_name = order.content[0].__component === 'commandes.box' ? order.content[0].box.title : 'Box sur mesure'
+			order.referent_name = order.referent.name
 			order.actions = (
 				<div className="tmp-table-actions">
-					<ReactTooltip id="user-data-tooltip" />
-					<ReactTooltip id="update-tooltip" />
 					<button onClick={() => {
-						setCurrentOrder(order);
-						setShowUserData(true);
-					}}
-					data-for="user-data-tooltip"
-					data-tip="Informations anonymes"
-					className="tmp-button" style={{
-						backgroundColor: order.user_data && order.user_data.sex && order.user_data.age && order.user_data.zipcode ? 'green' : 'red'
-					}}>
-						<FontAwesomeIcon icon={faUserCircle} color="white" />
+						confirmAlert({
+							title: 'Confirmation',
+							message: `Êtes vous sûr de vouloir reprendre la commande ${order.id} ?`,
+							buttons: [
+								{
+									label: 'Oui',
+									onClick: () => updateOrderReferent(order)
+								},
+								{
+									label: 'Non'
+								}
+							]
+						});
+					}} className="tmp-button">
+						<FontAwesomeIcon icon={faUndo} color="white" className="mr-2" /> Récupérer la commande
 					</button>
-					<button onClick={() => {
-						setCurrentOrder(order);
-						setShowUpdateOrderContent(true);
-					}} 
-					data-for="update-tooltip"
-					data-tip="Éditer"
-					className="tmp-button">
-						<FontAwesomeIcon icon={faPen} color="white" />
-					</button>
-					{
-						!order.received ? (
-							<button onClick={() => {
-								updateReceivedOrder(order)
-							}} className="tmp-button">
-								<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Délivrer
-							</button>
-						) : (
-							<button onClick={() => {
-								undoReceivedOrder(order)
-							}} className="tmp-button">
-								<FontAwesomeIcon icon={faUndo} color="white" className="mr-2" /> Annuler la distribution
-							</button>
-						)
-					}
 				</div>
 			)
     })
@@ -131,10 +110,10 @@ const OrdersLogistics = () => {
 
   const handleSelectAll = (e) => {
     if(e.target.checked) {
-      filteredorders.forEach(order => order.selected = e.target.checked)
-      setTmpSelectedItems([...filteredorders])
+      orders.forEach(order => order.selected = e.target.checked)
+      setTmpSelectedItems([...orders])
     } else {
-       filteredorders.forEach(order => order.selected = e.target.checked)
+			orders.forEach(order => order.selected = e.target.checked)
       setTmpSelectedItems([])
     }
   }
@@ -172,7 +151,7 @@ const OrdersLogistics = () => {
   useEffect(() => {
     retrieveBoxes()
     retrieveOrders({
-      referent: user.referent
+      referent_ne: user.referent
     })
    }, [])
 
@@ -203,7 +182,7 @@ const OrdersLogistics = () => {
 						<UserDataModal closeModal={() => {
 							setShowUserData(false)
 							retrieveOrders({
-								referent: user.referent
+								referent_ne: user.referent
 							})
 						}} boxes={boxes} order={currentOrder} />
 					}
@@ -215,41 +194,25 @@ const OrdersLogistics = () => {
 						<UpdateOrderContentModal closeModal={() => {
 							setShowUpdateOrderContent(false)
 							retrieveOrders({
-								referent: user.referent
+								referent_ne: user.referent
 							})
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
-				<div className="tmp-table-option">
-					<div className="tmp-top-buttons-container">
-						<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`} 
-											data-for="send-tooltip"
-											data-tip={`${tmpSelectedItems.length === 0 ? 'Sélectionnez des commandes afin de les marquer comme traitées' : ''}`}
-											onClick={(e) => {
-												if (tmpSelectedItems.length > 0) 
-													handleSendClick(e)
-											}}>
-							<FontAwesomeIcon icon={faPaperPlane} color="white" className="mr-2" /> Marquer comme délivrée(s)
-						</button>
-					</div>
-					<div className="tmp-dropdown-container" >
-						<Dropdown className='tmp-dropdown' menuClassName="tmp-dropdown-menu" options={dropdownOptions} onChange={(e) => handleChangeNumPerPage(e)} value={numberPerPage.toString()} />
-					</div>
-				</div>
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
-								title="Mes commandes"  />
-				{/* <div className="tmp-pagination-container">
+								title="Les commandes des autres référents"  />
+				<div className="tmp-pagination-container">
 					<Pagination
 						currentPage={currentPage}
-						totalSize={filteredorders.length}
+						totalSize={count}
 						sizePerPage={numberPerPage}
 						numberOfPagesNextToActivePage={3}
 						changeCurrentPage={(event) => onPageChange(event)}
 						theme="border-bottom"
 					/>
-				</div> */}
+				</div>
 			</div>
 		</>
 		)
