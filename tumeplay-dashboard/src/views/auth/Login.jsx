@@ -51,7 +51,10 @@ const Login = () => {
 									const res = await login(values.email, values.password)
 									if(res.status === 200) {
 										const user = res.data.user
-										user.referent = user.referent.id
+
+										if (user.referent)
+											user.referent = user.referent.id
+											
 										context.verifyAuthentication(user)
 									} else {
 										// TODO : growl error
