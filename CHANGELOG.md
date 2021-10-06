@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/SocialGouv/Tumeplay/compare/v1.15.0...v1.15.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* **dashboard:** login bug with CAT role ([faaaaae](https://github.com/SocialGouv/Tumeplay/commit/faaaaae1a6199f3689ace6164184b0b0fc6e481e))
+
 # [1.15.0](https://github.com/SocialGouv/Tumeplay/compare/v1.14.1...v1.15.0) (2021-10-06)
 
 
