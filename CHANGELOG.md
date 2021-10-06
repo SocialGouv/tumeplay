@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/SocialGouv/Tumeplay/compare/v1.14.1...v1.15.0) (2021-10-06)
+
+
+### Features
+
+* **dashboard-referent:** search bar on table views ([#162](https://github.com/SocialGouv/Tumeplay/issues/162)) ([e9d234f](https://github.com/SocialGouv/Tumeplay/commit/e9d234ffd5dc18a1e9253e67b0f0c003fe71bfe5))
+
 ## [1.14.1](https://github.com/SocialGouv/Tumeplay/compare/v1.14.0...v1.14.1) (2021-10-05)
 
 
