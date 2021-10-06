@@ -1,10 +1,10 @@
 import React from 'react';
-import { faPaperPlane, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import chronoLogo from "../assets/pictures/colissimo.png"
 import mondialRelay from "../assets/pictures/mondial-relay.png"
 
-const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, checked}) => {
+const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, checked, search}) => {
 
   const titlesToDisplay = dataToDisplay.headers.map((item,index) => {
     return(
@@ -61,8 +61,21 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, 
 
   return (
 		<div className="tmp-table-container shadow-md flex flex-col bg-white">
-			<div className="pl-8">
+			<div className="flex flex-wrap justify-between items-center pl-8">
 				<h3 class="font-semibold text-lg text-blueGray-700">{title}</h3>
+				{
+					search && (
+						<div className="pr-8">
+							<div className="relative">
+								<input 	type="text" placeholder="Recherche..."
+												onChange={(e) => search(e.target.value)}
+												className="border-0 px-3 pr-9 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+								/>
+								<FontAwesomeIcon icon={faSearch} color="lightGray" className="absolute right-3 top-1/2 transform -translate-y-1/2" />
+							</div>
+						</div>
+					)
+				}
 			</div>
 			<table className="tmp-table-ext items-center w-full ">
 				<thead>

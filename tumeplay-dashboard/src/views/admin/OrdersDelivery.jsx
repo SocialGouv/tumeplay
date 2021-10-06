@@ -33,6 +33,10 @@ const OrdersLogistics = () => {
   const [showUserData, setShowUserData] = useState(false)
   const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
 
+	const defaultParams = {
+		referent: user.referent
+	}
+
   const dataToDisplay = {
     headers: [
      {name: "ID", fieldName: 'id'},
@@ -48,22 +52,26 @@ const OrdersLogistics = () => {
 
   const dropdownOptions = ['5', '10', '50', '100', {value: orders.length, label: 'Tout'}]
 
+	const searchOrders = (query) => {
+		retrieveOrders(
+			Object.assign({
+				_q: query
+			}, defaultParams)
+		)
+	}
+
 	const updateReceivedOrder = async (order) => {
 		order.received = true;
 		order.date_received = new Date();
 		await OrdersAPI.update(token, order)
-    retrieveOrders({
-      referent: user.referent
-    });
+    retrieveOrders(defaultParams);
 	}
 
 	const undoReceivedOrder = async (order) => {
 		order.received = false;
 		delete order.date_received;
 		await OrdersAPI.update(token, order)
-    retrieveOrders({
-      referent: user.referent
-    });
+    retrieveOrders(defaultParams);
 	}
 	
   const retrieveOrders = async (params) => {
@@ -171,9 +179,7 @@ const OrdersLogistics = () => {
 
   useEffect(() => {
     retrieveBoxes()
-    retrieveOrders({
-      referent: user.referent
-    })
+    retrieveOrders(defaultParams)
    }, [])
 
 
@@ -202,9 +208,7 @@ const OrdersLogistics = () => {
 						showUserData  &&
 						<UserDataModal closeModal={() => {
 							setShowUserData(false)
-							retrieveOrders({
-								referent: user.referent
-							})
+							retrieveOrders(defaultParams)
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
@@ -214,9 +218,7 @@ const OrdersLogistics = () => {
 						showUpdateOrderContent  &&
 						<UpdateOrderContentModal closeModal={() => {
 							setShowUpdateOrderContent(false)
-							retrieveOrders({
-								referent: user.referent
-							})
+							retrieveOrders(defaultParams)
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
@@ -239,6 +241,7 @@ const OrdersLogistics = () => {
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
+								search={searchOrders}
 								title="Mes commandes"  />
 				{/* <div className="tmp-pagination-container">
 					<Pagination

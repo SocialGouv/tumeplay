@@ -32,6 +32,10 @@ const OrdersLogistics = () => {
   const [showUserData, setShowUserData] = useState(false)
   const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
 
+	const defaultParams = {
+		referent_ne: user.referent
+	}
+
   const dataToDisplay = {
     headers: [
      {name: "ID", fieldName: 'id'},
@@ -50,9 +54,15 @@ const OrdersLogistics = () => {
 	const updateOrderReferent = async (order) => {
 		order.referent = user.referent;
 		await OrdersAPI.update(token, order)
-    retrieveOrders({
-      referent_ne: user.referent
-    });
+    retrieveOrders(defaultParams);
+	}
+
+	const searchOrders = (query) => {
+		retrieveOrders(
+			Object.assign({
+				_q: query
+			}, defaultParams)
+		)
 	}
 	
   const retrieveOrders = async (params) => {
@@ -150,9 +160,7 @@ const OrdersLogistics = () => {
 
   useEffect(() => {
     retrieveBoxes()
-    retrieveOrders({
-      referent_ne: user.referent
-    })
+    retrieveOrders(defaultParams)
    }, [])
 
 
@@ -181,9 +189,7 @@ const OrdersLogistics = () => {
 						showUserData  &&
 						<UserDataModal closeModal={() => {
 							setShowUserData(false)
-							retrieveOrders({
-								referent_ne: user.referent
-							})
+							retrieveOrders(defaultParams)
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
@@ -193,9 +199,7 @@ const OrdersLogistics = () => {
 						showUpdateOrderContent  &&
 						<UpdateOrderContentModal closeModal={() => {
 							setShowUpdateOrderContent(false)
-							retrieveOrders({
-								referent_ne: user.referent
-							})
+							retrieveOrders(defaultParams)
 						}} boxes={boxes} order={currentOrder} />
 					}
 				</div>
@@ -208,6 +212,7 @@ const OrdersLogistics = () => {
 				<Table  dataToDisplay={dataToDisplay}
 								handleSpecificSelection={handleSpecificSelection}
 								handleSelectAll={handleSelectAll}
+								search={searchOrders}
 								title="Les commandes des autres référents"  />
 				<div className="tmp-pagination-container">
 					<Pagination
