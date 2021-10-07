@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from 'react'
 import Table from '../../components/Table'
 import OrdersAPI from '../../services/api/orders'
 import AppContext from '../../AppContext';
-import { useHistory } from 'react-router'
 import Pagination from "react-pagination-js";
 import "react-pagination-js/dist/styles.css";
 import Dropdown from "react-dropdown";
@@ -10,7 +9,7 @@ import ConfirmModal from '../../components/ui/ConfirmModal';
 import UserDataModal from '../../components/ui/UserDataModal';
 import UpdateOrderContentModal from '../../components/ui/UpdateOrderContentModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
 import { confirmAlert } from 'react-confirm-alert';
