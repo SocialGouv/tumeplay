@@ -30,6 +30,9 @@
     },
     "first_box": {
       "type": "string"
+    },
+    "city": {
+      "type": "string"
     }
   }
 }
