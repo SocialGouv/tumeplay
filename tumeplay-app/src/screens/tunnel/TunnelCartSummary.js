@@ -93,7 +93,7 @@ export default function TunnelCartSummary(props) {
         address_deptcode: selectedReferent.address_deptcode,
         address_region: selectedReferent.address_region,
         address_zipcode: selectedReferent.address_zipcode,
-        phone: selectedReferent.phone_number,
+        phone: userAdress.phoneNumber,
         poi_name: selectedReferent.name,
         delivery: deliveryType,
         referent: selectedReferent.id,
@@ -278,7 +278,12 @@ export default function TunnelCartSummary(props) {
                 TunnelCartSummaryStyle.subTitle,
                 TunnelCartSummaryStyle.emailAdress,
               ]}>
-              {userAdress.firstName} {userAdress.lastName}
+              {deliveryType === "home" && (
+                userAdress.firstName + ' ' + userAdress.lastName
+              )}
+              {deliveryType === 'referent' && (
+                selectedReferent.name
+              )}
             </Text>
             {deliveryType == 'home' && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
