@@ -1,13 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import Loader from '../../components/ui/Loader';
 import { Formik } from 'formik';
 import FormErrorMessage from '../../components/ui/FormErrorMessage';
 import OrdersAPI from '../../services/api/orders';
 import AppContext from '../../AppContext';
+import GeoGouvApi from '../../services/api/geogouv';
 
 const ConfirmModal = ({closeModal, order, boxes}) => {
   const context = useContext(AppContext)
   const {token} = context
+
+	const [currentCities, setCurrentCities] = useState([])
+
+	const retrieveCities = async (e) => {
+		const response = await GeoGouvApi.getCities(e.target.value)
+		setCurrentCities((response.data || []).slice(0, 5))
+	}
 
 	return(
 		<div className="relative top-1/2 transform -translate-y-1/2 mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
@@ -20,6 +28,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 							age: '',
 							district: '',
 							city: '',
+							zipcode: '',
 							schooling: '',
 							first_box: 'oui',
 							comment: '',
@@ -58,7 +67,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 						handleSubmit,
 						isSubmitting
 					}) => (
-						<form onSubmit={handleSubmit} className="text-left">
+						<form onSubmit={handleSubmit} className="text-left" autocomplete="off">
 							<div className="relative w-full mb-4">
 								<label
 									className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -112,14 +121,48 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 								<label
 									className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
 								>
-									Code postal
+									Ville
 								</label>
 								<input
 									type="text"
-									value={values.zipcode} onChange={handleChange} onBlur={handleBlur} name="zipcode"
+									value={values.city} onChange={(e) => {
+										handleChange(e)
+										retrieveCities(e)
+									}} onBlur={handleBlur} name="city"
+									autocomplete="off" 
 									className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-									placeholder="Code postal à 5 chiffres..."
+									placeholder="Ville..."
 								/>
+								{
+									currentCities && currentCities.length > 0 && (
+										<div className="relative">
+											<ul className="rounded-b border border-light absolute top-0 bg-white w-full z-50">
+												{
+													currentCities.map((city, index) => (
+														<li className={`px-4 py-2 cursor-pointer hover:bg-blueGray-100 ${index !== (currentCities.length - 1) && 'border-bottom-light border-light'}`}
+																onClick={() => {
+																	handleChange({
+																		target: {
+																			name: 'zipcode',
+																			value: city.codesPostaux[0] || ''
+																		}
+																	})
+																	handleChange({
+																		target: {
+																			name: 'city',
+																			value: city.nom
+																		}
+																	})
+																	setCurrentCities([])
+																}}>
+															{city.nom}
+														</li>
+													))
+												}
+											</ul>
+										</div>
+									)
+								}
 								<FormErrorMessage errors={errors} touched={touched} name="zipcode" />
 							</div>
 
