@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/SocialGouv/Tumeplay/compare/v1.16.0...v1.16.1) (2021-10-07)
+
+
+### Bug Fixes
+
+* **front:** removing geocoder and replacing with Geogouv ([#165](https://github.com/SocialGouv/Tumeplay/issues/165)) ([8ffe7e7](https://github.com/SocialGouv/Tumeplay/commit/8ffe7e778a240e967e1c88ab72cd83b54a842c56))
+
 # [1.16.0](https://github.com/SocialGouv/Tumeplay/compare/v1.15.2...v1.16.0) (2021-10-07)
 
 
