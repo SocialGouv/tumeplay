@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/SocialGouv/Tumeplay/compare/v1.15.2...v1.16.0) (2021-10-07)
+
+
+### Features
+
+* geogouv for city completion ([#168](https://github.com/SocialGouv/Tumeplay/issues/168)) ([35294bd](https://github.com/SocialGouv/Tumeplay/commit/35294bd695c6fb15d9e1e984ddf14a26725811a8))
+
 ## [1.15.2](https://github.com/SocialGouv/Tumeplay/compare/v1.15.1...v1.15.2) (2021-10-07)
 
 
