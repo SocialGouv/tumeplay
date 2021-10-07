@@ -114,7 +114,7 @@ export default function TunnelUserAddress(props) {
 
   function _validateAddressBeforeGoto() {
     const fullAddress =
-      localAdress.address + ' ' + localAdress.zipCode + ' ' + localAdress.city;
+       localAdress.zipCode + ' ' + localAdress.city;
 
     setInvalidAddress(false);
 
@@ -154,7 +154,6 @@ export default function TunnelUserAddress(props) {
             }
           }
         }
-
         if (filtered.length === 0 || res.length === 0) {
           setInvalidAddress(false);
         }
