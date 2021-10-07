@@ -18,6 +18,7 @@ import ModalCloseButton from './components/global/ModalCloseButton';
 import UserService from '../services/User';
 import Tracking from '../services/Tracking';
 import QuizzService from '../services/Quiz';
+import _ from "lodash"
 
 import autoScrollToTop from '../hooks/autoScrollToTop';
 import useIsMounted from '../hooks/isMounted';
@@ -129,7 +130,7 @@ export default function ContentScreen(props) {
         <ContentCards
           activeOpacity={activeOpacity}
           style={{flex: 0.8}}
-          localContents={contents}
+          localContents={_.shuffle(contents)}
         />
       );
     }
