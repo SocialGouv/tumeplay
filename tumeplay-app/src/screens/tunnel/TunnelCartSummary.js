@@ -45,8 +45,6 @@ export default function TunnelCartSummary(props) {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  console.log("FINAL SELECTED", selectedPickup)
-
   async function _confirmOrder() {
     //ORDER STRAPI API
     let orderPost;
@@ -61,7 +59,7 @@ export default function TunnelCartSummary(props) {
         ...requestBody,
         phone: userAdress.phoneNumber,
         address: userAdress.address,
-        address_more: userAdress.adressMore,
+        address_more: userAdress.addressMore,
         address_region: userAdress.address_region,
         address_deptcode: userAdress.address_deptcode,
         address_dept: userAdress.address_dept,
@@ -286,6 +284,7 @@ export default function TunnelCartSummary(props) {
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
                 {userAdress.address}
                 {'\n'}
+                {userAdress.addressMore ? userAdress.addressMore + '\n' : ''}
                 {userAdress.zipCode} {userAdress.city}
               </Text>
             )}
