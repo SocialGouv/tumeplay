@@ -5,9 +5,12 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  Picker
 } from 'react-native';
 import PropTypes from 'prop-types';
 import openGeocoder from 'node-open-geocoder';
+import _ from "lodash";
+
 
 import Colors from '../../styles/Color';
 import Styles from '../../styles/Styles';
@@ -52,7 +55,7 @@ export default function TunnelUserAddress(props) {
     emailAdressConfirmation: '',
     phoneNumber: '',
     address: '',
-    adressMore: '',
+    addressMore: '',
     zipCode: '',
     city: '',
     address_region: '',
@@ -92,8 +95,10 @@ export default function TunnelUserAddress(props) {
   const [invalidAddress, setInvalidAddress] = useState(false);
   const [invalidZipCode, setInvalidZipCode] = useState(false);
   const [disallowOrder, setDisallowOrder] = useState(false);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
+    setInvalidAddress(false)
     if (props.navigation.state.params.userAdress) {
       const userAdress = props.navigation.state.params.userAdress;
       const newAdress = {
@@ -102,8 +107,8 @@ export default function TunnelUserAddress(props) {
         emailAdress: userAdress.emailAdress,
         emailAdressConfirmation: userAdress.emailAdressConfirmation,
         phoneNumber: userAdress.phoneNumber,
-        address: userAdress.adress,
-        adressMore: userAdress.adressMore,
+        address: userAdress.address,
+        addressMore: userAdress.addressMore,
         zipCode: userAdress.zipCode,
         city: userAdress.city,
       };
@@ -112,53 +117,25 @@ export default function TunnelUserAddress(props) {
     }
   }, [isMounted, props.navigation.state.params.userAdress]);
 
-  function _validateAddressBeforeGoto() {
-    const fullAddress =
-      localAdress.address + ' ' + localAdress.zipCode + ' ' + localAdress.city;
+  async function _validateAddressBeforeGoto() {
+    const response = await fetch('https://geo.api.gouv.fr/communes?codePostal=' + localAdress.zipCode)
+    const json_response = await response.json();
+    if (json_response && json_response[0]) {
+      const codeDept = json_response[0].codeDepartement
+      const codeRegion = json_response[0].codeRegion
 
-    setInvalidAddress(false);
+      const responseDept = await fetch('https://geo.api.gouv.fr/departements/' + codeDept)
+      const responseRegion = await fetch('https://geo.api.gouv.fr/regions/' + codeRegion)
 
-    openGeocoder()
-      .geocode(fullAddress)
-      .end((err, res) => {
-        let filtered = [];
-        if (res.length >= 1) {
-          filtered = res.filter(place => place.address.country_code === 'fr');
+      const json_dept = await responseDept.json();
+      const json_region = await responseRegion.json();
 
-          if (filtered.length > 0) {
-            if (res[0]) {
-              const deptCode = res[0].address.postcode;
-              if (deptCode.substring(0, 2) === '97') {
-                localAdress['address_deptcode'] = deptCode.substring(0, 3);
-              } else {
-                localAdress['address_deptcode'] = deptCode.substring(0, 2);
-              }
-              if (
-                //OpenGeocode do not send address.state for Ile de France
-                deptCode.substring(0, 2) === '75' ||
-                deptCode.substring(0, 2) === '77' ||
-                deptCode.substring(0, 2) === '78' ||
-                deptCode.substring(0, 2) === '91' ||
-                deptCode.substring(0, 2) === '92' ||
-                deptCode.substring(0, 2) === '93' ||
-                deptCode.substring(0, 2) === '94' ||
-                deptCode.substring(0, 2) === '95'
-              ) {
-                localAdress['address_region'] = 'Île-de-France';
-              } else {
-                localAdress['address_region'] = res[0].address.state;
-              }
-              localAdress['address_dept'] = res[0].address.county;
-              localAdress['address_city'] = res[0].address.city;
-              _gotoSummary();
-            }
-          }
-        }
-
-        if (filtered.length === 0 || res.length === 0) {
-          setInvalidAddress(false);
-        }
-      });
+      localAdress['address_region'] = json_region.nom;
+      localAdress['address_dept'] = json_dept.nom;
+      localAdress['address_deptcode'] = json_dept.code;
+      _gotoSummary();
+    }
+    setInvalidAddress(true);
   }
 
   function _validateFields(defaultValue) {
@@ -206,7 +183,6 @@ export default function TunnelUserAddress(props) {
           localAdress.emailAdressConfirmation !== ''
         ) {
           if (localAdress.emailAdress != localAdress.emailAdressConfirmation) {
-            console.log('Invalid mismatch.');
             checkedIsValid.emailAdressConfirmation =
               CustomTextInput.fieldStatus.INVALID;
             checkedIsValid.emailAdressMismatch = true;
@@ -307,38 +283,37 @@ export default function TunnelUserAddress(props) {
   }
 
   async function _handleZipCode(zipCode) {
+    localAdress['city'] = ''
+    setCities([])
     const localValue = zipCode.replace(/[^0-9]/g, '');
 
     if (!isNaN(localValue)) {
       if (localAdress['zipCode'] !== zipCode && zipCodeTest.test(localValue)) {
-        const _foundCity = await AddressValidator.validateZipCodeLocality(
+        const _foundCities = await AddressValidator.validateZipCodeLocality(
           localValue,
         );
-
-        if (_foundCity) {
-          localAdress['city'] = _foundCity.city;
-          localAdress['zipCode'] = localValue;
-
-          setLocalAdress(localAdress);
-          _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
+        setCities(_foundCities.map(city => city.properties))
+        if(_foundCities[0]){
+          localAdress["city"] = _foundCities[0].properties.label
         }
       }
+      localAdress['zipCode'] = localValue
     }
+    setLocalAdress(localAdress)
   }
 
   function _handleChange(name, inputValue) {
     const value = inputValue.trim();
-
     if (name === 'zipCode') {
+      _handleZipCode(value);
       if (AddressValidator.validateZipCode(value)) {
         setInvalidZipCode(false);
-        _handleZipCode(value);
       } else {
         setInvalidZipCode(true);
       }
+      _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
     } else {
       localAdress[`${name}`] = value;
-
       setLocalAdress(localAdress);
       _validateFields(CustomTextInput.fieldStatus.NEUTRAL);
     }
@@ -441,31 +416,50 @@ export default function TunnelUserAddress(props) {
           <CustomTextInput
             inputLabel="Complément d'adresse"
             inputPlaceholder="Bâtiment, lieu-dit, nom sur la boîte, etc."
-            onChangeText={val => _handleChange('adressMore', val)}
-            currentValue={localAdress.adressMore}
-            name="adressMore"
+            onChangeText={val => _handleChange('addressMore', val)}
+            currentValue={localAdress.addressMore}
+            name="addressMore"
             isRequired={false}
           />
           <CustomTextInput
             inputLabel="Code Postal"
             inputPlaceholder="Ton code postal"
             onChangeText={val => _handleChange('zipCode', val)}
-            isValid={localValid.zipCode}
+            isValid={!invalidZipCode}
             currentValue={localAdress.zipCode}
             filterNumbers={true}
             name="zipCode"
           />
-          <CustomTextInput
+          {
+            cities.length > 0 && (
+              <>
+                <Text style={[Styles.labelText, {marginTop: "25px"}]}>
+                  Ville
+                </Text>
+                <Picker selectedValue={localAdress.city}
+                        style={[TunnelUserAdressStyle.requiredFieldsWrapper, {borderRadius: "5px", borderColor: Colors.mainButton, marginTop: 0}]}
+                        onValueChange={val => _handleChange('city', val)}
+                >
+                  {cities.map((city, index) => {
+                    return(
+                      <Picker.Item key={index} label={city.label} value={city.label} />
+                    )
+                  })}
+              </Picker>
+              </>
+            )
+          }
+          {/* <CustomTextInput
             inputLabel="Ville"
             inputPlaceholder="Ta ville"
             onChangeText={val => _handleChange('city', val)}
             isValid={localValid.city}
             currentValue={localAdress.city}
             name="city"
-          />
+          /> */}
         </View>
       )}
-      {deliveryType === 'home' && invalidAddress && (
+      {(deliveryType === 'home' && invalidAddress) && (
         <View style={TunnelUserAdressStyle.requiredFieldsWrapper}>
           <View style={{flex: 1}}>
             <Text
@@ -479,7 +473,7 @@ export default function TunnelUserAddress(props) {
           </View>
         </View>
       )}
-      {deliveryType === 'home' && invalidZipCode && (
+      {(deliveryType === 'home' && cities.length > 0 && invalidZipCode) && (
         <View style={TunnelUserAdressStyle.requiredFieldsWrapper}>
           <View style={{flex: 1}}>
             <Text
