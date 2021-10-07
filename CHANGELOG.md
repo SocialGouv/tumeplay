@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/SocialGouv/Tumeplay/compare/v1.15.1...v1.15.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* **front:** installing lodash + randomize contents ([#163](https://github.com/SocialGouv/Tumeplay/issues/163)) ([6a700e4](https://github.com/SocialGouv/Tumeplay/commit/6a700e44632e163113b96f6a4b2fad9bb27b7efe))
+
 ## [1.15.1](https://github.com/SocialGouv/Tumeplay/compare/v1.15.0...v1.15.1) (2021-10-06)
 
 
