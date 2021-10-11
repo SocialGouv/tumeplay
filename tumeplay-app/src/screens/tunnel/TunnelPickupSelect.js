@@ -162,8 +162,6 @@ export default function TunnelPickupSelect(props) {
     });
   }
 
-  console.log("SELECtED", selectedPickup)
-
   function _handleChange(name, value) {
     if (AddressValidator.validateZipCode(value)) {
       setInvalidZipCode(false);
@@ -252,7 +250,6 @@ export default function TunnelPickupSelect(props) {
       .end((err, res) => {
         if (res) {
           const deptCode = res.address.postcode;
-          console.log("dept", deptCode)
           if (res.address.postcode.substring(0, 2) === '97') {
             item['address_deptcode'] = res.address.postcode.substring(0, 3);
           } else {
@@ -270,9 +267,8 @@ export default function TunnelPickupSelect(props) {
             deptCode.substring(0, 2) === '95'
           ) {
             item['address_region'] = 'Île-de-France';
-            console.log("REGION", item)
           } else {
-            item['address_region'] = res[0].address.state;
+            item['address_region'] = res.address.state;
           }
           item['address_dept'] = res.address.county;
           setSelectedPickup({...item});
@@ -285,9 +281,9 @@ export default function TunnelPickupSelect(props) {
       item.isSelected = item.Num === selectedItem.Num;
       return item;
     });
+    // setSelectedPickup({...selectedItem});
     handleAddressMore(selectedItem);
     setPickupPoints(newItems);
-    // setSelectedPickup({...selectedItem});
   }
 
   let poiCards = <View></View>;
