@@ -1,3 +1,10 @@
+## [1.16.3](https://github.com/SocialGouv/Tumeplay/compare/v1.16.2...v1.16.3) (2021-10-11)
+
+
+### Bug Fixes
+
+* **guyane:** removing badge access link ([#172](https://github.com/SocialGouv/Tumeplay/issues/172)) ([cde0398](https://github.com/SocialGouv/Tumeplay/commit/cde0398faead1ff602e353737d6ad0dd755dc923))
+
 ## [1.16.2](https://github.com/SocialGouv/Tumeplay/compare/v1.16.1...v1.16.2) (2021-10-11)
 
 
