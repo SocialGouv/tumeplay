@@ -249,7 +249,6 @@ export default function TunnelPickupSelect(props) {
       .reverse(item.coordinates.longitude, item.coordinates.latitude)
       .end((err, res) => {
         if (res) {
-          console.log(res)
           const deptCode = res.address.postcode;
           if (res.address.postcode.substring(0, 2) === '97') {
             item['address_deptcode'] = res.address.postcode.substring(0, 3);
