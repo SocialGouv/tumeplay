@@ -242,11 +242,15 @@ module.exports = {
     }
 
     // SEND CONFIRMATION EMAIL TO USER
-    if (ctx.request.body.content[0].__component === 'commandes.box' && ctx.request.body.email && !ctx.request.body.no_email) {
+    if (ctx.request.body.email && !ctx.request.body.no_email) {
       strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
-
-      const box_id = ctx.request.body.content[0].box
-      const box = await strapi.services.box.findOne({id: box_id})
+      let box;
+      if(ctx.request.body.content[0].__component === 'commandes.box') {
+        const box_id = ctx.request.body.content[0].box
+        box = await strapi.services.box.findOne({id: box_id})
+      } else if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
+        box = await strapi.services['box-sur-mesure'].find()
+      }
 
       const email_txt = await fs.promises.readFile('emails/order_confirmation.txt', 'utf8')
       const email_html = await fs.promises.readFile('emails/order_confirmation.html', 'utf8')
@@ -257,16 +261,19 @@ module.exports = {
         html: email_html,
       }
 
-      let delivery_name = ''
+      let delivery_name = '';
+      let custom_text = '';
       switch(entity.delivery) {
         case 'pickup':
           delivery_name = 'En point relais'
+          custom_text = 'Nos équipes la préparent et font le maximum pour l’expédier au plus vite. Le n° de suivi de ton colis te sera communiqué par e-mail.'
           break;
         case 'home':
           delivery_name = 'À domicile'
           break;
         case 'referent':
           delivery_name = 'Chez un référent'
+          custom_text = 'Tu pourras récupérer ta boîte dans 5 jours au lieu de rencontre choisi, auprès du référent que tu as choisi.'
           break;
       }
 
@@ -280,6 +287,7 @@ module.exports = {
             _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
             {
               delivery_name: delivery_name,
+              custom_text: custom_text,
               box: _.pick(box, ['title'])
             }
           )
