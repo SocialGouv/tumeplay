@@ -59,7 +59,7 @@ export default function TunnelPickupSelect(props) {
   const [localAdress, setLocalAdress] = useState(defaultPickup);
   const [localValid, setLocalValid] = useState({});
   const [pickupPoints, setPickupPoints] = useState([]);
-  const [mapLayout, setMapLayout] = useState({width: 250, height: 250});
+  const [mapLayout, setMapLayout] = useState({width: 550, height: 250});
   const [displayReset, setDisplayReset] = useState(false);
   const [displayMap, setDisplayMap] = useState(true);
   const [invalidZipCode, setInvalidZipCode] = useState(false);
