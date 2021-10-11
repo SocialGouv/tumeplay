@@ -268,7 +268,7 @@ export default function TunnelPickupSelect(props) {
           ) {
             item['address_region'] = 'Île-de-France';
           } else {
-            item['address_region'] = res[0].address.state;
+            item['address_region'] = res.address.state;
           }
           item['address_dept'] = res.address.county;
           setSelectedPickup({...item});
@@ -281,9 +281,9 @@ export default function TunnelPickupSelect(props) {
       item.isSelected = item.Num === selectedItem.Num;
       return item;
     });
+    // setSelectedPickup({...selectedItem});
     handleAddressMore(selectedItem);
     setPickupPoints(newItems);
-    setSelectedPickup({...selectedItem});
   }
 
   let poiCards = <View></View>;
