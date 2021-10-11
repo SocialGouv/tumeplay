@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/SocialGouv/Tumeplay/compare/v1.16.1...v1.16.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* **front:** fixing next button display in POI Order process ([#169](https://github.com/SocialGouv/Tumeplay/issues/169)) ([5804684](https://github.com/SocialGouv/Tumeplay/commit/580468418916003493fb2ddde2e9ea7b607434c5))
+
 ## [1.16.1](https://github.com/SocialGouv/Tumeplay/compare/v1.16.0...v1.16.1) (2021-10-07)
 
 
