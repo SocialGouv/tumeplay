@@ -170,28 +170,6 @@ export default function TunnelDeliverySelect(props) {
             .
           </Text>
         )}
-        <Text
-          style={{
-            color: '#FFFFFF',
-            fontSize: 14,
-            marginTop: 0,
-            lineHeight: 22,
-            fontFamily: Colors.textFont,
-          }}>
-          Pour accéder aux badges gagnés, c&apos;est{' '}
-          <TouchableOpacity
-            onPress={() => {
-              _onBadgeListClick();
-            }}>
-            <Text
-              style={{
-                textDecorationLine: 'underline',
-              }}>
-              ici
-            </Text>
-          </TouchableOpacity>
-          .
-        </Text>
       </View>
     </View>
   );
