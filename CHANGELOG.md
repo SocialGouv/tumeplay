@@ -1,3 +1,10 @@
+## [1.16.4](https://github.com/SocialGouv/Tumeplay/compare/v1.16.3...v1.16.4) (2021-10-12)
+
+
+### Bug Fixes
+
+* **dashboard:** fix orderKPI request filtered by environnement ([#174](https://github.com/SocialGouv/Tumeplay/issues/174)) ([451bd76](https://github.com/SocialGouv/Tumeplay/commit/451bd76d2a1eb2b2d64b1fba62e20323e577251c))
+
 ## [1.16.3](https://github.com/SocialGouv/Tumeplay/compare/v1.16.2...v1.16.3) (2021-10-11)
 
 
