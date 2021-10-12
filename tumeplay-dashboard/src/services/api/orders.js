@@ -77,7 +77,8 @@ const OrdersAPI = {
 		ourDate.setDate(oneWeekAgo);
     return axios.get(`${API_URL}/commandes/count`, {
 			params: {
-				created_at_gte: ourDate.getTime()
+				created_at_gte: ourDate.getTime(),
+        environnement: 1
 			},
 			headers: {
    			Authorization: `Bearer ${token}`
@@ -94,7 +95,8 @@ const OrdersAPI = {
     return axios.get(`${API_URL}/commandes/count`, {
 			params: {
 				created_at_gte: lastLastWeek.getTime(),
-				created_at_lte: lastWeek.getTime()
+				created_at_lte: lastWeek.getTime(),
+        environnement: 1
 			},
 			headers: {
    			Authorization: `Bearer ${token}`
