@@ -1,3 +1,10 @@
+## [1.16.5](https://github.com/SocialGouv/Tumeplay/compare/v1.16.4...v1.16.5) (2021-10-14)
+
+
+### Bug Fixes
+
+* **front:** removing word 'quatre' ([#181](https://github.com/SocialGouv/Tumeplay/issues/181)) ([23bdb10](https://github.com/SocialGouv/Tumeplay/commit/23bdb1027d612aa2ed2401c21456d206bf186d0e))
+
 ## [1.16.4](https://github.com/SocialGouv/Tumeplay/compare/v1.16.3...v1.16.4) (2021-10-12)
 
 
