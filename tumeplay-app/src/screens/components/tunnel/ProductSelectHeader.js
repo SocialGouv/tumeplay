@@ -33,7 +33,7 @@ export default function ProductSelectHeader() {
         <UnderlineText borderMargin={-4} textStyle={Styles.text}>
           Super
         </UnderlineText>{' '}
-        ! Tu as {availableTokens} points, choisis une de nos quatre boxs pour en
+        ! Tu as {availableTokens} points, choisis une de nos boxs pour en
         apprendre plus et passer à l&apos;action en toute sécurité !
       </Text>
       <Image
