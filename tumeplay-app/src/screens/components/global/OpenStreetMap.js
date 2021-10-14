@@ -60,12 +60,12 @@ export default function OpenStreetMap(props) {
 
   let mapWidth = props.width;
   if (!mapWidth || isNaN(mapWidth)) {
-    mapWidth = 100;
+    mapWidth = 250;
   }
 
   let mapHeight = props.height;
   if (!mapHeight || isNaN(mapHeight)) {
-    mapHeight = 100;
+    mapHeight = 250;
   }
 
   const newItems = items.map((item) => {

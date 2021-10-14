@@ -85,7 +85,6 @@ export default function TunnelDeliverySelect(props) {
 
       <View style={{marginTop: 30}}>
         {REACT_APP_ZONE === 'guyane' ? (
-
           <TouchableOpacity
             style={{
               flex: 1,
@@ -127,7 +126,6 @@ export default function TunnelDeliverySelect(props) {
                 maxHeight: 60,
                 paddingTop: 2,
                 paddingBottom: 2,
-                marginBottom: 60,
                 minHeight: 60,
                 width: '50%',
                 alignSelf: 'center',
@@ -137,6 +135,22 @@ export default function TunnelDeliverySelect(props) {
                 <Text style={Styles.tunnelButtonText}>En point relais</Text>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity
+            style={{
+              flex: 1,
+              paddingTop: 2,
+              paddingBottom: 2,
+              width: '50%',
+              height: 60,
+              maxHeight: 60,
+              minHeight: 60,
+              alignSelf: 'center',
+            }}
+            onPress={() => _onDone('referent')}>
+            <View style={Styles.tunnelButton}>
+              <Text style={Styles.tunnelButtonText}>Chez un référent <Text style={Styles.tunnelButtonLongText}>- Nouvelle Aquitaine seulement</Text></Text>
+            </View>
+          </TouchableOpacity>
           </>
         )}
         <Splitter />

@@ -24,10 +24,14 @@ import {
 const zipCodeTest = /^[0-9]{5}$/;
 
 const TunnelReferentSelect = props => {
+
+  const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
+
   const defaultPosition = {
     coords: {
-      latitude: 5.495556,
-      longitude: -54.030833,
+      latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+      longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918,
     },
     delta: {
       latitude: 0.009,
@@ -55,7 +59,7 @@ const TunnelReferentSelect = props => {
   const [localAdress, setLocalAdress] = useState(defaultReferent);
   const [localValid, setLocalValid] = useState({});
   const [referentPoints, setReferentPoints] = useState([]);
-  const [mapLayout, setMapLayout] = useState({width: 250, height: 250});
+  const [mapLayout, setMapLayout] = useState({width: 650, height: 250});
   const [displayReset, setDisplayReset] = useState(false);
   const [displayMap, setDisplayMap] = useState(true);
   const [invalidZipCode, setInvalidZipCode] = useState(false);
@@ -306,7 +310,7 @@ const TunnelReferentSelect = props => {
       </View>
 
       <View
-        style={{flex: 0.4, minHeight: 275, paddingTop: 0, marginTop: 15}}
+        style={{flex: 0.4, paddingTop: 0, marginTop: 15}}
         onLayout={event => {
           adjustMapLayout(event.nativeEvent.layout);
         }}>
