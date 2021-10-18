@@ -102,6 +102,11 @@
       "type": "component",
       "repeatable": false,
       "component": "commandes.information-anonymes"
+    },
+    "additionnal_products": {
+      "type": "component",
+      "repeatable": true,
+      "component": "commandes.box-sur-mesure-produit"
     }
   }
 }
