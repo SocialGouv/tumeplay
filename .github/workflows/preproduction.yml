@@ -1,15 +1,13 @@
-name: Review
+name: Production
 
 on:
   push:
-    branches-ignore: 
+    branches:
       - master
-    tags-ignore:
-      - v*
 
 concurrency:
+  group: preproduction
   cancel-in-progress: true
-  group: review-${{ github.ref }}
 
 jobs:
   ##############################################################################
@@ -34,7 +32,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
   ##############################################################################
-  ## BUILD AND REGISTER FRONTEND GUYANE
+  ## BUILD AND REGISTER FRONTEND IMAGE
   ##############################################################################
   register-frontend-guyane:
     name: Register frontend Guyane
@@ -54,14 +52,11 @@ jobs:
         project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
-          buildenv=dev.guyane
+          buildenv=preprod.guyane
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
-
-    - name: debug backend URL
-      run: |
-        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+          REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
 
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND GUYANE
@@ -84,14 +79,11 @@ jobs:
         project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
-          buildenv=dev.metropole
+          buildenv=preprod.metropole
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
-
-    - name: debug backend URL
-      run: |
-        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+          REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
 
   ##############################################################################
   ## BUILD AND REGISTER DASHBOARD
@@ -117,37 +109,44 @@ jobs:
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
 
   ##############################################################################
-  ## GENERATE KUBERNETES MANIFESTS
+  ## GENERATE PREPROD KUBERNETES MANIFESTS
   ##############################################################################
   manifests:
-    name: Generate k8s manifests
+    name: Preproduction manifests
     runs-on: ubuntu-latest
     steps:
 
     - name: Use autodevops manifests generation
       uses: SocialGouv/actions/k8s-manifests@v1
       with:
-        environment: "dev"
+        environment: "preprod"
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
+        socialgouvBaseDomain: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
-  ## DEPLOY BACKEND & FRONT-END
+  ## DEPLOY BACKEND & FRONT-END TO PREPRODUCTION
   ##############################################################################
   deploy:
-    name: Deploy review branch
+    name: Deploy preproduction
     runs-on: ubuntu-latest
     needs:
       [
-        manifests,
         register-backend,
         register-dashboard,
         register-frontend-guyane,
         register-frontend-metropole,
+        manifests,
       ]
+    environment:
+      name: preproduction
+      url: ${{ steps.deploy.outputs.url }}
     steps:
 
     - name: Use autodevops deployment
       uses: SocialGouv/actions/autodevops-deploy@v1
       with:
-        environment: "dev"
+        id: deploy
+        environment: "preprod"
         token: ${{ secrets.GITHUB_TOKEN }}
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV2 }}
