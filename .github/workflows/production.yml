@@ -109,72 +109,34 @@ jobs:
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
 
   ##############################################################################
-  ## GENERATE PREPROD KUBERNETES MANIFESTS
-  ##############################################################################
-  manifests-preproduction:
-    name: Preproduction manifests
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Use autodevops manifests generation
-      uses: SocialGouv/actions/k8s-manifests@v1
-      with:
-        environment: "preprod"
-
-  ##############################################################################
-  ## DEPLOY BACKEND & FRONT-END TO PREPRODUCTION
-  ##############################################################################
-  deploy-preproduction:
-    name: Deploy preproduction
-    runs-on: ubuntu-latest
-    needs:
-      [
-        register-backend,
-        register-dashboard,
-        register-frontend-guyane,
-        register-frontend-metropole,
-        manifests-preproduction,
-      ]
-    environment:
-      name: preproduction
-      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-    steps:
-
-    - name: Use autodevops deployment
-      uses: SocialGouv/actions/autodevops-deploy@v1
-      with:
-        environment: "preprod"
-        token: ${{ secrets.GITHUB_TOKEN }}
-        kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV2 }}
-
-  ##############################################################################
-  ## GENERATE PROD KUBERNETES MANIFESTS
-  ##############################################################################
-  manifests-production:
-    name: Production manifests
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Use autodevops manifests generation
-      uses: SocialGouv/actions/k8s-manifests@v1
-      with:
-        environment: "prod"
-
-  ##############################################################################
   ## DEPLOY BACKEND & FRONT-END TO PRODUCTION
   ##############################################################################
-  deploy-production:
+  deploy:
     name: Deploy production
     runs-on: ubuntu-latest
-    needs: [deploy-preproduction, manifests-production]
+    needs: [
+      register-backend,
+      register-dashboard,
+      register-frontend-guyane,
+      register-frontend-metropole
+    ]
     environment:
       name: production
-      url: https://backend-${{ env.namespace }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+      url: ${{ steps.deploy.outputs.url }}
     steps:
+
+    - name: Use autodevops manifests generation
+      uses: SocialGouv/actions/k8s-manifests@v1
+      with:
+        environment: "prod"
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
+        socialgouvBaseDomain: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
 
     - name: Use autodevops deployment
       uses: SocialGouv/actions/autodevops-deploy@v1
       with:
+        id: deploy
         environment: "prod"
         token: ${{ secrets.GITHUB_TOKEN }}
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_PROD }}
