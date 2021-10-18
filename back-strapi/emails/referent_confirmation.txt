@@ -1,0 +1,13 @@
+Bonjour,\n
+Une nouvelle commande a été effectuée dans votre point de rencontre !\n
+Détail de la commande :\n
+<%= order.first_name %> <%= order.last_name %>\n
+Numéro de la commande : <%= order.id %>\n
+Box : «<%= order.box.title %>»\n
+Mode de livraison : <%= order.delivery_name %>\n
+Adresse de livraison :\n
+<%= order.name %>\n
+<%= order.address %>\n
+<%= order.address_zipcode %> <%= order.address_city %>\n
+Cordialement,\n
+L'équipe Tumeplay
