@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/SocialGouv/Tumeplay/compare/v1.16.5...v1.17.0) (2021-10-18)
+
+
+### Features
+
+* **dashboard-referent:** handle product selector for order update ([#184](https://github.com/SocialGouv/Tumeplay/issues/184)) ([8de7d9e](https://github.com/SocialGouv/Tumeplay/commit/8de7d9e2c7684877caa864e60efa8adb7044b416))
+
 ## [1.16.5](https://github.com/SocialGouv/Tumeplay/compare/v1.16.4...v1.16.5) (2021-10-14)
 
 
