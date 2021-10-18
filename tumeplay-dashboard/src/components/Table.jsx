@@ -58,6 +58,10 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, 
     )
   })
 
+	const horizontalScroll = (event) => {
+		const delta = Math.max(-1, Math.min(1, (event.nativeEvent.wheelDelta || -event.nativeEvent.detail)))
+		event.currentTarget.scrollLeft -= (delta * 100)
+	}
 
   return (
 		<div className="tmp-table-container shadow-md flex flex-col bg-white">
@@ -77,22 +81,24 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, 
 					)
 				}
 			</div>
-			<table className="tmp-table-ext items-center w-full ">
-				<thead>
-					<tr>
-						<th className="w-20 px-6 align-middle text-center border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-80">
-							<input type='checkbox' id="all" checked={checked} onClick={(e) =>{handleSelectAll(e)}}/>
-						</th>
-						{titlesToDisplay}
-					</tr>
-				</thead>
-				<tbody>
-					{dataToDisplay.items.length > 0 ?
-					Rows :
-					<></>
-					}
-				</tbody>
-			</table>
+			<div className="overflow-x-scroll" onWheel={horizontalScroll}>
+				<table className="tmp-table-ext items-center w-full ">
+					<thead>
+						<tr>
+							<th className="w-20 px-6 align-middle text-center border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-80">
+								<input type='checkbox' id="all" checked={checked} onClick={(e) =>{handleSelectAll(e)}}/>
+							</th>
+							{titlesToDisplay}
+						</tr>
+					</thead>
+					<tbody>
+						{dataToDisplay.items.length > 0 ?
+						Rows :
+						<></>
+						}
+					</tbody>
+				</table>
+			</div>
 			{dataToDisplay.items.length > 0 ?
 				<></>
 				:
