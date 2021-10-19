@@ -1,0 +1,13 @@
+Bonjour <%= order.first_name %>,\n
+Votre commande a bien été effectuée !\n
+Détail de la commande :\n
+<%= order.first_name %> <%= order.last_name %>\n
+Numéro de la commande : <%= order.id %>\n
+Box : «<%= order.box.title %>»\n
+Mode de livraison : <%= order.delivery_name %>\n
+Adresse de livraison :\n
+<%= order.name %>\n
+<%= order.address %>\n
+<%= order.address_zipcode %> <%= order.address_city %>\n
+Si jamais tu ne reçois pas ton colis, n’hésite pas à nous le signaler à cette adresse. Nous ferons de notre mieux pour trouver une solution.\n
+Pour en savoir plus, suis-nous sur Instagram.

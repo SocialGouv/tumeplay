@@ -268,7 +268,6 @@ module.exports = {
       let delivery_name = '';
       let custom_text = '';
       let email_to_send = entity.email
-      let referent_name = '';
 
       switch(entity.delivery) {
         case 'pickup':
@@ -281,7 +280,6 @@ module.exports = {
         case 'referent':
           delivery_name = 'Chez un référent'
           custom_text = 'Tu pourras récupérer ta boîte dans 5 jours au lieu de rencontre choisi, auprès du référent que tu as choisi.'
-          referent_name = referent.name
           break;
       }
 
@@ -296,7 +294,7 @@ module.exports = {
             {
               delivery_name: delivery_name,
               custom_text: custom_text,
-              box: _.pick(box, ['title'])
+              box: _.pick(box, ['title']),
             }
           )
         }
@@ -305,12 +303,41 @@ module.exports = {
       if (entity.delivery === "referent") {
         const referent_text = await fs.promises.readFile('emails/referent_confirmation.txt', 'utf8');
         const referent_html = await fs.promises.readFile('emails/referent_confirmation.html', 'utf8');
+        const order_email_ref_txt = await fs.promises.readFile('emails/order_confirmation_ref.txt', 'utf8')
+        const order_email_ref_html = await fs.promises.readFile('emails/order_confirmation_ref.html', 'utf8')
+
 
         const REFERENT_ORDER_CONFIRM = {
           subject: "Une nouvelle commande Tumeplay",
           text: referent_text,
           html: referent_html
         };
+
+        const EMAIL_ORDER_CONFIRM_REF = {
+           subject: 'Commande effectuée ✔',
+            text: order_email_ref_txt,
+            html: order_email_ref_html,
+        }
+
+        await strapi.plugins['email'].services.email.sendTemplatedEmail(
+        {
+          to: email_to_send
+        },
+        EMAIL_ORDER_CONFIRM_REF,
+        {
+          order: Object.assign(
+            _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
+            {
+              delivery_name: delivery_name,
+              custom_text: custom_text,
+              box: _.pick(box, ['title']),
+            }
+          ),
+          referent: Object.assign(
+            _.pick(referent, ['openingHours'])
+          )
+        }
+      )
 
         await strapi.plugins['email'].services.email.sendTemplatedEmail(
           {
@@ -322,7 +349,6 @@ module.exports = {
               _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
               {
                 delivery_name: delivery_name,
-                referent_name: referent_name,
                 box: _.pick(box, ['title'])
               }
             )
