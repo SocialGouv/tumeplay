@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/SocialGouv/Tumeplay/compare/v1.17.0...v1.17.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* **backend:** rename 'Référents' collection & remove user list from it ([5d6d87f](https://github.com/SocialGouv/Tumeplay/commit/5d6d87f392a661dc10364f2aec1fd037228dc1ad))
+
 # [1.17.0](https://github.com/SocialGouv/Tumeplay/compare/v1.16.5...v1.17.0) (2021-10-18)
 
 
