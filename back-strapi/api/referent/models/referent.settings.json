@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "referents",
   "info": {
-    "name": "Referent",
+    "name": "Lieux de rencontres",
     "description": ""
   },
   "options": {
@@ -38,10 +38,6 @@
     },
     "longitude": {
       "type": "float"
-    },
-    "users": {
-      "plugin": "admin",
-      "collection": "user"
     },
     "openingHours": {
       "type": "component",
