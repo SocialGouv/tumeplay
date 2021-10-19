@@ -7,7 +7,7 @@ import useIsMounted from '../../../hooks/isMounted';
 const {width, height} = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.00922;
+const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 OpenStreetMap.propTypes = {
   latitude: PropTypes.number,

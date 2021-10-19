@@ -77,16 +77,13 @@ const TunnelReferentSelect = props => {
           openGeocoder()
             .reverse(coordinates.long, coordinates.lat)
             .end((err, res) => {
-              if (
-                res.address.state === 'Île-de-France' ||
-                res.address.state === 'Aquitaine'
-              ) {
+              if (res) {
                 currentPosition.coords.latitude = position.coords.latitude;
                 currentPosition.coords.longitude = position.coords.longitude;
                 setCurrentPosition({...currentPosition});
               } else {
                 currentPosition.isValid = false;
-                setCurrentPosition({...currentPosition});
+                setCurrentPosition({...defaultPosition});
               }
             });
         },
