@@ -267,7 +267,6 @@ module.exports = {
 
       let delivery_name = '';
       let custom_text = '';
-      let email_to_send = entity.email
 
       switch(entity.delivery) {
         case 'pickup':
@@ -285,7 +284,7 @@ module.exports = {
 
       await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
-          to: email_to_send
+          to: entity.email
         },
         EMAIL_ORDER_CONFIRM,
         {
@@ -321,7 +320,7 @@ module.exports = {
 
         await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
-          to: email_to_send
+          to: entity.email
         },
         EMAIL_ORDER_CONFIRM_REF,
         {

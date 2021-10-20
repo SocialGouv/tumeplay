@@ -4,7 +4,6 @@ Détail de la commande :\n
 <%= order.first_name %> <%= order.last_name %>\n
 Numéro de la commande : <%= order.id %>\n
 Box : «<%= order.box.title %>»\n
-Mode de livraison : <%= order.delivery_name %>\n
 Adresse de livraison :\n
 <%= order.name %>\n
 <%= order.address %>\n
