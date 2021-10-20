@@ -1,0 +1,22 @@
+<div>
+  <div style="text-align:center">
+    <span>
+      <div style="font-family:&quot;CarterOne-Regular&quot;;font-size:18px;display:inline-block;margin-bottom:12px">
+          Nouvelle commande <span class="il">Tumeplay</span>
+      </div>
+      <div style="display:inline-block;height:3px;width:100%;background-color:rgb(253,188,17)">
+      </div>
+    </span>
+  </div>
+  <div style="padding:10px;float:left"><img style="width:30px;height:30px" src="https://ci3.googleusercontent.com/proxy/zEYVZ3ooo5ElvsR8vW1yVPEJeXZ8lI-MHdM3GkPDS_xptWiHiIR6ceE3b8a0y3v-eXtir0TKZxAsc4xwLMAYKcSTWLpjYnjdt84-VvsZixSYzpSBgYiO1FqTMl43zx0h-7nH=s0-d-e1-ft#https://tumeplay-api.fabrique.social.gouv.fr/pictures/mail/decorate-top-left.png" class="CToWUd"><img style="max-width:170px;min-width:170px" src="https://ci5.googleusercontent.com/proxy/t5ny5Cn4ZvFO1XdXmDcm0Pod-3RE7hI2uSKjCZnbhPMiAHcUUtk5VH_syGknnqZ77Hmptjs-Nd2UKCwQYc7ptXA4-KqnqGee4nFpXHRwNGgUE15sy8ps=s0-d-e1-ft#https://tumeplay-api.fabrique.social.gouv.fr/pictures/mail/box-2.png" class="CToWUd"><img style="width:30px;height:30px" src="https://ci3.googleusercontent.com/proxy/n9szBTaEr3bdhBhqI1uviLpFernVkY7RHhv7HeofEcp2fGR_yLqzt63-_k5W-a2UNDcR_Qqb7VoZji6ytvhFnzsWLh5SN95rTA-f6Aymvm_HfkYG9p4P8Ha1Ppuiae7WXJ9sBU-5bQ=s0-d-e1-ft#https://tumeplay-api.fabrique.social.gouv.fr/pictures/mail/decorate-bottom-right.png" class="CToWUd"></div>
+    <div style="padding:10px;float:left">
+      <div style="color:rgb(200,3,82);font-family:&quot;Abel-Regular&quot;;font-size:20px">
+        Bonjour, vous avez reçu une nouvelle commande de <%= order.first_name %>
+      </div>
+      <br>
+      <div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Détail de la commande :</div>
+      <div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px"><%= order.first_name %> <%= order.last_name %></div>
+      <div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Numéro de commande : <%= order.id %></div>
+      <div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Box «<%= order.box.title %>»</div>
+    </div>
+</div>

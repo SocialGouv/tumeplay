@@ -107,6 +107,10 @@ var Styles = {
     color: '#FFFFFF',
     fontSize: 18,
   },
+  tunnelButtonLongText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+  },
 
   tunnelButtonTextOpaque: {
     opacity: 0.2,
