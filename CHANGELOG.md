@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/SocialGouv/Tumeplay/compare/v1.17.1...v1.17.2) (2021-10-20)
+
+
+### Bug Fixes
+
+* **k8s:** rename preproduction workflow & fix master to main ([#193](https://github.com/SocialGouv/Tumeplay/issues/193)) ([303bbec](https://github.com/SocialGouv/Tumeplay/commit/303bbec058511fa61ab5f8b124a9d12fb811204f))
+
 ## [1.17.1](https://github.com/SocialGouv/Tumeplay/compare/v1.17.0...v1.17.1) (2021-10-19)
 
 
