@@ -245,24 +245,29 @@ module.exports = {
     if (ctx.request.body.email && !ctx.request.body.no_email) {
       strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
       let box;
+      let referent;
+      const referentID = ctx.request.body.referent
       if(ctx.request.body.content[0].__component === 'commandes.box') {
         const box_id = ctx.request.body.content[0].box
         box = await strapi.services.box.findOne({id: box_id})
+        referent = await strapi.services.referent.findOne({id: referentID})
       } else if (ctx.request.body.content[0].__component === 'commandes.box-sur-mesure') {
+        referent = await strapi.services.referent.findOne({id: referentID})
         box = await strapi.services['box-sur-mesure'].find()
       }
 
-      const email_txt = await fs.promises.readFile('emails/order_confirmation.txt', 'utf8')
-      const email_html = await fs.promises.readFile('emails/order_confirmation.html', 'utf8')
+      const order_email_txt = await fs.promises.readFile('emails/order_confirmation.txt', 'utf8')
+      const order_email_html = await fs.promises.readFile('emails/order_confirmation.html', 'utf8')
 
       const EMAIL_ORDER_CONFIRM = {
         subject: 'Commande effectuée ✔',
-        text: email_txt,
-        html: email_html,
+        text: order_email_txt,
+        html: order_email_html,
       }
 
       let delivery_name = '';
       let custom_text = '';
+
       switch(entity.delivery) {
         case 'pickup':
           delivery_name = 'En point relais'
@@ -277,7 +282,8 @@ module.exports = {
           break;
       }
 
-      await strapi.plugins['email'].services.email.sendTemplatedEmail(
+      if (entity.delivery !== "referent") {
+        await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
           to: entity.email
         },
@@ -288,13 +294,68 @@ module.exports = {
             {
               delivery_name: delivery_name,
               custom_text: custom_text,
-              box: _.pick(box, ['title'])
+              box: _.pick(box, ['title']),
             }
           )
         }
       )
-    }
 
+      } else {
+        const referent_text = await fs.promises.readFile('emails/referent_confirmation.txt', 'utf8');
+        const referent_html = await fs.promises.readFile('emails/referent_confirmation.html', 'utf8');
+        const order_email_ref_txt = await fs.promises.readFile('emails/order_confirmation_ref.txt', 'utf8')
+        const order_email_ref_html = await fs.promises.readFile('emails/order_confirmation_ref.html', 'utf8')
+
+
+        const REFERENT_ORDER_CONFIRM = {
+          subject: "Une nouvelle commande Tumeplay",
+          text: referent_text,
+          html: referent_html
+        };
+
+        const EMAIL_ORDER_CONFIRM_REF = {
+           subject: 'Commande effectuée ✔',
+            text: order_email_ref_txt,
+            html: order_email_ref_html,
+        }
+
+        await strapi.plugins['email'].services.email.sendTemplatedEmail(
+        {
+          to: entity.email
+        },
+        EMAIL_ORDER_CONFIRM_REF,
+        {
+          order: Object.assign(
+            _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
+            {
+              delivery_name: delivery_name,
+              custom_text: custom_text,
+              box: _.pick(box, ['title']),
+            }
+          ),
+          referent: Object.assign(
+            _.pick(referent, ['openingHours'])
+          )
+        }
+      )
+
+        await strapi.plugins['email'].services.email.sendTemplatedEmail(
+          {
+            to: referent.email
+          },
+          REFERENT_ORDER_CONFIRM,
+          {
+            order: Object.assign(
+              _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
+              {
+                delivery_name: delivery_name,
+                box: _.pick(box, ['title'])
+              }
+            )
+          }
+        )
+      }
+    }
     return entity;
   },
   async searchPOI(ctx) {
