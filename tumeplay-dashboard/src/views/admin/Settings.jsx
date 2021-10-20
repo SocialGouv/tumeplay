@@ -4,9 +4,12 @@ import { Formik } from 'formik';
 import FormErrorMessage from '../../components/ui/FormErrorMessage';
 import ErrorMessage from '../../components/ui/ErrorMessage';
 import Loader from '../../components/ui/Loader';
+import UserApi from '../../services/api/user';
+import { growl } from '@crystallize/react-growl';
 
 const Settings = () => {
 	const context = useContext(AppContext)
+	const { token } = context
 	const [user] = useState(context.user)
 
 	return (
@@ -30,7 +33,25 @@ const Settings = () => {
 									return errors;
 								}}
 								onSubmit={(values, { setSubmitting }) => {
-									
+									UserApi.changeUsername(token, {
+										username: values.username,
+									}).then((response) => {
+										context.verifyAuthentication(response.data)
+										growl({
+											title: 'Superbe!',
+											message: 'Votre nom d\'utilisateur a bien été modifié',
+											timeout: 2000
+										})
+										setSubmitting(false);
+									}).catch((error) => {
+										growl({
+											title: 'Erreur serveur',
+											message: 'Code erreur : ' + error.response.status,
+											type: 'error',
+											timeout: 2000
+										});
+										setSubmitting(false);
+									})
 								}}
 							>
 								{({
@@ -104,7 +125,7 @@ const Settings = () => {
 									if (!values.password) {
 										errors.password = 'Ce champ est requis';
 									} else if (
-										!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(values.password)
+										!/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/i.test(values.password)
 									) {
 										errors.password = 'Le mot de passe doit comporter au moins 8 caractères et doit comporter au moins un caractère numérique.'
 									}
@@ -120,7 +141,25 @@ const Settings = () => {
 									return errors;
 								}}
 								onSubmit={(values, { setSubmitting }) => {
-									
+									UserApi.changePassword(token, {
+										newPassword: values.password,
+      							confirmNewPassword: values.password2
+									}).then(() => {
+										growl({
+											title: 'Superbe!',
+											message: 'Votre mot de passe a bien été modifié',
+											timeout: 2000
+										})
+										setSubmitting(false);
+									}).catch((error) => {
+										growl({
+											title: 'Erreur serveur',
+											message: 'Code erreur : ' + error.response.status,
+											type: 'error',
+											timeout: 2000
+										});
+										setSubmitting(false);
+									})
 								}}
 							>
 								{({

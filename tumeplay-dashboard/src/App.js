@@ -7,6 +7,7 @@ import { createBrowserHistory } from 'history';
 import UserApi from './services/api/user';
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { GrowlScene } from '@crystallize/react-growl';
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
 						:
 						<Router history={history}>
 							<Routes />
+							<GrowlScene />
 						</Router>
         }
     </AppContext.Provider>
