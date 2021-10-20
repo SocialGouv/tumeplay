@@ -282,7 +282,8 @@ module.exports = {
           break;
       }
 
-      await strapi.plugins['email'].services.email.sendTemplatedEmail(
+      if (entity.delivery !== "referent") {
+        await strapi.plugins['email'].services.email.sendTemplatedEmail(
         {
           to: entity.email
         },
@@ -299,7 +300,7 @@ module.exports = {
         }
       )
 
-      if (entity.delivery === "referent") {
+      } else {
         const referent_text = await fs.promises.readFile('emails/referent_confirmation.txt', 'utf8');
         const referent_html = await fs.promises.readFile('emails/referent_confirmation.html', 'utf8');
         const order_email_ref_txt = await fs.promises.readFile('emails/order_confirmation_ref.txt', 'utf8')
@@ -355,7 +356,6 @@ module.exports = {
         )
       }
     }
-
     return entity;
   },
   async searchPOI(ctx) {
