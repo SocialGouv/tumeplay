@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/SocialGouv/Tumeplay/compare/v1.17.2...v1.18.0) (2021-10-20)
+
+
+### Features
+
+* **front:** init referent process for metropole ([#182](https://github.com/SocialGouv/Tumeplay/issues/182)) ([dd9dde1](https://github.com/SocialGouv/Tumeplay/commit/dd9dde16b32bab6ad9a5a9d3d42eddb77a2d403f))
+
 ## [1.17.2](https://github.com/SocialGouv/Tumeplay/compare/v1.17.1...v1.17.2) (2021-10-20)
 
 
