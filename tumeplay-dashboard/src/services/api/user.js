@@ -8,6 +8,20 @@ const UserApi = {
      {headers: {
       Authorization: `Bearer ${token}`
     }});
+  },
+  changePassword: (token, params) => {
+    return axios.post(`${API_URL}/users/change-password`, params, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+  },
+  changeUsername: (token, params) => {
+    return axios.post(`${API_URL}/users/change-username`, params, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
   }
 }
 
