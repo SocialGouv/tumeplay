@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/SocialGouv/Tumeplay/compare/v1.18.2...v1.18.3) (2021-10-25)
+
+
+### Bug Fixes
+
+* **strapi:** fixing email sent to referent users ([#205](https://github.com/SocialGouv/Tumeplay/issues/205)) ([c1a0e21](https://github.com/SocialGouv/Tumeplay/commit/c1a0e21b6893ae9900b769188ab16d6d1c402628))
+
 ## [1.18.2](https://github.com/SocialGouv/Tumeplay/compare/v1.18.1...v1.18.2) (2021-10-25)
 
 
