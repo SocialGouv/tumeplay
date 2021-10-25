@@ -452,7 +452,7 @@ const Settings = () => {
 															<FormErrorMessage errors={errors} touched={touched} name="description" />
 														</div>
 														<div className="mt-4">
-															<h3 className="text-lg font-semibold mt-2">Les horaires d'ouverture</h3>
+															<h3 className="text-lg font-semibold">Les horaires d'ouverture</h3>
 															{OpeningHoursFields()}
 														</div>
 														<div className="text-center mt-6">
