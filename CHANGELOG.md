@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/SocialGouv/Tumeplay/compare/v1.18.1...v1.18.2) (2021-10-25)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** other commands environnement ([7570c5b](https://github.com/SocialGouv/Tumeplay/commit/7570c5bf1cdf5ead8ce8d58ef16909ba9c14128d))
+
 ## [1.18.1](https://github.com/SocialGouv/Tumeplay/compare/v1.18.0...v1.18.1) (2021-10-25)
 
 
