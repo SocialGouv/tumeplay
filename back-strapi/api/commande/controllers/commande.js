@@ -249,7 +249,6 @@ module.exports = {
       const referentID = ctx.request.body.referent
       const users =  await strapi.plugins['users-permissions'].services.user.fetchAll({referent: referentID})
       const users_email = users.map((user) => user.email)
-      strapi.log.info("", users_email.join(','))
 
       if(ctx.request.body.content[0].__component === 'commandes.box') {
         const box_id = ctx.request.body.content[0].box
