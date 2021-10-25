@@ -8,7 +8,14 @@ const ReferentApi = {
      {headers: {
       Authorization: `Bearer ${token}`
     }});
-  }
+  },
+	update: (token, params) => {
+		return axios.put(`${API_URL}/referents/${params.id}`, params, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		})
+	}
 }
 
 export default ReferentApi;
