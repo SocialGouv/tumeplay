@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { Formik } from 'formik';
 import FormErrorMessage from '../../components/ui/FormErrorMessage';
 import Loader from '../../components/ui/Loader';
-
+import { growl } from '@crystallize/react-growl';
+import Cookie from "js-cookie";
 
 const Login = () => {
 
@@ -48,18 +49,26 @@ const Login = () => {
 									return errors;
 								}}
 								onSubmit={async (values, { setSubmitting }) => {
-									const res = await login(values.email, values.password)
-									if(res.status === 200) {
+									login(values.email, values.password)
+									.then((res) => {
+										Cookie.set("token", res.data.jwt);
 										const user = res.data.user
 
 										if (user.referent)
 											user.referent = user.referent.id
 											
 										context.verifyAuthentication(user)
-									} else {
-										// TODO : growl error
-									}
-									setSubmitting(false);
+										setSubmitting(false);
+									})
+									.catch((error) => {
+										growl({
+											title: 'Erreur',
+											message: error.response.status === 400 ? 'Mot de passe incorrect' : 'Erreur serveur, veuillez ré-essayer plus tard',
+											type: 'error',
+											timeout: 1500
+										});
+										setSubmitting(false);
+									})
 								}}
 							>
 								{({

@@ -43,6 +43,12 @@
       "type": "component",
       "repeatable": false,
       "component": "referents.opening-hours"
+    },
+    "description": {
+      "type": "text"
+    },
+    "is_available": {
+      "type": "boolean"
     }
   }
 }
