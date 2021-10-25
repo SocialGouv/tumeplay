@@ -5,10 +5,14 @@ import FormErrorMessage from '../../components/ui/FormErrorMessage';
 import ErrorMessage from '../../components/ui/ErrorMessage';
 import Loader from '../../components/ui/Loader';
 import UserApi from '../../services/api/user';
+<<<<<<< HEAD
 import ReferentApi from '../../services/api/referents';
 import { growl } from '@crystallize/react-growl';
 import _ from 'lodash'
 import Switch from 'react-switch'
+=======
+import { growl } from '@crystallize/react-growl';
+>>>>>>> 5fe622c98fb47506318cb726be89bb44be9d7ecd
 
 const Settings = () => {
 	const context = useContext(AppContext)
