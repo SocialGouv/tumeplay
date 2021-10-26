@@ -1,3 +1,10 @@
+## [1.18.9](https://github.com/SocialGouv/Tumeplay/compare/v1.18.8...v1.18.9) (2021-10-26)
+
+
+### Bug Fixes
+
+* referent map default position ([4fc74d7](https://github.com/SocialGouv/Tumeplay/commit/4fc74d72f4639b5ab21a192a8c8559353d316828))
+
 ## [1.18.8](https://github.com/SocialGouv/Tumeplay/compare/v1.18.7...v1.18.8) (2021-10-26)
 
 
