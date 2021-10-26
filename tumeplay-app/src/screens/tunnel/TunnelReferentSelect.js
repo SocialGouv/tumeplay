@@ -66,6 +66,7 @@ const TunnelReferentSelect = props => {
 
   const isMounted = useIsMounted();
 
+
   useEffect(() => {
     if (isMounted.current) {
       Geolocation.getCurrentPosition(
@@ -83,7 +84,18 @@ const TunnelReferentSelect = props => {
                 setCurrentPosition({...currentPosition});
               } else {
                 currentPosition.isValid = false;
-                setCurrentPosition({...defaultPosition});
+                setCurrentPosition({...{
+                    coords: {
+                      latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+                      longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+                    },
+                    delta: {
+                      latitude: 0.9,
+                      longitude: 0.9,
+                    },
+                    isValid: true,
+                  }
+                });
               }
             });
         },
