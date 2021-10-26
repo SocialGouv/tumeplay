@@ -87,8 +87,22 @@ const TunnelReferentSelect = props => {
               }
             });
         },
-        error => console.log('Error', JSON.stringify(error)),
+        error => {console.log('Error', JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+        console.log("REACT_APP_ZONE", REACT_APP_ZONE)
+        setCurrentPosition({...{
+            coords: {
+              latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+              longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+            },
+            delta: {
+              latitude: 0.9,
+              longitude: 0.9,
+            },
+            isValid: true,
+          }
+        });
+        }
       );
       setDisplayMap(true);
     }
