@@ -23,7 +23,7 @@ import {
 
 const zipCodeTest = /^[0-9]{5}$/;
 
-const TunnelReferentSelect = props => {
+const TunnelReferentSelectGuyane = props => {
 
   var defaultReferent = {
     userZipCode: '',
@@ -31,6 +31,18 @@ const TunnelReferentSelect = props => {
     city: '',
   };
   var pickupTimer = false;
+
+	const defaultPosition = {
+		coords: {
+			latitude: 5.495556,
+			longitude: -54.030833
+		},
+		delta: {
+			latitude: 0.9,
+			longitude: 0.9,
+		},
+		isValid: true,
+	};
 
   const [selectedReferent, setSelectedReferent] = useState(
     props.navigation.state.params.selectedReferent,
@@ -53,21 +65,10 @@ const TunnelReferentSelect = props => {
   const [invalidZipCode, setInvalidZipCode] = useState(false);
 
   const isMounted = useIsMounted();
-	const guyaneSlug = 'guyane'
 
 	useEffect(() => {
 		if (rawReferents) {
-				setCurrentPosition({...{
-					coords: {
-						latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
-						longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
-					},
-					delta: {
-						latitude: 0.9,
-						longitude: 0.9,
-					},
-					isValid: true,
-				}});
+			setCurrentPosition({...defaultPosition});
 			Geolocation.getCurrentPosition(
 				position => {
 					const coordinates = {
@@ -83,34 +84,13 @@ const TunnelReferentSelect = props => {
 								setCurrentPosition({...currentPosition});
 							} else {
 								currentPosition.isValid = false;
-								setCurrentPosition({...{
-										coords: {
-											latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
-											longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
-										},
-										delta: {
-											latitude: 0.9,
-											longitude: 0.9,
-										},
-										isValid: true,
-									}});
+								setCurrentPosition({...defaultPosition});
 							}
 						});
 				},
 				error =>
 					{
-						setCurrentPosition({...{
-								coords: {
-									latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
-									longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
-								},
-								delta: {
-									latitude: 0.9,
-									longitude: 0.9,
-								},
-								isValid: true,
-							}
-						});
+						setCurrentPosition({...defaultPosition});
 					}
 			);
 			setDisplayMap(true);
@@ -119,7 +99,7 @@ const TunnelReferentSelect = props => {
 
   useEffect(() => {
 		const fetchReferents = async () => {
-			const tmpRef = await referentAPI.fetchReferents();
+			const tmpRef = await referentAPI.fetchReferents(2);
 			setRawReferents(tmpRef)
 			const refPoints = tmpRef.map(function(item) {
 				item.isSelected = false;
@@ -371,4 +351,4 @@ const TunnelReferentSelect = props => {
   );
 };
 
-export default TunnelReferentSelect;
+export default TunnelReferentSelectGuyane;
