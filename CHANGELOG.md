@@ -1,3 +1,10 @@
+## [1.18.6](https://github.com/SocialGouv/Tumeplay/compare/v1.18.5...v1.18.6) (2021-10-26)
+
+
+### Bug Fixes
+
+* removing boudaries calculation from front ([#209](https://github.com/SocialGouv/Tumeplay/issues/209)) ([d04c9c9](https://github.com/SocialGouv/Tumeplay/commit/d04c9c9c085de2001170c781c92b3d01bc6894c4))
+
 ## [1.18.5](https://github.com/SocialGouv/Tumeplay/compare/v1.18.4...v1.18.5) (2021-10-26)
 
 
