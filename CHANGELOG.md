@@ -1,3 +1,11 @@
+## [1.18.5](https://github.com/SocialGouv/Tumeplay/compare/v1.18.4...v1.18.5) (2021-10-26)
+
+
+### Bug Fixes
+
+* clean ([8b55e19](https://github.com/SocialGouv/Tumeplay/commit/8b55e1957c4fe31b2a5471dee5f58a99e5022c02))
+* **front:** push with console.log to debug preprod ([eb31fce](https://github.com/SocialGouv/Tumeplay/commit/eb31fce585760414de3c185290a7bd8ae884ecca))
+
 ## [1.18.4](https://github.com/SocialGouv/Tumeplay/compare/v1.18.3...v1.18.4) (2021-10-26)
 
 
