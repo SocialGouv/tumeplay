@@ -26,18 +26,6 @@ const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const TunnelReferentSelect = props => {
 
-  // const defaultPosition = {
-  //   coords: {
-  //     latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
-  //     longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918,
-  //   },
-  //   delta: {
-  //     latitude: 0.9,
-  //     longitude: 0.9,
-  //   },
-  //   isValid: true,
-  // };
-
   var defaultReferent = {
     userZipCode: '',
     zipCode: '',
@@ -66,6 +54,7 @@ const TunnelReferentSelect = props => {
   const [invalidZipCode, setInvalidZipCode] = useState(false);
 
   const isMounted = useIsMounted();
+	const guyaneSlug = 'guyane'
 
   console.log("currentPosition : ", currentPosition)
 
@@ -73,11 +62,11 @@ const TunnelReferentSelect = props => {
     if (isMounted.current) {
 			console.log('SET DEFAULT')
 			console.log(REACT_APP_ZONE)
-			console.log(REACT_APP_ZONE === 'guyane')
+			console.log(REACT_APP_ZONE === guyaneSlug)
        setCurrentPosition({...{
           coords: {
-            latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
-            longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+            latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
+            longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
           },
           delta: {
             latitude: 0.9,
@@ -105,8 +94,8 @@ const TunnelReferentSelect = props => {
                 console.log("REACT_APP_ZONE", REACT_APP_ZONE)
                 setCurrentPosition({...{
                     coords: {
-                      latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
-                      longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+                      latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
+                      longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
                     },
                     delta: {
                       latitude: 0.9,
@@ -122,8 +111,8 @@ const TunnelReferentSelect = props => {
           console.log("REACT APP ZONE", REACT_APP_ZONE)
           setCurrentPosition({...{
               coords: {
-                latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
-                longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+                latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
+                longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
               },
               delta: {
                 latitude: 0.9,
