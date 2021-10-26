@@ -22,7 +22,6 @@ import {
 } from 'react-native';
 
 const zipCodeTest = /^[0-9]{5}$/;
-const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const TunnelReferentSelect = props => {
 
@@ -56,92 +55,83 @@ const TunnelReferentSelect = props => {
   const isMounted = useIsMounted();
 	const guyaneSlug = 'guyane'
 
-  console.log("currentPosition : ", currentPosition)
+	useEffect(() => {
+		if (rawReferents) {
+				setCurrentPosition({...{
+					coords: {
+						latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
+						longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
+					},
+					delta: {
+						latitude: 0.9,
+						longitude: 0.9,
+					},
+					isValid: true,
+				}});
+			Geolocation.getCurrentPosition(
+				position => {
+					const coordinates = {
+						lat: position.coords.latitude,
+						long: position.coords.longitude,
+					};
+					openGeocoder()
+						.reverse(coordinates.long, coordinates.lat)
+						.end((err, res) => {
+							if (res) {
+								currentPosition.coords.latitude = position.coords.latitude;
+								currentPosition.coords.longitude = position.coords.longitude;
+								setCurrentPosition({...currentPosition});
+							} else {
+								currentPosition.isValid = false;
+								setCurrentPosition({...{
+										coords: {
+											latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
+											longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
+										},
+										delta: {
+											latitude: 0.9,
+											longitude: 0.9,
+										},
+										isValid: true,
+									}});
+							}
+						});
+				},
+				error =>
+					{
+						setCurrentPosition({...{
+								coords: {
+									latitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? 5.495556 : 44.837789,
+									longitude: rawReferents[0] && rawReferents[0].environnement.slug === guyaneSlug ? -54.030833 : -0.57918
+								},
+								delta: {
+									latitude: 0.9,
+									longitude: 0.9,
+								},
+								isValid: true,
+							}
+						});
+					}
+			);
+			setDisplayMap(true);
+		}
+	}, [rawReferents])
 
   useEffect(() => {
+		const fetchReferents = async () => {
+			const tmpRef = await referentAPI.fetchReferents();
+			setRawReferents(tmpRef)
+			const refPoints = tmpRef.map(function(item) {
+				item.isSelected = false;
+				return item;
+			});
+			setReferentPoints([...refPoints]);
+		};
+
     if (isMounted.current) {
-			console.log('SET DEFAULT')
-			console.log(REACT_APP_ZONE)
-			console.log(REACT_APP_ZONE === guyaneSlug)
-       setCurrentPosition({...{
-          coords: {
-            latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
-            longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
-          },
-          delta: {
-            latitude: 0.9,
-            longitude: 0.9,
-          },
-          isValid: true,
-        }});
-      Geolocation.getCurrentPosition(
-        position => {
-          const coordinates = {
-            lat: position.coords.latitude,
-            long: position.coords.longitude,
-          };
-          openGeocoder()
-            .reverse(coordinates.long, coordinates.lat)
-            .end((err, res) => {
-              if (res) {
-                console.log('GEOLOC ACTIVEE')
-                currentPosition.coords.latitude = position.coords.latitude;
-                currentPosition.coords.longitude = position.coords.longitude;
-                setCurrentPosition({...currentPosition});
-              } else {
-                console.log('GEOLOC DESACTIVEE')
-                currentPosition.isValid = false;
-                console.log("REACT_APP_ZONE", REACT_APP_ZONE)
-                setCurrentPosition({...{
-                    coords: {
-                      latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
-                      longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
-                    },
-                    delta: {
-                      latitude: 0.9,
-                      longitude: 0.9,
-                    },
-                    isValid: true,
-                  }});
-              }
-            });
-        },
-        error =>
-          {console.log('Error', JSON.stringify(error))
-          console.log("REACT APP ZONE", REACT_APP_ZONE)
-          setCurrentPosition({...{
-              coords: {
-                latitude: REACT_APP_ZONE === guyaneSlug ? 5.495556 : 44.837789,
-                longitude: REACT_APP_ZONE === guyaneSlug ? -54.030833 : -0.57918
-              },
-              delta: {
-                latitude: 0.9,
-                longitude: 0.9,
-              },
-              isValid: true,
-            }
-          });
-          }
-      );
-      setDisplayMap(true);
+			fetchReferents();
     }
   }, [isMounted.current]);
-
-  useEffect(() => {
-    const fetchReferent = async () => {
-      let tmpRef = rawReferents;
-      if(!rawReferents) {
-        tmpRef = await referentAPI.fetchReferents();
-        setRawReferents(tmpRef)
-        const refPoints = tmpRef.map(function(item) {
-          item.isSelected = false;
-          return item;
-        });
-        setReferentPoints([...refPoints]);
-      }
-    };
-    fetchReferent();
-  }, [currentPosition]);
 
   const _onDone = () => {
     setDisplayMap(false);
