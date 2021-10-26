@@ -1,3 +1,24 @@
+## [1.18.4](https://github.com/SocialGouv/Tumeplay/compare/v1.18.3...v1.18.4) (2021-10-26)
+
+
+### Bug Fixes
+
+* **front:** push with console.log to debug preprod ([#206](https://github.com/SocialGouv/Tumeplay/issues/206)) ([2098dc2](https://github.com/SocialGouv/Tumeplay/commit/2098dc2c53d002cc089800939ed0794644f7bb9d))
+
+## [1.18.3](https://github.com/SocialGouv/Tumeplay/compare/v1.18.2...v1.18.3) (2021-10-25)
+
+
+### Bug Fixes
+
+* **strapi:** fixing email sent to referent users ([#205](https://github.com/SocialGouv/Tumeplay/issues/205)) ([c1a0e21](https://github.com/SocialGouv/Tumeplay/commit/c1a0e21b6893ae9900b769188ab16d6d1c402628))
+
+## [1.18.2](https://github.com/SocialGouv/Tumeplay/compare/v1.18.1...v1.18.2) (2021-10-25)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** other commands environnement ([7570c5b](https://github.com/SocialGouv/Tumeplay/commit/7570c5bf1cdf5ead8ce8d58ef16909ba9c14128d))
+
 ## [1.18.1](https://github.com/SocialGouv/Tumeplay/compare/v1.18.0...v1.18.1) (2021-10-25)
 
 
