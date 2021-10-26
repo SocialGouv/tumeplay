@@ -39,8 +39,6 @@ const TunnelReferentSelect = props => {
     isValid: true,
   };
 
-  console.log("defaultPosition", defaultPosition);
-
   var defaultReferent = {
     userZipCode: '',
     zipCode: '',
