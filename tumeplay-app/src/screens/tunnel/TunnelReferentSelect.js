@@ -27,18 +27,20 @@ const TunnelReferentSelect = props => {
 
   const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
-
   const defaultPosition = {
     coords: {
       latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
       longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918,
     },
     delta: {
-      latitude: 0.009,
-      longitude: 0.009,
+      latitude: 0.9,
+      longitude: 0.9,
     },
     isValid: true,
   };
+
+  console.log("defaultPosition", defaultPosition);
+
   var defaultReferent = {
     userZipCode: '',
     zipCode: '',
@@ -66,6 +68,8 @@ const TunnelReferentSelect = props => {
 
   const isMounted = useIsMounted();
 
+  console.log("currentPosition : ", currentPosition)
+
   useEffect(() => {
     if (isMounted.current) {
       Geolocation.getCurrentPosition(
@@ -78,12 +82,25 @@ const TunnelReferentSelect = props => {
             .reverse(coordinates.long, coordinates.lat)
             .end((err, res) => {
               if (res) {
+                console.log('GEOLOC ACTIVEE')
                 currentPosition.coords.latitude = position.coords.latitude;
                 currentPosition.coords.longitude = position.coords.longitude;
                 setCurrentPosition({...currentPosition});
               } else {
+                console.log('GEOLOC DESACTIVEE')
                 currentPosition.isValid = false;
-                setCurrentPosition({...defaultPosition});
+                console.log("REACT_APP_ZONE", REACT_APP_ZONE)
+                setCurrentPosition({...{
+                    coords: {
+                      latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+                      longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+                    },
+                    delta: {
+                      latitude: 0.9,
+                      longitude: 0.9,
+                    },
+                    isValid: true,
+                  }});
               }
             });
         },
@@ -92,7 +109,7 @@ const TunnelReferentSelect = props => {
       );
       setDisplayMap(true);
     }
-  }, [isMounted]);
+  }, [isMounted.current]);
 
   useEffect(() => {
     const fetchReferent = async () => {
@@ -166,7 +183,7 @@ const TunnelReferentSelect = props => {
     const newMapLayout = mapLayout;
 
     newMapLayout.width = width;
-    newMapLayout.height = height * 0.4;
+    newMapLayout.height = height * 0.3;
 
     setMapLayout(newMapLayout);
   };
@@ -212,6 +229,7 @@ const TunnelReferentSelect = props => {
       .reverse(item.coordinates.longitude, item.coordinates.latitude)
       .end((err, res) => {
         if (res) {
+          console.log("res", res)
           if (res.address.postcode.substring(0, 2) === '97') {
             item['address_deptcode'] = res.address.postcode.substring(0, 3);
           } else {
@@ -252,11 +270,11 @@ const TunnelReferentSelect = props => {
                     latitude:
                       typeof currentPosition.delta !== 'undefined'
                         ? currentPosition.delta.latitude
-                        : 0.09,
+                        : 0.9,
                     longitude:
                       typeof currentPosition.delta !== 'undefined'
                         ? currentPosition.delta.longitude
-                        : 0.09,
+                        : 0.9,
                   },
                 };
                 setCurrentPosition({...localPosition});
