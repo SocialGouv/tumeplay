@@ -59,7 +59,7 @@ const OrdersLogistics = () => {
 	const searchOrders = (query) => {
 		retrieveOrders(
 			Object.assign({
-				_q: query
+				_q: query,
 			}, defaultParams)
 		)
 	}
@@ -68,11 +68,15 @@ const OrdersLogistics = () => {
     let response = await OrdersAPI.countDeliveryOrders(token, params);
     setCount(response.data)
     
+		response = await ReferentAPI.findOne(token, {id: user.referent})
+		const referent = response.data
+
 		response = await OrdersAPI.getDeliveryOrders(
 			token, 
 			Object.assign({
 				_limit: numberPerPage,
-				_start: numberPerPage * (currentPage - 1)
+				_start: numberPerPage * (currentPage - 1),
+				environnement: referent.environnement.id
 			}, params)
 		)
     let orders = response.data

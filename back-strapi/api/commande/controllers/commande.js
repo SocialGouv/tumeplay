@@ -247,6 +247,9 @@ module.exports = {
       let box;
       let referent;
       const referentID = ctx.request.body.referent
+      const users =  await strapi.plugins['users-permissions'].services.user.fetchAll({referent: referentID})
+      const users_email = users.map((user) => user.email)
+
       if(ctx.request.body.content[0].__component === 'commandes.box') {
         const box_id = ctx.request.body.content[0].box
         box = await strapi.services.box.findOne({id: box_id})
@@ -341,7 +344,7 @@ module.exports = {
 
         await strapi.plugins['email'].services.email.sendTemplatedEmail(
           {
-            to: referent.email
+            to: users_email.join(',')
           },
           REFERENT_ORDER_CONFIRM,
           {
