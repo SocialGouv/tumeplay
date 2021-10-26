@@ -22,10 +22,10 @@ import {
 } from 'react-native';
 
 const zipCodeTest = /^[0-9]{5}$/;
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const TunnelReferentSelect = props => {
 
-  const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
   const defaultPosition = {
     coords: {
@@ -104,8 +104,22 @@ const TunnelReferentSelect = props => {
               }
             });
         },
-        error => console.log('Error', JSON.stringify(error)),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+        error =>
+          console.log('Error', JSON.stringify(error)),
+          console.log("REACT APP ZONE", REACT_APP_ZONE),
+          setCurrentPosition({...{
+              coords: {
+                latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+                longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+              },
+              delta: {
+                latitude: 0.9,
+                longitude: 0.9,
+              },
+              isValid: true,
+            }
+          }),
+          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
       setDisplayMap(true);
     }
