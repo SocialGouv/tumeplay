@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/SocialGouv/Tumeplay/compare/v1.18.9...v1.19.0) (2021-10-26)
+
+
+### Features
+
+* **app:** split referent select for guyane & metropole ([234369b](https://github.com/SocialGouv/Tumeplay/commit/234369b71f6b4b4da9aa89c4a507be2c830a1332))
+
 ## [1.18.9](https://github.com/SocialGouv/Tumeplay/compare/v1.18.8...v1.18.9) (2021-10-26)
 
 
