@@ -37,8 +37,10 @@ export default function TunnelDeliverySelect(props) {
       props.navigation.navigate('TunnelUserAddress', _params);
     } else if (deliveryType === 'pickup') {
       props.navigation.navigate('TunnelPickupSelect', _params);
-    } else if (deliveryType === 'referent') {
-      props.navigation.navigate('TunnelReferentSelect', _params);
+    } else if (deliveryType === 'referent-metropole') {
+      props.navigation.navigate('TunnelReferentSelectMetropole', _params);
+    } else if (deliveryType === 'referent-guyane') {
+      props.navigation.navigate('TunnelReferentSelectGuyane', _params);
     }
   }
 
@@ -96,7 +98,7 @@ export default function TunnelDeliverySelect(props) {
               minHeight: 60,
               alignSelf: 'center',
             }}
-            onPress={() => _onDone('referent')}>
+            onPress={() => _onDone('referent-guyane')}>
             <View style={Styles.tunnelButton}>
               <Text style={Styles.tunnelButtonText}>Chez un référent</Text>
             </View>
@@ -146,7 +148,7 @@ export default function TunnelDeliverySelect(props) {
               minHeight: 60,
               alignSelf: 'center',
             }}
-            onPress={() => _onDone('referent')}>
+            onPress={() => _onDone('referent-metropole')}>
             <View style={Styles.tunnelButton}>
               <Text style={Styles.tunnelButtonText}>Chez un référent <Text style={Styles.tunnelButtonLongText}>- Nouvelle Aquitaine seulement</Text></Text>
             </View>
