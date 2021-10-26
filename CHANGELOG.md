@@ -1,3 +1,10 @@
+## [1.18.7](https://github.com/SocialGouv/Tumeplay/compare/v1.18.6...v1.18.7) (2021-10-26)
+
+
+### Bug Fixes
+
+* test zone ([a3c178c](https://github.com/SocialGouv/Tumeplay/commit/a3c178ca98442ab6e12fcd1dea332e6b695a60bd))
+
 ## [1.18.6](https://github.com/SocialGouv/Tumeplay/compare/v1.18.5...v1.18.6) (2021-10-26)
 
 
