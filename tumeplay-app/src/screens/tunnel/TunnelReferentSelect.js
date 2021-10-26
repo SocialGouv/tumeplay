@@ -26,18 +26,17 @@ const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const TunnelReferentSelect = props => {
 
-
-  const defaultPosition = {
-    coords: {
-      latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
-      longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918,
-    },
-    delta: {
-      latitude: 0.9,
-      longitude: 0.9,
-    },
-    isValid: true,
-  };
+  // const defaultPosition = {
+  //   coords: {
+  //     latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+  //     longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918,
+  //   },
+  //   delta: {
+  //     latitude: 0.9,
+  //     longitude: 0.9,
+  //   },
+  //   isValid: true,
+  // };
 
   var defaultReferent = {
     userZipCode: '',
@@ -55,7 +54,9 @@ const TunnelReferentSelect = props => {
     props.navigation.state.params.selectedProducts,
   );
 
-  const [currentPosition, setCurrentPosition] = useState(defaultPosition);
+  const [rawReferents, setRawReferents] = useState()
+
+  const [currentPosition, setCurrentPosition] = useState();
   const [localAdress, setLocalAdress] = useState(defaultReferent);
   const [localValid, setLocalValid] = useState({});
   const [referentPoints, setReferentPoints] = useState([]);
@@ -70,6 +71,17 @@ const TunnelReferentSelect = props => {
 
   useEffect(() => {
     if (isMounted.current) {
+       setCurrentPosition({...{
+          coords: {
+            latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
+            longitude: REACT_APP_ZONE === 'guyane' ? -54.030833 : -0.57918
+          },
+          delta: {
+            latitude: 0.9,
+            longitude: 0.9,
+          },
+          isValid: true,
+        }});
       Geolocation.getCurrentPosition(
         position => {
           const coordinates = {
@@ -103,8 +115,8 @@ const TunnelReferentSelect = props => {
             });
         },
         error =>
-          console.log('Error', JSON.stringify(error)),
-          console.log("REACT APP ZONE", REACT_APP_ZONE),
+          {console.log('Error', JSON.stringify(error))
+          console.log("REACT APP ZONE", REACT_APP_ZONE)
           setCurrentPosition({...{
               coords: {
                 latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
@@ -116,8 +128,8 @@ const TunnelReferentSelect = props => {
               },
               isValid: true,
             }
-          }),
-          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+          });
+          }
       );
       setDisplayMap(true);
     }
@@ -125,42 +137,19 @@ const TunnelReferentSelect = props => {
 
   useEffect(() => {
     const fetchReferent = async () => {
-      const rawReferents = await referentAPI.fetchReferents();
-      const refPoints = rawReferents.map(function(item) {
-        item.isSelected = false;
-        return item;
-      });
-      let filteredPoints = [];
-      if (typeof currentPosition.delta !== 'undefined') {
-        const bounds = {
-          max_lat:
-            currentPosition.coords.latitude + currentPosition.delta.latitude,
-          min_lat:
-            currentPosition.coords.latitude - currentPosition.delta.latitude,
-          max_lon:
-            currentPosition.coords.longitude + currentPosition.delta.longitude,
-          min_lon:
-            currentPosition.coords.longitude - currentPosition.delta.longitude,
-        };
-
-        filteredPoints = refPoints.filter(refPoint => {
-          if (
-            parseFloat(refPoint.latitude) < bounds.max_lat ||
-            parseFloat(refPoint.latitude) > bounds.min_lat ||
-            parseFloat(refPoint.longitude) < bounds.max_lon ||
-            parseFloat(refPoint.longitude) > bounds.min_lon
-          ) {
-            return refPoint;
-          }
+      let tmpRef = rawReferents;
+      if(!rawReferents) {
+        tmpRef = await referentAPI.fetchReferents();
+        setRawReferents(tmpRef)
+        const refPoints = tmpRef.map(function(item) {
+          item.isSelected = false;
+          return item;
         });
-      } else {
-        filteredPoints = referentPoints;
+        setReferentPoints([...refPoints]);
       }
-      setReferentPoints([]);
-      setReferentPoints([...filteredPoints]);
     };
     fetchReferent();
-  }, []);
+  }, [currentPosition]);
 
   const _onDone = () => {
     setDisplayMap(false);
@@ -359,7 +348,7 @@ const TunnelReferentSelect = props => {
             </View>
           </View>
         )}
-        {displayMap && (
+        {displayMap && currentPosition && (
           <OpenStreetMap
             items={referentPoints}
             onPoiPress={onPoiPress}
