@@ -71,6 +71,9 @@ const TunnelReferentSelect = props => {
 
   useEffect(() => {
     if (isMounted.current) {
+			console.log('SET DEFAULT')
+			console.log(REACT_APP_ZONE)
+			console.log(REACT_APP_ZONE === 'guyane')
        setCurrentPosition({...{
           coords: {
             latitude: REACT_APP_ZONE === 'guyane' ? 5.495556 : 44.837789,
