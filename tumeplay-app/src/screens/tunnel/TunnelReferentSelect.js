@@ -22,10 +22,10 @@ import {
 } from 'react-native';
 
 const zipCodeTest = /^[0-9]{5}$/;
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const TunnelReferentSelect = props => {
 
-  const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
   const defaultPosition = {
     coords: {
