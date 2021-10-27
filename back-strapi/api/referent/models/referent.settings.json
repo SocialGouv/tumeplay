@@ -48,7 +48,8 @@
       "type": "text"
     },
     "is_available": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true
     }
   }
 }

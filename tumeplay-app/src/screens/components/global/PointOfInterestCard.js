@@ -60,7 +60,7 @@ export default function PointOfInterestCard(props) {
     if (localHeight > 0) {
       setLocalHeight(0);
     } else {
-      setLocalHeight(7 * 21);
+      setLocalHeight(14 * 21);
     }
   }
 

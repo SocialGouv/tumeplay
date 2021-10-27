@@ -107,13 +107,13 @@ const Settings = () => {
 													className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
 													htmlFor="grid-username"
 												>
-													Nom d'utilisateur
+													Email
 												</label>
 												<input
 													type="text"
 													value={user.email} disabled name="email"
 													className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-													placeholder="Votre nom..."
+													placeholder="Votre email..."
 												/>
 											</div>
 											<div className="text-center mt-6">
@@ -225,7 +225,6 @@ const Settings = () => {
 												/>
 												<FormErrorMessage errors={errors} touched={touched} name="password2" />
 											</div>
-											<FormErrorMessage errors={errors} touched={touched} name="email" />
 											<div className="text-center mt-6">
 												{
 													isSubmitting
@@ -260,9 +259,8 @@ const Settings = () => {
 											validate={values => {
 												const errors = {};
 
-												if (!values.email) {
-													errors.email = 'Ce champ est requis';
-												} else if (
+												if (
+													values.email &&
 													!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
 												) {
 													errors.email = 'Adresse email incorrecte';
@@ -447,7 +445,7 @@ const Settings = () => {
 															<textarea
 																value={values.description} onChange={handleChange} onBlur={handleBlur} name="description"
 																className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-																placeholder="Décrivez votre lieu de rencontre (cette description sera affichée sur l'applicaiton)..."
+																placeholder="Décrivez votre lieu de rencontre (cette description sera affichée sur l'application)..."
 															/>
 															<FormErrorMessage errors={errors} touched={touched} name="description" />
 														</div>
