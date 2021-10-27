@@ -267,8 +267,14 @@ export default function TunnelUserAddress(props) {
         selectedItem: selectedItem,
         selectedProducts: selectedProducts,
       });
-    } else if (deliveryType === 'referent') {
-      props.navigation.navigate('TunnelReferentSelect', {
+    } else if (deliveryType === 'referent-guyane') {
+      props.navigation.navigate('TunnelReferentSelectGuyane', {
+        selectedItem: selectedItem,
+        selectedProducts: selectedProducts,
+        selectedReferent: selectedReferent,
+      });
+    } else if (deliveryType === 'referent-metropole') {
+      props.navigation.navigate('TunnelReferentSelectMetropole', {
         selectedItem: selectedItem,
         selectedProducts: selectedProducts,
         selectedReferent: selectedReferent,
