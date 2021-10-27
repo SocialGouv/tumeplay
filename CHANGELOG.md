@@ -1,3 +1,10 @@
+## [1.19.3-alpha.3](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3-alpha.2...v1.19.3-alpha.3) (2021-10-27)
+
+
+### Bug Fixes
+
+* Trigger preprod deploy on alpha, beta and next branches ([e99f048](https://github.com/SocialGouv/Tumeplay/commit/e99f048d7c94c51fe79e33a2d6abecb1733139e7))
+
 ## [1.19.3-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3-alpha.1...v1.19.3-alpha.2) (2021-10-27)
 
 
