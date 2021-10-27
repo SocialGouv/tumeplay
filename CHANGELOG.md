@@ -1,3 +1,10 @@
+## [1.19.6](https://github.com/SocialGouv/Tumeplay/compare/v1.19.5...v1.19.6) (2021-10-27)
+
+
+### Bug Fixes
+
+* clean code ([a40aeda](https://github.com/SocialGouv/Tumeplay/commit/a40aedac4d4daae2b2b1e43d7f0bbce8fb46d0ad))
+
 ## [1.19.5](https://github.com/SocialGouv/Tumeplay/compare/v1.19.4...v1.19.5) (2021-10-27)
 
 
