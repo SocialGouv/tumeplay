@@ -304,11 +304,11 @@ export default function TunnelCartSummary(props) {
                 {'\n'}
               </Text>
             )}
-            {deliveryType == 'referent' && (
+            {(deliveryType == 'referent-metropole' || deliveryType === 'referent-guyane') && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
                 {selectedReferent.address}
                 {'\n'}
-                {selectedReferent.address_zipCode}{' '}
+                {selectedReferent.address_zipcode}{' '}
                 {selectedReferent.address_city}
               </Text>
             )}
