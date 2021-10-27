@@ -54,7 +54,6 @@ const TunnelReferentSelectGuyane = props => {
   );
 
   const [rawReferents, setRawReferents] = useState()
-
   const [currentPosition, setCurrentPosition] = useState();
   const [localAdress, setLocalAdress] = useState(defaultReferent);
   const [localValid, setLocalValid] = useState({});
