@@ -1,3 +1,12 @@
+## [1.19.4-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3...v1.19.4-alpha.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* Add env vars to manifest action ([53665d5](https://github.com/SocialGouv/Tumeplay/commit/53665d57367ecb5059abf2f7225b3928f5001ad6))
+* Tag images according to deployment env ([ade03dd](https://github.com/SocialGouv/Tumeplay/commit/ade03ddd37ffd44dd9781a22bc99a90c975b7931))
+* Trigger preprod deploy on alpha, beta and next branches ([013fa46](https://github.com/SocialGouv/Tumeplay/commit/013fa4671e871f9b7c312fb1e9ea5e045f1ccaab))
+
 ## [1.19.3](https://github.com/SocialGouv/Tumeplay/compare/v1.19.2...v1.19.3) (2021-10-27)
 
 
