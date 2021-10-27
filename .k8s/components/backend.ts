@@ -13,8 +13,6 @@ import {
 } from "kubernetes-models/v1";
 import environments from "@socialgouv/kosko-charts/environments";
 
-import getImageTag from "../utils/getImageTag";
-
 const component = "backend";
 
 const prob = new Probe({
@@ -47,9 +45,9 @@ const getAzureProjectVolume = () => {
 export const getManifests = async () => {
   const volumeName = "uploads";
   const subdomain = "backend-tumeplay";
-  const imageTag = getImageTag(process.env);
   const ciEnv = environments(process.env);
   const [persistentVolumeClaim] = getAzureProjectVolume();
+  const version = ciEnv.isPreProduction ? "preprod" : ciEnv.tag || `sha-${ciEnv.sha}`;
 
   const uploadsVolume = new Volume({
     persistentVolumeClaim: { claimName: persistentVolumeClaim.metadata!.name! },
@@ -71,7 +69,7 @@ export const getManifests = async () => {
       ingress: true,
       withPostgres: true,
       containerPort: 1337,
-      image: `ghcr.io/socialgouv/tumeplay/backend:${imageTag}`,
+      image: `ghcr.io/socialgouv/tumeplay/backend:${version}`,
       subDomainPrefix: (!ciEnv.isProduction && `backend-`) || undefined,
     },
     deployment: {
