@@ -66,7 +66,6 @@ const TunnelReferentSelectGuyane = props => {
 
   const isMounted = useIsMounted();
 
-
 	useEffect(() => {
 		if (rawReferents) {
 			setCurrentPosition({...defaultPosition});
