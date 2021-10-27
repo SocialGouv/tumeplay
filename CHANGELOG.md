@@ -1,3 +1,10 @@
+## [1.19.3-alpha.2](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3-alpha.1...v1.19.3-alpha.2) (2021-10-27)
+
+
+### Bug Fixes
+
+* Add env vars to manifest action ([889e487](https://github.com/SocialGouv/Tumeplay/commit/889e48706c886088ac9f2a0bc676201d4a5648f5))
+
 ## [1.19.3-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.19.2...v1.19.3-alpha.1) (2021-10-27)
 
 
