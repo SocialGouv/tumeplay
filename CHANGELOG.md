@@ -1,3 +1,10 @@
+## [1.19.3](https://github.com/SocialGouv/Tumeplay/compare/v1.19.2...v1.19.3) (2021-10-27)
+
+
+### Bug Fixes
+
+* **back:** conditionning mail for referents ([#214](https://github.com/SocialGouv/Tumeplay/issues/214)) ([e294875](https://github.com/SocialGouv/Tumeplay/commit/e294875266caac1e8913c8a47c92c855a8a7d103))
+
 ## [1.19.2](https://github.com/SocialGouv/Tumeplay/compare/v1.19.1...v1.19.2) (2021-10-27)
 
 
