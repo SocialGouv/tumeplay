@@ -1,9 +1,8 @@
-name: Pre-production
+name: Preproduction
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, alpha, beta, next]
 
 concurrency:
   group: preproduction
