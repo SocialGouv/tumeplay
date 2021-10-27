@@ -287,6 +287,7 @@ module.exports = {
 
       if (entity.delivery !== "referent") {
         if(ctx.request.body.email) {
+          strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
           await strapi.plugins['email'].services.email.sendTemplatedEmail(
             {
               to: entity.email
@@ -323,6 +324,7 @@ module.exports = {
             html: order_email_ref_html,
         }
         if(ctx.request.body.email) {
+          strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
           await strapi.plugins['email'].services.email.sendTemplatedEmail(
             {
               to: entity.email
@@ -344,6 +346,7 @@ module.exports = {
           )
         }
         if(users_email.length > 0) {
+          strapi.log.info('SENDING EMAIL TO : ', users_email.join(','), ' - ORDER NUMBER ', entity.id)
           await strapi.plugins['email'].services.email.sendTemplatedEmail(
             {
               to: users_email.join(',')
