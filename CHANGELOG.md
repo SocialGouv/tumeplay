@@ -1,3 +1,10 @@
+## [1.19.2](https://github.com/SocialGouv/Tumeplay/compare/v1.19.1...v1.19.2) (2021-10-27)
+
+
+### Bug Fixes
+
+* [#189](https://github.com/SocialGouv/Tumeplay/issues/189) [#190](https://github.com/SocialGouv/Tumeplay/issues/190) [#200](https://github.com/SocialGouv/Tumeplay/issues/200) ([a2fc096](https://github.com/SocialGouv/Tumeplay/commit/a2fc096ce563aa1d68f91de3e29c3b8b1c4d4cb5))
+
 ## [1.19.1](https://github.com/SocialGouv/Tumeplay/compare/v1.19.0...v1.19.1) (2021-10-27)
 
 
