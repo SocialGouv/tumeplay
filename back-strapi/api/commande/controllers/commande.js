@@ -242,7 +242,8 @@ module.exports = {
     }
 
     // SEND CONFIRMATION EMAIL TO USER
-    if (!ctx.request.body.no_email) {
+		strapi.log.info('CONFIRMATION EMAILS START')
+    if (!!!ctx.request.body.no_email) {
       strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
       let box;
       let referent;
