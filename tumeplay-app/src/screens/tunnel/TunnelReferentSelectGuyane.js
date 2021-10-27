@@ -66,6 +66,7 @@ const TunnelReferentSelectGuyane = props => {
 
   const isMounted = useIsMounted();
 
+
 	useEffect(() => {
 		if (rawReferents) {
 			setCurrentPosition({...defaultPosition});
@@ -192,7 +193,6 @@ const TunnelReferentSelectGuyane = props => {
       .reverse(item.coordinates.longitude, item.coordinates.latitude)
       .end((err, res) => {
         if (res) {
-          console.log("res", res)
           if (res.address.postcode.substring(0, 2) === '97') {
             item['address_deptcode'] = res.address.postcode.substring(0, 3);
           } else {

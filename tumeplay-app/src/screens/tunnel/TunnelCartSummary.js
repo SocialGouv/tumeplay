@@ -84,7 +84,7 @@ export default function TunnelCartSummary(props) {
         box_name: selectedItem.title,
         environnement: REACT_APP_ZONE,
       };
-    } else if (deliveryType === 'referent') {
+    } else if ((deliveryType == 'referent-metropole' || deliveryType === 'referent-guyane')) {
       requestBody = {
         ...requestBody,
         address: selectedReferent.address,
@@ -95,7 +95,7 @@ export default function TunnelCartSummary(props) {
         address_zipcode: selectedReferent.address_zipcode,
         phone: userAdress.phoneNumber,
         poi_name: selectedReferent.name,
-        delivery: deliveryType,
+        delivery: 'referent',
         referent: selectedReferent.id,
         box_name: selectedItem.title,
         environnement: REACT_APP_ZONE,
@@ -304,11 +304,11 @@ export default function TunnelCartSummary(props) {
                 {'\n'}
               </Text>
             )}
-            {deliveryType == 'referent' && (
+            {(deliveryType == 'referent-metropole' || deliveryType === 'referent-guyane') && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
                 {selectedReferent.address}
                 {'\n'}
-                {selectedReferent.address_zipCode}{' '}
+                {selectedReferent.address_zipcode}{' '}
                 {selectedReferent.address_city}
               </Text>
             )}
