@@ -242,7 +242,7 @@ module.exports = {
     }
 
     // SEND CONFIRMATION EMAIL TO USER
-    if (ctx.request.body.email && !ctx.request.body.no_email) {
+    if (!ctx.request.body.no_email) {
       strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
       let box;
       let referent;
@@ -285,78 +285,81 @@ module.exports = {
           break;
       }
 
-      if (entity.delivery !== "referent") {
-        await strapi.plugins['email'].services.email.sendTemplatedEmail(
-        {
-          to: entity.email
-        },
-        EMAIL_ORDER_CONFIRM,
-        {
-          order: Object.assign(
-            _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
-            {
-              delivery_name: delivery_name,
-              custom_text: custom_text,
-              box: _.pick(box, ['title']),
-            }
-          )
-        }
-      )
-
-      } else {
-        const referent_text = await fs.promises.readFile('emails/referent_confirmation.txt', 'utf8');
-        const referent_html = await fs.promises.readFile('emails/referent_confirmation.html', 'utf8');
-        const order_email_ref_txt = await fs.promises.readFile('emails/order_confirmation_ref.txt', 'utf8')
-        const order_email_ref_html = await fs.promises.readFile('emails/order_confirmation_ref.html', 'utf8')
-
-
-        const REFERENT_ORDER_CONFIRM = {
-          subject: "Une nouvelle commande Tumeplay",
-          text: referent_text,
-          html: referent_html
-        };
-
-        const EMAIL_ORDER_CONFIRM_REF = {
-           subject: 'Commande effectuée ✔',
-            text: order_email_ref_txt,
-            html: order_email_ref_html,
-        }
-
-        await strapi.plugins['email'].services.email.sendTemplatedEmail(
-        {
-          to: entity.email
-        },
-        EMAIL_ORDER_CONFIRM_REF,
-        {
-          order: Object.assign(
-            _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
-            {
-              delivery_name: delivery_name,
-              custom_text: custom_text,
-              box: _.pick(box, ['title']),
-            }
-          ),
-          referent: Object.assign(
-            _.pick(referent, ['openingHours'])
-          )
-        }
-      )
-
-        await strapi.plugins['email'].services.email.sendTemplatedEmail(
+      if(ctx.request.body.email) {
+        if (entity.delivery !== "referent") {
+          await strapi.plugins['email'].services.email.sendTemplatedEmail(
           {
-            to: users_email.join(',')
+            to: entity.email
           },
-          REFERENT_ORDER_CONFIRM,
+          EMAIL_ORDER_CONFIRM,
           {
             order: Object.assign(
               _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
               {
                 delivery_name: delivery_name,
-                box: _.pick(box, ['title'])
+                custom_text: custom_text,
+                box: _.pick(box, ['title']),
               }
             )
           }
         )
+
+        } else {
+          const referent_text = await fs.promises.readFile('emails/referent_confirmation.txt', 'utf8');
+          const referent_html = await fs.promises.readFile('emails/referent_confirmation.html', 'utf8');
+          const order_email_ref_txt = await fs.promises.readFile('emails/order_confirmation_ref.txt', 'utf8')
+          const order_email_ref_html = await fs.promises.readFile('emails/order_confirmation_ref.html', 'utf8')
+
+
+          const REFERENT_ORDER_CONFIRM = {
+            subject: "Une nouvelle commande Tumeplay",
+            text: referent_text,
+            html: referent_html
+          };
+
+          const EMAIL_ORDER_CONFIRM_REF = {
+             subject: 'Commande effectuée ✔',
+              text: order_email_ref_txt,
+              html: order_email_ref_html,
+          }
+
+          await strapi.plugins['email'].services.email.sendTemplatedEmail(
+          {
+            to: entity.email
+          },
+          EMAIL_ORDER_CONFIRM_REF,
+          {
+            order: Object.assign(
+              _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
+              {
+                delivery_name: delivery_name,
+                custom_text: custom_text,
+                box: _.pick(box, ['title']),
+              }
+            ),
+            referent: Object.assign(
+              _.pick(referent, ['openingHours'])
+            )
+          }
+        )
+          if(users_email.length > 0) {
+            await strapi.plugins['email'].services.email.sendTemplatedEmail(
+              {
+                to: users_email.join(',')
+              },
+              REFERENT_ORDER_CONFIRM,
+              {
+                order: Object.assign(
+                  _.pick(entity, ['name', 'first_name', 'last_name', 'id', 'address', 'address_zipcode', 'address_city']),
+                  {
+                    delivery_name: delivery_name,
+                    box: _.pick(box, ['title'])
+                  }
+                )
+              }
+            )
+          }
+        }
       }
     }
     return entity;
