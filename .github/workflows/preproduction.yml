@@ -147,8 +147,8 @@ jobs:
 
     - name: Use autodevops deployment
       uses: SocialGouv/actions/autodevops-deploy@v1
+      id: deploy
       with:
-        id: deploy
         environment: "preprod"
         token: ${{ secrets.GITHUB_TOKEN }}
         rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
