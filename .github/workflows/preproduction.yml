@@ -25,6 +25,7 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@local-cache
       with:
+        environment: preprod
         imageName: ${{ env.project }}/backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
@@ -46,6 +47,7 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@local-cache
       with:
+        environment: preprod
         imageName: ${{ env.project }}/frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
@@ -73,6 +75,7 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@local-cache
       with:
+        environment: preprod
         imageName: ${{ env.project }}/frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
@@ -100,6 +103,7 @@ jobs:
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@local-cache
       with:
+        environment: preprod
         imageName: ${{ env.project }}/dashboard
         dockercontext: ./tumeplay-dashboard
         dockerfile: ./tumeplay-dashboard/Dockerfile

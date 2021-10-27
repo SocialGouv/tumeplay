@@ -5,17 +5,14 @@ import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { ok } from "assert";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
-import { EnvVar } from "kubernetes-models/v1/EnvVar";
 import environments from "@socialgouv/kosko-charts/environments";
 
-import getImageTag from "../utils/getImageTag";
 import { getManifests as getBackendManifests } from "../components/backend";
 
 export default async (name: string) => {
   const probesPath = "/";
   const ciEnv = environments(process.env);
-
-  const imageTag = getImageTag(process.env);
+  const version = ciEnv.isPreProduction ? "preprod" : ciEnv.tag || `sha-${ciEnv.sha}`;
 
   const podProbes = ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
     (probes, probe) => ({
@@ -41,7 +38,7 @@ export default async (name: string) => {
         : ciEnv.metadata.subdomain,
     },
     deployment: {
-      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:${imageTag}`,
+      image: `ghcr.io/socialgouv/tumeplay/frontend-${name}:${version}`,
       ...podProbes,
     },
   });

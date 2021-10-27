@@ -59,10 +59,6 @@ jobs:
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
-    - name: debug backend URL
-      run: |
-        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
-
   ##############################################################################
   ## BUILD AND REGISTER FRONTEND GUYANE
   ##############################################################################
@@ -91,7 +87,7 @@ jobs:
 
     - name: debug backend URL
       run: |
-        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ env.SOCIALGOUV_BASE_DOMAIN }}
+        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
 
   ##############################################################################
   ## BUILD AND REGISTER DASHBOARD
