@@ -1,3 +1,10 @@
+## [1.19.4](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3...v1.19.4) (2021-10-27)
+
+
+### Bug Fixes
+
+* **back:** investigation-guyane-mail ([#217](https://github.com/SocialGouv/Tumeplay/issues/217)) ([c03ab9a](https://github.com/SocialGouv/Tumeplay/commit/c03ab9ac0039238b72de908f18467e10966eb1b4))
+
 ## [1.19.4-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.19.3...v1.19.4-alpha.1) (2021-10-27)
 
 
