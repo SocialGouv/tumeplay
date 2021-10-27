@@ -1,3 +1,10 @@
+## [1.19.3-alpha.1](https://github.com/SocialGouv/Tumeplay/compare/v1.19.2...v1.19.3-alpha.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* Tag images according to deployment env ([046d574](https://github.com/SocialGouv/Tumeplay/commit/046d574936ef88f223b251a933b988c4f5d007c2))
+
 ## [1.19.2](https://github.com/SocialGouv/Tumeplay/compare/v1.19.1...v1.19.2) (2021-10-27)
 
 
