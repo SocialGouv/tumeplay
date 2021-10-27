@@ -51,15 +51,15 @@ const TimeTable = (props) => {
                   </Text>
       }
       return(
-        <View style={{height: 15, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'col', justifyContent: 'space-between'}}>
           <Text style={{lineHeight: 21,
-                        color: '#4F4F4F',
-                        fontSize: 12,
-                        fontFamily: 'Chivo-Regular',
-                        flexWrap: 'wrap'}}>
-              {item.day}
-            </Text>
-          <Text style={{marginRight: 45}}>{hours}</Text>
+											color: '#4F4F4F',
+											fontSize: 12,
+											fontFamily: 'Chivo-Regular',
+											flexWrap: 'wrap'}}>
+						{item.day}
+					</Text>
+          <Text>{hours}</Text>
         </View>
       )
     }))
