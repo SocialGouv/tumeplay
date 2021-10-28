@@ -265,7 +265,7 @@ const TunnelReferentSelectGuyane = props => {
       ]}>
       <Backlink step={2} onPress={_goBack} />
 
-      <View style={{flex: 0.15, paddingTop: 15}}>
+      <View style={{flex: 0.20, paddingTop: 15}}>
         <TextWithSound
           style={Styles.tunnelTitle}
           sound={'lieu-de-retrait_XlV9Zth8.mp3'}

@@ -113,7 +113,6 @@ const OrdersLogistics = () => {
     setOrders(orders)
   }
 
-
   const handleChangeTab = (event, box_number) => {
     event.preventDefault()
     setOpenTab(box_number)
@@ -172,7 +171,7 @@ const OrdersLogistics = () => {
   }
 
   const handlePrintClick = (e) => {
-    const colissimoItems = tmpSelectedItems.filter(item => item.delivery === "home")
+    const colissimoItems = tmpSelectedItems.filter(item => item.delivery === "home" || item.delivery === 'referent')
     const mondialRelayItems = tmpSelectedItems.filter(item => item.delivery === "pickup")
     if(colissimoItems.length > 0) {
       const ids = colissimoItems.map((item) => {
