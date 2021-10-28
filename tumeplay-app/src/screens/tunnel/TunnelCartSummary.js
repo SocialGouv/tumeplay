@@ -322,7 +322,7 @@ export default function TunnelCartSummary(props) {
 			{
 					deliveryType.includes('referent') ?
 					<Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
-						Nous t&apos;informerons de l'avancée de ta commande aux coordonnées que tu nous as laissé
+						Nous t&apos;informerons de l'avancée de ta commande aux coordonnées que tu nous as laissées
 					</Text>
 					:
 					<Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
