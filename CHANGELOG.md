@@ -1,3 +1,10 @@
+## [1.19.7](https://github.com/SocialGouv/Tumeplay/compare/v1.19.6...v1.19.7) (2021-10-27)
+
+
+### Bug Fixes
+
+* **app:** goBack in TunnelUserAddress for referent delivery ([dd221cb](https://github.com/SocialGouv/Tumeplay/commit/dd221cb3f6f69e5b89895b159b10f1f95aa194c2))
+
 ## [1.19.6](https://github.com/SocialGouv/Tumeplay/compare/v1.19.5...v1.19.6) (2021-10-27)
 
 
