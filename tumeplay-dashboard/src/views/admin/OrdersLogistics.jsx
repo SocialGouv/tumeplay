@@ -116,6 +116,7 @@ const OrdersLogistics = () => {
   const handleChangeTab = (event, box_number) => {
     event.preventDefault()
     setOpenTab(box_number)
+    setTmpSelectedItems([])
     retrieveOrders({sent_ne: true, box_number, _sort: 'created_at:ASC'})
     setChecked(false)
     history.push(`/orders/box/${box_number}`)
