@@ -1,3 +1,16 @@
+# [1.20.0](https://github.com/SocialGouv/Tumeplay/compare/v1.19.7...v1.20.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* settings values bug ([892e07b](https://github.com/SocialGouv/Tumeplay/commit/892e07b815a6d394ad010e8827eb763a4bf98845))
+
+
+### Features
+
+* adapt referent metropole to guyane & dynamic data display on summary ([1be30fc](https://github.com/SocialGouv/Tumeplay/commit/1be30fc462270295c95fe33c08eab425b7db03ed))
+* open street map zoom handle ([8655b6a](https://github.com/SocialGouv/Tumeplay/commit/8655b6a4d9a75a97903a936b94150cbc62e7afdc))
+
 ## [1.19.7](https://github.com/SocialGouv/Tumeplay/compare/v1.19.6...v1.19.7) (2021-10-27)
 
 
