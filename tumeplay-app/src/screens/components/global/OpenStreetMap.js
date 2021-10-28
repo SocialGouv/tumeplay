@@ -12,6 +12,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 OpenStreetMap.propTypes = {
   latitude: PropTypes.number,
   longitude: PropTypes.number,
+	delta: PropTypes.number,
   items: PropTypes.array,
   width: PropTypes.number,
   height: PropTypes.number,
@@ -19,14 +20,14 @@ OpenStreetMap.propTypes = {
   onRegionChange: PropTypes.func,
 };
 export default function OpenStreetMap(props) {
-  const {items, latitude, longitude } = props;
+  const {items, latitude, longitude, delta } = props;
 
   const isMounted = useIsMounted();
   const [region, setRegion] = useState({
     latitude: latitude,
     longitude: longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
+    latitudeDelta: delta || LATITUDE_DELTA,
+    longitudeDelta: (delta * ASPECT_RATIO) || LONGITUDE_DELTA,
   });
 
 
