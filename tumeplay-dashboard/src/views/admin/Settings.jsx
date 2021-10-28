@@ -390,21 +390,6 @@ const Settings = () => {
 															/>
 															<FormErrorMessage errors={errors} touched={touched} name="name" />
 														</div>
-														<div className="relative w-full mb-6">
-															<label
-																className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-																htmlFor="grid-name"
-															>
-																Nom du lieu de rencontre
-															</label>
-															<input
-																type="text"
-																value={values.name} onChange={handleChange} onBlur={handleBlur} name="name"
-																className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-																placeholder="Nom du lieu de rencontre..."
-															/>
-															<FormErrorMessage errors={errors} touched={touched} name="name" />
-														</div>
 														<div className="relative w-full mb-3">
 															<label
 																className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -429,7 +414,7 @@ const Settings = () => {
 															</label>
 															<input
 																type="text"
-																value={values.name} onChange={handleChange} onBlur={handleBlur} name="phone_number"
+																value={values.phone_number} onChange={handleChange} onBlur={handleBlur} name="phone_number"
 																className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
 																placeholder="Numéro de téléphone..."
 															/>
