@@ -37,10 +37,7 @@ const TunnelReferentSelectGuyane = props => {
 			latitude: 5.495556,
 			longitude: -54.030833
 		},
-		delta: {
-			latitude: 0.9,
-			longitude: 0.9,
-		},
+		delta: 0.7,
 		isValid: true,
 	};
 
@@ -315,6 +312,7 @@ const TunnelReferentSelectGuyane = props => {
             width={mapLayout.width}
             height={mapLayout.height}
             onRegionChange={onRegionChange}
+						delta={currentPosition.delta}
             latitude={currentPosition.coords.latitude}
             longitude={currentPosition.coords.longitude}
           />

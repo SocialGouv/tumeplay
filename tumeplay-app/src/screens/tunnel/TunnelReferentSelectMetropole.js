@@ -37,10 +37,7 @@ const TunnelReferentSelectMetropole = props => {
 			latitude: 44.837789,
 			longitude: -0.57918
 		},
-		delta: {
-			latitude: 0.9,
-			longitude: 0.9,
-		},
+		delta: 0.1,
 		isValid: true,
 	};
 
@@ -315,6 +312,7 @@ const TunnelReferentSelectMetropole = props => {
             width={mapLayout.width}
             height={mapLayout.height}
             onRegionChange={onRegionChange}
+						delta={currentPosition.delta}
             latitude={currentPosition.coords.latitude}
             longitude={currentPosition.coords.longitude}
           />
