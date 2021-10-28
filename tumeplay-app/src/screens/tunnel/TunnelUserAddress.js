@@ -52,7 +52,6 @@ export default function TunnelUserAddress(props) {
     firstName: '',
     lastName: '',
     emailAdress: '',
-    emailAdressConfirmation: '',
     phoneNumber: '',
     address: '',
     addressMore: '',
@@ -68,7 +67,6 @@ export default function TunnelUserAddress(props) {
     firstName: -1,
     lastName: -1,
     emailAdress: -1,
-    emailAdressConfirmation: -1,
     emailAdressMismatch: false,
     phoneNumber: -1,
     address: -1,
@@ -105,7 +103,6 @@ export default function TunnelUserAddress(props) {
         firstName: userAdress.firstName,
         lastName: userAdress.lastName,
         emailAdress: userAdress.emailAdress,
-        emailAdressConfirmation: userAdress.emailAdressConfirmation,
         phoneNumber: userAdress.phoneNumber,
         address: userAdress.address,
         addressMore: userAdress.addressMore,
@@ -149,15 +146,15 @@ export default function TunnelUserAddress(props) {
       isValid = false;
     }
 
-    if (localAdress.lastName === '' && REACT_APP_ZONE === 'metropole') {
+    if (localAdress.lastName === '' && !deliveryType.includes('referent')) {
       checkedIsValid.lastName = defaultValue;
       isValid = false;
     }
 
-    if (localAdress.emailAdress === '' && REACT_APP_ZONE === 'metropole') {
+    if (localAdress.emailAdress === '' && !deliveryType.includes('referent')) {
       checkedIsValid.emailAdress = defaultValue;
       isValid = false;
-    } else if (REACT_APP_ZONE === 'metropole') {
+    } else if (!deliveryType.includes('referent')) {
       if (!MailValidator.validateMail(localAdress.emailAdress)) {
         checkedIsValid.emailAdress = CustomTextInput.fieldStatus.INVALID;
         checkedIsValid.emailAdressWrongFormat = true;
@@ -165,32 +162,18 @@ export default function TunnelUserAddress(props) {
       }
     }
 
-    if (
-      localAdress.emailAdressConfirmation === '' &&
-      REACT_APP_ZONE === 'metropole'
-    ) {
-      checkedIsValid.emailAdressConfirmation = defaultValue;
-      isValid = false;
-    } else if (REACT_APP_ZONE === 'metropole') {
-      if (!MailValidator.validateMail(localAdress.emailAdressConfirmation)) {
-        checkedIsValid.emailAdressConfirmation =
-          CustomTextInput.fieldStatus.INVALID;
-        checkedIsValid.emailAdressConfirmationWrongFormat = true;
+		if (deliveryType.includes('referent')) {
+			if (localAdress.phoneNumber === '') {
+        checkedIsValid.phoneNumber = defaultValue;
         isValid = false;
       } else {
-        if (
-          localAdress.emailAdress !== '' &&
-          localAdress.emailAdressConfirmation !== ''
-        ) {
-          if (localAdress.emailAdress != localAdress.emailAdressConfirmation) {
-            checkedIsValid.emailAdressConfirmation =
-              CustomTextInput.fieldStatus.INVALID;
-            checkedIsValid.emailAdressMismatch = true;
-            isValid = false;
-          }
+        if (!phoneTest.test(localAdress.phoneNumber)) {
+          checkedIsValid.phoneNumber = CustomTextInput.fieldStatus.INVALID;
+          checkedIsValid.phoneNumberWrongFormat = true;
+          isValid = false;
         }
       }
-    }
+		}
 
     if (deliveryType === 'home') {
       if (localAdress.address === '') {
@@ -350,7 +333,7 @@ export default function TunnelUserAddress(props) {
         currentValue={localAdress.firstName}
         name="firstName"
       />
-      {REACT_APP_ZONE === 'guyane' ? (
+      {deliveryType.includes('referent') ? (
         <CustomTextInput
           inputLabel="Numéro de téléphone"
           inputPlaceholder="Ton numéro de téléphone"
@@ -371,30 +354,20 @@ export default function TunnelUserAddress(props) {
             currentValue={localAdress.lastName}
             name="lastName"
           />
-          <CustomTextInput
-            inputLabel="Adresse e-mail"
-            inputPlaceholder="Ton adresse e-mail"
-            onChangeText={val => _handleChange('emailAdress', val)}
-            isValid={localValid.emailAdress}
-            emailAdressWrongFormat={localValid.emailAdressWrongFormat}
-            currentValue={localAdress.emailAdress}
-            name="emailAdress"
-          />
-
-          <CustomTextInput
-            inputLabel="Confirmation adresse e-mail"
-            inputPlaceholder="Confirme ton adresse e-mail"
-            onChangeText={val => _handleChange('emailAdressConfirmation', val)}
-            isValid={localValid.emailAdressConfirmation}
-            emailAdressWrongFormat={
-              localValid.emailAdressConfirmationWrongFormat
-            }
-            emailAdressMismatch={localValid.emailAdressMismatch}
-            currentValue={localAdress.emailAdressConfirmation}
-            name="emailAdressConfirmation"
-          />
         </>
       )}
+
+
+			<CustomTextInput
+				inputLabel="Adresse e-mail"
+				isRequired={!deliveryType.includes('referent')}
+				inputPlaceholder="Ton adresse e-mail"
+				onChangeText={val => _handleChange('emailAdress', val)}
+				isValid={localValid.emailAdress}
+				emailAdressWrongFormat={localValid.emailAdressWrongFormat}
+				currentValue={localAdress.emailAdress}
+				name="emailAdress"
+			/>
 
       {deliveryType === 'home' && (
         <CustomTextInput
