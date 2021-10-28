@@ -1,3 +1,15 @@
+# [1.21.0](https://github.com/SocialGouv/Tumeplay/compare/v1.20.0...v1.21.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* phone is not required in referent tunnel ([#219](https://github.com/SocialGouv/Tumeplay/issues/219)) ([897b59f](https://github.com/SocialGouv/Tumeplay/commit/897b59f34c2d897d226239c8bd04a418aad17853))
+
+
+### Features
+
+* **dashboard:** adding referent orders for metropole ([#218](https://github.com/SocialGouv/Tumeplay/issues/218)) ([75f21e4](https://github.com/SocialGouv/Tumeplay/commit/75f21e4bf6f9169e5c30deb82a6cf81f28694ec4))
+
 # [1.20.0](https://github.com/SocialGouv/Tumeplay/compare/v1.19.7...v1.20.0) (2021-10-28)
 
 
