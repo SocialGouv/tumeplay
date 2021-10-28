@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/SocialGouv/Tumeplay/compare/v1.21.0...v1.21.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* **dashboard:** empty tmpOrders on TabChange ([#220](https://github.com/SocialGouv/Tumeplay/issues/220)) ([4957bf8](https://github.com/SocialGouv/Tumeplay/commit/4957bf87c861613a1e4054a3fb6fceedb8ff41ae))
+
 # [1.21.0](https://github.com/SocialGouv/Tumeplay/compare/v1.20.0...v1.21.0) (2021-10-28)
 
 
