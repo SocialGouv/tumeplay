@@ -6,7 +6,7 @@ const OrdersAPI = {
 	getLogisticsOrders: (token, params) => {
     return axios.get(`${API_URL}/commandes`, {
       params: Object.assign({
-        delivery: ['pickup', 'home'],
+        delivery: ['pickup', 'home', 'referent'],
       }, params),
       headers: {
       Authorization: `Bearer ${token}`
