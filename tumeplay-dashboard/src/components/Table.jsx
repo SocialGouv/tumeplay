@@ -21,7 +21,7 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, 
     if (fieldName === "delivery") {
       return(
         <div className="flex items-center">
-          <img className="h-6" src={item === 'home' ? chronoLogo : mondialRelay} alt="logo transporteur" />
+          <img className="h-6" src={item === 'home' || item === 'referent' ? chronoLogo : mondialRelay} alt="logo transporteur" />
         </div>
       )
     }
