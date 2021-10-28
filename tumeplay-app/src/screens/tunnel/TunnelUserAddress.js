@@ -163,10 +163,7 @@ export default function TunnelUserAddress(props) {
     }
 
 		if (deliveryType.includes('referent')) {
-			if (localAdress.phoneNumber === '') {
-        checkedIsValid.phoneNumber = defaultValue;
-        isValid = false;
-      } else {
+			if (localAdress.phoneNumber !== '') {
         if (!phoneTest.test(localAdress.phoneNumber)) {
           checkedIsValid.phoneNumber = CustomTextInput.fieldStatus.INVALID;
           checkedIsValid.phoneNumberWrongFormat = true;
@@ -339,6 +336,7 @@ export default function TunnelUserAddress(props) {
           inputPlaceholder="Ton numéro de téléphone"
           onChangeText={val => _handleChange('phoneNumber', val)}
           isValid={localValid.phoneNumber}
+					isRequired={false}
           currentValue={localAdress.phoneNumber}
           phoneNumberWrongFormat={localValid.phoneNumberWrongFormat}
           name="phoneNumber"
