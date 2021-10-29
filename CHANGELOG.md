@@ -1,3 +1,10 @@
+## [1.21.4](https://github.com/SocialGouv/Tumeplay/compare/v1.21.3...v1.21.4) (2021-10-29)
+
+
+### Bug Fixes
+
+* **hot:** referent openingHours is unset ([a60022e](https://github.com/SocialGouv/Tumeplay/commit/a60022e706b259fc260bfada0867293096ca306a))
+
 ## [1.21.3](https://github.com/SocialGouv/Tumeplay/compare/v1.21.2...v1.21.3) (2021-10-29)
 
 
