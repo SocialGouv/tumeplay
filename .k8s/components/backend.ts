@@ -47,7 +47,7 @@ export const getManifests = async () => {
   const subdomain = "backend-tumeplay";
   const ciEnv = environments(process.env);
   const [persistentVolumeClaim] = getAzureProjectVolume();
-  const version = ciEnv.isPreProduction ? "preprod" : ciEnv.tag || `sha-${ciEnv.sha}`;
+  const version = ciEnv.isPreProduction ? `preprod-${ciEnv.sha}` : ciEnv.tag || `sha-${ciEnv.sha}`;
 
   const uploadsVolume = new Volume({
     persistentVolumeClaim: { claimName: persistentVolumeClaim.metadata!.name! },

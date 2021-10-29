@@ -12,7 +12,7 @@ export default async () => {
   const subdomain = "bo-tumeplay";
   const ciEnv = environments(process.env);
   const subDomainPrefix = (!ciEnv.isProduction && `bo-`) || undefined;
-  const version = ciEnv.isPreProduction ? "preprod" : ciEnv.tag || `sha-${ciEnv.sha}`;
+  const version = ciEnv.isPreProduction ? `preprod-${ciEnv.sha}` : ciEnv.tag || `sha-${ciEnv.sha}`;
   const image = `ghcr.io/socialgouv/tumeplay/dashboard:${version}`;
 
   const manifests = await create("dashboard", {
