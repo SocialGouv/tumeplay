@@ -133,7 +133,7 @@ const colissimoTmpPdf = async (orders, promises) => {
       gridItems = gridItems + (`
                           <div style="${gridItemStyle}">
                             <span style="display: block; padding-top: 10px;">${order.name.toUpperCase()}</span>
-                            <span>${order.address.toUpperCase()}${order.address_more ? ', ' + order.address_more.toUpperCase() : ''}</span><br><br>
+                            <span>${order.address.toUpperCase()}${(order.address_more && order.address_more !== null) ? ', ' + order.address_more.toUpperCase() : ''}</span><br><br>
 														<span>${order.address_zipcode} ${order.address_city && order.address_city.toUpperCase()}</span><br>
                             <span>${order.phone}</span>
                          </div>
