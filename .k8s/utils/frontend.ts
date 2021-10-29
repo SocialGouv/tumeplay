@@ -12,7 +12,7 @@ import { getManifests as getBackendManifests } from "../components/backend";
 export default async (name: string) => {
   const probesPath = "/";
   const ciEnv = environments(process.env);
-  const version = ciEnv.isPreProduction ? "preprod" : ciEnv.tag || `sha-${ciEnv.sha}`;
+  const version = ciEnv.isPreProduction ? `preprod-${ciEnv.sha}` : ciEnv.tag || `sha-${ciEnv.sha}`;
 
   const podProbes = ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
     (probes, probe) => ({
