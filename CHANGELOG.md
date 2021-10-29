@@ -1,3 +1,10 @@
+## [1.21.2](https://github.com/SocialGouv/Tumeplay/compare/v1.21.1...v1.21.2) (2021-10-29)
+
+
+### Bug Fixes
+
+* **cat:** address_more null ([c8a0615](https://github.com/SocialGouv/Tumeplay/commit/c8a06159f84547d72a9567a61cb55a8d01783290))
+
 ## [1.21.1](https://github.com/SocialGouv/Tumeplay/compare/v1.21.0...v1.21.1) (2021-10-28)
 
 
