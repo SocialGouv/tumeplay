@@ -325,6 +325,10 @@ module.exports = {
         }
         if(ctx.request.body.email) {
           strapi.log.info('SENDING EMAIL TO : ', entity.email, ' - ORDER NUMBER ', entity.id)
+					
+					if (!referent.openingHours)
+						referent.openingHours = {}
+
           await strapi.plugins['email'].services.email.sendTemplatedEmail(
             {
               to: entity.email
