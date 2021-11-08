@@ -1,3 +1,10 @@
+## [1.21.8](https://github.com/SocialGouv/Tumeplay/compare/v1.21.7...v1.21.8) (2021-11-08)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** init request other orders ([352bc2f](https://github.com/SocialGouv/Tumeplay/commit/352bc2f655792475d55d9863ee206c1db14246ec))
+
 ## [1.21.7](https://github.com/SocialGouv/Tumeplay/compare/v1.21.6...v1.21.7) (2021-11-08)
 
 
