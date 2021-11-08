@@ -23,7 +23,6 @@ const OrdersLogistics = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [currentOrder, setCurrentOrder] = useState({})
   const [numberPerPage, setNumberPerPage] = useState(10)
-  const [pageItems, setPageItems] = useState([])
   const [orders, setOrders] = useState([])
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [boxes, setBoxes] = useState([])
@@ -45,7 +44,7 @@ const OrdersLogistics = () => {
      {name: "Référent", fieldName: 'referent_name'},
      {name: "Actions", fieldName: 'actions'}
     ],
-    items: pageItems
+    items: orders
   }
 
   const dropdownOptions = ['5', '10', '50', '100', {value: orders.length, label: 'Tout'}]
