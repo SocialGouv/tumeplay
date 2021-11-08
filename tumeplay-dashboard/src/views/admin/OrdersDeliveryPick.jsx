@@ -22,7 +22,7 @@ const OrdersLogistics = () => {
 	const [count, setCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [currentOrder, setCurrentOrder] = useState({})
-  const [numberPerPage, setNumberPerPage] = useState(50)
+  const [numberPerPage, setNumberPerPage] = useState(10)
   const [pageItems, setPageItems] = useState([])
   const [orders, setOrders] = useState([])
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
@@ -65,11 +65,13 @@ const OrdersLogistics = () => {
 	}
 	
   const retrieveOrders = async (params) => {
-    let response = await OrdersAPI.countDeliveryOrders(token, params);
-    setCount(response.data)
-    
-		response = await ReferentAPI.findOne(token, {id: user.referent})
+		let response = await ReferentAPI.findOne(token, {id: user.referent})
 		const referent = response.data
+
+    response = await OrdersAPI.countDeliveryOrders(token, Object.assign({
+			environnement: referent.environnement.id
+		}, params));
+    setCount(response.data)
 
 		response = await OrdersAPI.getDeliveryOrders(
 			token, 
