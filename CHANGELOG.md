@@ -1,3 +1,10 @@
+## [1.21.7](https://github.com/SocialGouv/Tumeplay/compare/v1.21.6...v1.21.7) (2021-11-08)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** do not trigger refresh on orders ([0c37671](https://github.com/SocialGouv/Tumeplay/commit/0c376713c9a1f073a034ef1d3fabe65dea41350b))
+
 ## [1.21.6](https://github.com/SocialGouv/Tumeplay/compare/v1.21.5...v1.21.6) (2021-11-08)
 
 
