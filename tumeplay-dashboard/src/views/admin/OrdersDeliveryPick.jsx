@@ -170,9 +170,7 @@ const OrdersLogistics = () => {
 
 
 	useEffect(() => {
-		const offset = (currentPage - 1) * numberPerPage;
-		let tmpFiltered = orders.slice(offset, offset + numberPerPage)
-		setPageItems([...tmpFiltered])
+		retrieveOrders(defaultParams)
 		setTmpSelectedItems([])
   }, [orders, currentPage, numberPerPage])
 	
