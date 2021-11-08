@@ -1,3 +1,10 @@
+## [1.21.6](https://github.com/SocialGouv/Tumeplay/compare/v1.21.5...v1.21.6) (2021-11-08)
+
+
+### Bug Fixes
+
+* **dashboard-referent:** retrieve orders on page change ([9a2cf53](https://github.com/SocialGouv/Tumeplay/commit/9a2cf53eaeb28f4eacc2fd255e8c859425122c33))
+
 ## [1.21.5](https://github.com/SocialGouv/Tumeplay/compare/v1.21.4...v1.21.5) (2021-11-08)
 
 
