@@ -172,7 +172,7 @@ const OrdersLogistics = () => {
 	useEffect(() => {
 		retrieveOrders(defaultParams)
 		setTmpSelectedItems([])
-  }, [orders, currentPage, numberPerPage])
+  }, [currentPage, numberPerPage])
 	
 	return(
 		<>
