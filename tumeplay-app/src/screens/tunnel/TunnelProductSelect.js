@@ -19,12 +19,12 @@ import useIsMounted from '../../hooks/isMounted';
 import autoScrollToTop from '../../hooks/autoScrollToTop';
 import {useQuery} from '@apollo/client';
 import {GET_BOXES, GET_BOX_MESURES} from '../../services/api/boxes';
-import _ from 'lodash'
+import _ from 'lodash';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 TunnelProductSelect.propTypes = {
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 };
 export default function TunnelProductSelect(props) {
   const [selectedItem, setSelectedItem] = useState({});
@@ -33,19 +33,31 @@ export default function TunnelProductSelect(props) {
   const [showModal, setShowModal] = useState(false);
   const [showNotEnoughModal, setShowNotEnoughModal] = useState(false);
   const [showConflictModal, setShowConflictModal] = useState(false);
-  const [showMondialRelayErrorModal, setShowMondialRelayErrorModal] = useState(false);
+  const [showMondialRelayErrorModal, setShowMondialRelayErrorModal] = useState(
+    false,
+  );
   const isMounted = useIsMounted();
   const neededTokens = 1000;
 
   autoScrollToTop(props);
 
-  const error = _.get(props.navigation, 'state.params.error', null)
+  const error = _.get(props.navigation, 'state.params.error', null);
 
   const {data: box, loading, refetch: refetchBoxes} = useQuery(GET_BOXES);
-  const {data: boxes_sur_mesure, loading2, refetch: refetchBoxMesure} = useQuery(GET_BOX_MESURES);
+  const {
+    data: boxes_sur_mesure,
+    loading2,
+    refetch: refetchBoxMesure,
+  } = useQuery(GET_BOX_MESURES);
 
   const fetchAllBoxes = () => {
-    if (REACT_APP_ZONE === 'guyane' && !loading && box && !loading2 && boxes_sur_mesure) {
+    if (
+      REACT_APP_ZONE === 'guyane' &&
+      !loading &&
+      box &&
+      !loading2 &&
+      boxes_sur_mesure
+    ) {
       const boxes = box.boxes;
       setLocalBoxs(
         boxes_sur_mesure.boxSurMesure !== null
@@ -55,9 +67,9 @@ export default function TunnelProductSelect(props) {
     } else if (!loading && box && !loading2 && boxes_sur_mesure) {
       const boxes = box.boxes;
       const allBoxes = [...boxes];
-      setLocalBoxs(allBoxes)
+      setLocalBoxs(allBoxes);
     }
-  }
+  };
 
   useEffect(() => {
     if (error) {
@@ -74,14 +86,13 @@ export default function TunnelProductSelect(props) {
           break;
       }
 
-      props.navigation.state.params.error = null
+      props.navigation.state.params.error = null;
     }
-  }, [error])
+  }, [error]);
 
   useEffect(() => {
     fetchAllBoxes();
   }, [box, boxes_sur_mesure]);
-
 
   async function _onBoxClicked(selectedItem) {
     const _tokens = await UserService.getTokensAmount();
@@ -109,7 +120,6 @@ export default function TunnelProductSelect(props) {
     />
   ));
 
-
   const ConflictBoxModal = forwardRef(() => (
     <ProductConflictModal
       showModal={showConflictModal}
@@ -124,12 +134,23 @@ export default function TunnelProductSelect(props) {
     />
   ));
 
+  //For A/B Testing purpose only
+  const FilteredItemByPath = () => {
+    if (UserService.localUser.path === 'B') {
+      //ICI PENSER A FAIRE LES CASE PAR BOX => PAR CONTRE PAS DE BOX NUM...
+      console.log(selectedItem);
+      return selectedItem;
+    } else {
+      return selectedItem;
+    }
+  };
+
   const ForwardedBoxModal = forwardRef(() => (
     <ProductModal
       navigation={props.navigation}
       onOrder={_onOrder}
       showModal={showModal}
-      item={selectedItem}
+      item={FilteredItemByPath()}
       onClose={_toggleModal}
     />
   ));
@@ -142,7 +163,7 @@ export default function TunnelProductSelect(props) {
 
       props.navigation.navigate('TunnelDeliverySelect', {
         selectedItem: selectedItem,
-        selectedProducts: selectedProducts
+        selectedProducts: selectedProducts,
       });
     }
   }

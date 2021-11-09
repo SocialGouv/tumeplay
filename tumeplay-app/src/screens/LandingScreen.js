@@ -14,9 +14,6 @@ import ProductErrorModal from './components/tunnel/ProductErrorModal';
 
 import CustomFooter from './CustomFooter';
 import Styles from '../styles/Styles';
-
-import UserService from '../services/User';
-
 import Tracking from '../services/Tracking';
 import {GET_THEMES, GET_SOSTHEME} from '../services/api/themes';
 import {useQuery} from '@apollo/client';
@@ -28,6 +25,7 @@ LandingScreen.propTypes = {
 };
 export default function LandingScreen(props) {
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [parcour, setParcour] = useState();
 
   const isMounted = useIsMounted();
 
@@ -42,28 +40,12 @@ export default function LandingScreen(props) {
     bottomTitle2: 'Échange avec un professionnel',
   };
 
-  // useEffect(() => {
-  //   async function _fetchUserOrRegister() {
-  //     if (isMounted.current) {
-  //       const uniqId = await UserService.getUniqueId();
-
-  //       if (uniqId !== undefined && uniqId) {
-	// 				// const {token} = await RemoteApi.registerUser(uniqId);
-
-  //         // if (token) {
-  //         //   await UserService.setJWT(token);
-  //         // } else {
-  //         //   _toggleErrorModal();
-  //         // }
-  //       }
-  //     }
-  //   }
-  //   _fetchUserOrRegister();
-  // }, [_toggleErrorModal, isMounted]);
-
   function _onSelectedTheme(selectedTheme) {
     Tracking.themeSelected(selectedTheme);
-    props.navigation.navigate('ContentScreen', {selectedTheme: selectedTheme});
+    props.navigation.navigate('ContentScreen', {
+      selectedTheme: selectedTheme,
+      parcour: parcour,
+    });
   }
 
   const {data, loading} = useQuery(GET_SOSTHEME);

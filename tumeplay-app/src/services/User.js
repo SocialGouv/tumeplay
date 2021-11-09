@@ -286,7 +286,6 @@ const User = {
         if (localUser) {
           return localUser.passedOnBoarding !== undefined;
         }
-
         return false;
       } else {
         return false;
@@ -448,6 +447,20 @@ const User = {
       User.localHmac = hmac;
 
       await Storage.set(User.localHmacKey, hmac);
+    }
+  },
+  setPath: async path => {
+    try {
+      if (!User.localUser) {
+        await User.load();
+      }
+      if (User.localUser) {
+        User.localUser.path = path;
+        await User.save();
+        return User.localUser.path;
+      }
+    } catch (e) {
+      throw Error(e);
     }
   },
 };
