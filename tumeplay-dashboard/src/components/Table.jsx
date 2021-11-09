@@ -30,12 +30,12 @@ const Table = ({dataToDisplay, handleSpecificSelection, handleSelectAll, title, 
 				item ?
 					<>
 						<FontAwesomeIcon icon={faPaperPlane} color="green" />
-						<span className="ml-2">{fieldName === 'sent' && 'Commande traitée'}{fieldName === 'received' && 'Distrbuée'}</span>
+						<span className="ml-2">{fieldName === 'sent' && 'Commande traitée'}{fieldName === 'received' && 'Distribuée'}</span>
 					</>
 					:
 					<>
 						<FontAwesomeIcon icon={faTimes} color='red' />
-						<span className="ml-2">{fieldName === 'sent' && 'Commande non traitée'}{fieldName === 'received' && 'Non distrbuée'}</span>
+						<span className="ml-2">{fieldName === 'sent' && 'Commande non traitée'}{fieldName === 'received' && 'Non distribuée'}</span>
 					</>
 			)
     }
