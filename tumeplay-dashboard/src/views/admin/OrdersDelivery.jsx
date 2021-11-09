@@ -34,7 +34,8 @@ const OrdersLogistics = () => {
   const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
 
 	const defaultParams = {
-		referent: user.referent
+		referent: user.referent,
+		_sort: 'created_at:DESC'
 	}
 
   const dataToDisplay = {
