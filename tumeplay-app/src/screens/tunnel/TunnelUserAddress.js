@@ -5,12 +5,11 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-  Picker
+  Picker,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import openGeocoder from 'node-open-geocoder';
-import _ from "lodash";
-
+import _ from 'lodash';
 
 import Colors from '../../styles/Color';
 import Styles from '../../styles/Styles';
@@ -96,7 +95,7 @@ export default function TunnelUserAddress(props) {
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
-    setInvalidAddress(false)
+    setInvalidAddress(false);
     if (props.navigation.state.params.userAdress) {
       const userAdress = props.navigation.state.params.userAdress;
       const newAdress = {
@@ -115,14 +114,20 @@ export default function TunnelUserAddress(props) {
   }, [isMounted, props.navigation.state.params.userAdress]);
 
   async function _validateAddressBeforeGoto() {
-    const response = await fetch('https://geo.api.gouv.fr/communes?codePostal=' + localAdress.zipCode)
+    const response = await fetch(
+      'https://geo.api.gouv.fr/communes?codePostal=' + localAdress.zipCode,
+    );
     const json_response = await response.json();
     if (json_response && json_response[0]) {
-      const codeDept = json_response[0].codeDepartement
-      const codeRegion = json_response[0].codeRegion
+      const codeDept = json_response[0].codeDepartement;
+      const codeRegion = json_response[0].codeRegion;
 
-      const responseDept = await fetch('https://geo.api.gouv.fr/departements/' + codeDept)
-      const responseRegion = await fetch('https://geo.api.gouv.fr/regions/' + codeRegion)
+      const responseDept = await fetch(
+        'https://geo.api.gouv.fr/departements/' + codeDept,
+      );
+      const responseRegion = await fetch(
+        'https://geo.api.gouv.fr/regions/' + codeRegion,
+      );
 
       const json_dept = await responseDept.json();
       const json_region = await responseRegion.json();
@@ -162,15 +167,15 @@ export default function TunnelUserAddress(props) {
       }
     }
 
-		if (deliveryType.includes('referent')) {
-			if (localAdress.phoneNumber !== '') {
+    if (deliveryType.includes('referent')) {
+      if (localAdress.phoneNumber !== '') {
         if (!phoneTest.test(localAdress.phoneNumber)) {
           checkedIsValid.phoneNumber = CustomTextInput.fieldStatus.INVALID;
           checkedIsValid.phoneNumberWrongFormat = true;
           isValid = false;
         }
       }
-		}
+    }
 
     if (deliveryType === 'home') {
       if (localAdress.address === '') {
@@ -269,8 +274,8 @@ export default function TunnelUserAddress(props) {
   }
 
   async function _handleZipCode(zipCode) {
-    localAdress['city'] = ''
-    setCities([])
+    localAdress['city'] = '';
+    setCities([]);
     const localValue = zipCode.replace(/[^0-9]/g, '');
 
     if (!isNaN(localValue)) {
@@ -278,14 +283,14 @@ export default function TunnelUserAddress(props) {
         const _foundCities = await AddressValidator.validateZipCodeLocality(
           localValue,
         );
-        setCities(_foundCities.map(city => city.properties))
-        if(_foundCities[0]){
-          localAdress["city"] = _foundCities[0].properties.label
+        setCities(_foundCities.map(city => city.properties));
+        if (_foundCities[0]) {
+          localAdress['city'] = _foundCities[0].properties.label;
         }
       }
-      localAdress['zipCode'] = localValue
+      localAdress['zipCode'] = localValue;
     }
-    setLocalAdress(localAdress)
+    setLocalAdress(localAdress);
   }
 
   function _handleChange(name, inputValue) {
@@ -336,7 +341,7 @@ export default function TunnelUserAddress(props) {
           inputPlaceholder="Ton numéro de téléphone"
           onChangeText={val => _handleChange('phoneNumber', val)}
           isValid={localValid.phoneNumber}
-					isRequired={false}
+          isRequired={false}
           currentValue={localAdress.phoneNumber}
           phoneNumberWrongFormat={localValid.phoneNumberWrongFormat}
           name="phoneNumber"
@@ -355,17 +360,16 @@ export default function TunnelUserAddress(props) {
         </>
       )}
 
-
-			<CustomTextInput
-				inputLabel="Adresse e-mail"
-				isRequired={!deliveryType.includes('referent')}
-				inputPlaceholder="Ton adresse e-mail"
-				onChangeText={val => _handleChange('emailAdress', val)}
-				isValid={localValid.emailAdress}
-				emailAdressWrongFormat={localValid.emailAdressWrongFormat}
-				currentValue={localAdress.emailAdress}
-				name="emailAdress"
-			/>
+      <CustomTextInput
+        inputLabel="Adresse e-mail"
+        isRequired={!deliveryType.includes('referent')}
+        inputPlaceholder="Ton adresse e-mail"
+        onChangeText={val => _handleChange('emailAdress', val)}
+        isValid={localValid.emailAdress}
+        emailAdressWrongFormat={localValid.emailAdressWrongFormat}
+        currentValue={localAdress.emailAdress}
+        name="emailAdress"
+      />
 
       {deliveryType === 'home' && (
         <CustomTextInput
@@ -407,25 +411,32 @@ export default function TunnelUserAddress(props) {
             filterNumbers={true}
             name="zipCode"
           />
-          {
-            cities.length > 0 && (
-              <>
-                <Text style={[Styles.labelText, {marginTop: "25px"}]}>
-                  Ville
-                </Text>
-                <Picker selectedValue={localAdress.city}
-                        style={[TunnelUserAdressStyle.requiredFieldsWrapper, {borderRadius: "5px", borderColor: Colors.mainButton, marginTop: 0}]}
-                        onValueChange={val => _handleChange('city', val)}
-                >
-                  {cities.map((city, index) => {
-                    return(
-                      <Picker.Item key={index} label={city.label} value={city.label} />
-                    )
-                  })}
+          {cities.length > 0 && (
+            <>
+              <Text style={[Styles.labelText, {marginTop: '25px'}]}>Ville</Text>
+              <Picker
+                selectedValue={localAdress.city}
+                style={[
+                  TunnelUserAdressStyle.requiredFieldsWrapper,
+                  {
+                    borderRadius: '5px',
+                    borderColor: Colors.mainButton,
+                    marginTop: 0,
+                  },
+                ]}
+                onValueChange={val => _handleChange('city', val)}>
+                {cities.map((city, index) => {
+                  return (
+                    <Picker.Item
+                      key={index}
+                      label={city.label}
+                      value={city.label}
+                    />
+                  );
+                })}
               </Picker>
-              </>
-            )
-          }
+            </>
+          )}
           {/* <CustomTextInput
             inputLabel="Ville"
             inputPlaceholder="Ta ville"
@@ -436,7 +447,7 @@ export default function TunnelUserAddress(props) {
           /> */}
         </View>
       )}
-      {(deliveryType === 'home' && invalidAddress) && (
+      {deliveryType === 'home' && invalidAddress && (
         <View style={TunnelUserAdressStyle.requiredFieldsWrapper}>
           <View style={{flex: 1}}>
             <Text
@@ -450,7 +461,7 @@ export default function TunnelUserAddress(props) {
           </View>
         </View>
       )}
-      {(deliveryType === 'home' && cities.length > 0 && invalidZipCode) && (
+      {deliveryType === 'home' && cities.length > 0 && invalidZipCode && (
         <View style={TunnelUserAdressStyle.requiredFieldsWrapper}>
           <View style={{flex: 1}}>
             <Text

@@ -94,11 +94,70 @@ export default function TunnelProductSelect(props) {
     fetchAllBoxes();
   }, [box, boxes_sur_mesure]);
 
+  //For A/B Testing purpose only
+  const filteredItemByPath = selectedItem => {
+    if (UserService.localUser.path === 'B') {
+      let tmpSelectedITem = {...selectedItem};
+      switch (tmpSelectedITem.number) {
+        case 1:
+          tmpSelectedITem.ABProduct = [
+            {title: 'Pochette personnalisée (2 Pasante + 1 XL)', quantity: 2},
+            {title: 'Reglette "Mesure ton penis"', quantity: 3},
+            {title: "Dosettes de lubrifiant à base d'eau", quantity: 4},
+            {
+              title: 'Livret pour partir à la découverte du corps',
+              quantity: 5,
+            },
+            {title: 'Tuto Préservatif', quantity: 6},
+          ];
+          break;
+        case 2:
+          tmpSelectedITem.ABProduct = [
+            {title: 'Pochette personnalisée (3 Pasante)', quantity: 2},
+            {title: "Dosettes de lubrifiant à base d'eau", quantity: 3},
+            {
+              title:
+                'Jeu de carte "Vrai/faux" sur le consentement et les droits',
+              quantity: 4,
+            },
+            {
+              title: "Affiche j'aime/j'aime pas",
+              quantity: 5,
+            },
+          ];
+          break;
+        case 3:
+          tmpSelectedITem.ABProduct = [
+            {
+              title:
+                'Boîte de 3 préservatifs externes à la texture perlée stimulante',
+              quantity: 2,
+            },
+            {title: "Dosettes de lubrifiant à base d'eau", quantity: 3},
+            {
+              title: 'Livret pour en savoir plus sur le sexe',
+              quantity: 4,
+            },
+            {
+              title: 'Affiche arbre décisionnel du consentement',
+              quantity: 5,
+            },
+          ];
+          break;
+        default:
+          break;
+      }
+      setSelectedItem({...tmpSelectedITem});
+    } else {
+      setSelectedItem(selectedItem);
+    }
+  };
+
   async function _onBoxClicked(selectedItem) {
     const _tokens = await UserService.getTokensAmount();
 
     if (_tokens >= neededTokens) {
-      setSelectedItem(selectedItem);
+      filteredItemByPath(selectedItem);
       setShowModal(true);
     } else {
       setShowNotEnoughModal(true);
@@ -134,23 +193,12 @@ export default function TunnelProductSelect(props) {
     />
   ));
 
-  //For A/B Testing purpose only
-  const FilteredItemByPath = () => {
-    if (UserService.localUser.path === 'B') {
-      //ICI PENSER A FAIRE LES CASE PAR BOX => PAR CONTRE PAS DE BOX NUM...
-      console.log(selectedItem);
-      return selectedItem;
-    } else {
-      return selectedItem;
-    }
-  };
-
   const ForwardedBoxModal = forwardRef(() => (
     <ProductModal
       navigation={props.navigation}
       onOrder={_onOrder}
       showModal={showModal}
-      item={FilteredItemByPath()}
+      item={selectedItem}
       onClose={_toggleModal}
     />
   ));

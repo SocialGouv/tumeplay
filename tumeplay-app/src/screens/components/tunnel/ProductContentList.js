@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
+import UserService from '../../../services/User';
 
 ProductContentList.propTypes = {
   item: PropTypes.object,
@@ -12,6 +13,8 @@ export default function ProductContentList(props) {
   const [productBox] = useState(props.item);
   const [customProducts] = useState(props.products);
   const [shortMode] = useState(props.shortMode);
+  //added for ABTesting
+  const ABtestingPath = UserService.localUser.path === 'B';
 
   function renderRow(key, itemQty, itemText) {
     const itemLabel = itemQty ? itemQty + ' ' + itemText : itemText;
@@ -24,17 +27,17 @@ export default function ProductContentList(props) {
       </View>
     );
   }
-
+  //modified for ABTesting purpose
   function _renderProductList(items) {
     if (items !== undefined) {
       return items.map((item, key) => {
         // When shortmode, it's a sub-sub-item
-        var itemText = item.produit.title;
+        var itemText = ABtestingPath ? item.title : item.produit.title;
         if (shortMode && typeof item.item !== 'undefined') {
           if (typeof item.produit.title !== 'undefined') {
-            itemText = item.produit.title;
+            itemText = ABtestingPath ? item.title : item.produit.title;
           } else {
-            itemText = item.produit.title;
+            itemText = ABtestingPath ? item.title : item.produit.title;
           }
         }
 
@@ -68,8 +71,14 @@ export default function ProductContentList(props) {
     _targetList =
       productBox.produits.length > 0 ? productBox.produits : customProducts;
   } else {
-    _targetList =
-      productBox.products.length > 0 ? productBox.products : customProducts;
+    //modified for ABTesting purpose
+    if (ABtestingPath) {
+      _targetList =
+        productBox.ABProduct.length > 0 ? productBox.ABProduct : customProducts;
+    } else {
+      _targetList =
+        productBox.products.length > 0 ? productBox.products : customProducts;
+    }
   }
 
   return _renderProductList(_targetList);

@@ -278,12 +278,9 @@ export default function TunnelCartSummary(props) {
                 TunnelCartSummaryStyle.subTitle,
                 TunnelCartSummaryStyle.emailAdress,
               ]}>
-              {deliveryType === "home" && (
-                userAdress.firstName + ' ' + userAdress.lastName
-              )}
-              {deliveryType === 'referent' && (
-                selectedReferent.name
-              )}
+              {deliveryType === 'home' &&
+                userAdress.firstName + ' ' + userAdress.lastName}
+              {deliveryType === 'referent' && selectedReferent.name}
             </Text>
             {deliveryType == 'home' && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
@@ -304,7 +301,8 @@ export default function TunnelCartSummary(props) {
                 {'\n'}
               </Text>
             )}
-            {(deliveryType == 'referent-metropole' || deliveryType === 'referent-guyane') && (
+            {(deliveryType == 'referent-metropole' ||
+              deliveryType === 'referent-guyane') && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
                 {selectedReferent.address}
                 {'\n'}
@@ -319,36 +317,36 @@ export default function TunnelCartSummary(props) {
       <Splitter />
 
       <View>
-			{
-					deliveryType.includes('referent') ?
-					<Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
-						Nous t&apos;informerons de l'avancée de ta commande aux coordonnées que tu nous as laissées
-					</Text>
-					:
-					<Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
-						Nous t&apos;enverrons un mail pour t&apos;informer de
-						l&apos;expédition de ta commande à :
-					</Text>
-				}
-        
-				{
-					userAdress.emailAdress ? (
-						<View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
-							<Image
-								style={TunnelCartSummaryStyle.pictureAndTextPicture}
-								source={require('../../assets/pictures/letterbox.png')}
-							/>
+        {deliveryType.includes('referent') ? (
+          <Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
+            Nous t&apos;informerons de l'avancée de ta commande aux coordonnées
+            que tu nous as laissées
+          </Text>
+        ) : (
+          <Text style={[TunnelCartSummaryStyle.subTitle, {marginBottom: 8}]}>
+            Nous t&apos;enverrons un mail pour t&apos;informer de
+            l&apos;expédition de ta commande à :
+          </Text>
+        )}
 
-							<Text
-								style={[
-									TunnelCartSummaryStyle.subTitle,
-									TunnelCartSummaryStyle.emailAdress,
-								]}>
-								{userAdress.emailAdress}
-							</Text>
-						</View>
-					) : <></>
-				}
+        {userAdress.emailAdress ? (
+          <View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
+            <Image
+              style={TunnelCartSummaryStyle.pictureAndTextPicture}
+              source={require('../../assets/pictures/letterbox.png')}
+            />
+
+            <Text
+              style={[
+                TunnelCartSummaryStyle.subTitle,
+                TunnelCartSummaryStyle.emailAdress,
+              ]}>
+              {userAdress.emailAdress}
+            </Text>
+          </View>
+        ) : (
+          <></>
+        )}
 
         {userAdress.phoneNumber ? (
           <View style={TunnelCartSummaryStyle.pictureAndTextWrapper}>
@@ -365,7 +363,9 @@ export default function TunnelCartSummary(props) {
               {userAdress.phoneNumber}
             </Text>
           </View>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
 
         <Splitter />
         <View style={{flexDirection: 'row'}}>
