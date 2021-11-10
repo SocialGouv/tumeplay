@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/SocialGouv/Tumeplay/compare/v1.21.9...v1.22.0) (2021-11-10)
+
+
+### Features
+
+* init A/B testing for scores divided by 2 & different products i… ([#230](https://github.com/SocialGouv/Tumeplay/issues/230)) ([272b5e7](https://github.com/SocialGouv/Tumeplay/commit/272b5e7ad1a20f5d933036912003d04c9036b5a5))
+
 ## [1.21.9](https://github.com/SocialGouv/Tumeplay/compare/v1.21.8...v1.21.9) (2021-11-09)
 
 
