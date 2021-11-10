@@ -8,6 +8,7 @@ export const GET_BOXES = gql`
       id
       title
       description
+      number
       available
       products {
         id

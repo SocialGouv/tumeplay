@@ -138,21 +138,26 @@ export default function TunnelDeliverySelect(props) {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-            style={{
-              flex: 1,
-              paddingTop: 2,
-              paddingBottom: 2,
-              width: '50%',
-              height: 60,
-              maxHeight: 60,
-              minHeight: 60,
-              alignSelf: 'center',
-            }}
-            onPress={() => _onDone('referent-metropole')}>
-            <View style={Styles.tunnelButton}>
-              <Text style={Styles.tunnelButtonText}>Chez un référent <Text style={Styles.tunnelButtonLongText}>- Nouvelle Aquitaine seulement</Text></Text>
-            </View>
-          </TouchableOpacity>
+              style={{
+                flex: 1,
+                paddingTop: 2,
+                paddingBottom: 2,
+                width: '50%',
+                height: 60,
+                maxHeight: 60,
+                minHeight: 60,
+                alignSelf: 'center',
+              }}
+              onPress={() => _onDone('referent-metropole')}>
+              <View style={Styles.tunnelButton}>
+                <Text style={Styles.tunnelButtonText}>
+                  Chez un référent{' '}
+                  <Text style={Styles.tunnelButtonLongText}>
+                    - Nouvelle Aquitaine seulement
+                  </Text>
+                </Text>
+              </View>
+            </TouchableOpacity>
           </>
         )}
         <Splitter />

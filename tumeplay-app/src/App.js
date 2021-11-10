@@ -7,6 +7,7 @@ import AppStack from './routes/routes';
 import Onboarding from './canvas/slider/Onboarding';
 
 import UserService from './services/User';
+import Tracking from './services/Tracking';
 
 import useIsMounted from './hooks/isMounted';
 
@@ -20,10 +21,16 @@ const App = () => {
   const isMounted = useIsMounted();
 
   useEffect(() => {
-
     async function _alreadyRegistered() {
       const _passedOnboarding = await UserService.hasPassedOnboarding();
-
+      let userID = await UserService.getUniqueId();
+      if (parseInt(userID, 16) % 2 === 0) {
+        UserService.setPath('A');
+        Tracking.questionPath('A');
+      } else {
+        UserService.setPath('B');
+        Tracking.questionPath('B');
+      }
       if (_passedOnboarding) {
         setShowRealApp(true);
       }
