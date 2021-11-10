@@ -25,7 +25,6 @@ LandingScreen.propTypes = {
 };
 export default function LandingScreen(props) {
   const [showErrorModal, setShowErrorModal] = useState(false);
-  const [parcour, setParcour] = useState();
 
   const isMounted = useIsMounted();
 
@@ -44,7 +43,6 @@ export default function LandingScreen(props) {
     Tracking.themeSelected(selectedTheme);
     props.navigation.navigate('ContentScreen', {
       selectedTheme: selectedTheme,
-      parcour: parcour,
     });
   }
 
