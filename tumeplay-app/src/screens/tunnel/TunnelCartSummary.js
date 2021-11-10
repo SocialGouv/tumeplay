@@ -16,6 +16,7 @@ import Colors from '../../styles/Color';
 import TunnelCartSummaryStyle from '../../styles/components/TunnelCartSummary';
 import OrdersAPI from '../../services/api/orders';
 import ContactsAPI from '../../services/api/contact';
+import Tracking from '../../services/Tracking';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -121,6 +122,7 @@ export default function TunnelCartSummary(props) {
           },
         ],
       };
+      Tracking.validateOrderButtonTriggered();
     }
     orderPost = await OrdersAPI.orderBoxes(requestBody);
     switch (orderPost.status) {

@@ -21,6 +21,7 @@ import CustomTextInput from '../components/tunnel/CustomTextInput';
 import useIsMounted from '../../hooks/isMounted';
 import AddressValidator from '../../services/AddressValidator';
 import MailValidator from '../../services/MailValidator';
+import Tracking from '../../services/Tracking';
 
 const zipCodeTest = /^[0-9]{5}$/;
 export const phoneTest = /^0[0-9]{9}$/;
@@ -135,6 +136,7 @@ export default function TunnelUserAddress(props) {
       localAdress['address_region'] = json_region.nom;
       localAdress['address_dept'] = json_dept.nom;
       localAdress['address_deptcode'] = json_dept.code;
+      Tracking.nextHomeDeliveryButtonTriggered();
       _gotoSummary();
     }
     setInvalidAddress(true);
@@ -234,6 +236,9 @@ export default function TunnelUserAddress(props) {
     if (deliveryType === 'home') {
       _validateAddressBeforeGoto();
     } else {
+      if (deliveryType === 'pickup') {
+        Tracking.nextPickupDeliveryButtonTriggered();
+      }
       _gotoSummary();
     }
   }
