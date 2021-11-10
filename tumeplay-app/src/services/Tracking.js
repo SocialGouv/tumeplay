@@ -28,6 +28,9 @@ const Tracking = {
     Tracking.trigger(['trackEvent', 'mobileApp', 'themeChosen', theme.value]);
   },
 
+  questionPath: path => {
+    Tracking.trigger(['trackEvent', 'mobileApp', path]);
+  },
   categorySelected: (theme, category) => {
     Tracking.trigger([
       'trackEvent',

@@ -57,11 +57,19 @@ export default function QuizzScreen(props) {
 
   const {data, loading} = useQuery(GET_POINTS);
   if (!loading) {
-    QuizService.setAnswersPoints(
-      data.parametre.nb_points_wrong_answer,
-      data.parametre.nb_points_right_answer,
-      data.parametre.nb_points_neutral_answer,
-    );
+    if (UserService.localUser.path === 'A') {
+      QuizService.setAnswersPoints(
+        data.parametre.nb_points_wrong_answer,
+        data.parametre.nb_points_right_answer,
+        data.parametre.nb_points_neutral_answer,
+      );
+    } else {
+      QuizService.setAnswersPoints(
+        data.parametre.nb_points_wrong_answer / 2,
+        data.parametre.nb_points_right_answer / 2,
+        data.parametre.nb_points_neutral_answer / 2,
+      );
+    }
   }
 
   function _answerQuestion(key) {
