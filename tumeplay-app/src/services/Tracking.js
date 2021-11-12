@@ -43,6 +43,27 @@ const Tracking = {
   knowMoreTriggered: (type, contentId) => {
     Tracking.trigger(['trackEvent', 'mobileApp', 'knowMore', type, contentId]);
   },
+  orderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'orderButton']);
+  },
+  homeDeliveryButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'homeDeliveryButton']);
+  },
+  pickupDeliveryButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'pickupDeliveryButton']);
+  },
+  referentDeliveryButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'referentDeliveryButton']);
+  },
+  nextPickupDeliveryButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'nextPickupDeliveryButton']);
+  },
+  nextHomeDeliveryButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'nextHomeDeliveryButton']);
+  },
+  validateOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'validateOrderButton']);
+  },
 
   questionAnswered: (questionId, timeNeeded) => {
     Tracking.trigger([
