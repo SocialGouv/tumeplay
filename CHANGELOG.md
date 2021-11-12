@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/SocialGouv/Tumeplay/compare/v1.22.0...v1.23.0) (2021-11-12)
+
+
+### Features
+
+* adding matomo trackers on funnel steps ([#233](https://github.com/SocialGouv/Tumeplay/issues/233)) ([81eaf63](https://github.com/SocialGouv/Tumeplay/commit/81eaf637005b3e5b55a558fdfac48b1347c324ce))
+
 # [1.22.0](https://github.com/SocialGouv/Tumeplay/compare/v1.21.9...v1.22.0) (2021-11-10)
 
 
