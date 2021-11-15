@@ -48,7 +48,7 @@ const createColissimoCsv = async (dirpath, today_7AM, orders, environnement_id) 
     orders.map((order) => {
       var box_number = _.get(order.content, '[0].box.number', null)
       if (box_number) return box_number
-    })    
+    })
   )
 
   let csvColissimoOrders = {}
@@ -79,14 +79,14 @@ const createColissimoCsv = async (dirpath, today_7AM, orders, environnement_id) 
         path: path,
         header: [
           {id: 'date', title: 'date'},
-          {id: 'id', title: 'id'}, 
-          {id: 'last_name', title: 'nom'}, 
+          {id: 'id', title: 'id'},
+          {id: 'last_name', title: 'nom'},
           {id: 'first_name', title: 'prenom'},
-          {id: 'box_number', title: 'numéro boite'}, 
-          {id: 'address', title: 'adresse'}, 
-          {id: 'address_more', title: 'comple'}, 
-          {id: 'address_zipcode', title: 'cp'}, 
-          {id: 'address_city', title: 'ville'}, 
+          {id: 'box_number', title: 'numéro boite'},
+          {id: 'address', title: 'adresse'},
+          {id: 'address_more', title: 'comple'},
+          {id: 'address_zipcode', title: 'cp'},
+          {id: 'address_city', title: 'ville'},
           {id: 'phone', title: 'tph'}
         ]
       });
@@ -112,7 +112,7 @@ const createMondialRelayCsv = async (dirpath, today_7AM, orders, environnement_i
     orders.map((order) => {
       var box_number = _.get(order.content, '[0].box.number', null)
       if (box_number) return box_number
-    })    
+    })
   )
 
   let csvMondialRelayOrders = {}
@@ -140,7 +140,7 @@ const createMondialRelayCsv = async (dirpath, today_7AM, orders, environnement_i
   for (const [number, boxOrders] of Object.entries(csvMondialRelayOrders)) {
     if (boxOrders.length > 0) {
       const path = dirpath + 'orders_mondial_relay_box_' + number + '_' + today_7AM.getTime() + '.csv'
-      const csvMondialRelayWriter = createCsvWriter({   
+      const csvMondialRelayWriter = createCsvWriter({
         path: path,
         header: [
           {id: 'date', title: 'Date'},
@@ -227,5 +227,44 @@ module.exports = {
     )
 
     strapi.log.info('EMAIL SENT / CRON OVER at ', new Date().toISOString())
+  },
+  '0 5 * * *': async () => {
+
+    let yesterday_7AM  = new Date();
+      yesterday_7AM.setDate(yesterday_7AM.getDate() - 1);
+      yesterday_7AM.setHours(5);
+      yesterday_7AM.setMinutes(0);
+      yesterday_7AM.setMilliseconds(0);
+
+    let today_7AM  = new Date();
+      today_7AM.setHours(5);
+      today_7AM.setMinutes(0);
+      today_7AM.setMilliseconds(0);
+
+    const cat_users = await strapi.query('user', 'users-permissions').find({'role.type': 'cat'})
+    const ordersColissimo = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'home', sent: false, _sort: 'created_at:desc'})
+    const ordersMondialRelay = await strapi.services.commande.find({created_at_gte: yesterday_7AM.getTime(), created_at_lt: today_7AM.getTime(), delivery: 'pickup', sent: false, _sort: 'created_at:desc'})
+
+    await cat_users.forEach((user) => {
+      const CAT_TEMPLATE = {
+      subject: `Tumeplay: ${ordersColissimo.length + ordersMondialRelay.length} nouvelle(s) commande(s) prête(s) à être traitées`,
+      text: `Bienvenue, pour rappel vous pouvez maintenant traiter les commandes ici :
+        https://bo-tumeplay.fabrique.social.gouv.fr/orders/box/1
+        Pour toutes informations complémentaires merci de contacter l'équipe Tumeplay
+      `,
+      html: `
+            <p>Bienvenue, pour rappel vous pouvez maintenant traiter les commandes ici :
+        https://bo-tumeplay.fabrique.social.gouv.fr/orders/box/1
+        Pour toutes informations complémentaires merci de contacter l'équipe Tumeplay </p>
+      `
+      }
+      strapi.plugins['email'].services.email.sendTemplatedEmail(
+        {
+          to: user.email
+        },
+        CAT_TEMPLATE
+      )
+    })
   }
+
 };
