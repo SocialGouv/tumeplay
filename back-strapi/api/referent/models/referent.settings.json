@@ -50,6 +50,9 @@
     "is_available": {
       "type": "boolean",
       "default": true
+    },
+    "region": {
+      "model": "regions"
     }
   }
 }

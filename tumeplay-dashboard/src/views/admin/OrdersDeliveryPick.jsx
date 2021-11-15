@@ -68,6 +68,10 @@ const OrdersLogistics = () => {
 		let response = await ReferentAPI.findOne(token, {id: user.referent})
 		const referent = response.data
 
+		if (referent.region) {
+			params.address_region = referent.region.name
+		}
+
     response = await OrdersAPI.countDeliveryOrders(token, Object.assign({
 			environnement: referent.environnement.id
 		}, params));
