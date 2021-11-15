@@ -18,6 +18,7 @@ import Colors from '../../../styles/Color';
 
 import ReactHowler from 'react-howler';
 import CustomTouchableOpacity from './CustomTouchableOpacity';
+import Tracking from '../../../services/Tracking';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -93,12 +94,19 @@ export default function ExpandableText(props) {
     setShowAllText(props.isExpanded);
   }, [props.isExpanded]);
 
+  const setMatomoTrackers = node => {
+    if (node.dataset === 'content-link') {
+      Tracking.externalLink(node.href);
+    }
+  };
+
   function renderNode(node, index, siblings, parent, defaultRenderer) {
     if (node.name === 'a') {
       return (
         <TextLink
           key={index}
           style={[cardStyle.readMore, {...props.readMoreStyle}]}
+          onPress={() => setMatomoTrackers(node.attribs)}
           targetUrl={node.attribs.href}>
           {defaultRenderer(node.children, parent)}
         </TextLink>

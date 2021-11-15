@@ -18,7 +18,7 @@ import ModalCloseButton from './components/global/ModalCloseButton';
 import UserService from '../services/User';
 import Tracking from '../services/Tracking';
 import QuizzService from '../services/Quiz';
-import _ from "lodash"
+import _ from 'lodash';
 
 import autoScrollToTop from '../hooks/autoScrollToTop';
 import useIsMounted from '../hooks/isMounted';
@@ -42,8 +42,8 @@ export default function ContentScreen(props) {
   const [isAge25ModalVisible, setIsAge25ModalVisible] = useState(false);
   const [isResultModalVisible, setIsResultModalVisible] = useState(false);
   const [isBadgeModalVisible, setIsBadgeModalVisible] = useState(false);
-	const [startQuizTimestamp, setStartQuizTimestamp] = useState(false);
-	const [countScore, setCountScore] = useState(0);
+  const [startQuizTimestamp, setStartQuizTimestamp] = useState(false);
+  const [countScore, setCountScore] = useState(0);
 
   const [isAge25, setIsAge25] = useState(null);
 
@@ -93,9 +93,9 @@ export default function ContentScreen(props) {
     }
   }, [isMounted]);
 
-	const incrementScore = () => {
-		setCountScore(countScore + 1);
-	};
+  const incrementScore = () => {
+    setCountScore(countScore + 1);
+  };
 
   const willBlurSubscription = props.navigation.addListener('willBlur', () => {
     if (isQuizzButtonVisible) {
@@ -115,7 +115,7 @@ export default function ContentScreen(props) {
         const Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
         let text = content.text.replace(
           Rexp,
-          "<a href='$1' target='_blank'>$1</a>",
+          `<a href='$1' dataset="content-link" target='_blank'>$1</a>`,
         );
         text = text.replaceAll('.</a>', '</a>.');
         text = text.replaceAll(".' target='_blank'", "' target='_blank'");
@@ -166,8 +166,8 @@ export default function ContentScreen(props) {
     } else {
       // Step 3
       Tracking.quizStarted();
-			setCountScore(0);
-			setStartQuizTimestamp(Math.floor(Date.now() / 1000));
+      setCountScore(0);
+      setStartQuizTimestamp(Math.floor(Date.now() / 1000));
 
       _shuffleQuestions();
       _toggleQuizzModal();
@@ -184,7 +184,7 @@ export default function ContentScreen(props) {
     return (
       <QuizzScreen
         onFinishedQuizz={_onFinishedQuizz}
-				incrementScore={incrementScore}
+        incrementScore={incrementScore}
         questions={localQuestions}
       />
     );
@@ -214,15 +214,22 @@ export default function ContentScreen(props) {
   }
 
   function _onFinishedQuizz() {
-    const quizTimerDifference = Math.floor(Date.now() / 1000) - startQuizTimestamp;
+    const quizTimerDifference =
+      Math.floor(Date.now() / 1000) - startQuizTimestamp;
     Tracking.quizEnded(quizTimerDifference);
-
 
     const localStorage = window.localStorage.getItem('local.user');
     const JsonObject = JSON.parse(localStorage);
     const userID = JsonObject.uniqueId;
     const iteration = 1;
-    QuizTimesAPI.publishQuizTime(userID, quizTimerDifference, countScore, isAge25 ? '+25' : '-25', iteration, selectedTheme.id)
+    QuizTimesAPI.publishQuizTime(
+      userID,
+      quizTimerDifference,
+      countScore,
+      isAge25 ? '+25' : '-25',
+      iteration,
+      selectedTheme.id,
+    );
 
     _toggleQuizzModal();
     setNeedResultModal(true);
@@ -239,7 +246,7 @@ export default function ContentScreen(props) {
     setIsBadgeModalVisible(false);
     setIsResultModalVisible(false);
     if (hideQuizzModal) {
-			setCountScore(0);
+      setCountScore(0);
       _toggleQuizzModal();
     }
   }
@@ -268,7 +275,7 @@ export default function ContentScreen(props) {
     _toggleMoreThan25YearsModal();
     _shuffleQuestions();
     _toggleQuizzModal();
-		setStartQuizTimestamp(Math.floor(Date.now() / 1000));
+    setStartQuizTimestamp(Math.floor(Date.now() / 1000));
     Tracking.quizStarted();
   }
 

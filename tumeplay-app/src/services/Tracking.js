@@ -64,7 +64,6 @@ const Tracking = {
   validateOrderButtonTriggered: () => {
     Tracking.trigger(['trackEvent', 'mobileApp', 'validateOrderButton']);
   },
-
   questionAnswered: (questionId, timeNeeded) => {
     Tracking.trigger([
       'trackEvent',
@@ -73,6 +72,9 @@ const Tracking = {
       questionId,
       timeNeeded,
     ]);
+  },
+  externalLink: externalLink => {
+    Tracking.trigger(['trackEvent', 'mobileApp', `${externalLink}`]);
   },
 };
 export default Tracking;

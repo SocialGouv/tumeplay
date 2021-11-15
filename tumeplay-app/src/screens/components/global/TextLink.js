@@ -21,7 +21,7 @@ export default function TextLink(props) {
 
   if (Platform.OS === 'web') {
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={props.onPress}>
         <View>
           <Text
             href={props.targetUrl}
