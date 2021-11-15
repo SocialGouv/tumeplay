@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/SocialGouv/Tumeplay/compare/v1.23.0...v1.24.0) (2021-11-15)
+
+
+### Features
+
+* tracking each external link on content card ([#236](https://github.com/SocialGouv/Tumeplay/issues/236)) ([5334dd6](https://github.com/SocialGouv/Tumeplay/commit/5334dd6d275076ce8bbe0a85aa1445a3e08d8ecf))
+
 # [1.23.0](https://github.com/SocialGouv/Tumeplay/compare/v1.22.0...v1.23.0) (2021-11-12)
 
 
