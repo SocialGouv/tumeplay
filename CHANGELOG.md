@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/SocialGouv/Tumeplay/compare/v1.25.0...v1.26.0) (2021-11-15)
+
+
+### Features
+
+* mailing CAT ([#238](https://github.com/SocialGouv/Tumeplay/issues/238)) ([99df341](https://github.com/SocialGouv/Tumeplay/commit/99df3417261d6a295c3eb0e355990c9b6f48ed18))
+
 # [1.25.0](https://github.com/SocialGouv/Tumeplay/compare/v1.24.0...v1.25.0) (2021-11-15)
 
 
