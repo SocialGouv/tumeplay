@@ -69,7 +69,7 @@ const OrdersLogistics = () => {
 		const referent = response.data
 
 		if (referent.region) {
-			params.address_region = referent.region.name
+			params['referent.region.id'] = referent.region.id
 		}
 
     response = await OrdersAPI.countDeliveryOrders(token, Object.assign({
