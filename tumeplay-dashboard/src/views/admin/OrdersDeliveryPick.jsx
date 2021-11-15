@@ -9,7 +9,7 @@ import ConfirmModal from '../../components/ui/ConfirmModal';
 import UserDataModal from '../../components/ui/UserDataModal';
 import UpdateOrderContentModal from '../../components/ui/UpdateOrderContentModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faUndo } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
 import { confirmAlert } from 'react-confirm-alert';
@@ -27,7 +27,6 @@ const OrdersLogistics = () => {
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [boxes, setBoxes] = useState([])
   const [showConfirm, setShowConfirm] = useState(false)
-  const [showUserData, setShowUserData] = useState(false)
   const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
 
 	const defaultParams = {
@@ -108,6 +107,12 @@ const OrdersLogistics = () => {
 						});
 					}} className="tmp-button">
 						<FontAwesomeIcon icon={faUndo} color="white" className="mr-2" /> Récupérer la commande
+					</button>
+					<button onClick={() => {
+						setCurrentOrder(order)
+						setShowUpdateOrderContent(true)
+					}} className="tmp-button">
+						<FontAwesomeIcon icon={faEye} color="white" className="mr-2" /> Voir
 					</button>
 				</div>
 			)
@@ -190,21 +195,11 @@ const OrdersLogistics = () => {
 						<ConfirmModal setShow={setShowConfirm} />
 					}
 				</div>
-				<div className={`fixed ${showUserData ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
-				>
-					{
-						showUserData  &&
-						<UserDataModal closeModal={() => {
-							setShowUserData(false)
-							retrieveOrders(defaultParams)
-						}} boxes={boxes} order={currentOrder} />
-					}
-				</div>
 				<div className={`fixed ${showUpdateOrderContent ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
 				>
 					{
 						showUpdateOrderContent  &&
-						<UpdateOrderContentModal closeModal={() => {
+						<UpdateOrderContentModal readOnly closeModal={() => {
 							setShowUpdateOrderContent(false)
 							retrieveOrders(defaultParams)
 						}} boxes={boxes} order={currentOrder} />
