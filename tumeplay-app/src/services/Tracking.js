@@ -43,7 +43,6 @@ const Tracking = {
   knowMoreTriggered: (type, contentId) => {
     Tracking.trigger(['trackEvent', 'mobileApp', 'knowMore', type, contentId]);
   },
-
   questionAnswered: (questionId, timeNeeded) => {
     Tracking.trigger([
       'trackEvent',
@@ -52,6 +51,9 @@ const Tracking = {
       questionId,
       timeNeeded,
     ]);
+  },
+  externalLink: externalLink => {
+    Tracking.trigger(['trackEvent', 'mobileApp', `${externalLink}`]);
   },
 };
 export default Tracking;
