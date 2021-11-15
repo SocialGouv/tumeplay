@@ -74,7 +74,7 @@ const Tracking = {
     ]);
   },
   externalLink: externalLink => {
-    Tracking.trigger(['trackEvent', 'mobileApp', `${externalLink}`]);
+    Tracking.trigger(['trackEvent', 'mobileApp', 'externalLink', externalLink]);
   },
 };
 export default Tracking;
