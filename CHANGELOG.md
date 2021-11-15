@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/SocialGouv/Tumeplay/compare/v1.24.0...v1.25.0) (2021-11-15)
+
+
+### Features
+
+* setting up matomo tracker for external link ([#237](https://github.com/SocialGouv/Tumeplay/issues/237)) ([0cf25bc](https://github.com/SocialGouv/Tumeplay/commit/0cf25bc086535aeca404f4e6ee8e84979db3bcd3))
+
 # [1.24.0](https://github.com/SocialGouv/Tumeplay/compare/v1.23.0...v1.24.0) (2021-11-15)
 
 
