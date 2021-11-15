@@ -19,6 +19,7 @@ import ModalCloseButton from '../global/ModalCloseButton';
 import Styles from '../../../styles/Styles';
 import Colors from '../../../styles/Color';
 import ModalStyle from '../../../styles/components/Modal';
+import Tracking from '../../../services/Tracking';
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -113,6 +114,7 @@ export default function ProductModal(props) {
 
   function onOrder() {
     if (props.item.available || productBox.__typename === 'BoxSurMesure') {
+      Tracking.orderButtonTriggered();
       props.onOrder(selectedItems);
     } else {
       stayInTouch();

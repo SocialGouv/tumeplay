@@ -6,6 +6,7 @@ import Colors from '../../styles/Color';
 import Styles from '../../styles/Styles';
 import Backlink from '../components/tunnel/Backlink';
 import Splitter from '../components/tunnel/Splitter';
+import Tracking from '../../services/Tracking';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
@@ -34,12 +35,16 @@ export default function TunnelDeliverySelect(props) {
       deliveryType: deliveryType,
     };
     if (deliveryType === 'home') {
+      Tracking.homeDeliveryButtonTriggered();
       props.navigation.navigate('TunnelUserAddress', _params);
     } else if (deliveryType === 'pickup') {
+      Tracking.pickupDeliveryButtonTriggered();
       props.navigation.navigate('TunnelPickupSelect', _params);
     } else if (deliveryType === 'referent-metropole') {
+      Tracking.referentDeliveryButtonTriggered();
       props.navigation.navigate('TunnelReferentSelectMetropole', _params);
     } else if (deliveryType === 'referent-guyane') {
+      Tracking.referentDeliveryButtonTriggered();
       props.navigation.navigate('TunnelReferentSelectGuyane', _params);
     }
   }
