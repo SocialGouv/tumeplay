@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/SocialGouv/Tumeplay/compare/v1.26.0...v1.26.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* dashboard referent tickets ([#235](https://github.com/SocialGouv/Tumeplay/issues/235)) ([22a6c83](https://github.com/SocialGouv/Tumeplay/commit/22a6c83e64cd1ae7bebc27bd66a7f35190c4fa7b))
+
 # [1.26.0](https://github.com/SocialGouv/Tumeplay/compare/v1.25.0...v1.26.0) (2021-11-15)
 
 
