@@ -10,7 +10,7 @@ import AsyncSelect from 'react-select/async';
 import searchProducts from '../../services/api/products';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const ConfirmModal = ({closeModal, order, boxes}) => {
+const ConfirmModal = ({closeModal, order, boxes, readOnly}) => {
   const context = useContext(AppContext)
   const {token} = context
 
@@ -44,6 +44,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 								handleChange
 								cacheOptions 
 								defaultOptions
+								isDisabled={readOnly}
 								getOptionValue={(product) => product.id }
 								getOptionLabel={(product) => product.title }
 								onChange={(product) => {
@@ -58,6 +59,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 								loadOptions={promiseOptions} />
 								<input name={`qty-${index}-${product.id}`}
 										min={1}
+										disabled={readOnly}
 										value={product.qty}
 										onChange={(e) => {
 											model[index] = Object.assign(model[index], {qty: e.target.value})
@@ -70,32 +72,36 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 										}}
 										className="border-0 px-2 py-2 mr-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-14 ease-linear transition-all duration-150"
 										type="number" />
-								<FontAwesomeIcon onClick={() => {
-									model.splice(index, 1)
-									handleChange({
-										target: {
-											name: name,
-											value: model
-										}
-									})
-								}}icon={faTrash} color="gray" className="cursor-pointer" />
+									{!readOnly && (
+										<FontAwesomeIcon onClick={() => {
+											model.splice(index, 1)
+											handleChange({
+												target: {
+													name: name,
+													value: model
+												}
+											})
+										}} icon={faTrash} color="gray" className="cursor-pointer" />
+									)}
 							</div>
 						)
 					})
 				}
-				<div className="flex justify-center">
-					<button onClick={() => {
-														model.push({id: Math.round(Math.random() * 1000)})
-														handleChange({
-															target: {
-																name: name,
-																value: model
-															}
-														})
-													}}
-									type="button" 
-									className="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-full text-xl mr-1 shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">+</button>
-				</div>
+				{!readOnly && (
+					<div className="flex justify-center">
+						<button onClick={() => {
+															model.push({id: Math.round(Math.random() * 1000)})
+															handleChange({
+																target: {
+																	name: name,
+																	value: model
+																}
+															})
+														}}
+										type="button" 
+										className="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-full text-xl mr-1 shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">+</button>
+					</div>
+				)}
 			</div>
 		)
 	}
@@ -181,6 +187,7 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 									value={values.box_number} onChange={(e) => {
 										handleChange(e)
 									}} onBlur={handleBlur} name="box_number"
+									disabled={readOnly}
 									className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
 									placeholder="Choisir..."
 								>
@@ -214,24 +221,30 @@ const ConfirmModal = ({closeModal, order, boxes}) => {
 									className="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full mr-1 shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
 									onClick={() => closeModal()}
 								>
-									Annuler
+									{!readOnly ? 'Annuler' : 'Fermer'}
 								</button>
 								{
-									isSubmitting
-									?
-									<button
-										className="flex justify-center px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full ml-1 shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-										type="button"
-									>
-										<Loader />
-									</button>
-									:
-									<button
-										className="px-4 py-2 bg-lightBlue-500 text-white text-base font-medium rounded-md w-full ml-1 shadow-sm hover:bg-lightBlue-600 focus:outline-none focus:ring-2 focus:ring-lightBlue-300"
-										type="submit"
-									>
-										Valider
-									</button>
+									!readOnly && (
+										<>
+											{
+												isSubmitting
+												?
+												<button
+													className="flex justify-center px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full ml-1 shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+													type="button"
+												>
+													<Loader />
+												</button>
+												:
+												<button
+													className="px-4 py-2 bg-lightBlue-500 text-white text-base font-medium rounded-md w-full ml-1 shadow-sm hover:bg-lightBlue-600 focus:outline-none focus:ring-2 focus:ring-lightBlue-300"
+													type="submit"
+												>
+													Valider
+												</button>
+											}
+										</>
+									)
 								}
 							</div>
 						</form>
