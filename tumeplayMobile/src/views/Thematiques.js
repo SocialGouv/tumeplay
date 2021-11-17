@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
-import Container from '../components/Container';
 
 export default function Thematiques() {
   const {data, loading} = useQuery(GET_THEMES);
