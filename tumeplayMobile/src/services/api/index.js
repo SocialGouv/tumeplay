@@ -1,6 +1,5 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
-
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+import {REACT_APP_API_URL} from '@env';
 
 const client = new ApolloClient({
   uri: REACT_APP_API_URL + '/graphql',

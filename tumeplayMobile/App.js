@@ -1,33 +1,21 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Container from './src/components/Container';
+import Thematiques from './src/views/Thematiques';
 
 const App = () => {
   return (
     <Container>
-      <View>
-        <Text>Tumeplay !!!!</Text>
-      </View>
+      <Text>Tumeplay !!</Text>
+      <Thematiques />
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  card: {
+    width: 150,
+    height: 100,
   },
 });
 
