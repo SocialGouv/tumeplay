@@ -57,7 +57,10 @@ export default function QuizzScreen(props) {
 
   const {data, loading} = useQuery(GET_POINTS);
   if (!loading) {
-    if (UserService.localUser.path === 'A') {
+    if (
+      UserService.localUser.path === 'A' ||
+      UserService.localUser.path === 'C'
+    ) {
       QuizService.setAnswersPoints(
         data.parametre.nb_points_wrong_answer,
         data.parametre.nb_points_right_answer,

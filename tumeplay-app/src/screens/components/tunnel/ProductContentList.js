@@ -14,7 +14,8 @@ export default function ProductContentList(props) {
   const [customProducts] = useState(props.products);
   const [shortMode] = useState(props.shortMode);
   //added for ABTesting
-  const ABtestingPath = UserService.localUser.path === 'B';
+  const ABtestingPath =
+    UserService.localUser.path === 'C' || UserService.localUser.path === 'D';
 
   function renderRow(key, itemQty, itemText) {
     const itemLabel = itemQty ? itemQty + ' ' + itemText : itemText;
