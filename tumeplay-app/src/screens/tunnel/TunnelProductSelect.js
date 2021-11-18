@@ -96,7 +96,10 @@ export default function TunnelProductSelect(props) {
 
   //For A/B Testing purpose only
   const filteredItemByPath = selectedItem => {
-    if (UserService.localUser.path === 'B') {
+    if (
+      UserService.localUser.path === 'C' ||
+      UserService.localUser.path === 'D'
+    ) {
       let tmpSelectedITem = {...selectedItem};
       switch (tmpSelectedITem.number) {
         case 1:

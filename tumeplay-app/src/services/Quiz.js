@@ -51,7 +51,9 @@ const QuizzService = {
     let undoneQuestions = [];
 
     if (reset) {
-      QuizzService.doneIds = QuizzService.doneIds.filter(_ => !QuizzService.currentQuestions.map(_ => _.id).includes(_))
+      QuizzService.doneIds = QuizzService.doneIds.filter(
+        _ => !QuizzService.currentQuestions.map(_ => _.id).includes(_),
+      );
       undoneQuestions = QuizzService.currentQuestions;
     } else {
       undoneQuestions = QuizzService.currentQuestions.filter(
@@ -64,16 +66,22 @@ const QuizzService = {
       questionIds.includes(_),
     );
 
-    const toImproveQuestions = undoneQuestions.filter(_ => tmpToImproveIds.includes(_.id))
-    const freshQuestions = undoneQuestions.filter(_ => !tmpToImproveIds.includes(_.id))
-    let selectedQuestions = toImproveQuestions
+    const toImproveQuestions = undoneQuestions.filter(_ =>
+      tmpToImproveIds.includes(_.id),
+    );
+    const freshQuestions = undoneQuestions.filter(
+      _ => !tmpToImproveIds.includes(_.id),
+    );
+    let selectedQuestions = toImproveQuestions;
 
     if (selectedQuestions.length < 10) {
-      const numberToFill = 10 - selectedQuestions.length
+      const numberToFill = 10 - selectedQuestions.length;
       if (freshQuestions.length >= numberToFill) {
-        selectedQuestions = selectedQuestions.concat(QuizzService.shuffleArray(freshQuestions).slice(0, numberToFill))
+        selectedQuestions = selectedQuestions.concat(
+          QuizzService.shuffleArray(freshQuestions).slice(0, numberToFill),
+        );
       } else {
-        selectedQuestions = QuizzService.getQuestions(true)
+        selectedQuestions = QuizzService.getQuestions(true);
       }
     }
 
@@ -84,7 +92,9 @@ const QuizzService = {
       QuizzService.doneIds.push(question.id);
 
       if (QuizzService.toImproveIds.includes(question.id)) {
-        QuizzService.toImproveIds = QuizzService.toImproveIds.filter(_ => _ !== question.id)
+        QuizzService.toImproveIds = QuizzService.toImproveIds.filter(
+          _ => _ !== question.id,
+        );
       }
     } else if (!QuizzService.toImproveIds.includes(question.id)) {
       QuizzService.toImproveIds.push(question.id);
