@@ -23,7 +23,6 @@ const App = () => {
       const _passedOnboarding = await UserService.hasPassedOnboarding();
       // let userID = await UserService.getUniqueId();
       let random = Math.random() * 100;
-      console.log(random);
       if (random < 25) {
         UserService.setPath('A');
         Tracking.questionPath('A');
@@ -37,7 +36,6 @@ const App = () => {
         UserService.setPath('D');
         Tracking.questionPath('D');
       }
-      console.log(UserService.localUser.path);
       if (_passedOnboarding) {
         setShowRealApp(true);
       }
