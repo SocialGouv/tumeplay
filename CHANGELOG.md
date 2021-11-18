@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/SocialGouv/Tumeplay/compare/v1.26.1...v1.27.0) (2021-11-18)
+
+
+### Features
+
+* **front:** adding 4 path for AB Testing ([#241](https://github.com/SocialGouv/Tumeplay/issues/241)) ([25e05b5](https://github.com/SocialGouv/Tumeplay/commit/25e05b5926bf46ce2ab510b5de55d9f1542d9f04))
+
 ## [1.26.1](https://github.com/SocialGouv/Tumeplay/compare/v1.26.0...v1.26.1) (2021-11-15)
 
 
