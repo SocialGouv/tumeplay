@@ -38,7 +38,6 @@ const User = {
     } else {
       uniqueId = DeviceInfo.getUniqueId();
     }
-
     return uniqueId;
   },
   /**

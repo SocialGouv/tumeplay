@@ -21,13 +21,20 @@ const App = () => {
   useEffect(() => {
     async function _alreadyRegistered() {
       const _passedOnboarding = await UserService.hasPassedOnboarding();
-      let userID = await UserService.getUniqueId();
-      if (parseInt(userID, 16) % 2 === 0) {
+      // let userID = await UserService.getUniqueId();
+      let random = Math.random() * 100;
+      if (random < 25) {
         UserService.setPath('A');
         Tracking.questionPath('A');
-      } else {
+      } else if (25 < random < 50) {
         UserService.setPath('B');
         Tracking.questionPath('B');
+      } else if (50 < random < 75) {
+        UserService.setPath('C');
+        Tracking.questionPath('C');
+      } else {
+        UserService.setPath('D');
+        Tracking.questionPath('D');
       }
       if (_passedOnboarding) {
         setShowRealApp(true);
