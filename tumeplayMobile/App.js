@@ -30,7 +30,12 @@ const App = () => {
     }
   };
 
+  const clearStorage = async () => {
+    await EncryptedStorage.clear();
+  };
+
   useEffect(() => {
+    clearStorage();
     generateuserId();
     retrieveUserFromStorage();
   }, []);
