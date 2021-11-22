@@ -14,9 +14,7 @@ const Container = ({children}) => {
 
 const style = StyleSheet.create({
   container: {
-    marginHorizontal: 24,
     paddingVertical: 24,
-    backgroundColor: '#FFF',
   },
 });
 
