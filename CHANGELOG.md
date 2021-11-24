@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/SocialGouv/Tumeplay/compare/v1.27.0...v1.27.1) (2021-11-24)
+
+
+### Bug Fixes
+
+* wording guyane ([13e82fa](https://github.com/SocialGouv/Tumeplay/commit/13e82fa4e05aa6c1d0f3fe80758fbfdef4c6cc31))
+
 # [1.27.0](https://github.com/SocialGouv/Tumeplay/compare/v1.26.1...v1.27.0) (2021-11-18)
 
 
