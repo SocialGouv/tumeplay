@@ -4,15 +4,18 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
+  ImageBackground,
 } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import RadioForm from 'react-native-simple-radio-button';
+import Button from '../components/Button';
+import {Colors, Fonts} from '../styles/Style';
 
 const Signup = ({user, setUser}) => {
   let tmpUser = user;
 
-  const handleUserAge = arg => {
-    tmpUser.isUnder25 = arg;
+  const handleUserAge = value => {
+    tmpUser.isUnder25 = value;
     setUser({...tmpUser});
   };
 
@@ -39,49 +42,98 @@ const Signup = ({user, setUser}) => {
     }
   };
 
+  const radio_props = [
+    {label: '14-18 ans', value: true},
+    {label: '18-25 ans', value: true},
+    {label: '+ de 25 ans', value: false},
+  ];
+
+  const radio_props_location = [
+    {label: 'Région Ile-de-France', value: 'Région Ile-de-France'},
+    {label: 'Région Nouvelle Aquitaine', value: 'Région Nouvelle Aquitaine'},
+    {label: 'Région Guyane', value: 'Région Guyane'},
+    {label: 'Autres régions', value: 'Autres régions'},
+  ];
+
   return (
-    <View>
+    <ImageBackground style={styles.container}>
+      <Text style={styles.title}>Ton profil</Text>
       <View>
-        <Text>Quel est ton age ?</Text>
-        <View style={style.buttonContainer}>
-          <TouchableOpacity
-            style={style.button}
-            onPress={() => handleUserAge(true)}>
-            <Text>- 25 ans</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.button}
-            onPress={() => handleUserAge(false)}>
-            <Text>+ 25 ans</Text>
-          </TouchableOpacity>
+        <Text style={styles.subtitle}>Quelle est ta tranche d'âge ?</Text>
+        <View style={styles.radioContainer}>
+          <RadioForm
+            radio_props={radio_props}
+            buttonColor={'#B3B3B3'}
+            selectedButtonColor={Colors.black}
+            style={styles.labelStyle}
+            buttonSize={15}
+            labelWrapStyle={styles.radio}
+            wrapStyle={styles.radio}
+            animation={false}
+            onPress={value => handleUserAge(value)}
+          />
         </View>
-        <TextInput style={style.input} onChangeText={handleChange} />
       </View>
-      <TouchableOpacity onPress={() => handleValidation()}>
-        <Text>Valider</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={{marginTop: 35}}>
+        <Text style={styles.subtitle}>Tu habites </Text>
+        <View style={styles.radioContainer}>
+          <RadioForm
+            radio_props={radio_props_location}
+            buttonColor={'#B3B3B3'}
+            selectedButtonColor={Colors.black}
+            style={styles.labelStyle}
+            buttonSize={15}
+            labelWrapStyle={styles.radio}
+            wrapStyle={styles.radio}
+            animation={false}
+            onPress={value => handleChange(value)}
+          />
+        </View>
+      </View>
+      <Button
+        style={styles.button}
+        text={'Je continue'}
+        size={'large'}
+        onPress={() => handleValidation()}
+      />
+    </ImageBackground>
   );
 };
 
-const style = StyleSheet.create({
-  buttonContainer: {
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    paddingTop: 18,
+    paddingHorizontal: 18,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  button: {
-    backgroundColor: '#F1E1A3',
-    borderRadius: 15,
-    marginHorizontal: 5,
-    paddingHorizontal: 15,
+  title: {
+    fontSize: 30,
+    lineHeight: 40,
+    fontFamily: Fonts.title,
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
+  subtitle: {
+    fontSize: 18,
+    lineHeight: 22,
+    fontFamily: Fonts.strongText,
+    marginBottom: 25,
+  },
+  radioContainer: {
+    marginLeft: 35,
+  },
+  labelStyle: {
+    fontSize: 18,
+    lineHeight: 22,
+    fontFamily: Fonts.text,
+  },
+  radio: {
+    paddingVertical: 11,
+  },
+  button: {
+    position: 'fixed',
+    bottom: 0,
   },
 });
 

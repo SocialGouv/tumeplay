@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {Fonts} from '../styles/Style';
 
 const Button = props => {
   const {size, text, icon, isDisabled, onPress} = props;
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     lineHeight: 24,
+    fontFamily: Fonts.strongText,
   },
 });
 

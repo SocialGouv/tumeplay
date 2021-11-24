@@ -14,7 +14,7 @@ const Container = ({children}) => {
 
 const style = StyleSheet.create({
   container: {
-    paddingVertical: 24,
+    flex: 1,
   },
 });
 

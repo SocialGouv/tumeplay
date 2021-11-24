@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   description: {
     paddingHorizontal: 35,
-    lineHeight: 25,
+    lineHeight: 27,
     fontSize: 18,
     fontFamily: Fonts.strongText,
     textAlign: 'center',
