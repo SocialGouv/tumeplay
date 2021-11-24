@@ -21,6 +21,8 @@ const OrdersLogistics = () => {
   const context = useContext(AppContext)
   const {token, user} = context
 
+	console.log(user);
+
   const [filteredorders, setFilteredOrders] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [currentOrder, setCurrentOrder] = useState({})

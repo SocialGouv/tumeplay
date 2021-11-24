@@ -53,6 +53,11 @@
     },
     "region": {
       "model": "regions"
+    },
+    "user": {
+      "via": "referents",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

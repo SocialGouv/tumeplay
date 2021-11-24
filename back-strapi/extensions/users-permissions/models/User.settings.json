@@ -59,8 +59,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "referent": {
-      "model": "referent"
+    "referents": {
+      "collection": "referent",
+      "via": "user"
     }
   }
 }
