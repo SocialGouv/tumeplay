@@ -1,3 +1,10 @@
+## [1.27.2](https://github.com/SocialGouv/Tumeplay/compare/v1.27.1...v1.27.2) (2021-11-25)
+
+
+### Bug Fixes
+
+* double conditions for role strapi coordinateur ([1b4ed43](https://github.com/SocialGouv/Tumeplay/commit/1b4ed43c4863ad8455ef793420b74ade01d90e39))
+
 ## [1.27.1](https://github.com/SocialGouv/Tumeplay/compare/v1.27.0...v1.27.1) (2021-11-24)
 
 
