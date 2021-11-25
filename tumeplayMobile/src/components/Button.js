@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {Fonts} from '../styles/Style';
 
 const Button = props => {
-  const {size, text, icon, isDisabled, onPress} = props;
+  const {size, text, icon, isDisabled, onPress, style} = props;
 
   const adjustStyle = () => {
     switch (size) {
@@ -17,7 +17,7 @@ const Button = props => {
   };
   return (
     <TouchableOpacity
-      style={[adjustStyle()]}
+      style={[adjustStyle(), style]}
       disabled={isDisabled}
       onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
@@ -34,15 +34,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
     color: '#FFF',
+    marginBottom: 5,
   },
   mediumPressable: {
-    width: 150,
-    height: 35,
+    width: 134,
+    height: 50,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
     color: '#FFF',
+    marginBottom: 5,
   },
   smallPressable: {
     width: 70,
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
     color: '#FFF',
+    marginBottom: 5,
   },
   text: {
     color: '#FFF',

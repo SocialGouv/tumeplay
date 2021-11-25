@@ -1,10 +1,12 @@
 import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import ContentCard from '../components/ContentCard';
+import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 
 const ContentsPage = props => {
-  const {route, navigation} = props;
+  const {route, navigation, image} = props;
 
   const backgroundColor = route.params.backgroundColor;
   const [contents, setContents] = useState([]);
@@ -19,12 +21,30 @@ const ContentsPage = props => {
     }
   }, [data, loading]);
 
+  const renderItem = ({item}) => {
+    return (
+      <ContentCard
+        key={item.id}
+        item={item}
+        backgroundColor={backgroundColor}
+        navigation={navigation}
+      />
+    );
+  };
+
   return (
-    <View style={[styles.container, {backgroundColor: backgroundColor}]}>
-      <Text>Content !!</Text>
+    <View style={[styles.container]}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>Go BACK</Text>
       </TouchableOpacity>
+      <Title />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={contents}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </View>
     </View>
   );
 };
@@ -32,6 +52,9 @@ const ContentsPage = props => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+  },
+  listContainer: {
+    marginTop: 15,
   },
 });
 

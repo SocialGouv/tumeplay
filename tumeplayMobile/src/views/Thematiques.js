@@ -11,6 +11,7 @@ import metal from '../assets/custom_images/metal.png';
 import peach from '../assets/custom_images/peach.png';
 import peace from '../assets/custom_images/peace.png';
 import thumbs_up from '../assets/custom_images/thumbs_up.png';
+import Title from '../components/Title';
 
 export default function Thematiques(props) {
   const {navigation} = props;
@@ -40,10 +41,7 @@ export default function Thematiques(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Hello</Text>
-        <Image source={wave} />
-      </View>
+      <Title />
       <Text style={styles.subtitle}>
         Sélectionne le thème qui t'intéresse le plus
       </Text>

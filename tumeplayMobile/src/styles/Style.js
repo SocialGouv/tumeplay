@@ -10,6 +10,7 @@ export const Colors = {
   primary: '#E85439',
   corail: '#F1A383',
   corailLight: '#EDC38B',
+  grey: '#B3B3B3',
 };
 
 export const bgColors = [

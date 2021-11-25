@@ -7,6 +7,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContentsPage from './src/views/Contents';
+import ContentPage from './src/views/Contents/ContentPage';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const App = () => {
     isOnboarded: false,
     isSignedUp: false,
     isUnder25: null,
+    firstname: '',
   });
 
   const generateuserId = () => {
@@ -34,12 +36,12 @@ const App = () => {
     }
   };
 
-  const clearStorage = async () => {
-    await EncryptedStorage.clear();
-  };
+  // const clearStorage = async () => {
+  //   await EncryptedStorage.clear();
+  // };
 
   useEffect(() => {
-    clearStorage();
+    // clearStorage();
     generateuserId();
     retrieveUserFromStorage();
   }, []);
@@ -64,7 +66,7 @@ const App = () => {
               name="ContentsPage"
               component={ContentsPage}
             />
-            <NavigationStack.Screen name="Content" component={ContentsPage} />
+            <NavigationStack.Screen name="Content" component={ContentPage} />
           </NavigationStack.Navigator>
         </NavigationContainer>
       )}

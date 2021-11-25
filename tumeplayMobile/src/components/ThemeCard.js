@@ -13,6 +13,7 @@ const ThemeCard = props => {
         navigation.navigate('ContentsPage', {
           theme_id: theme.id,
           backgroundColor: backgroundColor,
+          image: image,
         });
       }}>
       <Image style={styles.image} source={image} />

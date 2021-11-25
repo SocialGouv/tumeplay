@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 5,
   },
   topContainer: {
     width: '100%',
