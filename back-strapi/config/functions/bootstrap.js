@@ -64,7 +64,10 @@ module.exports = () => {
             plugin: 'admin',
             async handler() { 
                 return {
-                    'address_deptcode_ne': '973',
+										'$or': {
+											'address_deptcode_ne': '973',		
+											'theme.environnement': 1,									
+										}
                 };
             }
         },
@@ -75,7 +78,10 @@ module.exports = () => {
             plugin: 'admin',
             async handler() { 
                 return {
+									'$or': {
                     'address_deptcode': '973',
+										'theme.environnement': 2,
+									}
                 };
             }
         },
