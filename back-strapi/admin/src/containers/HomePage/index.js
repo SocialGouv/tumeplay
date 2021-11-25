@@ -10,6 +10,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { subDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
+import { CSVLink, CSVDownload } from 'react-csv';
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -446,6 +447,17 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 		)
 	}
 
+	const exportData = async () => {
+		const data = await request('/contents', {
+			method: 'GET',
+			params: {
+				_limit: 100000
+			}
+		})
+		
+
+	}
+
   return (
     <>
       <Container className="container-fluid">
@@ -780,10 +792,21 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 									}
 								</div>
 							</Block>
-					</div>
-        </div>
-      </Container>
-    </>
+						</div>
+
+						<div className="col-12">
+							<Block style={{height: '500px', padding: '4rem 3rem 6rem 3rem'}}>
+              	<h2>Exporter vos données</h2>
+								<div className="flex">
+									<button className="button button-primary" onClick={() => exportData('contents')}>
+										Exporter les contenus
+									</button>
+								</div>
+							</Block>
+						</div>
+        	</div>
+      	</Container>
+    	</>
   );
 };
 
