@@ -1,3 +1,10 @@
+## [1.27.4](https://github.com/SocialGouv/Tumeplay/compare/v1.27.3...v1.27.4) (2021-11-25)
+
+
+### Bug Fixes
+
+* conditionProvider correction ([f8be0c7](https://github.com/SocialGouv/Tumeplay/commit/f8be0c749eb7a43f3faef8c4cbca5d1042a8b6e6))
+
 ## [1.27.3](https://github.com/SocialGouv/Tumeplay/compare/v1.27.2...v1.27.3) (2021-11-25)
 
 
