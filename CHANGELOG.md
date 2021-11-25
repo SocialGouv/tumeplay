@@ -1,3 +1,10 @@
+## [1.27.3](https://github.com/SocialGouv/Tumeplay/compare/v1.27.2...v1.27.3) (2021-11-25)
+
+
+### Bug Fixes
+
+* correct  operator for conditionProvider handler ([031e50f](https://github.com/SocialGouv/Tumeplay/commit/031e50f1497842f7b101d9508cccfdf8696f4a30))
+
 ## [1.27.2](https://github.com/SocialGouv/Tumeplay/compare/v1.27.1...v1.27.2) (2021-11-25)
 
 
