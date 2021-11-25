@@ -66,7 +66,7 @@ module.exports = () => {
                 return {
 										'$or': [
 											{'address_deptcode_ne': '973'},
-											{'theme.environnement': 1}
+											{'environnement': 1}
 										]
                 };
             }
@@ -80,7 +80,7 @@ module.exports = () => {
                 return {
 									'$or': [
                     {'address_deptcode': '973'},
-										{'theme.environnement': 2}
+										{'environnement': 2}
 									]
                 };
             }
