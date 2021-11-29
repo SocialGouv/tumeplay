@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,15 +6,35 @@ import {
   StyleSheet,
   ImageBackground,
   ScrollView,
-  Image,
 } from 'react-native';
 import {REACT_APP_URL} from '@env';
 import {Fonts} from '../../styles/Style';
 import bg from '../../assets/test.png';
 import Button from '../../components/Button';
+import {useQuery} from '@apollo/client';
+import {GET_SINGLE_CONTENT} from '../../services/api/contents';
+import Feedback from '../../components/Feedback';
 
 const ContentPage = ({navigation, route}) => {
-  const content = route?.params?.content;
+  const [content, setContent] = useState();
+  const content_id = route?.params?.content_id;
+
+  const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
+    variables: {content_id: content_id},
+  });
+
+  useEffect(() => {
+    if (data && !loading) {
+      console.log(data);
+      setContent(data.contents[0]);
+    }
+  }, [content, data, loading]);
+
+  const nextContent = () => {
+    navigation.navigate('Content', {
+      content_id: (parseInt(content?.id, 10) + 1).toString(),
+    });
+  };
 
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
@@ -38,24 +58,16 @@ const ContentPage = ({navigation, route}) => {
         <View style={styles.textContainer}>
           <Text style={styles.text}>{content?.text}</Text>
           <View style={styles.divider} />
-          <Text style={[styles.text, {fontWeight: '600'}]}>
-            As-tu trouvé ce contenu intéressant ?
-          </Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.badge}>
-              <Text>👍</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.badge}>
-              <Text>🤨</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.badge}>
-              <Text>👎</Text>
-            </TouchableOpacity>
-          </View>
+          <Feedback />
           <View style={styles.divider} />
         </View>
       </ScrollView>
-      <Button size={'medium'} text={'Suivant'} style={styles.button} />
+      <Button
+        size={'medium'}
+        text={'Suivant'}
+        style={styles.button}
+        onPress={() => nextContent()}
+      />
     </View>
   );
 };

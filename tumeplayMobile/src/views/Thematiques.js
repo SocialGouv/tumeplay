@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
-import wave from '../assets/wave.png';
 import {Colors, Fonts, bgColors} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
 import dynamite from '../assets/custom_images/dynamite.png';

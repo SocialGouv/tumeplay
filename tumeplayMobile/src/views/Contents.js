@@ -6,7 +6,7 @@ import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 
 const ContentsPage = props => {
-  const {route, navigation, image} = props;
+  const {route, navigation} = props;
 
   const backgroundColor = route.params.backgroundColor;
   const [contents, setContents] = useState([]);

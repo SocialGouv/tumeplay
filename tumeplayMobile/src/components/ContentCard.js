@@ -5,7 +5,7 @@ import {Fonts} from '../styles/Style';
 const ContentCard = ({item, backgroundColor, navigation}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Content', {content: item})}
+      onPress={() => navigation.navigate('Content', {content_id: item?.id})}
       style={[styles.container, {backgroundColor: backgroundColor}]}>
       <Text style={styles.level}>NIVEAU 1</Text>
       <Text style={styles.title}>{item?.title}</Text>

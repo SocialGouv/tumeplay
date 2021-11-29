@@ -16,3 +16,20 @@ export const GET_CONTENTS = gql`
     }
   }
 `;
+
+export const GET_SINGLE_CONTENT = gql`
+  query GetSingleContent($content_id: String!) {
+    contents(where: {id: $content_id}) {
+      id
+      title
+      text
+      image {
+        url
+      }
+      sound {
+        url
+      }
+      external_link
+    }
+  }
+`;
