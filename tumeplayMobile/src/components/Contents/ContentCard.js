@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {Fonts} from '../styles/Style';
+import {Fonts} from '../../styles/Style';
 
 const ContentCard = ({item, backgroundColor, navigation}) => {
   return (

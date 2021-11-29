@@ -19,7 +19,7 @@ const Navbar = ({navigation, route}) => {
         tabBarInactiveTintColor: Colors.black,
         tabBarItemStyle: {padding: 5},
         tabBarStyle: {
-          // position: 'absolute',
+          position: 'absolute',
           backgroundColor: Colors.lightCorail,
         },
       }}>

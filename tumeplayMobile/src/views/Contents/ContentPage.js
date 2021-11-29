@@ -32,6 +32,7 @@ const ContentPage = ({navigation, route}) => {
 
   const nextContent = () => {
     navigation.navigate('Content', {
+      //ATTENTION A MODIFIER
       content_id: (parseInt(content?.id, 10) + 1).toString(),
     });
   };

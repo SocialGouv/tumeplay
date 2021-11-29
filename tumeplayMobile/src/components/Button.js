@@ -9,6 +9,8 @@ const Button = props => {
     switch (size) {
       case 'large':
         return styles.longPressable;
+      case 'intermediate':
+        return styles.intermediataPressable;
       case 'medium':
         return styles.mediumPressable;
       case 'small':
@@ -29,6 +31,16 @@ const styles = StyleSheet.create({
   longPressable: {
     width: 350,
     height: 55,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    color: '#FFF',
+    marginBottom: 5,
+  },
+  intermediataPressable: {
+    width: 275,
+    height: 50,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
