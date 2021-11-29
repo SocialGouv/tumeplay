@@ -427,6 +427,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 			setTmpDateRanges(dateRanges[0].startDate ? dateRanges : [default_range_date])
 	}, [showRangeModal])
   
+	const userRole = get(auth.getUserInfo(), 'roles[0].code', null);
   const username = get(auth.getUserInfo(), 'firstname', '');
 
 	const formatDate = (date) => {
@@ -446,6 +447,130 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 		)
 	}
 
+	const exportData = async (type) => {
+		let route = ''
+		let csvData = []
+
+		switch (type) {
+			case 'contents':
+				route = 'contents'
+				csvData.push(
+					'"Titre";"Contenu";"Thématique"'
+				)
+				break;
+			case 'questions':
+				route = 'questions'
+				csvData.push(
+					'"Question";"Réponse A";"Réponse B";"Réponse C";"Bonne réponse";"Précision";"Nom audio question";"Nom audio réponse";"Thématique"'
+				)
+				break;
+			case 'contacts':
+				route = 'contacts'
+				csvData.push(
+					'"Nom";"Email";"Code postal";"Box";"Zone";"Type"'
+				)
+				break;
+			case 'commandes':
+				route = 'commandes'
+				csvData.push(
+					'"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Délivrée";"Code postal";"Nom POI";"Envoyée"'
+				)
+				break;
+		}
+
+		let exportParams = {
+			_limit: 100000
+		}
+
+		if (userRole.includes('pilote-guyane')) {
+			switch (type) {
+				case 'contents':
+				case 'questions':
+					exportParams['theme.environnement.slug'] = 'guyane'
+					break;
+				case 'contacts':
+				case 'commandes':
+					exportParams['environnement.slug'] = 'guyane'
+					break;
+			}
+		}
+
+		const data = await request('/' + route, {
+			method: 'GET',
+			params: exportParams
+		})
+		
+		data.forEach((item) => {
+			switch (type) {
+				case 'contents':
+					csvData.push(
+						'"' + item.title.replaceAll('"', '\'') + '";"' + item.text.replaceAll('"', '\'') + '";"' + item.theme.title.replaceAll('"', '\'') + '"'
+					)
+					break;
+				case 'questions':
+					csvData.push(
+						'"' + item.text_question.replaceAll('"', '\'') 
+						+ '";"' + item.responses.response_A.replaceAll('"', '\'')
+						+ '";"' + item.responses.response_B.replaceAll('"', '\'')
+						+ '";"' + item.responses.response_C.replaceAll('"', '\'')
+						+ '";"' + item.responses.right_answer.replaceAll('"', '\'')
+						+ '";"' + item.text_answer.replaceAll('"', '\'')
+						+ '";"' + (item.sound_queston ? item.sound_queston.hash.replaceAll('"', '\'') : '')
+						+ '";"' + (item.sound_answer ? item.sound_answer.hash.replaceAll('"', '\'') : '')
+						+ '";"' + item.theme.title.replaceAll('"', '\'')
+						+ '"'
+					)
+					break;
+				case 'contacts':
+					csvData.push(
+						'"' + item.name.replaceAll('"', '\'') 
+						+ '";"' + item.email.replaceAll('"', '\'')
+						+ '";"' + (item.zipcode ? item.zipcode : '')
+						+ '";"' + (item.box ? item.box.title.replaceAll('"', '\'') : '')
+						+ '";"' + (item.zone ? item.zone.name.replaceAll('"', '\'') : '')
+						+ '";"' + (item.type ? item.type.replaceAll('"', '\'') : '')
+						+ '"'						
+					)
+					break;
+				case 'commandes':
+					let boxName = ''
+
+					if (item.content && item.content[0].__component === 'commandes.box-sur-mesure') {
+						boxName = 'Box sur mesure'
+					} else if (item.content && item.content[0].__component === 'commandes.box') {
+						boxName = item.content[0].box.title
+					}
+
+					csvData.push(
+						'"' + item.id 
+						+ '";"' + new Date(item.created_at)
+						+ '";"' + boxName.replaceAll('"', '\'')
+						+ '";"' + (item.delivery ? item.delivery.replaceAll('"', '\'') : '')
+						+ '";"' + (item.environnement ? item.environnement.name : '')
+						+ '";"' + (item.referent ? item.referent.name : '')
+						+ '";"' + (item.received ? 'Oui' : 'Non')
+						+ '";"' + (item.address_zipcode ? item.address_zipcode : '')
+						+ '";"' + (item.poi_name ? item.poi_name : '')
+						+ '";"' + (item.sent ? 'Oui' : 'Non')
+						+ '"'						
+					)
+					break;
+
+			}
+		})
+
+		var element = document.createElement('a');
+		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csvData.join('\n')));
+		element.setAttribute('download', type + '_' + new Date().getTime() + '.csv');
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	}
+
   return (
     <>
       <Container className="container-fluid">
@@ -453,7 +578,25 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
           <div className="col-12">
             <h1><Wave /> Bonjour {username}!</h1>
           </div>
-					<div className="col-12 mb-5">
+					<div className="col-12 mb-5 mt-2">
+						<h2>🏋 Exporter vos données</h2>
+						<div className="flex justify-between">
+							<button className="button button-primary" onClick={() => exportData('contents')}>
+								Exporter les contenus
+							</button>
+							<button className="button button-primary ml-4" onClick={() => exportData('questions')}>
+								Exporter les questions
+							</button>
+							<button className="button button-primary ml-4" onClick={() => exportData('contacts')}>
+								Exporter les contacts
+							</button>
+							<button className="button button-primary ml-4" onClick={() => exportData('commandes')}>
+								Exporter les commandes
+							</button>
+						</div>
+					</div>
+					<div className="col-12 mb-5 mt-5">
+						<h2>🧘 Analyser vos données</h2>
 						{
 							!dateRanges[0].startDate && (
 								<button className="button button-primary" onClick={() => setShowRangeModal(true)}>
@@ -780,10 +923,10 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 									}
 								</div>
 							</Block>
-					</div>
-        </div>
-      </Container>
-    </>
+						</div>
+        	</div>
+      	</Container>
+    	</>
   );
 };
 
