@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/SocialGouv/Tumeplay/compare/v1.27.5...v1.28.0) (2021-11-29)
+
+
+### Features
+
+* strapi exports ([#245](https://github.com/SocialGouv/Tumeplay/issues/245)) ([63174f7](https://github.com/SocialGouv/Tumeplay/commit/63174f7442a421a4f4a0caca35d82ec600a02070))
+
 ## [1.27.5](https://github.com/SocialGouv/Tumeplay/compare/v1.27.4...v1.27.5) (2021-11-25)
 
 
