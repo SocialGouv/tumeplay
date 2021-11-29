@@ -10,7 +10,7 @@ import FreshContentCard from '../components/Contents/FreshContentCard';
 
 const HomePage = () => {
   //here we calculate the number of point from the user
-  const [points, setPoints] = useState(270);
+  const [points, setPoints] = useState(3000);
   const [freshContents, setFreshContents] = useState([]);
 
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);

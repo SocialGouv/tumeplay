@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     zIndex: 1,
+    borderRadius: 8,
   },
   level: {
     fontFamily: Fonts.strongText,
