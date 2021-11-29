@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import wave from '../assets/wave.png';
 import {Colors, Fonts} from '../styles/Style';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const Title = () => {
+  const [userName, setUserName] = useState();
+
+  const retrieveUserName = async () => {
+    const user = JSON.parse(await EncryptedStorage.getItem('user'));
+    setUserName(user.firstname);
+  };
+
+  useEffect(() => {
+    retrieveUserName();
+  }, []);
+
   return (
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>Hello</Text>
+      <Text style={styles.title}>Hello {userName} </Text>
       <Image source={wave} />
     </View>
   );

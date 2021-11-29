@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import Container from './src/components/global/Container';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
-import Thematiques from './src/views/Thematiques';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContentsPage from './src/views/Contents';
 import ContentPage from './src/views/Contents/ContentPage';
+import Navbar from './src/components/Navbar';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -58,10 +58,7 @@ const App = () => {
             screenOptions={{
               headerShown: false,
             }}>
-            <NavigationStack.Screen
-              name="Thematiques"
-              component={Thematiques}
-            />
+            <NavigationStack.Screen name="Home" component={Navbar} />
             <NavigationStack.Screen
               name="ContentsPage"
               component={ContentsPage}

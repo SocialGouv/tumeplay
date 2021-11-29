@@ -34,6 +34,7 @@ const Signup = ({user, setUser}) => {
           isOnboarded: tmpUser.isOnboarded,
           isSignedUp: tmpUser.isSignedUp,
           isUnder25: tmpUser.isUnder25,
+          firstname: tmpUser.firstname,
         }),
       );
     } catch (error) {
@@ -123,7 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   button: {
-    position: 'fixed',
     bottom: 0,
   },
 });
