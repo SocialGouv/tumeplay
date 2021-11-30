@@ -506,7 +506,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 					csvData.push(
 						'"' + (item.title ? item.title.replaceAll('"', '\'') : '')
 						+ '";"' + (item.text ? item.text.replaceAll('"', '\'') : '') 
-						+ '";"' + (item.theme ? item.theme.title.replaceAll('"', '\'') : '')
+						+ '";"' + (item.theme && item.theme.title ? item.theme.title.replaceAll('"', '\'') : '')
 						+ '"'
 					)
 					break;
@@ -520,7 +520,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 						+ '";"' + (item.text_answer ? item.text_answer.replaceAll('"', '\'') : '')
 						+ '";"' + (item.sound_queston ? item.sound_queston.hash.replaceAll('"', '\'') : '')
 						+ '";"' + (item.sound_answer ? item.sound_answer.hash.replaceAll('"', '\'') : '')
-						+ '";"' + (item.theme ? item.theme.title.replaceAll('"', '\'') : '')
+						+ '";"' + (item.theme && item.theme.title ? item.theme.title.replaceAll('"', '\'') : '')
 						+ '"'
 					)
 					break;
