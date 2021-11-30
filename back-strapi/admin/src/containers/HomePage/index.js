@@ -504,20 +504,23 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 			switch (type) {
 				case 'contents':
 					csvData.push(
-						'"' + item.title.replaceAll('"', '\'') + '";"' + item.text.replaceAll('"', '\'') + '";"' + item.theme.title.replaceAll('"', '\'') + '"'
+						'"' + (item.title ? item.title.replaceAll('"', '\'') : '')
+						+ '";"' + (item.text ? item.text.replaceAll('"', '\'') : '') 
+						+ '";"' + (item.theme ? item.theme.title.replaceAll('"', '\'') : '')
+						+ '"'
 					)
 					break;
 				case 'questions':
 					csvData.push(
-						'"' + item.text_question.replaceAll('"', '\'') 
-						+ '";"' + item.responses.response_A.replaceAll('"', '\'')
-						+ '";"' + item.responses.response_B.replaceAll('"', '\'')
-						+ '";"' + item.responses.response_C.replaceAll('"', '\'')
-						+ '";"' + item.responses.right_answer.replaceAll('"', '\'')
-						+ '";"' + item.text_answer.replaceAll('"', '\'')
+						'"' + (item.text_question ? item.text_question.replaceAll('"', '\'') : '')  
+						+ '";"' + (item.responses && item.responses.response_A ? item.responses.response_A.replaceAll('"', '\'') : '')
+						+ '";"' + (item.responses && item.responses.response_B ? item.responses.response_B.replaceAll('"', '\'') : '')
+						+ '";"' + (item.responses && item.responses.response_C ? item.responses.response_C.replaceAll('"', '\'') : '')
+						+ '";"' + (item.responses && item.responses.right_answer ? item.responses.right_answer.replaceAll('"', '\'') : '')
+						+ '";"' + (item.text_answer ? item.text_answer.replaceAll('"', '\'') : '')
 						+ '";"' + (item.sound_queston ? item.sound_queston.hash.replaceAll('"', '\'') : '')
 						+ '";"' + (item.sound_answer ? item.sound_answer.hash.replaceAll('"', '\'') : '')
-						+ '";"' + item.theme.title.replaceAll('"', '\'')
+						+ '";"' + (item.theme ? item.theme.title.replaceAll('"', '\'') : '')
 						+ '"'
 					)
 					break;
