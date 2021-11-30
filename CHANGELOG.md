@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/SocialGouv/Tumeplay/compare/v1.28.0...v1.28.1) (2021-11-30)
+
+
+### Bug Fixes
+
+* contents & questions exports ([3470517](https://github.com/SocialGouv/Tumeplay/commit/3470517c80c7df18896dbe5b953e281ef3e71328))
+
 # [1.28.0](https://github.com/SocialGouv/Tumeplay/compare/v1.27.5...v1.28.0) (2021-11-29)
 
 
