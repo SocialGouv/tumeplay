@@ -1,3 +1,10 @@
+## [1.28.2](https://github.com/SocialGouv/Tumeplay/compare/v1.28.1...v1.28.2) (2021-11-30)
+
+
+### Bug Fixes
+
+* check theme title in export ([255fc6a](https://github.com/SocialGouv/Tumeplay/commit/255fc6a879314a20b53d030896730e202ba7454f))
+
 ## [1.28.1](https://github.com/SocialGouv/Tumeplay/compare/v1.28.0...v1.28.1) (2021-11-30)
 
 
