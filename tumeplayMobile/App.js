@@ -8,7 +8,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContentsPage from './src/views/Contents';
 import ContentPage from './src/views/Contents/ContentPage';
 import Navbar from './src/components/Navbar';
-
+import QuizzStartPage from './src/views/QuizzStartPage';
+import {useQuery} from '@apollo/client';
+import {GET_THEMES} from './src/services/api/themes';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
@@ -18,6 +20,16 @@ const App = () => {
     isUnder25: null,
     firstname: '',
   });
+
+  const [thematiques, setThematiques] = useState([]);
+
+  const {data, loading} = useQuery(GET_THEMES);
+
+  useEffect(() => {
+    if (!loading) {
+      setThematiques(data.thematiques);
+    }
+  }, [loading, data]);
 
   const generateuserId = () => {
     const user_id =
@@ -64,6 +76,10 @@ const App = () => {
               component={ContentsPage}
             />
             <NavigationStack.Screen name="Content" component={ContentPage} />
+            <NavigationStack.Screen
+              name="QuizzStartPage"
+              component={QuizzStartPage}
+            />
           </NavigationStack.Navigator>
         </NavigationContainer>
       )}

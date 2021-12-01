@@ -31,6 +31,7 @@ const Navbar = ({navigation, route}) => {
             <MaterialIcons name="home" color={color} size={size} />
           ),
         }}
+        navigation={navigation}
       />
       <Tab.Screen
         name="Posts"

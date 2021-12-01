@@ -6,9 +6,10 @@ import {Colors, Fonts} from '../styles/Style';
 import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
+import {GET_THEMES} from '../services/api/themes';
 import FreshContentCard from '../components/Contents/FreshContentCard';
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
   const [points, setPoints] = useState(3000);
   const [freshContents, setFreshContents] = useState([]);
@@ -50,6 +51,7 @@ const HomePage = () => {
         text="Teste tes connaissances"
         size="intermediate"
         style={{backgroundColor: Colors.primary}}
+        onPress={() => navigation.navigate('QuizzStartPage')}
       />
       <Text style={styles.subtitle}> DERNIERS CONTENUS AJOUTÉS</Text>
       <FlatList
@@ -79,9 +81,10 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: Fonts.subtitle,
     alignSelf: 'flex-start',
+    marginHorizontal: 5,
   },
   listContainer: {
-    maxHeight: 250,
+    maxHeight: 300,
   },
 });
 
