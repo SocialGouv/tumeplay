@@ -6,7 +6,6 @@ import {Colors, Fonts} from '../styles/Style';
 import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
-import {GET_THEMES} from '../services/api/themes';
 import FreshContentCard from '../components/Contents/FreshContentCard';
 
 const HomePage = ({navigation}) => {
@@ -39,7 +38,7 @@ const HomePage = ({navigation}) => {
   };
 
   const renderItem = ({item}) => {
-    return <FreshContentCard content={item} />;
+    return <FreshContentCard content={item} navigation={navigation} />;
   };
 
   return (

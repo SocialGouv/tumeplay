@@ -11,6 +11,7 @@ import Navbar from './src/components/Navbar';
 import QuizzStartPage from './src/views/QuizzStartPage';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
+import AppContext from './AppContext';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
@@ -58,32 +59,38 @@ const App = () => {
     retrieveUserFromStorage();
   }, []);
 
+  const contextValues = {
+    thematiques,
+  };
+
   return (
-    <Container>
-      {!user?.isOnboarded && <Onboarding user={user} setUser={setUser} />}
-      {user?.isOnboarded && !user?.isSignedUp && (
-        <Signup user={user} setUser={setUser} />
-      )}
-      {user?.isOnboarded && user?.isSignedUp && (
-        <NavigationContainer>
-          <NavigationStack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}>
-            <NavigationStack.Screen name="Home" component={Navbar} />
-            <NavigationStack.Screen
-              name="ContentsPage"
-              component={ContentsPage}
-            />
-            <NavigationStack.Screen name="Content" component={ContentPage} />
-            <NavigationStack.Screen
-              name="QuizzStartPage"
-              component={QuizzStartPage}
-            />
-          </NavigationStack.Navigator>
-        </NavigationContainer>
-      )}
-    </Container>
+    <AppContext.Provider value={contextValues}>
+      <Container>
+        {!user?.isOnboarded && <Onboarding user={user} setUser={setUser} />}
+        {user?.isOnboarded && !user?.isSignedUp && (
+          <Signup user={user} setUser={setUser} />
+        )}
+        {user?.isOnboarded && user?.isSignedUp && (
+          <NavigationContainer>
+            <NavigationStack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}>
+              <NavigationStack.Screen name="Home" component={Navbar} />
+              <NavigationStack.Screen
+                name="ContentsPage"
+                component={ContentsPage}
+              />
+              <NavigationStack.Screen name="Content" component={ContentPage} />
+              <NavigationStack.Screen
+                name="QuizzStartPage"
+                component={QuizzStartPage}
+              />
+            </NavigationStack.Navigator>
+          </NavigationContainer>
+        )}
+      </Container>
+    </AppContext.Provider>
   );
 };
 

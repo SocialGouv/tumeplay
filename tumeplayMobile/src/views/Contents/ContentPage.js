@@ -25,7 +25,6 @@ const ContentPage = ({navigation, route}) => {
 
   useEffect(() => {
     if (data && !loading) {
-      console.log(data);
       setContent(data.contents[0]);
     }
   }, [content, data, loading]);

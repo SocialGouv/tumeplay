@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -10,9 +10,15 @@ import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
 import bg from '../assets/Quiiz_BG.png';
+import AppContext from '../../AppContext';
 
-const QuizzStartPage = ({navigation}) => {
-  console.log(navigation);
+const QuizzStartPage = ({navigation, route}) => {
+  const context = useContext(AppContext);
+
+  const thematiques = context?.thematiques;
+  const random = Math.floor(Math.random() * thematiques.length);
+  const thematique = thematiques[random];
+
   return (
     <ImageBackground source={bg} style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -26,7 +32,7 @@ const QuizzStartPage = ({navigation}) => {
             jusqu'à <Text style={styles.redText}>1000 points</Text>
           </Text>
         </View>
-        <CategorieIndicator />
+        <CategorieIndicator thematique={thematique} />
       </View>
       <Button size="medium" text="C'est parti" />
     </ImageBackground>
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     lineHeight: 27,
-    fontWeiht: '600',
+    fontWeight: '600',
   },
   redText: {
     color: Colors.primary,

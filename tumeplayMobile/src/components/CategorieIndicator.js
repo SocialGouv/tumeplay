@@ -1,11 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Colors} from '../styles/Style';
 
-const CategorieIndicator = ({categorie}) => {
+const CategorieIndicator = ({thematique}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>CATÉGORIE</Text>
-      <Text style={styles.text}>{categorie?.title} </Text>
+      <Text style={[styles.text, {color: Colors.primary}]}>
+        {thematique?.title}
+      </Text>
     </View>
   );
 };
@@ -13,7 +16,7 @@ const CategorieIndicator = ({categorie}) => {
 const styles = StyleSheet.create({
   container: {
     width: 240,
-    height: 60,
+    minHeight: 60,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -22,11 +25,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     backgroundColor: '#FFF',
+    padding: 15,
   },
   text: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '500',
+    textAlign: 'center',
   },
 });
 

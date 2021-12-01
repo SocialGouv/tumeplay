@@ -1,19 +1,27 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 import bg from '../../assets/test.png';
 
-const FreshContentCard = ({content}) => {
+const FreshContentCard = ({content, navigation}) => {
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
   return (
-    <ImageBackground style={styles.container} source={imageUrl}>
-      <ImageBackground style={styles.image} source={bg}>
-        <Text style={styles.level}>Niveau 1</Text>
-        <Text style={styles.title}>{content?.title}</Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Content', {content_id: content.id})}>
+      <ImageBackground style={styles.container} source={imageUrl}>
+        <ImageBackground style={styles.image} source={bg}>
+          <Text style={styles.level}>Niveau 1</Text>
+          <Text style={styles.title}>{content?.title}</Text>
+        </ImageBackground>
       </ImageBackground>
-    </ImageBackground>
+    </TouchableOpacity>
   );
 };
 
