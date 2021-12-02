@@ -15,6 +15,8 @@ const ContentsPage = props => {
     variables: {theme_id: route.params.theme_id},
   });
 
+  const contents_ids = contents.map(content => content.id);
+
   useEffect(() => {
     if (data && !loading) {
       setContents(data.contents);
@@ -26,6 +28,7 @@ const ContentsPage = props => {
       <ContentCard
         key={item.id}
         item={item}
+        contents_ids={contents_ids}
         backgroundColor={backgroundColor}
         navigation={navigation}
       />

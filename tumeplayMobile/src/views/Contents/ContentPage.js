@@ -17,10 +17,21 @@ import Feedback from '../../components/Feedback';
 
 const ContentPage = ({navigation, route}) => {
   const [content, setContent] = useState();
-  const content_id = route?.params?.content_id;
+  const [nextContentID, setNextContentID] = useState('');
+  const [remainingIDs, setRemainingIDs] = useState();
+
+  const randomNextID = () => {
+    let contents_ids = route?.params?.contents_ids;
+    let remaining_ids = contents_ids?.filter(id => content?.id !== id);
+    setRemainingIDs(remaining_ids);
+    const random = Math.floor(Math.random() * remaining_ids?.length);
+    if (remaining_ids) {
+      setNextContentID(remaining_ids[random]);
+    }
+  };
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
-    variables: {content_id: content_id},
+    variables: {content_id: route?.params?.content_id},
   });
 
   useEffect(() => {
@@ -29,10 +40,15 @@ const ContentPage = ({navigation, route}) => {
     }
   }, [content, data, loading]);
 
+  useEffect(() => {
+    randomNextID();
+  }, [content]);
+
   const nextContent = () => {
     navigation.navigate('Content', {
       //ATTENTION A MODIFIER
-      content_id: (parseInt(content?.id, 10) + 1).toString(),
+      content_id: nextContentID,
+      contents_ids: remainingIDs,
     });
   };
 

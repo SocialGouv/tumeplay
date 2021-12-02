@@ -10,9 +10,9 @@ import FreshContentCard from '../components/Contents/FreshContentCard';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
-  const [points, setPoints] = useState(3000);
+  const [points, setPoints] = useState(500);
   const [freshContents, setFreshContents] = useState([]);
-
+  const freshContentsIds = freshContents?.map(content => content.id);
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const HomePage = ({navigation}) => {
         <Text style={styles.text}>
           Plus que{' '}
           <Text style={[styles.text, {color: Colors.primary}]}>
-            {points} points
+            {3000 - points} points
           </Text>{' '}
           pour gagner ta box !
         </Text>
@@ -38,7 +38,13 @@ const HomePage = ({navigation}) => {
   };
 
   const renderItem = ({item}) => {
-    return <FreshContentCard content={item} navigation={navigation} />;
+    return (
+      <FreshContentCard
+        content={item}
+        navigation={navigation}
+        freshContentsIds={freshContentsIds}
+      />
+    );
   };
 
   return (
