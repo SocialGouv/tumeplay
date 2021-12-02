@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_questions_questions",
+  "info": {
+    "name": "questions",
+    "icon": "question"
+  },
+  "options": {},
+  "attributes": {
+    "question_9": {
+      "model": "question"
+    },
+    "question_10": {
+      "model": "question"
+    },
+    "question_1": {
+      "model": "question"
+    },
+    "question_2": {
+      "model": "question"
+    },
+    "question_3": {
+      "model": "question"
+    },
+    "question_4": {
+      "model": "question"
+    },
+    "question_5": {
+      "model": "question"
+    },
+    "question_6": {
+      "model": "question"
+    },
+    "question_7": {
+      "model": "question"
+    },
+    "question_8": {
+      "model": "question"
+    }
+  }
+}
