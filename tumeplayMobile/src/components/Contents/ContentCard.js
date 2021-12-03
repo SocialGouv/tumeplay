@@ -3,12 +3,17 @@ import {TouchableOpacity, Text, StyleSheet, View, Image} from 'react-native';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 
-const ContentCard = ({item, backgroundColor, navigation}) => {
+const ContentCard = ({item, backgroundColor, navigation, contents_ids}) => {
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Content', {content_id: item?.id})}
+      onPress={() =>
+        navigation.navigate('Content', {
+          content_id: item?.id,
+          contents_ids: contents_ids,
+        })
+      }
       style={[styles.container, {backgroundColor: backgroundColor}]}>
       <View style={styles.cardContainer}>
         <View style={styles.titleContainer}>

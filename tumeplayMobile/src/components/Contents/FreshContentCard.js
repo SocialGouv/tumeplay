@@ -9,12 +9,17 @@ import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 import bg from '../../assets/test.png';
 
-const FreshContentCard = ({content, navigation}) => {
+const FreshContentCard = ({content, navigation, freshContentsIds}) => {
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Content', {content_id: content.id})}>
+      onPress={() =>
+        navigation.navigate('Content', {
+          content_id: content.id,
+          contents_ids: freshContentsIds,
+        })
+      }>
       <ImageBackground style={styles.container} source={imageUrl}>
         <ImageBackground style={styles.image} source={bg}>
           <Text style={styles.level}>Niveau 1</Text>
