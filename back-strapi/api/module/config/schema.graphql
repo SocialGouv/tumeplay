@@ -1,0 +1,7 @@
+module.exports = {
+  definition:`
+    extend type Module {
+      questionsArray: [Question!]!
+    }
+  `,
+};

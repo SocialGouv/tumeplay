@@ -11,7 +11,6 @@ const questionsModuleToArray = (questions) => {
 	var indexes = new Array(10).fill(0);
 
 	indexes.forEach((osef, index) => {
-		strapi.log.debug('pushing question_' + (index + 1))
 		if (questions['question_' + (index + 1)]) {
 			questionsArray.push(questions['question_' + (index + 1)])
 		}
@@ -30,7 +29,7 @@ module.exports = {
     }
 
 		entities = entities.map(entity => {
-			entity.questions = questionsModuleToArray(entity.questions)
+			entity.questionsArray = questionsModuleToArray(entity.questions)
 			return entity
 		})
 
@@ -41,7 +40,7 @@ module.exports = {
 
     let entity = await strapi.services.module.findOne({ id });
 
-		entity.questions = questionsModuleToArray(entity.questions);
+		entity.questionsArray = questionsModuleToArray(entity.questions);
 
     return entity;
 	}
