@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,13 +11,24 @@ import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
 import bg from '../assets/Quiiz_BG.png';
 import AppContext from '../../AppContext';
+import {useQuery} from '@apollo/client';
+import {GET_MODULES} from '../services/api/modules';
 
 const QuizzStartPage = ({navigation, route}) => {
   const context = useContext(AppContext);
-
   const thematiques = context?.thematiques;
   const random = Math.floor(Math.random() * thematiques.length);
   const thematique = thematiques[random];
+
+  const [module, setModule] = useState();
+
+  const {data, loading} = useQuery(GET_MODULES);
+
+  useEffect(() => {
+    if (data && !loading) {
+      console.log(data);
+    }
+  }, [data, loading]);
 
   return (
     <ImageBackground source={bg} style={styles.container}>
@@ -34,7 +45,13 @@ const QuizzStartPage = ({navigation, route}) => {
         </View>
         <CategorieIndicator thematique={thematique} />
       </View>
-      <Button size="medium" text="C'est parti" />
+      <Button
+        size="medium"
+        text="C'est parti"
+        onPress={() => {
+          navigation.navigate('QuizzModule', {module: module});
+        }}
+      />
     </ImageBackground>
   );
 };

@@ -12,6 +12,7 @@ import QuizzStartPage from './src/views/QuizzStartPage';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
+import QuizzModule from './src/components/Quizz/QuizzModule';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
@@ -85,6 +86,10 @@ const App = () => {
               <NavigationStack.Screen
                 name="QuizzStartPage"
                 component={QuizzStartPage}
+              />
+              <NavigationStack.Screen
+                name="QuizzModule"
+                component={QuizzModule}
               />
             </NavigationStack.Navigator>
           </NavigationContainer>
