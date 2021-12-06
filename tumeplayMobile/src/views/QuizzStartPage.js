@@ -21,12 +21,14 @@ const QuizzStartPage = ({navigation, route}) => {
   const thematique = thematiques[random];
 
   const [module, setModule] = useState();
-
   const {data, loading} = useQuery(GET_MODULES);
+  const [questions, setQuestions] = useState([]);
+  const questions_ids = questions.map(ques => ques.id);
 
   useEffect(() => {
     if (data && !loading) {
-      console.log(data);
+      setModule(data.modules);
+      setQuestions(data.modules[0]?.questionsArray);
     }
   }, [data, loading]);
 
@@ -49,7 +51,10 @@ const QuizzStartPage = ({navigation, route}) => {
         size="medium"
         text="C'est parti"
         onPress={() => {
-          navigation.navigate('QuizzModule', {module: module});
+          navigation.navigate('QuizzModule', {
+            question: questions[Math.floor(Math.random() * questions?.length)],
+            questions_ids: questions_ids,
+          });
         }}
       />
     </ImageBackground>

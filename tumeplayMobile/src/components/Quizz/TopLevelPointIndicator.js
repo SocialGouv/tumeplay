@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import coin from '../assets/coin.png';
+import coin from '../../assets/coin.png';
 
-const LevelPointsIndicator = ({points}) => {
+const TopLevelPointIndicator = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>NIVEAU 1</Text>
+      <Text>Niveau 1</Text>
       <View style={styles.pointsContainer}>
         <Image source={coin} style={styles.image} />
-        <Text style={styles.text}>{points} / 3000 </Text>
+        <Text>300/3000</Text>
       </View>
     </View>
   );
@@ -16,27 +16,29 @@ const LevelPointsIndicator = ({points}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 180,
-    height: 50,
+    width: '50%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    marginVertical: 24,
     alignItems: 'center',
-    borderColor: '#ECC160',
-    borderWidth: 1,
-    borderRadius: 8,
-    backgroundColor: '#FFF',
   },
   pointsContainer: {
+    width: '50%',
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    marginRight: 18,
+    borderRadius: 8,
   },
-  text: {},
   image: {
     width: 15,
     height: 15,
-    marginRight: 5,
+    margin: 5,
   },
 });
 
-export default LevelPointsIndicator;
+export default TopLevelPointIndicator;

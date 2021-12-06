@@ -5,16 +5,19 @@
  * to customize this controller
  */
 
-const questionsModuleToArray = (questions) => {
+const questionsModuleToArray = async (questions) => {
   let questionsArray = [];
 
   var indexes = new Array(10).fill(0);
 
-  indexes.forEach((osef, index) => {
+  for (const index of indexes.keys()) {
     if (questions["question_" + (index + 1)]) {
-      questionsArray.push(questions["question_" + (index + 1)]);
+      const question = await strapi.services.question.findOne({
+        id: questions["question_" + (index + 1)].id,
+      });
+      questionsArray.push(question);
     }
-  });
+  }
 
   return questionsArray;
 };
@@ -28,10 +31,12 @@ module.exports = {
       entities = await strapi.services.module.find(ctx.query);
     }
 
-    entities = entities.map((entity) => {
-      entity.questionsArray = questionsModuleToArray(entity.questions);
-      return entity;
-    });
+    entities = await Promise.all(
+      entities.map(async (entity) => {
+        entity.questionsArray = await questionsModuleToArray(entity.questions);
+        return entity;
+      })
+    );
 
     return entities;
   },
