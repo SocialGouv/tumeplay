@@ -1,3 +1,10 @@
+## [1.28.3](https://github.com/SocialGouv/Tumeplay/compare/v1.28.2...v1.28.3) (2021-12-06)
+
+
+### Bug Fixes
+
+* add user_data for guyane orders export ([#247](https://github.com/SocialGouv/Tumeplay/issues/247)) ([c988c6f](https://github.com/SocialGouv/Tumeplay/commit/c988c6fcb90fac7b53838c16f9f04f9b2dcd0ae0))
+
 ## [1.28.2](https://github.com/SocialGouv/Tumeplay/compare/v1.28.1...v1.28.2) (2021-11-30)
 
 
