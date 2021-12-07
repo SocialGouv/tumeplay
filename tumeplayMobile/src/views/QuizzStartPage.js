@@ -52,6 +52,7 @@ const QuizzStartPage = ({navigation, route}) => {
         text="C'est parti"
         onPress={() => {
           navigation.navigate('QuizzModule', {
+            questions: questions,
             question: questions[Math.floor(Math.random() * questions?.length)],
             questions_ids: questions_ids,
           });
