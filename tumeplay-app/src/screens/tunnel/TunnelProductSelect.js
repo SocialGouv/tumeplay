@@ -98,7 +98,7 @@ export default function TunnelProductSelect(props) {
   const filteredItemByPath = selectedItem => {
     if (
       UserService.localUser.path === 'C' ||
-      UserService.localUser.path === 'D'
+      UserService.localUser.path === 'B'
     ) {
       let tmpSelectedITem = {...selectedItem};
       switch (tmpSelectedITem.number) {
