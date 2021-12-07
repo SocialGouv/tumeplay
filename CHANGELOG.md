@@ -1,3 +1,10 @@
+## [1.28.4](https://github.com/SocialGouv/Tumeplay/compare/v1.28.3...v1.28.4) (2021-12-07)
+
+
+### Bug Fixes
+
+* **front:** AB testing correction with 4 paths ([#248](https://github.com/SocialGouv/Tumeplay/issues/248)) ([f83acdc](https://github.com/SocialGouv/Tumeplay/commit/f83acdc6ccf881066b15e5f9817e86d28706a983))
+
 ## [1.28.3](https://github.com/SocialGouv/Tumeplay/compare/v1.28.2...v1.28.3) (2021-12-06)
 
 
