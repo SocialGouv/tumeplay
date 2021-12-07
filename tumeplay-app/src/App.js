@@ -26,10 +26,10 @@ const App = () => {
       if (random < 25) {
         UserService.setPath('A');
         Tracking.questionPath('A');
-      } else if (25 < random < 50) {
+      } else if (random > 25 && random < 50) {
         UserService.setPath('B');
         Tracking.questionPath('B');
-      } else if (50 < random < 75) {
+      } else if (random > 50 && random < 75) {
         UserService.setPath('C');
         Tracking.questionPath('C');
       } else {
