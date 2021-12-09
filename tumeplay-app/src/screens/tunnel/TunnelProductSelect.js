@@ -98,7 +98,7 @@ export default function TunnelProductSelect(props) {
   const filteredItemByPath = selectedItem => {
     if (
       UserService.localUser.path === 'C' ||
-      UserService.localUser.path === 'B'
+      UserService.localUser.path === 'D'
     ) {
       let tmpSelectedITem = {...selectedItem};
       switch (tmpSelectedITem.number) {
@@ -205,6 +205,8 @@ export default function TunnelProductSelect(props) {
       onClose={_toggleModal}
     />
   ));
+
+  console.log(selectedItem);
 
   async function orderProduct(selectedProducts) {
     const _tokens = await UserService.getTokensAmount();

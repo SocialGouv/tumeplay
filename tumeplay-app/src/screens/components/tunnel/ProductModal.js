@@ -114,7 +114,7 @@ export default function ProductModal(props) {
 
   function onOrder() {
     if (props.item.available || productBox.__typename === 'BoxSurMesure') {
-      Tracking.orderButtonTriggered();
+      Tracking.BoxChoiceOrderButtonTriggered();
       props.onOrder(selectedItems);
     } else {
       stayInTouch();
