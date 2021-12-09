@@ -13,6 +13,7 @@ import {useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
+import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
@@ -90,6 +91,10 @@ const App = () => {
               <NavigationStack.Screen
                 name="QuizzModule"
                 component={QuizzModule}
+              />
+              <NavigationStack.Screen
+                name="QuizzFinishScreen"
+                component={QuizzFinishScreen}
               />
             </NavigationStack.Navigator>
           </NavigationContainer>

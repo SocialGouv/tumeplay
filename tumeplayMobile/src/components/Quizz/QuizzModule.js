@@ -19,13 +19,14 @@ const QuizzModule = ({navigation, route}) => {
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
   const [displayResponse, setDisplayResponse] = useState(false);
-  const [correctlyAnswered, setCorrectlyAnswered] = useState([]);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
+  const [wrongAnswers, setWrongAnswers] = useState([]);
   const [remainingQuestions, setRemainingQuestions] = useState();
   const remainings_ids = questions_ids?.filter(id => id !== question.id);
 
   const formatAnswers = () => {
     let tmpResponses = [];
-    for (let [key, value] of Object.entries(question.responses)) {
+    for (let [key, value] of Object.entries(question?.responses)) {
       key = key.substring(9, 10);
       tmpResponses?.push({key, value});
     }
@@ -34,10 +35,12 @@ const QuizzModule = ({navigation, route}) => {
   };
 
   const displayAnswerText = ans => {
-    let tmpRep = [];
     if (ans === responses[responses?.length - 1]?.value) {
-      tmpRep.push(question);
-      setCorrectlyAnswered([...tmpRep]);
+      correctAnswers.push(question);
+      setCorrectAnswers([...correctAnswers]);
+    } else {
+      wrongAnswers.push(question);
+      setWrongAnswers([...wrongAnswers]);
     }
     setHasAnswered(!hasAnswered);
     setDisplayResponse(!displayResponse);
@@ -57,7 +60,7 @@ const QuizzModule = ({navigation, route}) => {
   });
 
   const goToNextQuestion = () => {
-    if (remainingQuestions.length > correctlyAnswered.length) {
+    if (remainingQuestions.length + 1 > correctAnswers.length) {
       navigation.navigate('QuizzModule', {
         questions: remainingQuestions,
         question:
@@ -67,7 +70,10 @@ const QuizzModule = ({navigation, route}) => {
       setHasAnswered(!hasAnswered);
       setDisplayResponse(!displayResponse);
     } else {
-      navigation.navigate('Home');
+      navigation.navigate('QuizzFinishScreen', {
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers,
+      });
     }
   };
 
@@ -80,12 +86,12 @@ const QuizzModule = ({navigation, route}) => {
     <ImageBackground source={bg} style={styles.container}>
       <View style={styles.levelIndicator}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>RETOUR</Text>
+          <Text>Retour</Text>
         </TouchableOpacity>
         <TopLevelPointIndicator />
       </View>
       <View style={styles.stepIndicator}>
-        <Text style={styles.indicator}>{remainingQuestions?.length}</Text>
+        <Text style={styles.indicator}>{remainingQuestions?.length + 1}</Text>
       </View>
       <Text style={styles.question}>{question?.text_question}</Text>
       <View style={styles.answersContainer}>{displayAnswer}</View>
