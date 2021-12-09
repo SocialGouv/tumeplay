@@ -1,3 +1,10 @@
+## [1.28.5](https://github.com/SocialGouv/Tumeplay/compare/v1.28.4...v1.28.5) (2021-12-09)
+
+
+### Bug Fixes
+
+* **app:** Adding trackers for better segmentation and fixing order process ([#251](https://github.com/SocialGouv/Tumeplay/issues/251)) ([74bd1fe](https://github.com/SocialGouv/Tumeplay/commit/74bd1fe4871cdae8ee17179d005b2765b5f50ea8))
+
 ## [1.28.4](https://github.com/SocialGouv/Tumeplay/compare/v1.28.3...v1.28.4) (2021-12-07)
 
 
