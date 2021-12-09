@@ -10,6 +10,7 @@ import User from '../../../services/User';
 import Colors from '../../../styles/Color';
 
 import useIsMounted from '../../../hooks/isMounted';
+import Tracking from '../../../services/Tracking';
 
 CustomHeaderRight.propTypes = {
   navigation: PropTypes.object,
@@ -149,6 +150,7 @@ export default function CustomHeaderRight(props) {
     if (isAgeMoreThan25 === null) {
       setShowNotEnoughModal(!showNotEnoughModal);
     }
+    Tracking.pointsOrderButtonTriggered();
   }
 
   function _toggleNotEnoughModal() {
