@@ -6,9 +6,7 @@ const CategorieIndicator = ({thematique}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>CATÉGORIE</Text>
-      <Text style={[styles.text, {color: Colors.primary}]}>
-        {thematique?.title}
-      </Text>
+      <Text style={[styles.text, {color: Colors.primary}]}>{thematique}</Text>
     </View>
   );
 };

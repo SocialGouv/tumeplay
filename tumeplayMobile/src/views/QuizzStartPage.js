@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -10,27 +10,28 @@ import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
 import bg from '../assets/Quiiz_BG.png';
-import AppContext from '../../AppContext';
 import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 
 const QuizzStartPage = ({navigation, route}) => {
-  const context = useContext(AppContext);
-  const thematiques = context?.thematiques;
-  const random = Math.floor(Math.random() * thematiques.length);
-  const thematique = thematiques[random];
-
-  const [module, setModule] = useState();
   const {data, loading} = useQuery(GET_MODULES);
+  const [modules, setModules] = useState(null);
   const [questions, setQuestions] = useState([]);
-  const questions_ids = questions.map(ques => ques.id);
+  const random = Math.floor(Math.random() * modules?.length);
+  const [thematique, setThematique] = useState();
 
   useEffect(() => {
     if (data && !loading) {
-      setModule(data.modules);
-      setQuestions(data.modules[0]?.questionsArray);
+      setModules(data.modules);
     }
   }, [data, loading]);
+
+  useEffect(() => {
+    if (modules) {
+      setQuestions(modules[random]?.questionsArray);
+      setThematique(modules[random]?.thematique.title);
+    }
+  }, [modules]);
 
   return (
     <ImageBackground source={bg} style={styles.container}>
@@ -54,7 +55,6 @@ const QuizzStartPage = ({navigation, route}) => {
           navigation.navigate('QuizzModule', {
             questions: questions,
             question: questions[Math.floor(Math.random() * questions?.length)],
-            questions_ids: questions_ids,
           });
         }}
       />

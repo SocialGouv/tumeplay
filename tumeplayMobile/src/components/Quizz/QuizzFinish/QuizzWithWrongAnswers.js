@@ -10,7 +10,20 @@ import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
 
 const QuizzWithWrongAnswers = props => {
-  const {correctAnswers, wrongAnswers} = props;
+  const {correctAnswers, wrongAnswers, navigation} = props;
+
+  console.log('WRONGSCREEN', correctAnswers.length + wrongAnswers.length);
+
+  const restartQuizz = () => {
+    if (wrongAnswers.length > 0) {
+      navigation.navigate('QuizzModule', {
+        questions: wrongAnswers,
+        question: wrongAnswers[0],
+        restart: true,
+      });
+    }
+  };
+
   return (
     <ImageBackground source={bg} style={styles.container}>
       <TopLevelPointIndicator style={styles.levelIndicator} />
@@ -44,7 +57,12 @@ const QuizzWithWrongAnswers = props => {
         </Text>
       </View>
       <Image source={clap} />
-      <Button text={'Je continue'} size={'large'} style={{marginBottom: 50}} />
+      <Button
+        text={'Je continue'}
+        size={'large'}
+        style={{marginBottom: 50}}
+        onPress={() => restartQuizz()}
+      />
     </ImageBackground>
   );
 };

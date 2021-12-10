@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import coin from '../../assets/coin.png';
 
-const TopLevelPointIndicator = () => {
+const TopLevelPointIndicator = ({style}) => {
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <Text>Niveau 1</Text>
       <View style={styles.pointsContainer}>
         <Image source={coin} style={styles.image} />

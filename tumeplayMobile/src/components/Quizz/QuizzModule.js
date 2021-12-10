@@ -15,14 +15,13 @@ import TopLevelPointIndicator from './TopLevelPointIndicator';
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const question = route?.params?.question;
-  const questions_ids = route?.params?.questions_ids;
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
   const [displayResponse, setDisplayResponse] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
-  const [remainingQuestions, setRemainingQuestions] = useState();
-  const remainings_ids = questions_ids?.filter(id => id !== question.id);
+  const [remainingQuestions, setRemainingQuestions] = useState([]);
+  const restart = route?.params?.restart;
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -60,26 +59,32 @@ const QuizzModule = ({navigation, route}) => {
   });
 
   const goToNextQuestion = () => {
-    if (remainingQuestions.length + 1 > correctAnswers.length) {
-      navigation.navigate('QuizzModule', {
-        questions: remainingQuestions,
-        question:
-          remainingQuestions[Math.floor(Math.random() * questions?.length)],
-        questions_ids: remainings_ids,
-      });
-      setHasAnswered(!hasAnswered);
-      setDisplayResponse(!displayResponse);
-    } else {
+    if (remainingQuestions.length === 0) {
       navigation.navigate('QuizzFinishScreen', {
         correctAnswers: correctAnswers,
         wrongAnswers: wrongAnswers,
       });
+    } else {
+      navigation.navigate('QuizzModule', {
+        questions: remainingQuestions,
+        question:
+          remainingQuestions[
+            Math.floor(Math.random() * remainingQuestions?.length)
+          ],
+      });
+      setHasAnswered(!hasAnswered);
+      setDisplayResponse(!displayResponse);
     }
   };
 
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     formatAnswers();
+    if (restart) {
+      setDisplayResponse(!displayResponse);
+      setHasAnswered(!hasAnswered);
+      setWrongAnswers([]);
+    }
   }, [question]);
 
   return (
@@ -91,7 +96,7 @@ const QuizzModule = ({navigation, route}) => {
         <TopLevelPointIndicator />
       </View>
       <View style={styles.stepIndicator}>
-        <Text style={styles.indicator}>{remainingQuestions?.length + 1}</Text>
+        <Text style={styles.indicator}>{questions?.length}</Text>
       </View>
       <Text style={styles.question}>{question?.text_question}</Text>
       <View style={styles.answersContainer}>{displayAnswer}</View>
