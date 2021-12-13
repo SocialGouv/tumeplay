@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/SocialGouv/Tumeplay/compare/v1.28.5...v1.29.0) (2021-12-13)
+
+
+### Features
+
+* add referents multiple link aside old referent link ([#256](https://github.com/SocialGouv/Tumeplay/issues/256)) ([a77bc37](https://github.com/SocialGouv/Tumeplay/commit/a77bc37d2e255bb1ee06edd4eec9686c3b332159))
+
 ## [1.28.5](https://github.com/SocialGouv/Tumeplay/compare/v1.28.4...v1.28.5) (2021-12-09)
 
 
