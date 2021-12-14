@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import AppContext from '../../AppContext';
 import coin from '../assets/coin.png';
 
-const LevelPointsIndicator = ({points}) => {
+const LevelPointsIndicator = ({style}) => {
+  const context = useContext(AppContext);
+
+  const points = context.points;
+
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <Text style={styles.text}>NIVEAU 1</Text>
       <View style={styles.pointsContainer}>
         <Image source={coin} style={styles.image} />
@@ -16,7 +21,7 @@ const LevelPointsIndicator = ({points}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 180,
+    width: 200,
     height: 50,
     display: 'flex',
     flexDirection: 'row',
@@ -26,12 +31,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     backgroundColor: '#FFF',
+    paddingHorizontal: 5,
   },
   pointsContainer: {
     display: 'flex',
     flexDirection: 'row',
   },
-  text: {},
+  text: {
+    fontWeight: '600',
+  },
   image: {
     width: 15,
     height: 15,

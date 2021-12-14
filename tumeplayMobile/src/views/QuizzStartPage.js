@@ -12,6 +12,7 @@ import {Colors, Fonts} from '../styles/Style';
 import bg from '../assets/Quiiz_BG.png';
 import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
+import _ from 'lodash';
 
 const QuizzStartPage = ({navigation, route}) => {
   const {data, loading} = useQuery(GET_MODULES);
@@ -35,9 +36,12 @@ const QuizzStartPage = ({navigation, route}) => {
 
   return (
     <ImageBackground source={bg} style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.title}> Joue et teste tes connaissances !</Text>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
+        <Text>Retour</Text>
       </TouchableOpacity>
+      <Text style={styles.title}> Joue et teste tes connaissances !</Text>
       <View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Prêt.e ?</Text>
@@ -51,12 +55,14 @@ const QuizzStartPage = ({navigation, route}) => {
       <Button
         size="medium"
         text="C'est parti"
+        isDisabled={loading}
+        icon
         onPress={() => {
           navigation.navigate('QuizzModule', {
-            questions: questions,
-            question: questions[Math.floor(Math.random() * questions?.length)],
+            questions: _.shuffle(questions),
           });
         }}
+        style={styles.button}
       />
     </ImageBackground>
   );
@@ -66,12 +72,17 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    padding: 15,
   },
   title: {
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
+    marginTop: 90,
+    marginBottom: 48,
   },
   textContainer: {
     width: 230,
@@ -89,6 +100,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     fontWeight: '600',
+  },
+  button: {
+    position: 'absolute',
+    bottom: 50,
   },
 });
 

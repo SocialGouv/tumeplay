@@ -22,7 +22,10 @@ const App = () => {
     isSignedUp: false,
     isUnder25: null,
     firstname: '',
+    points: null,
   });
+
+  const [points, setPoints] = useState(0);
 
   const [thematiques, setThematiques] = useState([]);
 
@@ -63,6 +66,8 @@ const App = () => {
 
   const contextValues = {
     thematiques,
+    points,
+    setPoints,
   };
 
   return (

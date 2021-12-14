@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
 import {Fonts} from '../../../styles/Style';
+import AppContext from '../../../../AppContext';
 
-const QuizzAllRight = () => {
+const QuizzAllRight = ({pointsEarned}) => {
+  const context = useContext(AppContext);
+  const points = context.points;
+  const setPoints = context.setPoints;
+
+  useEffect(() => {
+    setPoints(points + pointsEarned);
+  }, []);
+
   return (
     <View style={styles.container}>
       <TopLevelPointIndicator style={styles.pointIndicator} />

@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    paddingTop: 21,
+    paddingBottom: 50,
   },
   titleContainer: {
     alignItems: 'center',

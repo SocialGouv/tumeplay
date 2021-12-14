@@ -6,14 +6,17 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
   const wrongAnswers = route?.params?.wrongAnswers;
 
+  const pointsEarned = correctAnswers.length * 100;
+
   return wrongAnswers.length > 1 ? (
-    <QuizzAllRight />
-  ) : (
     <QuizzWithWrongAnswers
       correctAnswers={correctAnswers}
       wrongAnswers={wrongAnswers}
+      pointsEarned={pointsEarned}
       navigation={navigation}
     />
+  ) : (
+    <QuizzAllRight pointsEarned={pointsEarned} />
   );
 };
 

@@ -18,7 +18,8 @@
     "react-native-screens": "^3.9.0",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-svg": "^12.1.1",
-    "react-native-swiper": "^1.6.0"
+    "react-native-swiper": "^1.6.0",
+    "react-polygon": "^0.2.0"
   },
   "devDependencies": {
     "@apollo/client": "^3.4.17",
@@ -33,6 +34,7 @@
     "eslint": "7.14.0",
     "graphql": "^16.0.1",
     "jest": "26.6.3",
+    "lodash": "^4.17.21",
     "metro-react-native-babel-preset": "0.66.2",
     "react-native-dotenv": "^3.3.0",
     "react-native-encrypted-storage": "^4.0.2",

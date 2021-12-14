@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import AppContext from '../../../AppContext';
 import coin from '../../assets/coin.png';
 
 const TopLevelPointIndicator = ({style}) => {
+  const context = useContext(AppContext);
+  const points = context.points;
+
   return (
     <View style={[style, styles.container]}>
       <Text>Niveau 1</Text>
       <View style={styles.pointsContainer}>
         <Image source={coin} style={styles.image} />
-        <Text>300/3000</Text>
+        <Text>{points} / 3000</Text>
       </View>
     </View>
   );

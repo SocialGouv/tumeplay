@@ -11,17 +11,19 @@ import {Fonts} from '../../styles/Style';
 import Button from '../Button';
 import QuizzAnswerButton from './QuizzAnswerButton';
 import TopLevelPointIndicator from './TopLevelPointIndicator';
+import _ from 'lodash';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
-  const question = route?.params?.question;
+  const question = questions[0];
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
   const [displayResponse, setDisplayResponse] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [remainingQuestions, setRemainingQuestions] = useState([]);
-  const restart = route?.params?.restart;
+  const retry = route?.params?.retry;
+  const [disabled, setDisabled] = useState(false);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -41,6 +43,7 @@ const QuizzModule = ({navigation, route}) => {
       wrongAnswers.push(question);
       setWrongAnswers([...wrongAnswers]);
     }
+    setDisabled(!disabled);
     setHasAnswered(!hasAnswered);
     setDisplayResponse(!displayResponse);
   };
@@ -52,6 +55,7 @@ const QuizzModule = ({navigation, route}) => {
           answer={ans}
           correctAnswer={responses[responses?.length - 1]?.value}
           hasAnswered={hasAnswered}
+          disabled={disabled}
           key={ans.key}
           onPress={() => displayAnswerText(ans.key)}
         />
@@ -66,12 +70,9 @@ const QuizzModule = ({navigation, route}) => {
       });
     } else {
       navigation.navigate('QuizzModule', {
-        questions: remainingQuestions,
-        question:
-          remainingQuestions[
-            Math.floor(Math.random() * remainingQuestions?.length)
-          ],
+        questions: _.shuffle(remainingQuestions),
       });
+      setDisabled(!disabled);
       setHasAnswered(!hasAnswered);
       setDisplayResponse(!displayResponse);
     }
@@ -80,9 +81,10 @@ const QuizzModule = ({navigation, route}) => {
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     formatAnswers();
-    if (restart) {
+    if (retry) {
       setDisplayResponse(!displayResponse);
       setHasAnswered(!hasAnswered);
+      setDisabled(!disabled);
       setWrongAnswers([]);
     }
   }, [question]);

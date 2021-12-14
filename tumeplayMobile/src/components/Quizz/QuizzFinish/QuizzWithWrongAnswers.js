@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
@@ -8,21 +8,27 @@ import coin from '../../../assets/coin.png';
 import {Fonts} from '../../../styles/Style';
 import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
+import _ from 'lodash';
+import AppContext from '../../../../AppContext';
 
 const QuizzWithWrongAnswers = props => {
-  const {correctAnswers, wrongAnswers, navigation} = props;
+  const {correctAnswers, wrongAnswers, navigation, pointsEarned} = props;
 
-  console.log('WRONGSCREEN', correctAnswers.length + wrongAnswers.length);
-
+  const context = useContext(AppContext);
+  const points = context.points;
+  const setPoints = context.setPoints;
   const restartQuizz = () => {
     if (wrongAnswers.length > 0) {
       navigation.navigate('QuizzModule', {
-        questions: wrongAnswers,
-        question: wrongAnswers[0],
-        restart: true,
+        questions: _.shuffle(wrongAnswers),
+        retry: true,
       });
     }
   };
+
+  useEffect(() => {
+    setPoints(points + pointsEarned);
+  }, []);
 
   return (
     <ImageBackground source={bg} style={styles.container}>
@@ -34,9 +40,7 @@ const QuizzWithWrongAnswers = props => {
       <View style={styles.pointsContainer}>
         <Text style={styles.points}>
           {' '}
-          <Text style={styles.boldPoints}>
-            + {correctAnswers?.length * 100}{' '}
-          </Text>
+          <Text style={styles.boldPoints}>+ {pointsEarned} </Text>
           points
         </Text>
         <Image source={coin} style={styles.coin} />

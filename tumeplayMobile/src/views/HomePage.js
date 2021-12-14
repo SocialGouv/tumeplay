@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {View, StyleSheet, Text, FlatList} from 'react-native';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
@@ -7,10 +7,11 @@ import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
 import FreshContentCard from '../components/Contents/FreshContentCard';
+import AppContext from '../../AppContext';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
-  const [points, setPoints] = useState(500);
+  const points = useContext(AppContext).points;
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);
@@ -57,6 +58,7 @@ const HomePage = ({navigation}) => {
         size="intermediate"
         style={{backgroundColor: Colors.primary}}
         onPress={() => navigation.navigate('QuizzStartPage')}
+        icon
       />
       <Text style={styles.subtitle}> DERNIERS CONTENUS AJOUTÉS</Text>
       <FlatList
