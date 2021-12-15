@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {REACT_APP_URL} from '@env';
-import {Fonts} from '../../styles/Style';
+import {Colors, Fonts} from '../../styles/Style';
 import bg from '../../assets/test.png';
 import Button from '../../components/Button';
 import {useQuery} from '@apollo/client';
@@ -19,6 +19,7 @@ const ContentPage = ({navigation, route}) => {
   const [content, setContent] = useState();
   const [nextContentID, setNextContentID] = useState('');
   const [remainingIDs, setRemainingIDs] = useState();
+  const [count, setCount] = useState(0);
 
   const randomNextID = () => {
     let contents_ids = route?.params?.contents_ids;
@@ -46,10 +47,14 @@ const ContentPage = ({navigation, route}) => {
 
   const nextContent = () => {
     navigation.navigate('Content', {
-      //ATTENTION A MODIFIER
       content_id: nextContentID,
       contents_ids: remainingIDs,
     });
+    setCount(count + 1);
+  };
+
+  const goToQuizz = () => {
+    navigation.navigate('QuizzStartPage');
   };
 
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
@@ -78,12 +83,21 @@ const ContentPage = ({navigation, route}) => {
           <View style={styles.divider} />
         </View>
       </ScrollView>
-      <Button
-        size={'medium'}
-        text={'Suivant'}
-        style={styles.button}
-        onPress={() => nextContent()}
-      />
+      {count === 4 ? (
+        <Button
+          size="large"
+          text="Joue et teste tes connaissances"
+          style={styles.redButton}
+          onPress={() => goToQuizz()}
+        />
+      ) : (
+        <Button
+          size={'medium'}
+          text={'Suivant'}
+          style={styles.button}
+          onPress={() => nextContent()}
+        />
+      )}
     </View>
   );
 };
@@ -163,6 +177,12 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     bottom: 50,
+  },
+  redButton: {
+    position: 'absolute',
+    bottom: 50,
+    backgroundColor: Colors.primary,
+    color: '#FFFFFF',
   },
 });
 

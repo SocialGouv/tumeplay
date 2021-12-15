@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   listContainer: {
-    maxHeight: 300,
+    maxHeight: 350,
   },
 });
 

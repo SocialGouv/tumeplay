@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
@@ -7,10 +7,12 @@ import Button from '../../Button';
 import {Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 
-const QuizzAllRight = ({pointsEarned}) => {
+const QuizzAllRight = ({pointsEarned, navigation}) => {
   const context = useContext(AppContext);
   const points = context.points;
   const setPoints = context.setPoints;
+
+  console.log('POINTS', pointsEarned);
 
   useEffect(() => {
     setPoints(points + pointsEarned);
@@ -26,6 +28,9 @@ const QuizzAllRight = ({pointsEarned}) => {
       <Text style={styles.description}>
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.text}>Non pas tout de suite</Text>
+      </TouchableOpacity>
       <Button text={'Je continue'} size={'large'} style={styles.button} />
     </View>
   );
@@ -65,6 +70,11 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     textAlign: 'center',
     paddingHorizontal: 15,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 24,
   },
   button: {
     position: 'absolute',

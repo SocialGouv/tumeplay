@@ -1,20 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Platform, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Platform} from 'react-native';
 
 const Container = ({children}) => {
   const displayContainer =
     Platform.OS === 'ios' ? (
-      <SafeAreaView style={style.container}>{children}</SafeAreaView>
+      <View style={styles.container}>{children}</View>
     ) : (
-      <View style={style.container}>{children}</View>
+      <View style={styles.container}>{children}</View>
     );
 
   return displayContainer;
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 40 : 2,
   },
 });
 

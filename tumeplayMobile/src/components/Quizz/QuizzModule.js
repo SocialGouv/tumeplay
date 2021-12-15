@@ -86,6 +86,7 @@ const QuizzModule = ({navigation, route}) => {
       setHasAnswered(!hasAnswered);
       setDisabled(!disabled);
       setWrongAnswers([]);
+      setCorrectAnswers([]);
     }
   }, [question]);
 
@@ -168,7 +169,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   bottomButton: {
-    marginTop: 100,
+    position: 'absolute',
+    bottom: 45,
   },
 });
 

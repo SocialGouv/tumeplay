@@ -25,6 +25,7 @@ const Signup = ({user, setUser}) => {
 
   const handleValidation = async () => {
     tmpUser.isSignedUp = true;
+    tmpUser.points = 0;
     setUser({...tmpUser});
     try {
       await EncryptedStorage.setItem(
@@ -35,6 +36,7 @@ const Signup = ({user, setUser}) => {
           isSignedUp: tmpUser.isSignedUp,
           isUnder25: tmpUser.isUnder25,
           firstname: tmpUser.firstname,
+          points: tmpUser.points,
         }),
       );
     } catch (error) {

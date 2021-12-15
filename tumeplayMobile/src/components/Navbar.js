@@ -19,7 +19,8 @@ const Navbar = ({navigation, route}) => {
         tabBarInactiveTintColor: Colors.black,
         tabBarItemStyle: {padding: 5},
         tabBarStyle: {
-          position: 'absolute',
+          position: 'relative',
+          bottom: 0,
           backgroundColor: Colors.lightCorail,
         },
       }}>
@@ -38,7 +39,7 @@ const Navbar = ({navigation, route}) => {
         component={Thematiques}
         options={{
           tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="description" color={color} size={size} />
+            <MaterialIcons name="import-contacts" color={color} size={size} />
           ),
         }}
       />
@@ -47,7 +48,7 @@ const Navbar = ({navigation, route}) => {
         component={QuizzStartPage}
         options={{
           tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="assignment" color={color} size={size} />
+            <MaterialIcons name="rule" color={color} size={size} />
           ),
         }}
       />
@@ -56,7 +57,7 @@ const Navbar = ({navigation, route}) => {
         component={Journey}
         options={{
           tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="leaderboard" color={color} size={size} />
+            <MaterialIcons name="timeline" color={color} size={size} />
           ),
         }}
       />

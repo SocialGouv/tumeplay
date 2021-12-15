@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 24,
+    marginVertical: 5,
     alignItems: 'center',
   },
   pointsContainer: {

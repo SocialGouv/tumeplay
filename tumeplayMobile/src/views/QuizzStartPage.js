@@ -14,7 +14,7 @@ import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 import _ from 'lodash';
 
-const QuizzStartPage = ({navigation, route}) => {
+const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
   const [modules, setModules] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: 50,
+    bottom: 45,
   },
 });
 
