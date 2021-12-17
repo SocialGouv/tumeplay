@@ -22,10 +22,12 @@ const App = () => {
     isSignedUp: false,
     isUnder25: null,
     firstname: '',
-    points: null,
   });
 
   const [points, setPoints] = useState(0);
+  const [doneModules_ids, setDoneModules_ids] = useState([]);
+
+  console.log('APP', doneModules_ids);
 
   const [thematiques, setThematiques] = useState([]);
 
@@ -33,9 +35,44 @@ const App = () => {
 
   useEffect(() => {
     if (!loading) {
-      setThematiques(data.thematiques);
+      setThematiques(data?.thematiques);
     }
   }, [loading, data]);
+
+  const saveUserPoints = async () => {
+    const tmpUser = await EncryptedStorage.getItem('user');
+    let jsonUser = JSON.parse(tmpUser);
+    if (tmpUser !== null) {
+      jsonUser.points = points;
+      await EncryptedStorage.setItem(
+        'user',
+        JSON.stringify({
+          user_id: jsonUser.user_id,
+          isOnboarded: jsonUser.isOnboarded,
+          isSignedUp: jsonUser.isSignedUp,
+          isUnder25: jsonUser.isUnder25,
+          firstname: jsonUser.firstname,
+          points: jsonUser.points,
+        }),
+      );
+    }
+    setUser({...jsonUser});
+  };
+
+  useEffect(() => {
+    saveUserPoints();
+  }, [points]);
+
+  const saveDoneModulesIds = async () => {
+    await EncryptedStorage.setItem(
+      'doneModules_id',
+      JSON.stringify(doneModules_ids),
+    );
+  };
+
+  useEffect(() => {
+    saveDoneModulesIds();
+  }, [doneModules_ids]);
 
   const generateuserId = () => {
     const user_id =
@@ -54,6 +91,21 @@ const App = () => {
     }
   };
 
+  const retrievePoints = async () => {
+    const tmpUser = await EncryptedStorage.getItem('user');
+    if (tmpUser !== null) {
+      let jsonUser = JSON.parse(tmpUser);
+      setPoints(jsonUser.points);
+    }
+  };
+
+  const retrieveDoneModulesIds = async () => {
+    const tmpDoneModulesIds = await EncryptedStorage.getItem('doneModules_id');
+    let jsonTmpDoneModulesIds = JSON.parse(tmpDoneModulesIds);
+    console.log('retrieve', jsonTmpDoneModulesIds);
+    setDoneModules_ids(jsonTmpDoneModulesIds);
+  };
+
   // const clearStorage = async () => {
   //   await EncryptedStorage.clear();
   // };
@@ -62,12 +114,16 @@ const App = () => {
     // clearStorage();
     generateuserId();
     retrieveUserFromStorage();
+    retrievePoints();
+    retrieveDoneModulesIds();
   }, []);
 
   const contextValues = {
     thematiques,
     points,
     setPoints,
+    doneModules_ids,
+    setDoneModules_ids,
   };
 
   return (

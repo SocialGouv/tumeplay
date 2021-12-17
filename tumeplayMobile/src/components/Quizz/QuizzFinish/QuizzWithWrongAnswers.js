@@ -12,7 +12,8 @@ import _ from 'lodash';
 import AppContext from '../../../../AppContext';
 
 const QuizzWithWrongAnswers = props => {
-  const {correctAnswers, wrongAnswers, navigation, pointsEarned} = props;
+  const {correctAnswers, wrongAnswers, navigation, pointsEarned, module_id} =
+    props;
 
   const context = useContext(AppContext);
   const points = context.points;
@@ -21,6 +22,7 @@ const QuizzWithWrongAnswers = props => {
     if (correctAnswers.length < 10) {
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(wrongAnswers),
+        module_id: module_id,
         retry: true,
       });
     }

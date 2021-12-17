@@ -2,11 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Fonts} from '../../styles/Style';
 
-const JourneyTopInformation = () => {
+const JourneyTopInformation = ({level}) => {
   return (
     <View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>NIVEAU 1</Text>
+        <Text style={styles.text}>{level.name}</Text>
         <Text style={styles.text}>0 / 3000</Text>
       </View>
       <View style={styles.border} />

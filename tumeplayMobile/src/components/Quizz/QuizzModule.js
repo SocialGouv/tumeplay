@@ -15,6 +15,7 @@ import _ from 'lodash';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
+  const module_id = route?.params?.module_id;
   const question = questions[0];
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
@@ -67,10 +68,12 @@ const QuizzModule = ({navigation, route}) => {
       navigation.navigate('QuizzFinishScreen', {
         correctAnswers: correctAnswers,
         wrongAnswers: wrongAnswers,
+        module_id: module_id,
       });
     } else {
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(remainingQuestions),
+        module_id: module_id,
       });
       setDisabled(!disabled);
       setHasAnswered(!hasAnswered);

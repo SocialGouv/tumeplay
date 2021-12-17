@@ -7,14 +7,17 @@ import Button from '../../Button';
 import {Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 
-const QuizzAllRight = ({pointsEarned, navigation}) => {
+const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
   const points = context.points;
   const setPoints = context.setPoints;
-
-  console.log('POINTS', pointsEarned);
+  const doneModules_ids = context.doneModules_ids;
+  const setDoneModules_ids = context.setDoneModules_ids;
 
   useEffect(() => {
+    let tmpDoneIds = [...doneModules_ids];
+    tmpDoneIds.push(module_id);
+    setDoneModules_ids([...tmpDoneIds]);
     setPoints(points + pointsEarned);
   }, []);
 

@@ -3,18 +3,15 @@ import {View, StyleSheet} from 'react-native';
 import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
 
-const WrapperLevelBadges = () => {
+const WrapperLevelBadges = ({level, associatedModules}) => {
+  const modulesToDisplay = associatedModules?.map(module => {
+    return <Badge key={module.id} module={module} />;
+  });
+
   return (
     <View style={styles.container}>
-      <JourneyTopInformation />
-      <View style={styles.badgeWrapper}>
-        <Badge />
-        <Badge />
-        <Badge />
-        <Badge />
-        <Badge />
-        <Badge />
-      </View>
+      <JourneyTopInformation level={level} />
+      <View style={styles.badgeWrapper}>{modulesToDisplay}</View>
     </View>
   );
 };

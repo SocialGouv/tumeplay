@@ -17,6 +17,7 @@ import _ from 'lodash';
 const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
   const [modules, setModules] = useState(null);
+  const [module, setModule] = useState();
   const [questions, setQuestions] = useState([]);
   const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
@@ -29,6 +30,7 @@ const QuizzStartPage = ({navigation}) => {
 
   useEffect(() => {
     if (modules) {
+      setModule(modules[random]);
       setQuestions(modules[random]?.questionsArray);
       setThematique(modules[random]?.thematique.title);
     }
@@ -60,6 +62,7 @@ const QuizzStartPage = ({navigation}) => {
         onPress={() => {
           navigation.navigate('QuizzModule', {
             questions: _.shuffle(questions),
+            module_id: module.id,
           });
         }}
         style={styles.button}

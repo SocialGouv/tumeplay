@@ -23,7 +23,7 @@ const HomePage = ({navigation}) => {
   }, [data, loading]);
 
   const displayText = () => {
-    if (points > 0) {
+    if (points > 0 && points < 3000) {
       return (
         <Text style={styles.text}>
           Plus que{' '}
@@ -31,6 +31,12 @@ const HomePage = ({navigation}) => {
             {3000 - points} points
           </Text>{' '}
           pour gagner ta box !
+        </Text>
+      );
+    } else if (points > 3000) {
+      return (
+        <Text style={styles.text}>
+          Bravo ! Tu as assez de points pour commander une box
         </Text>
       );
     } else {
