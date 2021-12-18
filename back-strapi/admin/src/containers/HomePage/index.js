@@ -472,9 +472,15 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 				break;
 			case 'commandes':
 				route = 'commandes'
-				csvData.push(
-					'"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Délivrée";"Code postal";"Nom POI";"Envoyée"'
-				)
+				if (userRole.includes('pilote-guyane')) {
+					csvData.push(
+						'"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Jeune - Genre";"Jeune - Age";"Jeune - Quartier";"Jeune - Code postal";"Jeune - Ville";"Jeune - Scolarité";"Jeune - Commentaires";"Jeune - Ancienne box";"Jeune - Première box ?";"Délivrée";"Code postal";"Nom POI";"Envoyée"'
+					)
+				} else {
+					csvData.push(
+						'"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Délivrée";"Code postal";"Nom POI";"Envoyée"'
+					)
+				}
 				break;
 		}
 
@@ -544,19 +550,44 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 						boxName = item.content[0].box.title
 					}
 
-					csvData.push(
-						'"' + item.id 
-						+ '";"' + new Date(item.created_at)
-						+ '";"' + boxName.replaceAll('"', '\'')
-						+ '";"' + (item.delivery ? item.delivery.replaceAll('"', '\'') : '')
-						+ '";"' + (item.environnement ? item.environnement.name : '')
-						+ '";"' + (item.referent ? item.referent.name : '')
-						+ '";"' + (item.received ? 'Oui' : 'Non')
-						+ '";"' + (item.address_zipcode ? item.address_zipcode : '')
-						+ '";"' + (item.poi_name ? item.poi_name : '')
-						+ '";"' + (item.sent ? 'Oui' : 'Non')
-						+ '"'						
-					)
+					if (userRole.includes('pilote-guyane')) {
+						csvData.push(
+							'"' + item.id 
+							+ '";"' + new Date(item.created_at)
+							+ '";"' + boxName.replaceAll('"', '\'')
+							+ '";"' + (item.delivery ? item.delivery.replaceAll('"', '\'') : '')
+							+ '";"' + (item.environnement ? item.environnement.name : '')
+							+ '";"' + (item.referent ? item.referent.name : '')
+							+ '";"' + (item.user_data && item.user_data.sex ? item.user_data.sex === 'man' ? 'Garçon' : 'Fille' : '')
+							+ '";"' + (item.user_data && item.user_data.age ? item.user_data.age : '')
+							+ '";"' + (item.user_data && item.user_data.district ? item.user_data.district : '')
+							+ '";"' + (item.user_data && item.user_data.zipcode ? item.user_data.zipcode : '')
+							+ '";"' + (item.user_data && item.user_data.city ? item.user_data.city : '')
+							+ '";"' + (item.user_data && item.user_data.schooling ? item.user_data.schooling : '')
+							+ '";"' + (item.user_data && item.user_data.comment ? item.user_data.comment : '')
+							+ '";"' + (item.user_data && item.user_data.old_box ? _.get(boxes.find((box) => box.number === parseInt(item.user_data.old_box)), 'title', item.user_data.old_box) : '')
+							+ '";"' + (item.user_data && item.user_data.first_box ? item.user_data.first_box : '')
+							+ '";"' + (item.received ? 'Oui' : 'Non')
+							+ '";"' + (item.address_zipcode ? item.address_zipcode : '')
+							+ '";"' + (item.poi_name ? item.poi_name : '')
+							+ '";"' + (item.sent ? 'Oui' : 'Non')
+							+ '"'						
+						)
+					} else {
+						csvData.push(
+							'"' + item.id 
+							+ '";"' + new Date(item.created_at)
+							+ '";"' + boxName.replaceAll('"', '\'')
+							+ '";"' + (item.delivery ? item.delivery.replaceAll('"', '\'') : '')
+							+ '";"' + (item.environnement ? item.environnement.name : '')
+							+ '";"' + (item.referent ? item.referent.name : '')
+							+ '";"' + (item.received ? 'Oui' : 'Non')
+							+ '";"' + (item.address_zipcode ? item.address_zipcode : '')
+							+ '";"' + (item.poi_name ? item.poi_name : '')
+							+ '";"' + (item.sent ? 'Oui' : 'Non')
+							+ '"'						
+						)
+					}
 					break;
 
 			}

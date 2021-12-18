@@ -24,7 +24,6 @@ import {
 const zipCodeTest = /^[0-9]{5}$/;
 
 const TunnelReferentSelectGuyane = props => {
-
   var defaultReferent = {
     userZipCode: '',
     zipCode: '',
@@ -32,14 +31,14 @@ const TunnelReferentSelectGuyane = props => {
   };
   var pickupTimer = false;
 
-	const defaultPosition = {
-		coords: {
-			latitude: 5.495556,
-			longitude: -54.030833
-		},
-		delta: 0.7,
-		isValid: true,
-	};
+  const defaultPosition = {
+    coords: {
+      latitude: 5.495556,
+      longitude: -54.030833,
+    },
+    delta: 0.7,
+    isValid: true,
+  };
 
   const [selectedReferent, setSelectedReferent] = useState(
     props.navigation.state.params.selectedReferent,
@@ -50,7 +49,7 @@ const TunnelReferentSelectGuyane = props => {
     props.navigation.state.params.selectedProducts,
   );
 
-  const [rawReferents, setRawReferents] = useState()
+  const [rawReferents, setRawReferents] = useState();
   const [currentPosition, setCurrentPosition] = useState();
   const [localAdress, setLocalAdress] = useState(defaultReferent);
   const [localValid, setLocalValid] = useState({});
@@ -62,50 +61,49 @@ const TunnelReferentSelectGuyane = props => {
 
   const isMounted = useIsMounted();
 
-	useEffect(() => {
-		if (rawReferents) {
-			setCurrentPosition({...defaultPosition});
-			Geolocation.getCurrentPosition(
-				position => {
-					const coordinates = {
-						lat: position.coords.latitude,
-						long: position.coords.longitude,
-					};
-					openGeocoder()
-						.reverse(coordinates.long, coordinates.lat)
-						.end((err, res) => {
-							if (res) {
-								currentPosition.coords.latitude = position.coords.latitude;
-								currentPosition.coords.longitude = position.coords.longitude;
-								setCurrentPosition({...currentPosition});
-							} else {
-								currentPosition.isValid = false;
-								setCurrentPosition({...defaultPosition});
-							}
-						});
-				},
-				error =>
-					{
-						setCurrentPosition({...defaultPosition});
-					}
-			);
-			setDisplayMap(true);
-		}
-	}, [rawReferents])
+  useEffect(() => {
+    if (rawReferents) {
+      setCurrentPosition({...defaultPosition});
+      Geolocation.getCurrentPosition(
+        position => {
+          const coordinates = {
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+          };
+          openGeocoder()
+            .reverse(coordinates.long, coordinates.lat)
+            .end((err, res) => {
+              if (res) {
+                currentPosition.coords.latitude = position.coords.latitude;
+                currentPosition.coords.longitude = position.coords.longitude;
+                setCurrentPosition({...currentPosition});
+              } else {
+                currentPosition.isValid = false;
+                setCurrentPosition({...defaultPosition});
+              }
+            });
+        },
+        error => {
+          setCurrentPosition({...defaultPosition});
+        },
+      );
+      setDisplayMap(true);
+    }
+  }, [rawReferents]);
 
   useEffect(() => {
-		const fetchReferents = async () => {
-			const tmpRef = await referentAPI.fetchReferents(2);
-			setRawReferents(tmpRef)
-			const refPoints = tmpRef.map(function(item) {
-				item.isSelected = false;
-				return item;
-			});
-			setReferentPoints([...refPoints]);
-		};
+    const fetchReferents = async () => {
+      const tmpRef = await referentAPI.fetchReferents(2);
+      setRawReferents(tmpRef);
+      const refPoints = tmpRef.map(function(item) {
+        item.isSelected = false;
+        return item;
+      });
+      setReferentPoints([...refPoints]);
+    };
 
     if (isMounted.current) {
-			fetchReferents();
+      fetchReferents();
     }
   }, [isMounted.current]);
 
@@ -262,7 +260,7 @@ const TunnelReferentSelectGuyane = props => {
       ]}>
       <Backlink step={2} onPress={_goBack} />
 
-      <View style={{flex: 0.20, paddingTop: 15}}>
+      <View style={{flex: 0.2, paddingTop: 15}}>
         <TextWithSound
           style={Styles.tunnelTitle}
           sound={'lieu-de-retrait_XlV9Zth8.mp3'}
@@ -312,7 +310,7 @@ const TunnelReferentSelectGuyane = props => {
             width={mapLayout.width}
             height={mapLayout.height}
             onRegionChange={onRegionChange}
-						delta={currentPosition.delta}
+            delta={currentPosition.delta}
             latitude={currentPosition.coords.latitude}
             longitude={currentPosition.coords.longitude}
           />
