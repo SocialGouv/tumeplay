@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/SocialGouv/Tumeplay/compare/v1.30.0...v1.30.1) (2021-12-18)
+
+
+### Bug Fixes
+
+* sealed secret smtp pwd  update ([40a577a](https://github.com/SocialGouv/Tumeplay/commit/40a577afc6778be1590b117c7433d471568fa60b))
+
 # [1.30.0](https://github.com/SocialGouv/Tumeplay/compare/v1.29.0...v1.30.0) (2021-12-18)
 
 
