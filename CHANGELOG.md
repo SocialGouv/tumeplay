@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/SocialGouv/Tumeplay/compare/v1.29.0...v1.30.0) (2021-12-18)
+
+
+### Features
+
+* new email address for smtp ([eab3e15](https://github.com/SocialGouv/Tumeplay/commit/eab3e15d5316f88cafa05cc21ae3452ded45bbc9))
+
 # [1.29.0](https://github.com/SocialGouv/Tumeplay/compare/v1.28.5...v1.29.0) (2021-12-13)
 
 
