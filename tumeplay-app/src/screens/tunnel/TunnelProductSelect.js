@@ -206,6 +206,8 @@ export default function TunnelProductSelect(props) {
     />
   ));
 
+  console.log(selectedItem);
+
   async function orderProduct(selectedProducts) {
     const _tokens = await UserService.getTokensAmount();
 

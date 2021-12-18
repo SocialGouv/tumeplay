@@ -1,3 +1,31 @@
+# [1.29.0](https://github.com/SocialGouv/Tumeplay/compare/v1.28.5...v1.29.0) (2021-12-13)
+
+
+### Features
+
+* add referents multiple link aside old referent link ([#256](https://github.com/SocialGouv/Tumeplay/issues/256)) ([a77bc37](https://github.com/SocialGouv/Tumeplay/commit/a77bc37d2e255bb1ee06edd4eec9686c3b332159))
+
+## [1.28.5](https://github.com/SocialGouv/Tumeplay/compare/v1.28.4...v1.28.5) (2021-12-09)
+
+
+### Bug Fixes
+
+* **app:** Adding trackers for better segmentation and fixing order process ([#251](https://github.com/SocialGouv/Tumeplay/issues/251)) ([74bd1fe](https://github.com/SocialGouv/Tumeplay/commit/74bd1fe4871cdae8ee17179d005b2765b5f50ea8))
+
+## [1.28.4](https://github.com/SocialGouv/Tumeplay/compare/v1.28.3...v1.28.4) (2021-12-07)
+
+
+### Bug Fixes
+
+* **front:** AB testing correction with 4 paths ([#248](https://github.com/SocialGouv/Tumeplay/issues/248)) ([f83acdc](https://github.com/SocialGouv/Tumeplay/commit/f83acdc6ccf881066b15e5f9817e86d28706a983))
+
+## [1.28.3](https://github.com/SocialGouv/Tumeplay/compare/v1.28.2...v1.28.3) (2021-12-06)
+
+
+### Bug Fixes
+
+* add user_data for guyane orders export ([#247](https://github.com/SocialGouv/Tumeplay/issues/247)) ([c988c6f](https://github.com/SocialGouv/Tumeplay/commit/c988c6fcb90fac7b53838c16f9f04f9b2dcd0ae0))
+
 ## [1.28.2](https://github.com/SocialGouv/Tumeplay/compare/v1.28.1...v1.28.2) (2021-11-30)
 
 

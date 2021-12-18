@@ -61,6 +61,10 @@
     },
     "referent": {
       "model": "referent"
+    },
+    "referents": {
+      "collection": "referent",
+      "via": "users"
     }
   }
 }

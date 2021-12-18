@@ -61,8 +61,23 @@ const Tracking = {
   nextHomeDeliveryButtonTriggered: () => {
     Tracking.trigger(['trackEvent', 'mobileApp', 'nextHomeDeliveryButton']);
   },
-  validateOrderButtonTriggered: () => {
-    Tracking.trigger(['trackEvent', 'mobileApp', 'validateOrderButton']);
+  pickupOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'pickupOrderButton']);
+  },
+  homeOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'homeOrderButton']);
+  },
+  referentOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'referentOrderButton']);
+  },
+  pointsOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'pointsOrderButton']);
+  },
+  quizzOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'quizzOrderButton']);
+  },
+  BoxChoiceOrderButtonTriggered: () => {
+    Tracking.trigger(['trackEvent', 'mobileApp', 'boxChoiceOrderButton']);
   },
   questionAnswered: (questionId, timeNeeded) => {
     Tracking.trigger([

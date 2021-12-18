@@ -237,6 +237,7 @@ export default function ContentScreen(props) {
 
   function _onOrder() {
     _toggleResultModal();
+    Tracking.quizzOrderButtonTriggered();
     props.navigation.navigate('TunnelProductSelect');
   }
 

@@ -70,6 +70,7 @@ export default function TunnelCartSummary(props) {
         box_name: selectedItem.title,
         environnement: REACT_APP_ZONE,
       };
+      Tracking.homeOrderButtonTriggered();
     } else if (deliveryType === 'pickup') {
       requestBody = {
         ...requestBody,
@@ -85,6 +86,7 @@ export default function TunnelCartSummary(props) {
         box_name: selectedItem.title,
         environnement: REACT_APP_ZONE,
       };
+      Tracking.pickupOrderButtonTriggered();
     } else if (deliveryType.includes('referent')) {
       requestBody = {
         ...requestBody,
@@ -101,6 +103,7 @@ export default function TunnelCartSummary(props) {
         box_name: selectedItem.title,
         environnement: REACT_APP_ZONE,
       };
+      Tracking.referentOrderButtonTriggered();
     }
     if (selectedItem.__typename === 'Box') {
       requestBody = {
@@ -122,7 +125,6 @@ export default function TunnelCartSummary(props) {
           },
         ],
       };
-      Tracking.validateOrderButtonTriggered();
     }
     orderPost = await OrdersAPI.orderBoxes(requestBody);
     switch (orderPost.status) {
