@@ -184,11 +184,11 @@ data:
   EMAIL_PROVIDER_HOST: pro2.mail.ovh.net
   EMAIL_PROVIDER_PORT: '587'
   EMAIL_PROVIDER_SECURE: 'false'
-  EMAIL_PROVIDER_USERNAME: contact.tumeplay@fabrique.social.gouv.fr
+  EMAIL_PROVIDER_USERNAME: info.tumeplay@fabrique.social.gouv.fr
   EMAIL_PROVIDER_TLS: 'false'
-  EMAIL_PROVIDER_FROM: Tumeplay <contact.tumeplay@fabrique.social.gouv.fr>
-  EMAIL_PROVIDER_REPLY_TO: contact.tumeplay@fabrique.social.gouv.fr
-  EMAIL_CONFIG_ADMIN: contact.tumeplay@fabrique.social.gouv.fr
+  EMAIL_PROVIDER_FROM: Tumeplay <info.tumeplay@fabrique.social.gouv.fr>
+  EMAIL_PROVIDER_REPLY_TO: info.tumeplay@fabrique.social.gouv.fr
+  EMAIL_CONFIG_ADMIN: info.tumeplay@fabrique.social.gouv.fr
   EMAIL_CONFIG_CAT: esat.benext@gmail.com
 ---
 apiVersion: v1

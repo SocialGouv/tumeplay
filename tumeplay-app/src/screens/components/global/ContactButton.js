@@ -7,7 +7,7 @@ export default function ContactButton() {
   // @TODO : Pass this in global configuration
   function _contactMail() {
     Linking.openURL(
-      'mailto:contact.tumeplay@fabrique.social.gouv.fr?subject=Tumeplay > Demande de contact',
+      'mailto:info.tumeplay@fabrique.social.gouv.fr?subject=Tumeplay > Demande de contact',
     );
   }
 
