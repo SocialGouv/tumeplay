@@ -9,7 +9,7 @@ const Title = () => {
 
   const retrieveUserName = async () => {
     const user = JSON.parse(await EncryptedStorage.getItem('user'));
-    setUserName(user.firstname);
+    setUserName(user.first_name);
   };
 
   useEffect(() => {

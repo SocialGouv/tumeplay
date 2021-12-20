@@ -7,7 +7,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const wrongAnswers = route?.params?.wrongAnswers;
   const module_id = route?.params?.module_id;
 
-  const pointsEarned = correctAnswers.length * 100;
+  const pointsEarned = (correctAnswers.length + 1) * 100;
 
   return wrongAnswers.length > 0 ? (
     <QuizzWithWrongAnswers

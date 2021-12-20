@@ -14,54 +14,87 @@ import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
+import {
+  GET_HISTORIQUES,
+  GET_MOBILE_USER,
+} from './src/services/api/mobile_users';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
-  const [user, setUser] = useState({
-    isOnboarded: false,
-    isSignedUp: false,
-    isUnder25: null,
-    firstname: '',
-  });
-
+  const [user, setUser] = useState({});
+  const [userHistory, setUserHistory] = useState([]);
   const [points, setPoints] = useState(0);
   const [doneModules_ids, setDoneModules_ids] = useState([]);
 
-  console.log('APP', doneModules_ids);
-
   const [thematiques, setThematiques] = useState([]);
 
-  const {data, loading} = useQuery(GET_THEMES);
+  const checkUserIdInStorage = async () => {
+    const user_id = JSON.parse(await EncryptedStorage.getItem('user'))?.user_id;
+    user.user_id = user_id;
+    if (user_id) {
+      setUser({...user});
+    }
+  };
+
+  const useMultipleQuery = () => {
+    const res1 = useQuery(GET_THEMES);
+    const res2 = useQuery(GET_MOBILE_USER, {
+      variables: {
+        user_id: user?.user_id,
+      },
+    });
+    const res3 = useQuery(GET_HISTORIQUES);
+    return [res1, res2, res3];
+  };
+
+  const [
+    {data: data1, loading: loading1},
+    {data: data2, loading: loading2},
+    {data: data3, loading: loading3},
+  ] = useMultipleQuery();
 
   useEffect(() => {
-    if (!loading) {
-      setThematiques(data?.thematiques);
+    if (!loading1) {
+      setThematiques(data1?.thematiques);
     }
-  }, [loading, data]);
+  }, [loading1, data1]);
 
-  const saveUserPoints = async () => {
-    const tmpUser = await EncryptedStorage.getItem('user');
-    let jsonUser = JSON.parse(tmpUser);
-    if (tmpUser !== null) {
-      jsonUser.points = points;
-      await EncryptedStorage.setItem(
-        'user',
-        JSON.stringify({
-          user_id: jsonUser.user_id,
-          isOnboarded: jsonUser.isOnboarded,
-          isSignedUp: jsonUser.isSignedUp,
-          isUnder25: jsonUser.isUnder25,
-          firstname: jsonUser.firstname,
-          points: jsonUser.points,
-        }),
-      );
+  const retrieveUserFromAPI = async () => {
+    let userID = JSON.parse(await EncryptedStorage.getItem('user')).user_id;
+    if (userID !== '') {
+      setUser({...data2.utilisateursMobile});
     }
-    setUser({...jsonUser});
   };
 
   useEffect(() => {
-    saveUserPoints();
-  }, [points]);
+    if (!loading2) {
+      retrieveUserFromAPI();
+    }
+  }, [loading2, data2]);
+
+  // const saveUserPoints = async () => {
+  //   const tmpUser = await EncryptedStorage.getItem('user');
+  //   let jsonUser = JSON.parse(tmpUser);
+  //   if (tmpUser !== null) {
+  //     jsonUser.points = points;
+  //     await EncryptedStorage.setItem(
+  //       'user',
+  //       JSON.stringify({
+  //         user_id: jsonUser.user_id,
+  //         isOnboarded: jsonUser.isOnboarded,
+  //         isSignedUp: jsonUser.isSignedUp,
+  //         isUnder25: jsonUser.isUnder25,
+  //         firstname: jsonUser.firstname,
+  //         points: jsonUser.points,
+  //       }),
+  //     );
+  //   }
+  //   setUser({...jsonUser});
+  // };
+
+  // useEffect(() => {
+  //   saveUserPoints();
+  // }, [points]);
 
   const saveDoneModulesIds = async () => {
     await EncryptedStorage.setItem(
@@ -74,47 +107,29 @@ const App = () => {
     saveDoneModulesIds();
   }, [doneModules_ids]);
 
-  const generateuserId = () => {
-    const user_id =
-      Date.now().toString(36) + Math.random().toString(36).substr(2);
-    user.user_id = user_id;
-    setUser({...user});
-  };
-
-  const retrieveUserFromStorage = async () => {
-    const tmpUser = await EncryptedStorage.getItem('user');
-    if (tmpUser !== null) {
-      let jsonUser = JSON.parse(tmpUser);
-      setUser({...jsonUser});
-    } else {
-      generateuserId();
-    }
-  };
-
-  const retrievePoints = async () => {
-    const tmpUser = await EncryptedStorage.getItem('user');
-    if (tmpUser !== null) {
-      let jsonUser = JSON.parse(tmpUser);
-      setPoints(jsonUser.points);
-    }
-  };
+  // const retrievePoints = async () => {
+  //   const tmpUser = await EncryptedStorage.getItem('user');
+  //   if (tmpUser !== null) {
+  //     let jsonUser = JSON.parse(tmpUser);
+  //     setPoints(jsonUser.points);
+  //   }
+  // };
 
   const retrieveDoneModulesIds = async () => {
     const tmpDoneModulesIds = await EncryptedStorage.getItem('doneModules_id');
     let jsonTmpDoneModulesIds = JSON.parse(tmpDoneModulesIds);
-    console.log('retrieve', jsonTmpDoneModulesIds);
-    setDoneModules_ids(jsonTmpDoneModulesIds);
+    setDoneModules_ids([...jsonTmpDoneModulesIds]);
   };
 
-  // const clearStorage = async () => {
-  //   await EncryptedStorage.clear();
-  // };
+  const clearStorage = async () => {
+    await EncryptedStorage.clear();
+  };
 
   useEffect(() => {
     // clearStorage();
-    generateuserId();
-    retrieveUserFromStorage();
-    retrievePoints();
+    // retrieveUserFromStorage();
+    // retrievePoints();
+    checkUserIdInStorage();
     retrieveDoneModulesIds();
   }, []);
 

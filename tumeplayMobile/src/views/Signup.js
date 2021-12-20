@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, StyleSheet, ImageBackground, TextInput} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Button from '../components/Button';
 import {Colors, Fonts} from '../styles/Style';
+import {useMutation} from '@apollo/client';
+import {POST_MOBILE_USER} from '../services/api/mobile_users';
 
 const Signup = ({user, setUser}) => {
-  let tmpUser = user;
+  let tmpUser = {...user};
+
+  const generateID = () => {
+    const user_id =
+      Date.now().toString(36) + Math.random().toString(36).substring(2);
+    tmpUser.user_id = user_id;
+  };
+
+  const [signUpUser] = useMutation(POST_MOBILE_USER, {
+    onError(error) {
+      console.log('ERR', error);
+    },
+  });
 
   const handleUserAge = value => {
     tmpUser.isUnder25 = value;
@@ -14,7 +28,7 @@ const Signup = ({user, setUser}) => {
   };
 
   const handleChangeName = e => {
-    tmpUser.firstname = e;
+    tmpUser.first_name = e;
     setUser({...tmpUser});
   };
 
@@ -26,22 +40,33 @@ const Signup = ({user, setUser}) => {
   const handleValidation = async () => {
     tmpUser.isSignedUp = true;
     tmpUser.points = 0;
-    setUser({...tmpUser});
     try {
-      await EncryptedStorage.setItem(
-        'user',
-        JSON.stringify({
-          user_id: tmpUser.user_id,
+      await signUpUser({
+        variables: {
+          first_name: tmpUser.first_name,
           isOnboarded: tmpUser.isOnboarded,
           isSignedUp: tmpUser.isSignedUp,
           isUnder25: tmpUser.isUnder25,
-          firstname: tmpUser.firstname,
           points: tmpUser.points,
-        }),
-      );
-    } catch (error) {
-      console.error(error);
+          user_id: tmpUser.user_id,
+        },
+      });
+      setUser({...tmpUser});
+    } catch (err) {
+      console.log('ICI', err);
     }
+    await EncryptedStorage.setItem(
+      'user',
+      JSON.stringify({
+        user_id: tmpUser.user_id,
+        first_name: tmpUser.first_name,
+        isOnboarded: tmpUser.isOnboarded,
+        isSignedUp: tmpUser.isSignedUp,
+        isUnder25: tmpUser.isOnboarded,
+        points: tmpUser.points,
+        region: tmpUser.region,
+      }),
+    );
   };
 
   const radio_props = [
@@ -64,6 +89,10 @@ const Signup = ({user, setUser}) => {
     {label: 'Région Guyane', value: 'Région Guyane', key: 'Région Guyane'},
     {label: 'Autres régions', value: 'Autres régions', key: 'Autres régions'},
   ];
+
+  useEffect(() => {
+    generateID();
+  }, []);
 
   return (
     <ImageBackground style={styles.container}>
