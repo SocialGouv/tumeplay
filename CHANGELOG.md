@@ -1,3 +1,10 @@
+## [1.30.2](https://github.com/SocialGouv/Tumeplay/compare/v1.30.1...v1.30.2) (2021-12-20)
+
+
+### Bug Fixes
+
+* **secu:** add k8s network policies and update snaps ([#249](https://github.com/SocialGouv/Tumeplay/issues/249)) ([aa2e1b4](https://github.com/SocialGouv/Tumeplay/commit/aa2e1b46d961f618a1a1001b978bb2a2f1b74ee3))
+
 ## [1.30.1](https://github.com/SocialGouv/Tumeplay/compare/v1.30.0...v1.30.1) (2021-12-18)
 
 
