@@ -14,6 +14,7 @@ const Signup = ({user, setUser}) => {
     const user_id =
       Date.now().toString(36) + Math.random().toString(36).substring(2);
     tmpUser.user_id = user_id;
+    setUser({...tmpUser});
   };
 
   const [signUpUser] = useMutation(POST_MOBILE_USER, {

@@ -66,7 +66,7 @@ const QuizzWithWrongAnswers = props => {
       <Button
         text={'Je continue'}
         size={'large'}
-        style={{marginBottom: 50}}
+        style={styles.button}
         onPress={() => restartQuizz()}
       />
     </ImageBackground>
@@ -128,6 +128,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 22,
     padding: 10,
+  },
+  button: {
+    position: 'absolute',
+    bottom: 35,
   },
 });
 

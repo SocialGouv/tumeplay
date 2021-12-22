@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import Svg, {Polygon} from 'react-native-svg';
 import {Image, StyleSheet} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
+import check from '../../assets/Check.png';
 import AppContext from '../../../AppContext';
 
 const Badge = module => {
@@ -9,17 +10,19 @@ const Badge = module => {
   const doneModules_ids = context.doneModules_ids;
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
+  const [done, setDone] = useState(false);
 
   const adjustModuleColor = () => {
     if (doneModules_ids.includes(module.module.id)) {
       setStrokeColor('#51B070');
       setFillColor('#DDF4ED');
+      setDone(true);
     }
   };
 
   useEffect(() => {
     adjustModuleColor();
-  }, [strokeColor]);
+  }, [strokeColor, done]);
 
   return (
     <Svg style={styles.svgContainer}>
@@ -30,7 +33,11 @@ const Badge = module => {
         fill={fillColor}
         style={{zIndex: 1, position: 'relative'}}
       />
-      <Image source={lock} style={styles.imageLock} />
+      {done ? (
+        <Image source={check} style={styles.imageValidate} />
+      ) : (
+        <Image source={lock} style={styles.imageLock} />
+      )}
     </Svg>
   );
 };
@@ -46,6 +53,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -95,
     left: 70,
+  },
+  imageValidate: {
+    position: 'absolute',
+    top: 45,
+    left: 45,
   },
 });
 

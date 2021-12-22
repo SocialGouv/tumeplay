@@ -6,18 +6,49 @@ import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
 import {Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
+import {useMutation} from '@apollo/client';
+import {
+  CREATE_HISTORY,
+  UPDATE_MOBILE_USER_POINTS,
+} from '../../../services/api/mobile_users';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
   const points = context.points;
+  const user_id = context.user_id;
   const setPoints = context.setPoints;
-  const doneModules_ids = context.doneModules_ids;
-  const setDoneModules_ids = context.setDoneModules_ids;
+  const history = context.userHistory;
+
+  const [createHistory] = useMutation(CREATE_HISTORY);
+  const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
+
+  const checkUserHistory = async () => {
+    if (history?.module?.id === module_id) {
+      //Update historique existant => Le cas où le user aurait quitté sans finir tout le quizz
+    } else {
+      //Create historique => Cas nominal ou le user a fini le quizz
+      try {
+        await createHistory({
+          variables: {
+            user_id: history?.user?.id,
+            module_id: history?.module?.id,
+            status: 'success',
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   useEffect(() => {
-    let tmpDoneIds = [...doneModules_ids];
-    tmpDoneIds.push(module_id);
-    setDoneModules_ids([...tmpDoneIds]);
+    checkUserHistory();
+    updatePoints({
+      variables: {
+        user_id: history?.user?.id,
+        points: points + pointsEarned,
+      },
+    });
     setPoints(points + pointsEarned);
   }, []);
 
@@ -81,7 +112,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: 5,
+    bottom: 35,
   },
 });
 

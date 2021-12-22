@@ -46,11 +46,24 @@ export const POST_MOBILE_USER = gql`
   }
 `;
 
+export const UPDATE_MOBILE_USER_POINTS = gql`
+  mutation UpdateHistorique($user_id: ID!, $points: Long!) {
+    updateUtilisateursMobile(
+      input: {where: {id: $user_id}, data: {points: $points}}
+    ) {
+      utilisateursMobile {
+        points
+      }
+    }
+  }
+`;
+
 export const GET_HISTORIQUES = gql`
   query getHistorique {
     historiques {
       id
       user {
+        id
         user_id
         first_name
         points
@@ -59,6 +72,25 @@ export const GET_HISTORIQUES = gql`
         id
       }
       status
+    }
+  }
+`;
+
+export const CREATE_HISTORY = gql`
+  mutation UpdateHistorique(
+    $user_id: ID
+    $module_id: ID
+    $status: ENUM_HISTORIQUE_STATUS
+  ) {
+    createHistorique(
+      input: {data: {user: $user_id, module: $module_id, status: $status}}
+    ) {
+      historique {
+        id
+        module {
+          id
+        }
+      }
     }
   }
 `;
