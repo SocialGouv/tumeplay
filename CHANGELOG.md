@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/SocialGouv/Tumeplay/compare/v1.30.2...v1.31.0) (2021-12-23)
+
+
+### Features
+
+* **mobile:** Init app folder + Container Creation + graphQL file imp… ([#239](https://github.com/SocialGouv/Tumeplay/issues/239)) ([d7b60c2](https://github.com/SocialGouv/Tumeplay/commit/d7b60c2e346823b0b1f9670e2b7c86f921c086a4))
+
 ## [1.30.2](https://github.com/SocialGouv/Tumeplay/compare/v1.30.1...v1.30.2) (2021-12-20)
 
 
