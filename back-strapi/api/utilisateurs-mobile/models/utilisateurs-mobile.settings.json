@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "utilisateurs_mobiles",
+  "info": {
+    "name": "UtilisateursMobile",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "isUnder25": {
+      "type": "boolean"
+    },
+    "isOnboarded": {
+      "type": "boolean",
+      "default": false
+    },
+    "isSignedUp": {
+      "type": "boolean",
+      "default": false
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "points": {
+      "type": "biginteger",
+      "default": "0"
+    }
+  }
+}

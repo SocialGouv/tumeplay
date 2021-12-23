@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "historiques",
+  "info": {
+    "name": "Historique",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "model": "utilisateurs-mobile"
+    },
+    "module": {
+      "model": "module"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "success"
+      ]
+    }
+  }
+}

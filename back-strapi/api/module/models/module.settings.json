@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "module",
+  "info": {
+    "name": "Module",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "thematique": {
+      "model": "thematique"
+    },
+    "niveau": {
+      "model": "niveau"
+    },
+    "questions": {
+      "type": "component",
+      "repeatable": false,
+      "component": "questions.questions"
+    }
+  }
+}

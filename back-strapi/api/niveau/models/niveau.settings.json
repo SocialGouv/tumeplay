@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "level",
+  "info": {
+    "name": "Niveau"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "unique": true,
+      "type": "integer"
+    }
+  }
+}
