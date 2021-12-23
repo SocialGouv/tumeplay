@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@react-native-picker/picker": "^2.2.1",
+    "core-js": "^3.20.0",
+    "jsc-android": "^250230.2.1",
     "react": "17.0.2",
     "react-native": "0.66.3",
     "react-native-picker-select": "^8.0.4",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@apollo/client": "^3.4.17",
     "@babel/core": "7.16.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.5",
     "@babel/runtime": "7.16.3",
     "@react-native-community/eslint-config": "2.0.0",
     "@react-navigation/bottom-tabs": "^6.0.9",

@@ -67,15 +67,17 @@ const App = () => {
   }, [userHistory]);
 
   useEffect(() => {
-    if (!loading3) {
-      setUserHistory([...data3?.historiques]);
-      setPoints(user?.points);
+    if (!loading3 && data3) {
+      setUserHistory([data3?.historiques]);
+      if (user) {
+        setPoints(user?.points);
+      }
     }
   }, [loading3, data3]);
 
   useEffect(() => {
-    if (!loading1) {
-      setThematiques(data1?.thematiques);
+    if (!loading1 && data1) {
+      setThematiques([...data1.thematiques]);
     }
   }, [loading1, data1]);
 

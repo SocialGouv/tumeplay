@@ -13,6 +13,8 @@ target 'tumeplayMobile' do
   )
 
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'tumeplayMobileTests' do
     inherit! :complete
     # Pods for testing

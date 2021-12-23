@@ -22,17 +22,17 @@ const Journey = () => {
   const [levels, setLevels] = useState([]);
 
   useEffect(() => {
-    if (!loading1) {
-      setModules([...data1?.modules]);
+    if (!loading1 && data1) {
+      setModules([...data1.modules]);
     }
-    if (!loading2) {
-      setLevels([...data2?.niveaus]);
+    if (!loading2 && data2) {
+      setLevels([...data2.niveaus]);
     }
   }, [data1, loading1, loading2, data2]);
 
   const displayWrappers = levels?.map(level => {
     const associatedModules = modules?.filter(
-      module => module.niveau.value === level.value,
+      module => module.niveau?.value === level.value,
     );
     return (
       <WrapperLevelBadges

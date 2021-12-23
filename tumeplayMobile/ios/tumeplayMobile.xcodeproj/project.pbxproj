@@ -13,7 +13,6 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		5678F6CD36984D58BD66443C /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A648F3C04A2D45FDA2FBB924 /* Montserrat-Medium.ttf */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		882B38D593C5408D9DFE419E /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEEEDEF712ED4CFC96703FFF /* Montserrat-Bold.ttf */; };
 		CF4BCCF4FC48C9D80BEDE78D /* libPods-tumeplayMobile-tumeplayMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA085E8FCE6EDCED7718FE /* libPods-tumeplayMobile-tumeplayMobileTests.a */; };
 		D212A29A9C664B7743D205EA /* libPods-tumeplayMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FEE3B9A6569A4CBC4A8BF4 /* libPods-tumeplayMobile.a */; };
@@ -21,6 +20,23 @@
 		D4D6DBF3277231D6000D59E7 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B45F0CBDD49940198D57CA71 /* Montserrat-ExtraBold.ttf */; };
 		D4D6DBF4277231D6000D59E7 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA4ED942226A47A2BA1B38F2 /* Montserrat-Light.ttf */; };
 		D4D6DBF5277231D6000D59E7 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A648F3C04A2D45FDA2FBB924 /* Montserrat-Medium.ttf */; };
+		D4D6DC1927736328000D59E7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D6DC1827736328000D59E7 /* Launch Screen.storyboard */; };
+		D4D6DC1A277368B8000D59E7 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7649F10EDFD64E9A80AEA6C3 /* AntDesign.ttf */; };
+		D4D6DC1B277368B8000D59E7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8717A1252A47BBB6F09200 /* Entypo.ttf */; };
+		D4D6DC1C277368B8000D59E7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DD7070522D4403B9B46D91 /* EvilIcons.ttf */; };
+		D4D6DC1D277368B8000D59E7 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F933900D04E85861B63D4 /* Feather.ttf */; };
+		D4D6DC1E277368B8000D59E7 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A352F64258C4E4CA78C8756 /* FontAwesome.ttf */; };
+		D4D6DC1F277368B8000D59E7 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F033A891B877452A94D37BAE /* FontAwesome5_Brands.ttf */; };
+		D4D6DC20277368B8000D59E7 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D75D67687F343DA9D23D681 /* FontAwesome5_Regular.ttf */; };
+		D4D6DC21277368B8000D59E7 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 419A9E7755D845BBBB52FDDD /* FontAwesome5_Solid.ttf */; };
+		D4D6DC22277368B8000D59E7 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84E6925AE21C4D14813CC922 /* Fontisto.ttf */; };
+		D4D6DC23277368B9000D59E7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6A8CD454E1B412FB56FE0D9 /* Foundation.ttf */; };
+		D4D6DC24277368B9000D59E7 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9677FF54ACB9419CA31773FB /* Ionicons.ttf */; };
+		D4D6DC25277368B9000D59E7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38ADA9E4C64D4D289E2B233C /* MaterialCommunityIcons.ttf */; };
+		D4D6DC26277368B9000D59E7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED8785EE35254126AADF5065 /* MaterialIcons.ttf */; };
+		D4D6DC27277368B9000D59E7 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F3B2C89445741F6B9D73866 /* Octicons.ttf */; };
+		D4D6DC28277368B9000D59E7 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F1FA9A2C85C4E51823CD923 /* SimpleLineIcons.ttf */; };
+		D4D6DC29277368B9000D59E7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A03D74766B4A4270A0019973 /* Zocial.ttf */; };
 		EA79DFD78671415EA5CBC473 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B45F0CBDD49940198D57CA71 /* Montserrat-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -39,23 +55,39 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* tumeplayMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tumeplayMobileTests.m; sourceTree = "<group>"; };
 		08EA085E8FCE6EDCED7718FE /* libPods-tumeplayMobile-tumeplayMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tumeplayMobile-tumeplayMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A7F933900D04E85861B63D4 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		0F3B2C89445741F6B9D73866 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* tumeplayMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tumeplayMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = tumeplayMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = tumeplayMobile/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = tumeplayMobile/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = tumeplayMobile/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = tumeplayMobile/main.m; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = tumeplayMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1A352F64258C4E4CA78C8756 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		38ADA9E4C64D4D289E2B233C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		419A9E7755D845BBBB52FDDD /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		5D75D67687F343DA9D23D681 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		7649F10EDFD64E9A80AEA6C3 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		7F1FA9A2C85C4E51823CD923 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		84E6925AE21C4D14813CC922 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		9677FF54ACB9419CA31773FB /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		A03D74766B4A4270A0019973 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		A24FDC83357E46DA578D23ED /* Pods-tumeplayMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tumeplayMobile.debug.xcconfig"; path = "Target Support Files/Pods-tumeplayMobile/Pods-tumeplayMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		A648F3C04A2D45FDA2FBB924 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		A9DD7070522D4403B9B46D91 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		B45F0CBDD49940198D57CA71 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/assets/fonts/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BD497D8E70713135973B37C5 /* Pods-tumeplayMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tumeplayMobile.release.xcconfig"; path = "Target Support Files/Pods-tumeplayMobile/Pods-tumeplayMobile.release.xcconfig"; sourceTree = "<group>"; };
 		BD7F5B825204E50466074373 /* Pods-tumeplayMobile-tumeplayMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tumeplayMobile-tumeplayMobileTests.release.xcconfig"; path = "Target Support Files/Pods-tumeplayMobile-tumeplayMobileTests/Pods-tumeplayMobile-tumeplayMobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD8717A1252A47BBB6F09200 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		BEEEDEF712ED4CFC96703FFF /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		CA4ED942226A47A2BA1B38F2 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		D4D6DC1827736328000D59E7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D6A8CD454E1B412FB56FE0D9 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		E5FEE3B9A6569A4CBC4A8BF4 /* libPods-tumeplayMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tumeplayMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64A5A4B0711F2B60EF83478 /* Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-tumeplayMobile-tumeplayMobileTests/Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED8785EE35254126AADF5065 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		F033A891B877452A94D37BAE /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				D4D6DC1827736328000D59E7 /* Launch Screen.storyboard */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = tumeplayMobile;
@@ -125,6 +157,22 @@
 				B45F0CBDD49940198D57CA71 /* Montserrat-ExtraBold.ttf */,
 				CA4ED942226A47A2BA1B38F2 /* Montserrat-Light.ttf */,
 				A648F3C04A2D45FDA2FBB924 /* Montserrat-Medium.ttf */,
+				7649F10EDFD64E9A80AEA6C3 /* AntDesign.ttf */,
+				BD8717A1252A47BBB6F09200 /* Entypo.ttf */,
+				A9DD7070522D4403B9B46D91 /* EvilIcons.ttf */,
+				0A7F933900D04E85861B63D4 /* Feather.ttf */,
+				1A352F64258C4E4CA78C8756 /* FontAwesome.ttf */,
+				F033A891B877452A94D37BAE /* FontAwesome5_Brands.ttf */,
+				5D75D67687F343DA9D23D681 /* FontAwesome5_Regular.ttf */,
+				419A9E7755D845BBBB52FDDD /* FontAwesome5_Solid.ttf */,
+				84E6925AE21C4D14813CC922 /* Fontisto.ttf */,
+				D6A8CD454E1B412FB56FE0D9 /* Foundation.ttf */,
+				9677FF54ACB9419CA31773FB /* Ionicons.ttf */,
+				38ADA9E4C64D4D289E2B233C /* MaterialCommunityIcons.ttf */,
+				ED8785EE35254126AADF5065 /* MaterialIcons.ttf */,
+				0F3B2C89445741F6B9D73866 /* Octicons.ttf */,
+				7F1FA9A2C85C4E51823CD923 /* SimpleLineIcons.ttf */,
+				A03D74766B4A4270A0019973 /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -270,7 +318,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				D4D6DC1A277368B8000D59E7 /* AntDesign.ttf in Resources */,
+				D4D6DC1B277368B8000D59E7 /* Entypo.ttf in Resources */,
+				D4D6DC1C277368B8000D59E7 /* EvilIcons.ttf in Resources */,
+				D4D6DC1D277368B8000D59E7 /* Feather.ttf in Resources */,
+				D4D6DC1E277368B8000D59E7 /* FontAwesome.ttf in Resources */,
+				D4D6DC1F277368B8000D59E7 /* FontAwesome5_Brands.ttf in Resources */,
+				D4D6DC20277368B8000D59E7 /* FontAwesome5_Regular.ttf in Resources */,
+				D4D6DC21277368B8000D59E7 /* FontAwesome5_Solid.ttf in Resources */,
+				D4D6DC22277368B8000D59E7 /* Fontisto.ttf in Resources */,
+				D4D6DC23277368B9000D59E7 /* Foundation.ttf in Resources */,
+				D4D6DC24277368B9000D59E7 /* Ionicons.ttf in Resources */,
+				D4D6DC25277368B9000D59E7 /* MaterialCommunityIcons.ttf in Resources */,
+				D4D6DC26277368B9000D59E7 /* MaterialIcons.ttf in Resources */,
+				D4D6DC27277368B9000D59E7 /* Octicons.ttf in Resources */,
+				D4D6DC28277368B9000D59E7 /* SimpleLineIcons.ttf in Resources */,
+				D4D6DC29277368B9000D59E7 /* Zocial.ttf in Resources */,
+				D4D6DC1927736328000D59E7 /* Launch Screen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				882B38D593C5408D9DFE419E /* Montserrat-Bold.ttf in Resources */,
 				EA79DFD78671415EA5CBC473 /* Montserrat-ExtraBold.ttf in Resources */,
@@ -517,10 +581,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 76GBKHVK25;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = tumeplayMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -548,9 +613,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 76GBKHVK25;
 				INFOPLIST_FILE = tumeplayMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -618,7 +684,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -677,7 +743,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
