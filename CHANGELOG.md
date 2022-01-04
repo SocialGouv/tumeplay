@@ -1,3 +1,10 @@
+## [1.31.1](https://github.com/SocialGouv/Tumeplay/compare/v1.31.0...v1.31.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* matomo courses events ([e35b736](https://github.com/SocialGouv/Tumeplay/commit/e35b73667c46ded9eaaf06260499ada735e6c37b))
+
 # [1.31.0](https://github.com/SocialGouv/Tumeplay/compare/v1.30.2...v1.31.0) (2021-12-23)
 
 
