@@ -22,20 +22,23 @@ const App = () => {
     async function _alreadyRegistered() {
       const _passedOnboarding = await UserService.hasPassedOnboarding();
       // let userID = await UserService.getUniqueId();
-      let random = Math.random() * 100;
-      if (random < 25) {
-        UserService.setPath('A');
-        Tracking.questionPath('A');
-      } else if (random > 25 && random < 50) {
-        UserService.setPath('B');
-        Tracking.questionPath('B');
-      } else if (random > 50 && random < 75) {
-        UserService.setPath('C');
-        Tracking.questionPath('C');
-      } else {
-        UserService.setPath('D');
-        Tracking.questionPath('D');
-      }
+			const _userPath = UserService.getPath();
+			if (!_userPath) {
+				let random = Math.random() * 100;
+				if (random < 25) {
+					UserService.setPath('A');
+					Tracking.questionPath('ParcoursA');
+				} else if (random > 25 && random < 50) {
+					UserService.setPath('B');
+					Tracking.questionPath('ParcoursB');
+				} else if (random > 50 && random < 75) {
+					UserService.setPath('C');
+					Tracking.questionPath('ParcoursC');
+				} else {
+					UserService.setPath('D');
+					Tracking.questionPath('ParcoursD');
+				}
+			}
       if (_passedOnboarding) {
         setShowRealApp(true);
       }
