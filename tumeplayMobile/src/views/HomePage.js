@@ -81,6 +81,7 @@ const HomePage = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },

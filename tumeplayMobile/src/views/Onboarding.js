@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  Platform,
+  Dimensions,
+} from 'react-native';
 import Button from '../components/Button';
 import wave from '../assets/wave.png';
 import bg1 from '../assets/BG.png';
@@ -62,6 +70,7 @@ export default function Onboarding({user, setUser}) {
       <Button
         text={'Je commence'}
         size={'large'}
+        style={styles.button}
         onPress={() => finishOnboarding()}
       />
     </ImageBackground>
@@ -70,12 +79,13 @@ export default function Onboarding({user, setUser}) {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 5,
+    paddingTop:
+      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
   },
   topContainer: {
     width: '100%',
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
   },
   swipperContainer: {
     flex: 1,
-    minHeight: 300,
+    minHeight: 270,
   },
   imgTitle: {
     marginBottom: 35,
@@ -108,5 +118,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: Fonts.strongText,
     textAlign: 'center',
+  },
+  button: {
+    position: 'absolute',
+    bottom: 30,
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Platform} from 'react-native';
+import {View, StyleSheet, Platform, Dimensions} from 'react-native';
 
 const Container = ({children}) => {
   const displayContainer =
@@ -15,7 +15,7 @@ const Container = ({children}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 40 : 2,
+    height: '100%',
   },
 });
 
