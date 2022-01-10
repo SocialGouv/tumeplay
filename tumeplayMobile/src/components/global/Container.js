@@ -8,16 +8,11 @@ import {
 } from 'react-native';
 
 const Container = ({children, background, style}) => {
-  const displayContainer =
-    Platform.OS === 'ios' ? (
-      <ImageBackground source={background} style={[styles.container, style]}>
-        {children}
-      </ImageBackground>
-    ) : (
-      <ImageBackground style={[styles.container, style]}>
-        {children}
-      </ImageBackground>
-    );
+  const displayContainer = (
+    <ImageBackground source={background} style={[styles.container, style]}>
+      {children}
+    </ImageBackground>
+  );
 
   return displayContainer;
 };

@@ -104,7 +104,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // clearStorage();
+    clearStorage();
     checkUserIdInStorage();
   }, []);
 
