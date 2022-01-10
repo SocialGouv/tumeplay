@@ -1,18 +1,11 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ImageBackground,
-  Platform,
-  Dimensions,
-} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import wave from '../assets/wave.png';
 import bg1 from '../assets/BG.png';
 import {Colors, Fonts} from '../styles/Style';
 import Swiper from 'react-native-swiper';
+import Container from '../components/global/Container';
 
 export default function Onboarding({user, setUser}) {
   const [steps, setSteps] = useState([
@@ -54,7 +47,7 @@ export default function Onboarding({user, setUser}) {
   });
 
   return (
-    <ImageBackground style={styles.container} source={bg1}>
+    <Container style={styles.container} background={bg1}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>{title}</Text>
         <Image style={styles.imgTitle} source={wave} />
@@ -73,19 +66,16 @@ export default function Onboarding({user, setUser}) {
         style={styles.button}
         onPress={() => finishOnboarding()}
       />
-    </ImageBackground>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop:
-      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
   },
   topContainer: {
     width: '100%',

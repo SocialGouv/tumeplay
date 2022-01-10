@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Text,
-  StyleSheet,
-  ImageBackground,
-  TextInput,
-  Platform,
-  Dimensions,
-} from 'react-native';
+import {Text, StyleSheet, TextInput} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Button from '../components/Button';
@@ -14,6 +7,7 @@ import {Colors, Fonts} from '../styles/Style';
 import {useMutation} from '@apollo/client';
 import {POST_MOBILE_USER} from '../services/api/mobile_users';
 import bg from '../assets/BG_PROFIL.png';
+import Container from '../components/global/Container';
 
 const Signup = ({user, setUser}) => {
   let tmpUser = {...user};
@@ -25,9 +19,30 @@ const Signup = ({user, setUser}) => {
     setUser({...tmpUser});
   };
 
+  const setUserInStorage = async () => {
+    tmpUser.isSignedUp = true;
+    tmpUser.points = 0;
+    await EncryptedStorage.setItem(
+      'user',
+      JSON.stringify({
+        user_id: tmpUser.user_id,
+        first_name: tmpUser.first_name,
+        isOnboarded: tmpUser.isOnboarded,
+        isSignedUp: tmpUser.isSignedUp,
+        isUnder25: tmpUser.isOnboarded,
+        points: tmpUser.points,
+        region: tmpUser.region,
+      }),
+    );
+    setUser({...tmpUser});
+  };
+
   const [signUpUser] = useMutation(POST_MOBILE_USER, {
     onError(error) {
-      console.log('ERR', error);
+      console.log('error on signup', error);
+    },
+    onCompleted() {
+      setUserInStorage();
     },
   });
 
@@ -47,35 +62,16 @@ const Signup = ({user, setUser}) => {
   };
 
   const handleValidation = async () => {
-    tmpUser.isSignedUp = true;
-    tmpUser.points = 0;
-    try {
-      await signUpUser({
-        variables: {
-          first_name: tmpUser.first_name,
-          isOnboarded: tmpUser.isOnboarded,
-          isSignedUp: tmpUser.isSignedUp,
-          isUnder25: tmpUser.isUnder25,
-          points: tmpUser.points,
-          user_id: tmpUser.user_id,
-        },
-      });
-      setUser({...tmpUser});
-    } catch (err) {
-      console.log('ICI', err);
-    }
-    await EncryptedStorage.setItem(
-      'user',
-      JSON.stringify({
-        user_id: tmpUser.user_id,
+    await signUpUser({
+      variables: {
         first_name: tmpUser.first_name,
         isOnboarded: tmpUser.isOnboarded,
-        isSignedUp: tmpUser.isSignedUp,
-        isUnder25: tmpUser.isOnboarded,
-        points: tmpUser.points,
-        region: tmpUser.region,
-      }),
-    );
+        isSignedUp: true,
+        isUnder25: tmpUser.isUnder25,
+        points: 0,
+        user_id: tmpUser.user_id,
+      },
+    });
   };
 
   const radio_props_age = [
@@ -104,7 +100,7 @@ const Signup = ({user, setUser}) => {
   }, []);
 
   return (
-    <ImageBackground style={styles.container} source={bg}>
+    <Container style={styles.container} background={bg}>
       <Text style={styles.title}>ton profil</Text>
       <TextInput
         style={styles.textInput}
@@ -132,15 +128,13 @@ const Signup = ({user, setUser}) => {
         size={'large'}
         onPress={() => handleValidation()}
       />
-    </ImageBackground>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:
-      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

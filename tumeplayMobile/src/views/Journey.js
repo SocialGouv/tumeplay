@@ -2,6 +2,7 @@ import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import wave from '../assets/wave.png';
+import Container from '../components/global/Container';
 import WrapperLevelBadges from '../components/Journey/WrapperLevelBadges';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import {GET_LEVELS} from '../services/api/levels';
@@ -44,12 +45,12 @@ const Journey = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <Text style={styles.title}>Ton parcours</Text>
       <Image source={wave} />
       <LevelPointsIndicator points={'500'} style={styles.pointContainer} />
       <ScrollView>{displayWrappers}</ScrollView>
-    </View>
+    </Container>
   );
 };
 
