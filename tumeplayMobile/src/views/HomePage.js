@@ -1,5 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  Platform,
+  Dimensions,
+} from 'react-native';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -70,6 +77,7 @@ const HomePage = ({navigation}) => {
       <FlatList
         data={freshContents}
         renderItem={renderItem}
+        directionalLockEnabled={true}
         keyExtractor={item => item.id}
         numColumns={2}
         style={styles.listContainer}
@@ -80,8 +88,9 @@ const HomePage = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    paddingTop: 10,
+    flex: 1,
+    paddingTop:
+      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   listContainer: {
-    maxHeight: 350,
+    maxHeight: Dimensions.get('window').width > 375 ? 350 : 300,
   },
 });
 
