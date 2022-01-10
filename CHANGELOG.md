@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/SocialGouv/Tumeplay/compare/v1.31.2...v1.32.0) (2022-01-10)
+
+
+### Features
+
+* adjusting container ([#258](https://github.com/SocialGouv/Tumeplay/issues/258)) ([3c57ea7](https://github.com/SocialGouv/Tumeplay/commit/3c57ea773c764ddcbfab778674988f1812ebf3c0))
+
 ## [1.31.2](https://github.com/SocialGouv/Tumeplay/compare/v1.31.1...v1.31.2) (2022-01-10)
 
 
