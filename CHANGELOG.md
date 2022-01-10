@@ -1,3 +1,10 @@
+## [1.31.2](https://github.com/SocialGouv/Tumeplay/compare/v1.31.1...v1.31.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **mobile:** Integrating first UX returns Onboarding ([#257](https://github.com/SocialGouv/Tumeplay/issues/257)) ([7ce8467](https://github.com/SocialGouv/Tumeplay/commit/7ce846727edfc1550b200e9ff42df4baae8c0f46))
+
 ## [1.31.1](https://github.com/SocialGouv/Tumeplay/compare/v1.31.0...v1.31.1) (2022-01-04)
 
 
