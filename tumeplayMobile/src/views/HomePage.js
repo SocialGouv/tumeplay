@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {StyleSheet, Text, FlatList, Platform, Dimensions} from 'react-native';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -8,6 +8,7 @@ import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
 import FreshContentCard from '../components/Contents/FreshContentCard';
 import AppContext from '../../AppContext';
+import Container from '../components/global/Container';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -55,9 +56,12 @@ const HomePage = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Container background={null} style={styles.container}>
       <Title />
-      <LevelPointsIndicator points={points} />
+      <LevelPointsIndicator
+        points={points}
+        onPress={() => navigation.navigate('Journey')}
+      />
       <Text style={styles.text}>{displayText()}</Text>
       <Button
         text="Teste tes connaissances"
@@ -70,17 +74,17 @@ const HomePage = ({navigation}) => {
       <FlatList
         data={freshContents}
         renderItem={renderItem}
+        directionalLockEnabled={true}
         keyExtractor={item => item.id}
         numColumns={2}
         style={styles.listContainer}
       />
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   listContainer: {
-    maxHeight: 350,
+    maxHeight: Dimensions.get('window').width > 375 ? 350 : 300,
   },
 });
 

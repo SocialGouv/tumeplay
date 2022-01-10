@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import wave from '../assets/wave.png';
 import bg1 from '../assets/BG.png';
 import {Colors, Fonts} from '../styles/Style';
 import Swiper from 'react-native-swiper';
+import Container from '../components/global/Container';
 
 export default function Onboarding({user, setUser}) {
   const [steps, setSteps] = useState([
@@ -46,7 +47,7 @@ export default function Onboarding({user, setUser}) {
   });
 
   return (
-    <ImageBackground style={styles.container} source={bg1}>
+    <Container style={styles.container} background={bg1}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>{title}</Text>
         <Image style={styles.imgTitle} source={wave} />
@@ -62,20 +63,19 @@ export default function Onboarding({user, setUser}) {
       <Button
         text={'Je commence'}
         size={'large'}
+        style={styles.button}
         onPress={() => finishOnboarding()}
       />
-    </ImageBackground>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 5,
   },
   topContainer: {
     width: '100%',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   swipperContainer: {
     flex: 1,
-    minHeight: 300,
+    minHeight: 270,
   },
   imgTitle: {
     marginBottom: 35,
@@ -108,5 +108,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: Fonts.strongText,
     textAlign: 'center',
+  },
+  button: {
+    position: 'absolute',
+    bottom: 30,
   },
 });
