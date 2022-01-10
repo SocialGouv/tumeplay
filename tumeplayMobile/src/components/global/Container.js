@@ -1,12 +1,22 @@
 import React from 'react';
-import {View, StyleSheet, Platform} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
 
-const Container = ({children}) => {
+const Container = ({children, background, style}) => {
   const displayContainer =
     Platform.OS === 'ios' ? (
-      <View style={styles.container}>{children}</View>
+      <ImageBackground source={background} style={[styles.container, style]}>
+        {children}
+      </ImageBackground>
     ) : (
-      <View style={styles.container}>{children}</View>
+      <ImageBackground style={[styles.container, style]}>
+        {children}
+      </ImageBackground>
     );
 
   return displayContainer;
@@ -15,7 +25,9 @@ const Container = ({children}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 40 : 2,
+    paddingTop:
+      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
+    height: '100%',
   },
 });
 

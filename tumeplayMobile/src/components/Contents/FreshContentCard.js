@@ -32,7 +32,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 180,
+    width: 170,
     height: 180,
     marginVertical: 5,
     marginHorizontal: 5,

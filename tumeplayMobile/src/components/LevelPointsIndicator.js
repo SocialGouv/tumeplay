@@ -1,21 +1,21 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AppContext from '../../AppContext';
 import coin from '../assets/coin.png';
 
-const LevelPointsIndicator = ({style}) => {
+const LevelPointsIndicator = ({style, onPress}) => {
   const context = useContext(AppContext);
 
   const points = context.points;
 
   return (
-    <View style={[style, styles.container]}>
+    <TouchableOpacity style={[style, styles.container]} onPress={onPress}>
       <Text style={styles.text}>NIVEAU 1</Text>
       <View style={styles.pointsContainer}>
         <Image source={coin} style={styles.image} />
         <Text style={styles.text}>{points} / 3000 </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

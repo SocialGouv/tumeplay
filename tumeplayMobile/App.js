@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Container from './src/components/global/Container';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -18,6 +17,8 @@ import {
   GET_HISTORIQUES,
   GET_MOBILE_USER,
 } from './src/services/api/mobile_users';
+import Journey from './src/views/Journey';
+
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
@@ -120,39 +121,38 @@ const App = () => {
 
   return (
     <AppContext.Provider value={contextValues}>
-      <Container>
-        {!user?.isOnboarded && <Onboarding user={user} setUser={setUser} />}
-        {user?.isOnboarded && !user?.isSignedUp && (
-          <Signup user={user} setUser={setUser} />
-        )}
-        {user?.isOnboarded && user?.isSignedUp && (
-          <NavigationContainer>
-            <NavigationStack.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}>
-              <NavigationStack.Screen name="Home" component={Navbar} />
-              <NavigationStack.Screen
-                name="ContentsPage"
-                component={ContentsPage}
-              />
-              <NavigationStack.Screen name="Content" component={ContentPage} />
-              <NavigationStack.Screen
-                name="QuizzStartPage"
-                component={QuizzStartPage}
-              />
-              <NavigationStack.Screen
-                name="QuizzModule"
-                component={QuizzModule}
-              />
-              <NavigationStack.Screen
-                name="QuizzFinishScreen"
-                component={QuizzFinishScreen}
-              />
-            </NavigationStack.Navigator>
-          </NavigationContainer>
-        )}
-      </Container>
+      {!user?.isOnboarded && <Onboarding user={user} setUser={setUser} />}
+      {user?.isOnboarded && !user?.isSignedUp && (
+        <Signup user={user} setUser={setUser} />
+      )}
+      {user?.isOnboarded && user?.isSignedUp && (
+        <NavigationContainer>
+          <NavigationStack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <NavigationStack.Screen name="Home" component={Navbar} />
+            <NavigationStack.Screen
+              name="ContentsPage"
+              component={ContentsPage}
+            />
+            <NavigationStack.Screen name="Content" component={ContentPage} />
+            <NavigationStack.Screen
+              name="QuizzStartPage"
+              component={QuizzStartPage}
+            />
+            <NavigationStack.Screen
+              name="QuizzModule"
+              component={QuizzModule}
+            />
+            <NavigationStack.Screen
+              name="QuizzFinishScreen"
+              component={QuizzFinishScreen}
+            />
+            <NavigationStack.Screen name="Journey" component={Journey} />
+          </NavigationStack.Navigator>
+        </NavigationContainer>
+      )}
     </AppContext.Provider>
   );
 };
