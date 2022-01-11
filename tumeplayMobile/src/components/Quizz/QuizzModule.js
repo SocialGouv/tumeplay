@@ -12,6 +12,7 @@ import Button from '../Button';
 import QuizzAnswerButton from './QuizzAnswerButton';
 import TopLevelPointIndicator from './TopLevelPointIndicator';
 import _ from 'lodash';
+import Container from '../global/Container';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -94,7 +95,7 @@ const QuizzModule = ({navigation, route}) => {
   }, [question]);
 
   return (
-    <ImageBackground source={bg} style={styles.container}>
+    <Container background={bg} style={styles.container}>
       <View style={styles.levelIndicator}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Retour</Text>
@@ -119,7 +120,7 @@ const QuizzModule = ({navigation, route}) => {
           onPress={() => goToNextQuestion()}
         />
       ) : null}
-    </ImageBackground>
+    </Container>
   );
 };
 

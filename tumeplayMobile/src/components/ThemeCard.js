@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import {Fonts} from '../styles/Style';
 
 const ThemeCard = props => {
@@ -24,8 +30,8 @@ const ThemeCard = props => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: 160,
-    height: 160,
+    width: Dimensions.get('window').width > 375 ? 160 : 140,
+    height: Dimensions.get('window').width > 375 ? 160 : 140,
     borderRadius: 8,
     marginHorizontal: 5,
     marginVertical: 5,

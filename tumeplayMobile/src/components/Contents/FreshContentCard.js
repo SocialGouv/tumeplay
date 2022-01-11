@@ -14,13 +14,14 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
 
   return (
     <TouchableOpacity
+      style={styles.container}
       onPress={() =>
         navigation.navigate('Content', {
           content_id: content.id,
           contents_ids: freshContentsIds,
         })
       }>
-      <ImageBackground style={styles.container} source={imageUrl}>
+      <ImageBackground style={styles.image} source={imageUrl}>
         <ImageBackground style={styles.image} source={bg}>
           <Text style={styles.level}>Niveau 1</Text>
           <Text style={styles.title}>{content?.title}</Text>
@@ -33,7 +34,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
 const styles = StyleSheet.create({
   container: {
     width: 170,
-    height: 180,
+    height: 118,
     marginVertical: 5,
     marginHorizontal: 5,
     borderRadius: 8,

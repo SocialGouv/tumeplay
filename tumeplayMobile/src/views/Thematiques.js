@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
 import {Colors, Fonts, bgColors} from '../styles/Style';
@@ -12,6 +12,7 @@ import peace from '../assets/custom_images/peace.png';
 import thumbs_up from '../assets/custom_images/thumbs_up.png';
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
+import Container from '../components/global/Container';
 
 export default function Thematiques(props) {
   const {navigation} = props;
@@ -40,25 +41,22 @@ export default function Thematiques(props) {
   }, [data, loading]);
 
   return (
-    <ImageBackground style={styles.container} source={background}>
+    <Container style={styles.container} source={background}>
       <Title />
       <Text style={styles.subtitle}>
         Sélectionne le thème qui t'intéresse le plus
       </Text>
       <View style={styles.themeContainer}>{displayThematiques}</View>
-    </ImageBackground>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
     paddingHorizontal: 18,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingTop: 21,
-    paddingBottom: 50,
   },
   titleContainer: {
     alignItems: 'center',
