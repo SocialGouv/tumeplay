@@ -1,3 +1,10 @@
+## [1.32.2](https://github.com/SocialGouv/Tumeplay/compare/v1.32.1...v1.32.2) (2022-01-11)
+
+
+### Bug Fixes
+
+* out-of-stock contact props ([60c3158](https://github.com/SocialGouv/Tumeplay/commit/60c3158b269c535a8970193dce26a49587fea541))
+
 ## [1.32.1](https://github.com/SocialGouv/Tumeplay/compare/v1.32.0...v1.32.1) (2022-01-11)
 
 
