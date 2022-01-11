@@ -86,6 +86,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     fontFamily: Fonts.strongText,
+    fontWeight: '600',
+    letterSpacing: 0.6,
+    marginRight: 10,
   },
   icon: {
     marginLeft: 8,
