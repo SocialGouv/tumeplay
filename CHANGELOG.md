@@ -1,3 +1,10 @@
+## [1.32.1](https://github.com/SocialGouv/Tumeplay/compare/v1.32.0...v1.32.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* adding container to retrieve correct design ([#261](https://github.com/SocialGouv/Tumeplay/issues/261)) ([aa8c8ac](https://github.com/SocialGouv/Tumeplay/commit/aa8c8acdbe5da0c640a5badbe9905d0f54d73159))
+
 # [1.32.0](https://github.com/SocialGouv/Tumeplay/compare/v1.31.2...v1.32.0) (2022-01-10)
 
 
