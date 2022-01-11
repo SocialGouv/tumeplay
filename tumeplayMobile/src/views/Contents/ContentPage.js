@@ -14,6 +14,7 @@ import Button from '../../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_SINGLE_CONTENT} from '../../services/api/contents';
 import Feedback from '../../components/Feedback';
+import Container from '../../components/global/Container';
 
 const ContentPage = ({navigation, route}) => {
   const [content, setContent] = useState();
@@ -60,7 +61,7 @@ const ContentPage = ({navigation, route}) => {
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageBackground style={styles.image} source={imageUrl}>
           <ImageBackground style={styles.image} source={bg}>
@@ -98,7 +99,7 @@ const ContentPage = ({navigation, route}) => {
           onPress={() => nextContent()}
         />
       )}
-    </View>
+    </Container>
   );
 };
 

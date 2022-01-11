@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop:
-      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 20,
+      Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 25,
     height: '100%',
   },
 });

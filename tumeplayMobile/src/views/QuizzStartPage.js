@@ -13,6 +13,7 @@ import bg from '../assets/Quiiz_BG.png';
 import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 import _ from 'lodash';
+import Container from '../components/global/Container';
 
 const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
@@ -37,7 +38,7 @@ const QuizzStartPage = ({navigation}) => {
   }, [modules]);
 
   return (
-    <ImageBackground source={bg} style={styles.container}>
+    <Container background={bg} style={styles.container}>
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
@@ -67,7 +68,7 @@ const QuizzStartPage = ({navigation}) => {
         }}
         style={styles.button}
       />
-    </ImageBackground>
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react';
-import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import congrats from '../../../assets/custom_images/congrats.png';
@@ -10,6 +10,7 @@ import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
 import _ from 'lodash';
 import AppContext from '../../../../AppContext';
+import Container from '../../global/Container';
 
 const QuizzWithWrongAnswers = props => {
   const {correctAnswers, wrongAnswers, navigation, pointsEarned, module_id} =
@@ -33,10 +34,10 @@ const QuizzWithWrongAnswers = props => {
   }, []);
 
   return (
-    <ImageBackground source={bg} style={styles.container}>
+    <Container backgroundColor={bg} style={styles.container}>
       <TopLevelPointIndicator style={styles.levelIndicator} />
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>BRAVO MORRAY !</Text>
+        <Text style={styles.title}>BRAVO !</Text>
         <Image source={wave} />
       </View>
       <View style={styles.pointsContainer}>
@@ -69,7 +70,7 @@ const QuizzWithWrongAnswers = props => {
         style={styles.button}
         onPress={() => restartQuizz()}
       />
-    </ImageBackground>
+    </Container>
   );
 };
 

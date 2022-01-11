@@ -41,7 +41,9 @@ const HomePage = ({navigation}) => {
         </Text>
       );
     } else {
-      return 'Gagne des points pour commander une box';
+      return (
+        <Text style={styles.text}>Gagne des points pour commander une box</Text>
+      );
     }
   };
 
@@ -59,6 +61,7 @@ const HomePage = ({navigation}) => {
     <Container background={null} style={styles.container}>
       <Title />
       <LevelPointsIndicator
+        style={styles.levelIndicator}
         points={points}
         onPress={() => navigation.navigate('Journey')}
       />
@@ -88,10 +91,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
+  levelIndicator: {
+    marginTop: 18,
+  },
   text: {
     width: 340,
     textAlign: 'center',
     fontFamily: Fonts.text,
+    fontWeight: '500',
     fontSize: 16,
     lineHeight: 27,
   },
