@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Text, StyleSheet, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TextInput} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Button from '../components/Button';
@@ -47,7 +47,12 @@ const Signup = ({user, setUser}) => {
   });
 
   const handleUserAge = value => {
-    tmpUser.isUnder25 = value;
+    if (value === '14-18 ans' || value === '18-25 ans') {
+      tmpUser.isUnder25 = true;
+    } else {
+      tmpUser.isUnder25 = false;
+    }
+    console.log(value);
     setUser({...tmpUser});
   };
 
@@ -75,9 +80,9 @@ const Signup = ({user, setUser}) => {
   };
 
   const radio_props_age = [
-    {label: '14-18 ans', value: true, key: '14-18 ans'},
-    {label: '18-25 ans', value: true, key: '18-25 ans'},
-    {label: '+ de 25 ans', value: false, key: '+ de 25 ans'},
+    {label: '14-18 ans', value: '14-18 ans', key: '14-18 ans'},
+    {label: '18-25 ans', value: '18-25 ans', key: '18-25 ans'},
+    {label: '+ de 25 ans', value: '+ de 25 ans', key: '+ de 25 ans'},
   ];
 
   const radio_props_location = [
@@ -100,45 +105,56 @@ const Signup = ({user, setUser}) => {
   }, []);
 
   return (
-    <Container style={styles.container} background={bg}>
+    <Container background={bg}>
       <Text style={styles.title}>ton profil</Text>
-      <TextInput
-        style={styles.textInput}
-        name="firstname"
-        placeholder="Ton prénom"
-        onChangeText={e => handleChangeName(e)}
-      />
-      <RNPickerSelect
-        onValueChange={e => handleUserAge(e)}
-        style={{...pickerSelectStyle}}
-        placeholder={{label: "Ta tranche d'âge", value: null}}
-        name="isUnder25"
-        items={radio_props_age}
-      />
-      <RNPickerSelect
-        onValueChange={e => handleChangeRegion(e)}
-        style={{...pickerSelectStyle}}
-        placeholder={{label: 'Tu habites', value: null}}
-        name="region"
-        items={radio_props_location}
-      />
-      <Button
-        style={styles.button}
-        text={'Je continue'}
-        size={'large'}
-        onPress={() => handleValidation()}
-      />
+      <View style={styles.infoContainer}>
+        <TextInput
+          style={styles.textInput}
+          name="firstname"
+          placeholder="Ton prénom"
+          placeholderTextColor={Colors.darkgrey}
+          onChangeText={e => handleChangeName(e)}
+        />
+        <RNPickerSelect
+          onValueChange={e => handleUserAge(e)}
+          style={{...pickerSelectStyle}}
+          useNativeAndroidPickerStyle={false}
+          placeholder={{label: "Ta tranche d'âge", value: null}}
+          name="isUnder25"
+          items={radio_props_age}
+        />
+        <RNPickerSelect
+          onValueChange={e => handleChangeRegion(e)}
+          style={{...pickerSelectStyle}}
+          useNativeAndroidPickerStyle={false}
+          placeholder={{label: 'Tu habites', value: null}}
+          name="region"
+          items={radio_props_location}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          text={'Je continue'}
+          size={'large'}
+          onPress={() => handleValidation()}
+        />
+      </View>
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'relative',
+  },
+  infoContainer: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    marginHorizontal: 18,
+    paddingTop: 50,
   },
   title: {
     marginTop: 33,
@@ -146,6 +162,7 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     fontFamily: Fonts.title,
     textAlign: 'center',
+    color: Colors.black,
   },
   subtitle: {
     fontSize: 18,
@@ -154,19 +171,37 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   textInput: {
-    width: 350,
-    height: 50,
-    marginHorizontal: 18,
-    borderBottomWidth: 1,
+    width: '100%',
+    borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
     fontSize: 18,
+    color: Colors.black,
+    paddingBottom: 20,
   },
-  button: {
+
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
     bottom: 30,
   },
 });
 
 const pickerSelectStyle = StyleSheet.create({
+  placeholder: {
+    color: Colors.darkgrey,
+    marginHorizontal: 0,
+    paddingHorizontal: 0,
+  },
+  inputAndroid: {
+    width: '100%',
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.grey,
+    fontSize: 18,
+    paddingVertical: 20,
+  },
   inputIOS: {
     fontSize: 18,
     paddingVertical: 12,

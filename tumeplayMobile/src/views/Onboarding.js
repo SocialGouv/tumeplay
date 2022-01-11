@@ -13,12 +13,7 @@ import Container from '../components/global/Container';
 
 export default function Onboarding({user, setUser}) {
   const {width} = useWindowDimensions();
-  const source = {
-    html: `
-  <p style='text-align:center;'>
-    Hello World!
-  </p>`,
-  };
+
   const [steps, setSteps] = useState([
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
