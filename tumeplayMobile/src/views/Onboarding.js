@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import wave from '../assets/wave.png';
 import bg1 from '../assets/BG.png';
+import bg2 from '../assets/BG_2.png';
+import bg3 from '../assets/BG_3.png';
 import {Colors, Fonts} from '../styles/Style';
 import Swiper from 'react-native-swiper';
 import Container from '../components/global/Container';
@@ -28,6 +30,20 @@ export default function Onboarding({user, setUser}) {
     },
   ]);
 
+  const [customBackground, setCustomBackground] = useState(bg1);
+
+  const changeBackground = currentIndex => {
+    if (currentIndex === 0) {
+      setCustomBackground(bg1);
+    }
+    if (currentIndex === 1) {
+      setCustomBackground(bg2);
+    }
+    if (currentIndex === 2) {
+      setCustomBackground(bg3);
+    }
+  };
+
   const title = 'EN APPRENDRE PLUS SUR LA SEXUALITÉ';
 
   const finishOnboarding = () => {
@@ -47,12 +63,13 @@ export default function Onboarding({user, setUser}) {
   });
 
   return (
-    <Container style={styles.container} background={bg1}>
+    <Container style={styles.container} background={customBackground}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>{title}</Text>
         <Image style={styles.imgTitle} source={wave} />
         <Swiper
-          index={0}
+          onIndexChanged={index => changeBackground(index)}
+          loop={false}
           containerStyle={styles.swipperContainer}
           dotColor={Colors.corail}
           activeDotColor={Colors.black}
@@ -63,13 +80,13 @@ export default function Onboarding({user, setUser}) {
       <Button
         text={'Je commence'}
         size={'large'}
+        icon={true}
         style={styles.button}
         onPress={() => finishOnboarding()}
       />
     </Container>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -83,7 +100,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   title: {
-    padding: 35,
+    paddingHorizontal: 35,
+    paddingTop: 35,
+    paddingBottom: 7,
     fontSize: 30,
     textAlign: 'center',
     fontFamily: Fonts.title,
