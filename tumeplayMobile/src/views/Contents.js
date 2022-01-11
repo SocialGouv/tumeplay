@@ -2,6 +2,7 @@ import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
+import Container from '../components/global/Container';
 import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 
@@ -36,7 +37,7 @@ const ContentsPage = props => {
   };
 
   return (
-    <View style={[styles.container]}>
+    <Container style={[styles.container]}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>Go BACK</Text>
       </TouchableOpacity>
@@ -48,7 +49,7 @@ const ContentsPage = props => {
           keyExtractor={item => item.id}
         />
       </View>
-    </View>
+    </Container>
   );
 };
 

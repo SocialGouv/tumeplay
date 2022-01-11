@@ -11,6 +11,7 @@ import {
   CREATE_HISTORY,
   UPDATE_MOBILE_USER_POINTS,
 } from '../../../services/api/mobile_users';
+import Container from '../../global/Container';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
@@ -53,7 +54,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <TopLevelPointIndicator style={styles.pointIndicator} />
       <Text style={styles.title}>BIEN JOUÉ</Text>
       <Image source={wave} />
@@ -66,13 +67,12 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
         <Text style={styles.text}>Non pas tout de suite</Text>
       </TouchableOpacity>
       <Button text={'Je continue'} size={'large'} style={styles.button} />
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
     alignItems: 'center',
     paddingHorizontal: 10,
   },
