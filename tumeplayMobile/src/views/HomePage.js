@@ -63,7 +63,7 @@ const HomePage = ({navigation}) => {
       <LevelPointsIndicator
         style={styles.levelIndicator}
         points={points}
-        onPress={() => navigation.navigate('Journey')}
+        onPress={() => navigation.navigate('Parcours')}
       />
       <Text style={styles.text}>{displayText()}</Text>
       <Button
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: Fonts.subtitle,
     alignSelf: 'flex-start',
-    marginHorizontal: 5,
+    marginTop: 30,
+    marginHorizontal: Dimensions.get('window').width > 375 ? 15 : 10,
   },
   listContainer: {
     maxHeight: Dimensions.get('window').width > 375 ? 350 : 300,

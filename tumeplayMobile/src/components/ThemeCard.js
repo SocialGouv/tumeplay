@@ -30,8 +30,8 @@ const ThemeCard = props => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: Dimensions.get('window').width > 375 ? 160 : 140,
-    height: Dimensions.get('window').width > 375 ? 160 : 140,
+    width: 160,
+    height: 160,
     borderRadius: 8,
     marginHorizontal: 5,
     marginVertical: 5,

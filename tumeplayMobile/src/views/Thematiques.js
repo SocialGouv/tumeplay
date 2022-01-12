@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
 import {Colors, Fonts, bgColors} from '../styles/Style';
@@ -13,6 +13,7 @@ import thumbs_up from '../assets/custom_images/thumbs_up.png';
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
 import Container from '../components/global/Container';
+import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
 
 export default function Thematiques(props) {
   const {navigation} = props;
@@ -21,18 +22,18 @@ export default function Thematiques(props) {
 
   const images = [dynamite, peace, peach, thumbs_up, metal, hello];
 
-  const displayThematiques = thematiques?.map((theme, index) => {
+  const renderItem = ({item, index}) => {
     return (
       <ThemeCard
-        key={index}
+        key={item.id}
         index={index}
-        theme={theme}
+        theme={item}
         backgroundColor={bgColors[index]}
         image={images[index]}
         navigation={navigation}
       />
     );
-  });
+  };
 
   useEffect(() => {
     if (data && !loading) {
@@ -42,21 +43,31 @@ export default function Thematiques(props) {
 
   return (
     <Container style={styles.container} source={background}>
-      <Title />
-      <Text style={styles.subtitle}>
-        Sélectionne le thème qui t'intéresse le plus
-      </Text>
-      <View style={styles.themeContainer}>{displayThematiques}</View>
+      <TopLevelPointIndicator style={styles.pointsIndicator} />
+      <Title title="Informe-toi" />
+      <Text style={styles.subtitle}>Sélectionne un thème qui t'intéresse</Text>
+      <View style={styles.listContainer}>
+        <FlatList
+          data={thematiques}
+          renderItem={renderItem}
+          directionalLockEnabled={true}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          style={styles.themeContainer}
+        />
+      </View>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 18,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+  },
+  pointsIndicator: {
+    alignSelf: 'flex-end',
+    alignContent: 'flex-end',
   },
   titleContainer: {
     alignItems: 'center',
@@ -67,6 +78,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     lineHeight: 38,
     color: Colors.black,
+    marginTop: 12,
   },
   subtitle: {
     fontSize: 18,
@@ -74,12 +86,18 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
     textAlign: 'left',
     fontFamily: Fonts.subtitle,
-    paddingLeft: 2,
-    paddingRight: 18,
+    paddingLeft: 18,
+    marginTop: 13,
+    marginBottom: 16,
+  },
+  listContainer: {
+    flex: 1,
+    alignSelf: 'center',
   },
   themeContainer: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    // justifyContent: 'center',
   },
 });
