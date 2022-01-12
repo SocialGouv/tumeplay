@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
     borderRadius: 8,
+    overflow: 'hidden',
   },
   image: {
     height: '100%',
