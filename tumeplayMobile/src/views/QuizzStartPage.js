@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
@@ -86,7 +80,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
-    marginTop: 60,
+    marginTop: 40,
     marginBottom: 48,
     color: Colors.black,
   },
