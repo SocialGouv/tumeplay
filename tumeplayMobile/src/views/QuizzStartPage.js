@@ -14,6 +14,7 @@ import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 import _ from 'lodash';
 import Container from '../components/global/Container';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
@@ -42,7 +43,7 @@ const QuizzStartPage = ({navigation}) => {
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
-        <Text>Retour</Text>
+        <Icon name="md-arrow-back" size={30} color="#000" />
       </TouchableOpacity>
       <Text style={styles.title}> Joue et teste tes connaissances !</Text>
       <View>
@@ -85,8 +86,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
-    marginTop: 90,
+    marginTop: 60,
     marginBottom: 48,
+    color: Colors.black,
   },
   textContainer: {
     width: 230,
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 27,
     fontWeight: '600',
+    color: Colors.black,
   },
   redText: {
     color: Colors.primary,

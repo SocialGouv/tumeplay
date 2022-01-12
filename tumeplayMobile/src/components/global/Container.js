@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-  ImageBackground,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Platform, ImageBackground, Dimensions} from 'react-native';
 
 const Container = ({children, background, style}) => {
   const displayContainer = (

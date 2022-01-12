@@ -4,9 +4,10 @@ import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
-import {Fonts} from '../../../styles/Style';
+import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 import {useMutation} from '@apollo/client';
+import {bgColors} from '../../../styles/Style';
 import {
   CREATE_HISTORY,
   UPDATE_MOBILE_USER_POINTS,
@@ -63,10 +64,17 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
       <Text style={styles.description}>
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.text}>Non pas tout de suite</Text>
-      </TouchableOpacity>
-      <Button text={'Je continue'} size={'large'} style={styles.button} />
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.text}>Non, pas tout de suite</Text>
+        </TouchableOpacity>
+        <Button
+          icon={true}
+          text={'Je continue'}
+          size={'large'}
+          style={styles.button}
+        />
+      </View>
     </Container>
   );
 };
@@ -75,6 +83,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingHorizontal: 10,
+    backgroundColor: bgColors[2],
   },
   pointIndicator: {
     justifyContent: 'flex-end',
@@ -85,6 +94,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 38,
     marginTop: 49,
+    color: Colors.black,
+    paddingBottom: 5,
   },
   subtitle: {
     fontFamily: Fonts.subtitle,
@@ -92,6 +103,7 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     marginTop: 28,
     marginBottom: 17,
+    color: Colors.black,
   },
   imageThumb: {
     width: 60,
@@ -103,14 +115,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 27,
     textAlign: 'center',
-    paddingHorizontal: 15,
+    paddingHorizontal: 30,
+    color: Colors.black,
   },
   text: {
     fontSize: 18,
     fontWeight: '600',
     lineHeight: 24,
+    color: Colors.black,
+    textAlign: 'center',
+    paddingBottom: 12,
   },
-  button: {
+  bottomContainer: {
     position: 'absolute',
     bottom: 35,
   },

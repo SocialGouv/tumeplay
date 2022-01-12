@@ -23,9 +23,8 @@ const styles = StyleSheet.create({
   button: {
     display: 'flex',
     flexDirection: 'row',
-    maxWidth: 160,
-    minWidth: 160,
-    marginHorizontal: 10,
+    minWidth: 180,
+    maxWidth: 180,
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'space-around',

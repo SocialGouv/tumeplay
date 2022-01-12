@@ -52,7 +52,6 @@ const Signup = ({user, setUser}) => {
     } else {
       tmpUser.isUnder25 = false;
     }
-    console.log(value);
     setUser({...tmpUser});
   };
 
@@ -137,6 +136,7 @@ const Signup = ({user, setUser}) => {
           style={styles.button}
           text={'Je continue'}
           size={'large'}
+          icon={true}
           onPress={() => handleValidation()}
         />
       </View>
