@@ -12,6 +12,8 @@ const Badge = module => {
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const [done, setDone] = useState(false);
 
+  console.log('donemodules', doneModules_ids);
+
   const adjustModuleColor = () => {
     if (doneModules_ids.includes(module.module.id)) {
       setStrokeColor('#51B070');
