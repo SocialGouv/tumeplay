@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
@@ -32,7 +32,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
         await createHistory({
           variables: {
             user_id: history?.user?.id,
-            module_id: history?.module?.id,
+            module_id: module_id,
             status: 'success',
           },
         });

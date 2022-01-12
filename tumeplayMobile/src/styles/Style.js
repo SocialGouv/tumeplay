@@ -12,6 +12,7 @@ export const Colors = {
   corailLight: '#EDC38B',
   grey: '#B3B3B3',
   lightCorail: '#FEF0DC',
+  background: '#FBF7F2',
 };
 
 export const bgColors = [
