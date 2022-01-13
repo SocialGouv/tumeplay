@@ -16,7 +16,7 @@ import Container from '../../global/Container';
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
   const points = context.points;
-  const user_id = context.user_id;
+  const user_id = context.strapi_user_id;
   const setPoints = context.setPoints;
   const history = context.userHistory;
 
@@ -31,13 +31,13 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
       try {
         await createHistory({
           variables: {
-            user_id: history?.user?.id,
+            user_id: user_id,
             module_id: module_id,
             status: 'success',
           },
         });
       } catch (err) {
-        console.log(err);
+        console.log('Error on history creation', err);
       }
     }
   };

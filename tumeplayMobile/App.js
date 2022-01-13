@@ -110,6 +110,7 @@ const App = () => {
 
   const contextValues = {
     user_id: user.user_id,
+    strapi_user_id: user.id,
     thematiques,
     points,
     setPoints,

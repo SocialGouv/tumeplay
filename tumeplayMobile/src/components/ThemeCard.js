@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import {TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {Fonts} from '../styles/Style';
 
 const ThemeCard = props => {
