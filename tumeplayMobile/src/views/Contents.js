@@ -5,7 +5,7 @@ import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -37,9 +37,17 @@ const ContentsPage = props => {
     );
   };
 
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
+  };
+
   return (
-    <Container style={[styles.container]}>
-      <GestureRecognizer onSwipeLeft={() => navigation.goBack()}>
+    <Container style={styles.container}>
+      <GestureRecognizer
+        style={styles.container}
+        config={config}
+        onSwipeLeft={() => navigation.goBack()}>
         <Title />
         <View style={styles.listContainer}>
           <FlatList
