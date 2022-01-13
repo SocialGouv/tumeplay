@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/SocialGouv/Tumeplay/compare/v1.33.0...v1.34.0) (2022-01-13)
+
+
+### Features
+
+* rework quizz ([#265](https://github.com/SocialGouv/Tumeplay/issues/265)) ([82938be](https://github.com/SocialGouv/Tumeplay/commit/82938be642e747a07ad5d06ba8cf15c55a3093f6))
+
 # [1.33.0](https://github.com/SocialGouv/Tumeplay/compare/v1.32.2...v1.33.0) (2022-01-12)
 
 
