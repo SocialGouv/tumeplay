@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   View,
   StyleSheet,
@@ -6,6 +7,8 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
+import {Colors} from '../../styles/Style';
+
 
 const Container = ({children, background, style}) => {
   const displayContainer = (
@@ -23,6 +26,7 @@ const styles = StyleSheet.create({
     paddingTop:
       Platform.OS === 'ios' && Dimensions.get('window').width > 375 ? 40 : 25,
     height: '100%',
+    backgroundColor: Colors.background,
   },
 });
 

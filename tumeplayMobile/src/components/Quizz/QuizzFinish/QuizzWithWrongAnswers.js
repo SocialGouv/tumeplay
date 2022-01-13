@@ -5,7 +5,7 @@ import wave from '../../../assets/wave.png';
 import congrats from '../../../assets/custom_images/congrats.png';
 import clap from '../../../assets/custom_images/clap.png';
 import coin from '../../../assets/coin.png';
-import {Fonts} from '../../../styles/Style';
+import {Colors, Fonts} from '../../../styles/Style';
 import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
 import _ from 'lodash';
@@ -34,8 +34,10 @@ const QuizzWithWrongAnswers = props => {
   }, []);
 
   return (
-    <Container backgroundColor={bg} style={styles.container}>
-      <TopLevelPointIndicator style={styles.levelIndicator} />
+    <Container style={styles.container} background={bg}>
+      <View style={styles.pointIndicatorContainer}>
+        <TopLevelPointIndicator style={styles.levelIndicator} />
+      </View>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>BRAVO !</Text>
         <Image source={wave} />
@@ -50,7 +52,7 @@ const QuizzWithWrongAnswers = props => {
       </View>
       <Image source={congrats} />
       <View style={styles.answerContainer}>
-        <Text style={styles.answerText}>
+        <Text style={[styles.answerText, styles.firstAnswer]}>
           ✅ {correctAnswers?.length}{' '}
           {correctAnswers.length > 1
             ? 'réponses correctes'
@@ -63,11 +65,17 @@ const QuizzWithWrongAnswers = props => {
             : 'réponse incorrecte'}
         </Text>
       </View>
-      <Image source={clap} />
+      <View style={styles.bottomTextContainer}>
+        <Image source={clap} />
+        <Text style={styles.bottomText}>
+          Continue pour débloquer le niveau 1{' '}
+        </Text>
+      </View>
       <Button
         text={'Je continue'}
         size={'large'}
         style={styles.button}
+        icon={true}
         onPress={() => restartQuizz()}
       />
     </Container>
@@ -78,8 +86,13 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     paddingHorizontal: 10,
+  },
+  pointIndicatorContainer: {
+    justifyContent: 'flex-end',
+    width: '100%',
+    flexDirection: 'row',
   },
   levelIndicator: {
     width: '100%',
@@ -87,6 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 50,
   },
   titleContainer: {
     display: 'flex',
@@ -95,8 +109,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Fonts.title,
+    color: Colors.black,
     fontSize: 30,
     lineHeight: 38,
+    paddingBottom: 5,
   },
   boldPoints: {
     fontFamily: Fonts.subtitle,
@@ -105,6 +121,7 @@ const styles = StyleSheet.create({
   points: {
     fontFamily: Fonts.strongText,
     fontSize: 22,
+    color: Colors.black,
   },
   coin: {
     width: 30,
@@ -115,24 +132,43 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: 180,
     justifyContent: 'space-between',
+    marginTop: 32,
+    marginBottom: 20,
   },
   answerContainer: {
+    marginTop: 28,
     minWidth: 240,
     minHeight: 70,
     borderRadius: 8,
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingHorizontal: 25,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   answerText: {
     fontSize: 18,
+    color: Colors.black,
     lineHeight: 22,
-    padding: 10,
+  },
+  firstAnswer: {
+    paddingBottom: 10,
   },
   button: {
     position: 'absolute',
     bottom: 35,
+  },
+  bottomTextContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 110,
+  },
+  bottomText: {
+    color: Colors.black,
+    fontWeight: '600',
+    fontSize: 18,
+    paddingTop: 5,
   },
 });
 

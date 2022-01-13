@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
@@ -14,6 +8,11 @@ import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 import _ from 'lodash';
 import Container from '../components/global/Container';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 
 const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
@@ -37,37 +36,48 @@ const QuizzStartPage = ({navigation}) => {
     }
   }, [modules]);
 
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
+  };
+
   return (
-    <Container background={bg} style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <Text>Retour</Text>
-      </TouchableOpacity>
-      <Text style={styles.title}> Joue et teste tes connaissances !</Text>
-      <View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Prêt.e ?</Text>
-          <Text style={styles.text}>
-            Réponds à <Text style={styles.redText}>10 questions</Text> et gagne
-            jusqu'à <Text style={styles.redText}>1000 points</Text>
-          </Text>
+
+    <Container background={bg}>
+      <GestureRecognizer
+        style={styles.container}
+        config={config}
+        onSwipeLeft={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}>
+           <Icon name="md-arrow-back" size={30} color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.title}> Joue et teste tes connaissances !</Text>
+        <View>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Prêt.e ?</Text>
+            <Text style={styles.text}>
+              Réponds à <Text style={styles.redText}>10 questions</Text> et
+              gagne jusqu'à <Text style={styles.redText}>1000 points</Text>
+            </Text>
+          </View>
+          <CategorieIndicator thematique={thematique} />
         </View>
-        <CategorieIndicator thematique={thematique} />
-      </View>
-      <Button
-        size="medium"
-        text="C'est parti"
-        isDisabled={loading}
-        icon
-        onPress={() => {
-          navigation.navigate('QuizzModule', {
-            questions: _.shuffle(questions),
-            module_id: module.id,
-          });
-        }}
-        style={styles.button}
-      />
+        <Button
+          size="medium"
+          text="C'est parti"
+          isDisabled={loading}
+          icon
+          onPress={() => {
+            navigation.navigate('QuizzModule', {
+              questions: _.shuffle(questions),
+              module_id: module.id,
+            });
+          }}
+          style={styles.button}
+        />
+      </GestureRecognizer>
     </Container>
   );
 };
@@ -85,8 +95,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
-    marginTop: 90,
+    marginTop: 40,
     marginBottom: 48,
+    color: Colors.black,
   },
   textContainer: {
     width: 230,
@@ -98,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 27,
     fontWeight: '600',
+    color: Colors.black,
   },
   redText: {
     color: Colors.primary,

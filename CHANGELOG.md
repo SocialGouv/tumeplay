@@ -1,3 +1,24 @@
+# [1.34.0](https://github.com/SocialGouv/Tumeplay/compare/v1.33.0...v1.34.0) (2022-01-13)
+
+
+### Features
+
+* rework quizz ([#265](https://github.com/SocialGouv/Tumeplay/issues/265)) ([82938be](https://github.com/SocialGouv/Tumeplay/commit/82938be642e747a07ad5d06ba8cf15c55a3093f6))
+
+# [1.33.0](https://github.com/SocialGouv/Tumeplay/compare/v1.32.2...v1.33.0) (2022-01-12)
+
+
+### Features
+
+* **mobile:** Integrating UX corrections on HomePage and Posts page +… ([#262](https://github.com/SocialGouv/Tumeplay/issues/262)) ([9f12021](https://github.com/SocialGouv/Tumeplay/commit/9f120211fbb7685ded9d04e53a8a9e330cc015e1))
+
+## [1.32.2](https://github.com/SocialGouv/Tumeplay/compare/v1.32.1...v1.32.2) (2022-01-11)
+
+
+### Bug Fixes
+
+* out-of-stock contact props ([60c3158](https://github.com/SocialGouv/Tumeplay/commit/60c3158b269c535a8970193dce26a49587fea541))
+
 ## [1.32.1](https://github.com/SocialGouv/Tumeplay/compare/v1.32.0...v1.32.1) (2022-01-11)
 
 

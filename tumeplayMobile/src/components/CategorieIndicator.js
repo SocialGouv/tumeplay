@@ -23,13 +23,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     backgroundColor: '#FFF',
-    padding: 15,
+    padding: 12,
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
     fontWeight: '500',
     textAlign: 'center',
+    color: Colors.black,
+    textTransform: 'uppercase',
   },
 });
 

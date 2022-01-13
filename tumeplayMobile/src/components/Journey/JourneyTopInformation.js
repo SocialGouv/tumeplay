@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Fonts} from '../../styles/Style';
 
 const JourneyTopInformation = ({level}) => {
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 26,
+    color: Colors.black,
   },
   border: {
     borderBottomWidth: 1,
