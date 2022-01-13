@@ -13,6 +13,8 @@ import QuizzAnswerButton from './QuizzAnswerButton';
 import TopLevelPointIndicator from './TopLevelPointIndicator';
 import _ from 'lodash';
 import Container from '../global/Container';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Colors} from '../../styles/Style';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -98,12 +100,19 @@ const QuizzModule = ({navigation, route}) => {
     <Container background={bg} style={styles.container}>
       <View style={styles.levelIndicator}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>Retour</Text>
+          <Icon
+            name="md-arrow-back"
+            size={30}
+            color="#000"
+            style={styles.icon}
+          />
         </TouchableOpacity>
         <TopLevelPointIndicator />
       </View>
-      <View style={styles.stepIndicator}>
-        <Text style={styles.indicator}>{questions?.length}</Text>
+      <View style={styles.stepIndicatorContainer}>
+        <View style={styles.stepIndicator}>
+          <Text style={styles.indicator}>{questions?.length}</Text>
+        </View>
       </View>
       <Text style={styles.question}>{question?.text_question}</Text>
       <View style={styles.answersContainer}>{displayAnswer}</View>
@@ -113,12 +122,15 @@ const QuizzModule = ({navigation, route}) => {
         </View>
       ) : null}
       {hasAnswered ? (
-        <Button
-          text={'Suivant'}
-          size="large"
-          style={styles.bottomButton}
-          onPress={() => goToNextQuestion()}
-        />
+        <View style={styles.buttonContainer}>
+          <Button
+            text={'Suivant'}
+            size="large"
+            icon={true}
+            style={styles.bottomButton}
+            onPress={() => goToNextQuestion()}
+          />
+        </View>
       ) : null}
     </Container>
   );
@@ -127,8 +139,8 @@ const QuizzModule = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 10,
+    alignItems: 'flex-start',
+    paddingHorizontal: 16,
   },
   levelIndicator: {
     width: '100%',
@@ -136,6 +148,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 26,
+  },
+  stepIndicatorContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   stepIndicator: {
     width: 58,
@@ -145,36 +163,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#FFF',
     borderWidth: 5,
-    marginBottom: 10,
+    marginBottom: 16,
   },
   indicator: {
-    fontFamily: Fonts.strongText,
-    fontSize: 18,
-    lineHeight: 22,
-  },
-  question: {
-    marginBottom: 10,
     fontFamily: Fonts.subtitle,
     fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 22,
+    color: Colors.black,
+  },
+  question: {
+    marginBottom: 20,
+    fontFamily: Fonts.subtitle,
+    fontSize: 22,
     lineHeight: 24,
     fontWeight: '700',
+    color: Colors.black,
   },
   answersContainer: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
   answerContainer: {
-    marginHorizontal: 10,
     alignContent: 'center',
   },
   textAnswer: {
     marginTop: 10,
-    textAlign: 'center',
+    textAlign: 'left',
+    color: Colors.black,
   },
-  bottomButton: {
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
-    bottom: 45,
+    bottom: 15,
+    left: '0%',
+    right: '0%',
   },
 });
 
