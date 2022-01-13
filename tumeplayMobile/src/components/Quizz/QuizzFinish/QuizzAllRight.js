@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
@@ -17,7 +17,7 @@ import Container from '../../global/Container';
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
   const points = context.points;
-  const user_id = context.user_id;
+  const user_id = context.strapi_user_id;
   const setPoints = context.setPoints;
   const history = context.userHistory;
 
@@ -32,13 +32,13 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
       try {
         await createHistory({
           variables: {
-            user_id: history?.user?.id,
-            module_id: history?.module?.id,
+            user_id: user_id,
+            module_id: module_id,
             status: 'success',
           },
         });
       } catch (err) {
-        console.log(err);
+        console.log('Error on history creation', err);
       }
     }
   };

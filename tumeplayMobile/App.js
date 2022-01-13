@@ -59,7 +59,7 @@ const App = () => {
   ] = useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = userHistory?.map(history => history?.module?.id);
+    let tmpIds = userHistory?.map(history => history && history[0]?.module?.id);
     setDoneModules_ids([...tmpIds]);
   };
 
@@ -104,12 +104,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    clearStorage();
+    // clearStorage();
     checkUserIdInStorage();
   }, []);
 
   const contextValues = {
     user_id: user.user_id,
+    strapi_user_id: user.id,
     thematiques,
     points,
     setPoints,
@@ -149,7 +150,7 @@ const App = () => {
               name="QuizzFinishScreen"
               component={QuizzFinishScreen}
             />
-            <NavigationStack.Screen name="Journey" component={Journey} />
+            <NavigationStack.Screen name="Parcours" component={Journey} />
           </NavigationStack.Navigator>
         </NavigationContainer>
       )}

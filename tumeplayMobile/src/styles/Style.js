@@ -13,6 +13,7 @@ export const Colors = {
   grey: '#B3B3B3',
   darkgrey: '#676767',
   lightCorail: '#FEF0DC',
+  background: '#FBF7F2',
 };
 
 export const bgColors = [
