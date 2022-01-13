@@ -135,6 +135,7 @@ export default function ProductCard(props) {
   const redirectContact = () => {
     props.navigation.navigate('StayInTouch', {
       box_id: props.item.id,
+			outOfStock: true
     });
   };
 

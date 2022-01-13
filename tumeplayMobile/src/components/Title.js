@@ -4,7 +4,7 @@ import wave from '../assets/wave.png';
 import {Colors, Fonts} from '../styles/Style';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-const Title = () => {
+const Title = ({title}) => {
   const [userName, setUserName] = useState();
 
   const retrieveUserName = async () => {
@@ -18,8 +18,12 @@ const Title = () => {
 
   return (
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>Hello {userName} </Text>
-      <Image source={wave} />
+      {title ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : (
+        <Text style={styles.title}>Hello {userName} </Text>
+      )}
+      <Image source={wave} style={styles.image} />
     </View>
   );
 };
@@ -34,6 +38,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     lineHeight: 38,
     color: Colors.black,
+  },
+  image: {
+    marginTop: 3,
   },
 });
 
