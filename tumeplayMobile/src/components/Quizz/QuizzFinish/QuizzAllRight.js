@@ -37,7 +37,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
           },
         });
       } catch (err) {
-        console.log(err);
+        console.log('Error on history creation', err);
       }
     }
   };
