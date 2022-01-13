@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import Svg, {Polygon} from 'react-native-svg';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
 import check from '../../assets/Check.png';
 import AppContext from '../../../AppContext';
@@ -36,7 +36,9 @@ const Badge = module => {
       {done ? (
         <Image source={check} style={styles.imageValidate} />
       ) : (
-        <Image source={lock} style={styles.imageLock} />
+        <View style={styles.iconContainer}>
+          <Image source={lock} style={styles.imageLock} />
+        </View>
       )}
     </Svg>
   );
@@ -49,15 +51,23 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 10,
   },
-  imageLock: {
-    position: 'absolute',
-    bottom: -95,
-    left: 70,
-  },
+  imageLock: {},
   imageValidate: {
     position: 'absolute',
     top: 45,
     left: 45,
+  },
+  iconContainer: {
+    position: 'absolute',
+    bottom: -100,
+    left: 60,
+    backgroundColor: '#EAE2D7',
+    padding: 4,
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

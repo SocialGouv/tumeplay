@@ -213,7 +213,6 @@ const pickerSelectStyle = StyleSheet.create({
   inputIOSContainer: {
     borderBottomWidth: 1,
     borderBottomColor: Colors.grey,
-    marginHorizontal: 18,
   },
 });
 
