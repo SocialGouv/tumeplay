@@ -1,3 +1,10 @@
+## [1.34.1](https://github.com/SocialGouv/Tumeplay/compare/v1.34.0...v1.34.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* onboarding ([#266](https://github.com/SocialGouv/Tumeplay/issues/266)) ([ae8e63b](https://github.com/SocialGouv/Tumeplay/commit/ae8e63b83e744e22c68b28967ed9864ea546491c))
+
 # [1.34.0](https://github.com/SocialGouv/Tumeplay/compare/v1.33.0...v1.34.0) (2022-01-13)
 
 
