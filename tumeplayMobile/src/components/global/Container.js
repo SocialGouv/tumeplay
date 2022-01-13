@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   View,
   StyleSheet,
@@ -7,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../styles/Style';
+
 
 const Container = ({children, background, style}) => {
   const displayContainer = (

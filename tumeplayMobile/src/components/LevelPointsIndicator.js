@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AppContext from '../../AppContext';
 import coin from '../assets/coin.png';
+import {Colors} from '../styles/Style';
 
 const LevelPointsIndicator = ({style, onPress}) => {
   const context = useContext(AppContext);
@@ -36,9 +37,11 @@ const styles = StyleSheet.create({
   pointsContainer: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
-    fontWeight: '600',
+    fontWeight: 'bold',
+    color: Colors.black,
   },
   image: {
     width: 15,

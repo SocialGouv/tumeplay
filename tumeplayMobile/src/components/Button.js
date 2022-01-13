@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {Fonts} from '../styles/Style';
-import arrow from '../assets/Arrow.png';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Button = props => {
   const {size, text, icon, isDisabled, onPress, style} = props;
@@ -24,7 +24,14 @@ const Button = props => {
       disabled={isDisabled}
       onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
-      {icon && <Image source={arrow} style={styles.icon} />}
+      {icon && (
+        <Icon
+          name="md-arrow-forward"
+          size={22}
+          color="#fff"
+          style={styles.icon}
+        />
+      )}
     </TouchableOpacity>
   );
 };
@@ -57,7 +64,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   mediumPressable: {
-    width: 150,
     height: 50,
     borderRadius: 100,
     justifyContent: 'center',
@@ -67,6 +73,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     display: 'flex',
     flexDirection: 'row',
+    fontSize: 16,
+    paddingHorizontal: 20,
   },
   smallPressable: {
     width: 70,
@@ -86,6 +94,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     fontFamily: Fonts.strongText,
+    fontWeight: '600',
+    letterSpacing: 0.6,
   },
   icon: {
     marginLeft: 8,
