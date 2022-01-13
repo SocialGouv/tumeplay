@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   button: {
     display: 'flex',
     flexDirection: 'row',
-    minWidth: 180,
+    minWidth: 170,
     maxWidth: 180,
     marginVertical: 10,
     borderRadius: 8,
