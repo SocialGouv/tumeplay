@@ -42,6 +42,7 @@
     "react-native-dotenv": "^3.3.0",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-step-indicator": "^1.0.3",
+    "react-native-swipe-gestures": "^1.0.5",
     "react-native-vector-icons": "^9.0.0",
     "react-test-renderer": "17.0.2"
   },

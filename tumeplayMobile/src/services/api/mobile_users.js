@@ -9,6 +9,7 @@ export const GET_MOBILE_USER = gql`
       isSignedUp
       points
       user_id
+      id
     }
   }
 `;
