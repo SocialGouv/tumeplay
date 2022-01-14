@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
@@ -26,7 +26,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
 
   const checkUserHistory = async () => {
     if (history?.module?.id === module_id) {
-      //Update historique existant => Le cas où le user aurait quitté sans finir tout le quizz
+      //RAF : Update historique existant => Le cas où le user aurait quitté sans finir tout le quizz
     } else {
       //Create historique => Cas nominal ou le user a fini le quizz
       try {
@@ -47,7 +47,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
     checkUserHistory();
     updatePoints({
       variables: {
-        user_id: history?.user?.id,
+        user_id: user_id,
         points: points + pointsEarned,
       },
     });
@@ -73,6 +73,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
           text={'Je continue'}
           size={'large'}
           style={styles.button}
+          onPress={() => navigation.navigate('QuizzStartPage')}
         />
       </View>
     </Container>

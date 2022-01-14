@@ -59,7 +59,7 @@ const App = () => {
   ] = useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = userHistory?.map(history => history && history[0]?.module?.id);
+    let tmpIds = userHistory?.map(history => history.module.id);
     setDoneModules_ids([...tmpIds]);
   };
 
@@ -69,10 +69,11 @@ const App = () => {
 
   useEffect(() => {
     if (!loading3 && data3) {
-      setUserHistory([data3?.historiques]);
-      if (user) {
-        setPoints(user?.points);
-      }
+      let tmpUserHistory = data3?.historiques?.filter(
+        history =>
+          history.user !== null && history?.user.user_id === user.user_id,
+      );
+      setUserHistory(tmpUserHistory);
     }
   }, [loading3, data3]);
 
@@ -95,6 +96,7 @@ const App = () => {
       const tmpUser_id = tmpUser?.user_id;
       if (tmpUser_id !== '') {
         setUser({...data2?.utilisateursMobile});
+        setPoints(data2?.utilisateursMobile?.points);
       }
     }
   };
