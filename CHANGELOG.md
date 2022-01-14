@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/SocialGouv/Tumeplay/compare/v1.34.1...v1.35.0) (2022-01-14)
+
+
+### Features
+
+* **mobile:** Point logic + Quizz end redirection + manage darktheme on android ([#267](https://github.com/SocialGouv/Tumeplay/issues/267)) ([04a77b0](https://github.com/SocialGouv/Tumeplay/commit/04a77b01a2575ad73fe1cc310895f9d704e241a2))
+
 ## [1.34.1](https://github.com/SocialGouv/Tumeplay/compare/v1.34.0...v1.34.1) (2022-01-13)
 
 
