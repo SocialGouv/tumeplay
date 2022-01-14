@@ -29,6 +29,8 @@
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
+      <key>UIUserInterfaceStyle</key>
+      <string>Light</string>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
