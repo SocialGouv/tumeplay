@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   intermediataPressable: {
-    width: 275,
+    width: 290,
     height: 50,
     borderRadius: 100,
     justifyContent: 'center',
