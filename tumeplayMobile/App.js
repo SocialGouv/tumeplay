@@ -12,6 +12,8 @@ import {useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
+import BoxOrder from './src/views/BoxOrder';
+import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
 import {
   GET_HISTORIQUES,
@@ -152,6 +154,8 @@ const App = () => {
               name="QuizzFinishScreen"
               component={QuizzFinishScreen}
             />
+            <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
+            <NavigationStack.Screen name="Box" component={Box} />
             <NavigationStack.Screen name="Parcours" component={Journey} />
           </NavigationStack.Navigator>
         </NavigationContainer>
