@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {Fonts} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import config from '../../config';
 
 const Button = props => {
   const {size, text, icon, isDisabled, onPress, style} = props;
@@ -38,8 +39,7 @@ const Button = props => {
 
 const styles = StyleSheet.create({
   longPressable: {
-    width: 350,
-    height: 55,
+    width: '90%',
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     display: 'flex',
     flexDirection: 'row',
-    paddingHorizontal: 15,
+    padding: config.deviceWidth * 0.04,
   },
   intermediataPressable: {
     width: 290,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: config.deviceWidth * 0.045,
     lineHeight: 24,
     fontFamily: Fonts.strongText,
     fontWeight: '600',
