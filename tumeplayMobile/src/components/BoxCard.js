@@ -1,38 +1,43 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
 import {Fonts} from '../styles/Style';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
-  RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useRoute} from '@react-navigation/native';
 
 const BoxCard = props => {
-  const {index, title, description, moreInfo, box, image} = props;
-
-  const getInitialState = () => {
-    return {
-      value: 1,
-    };
-  };
-
+  const {index, title, description, moreInfo, box, image, navigation} = props;
+  const [value, setValue] = useState(0);
+  const route = useRoute();
   return (
     <View style={styles.boxCard}>
-      <RadioForm style={styles.radio}>
-        <RadioButton key={index}>
-          <RadioButtonInput
-            obj={box}
-            index={index}
-            borderWidth={1}
-            buttonInnerColor={'#000000'}
-            buttonOuterColor={'#000000'}
-            buttonSize={5}
-            buttonOuterSize={0}
-            buttonStyle={{}}
-          />
-        </RadioButton>
-      </RadioForm>
+      {route.name === 'Box' && (
+        <RadioForm style={styles.radio}>
+          <RadioButton key={index}>
+            <RadioButtonInput
+              obj={box}
+              index={index}
+              borderWidth={1}
+              isSelected={value === index}
+              onPress={(value, index) => {
+                navigation.navigate('BoxOrder', {
+                  index: index,
+                  box: box,
+                });
+                return setValue(value);
+              }}
+              buttonInnerColor={'#000'}
+              buttonOuterColor={'#000'}
+              buttonSize={10}
+              buttonOuterSize={15}
+              buttonStyle={{}}
+            />
+          </RadioButton>
+        </RadioForm>
+      )}
       <View>
         <Text style={styles.titleIndex}>BOX {index}</Text>
         <Text style={styles.titleBox}>{title}</Text>
@@ -52,9 +57,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '100%',
     paddingVertical: 12,
+    paddingLeft: 20,
   },
   radio: {
-    paddingHorizontal: 20,
+    paddingRight: 20,
   },
   titleIndex: {
     color: 'red',
@@ -76,6 +82,7 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: '400',
     fontSize: 14,
+    textDecorationLine: 'underline',
   },
   image: {
     position: 'absolute',

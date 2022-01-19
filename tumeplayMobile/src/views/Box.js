@@ -13,7 +13,6 @@ const Box = ({navigation}) => {
   const boxes = [
     {
       label: 'param1',
-      value: 1,
       title: 'DÉCOUVRE TON CORPS',
       description: 'Un contenu ludique',
       moreInfo: 'lorem ipsum',
@@ -21,7 +20,6 @@ const Box = ({navigation}) => {
     },
     {
       label: 'param2',
-      value: 2,
       title: 'LES PREMIÈRES FOIS',
       description: 'Se lancer sans prise de tête',
       moreInfo: 'lorem ipsum',
@@ -29,7 +27,6 @@ const Box = ({navigation}) => {
     },
     {
       label: 'param3',
-      value: 3,
       title: 'EXPLORE TA SEXUALITÉ',
       description: 'Expérimente et développe ton plaisir',
       moreInfo: 'lorem ipsum',
@@ -55,7 +52,7 @@ const Box = ({navigation}) => {
         {boxes &&
           boxes.map((box, index) => {
             return (
-              <View style={styles.box}>
+              <View key={index} style={styles.box}>
                 <BoxCard
                   index={index + 1}
                   title={box.title}
@@ -63,6 +60,7 @@ const Box = ({navigation}) => {
                   moreInfo={box.moreInfo}
                   box={box}
                   image={box.image}
+                  navigation={navigation}
                 />
               </View>
             );
