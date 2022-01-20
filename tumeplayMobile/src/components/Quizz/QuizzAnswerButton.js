@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 import {Colors} from '../../styles/Style';
+import config from '../../../config';
 
 const QuizzAnswerButton = props => {
   const {answer, onPress, name, correctAnswer, hasAnswered, disabled} = props;
@@ -38,13 +39,13 @@ const styles = StyleSheet.create({
   button: {
     display: 'flex',
     flexDirection: 'row',
-    minWidth: 170,
-    maxWidth: 180,
+    minWidth: config.deviceWidth <= 320 ? '100%' : 180,
+    maxWidth: config.deviceWidth <= 320 ? '100%' : 180,
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 80,
+    height: config.deviceWidth <= 320 ? 50 : 80,
     backgroundColor: '#F3E1E8',
   },
   correctAnswer: {
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: Colors.black,
     paddingRight: 10,
+    textAlign: 'center',
   },
   emoji: {
     justifyContent: 'center',

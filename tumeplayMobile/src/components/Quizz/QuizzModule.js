@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
+  ScrollView,
 } from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
@@ -15,6 +16,7 @@ import _ from 'lodash';
 import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../styles/Style';
+import config from '../../../config';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -28,6 +30,7 @@ const QuizzModule = ({navigation, route}) => {
   const [remainingQuestions, setRemainingQuestions] = useState([]);
   const retry = route?.params?.retry;
   const [disabled, setDisabled] = useState(false);
+  const [showAnswer, setshowAnswer] = useState(false);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -74,6 +77,7 @@ const QuizzModule = ({navigation, route}) => {
         module_id: module_id,
       });
     } else {
+      setshowAnswer(false);
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(remainingQuestions),
         module_id: module_id,
@@ -96,47 +100,65 @@ const QuizzModule = ({navigation, route}) => {
     }
   }, [question]);
 
+  const showMoreAnswer = () => {
+    setshowAnswer(!showAnswer);
+  };
+
   return (
-    <Container background={bg} style={styles.container}>
-      <View style={styles.levelIndicator}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon
-            name="md-arrow-back"
-            size={30}
-            color="#000"
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TopLevelPointIndicator />
-      </View>
-      <View style={styles.stepIndicatorContainer}>
-        <View style={styles.stepIndicator}>
-          <Text style={styles.indicator}>{questions?.length}</Text>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Container background={bg} style={styles.container}>
+        <View style={styles.levelIndicator}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon
+              name="md-arrow-back"
+              size={30}
+              color="#000"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <TopLevelPointIndicator />
         </View>
-      </View>
-      <Text style={styles.question}>{question?.text_question}</Text>
-      <View style={styles.answersContainer}>{displayAnswer}</View>
-      {displayResponse ? (
-        <View style={styles.answerContainer}>
-          <Text style={styles.textAnswer}>{question?.text_answer}</Text>
+        <View style={styles.stepIndicatorContainer}>
+          <View style={styles.stepIndicator}>
+            <Text style={styles.indicator}>{questions?.length}</Text>
+          </View>
         </View>
-      ) : null}
-      {hasAnswered ? (
-        <View style={styles.buttonContainer}>
-          <Button
-            text={'Suivant'}
-            size="large"
-            icon={true}
-            style={styles.bottomButton}
-            onPress={() => goToNextQuestion()}
-          />
-        </View>
-      ) : null}
-    </Container>
+        <Text style={styles.question}>{question?.text_question}</Text>
+        <View style={styles.answersContainer}>{displayAnswer}</View>
+        {displayResponse ? (
+          <View style={styles.answerContainer}>
+            <Text style={styles.textAnswer}>
+              {!showAnswer && config.deviceWidth <= 320
+                ? question?.text_answer.substring(0, 80) + '...'
+                : question?.text_answer}
+            </Text>
+            {config.deviceWidth <= 320 && (
+              <Text onPress={showMoreAnswer}>
+                {showAnswer ? 'Voir moins' : 'Voir plus'}
+              </Text>
+            )}
+          </View>
+        ) : null}
+        {hasAnswered ? (
+          <View style={styles.buttonContainer}>
+            <Button
+              text={'Suivant'}
+              size="large"
+              icon={true}
+              style={styles.bottomButton}
+              onPress={() => goToNextQuestion()}
+            />
+          </View>
+        ) : null}
+      </Container>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    height: config.deviceWidth <= 320 ? 'auto' : '100%',
+  },
   container: {
     height: '100%',
     alignItems: 'flex-start',
@@ -173,9 +195,9 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   question: {
-    marginBottom: 20,
+    marginBottom: 10,
     fontFamily: Fonts.subtitle,
-    fontSize: 22,
+    fontSize: config.deviceWidth <= 320 ? 16 : 22,
     lineHeight: 24,
     fontWeight: '700',
     color: Colors.black,
@@ -196,12 +218,12 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   buttonContainer: {
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 15,
-    left: '0%',
-    right: '0%',
+    position: config.deviceWidth <= 320 ? 'relative' : 'relative',
+    paddingVertical: 20,
+    flex: 1,
   },
 });
 
