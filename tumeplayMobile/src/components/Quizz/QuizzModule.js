@@ -128,11 +128,11 @@ const QuizzModule = ({navigation, route}) => {
         {displayResponse ? (
           <View style={styles.answerContainer}>
             <Text style={styles.textAnswer}>
-              {!showAnswer && config.deviceWidth <= 320
+              {!showAnswer && config.deviceWidth <= 400
                 ? question?.text_answer.substring(0, 80) + '...'
                 : question?.text_answer}
             </Text>
-            {config.deviceWidth <= 320 && (
+            {config.deviceWidth <= 400 && (
               <Text onPress={showMoreAnswer}>
                 {showAnswer ? 'Voir moins' : 'Voir plus'}
               </Text>
@@ -157,7 +157,7 @@ const QuizzModule = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    height: config.deviceWidth <= 320 ? 'auto' : '100%',
+    height: config.deviceWidth <= 400 ? 'auto' : '100%',
   },
   container: {
     height: '100%',
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: config.deviceWidth <= 320 ? 'relative' : 'relative',
+    position: config.deviceWidth <= 400 ? 'relative' : 'relative',
     paddingVertical: 20,
     flex: 1,
   },
