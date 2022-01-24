@@ -13,6 +13,7 @@ import {
   UPDATE_MOBILE_USER_POINTS,
 } from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
+import config from '../../../../config';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Fonts.title,
-    fontSize: 30,
+    fontSize: config.deviceWidth <= 320 ? 25 : 30,
     lineHeight: 38,
     marginTop: 49,
     color: Colors.black,
@@ -107,20 +108,20 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   imageThumb: {
-    width: 60,
-    height: 60,
+    width: config.deviceWidth <= 320 ? 30 : 60,
+    height: config.deviceWidth <= 320 ? 30 : 60,
     marginBottom: 23,
   },
   description: {
     fontFamily: Fonts.strongText,
-    fontSize: 18,
+    fontSize: config.deviceWidth <= 320 ? 14 : 18,
     lineHeight: 27,
     textAlign: 'center',
     paddingHorizontal: 30,
     color: Colors.black,
   },
   text: {
-    fontSize: 18,
+    fontSize: config.deviceWidth <= 320 ? 14 : 18,
     fontWeight: '600',
     lineHeight: 24,
     color: Colors.black,
@@ -129,7 +130,13 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     position: 'absolute',
+    justifyContent: 'center',
+    alignContent: 'center',
     bottom: 35,
+    width: '100%',
+  },
+  button: {
+    width: '100%',
   },
 });
 

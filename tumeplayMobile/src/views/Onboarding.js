@@ -83,13 +83,15 @@ export default function Onboarding({user, setUser}) {
           {displaySwipperContent}
         </Swiper>
       </View>
-      <Button
-        text={'Je commence'}
-        size={'large'}
-        icon={true}
-        style={styles.button}
-        onPress={() => finishOnboarding()}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          text={'Je commence'}
+          size={'large'}
+          icon={true}
+          style={styles.button}
+          onPress={() => finishOnboarding()}
+        />
+      </View>
     </Container>
   );
 }
@@ -136,7 +138,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#000000',
   },
-  button: {
+  buttonContainer: {
+    width: '100%',
+    paddingHorizontal: 16,
     marginBottom: config.deviceWidth * 0.08,
   },
 });

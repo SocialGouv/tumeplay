@@ -8,11 +8,10 @@ import {useQuery} from '@apollo/client';
 import {GET_MODULES} from '../services/api/modules';
 import _ from 'lodash';
 import Container from '../components/global/Container';
-
 import Icon from 'react-native-vector-icons/Ionicons';
+import config from '../../config';
 
 import GestureRecognizer from 'react-native-swipe-gestures';
-
 
 const QuizzStartPage = ({navigation}) => {
   const {data, loading} = useQuery(GET_MODULES);
@@ -42,7 +41,6 @@ const QuizzStartPage = ({navigation}) => {
   };
 
   return (
-
     <Container background={bg}>
       <GestureRecognizer
         style={styles.container}
@@ -51,10 +49,10 @@ const QuizzStartPage = ({navigation}) => {
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}>
-           <Icon name="md-arrow-back" size={30} color="#000" />
+          <Icon name="md-arrow-back" size={30} color="#000" />
         </TouchableOpacity>
         <Text style={styles.title}> Joue et teste tes connaissances !</Text>
-        <View>
+        <View style={styles.middleContent}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Prêt.e ?</Text>
             <Text style={styles.text}>
@@ -86,18 +84,19 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   backButton: {
     alignSelf: 'flex-start',
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingTop: 15,
   },
   title: {
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
-    marginTop: 40,
-    marginBottom: 48,
     color: Colors.black,
+    textAlign: 'center',
   },
   textContainer: {
     width: 230,
@@ -117,9 +116,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: '600',
   },
+  middleContent: {paddingBottom: 50},
   button: {
-    position: 'absolute',
-    bottom: 45,
+    marginBottom: config.deviceWidth * 0.08,
   },
 });
 
