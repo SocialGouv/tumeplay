@@ -1,3 +1,10 @@
+## [1.35.2](https://github.com/SocialGouv/Tumeplay/compare/v1.35.1...v1.35.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* adjusting design to IOS devices ([#271](https://github.com/SocialGouv/Tumeplay/issues/271)) ([0a06e82](https://github.com/SocialGouv/Tumeplay/commit/0a06e8213997ef6249af810cbd6ec9ac989e96f6))
+
 ## [1.35.1](https://github.com/SocialGouv/Tumeplay/compare/v1.35.0...v1.35.1) (2022-01-24)
 
 
