@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    marginHorizontal: 18,
+    paddingHorizontal: 16,
     paddingTop: 50,
   },
   title: {
@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     bottom: 30,
+    paddingHorizontal: 16,
   },
 });
 
