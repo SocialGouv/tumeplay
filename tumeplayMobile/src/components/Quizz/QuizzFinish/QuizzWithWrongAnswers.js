@@ -158,23 +158,25 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: config.deviceWidth <= 400 ? 20 : 35,
+    bottom: config.deviceWidth <= 320 ? 20 : 35,
+
   },
   bottomTextContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: config.deviceWidth <= 400 ? 80 : 110,
+    bottom: config.deviceWidth <= 320 ? 80 : 110,
   },
   bottomText: {
     color: Colors.black,
     fontWeight: '600',
-    fontSize: config.deviceWidth <= 400 ? 14 : 18,
+    fontSize: config.deviceWidth <= 320 ? 14 : 18,
     paddingTop: 5,
   },
   congratsImg: {
-    width: config.deviceWidth <= 400 ? 40 : 70,
-    height: config.deviceWidth <= 400 ? 40 : 70,
+    width: config.deviceWidth <= 320 ? 40 : 70,
+    height: config.deviceWidth <= 320 ? 40 : 70,
+
   },
 });
 

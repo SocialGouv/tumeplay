@@ -133,6 +133,7 @@ const QuizzModule = ({navigation, route}) => {
                 : question?.text_answer}
             </Text>
             {config.deviceWidth <= 400 && (
+
               <Text onPress={showMoreAnswer}>
                 {showAnswer ? 'Voir moins' : 'Voir plus'}
               </Text>
@@ -158,6 +159,7 @@ const QuizzModule = ({navigation, route}) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     height: config.deviceWidth <= 400 ? 'auto' : '100%',
+
   },
   container: {
     height: '100%',
@@ -222,6 +224,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: config.deviceWidth <= 400 ? 'relative' : 'relative',
+
     paddingVertical: 20,
     flex: 1,
   },
