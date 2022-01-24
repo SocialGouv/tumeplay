@@ -1,3 +1,10 @@
+## [1.35.1](https://github.com/SocialGouv/Tumeplay/compare/v1.35.0...v1.35.1) (2022-01-24)
+
+
+### Bug Fixes
+
+* responsive ([#270](https://github.com/SocialGouv/Tumeplay/issues/270)) ([ce1c094](https://github.com/SocialGouv/Tumeplay/commit/ce1c094218b6ad91462380619dca92ba098c3d38))
+
 # [1.35.0](https://github.com/SocialGouv/Tumeplay/compare/v1.34.1...v1.35.0) (2022-01-14)
 
 
