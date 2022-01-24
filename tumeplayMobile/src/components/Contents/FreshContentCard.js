@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingBottom: 28,
     fontFamily: Fonts.strongText,
-    fontSize: config.deviceWidth <= 320 ? 14 : 16,
+    fontSize: config.deviceWidth <= 375 ? 14 : 16,
     lineHeight: 24,
     color: Colors.black,
   },

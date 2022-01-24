@@ -128,13 +128,12 @@ const QuizzModule = ({navigation, route}) => {
         {displayResponse ? (
           <View style={styles.answerContainer}>
             <Text style={styles.textAnswer}>
-              {!showAnswer && config.deviceWidth <= 400
+              {!showAnswer && config.deviceWidth <= 375
                 ? question?.text_answer.substring(0, 80) + '...'
                 : question?.text_answer}
             </Text>
-            {config.deviceWidth <= 400 && (
-
-              <Text onPress={showMoreAnswer}>
+            {config.deviceWidth <= 375 && (
+              <Text onPress={showMoreAnswer} style={styles.action}>
                 {showAnswer ? 'Voir moins' : 'Voir plus'}
               </Text>
             )}
@@ -158,8 +157,8 @@ const QuizzModule = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    height: config.deviceWidth <= 400 ? 'auto' : '100%',
-
+    height: config.deviceWidth <= 375 ? 'auto' : '100%',
+    alignContent: 'center',
   },
   container: {
     height: '100%',
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
   question: {
     marginBottom: 10,
     fontFamily: Fonts.subtitle,
-    fontSize: config.deviceWidth <= 320 ? 16 : 22,
+    fontSize: config.deviceWidth <= 375 ? 16 : 22,
     lineHeight: 24,
     fontWeight: '700',
     color: Colors.black,
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   answerContainer: {
@@ -223,10 +222,13 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: config.deviceWidth <= 400 ? 'relative' : 'relative',
-
+    position: 'relative',
     paddingVertical: 20,
     flex: 1,
+  },
+  bottomButton: {},
+  action: {
+    fontWeight: '600',
   },
 });
 

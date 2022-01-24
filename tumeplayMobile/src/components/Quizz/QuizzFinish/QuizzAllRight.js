@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Fonts.title,
-    fontSize: config.deviceWidth <= 320 ? 25 : 30,
+    fontSize: config.deviceWidth <= 375 ? 25 : 30,
     lineHeight: 38,
     marginTop: 49,
     color: Colors.black,
@@ -108,20 +108,20 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   imageThumb: {
-    width: config.deviceWidth <= 320 ? 30 : 60,
-    height: config.deviceWidth <= 320 ? 30 : 60,
+    width: config.deviceWidth <= 375 ? 30 : 60,
+    height: config.deviceWidth <= 375 ? 30 : 60,
     marginBottom: 23,
   },
   description: {
     fontFamily: Fonts.strongText,
-    fontSize: config.deviceWidth <= 320 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 14 : 18,
     lineHeight: 27,
     textAlign: 'center',
     paddingHorizontal: 30,
     color: Colors.black,
   },
   text: {
-    fontSize: config.deviceWidth <= 320 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 14 : 18,
     fontWeight: '600',
     lineHeight: 24,
     color: Colors.black,
