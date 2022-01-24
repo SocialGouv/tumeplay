@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     bottom: config.deviceWidth <= 320 ? 20 : 35,
+
   },
   bottomTextContainer: {
     justifyContent: 'center',
@@ -175,6 +176,7 @@ const styles = StyleSheet.create({
   congratsImg: {
     width: config.deviceWidth <= 320 ? 40 : 70,
     height: config.deviceWidth <= 320 ? 40 : 70,
+
   },
 });
 

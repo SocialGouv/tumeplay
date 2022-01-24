@@ -21,7 +21,7 @@ const Title = ({title}) => {
       {title ? (
         <Text style={styles.title}>{title}</Text>
       ) : (
-        <Text style={styles.title}>Hello {userName} </Text>
+        <Text style={styles.title}>Hello</Text>
       )}
       <Image source={wave} style={styles.image} />
     </View>

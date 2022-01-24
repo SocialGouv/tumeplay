@@ -11,10 +11,10 @@ const LevelPointsIndicator = ({style, onPress}) => {
 
   return (
     <TouchableOpacity style={[style, styles.container]} onPress={onPress}>
-      <Text style={styles.text}>NIVEAU 1</Text>
+      <Text style={styles.level}>NIVEAU 1</Text>
       <View style={styles.pointsContainer}>
-        <Image source={coin} style={styles.image} />
         <Text style={styles.text}>{points} / 3000 </Text>
+        <Image source={coin} style={styles.image} />
       </View>
     </TouchableOpacity>
   );
@@ -22,31 +22,37 @@ const LevelPointsIndicator = ({style, onPress}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
     height: 50,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#ECC160',
-    borderWidth: 1,
-    borderRadius: 8,
+    borderWidth: 2,
+    borderRadius: 4,
     backgroundColor: '#FFF',
-    paddingHorizontal: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   pointsContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   text: {
+    fontWeight: 'bold',
+    color: Colors.black,
+    paddingRight: 5,
+  },
+  level: {
+    paddingRight: 15,
     fontWeight: 'bold',
     color: Colors.black,
   },
   image: {
     width: 15,
     height: 15,
-    marginRight: 5,
   },
 });
 
