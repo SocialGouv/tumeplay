@@ -10,10 +10,10 @@ import bg3 from '../assets/BG_3.png';
 import {Colors, Fonts} from '../styles/Style';
 import Swiper from 'react-native-swiper';
 import Container from '../components/global/Container';
+import config from '../../config';
 
 export default function Onboarding({user, setUser}) {
   const {width} = useWindowDimensions();
-
   const [steps, setSteps] = useState([
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
@@ -78,6 +78,7 @@ export default function Onboarding({user, setUser}) {
           containerStyle={styles.swipperContainer}
           dotColor={Colors.corail}
           activeDotColor={Colors.black}
+          paginationStyle={{position: 'absolute', bottom: '10%'}}
           horizontal>
           {displaySwipperContent}
         </Swiper>
@@ -102,41 +103,40 @@ const styles = StyleSheet.create({
   topContainer: {
     width: '100%',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: config.deviceWidth * 0.05,
   },
   title: {
-    paddingHorizontal: 35,
-    paddingTop: 35,
+    paddingHorizontal: config.deviceWidth * 0.08,
+    paddingTop: config.deviceWidth * 0.08,
     paddingBottom: 7,
-    fontSize: 30,
+    fontSize: config.deviceWidth * 0.08,
     textAlign: 'center',
     fontFamily: Fonts.title,
-    lineHeight: 38,
+    lineHeight: config.deviceWidth * 0.1,
     color: Colors.black,
   },
   swipperContainer: {
     flex: 1,
-    minHeight: 270,
+    minHeight: config.deviceWidth <= 350 ? '47%' : '40%',
   },
   imgTitle: {
-    marginBottom: 35,
+    marginBottom: config.deviceWidth * 0.05,
   },
   stepImg: {
     textAlign: 'center',
-    fontSize: 60,
-    marginVertical: 20,
+    fontSize: config.deviceWidth * 0.12,
+    marginVertical: config.deviceWidth * 0.02,
   },
   description: {
-    paddingHorizontal: 45,
+    paddingHorizontal: config.deviceWidth * 0.1,
     lineHeight: 27,
-    fontSize: 18,
+    fontSize: config.deviceWidth * 0.045,
     fontFamily: Fonts.strongText,
     fontWeight: '600',
     textAlign: 'center',
     color: '#000000',
   },
   button: {
-    position: 'absolute',
-    bottom: 30,
+    marginBottom: config.deviceWidth * 0.08,
   },
 });
