@@ -39,13 +39,14 @@ const styles = StyleSheet.create({
   button: {
     display: 'flex',
     flexDirection: 'row',
-    minWidth: config.deviceWidth <= 320 ? '100%' : 180,
-    maxWidth: config.deviceWidth <= 320 ? '100%' : 180,
+    alignSelf: 'center',
+    minWidth: config.deviceWidth <= 375 ? '100%' : 170,
+    maxWidth: config.deviceWidth <= 375 ? '100%' : 170,
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    height: config.deviceWidth <= 320 ? 50 : 80,
+    height: config.deviceWidth <= 375 ? 50 : 80,
     backgroundColor: '#F3E1E8',
   },
   correctAnswer: {

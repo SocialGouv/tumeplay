@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {Colors} from '../../styles/Style';
 
-
 const Container = ({children, background, style}) => {
   const displayContainer = (
     <ImageBackground source={background} style={[styles.container, style]}>

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: Fonts.title,
     color: Colors.black,
-    fontSize: config.deviceWidth <= 320 ? 25 : 30,
+    fontSize: config.deviceWidth <= 375 ? 25 : 30,
     lineHeight: 38,
     paddingBottom: 5,
   },
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    marginTop: config.deviceWidth <= 320 ? 20 : 32,
-    marginBottom: config.deviceWidth <= 320 ? 10 : 20,
+    marginTop: config.deviceWidth <= 375 ? 20 : 32,
+    marginBottom: config.deviceWidth <= 375 ? 10 : 20,
   },
   answerContainer: {
-    marginTop: config.deviceWidth <= 320 ? 12 : 28,
-    minWidth: config.deviceWidth <= 320 ? 190 : 240,
+    marginTop: config.deviceWidth <= 375 ? 12 : 28,
+    minWidth: config.deviceWidth <= 375 ? 190 : 240,
     minHeight: 70,
     borderRadius: 8,
     backgroundColor: '#FFFFFF',
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   answerText: {
-    fontSize: config.deviceWidth <= 320 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 14 : 18,
     color: Colors.black,
     lineHeight: 22,
   },
@@ -158,25 +158,23 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: config.deviceWidth <= 320 ? 20 : 35,
-
+    bottom: config.deviceWidth <= 375 ? 20 : 35,
   },
   bottomTextContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: config.deviceWidth <= 320 ? 80 : 110,
+    bottom: config.deviceWidth <= 375 ? 80 : 110,
   },
   bottomText: {
     color: Colors.black,
     fontWeight: '600',
-    fontSize: config.deviceWidth <= 320 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 14 : 18,
     paddingTop: 5,
   },
   congratsImg: {
-    width: config.deviceWidth <= 320 ? 40 : 70,
-    height: config.deviceWidth <= 320 ? 40 : 70,
-
+    width: config.deviceWidth <= 375 ? 40 : 70,
+    height: config.deviceWidth <= 375 ? 40 : 70,
   },
 });
 
