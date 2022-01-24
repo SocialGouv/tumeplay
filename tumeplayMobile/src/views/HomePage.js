@@ -1,5 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, Text, FlatList, Platform, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Platform,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -9,6 +17,8 @@ import {GET_FRESH_CONTENTS} from '../services/api/contents';
 import FreshContentCard from '../components/Contents/FreshContentCard';
 import AppContext from '../../AppContext';
 import Container from '../components/global/Container';
+import Carousel from 'react-native-snap-carousel';
+import config from '../../config';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -58,59 +68,83 @@ const HomePage = ({navigation}) => {
   };
 
   return (
-    <Container background={null} style={styles.container}>
-      <Title />
-      <LevelPointsIndicator
-        style={styles.levelIndicator}
-        points={points}
-        onPress={() => navigation.navigate('Parcours')}
-      />
-      <Text style={styles.text}>{displayText()}</Text>
-      <Button
-        text="Teste tes connaissances"
-        size="intermediate"
-        style={{backgroundColor: Colors.primary}}
-        onPress={() => navigation.navigate('QuizzStartPage')}
-        icon
-      />
-      <Text style={styles.subtitle}> DERNIERS CONTENUS AJOUTÉS</Text>
-      <FlatList
-        data={freshContents}
-        renderItem={renderItem}
-        directionalLockEnabled={true}
-        keyExtractor={item => item.id}
-        numColumns={2}
-        style={styles.listContainer}
-      />
-    </Container>
+    <ScrollView>
+      <Container background={null} style={styles.container}>
+        <Title />
+        <LevelPointsIndicator
+          style={styles.levelIndicator}
+          points={points}
+          onPress={() => navigation.navigate('Parcours')}
+        />
+        <View style={styles.middleContent}>
+          <Text style={styles.text}>{displayText()}</Text>
+          <Button
+            text="Teste tes connaissances"
+            size="large"
+            style={{backgroundColor: Colors.primary}}
+            onPress={() => navigation.navigate('QuizzStartPage')}
+            icon
+          />
+        </View>
+        <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
+        <View style={styles.carouselContainer}>
+          <Carousel
+            data={freshContents}
+            renderItem={renderItem}
+            sliderWidth={config.deviceWidth}
+            itemWidth={170}
+            keyExtractor={item => item.id}
+            activeSlideAlignment={'start'}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+          />
+        </View>
+      </Container>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    width: '100%',
   },
   levelIndicator: {
-    marginTop: 18,
+    marginVertical: 20,
+  },
+  middleContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: config.deviceWidth <= 320 ? 30 : 50,
+    width: '100%',
   },
   text: {
-    width: 340,
     textAlign: 'center',
-    fontFamily: Fonts.text,
+    fontFamily: Fonts.strongText,
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 27,
+    paddingBottom: 12,
+    color: Colors.black,
+  },
+  carouselContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingLeft: 14,
   },
   subtitle: {
     fontFamily: Fonts.subtitle,
+    color: Colors.black,
     alignSelf: 'flex-start',
     marginTop: 30,
+    marginBottom: 12,
+    fontSize: 18,
     marginHorizontal: Dimensions.get('window').width > 375 ? 15 : 10,
   },
-  listContainer: {
-    maxHeight: Dimensions.get('window').width > 375 ? 350 : 300,
-  },
+  listContainer: {},
 });
 
 export default HomePage;
