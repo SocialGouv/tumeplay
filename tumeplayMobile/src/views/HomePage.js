@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    minHeight: '100%',
   },
   levelIndicator: {
     marginVertical: 20,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   middleContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: config.deviceWidth <= 320 ? 30 : 50,
+    paddingHorizontal: config.deviceWidth <= 375 ? 30 : 50,
     width: '100%',
   },
   text: {
