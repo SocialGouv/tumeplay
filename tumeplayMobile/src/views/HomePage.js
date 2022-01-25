@@ -81,7 +81,6 @@ const HomePage = ({navigation}) => {
           <Button
             text="Teste tes connaissances"
             size="large"
-            style={{backgroundColor: Colors.primary}}
             onPress={() => navigation.navigate('QuizzStartPage')}
             icon
           />
