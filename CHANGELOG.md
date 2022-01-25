@@ -1,3 +1,10 @@
+## [1.35.3](https://github.com/SocialGouv/Tumeplay/compare/v1.35.2...v1.35.3) (2022-01-25)
+
+
+### Bug Fixes
+
+* fixing button positionning according to device ([#272](https://github.com/SocialGouv/Tumeplay/issues/272)) ([559831f](https://github.com/SocialGouv/Tumeplay/commit/559831f6fd372a9b2c048061287bba3a1f6ba00d))
+
 ## [1.35.2](https://github.com/SocialGouv/Tumeplay/compare/v1.35.1...v1.35.2) (2022-01-24)
 
 
