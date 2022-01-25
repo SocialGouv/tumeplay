@@ -186,17 +186,18 @@ const TunnelReferentSelectMetropole = props => {
   }
 
   const handleAddressMore = item => {
+		const city = item.address_zipcode + ' ' + item.address_city
     openGeocoder()
-      .reverse(item.coordinates.longitude, item.coordinates.latitude)
+      .geocode(city)
       .end((err, res) => {
-        if (res) {
-          if (res.address.postcode.substring(0, 2) === '97') {
-            item['address_deptcode'] = res.address.postcode.substring(0, 3);
+        if (res && res[0]) {
+          if (res[0].address.postcode.substring(0, 2) === '97') {
+            item['address_deptcode'] = res[0].address.postcode.substring(0, 3);
           } else {
-            item['address_deptcode'] = res.address.postcode.substring(0, 2);
+            item['address_deptcode'] = res[0].address.postcode.substring(0, 2);
           }
-          item['address_region'] = res.address.state;
-          item['address_dept'] = res.address.county;
+          item['address_region'] = res[0].address.state;
+          item['address_dept'] = res[0].address.county;
           setSelectedReferent({...item});
         }
       });
