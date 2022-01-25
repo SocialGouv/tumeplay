@@ -95,7 +95,6 @@ const App = () => {
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-    console.log('DATA', data2.utilisateursMobile);
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
       setPoints(data2?.utilisateursMobile?.points);
