@@ -13,6 +13,7 @@ import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
+import {View, Text, StyleSheet} from 'react-native';
 import {
   GET_HISTORIQUES,
   GET_MOBILE_USER,
@@ -28,6 +29,7 @@ const App = () => {
   const [doneModules_ids, setDoneModules_ids] = useState([]);
 
   const [thematiques, setThematiques] = useState([]);
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
 
   const checkUserIdInStorage = async () => {
     let encryptedUser = await EncryptedStorage.getItem('user');
@@ -36,8 +38,11 @@ const App = () => {
       const tmpUser_id = tmpUser?.user_id;
       if (tmpUser_id) {
         user.user_id = tmpUser_id;
+        user.isLoaded = true;
         setUser({...user});
       }
+    } else {
+      setUser({isLoaded: true});
     }
   };
 
@@ -84,21 +89,18 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-    if (!loading2) {
+    if (!loading2 && data2 && user?.isLoaded) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-    let encryptedUser = await EncryptedStorage.getItem('user');
-    if (encryptedUser) {
-      const tmpUser = JSON.parse(encryptedUser);
-      const tmpUser_id = tmpUser?.user_id;
-      if (tmpUser_id !== '') {
-        setUser({...data2?.utilisateursMobile});
-        setPoints(data2?.utilisateursMobile?.points);
-      }
+    console.log('DATA', data2.utilisateursMobile);
+    if (data2?.utilisateursMobile) {
+      setUser({...data2?.utilisateursMobile});
+      setPoints(data2?.utilisateursMobile?.points);
     }
+    setIsUserLoaded(true);
   };
 
   const clearStorage = async () => {
@@ -111,8 +113,8 @@ const App = () => {
   }, []);
 
   const contextValues = {
-    user_id: user.user_id,
-    strapi_user_id: user.id,
+    user_id: user?.user_id,
+    strapi_user_id: user?.id,
     thematiques,
     points,
     setPoints,
@@ -124,8 +126,15 @@ const App = () => {
 
   return (
     <AppContext.Provider value={contextValues}>
-      {!user?.isOnboarded && <Onboarding user={user} setUser={setUser} />}
-      {user?.isOnboarded && !user?.isSignedUp && (
+      {!isUserLoaded && (
+        <View style={styles.loadingScreenr}>
+          <Text>Chargement...</Text>
+        </View>
+      )}
+      {isUserLoaded && !user?.isOnboarded && (
+        <Onboarding user={user} setUser={setUser} />
+      )}
+      {isUserLoaded && user?.isOnboarded && !user?.isSignedUp && (
         <Signup user={user} setUser={setUser} />
       )}
       {user?.isOnboarded && user?.isSignedUp && (
@@ -159,5 +168,13 @@ const App = () => {
     </AppContext.Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default App;
