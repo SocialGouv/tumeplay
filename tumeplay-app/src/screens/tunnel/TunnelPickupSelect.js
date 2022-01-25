@@ -74,7 +74,7 @@ export default function TunnelPickupSelect(props) {
             lat: position.coords.latitude,
             long: position.coords.longitude,
           };
-          openGeocoder()
+          openGeocoder({'Accept-Language': 'fr' })
             .reverse(coordinates.long, coordinates.lat)
             .end((err, res) => {
               if (
@@ -170,7 +170,7 @@ export default function TunnelPickupSelect(props) {
       setLocalAdress(localAdress);
 
       if (zipCodeTest.test(value)) {
-        openGeocoder()
+        openGeocoder({'Accept-Language': 'fr' })
           .geocode(value)
           .end((err, res) => {
             if (res.length >= 1) {
@@ -245,7 +245,7 @@ export default function TunnelPickupSelect(props) {
   }
 
   const handleAddressMore = item => {
-    openGeocoder()
+    openGeocoder({'Accept-Language': 'fr' })
       .reverse(item.coordinates.longitude, item.coordinates.latitude)
       .end((err, res) => {
         if (res) {

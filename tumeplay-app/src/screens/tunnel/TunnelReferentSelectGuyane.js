@@ -70,7 +70,7 @@ const TunnelReferentSelectGuyane = props => {
             lat: position.coords.latitude,
             long: position.coords.longitude,
           };
-          openGeocoder()
+          openGeocoder({'Accept-Language': 'fr' })
             .reverse(coordinates.long, coordinates.lat)
             .end((err, res) => {
               if (res) {
@@ -182,17 +182,18 @@ const TunnelReferentSelectGuyane = props => {
   }
 
   const handleAddressMore = item => {
-    openGeocoder()
-      .reverse(item.coordinates.longitude, item.coordinates.latitude)
+    const city = item.address_zipcode + ' ' + item.address_city
+    openGeocoder({'Accept-Language': 'fr' })
+      .geocode(city)
       .end((err, res) => {
-        if (res) {
-          if (res.address.postcode.substring(0, 2) === '97') {
-            item['address_deptcode'] = res.address.postcode.substring(0, 3);
+        if (res && res[0]) {
+          if (res[0].address.postcode.substring(0, 2) === '97') {
+            item['address_deptcode'] = res[0].address.postcode.substring(0, 3);
           } else {
-            item['address_deptcode'] = res.address.postcode.substring(0, 2);
+            item['address_deptcode'] = res[0].address.postcode.substring(0, 2);
           }
-          item['address_region'] = res.address.state;
-          item['address_dept'] = res.address.county;
+          item['address_region'] = res[0].address.state;
+          item['address_dept'] = res[0].address.county;
           setSelectedReferent({...item});
         }
       });
@@ -205,7 +206,7 @@ const TunnelReferentSelectGuyane = props => {
       setLocalAdress(localAdress);
 
       if (zipCodeTest.test(value)) {
-        openGeocoder()
+        openGeocoder({'Accept-Language': 'fr' })
           .geocode(value)
           .end((err, res) => {
             if (res.length >= 1) {
