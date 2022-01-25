@@ -1,3 +1,10 @@
+## [1.35.4](https://github.com/SocialGouv/Tumeplay/compare/v1.35.3...v1.35.4) (2022-01-25)
+
+
+### Bug Fixes
+
+* user loading process to avoid onBoarding error ([#273](https://github.com/SocialGouv/Tumeplay/issues/273)) ([423ced5](https://github.com/SocialGouv/Tumeplay/commit/423ced52acc4c6d45d4eb9c0fd717a7da3c4e086))
+
 ## [1.35.3](https://github.com/SocialGouv/Tumeplay/compare/v1.35.2...v1.35.3) (2022-01-25)
 
 
