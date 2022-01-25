@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/SocialGouv/Tumeplay/compare/v1.36.1...v1.37.0) (2022-01-25)
+
+
+### Features
+
+* display referent name on order summary ([#274](https://github.com/SocialGouv/Tumeplay/issues/274)) ([067a9c0](https://github.com/SocialGouv/Tumeplay/commit/067a9c0c2de2d3d1a5c776a839381658bc387b1c))
+
 ## [1.36.1](https://github.com/SocialGouv/Tumeplay/compare/v1.36.0...v1.36.1) (2022-01-25)
 
 
