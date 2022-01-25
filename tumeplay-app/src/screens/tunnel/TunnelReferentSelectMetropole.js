@@ -73,7 +73,7 @@ const TunnelReferentSelectMetropole = props => {
 						lat: position.coords.latitude,
 						long: position.coords.longitude,
 					};
-					openGeocoder()
+					openGeocoder({'Accept-Language': 'fr' })
 						.reverse(coordinates.long, coordinates.lat)
 						.end((err, res) => {
 							if (res) {
@@ -187,7 +187,7 @@ const TunnelReferentSelectMetropole = props => {
 
   const handleAddressMore = item => {
 		const city = item.address_zipcode + ' ' + item.address_city
-    openGeocoder()
+    openGeocoder({'Accept-Language': 'fr' })
       .geocode(city)
       .end((err, res) => {
         if (res && res[0]) {
@@ -210,7 +210,7 @@ const TunnelReferentSelectMetropole = props => {
       setLocalAdress(localAdress);
 
       if (zipCodeTest.test(value)) {
-        openGeocoder()
+        openGeocoder({'Accept-Language': 'fr' })
           .geocode(value)
           .end((err, res) => {
             if (res.length >= 1) {
