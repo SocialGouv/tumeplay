@@ -308,6 +308,8 @@ export default function TunnelCartSummary(props) {
             {(deliveryType == 'referent-metropole' ||
               deliveryType === 'referent-guyane') && (
               <Text style={[TunnelCartSummaryStyle.subTitle]}>
+								{selectedReferent.name}
+								{'\n'}
                 {selectedReferent.address}
                 {'\n'}
                 {selectedReferent.address_zipcode}{' '}
