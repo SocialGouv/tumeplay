@@ -226,7 +226,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flex: 1,
   },
-  bottomButton: {},
+  bottomButton: {
+    position: config.deviceWidth <= 375 ? 'relative' : 'absolute',
+    bottom: config.deviceWidth <= 375 ? 0 : 30,
+  },
   action: {
     fontWeight: '600',
   },
