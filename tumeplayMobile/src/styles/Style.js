@@ -7,7 +7,7 @@ export const Fonts = {
 
 export const Colors = {
   black: '#000',
-  primary: '#E85439',
+  primary: '#D42201',
   corail: '#F1A383',
   corailLight: '#EDC38B',
   grey: '#B3B3B3',
