@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/SocialGouv/Tumeplay/compare/v1.35.4...v1.36.0) (2022-01-25)
+
+
+### Features
+
+* review buttons color for accessibility ([#275](https://github.com/SocialGouv/Tumeplay/issues/275)) ([c57cc43](https://github.com/SocialGouv/Tumeplay/commit/c57cc43163a6c6abba18b7503e22d9540841c9a5))
+
 ## [1.35.4](https://github.com/SocialGouv/Tumeplay/compare/v1.35.3...v1.35.4) (2022-01-25)
 
 
