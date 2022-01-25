@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/SocialGouv/Tumeplay/compare/v1.36.0...v1.36.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* typo error correction ([f40f1fd](https://github.com/SocialGouv/Tumeplay/commit/f40f1fdd1e4a70700343cfcf117e9c3fe42c11b4))
+
 # [1.36.0](https://github.com/SocialGouv/Tumeplay/compare/v1.35.4...v1.36.0) (2022-01-25)
 
 
