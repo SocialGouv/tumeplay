@@ -42,6 +42,7 @@ const App = () => {
         setUser({...user});
       }
     } else {
+      setIsUserLoaded(true);
       setUser({isLoaded: true});
     }
   };
@@ -112,8 +113,8 @@ const App = () => {
   }, []);
 
   const contextValues = {
-    user_id: user?.user_id,
-    strapi_user_id: user?.id,
+    user_id: user.user_id,
+    strapi_user_id: user.id,
     thematiques,
     points,
     setPoints,
