@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/SocialGouv/Tumeplay/compare/v1.37.0...v1.38.0) (2022-01-27)
+
+
+### Features
+
+* possibility to send email notification to user from referent dashboard ([#277](https://github.com/SocialGouv/Tumeplay/issues/277)) ([8d190fb](https://github.com/SocialGouv/Tumeplay/commit/8d190fba01adf63a91df0a28b699d3cd2e2c8ea7))
+
 # [1.37.0](https://github.com/SocialGouv/Tumeplay/compare/v1.36.1...v1.37.0) (2022-01-25)
 
 
