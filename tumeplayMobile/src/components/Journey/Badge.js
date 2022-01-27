@@ -7,12 +7,10 @@ import AppContext from '../../../AppContext';
 
 const Badge = module => {
   const context = useContext(AppContext);
-  const userHistory = context.userHistory;
+  const doneModules_ids = context.doneModules_ids;
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const [done, setDone] = useState(false);
-
-  const doneModules_ids = userHistory.map(history => history?.module?.id);
 
   const adjustModuleColor = () => {
     if (doneModules_ids.includes(module.module.id)) {

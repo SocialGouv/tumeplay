@@ -54,34 +54,20 @@ const App = () => {
         user_id: user?.user_id,
       },
     });
-    const res3 = useQuery(GET_HISTORIQUES);
-    return [res1, res2, res3];
+    return [res1, res2];
   };
 
-  const [
-    {data: data1, loading: loading1},
-    {data: data2, loading: loading2},
-    {data: data3, loading: loading3},
-  ] = useMultipleQuery();
+  const [{data: data1, loading: loading1}, {data: data2, loading: loading2}] =
+    useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = userHistory?.map(history => history.module.id);
+    let tmpIds = userHistory?.map(history => history.module_id);
     setDoneModules_ids([...tmpIds]);
   };
 
   useEffect(() => {
     retrieveDoneModulesIds();
   }, [userHistory]);
-
-  useEffect(() => {
-    if (!loading3 && data3) {
-      let tmpUserHistory = data3?.historiques?.filter(
-        history =>
-          history.user !== null && history?.user.user_id === user.user_id,
-      );
-      setUserHistory(tmpUserHistory);
-    }
-  }, [loading3, data3]);
 
   useEffect(() => {
     if (!loading1 && data1) {
@@ -98,6 +84,7 @@ const App = () => {
   const retrieveUserFromAPI = async () => {
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
+      setUserHistory([...data2?.utilisateursMobile?.history]);
       setPoints(data2?.utilisateursMobile?.points);
     }
     setIsUserLoaded(true);
@@ -113,6 +100,8 @@ const App = () => {
   }, []);
 
   const contextValues = {
+    user,
+    setUser,
     user_id: user.user_id,
     strapi_user_id: user.id,
     thematiques,
@@ -120,8 +109,6 @@ const App = () => {
     setPoints,
     doneModules_ids,
     setDoneModules_ids,
-    userHistory,
-    setUserHistory,
   };
 
   return (

@@ -13,10 +13,15 @@ import config from '../../config';
 
 import GestureRecognizer from '../lib/swipe';
 import AppContext from '../../AppContext';
+import {CREATE_HISTORY} from '../services/api/mobile_users';
+import {useMutation} from '@apollo/client';
 
 const QuizzStartPage = ({navigation}) => {
   const context = useContext(AppContext);
   const doneModules_ids = context.doneModules_ids;
+  const user_id = context.strapi_user_id;
+  const user = context.user;
+  const setUser = context.setUser;
   const {data, loading} = useQuery(GET_MODULES);
   const [modules, setModules] = useState(null);
   const [module, setModule] = useState();
@@ -24,6 +29,7 @@ const QuizzStartPage = ({navigation}) => {
   const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
   const [remainingModules, setRemainingModules] = useState();
+  const [createHistory] = useMutation(CREATE_HISTORY);
 
   useEffect(() => {
     if (data && !loading) {
@@ -61,6 +67,36 @@ const QuizzStartPage = ({navigation}) => {
     }
   }, [remainingModules]);
 
+  const handleStartQuizz = async () => {
+    let response = null;
+    try {
+      response = await createHistory({
+        variables: {
+          user_id: user_id,
+          module_id: module?.id,
+          status: 'pending',
+        },
+      });
+    } catch (error) {
+      console.log('Erreur:', error);
+    }
+    const history_id = response?.data?.createHistorique?.historique?.id;
+    if (user) {
+      user.history = [
+        {
+          id: history_id,
+          module_id: module?.id,
+          status: 'pending',
+        },
+      ];
+      setUser({...user});
+    }
+    navigation.navigate('QuizzModule', {
+      questions: _.shuffle(questions),
+      module_id: module?.id,
+    });
+  };
+
   return (
     <Container background={bg}>
       <GestureRecognizer
@@ -88,12 +124,7 @@ const QuizzStartPage = ({navigation}) => {
           text="C'est parti"
           isDisabled={loading}
           icon
-          onPress={() => {
-            navigation.navigate('QuizzModule', {
-              questions: _.shuffle(questions),
-              module_id: module.id,
-            });
-          }}
+          onPress={() => handleStartQuizz()}
           style={styles.button}
         />
       </GestureRecognizer>
