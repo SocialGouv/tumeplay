@@ -10,7 +10,7 @@ const mondialRelayUrl = 'http://api.mondialrelay.com/Web_Services.asmx?WSDL';
 const PDFMerger = require('pdf-merger-js');
 const axios = require("axios")
 const html_to_pdf = require('html-pdf-node');
-const { sanitizeEntity } = require('strapi-utils')
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -435,5 +435,47 @@ module.exports = {
       })
     );
     return body.orders.map(o => o.id)
-  }
+  },
+	async update(ctx) {
+    const { id } = ctx.params;
+
+    let entity;
+    if (ctx.is('multipart')) {
+      const { data, files } = parseMultipartData(ctx);
+      entity = await strapi.services.commande.update({ id }, data, {
+        files,
+      });
+    } else {
+      entity = await strapi.services.commande.update({ id }, ctx.request.body);
+    }
+
+		if (ctx.request.body.notify_user) {
+
+			const order_referent_notify = await fs.promises.readFile('emails/order_referent_notify.txt', 'utf8');
+			const order_referent_notify_html = await fs.promises.readFile('emails/order_referent_notify.html', 'utf8');
+		
+			const ORDER_REFERENT_NOTIFY_USER = {
+				subject: "Votre commande est disponible chez votre référent",
+				text: order_referent_notify,
+				html: order_referent_notify_html
+			};
+			
+			await strapi.plugins['email'].services.email.sendTemplatedEmail(
+				{
+					to: entity.email
+				},
+				ORDER_REFERENT_NOTIFY_USER,
+				{
+					order: Object.assign(
+						_.pick(entity, ['name', 'id', 'address', 'address_zipcode', 'address_city']),
+						{
+							box: _.pick(entity.content[0].box, ['title'])
+						}
+					)
+				}
+			)
+		}
+
+    return sanitizeEntity(entity, { model: strapi.models.commande });
+  },
 };
