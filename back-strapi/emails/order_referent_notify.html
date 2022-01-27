@@ -1,0 +1,24 @@
+<div>
+  <div style="text-align:center">
+    <span>
+      <div style="font-family:&quot;CarterOne-Regular&quot;;font-size:18px;display:inline-block;margin-bottom:12px">
+          Votre commande <span class="il">Tumeplay</span> est disponible !
+      </div>
+      <div style="display:inline-block;height:3px;width:100%;background-color:rgb(253,188,17)">
+      </div>
+    </span>
+  </div>
+	<div style="padding:10px;float:left">
+		<div style="color:rgb(200,3,82);font-family:&quot;Abel-Regular&quot;;font-size:20px">
+			Votre commande est disponible chez votre référent !
+		</div>
+		<br>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Votre commande :</div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Box «<%= order.box.title %>»</div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Numéro de la commande «<%= order.id %>»</div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px">Votre lieu de rencontre :</div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px"><%= order.name %></div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px"><%= order.address %></div>
+		<div style="font-family:&quot;Chivo-Regular&quot;;font-size:13px;line-height:22px"><%= order.address_zipcode %> <%= order.address_city %></div>
+	</div>
+</div>

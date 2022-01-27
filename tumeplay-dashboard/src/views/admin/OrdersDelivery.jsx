@@ -10,7 +10,7 @@ import ConfirmModal from '../../components/ui/ConfirmModal';
 import UserDataModal from '../../components/ui/UserDataModal';
 import UpdateOrderContentModal from '../../components/ui/UpdateOrderContentModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faPen, faUndo, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faPen, faUndo, faUserCircle, faBell } from '@fortawesome/free-solid-svg-icons';
 import getAllBoxes from "../../services/api/boxes.js";
 import ReferentAPI from "../../services/api/referents.js";
 import ReactTooltip from 'react-tooltip';
@@ -32,6 +32,7 @@ const OrdersLogistics = () => {
   const [showConfirm, setShowConfirm] = useState(false)
   const [showUserData, setShowUserData] = useState(false)
   const [showUpdateOrderContent, setShowUpdateOrderContent] = useState(false)
+	const [showConfirmNotification, setShowConfirmNotification] = useState(false)
 
 	const defaultParams = {
 		referent: user.referent,
@@ -74,6 +75,16 @@ const OrdersLogistics = () => {
 		await OrdersAPI.update(token, order)
     retrieveOrders(defaultParams);
 	}
+
+	const updateUserNotified = async (order) => {
+		if (!order.user_notified) {
+			order.user_notified = true;
+			order.notify_user = true;
+			await OrdersAPI.update(token, order)
+			setShowConfirmNotification(true);
+			retrieveOrders(defaultParams);
+		}
+	}
 	
   const retrieveOrders = async (params) => {
     let response = await OrdersAPI.getDeliveryOrders(token, params)
@@ -85,6 +96,7 @@ const OrdersLogistics = () => {
 				<div className="tmp-table-actions">
 					<ReactTooltip id="user-data-tooltip" />
 					<ReactTooltip id="update-tooltip" />
+					<ReactTooltip id="notify-tooltip" />
 					<button onClick={() => {
 						setCurrentOrder(order);
 						setShowUserData(true);
@@ -104,6 +116,14 @@ const OrdersLogistics = () => {
 					data-tip="Éditer"
 					className="tmp-button">
 						<FontAwesomeIcon icon={faPen} color="white" />
+					</button>
+					<button onClick={() => {
+						updateUserNotified(order);
+					}}
+					data-for="notify-tooltip"
+					data-tip={order.user_notified ? `${order.first_name} a déjà été notifié` : `Informer ${order.first_name} que sa commande est disponible`}
+					className={`tmp-button ${order.user_notified && 'disabled'}`}>
+						<FontAwesomeIcon icon={faBell} color="white" />
 					</button>
 					{
 						!order.received ? (
@@ -196,6 +216,15 @@ const OrdersLogistics = () => {
 			<div className="px-4 relative">
 				<div className="text-white text-sm uppercase hidden lg:inline-block font-semibold mb-8">
 					Vos commandes
+				</div>
+				<div className={`fixed ${showConfirmNotification ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+						id="my-modal"
+				>
+					{showConfirmNotification ?
+						<ConfirmModal setShow={setShowConfirmNotification} />
+						:
+						<></>
+					}
 				</div>
 				<div className={`fixed ${showConfirm ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
 				>
