@@ -219,9 +219,9 @@ const OrdersLogistics = () => {
 				</div>
 				<div className={`fixed ${showConfirmNotification ? "block" : "hidden"} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
 						id="my-modal"
-				>
+				> 
 					{showConfirmNotification ?
-						<ConfirmModal setShow={setShowConfirmNotification} />
+						<ConfirmModal message="L'utilisateur a bien été notifié" setShow={setShowConfirmNotification} />
 						:
 						<></>
 					}

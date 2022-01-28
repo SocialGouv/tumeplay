@@ -188,6 +188,35 @@ const OrdersLogistics = () => {
     }
   }
 
+	const handlePrintAllClick = async (e) => {
+		e.preventDefault();
+    let response = await OrdersAPI.getLogisticsOrders(token, Object.assign({
+      _limit: count,
+      _start: 0
+    }, {
+			box_number: openTab,
+			_sort: 'created_at:DESC',
+		}))
+
+		const items = response.data || []
+		const colissimoItems = items.filter(item => item.delivery === "home" || item.delivery === 'referent')
+    const mondialRelayItems = items.filter(item => item.delivery === "pickup")
+    if(colissimoItems.length > 0) {
+      const ids = colissimoItems.map((item) => {
+        return item.id
+      })
+			console.log('print colissimo')
+      printColissimoSticker(ids)
+    }
+    if (mondialRelayItems.length > 0) {
+      const ids = mondialRelayItems.map((item) => {
+        return item.id
+      })
+			console.log('print MR')
+        printMRStickers(ids)
+    }
+	}
+
   const handleSendClick = async (e) => {
     e.preventDefault()
     let ordersToSend = tmpSelectedItems.map(item => {
@@ -345,6 +374,14 @@ const OrdersLogistics = () => {
       <div className="tmp-tabs-container">
         {renderTabs()}
       </div>
+			<div className="tmp-topest-buttons-container">
+					<button className={`tmp-button ${count === 0 && 'disabled'}`}
+									onClick={(e) => {
+											handlePrintAllClick(e)
+									}}>
+						<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer toutes les étiquettes ({count})
+					</button>
+				</div>
 			<div className="tmp-table-option">
 				<div className="tmp-top-buttons-container">
 					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`}

@@ -4,6 +4,11 @@ html {
       @apply w-full flex mb-2;
     }
 
+		.tmp-topest-buttons-container {
+			@apply mb-4;
+		}
+
+
 		.tmp-table-option {
 			@apply flex items-center mb-2;
 
@@ -19,7 +24,6 @@ html {
 					}
 				}
 			}
-
 			.tmp-top-buttons-container {
 				@apply flex flex-1;
 			}
