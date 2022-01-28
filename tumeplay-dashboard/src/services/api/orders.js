@@ -34,6 +34,32 @@ const OrdersAPI = {
       }
     );
   },
+  countLogisticsOrdersColissimo: (token, params) => {
+    return axios.get(`${API_URL}/commandes/count`,
+      {
+        params: Object.assign({
+          delivery: ['home', 'referent'],
+        }, params),
+        headers:
+          {
+            Authorization: `Bearer ${token}`
+          }
+      }
+    );
+  },
+  countLogisticsOrdersMondialRelay: (token, params) => {
+    return axios.get(`${API_URL}/commandes/count`,
+      {
+        params: Object.assign({
+          delivery: ['pickup'],
+        }, params),
+        headers:
+          {
+            Authorization: `Bearer ${token}`
+          }
+      }
+    );
+  },
   countDeliveryOrders: (token, params) => {
     return axios.get(`${API_URL}/commandes/count`,
       {
