@@ -1,3 +1,10 @@
+## [1.38.1](https://github.com/SocialGouv/Tumeplay/compare/v1.38.0...v1.38.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* fixing swipe by adding lib folder + adding the remaining modules… ([#276](https://github.com/SocialGouv/Tumeplay/issues/276)) ([ecef6a4](https://github.com/SocialGouv/Tumeplay/commit/ecef6a44d3ae0c9b35684b9fce8a9ea799898521))
+
 # [1.38.0](https://github.com/SocialGouv/Tumeplay/compare/v1.37.0...v1.38.0) (2022-01-27)
 
 
