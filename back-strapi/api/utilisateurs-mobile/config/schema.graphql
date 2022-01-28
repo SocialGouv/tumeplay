@@ -1,0 +1,14 @@
+module.exports = {
+  definition:`
+    type CustomHistorique {
+      id: String,
+      module_id: String,
+      status: String
+    }
+    extend type UtilisateursMobile {
+      history: [CustomHistorique!]!
+      level: Int,
+      pending_module: String,
+    }
+  `,
+};

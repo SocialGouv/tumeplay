@@ -18,9 +18,9 @@ const QuizzWithWrongAnswers = props => {
     props;
 
   const context = useContext(AppContext);
-  const points = context.points;
-  const setPoints = context.setPoints;
+  const {points, setPoints} = context;
   const restartQuizz = () => {
+    console.log('length', correctAnswers.length);
     if (correctAnswers.length < 10) {
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(wrongAnswers),

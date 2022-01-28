@@ -23,6 +23,7 @@ const Button = props => {
     <TouchableOpacity
       style={[adjustStyle(), style]}
       disabled={isDisabled}
+      accessibilityRole="button"
       onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
       {icon && (
