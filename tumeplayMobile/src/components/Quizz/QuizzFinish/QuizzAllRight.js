@@ -41,7 +41,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
           },
         });
         currentHistory[0].status =
-          response.data.updateHistorique.historique.status;
+          response?.data?.updateHistorique?.historique?.status;
         user.history = [...currentHistory];
         updatePoints({
           variables: {
@@ -49,7 +49,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
             points: points + pointsEarned,
           },
         });
-        setUser(user);
+        setUser({...user});
         setPoints(points + pointsEarned);
       } catch (error) {
         console.log("Erreur à l'update : ", error);

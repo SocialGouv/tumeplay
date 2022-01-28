@@ -78,7 +78,7 @@ const QuizzStartPage = ({navigation}) => {
         },
       });
     } catch (error) {
-      console.log('Erreur:', error);
+      console.log('Erreur au lancement du quizz:', error);
     }
     const history_id = response?.data?.createHistorique?.historique?.id;
     if (user) {

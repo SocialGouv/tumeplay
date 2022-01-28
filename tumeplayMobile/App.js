@@ -24,8 +24,7 @@ const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
   const [user, setUser] = useState({});
-  const [userHistory, setUserHistory] = useState([]);
-  const [points, setPoints] = useState(0);
+  const [points, setPoints] = useState(null);
   const [doneModules_ids, setDoneModules_ids] = useState([]);
 
   const [thematiques, setThematiques] = useState([]);
@@ -43,7 +42,8 @@ const App = () => {
       }
     } else {
       setIsUserLoaded(true);
-      setUser({isLoaded: true});
+      setPoints(0);
+      setUser({isLoaded: true, points: 0});
     }
   };
 
@@ -61,13 +61,13 @@ const App = () => {
     useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = userHistory?.map(history => history.module_id);
+    let tmpIds = user?.history?.map(history => history.module_id);
     setDoneModules_ids([...tmpIds]);
   };
 
   useEffect(() => {
-    retrieveDoneModulesIds();
-  }, [userHistory]);
+    if (points) retrieveDoneModulesIds();
+  }, [points]);
 
   useEffect(() => {
     if (!loading1 && data1) {
@@ -84,7 +84,6 @@ const App = () => {
   const retrieveUserFromAPI = async () => {
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
-      setUserHistory([...data2?.utilisateursMobile?.history]);
       setPoints(data2?.utilisateursMobile?.points);
     }
     setIsUserLoaded(true);

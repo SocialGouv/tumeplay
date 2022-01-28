@@ -7,22 +7,27 @@ import AppContext from '../../../AppContext';
 
 const Badge = module => {
   const context = useContext(AppContext);
-  const doneModules_ids = context.doneModules_ids;
+  const {user} = context;
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const [done, setDone] = useState(false);
 
   const adjustModuleColor = () => {
-    if (doneModules_ids.includes(module.module.id)) {
-      setStrokeColor('#51B070');
-      setFillColor('#DDF4ED');
-      setDone(true);
-    }
+    (user.history || []).forEach(history => {
+      if (
+        history.module_id === module.module.id &&
+        history.status === 'success'
+      ) {
+        setStrokeColor('#51B070');
+        setFillColor('#DDF4ED');
+        setDone(true);
+      }
+    });
   };
 
   useEffect(() => {
     adjustModuleColor();
-  }, [doneModules_ids.length]);
+  }, [user.history]);
 
   return (
     <Svg style={styles.svgContainer}>
