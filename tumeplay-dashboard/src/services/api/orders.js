@@ -25,7 +25,7 @@ const OrdersAPI = {
     return axios.get(`${API_URL}/commandes/count`,
       {
         params: Object.assign({
-          delivery: ['pickup', 'home'],
+          delivery: ['pickup', 'home', 'referent'],
         }, params),
         headers:
           {
