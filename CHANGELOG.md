@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/SocialGouv/Tumeplay/compare/v1.39.0...v1.40.0) (2022-01-28)
+
+
+### Features
+
+* **dashboard-cat:** split print all button to handle each delivry type ([#279](https://github.com/SocialGouv/Tumeplay/issues/279)) ([620c689](https://github.com/SocialGouv/Tumeplay/commit/620c6896e6b00bfa8c4a9a415b2061970fa6ef2c))
+
 # [1.39.0](https://github.com/SocialGouv/Tumeplay/compare/v1.38.1...v1.39.0) (2022-01-28)
 
 
