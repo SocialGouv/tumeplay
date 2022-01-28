@@ -24,8 +24,7 @@ const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
   const [user, setUser] = useState({});
-  const [userHistory, setUserHistory] = useState([]);
-  const [points, setPoints] = useState(0);
+  const [points, setPoints] = useState(null);
   const [doneModules_ids, setDoneModules_ids] = useState([]);
 
   const [thematiques, setThematiques] = useState([]);
@@ -42,7 +41,9 @@ const App = () => {
         setUser({...user});
       }
     } else {
-      setUser({isLoaded: true});
+      setIsUserLoaded(true);
+      setPoints(0);
+      setUser({isLoaded: true, points: 0});
     }
   };
 
@@ -53,34 +54,20 @@ const App = () => {
         user_id: user?.user_id,
       },
     });
-    const res3 = useQuery(GET_HISTORIQUES);
-    return [res1, res2, res3];
+    return [res1, res2];
   };
 
-  const [
-    {data: data1, loading: loading1},
-    {data: data2, loading: loading2},
-    {data: data3, loading: loading3},
-  ] = useMultipleQuery();
+  const [{data: data1, loading: loading1}, {data: data2, loading: loading2}] =
+    useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = userHistory?.map(history => history.module.id);
+    let tmpIds = user?.history?.map(history => history.module_id);
     setDoneModules_ids([...tmpIds]);
   };
 
   useEffect(() => {
-    retrieveDoneModulesIds();
-  }, [userHistory]);
-
-  useEffect(() => {
-    if (!loading3 && data3) {
-      let tmpUserHistory = data3?.historiques?.filter(
-        history =>
-          history.user !== null && history?.user.user_id === user.user_id,
-      );
-      setUserHistory(tmpUserHistory);
-    }
-  }, [loading3, data3]);
+    if (points) retrieveDoneModulesIds();
+  }, [points]);
 
   useEffect(() => {
     if (!loading1 && data1) {
@@ -112,15 +99,15 @@ const App = () => {
   }, []);
 
   const contextValues = {
-    user_id: user?.user_id,
-    strapi_user_id: user?.id,
+    user,
+    setUser,
+    user_id: user.user_id,
+    strapi_user_id: user.id,
     thematiques,
     points,
     setPoints,
     doneModules_ids,
     setDoneModules_ids,
-    userHistory,
-    setUserHistory,
   };
 
   return (

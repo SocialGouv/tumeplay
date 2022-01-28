@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
@@ -11,15 +11,22 @@ import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
 
-import GestureRecognizer from 'react-native-swipe-gestures';
+import GestureRecognizer from '../lib/swipe';
+import AppContext from '../../AppContext';
+import {CREATE_HISTORY} from '../services/api/mobile_users';
+import {useMutation} from '@apollo/client';
 
 const QuizzStartPage = ({navigation}) => {
+  const context = useContext(AppContext);
+  const {doneModules_ids, strapi_user_id, user, setUser} = context;
   const {data, loading} = useQuery(GET_MODULES);
   const [modules, setModules] = useState(null);
   const [module, setModule] = useState();
   const [questions, setQuestions] = useState([]);
   const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
+  const [remainingModules, setRemainingModules] = useState();
+  const [createHistory] = useMutation(CREATE_HISTORY);
 
   useEffect(() => {
     if (data && !loading) {
@@ -27,17 +34,64 @@ const QuizzStartPage = ({navigation}) => {
     }
   }, [data, loading]);
 
-  useEffect(() => {
-    if (modules) {
-      setModule(modules[random]);
-      setQuestions(modules[random]?.questionsArray);
-      setThematique(modules[random]?.thematique.title);
+  const identifyRemainingModules = () => {
+    let tmpRemainings = [];
+    modules?.map(item => {
+      if (!doneModules_ids.includes(item.id)) {
+        tmpRemainings.push(item);
+      }
+    });
+    if (tmpRemainings) {
+      setRemainingModules([...tmpRemainings]);
     }
+  };
+
+  useEffect(() => {
+    identifyRemainingModules();
   }, [modules]);
 
-  const config = {
-    velocityThreshold: 0.3,
-    directionalOffsetThreshold: 80,
+  useEffect(() => {
+    if (remainingModules) {
+      if (remainingModules?.length > 1) {
+        setModule(remainingModules[random]);
+        setQuestions(remainingModules[random]?.questionsArray);
+        setThematique(remainingModules[random]?.thematique.title);
+      } else {
+        setModule(remainingModules[0]);
+        setQuestions(remainingModules[0]?.questionsArray);
+        setThematique(remainingModules[0]?.thematique.title);
+      }
+    }
+  }, [remainingModules]);
+
+  const handleStartQuizz = async () => {
+    let response = null;
+    try {
+      response = await createHistory({
+        variables: {
+          user_id: strapi_user_id,
+          module_id: module?.id,
+          status: 'pending',
+        },
+      });
+    } catch (error) {
+      console.log('Erreur au lancement du quizz:', error);
+    }
+    const history_id = response?.data?.createHistorique?.historique?.id;
+    if (user) {
+      user.history = [
+        {
+          id: history_id,
+          module_id: module?.id,
+          status: 'pending',
+        },
+      ];
+      setUser({...user});
+    }
+    navigation.navigate('QuizzModule', {
+      questions: _.shuffle(questions),
+      module_id: module?.id,
+    });
   };
 
   return (
@@ -67,12 +121,7 @@ const QuizzStartPage = ({navigation}) => {
           text="C'est parti"
           isDisabled={loading}
           icon
-          onPress={() => {
-            navigation.navigate('QuizzModule', {
-              questions: _.shuffle(questions),
-              module_id: module.id,
-            });
-          }}
+          onPress={() => handleStartQuizz()}
           style={styles.button}
         />
       </GestureRecognizer>
