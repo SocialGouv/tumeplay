@@ -9,7 +9,7 @@ import AppContext from '../../../../AppContext';
 import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
 import {
-  CREATE_HISTORY,
+  UPDATE_MOBILE_USER_HISTORY,
   UPDATE_MOBILE_USER_POINTS,
 } from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
@@ -17,42 +17,44 @@ import config from '../../../../config';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
-  const points = context.points;
-  const user_id = context.strapi_user_id;
-  const setPoints = context.setPoints;
-  const history = context.userHistory;
+  const {user, setUser, points, user_id, setPoints} = context;
 
-  const [createHistory] = useMutation(CREATE_HISTORY);
+  const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
   const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
 
   const checkUserHistory = async () => {
-    if (history?.module?.id === module_id) {
-      //RAF : Update historique existant => Le cas où le user aurait quitté sans finir tout le quizz
-    } else {
-      //Create historique => Cas nominal ou le user a fini le quizz
+    let response = null;
+    if (user?.history) {
+      let currentHistory = user?.history.filter(
+        history => history.module_id === module_id,
+      );
       try {
-        await createHistory({
+        response = await updateHistory({
           variables: {
-            user_id: user_id,
-            module_id: module_id,
+            history_id: currentHistory[0]?.id,
+            module_id: currentHistory[0]?.module_id,
             status: 'success',
           },
         });
-      } catch (err) {
-        console.log('Error on history creation', err);
+        currentHistory[0].status =
+          response?.data?.updateHistorique?.historique?.status;
+        user.history = [...currentHistory];
+        updatePoints({
+          variables: {
+            user_id: user_id,
+            points: points + pointsEarned,
+          },
+        });
+        setUser({...user});
+        setPoints(points + pointsEarned);
+      } catch (error) {
+        console.log("Erreur à l'update : ", error);
       }
     }
   };
 
   useEffect(() => {
     checkUserHistory();
-    updatePoints({
-      variables: {
-        user_id: user_id,
-        points: points + pointsEarned,
-      },
-    });
-    setPoints(points + pointsEarned);
   }, []);
 
   return (

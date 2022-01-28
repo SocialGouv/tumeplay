@@ -1,11 +1,11 @@
 import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
-import GestureRecognizer from 'react-native-swipe-gestures';
+import GestureRecognizer from '../lib/swipe';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -49,13 +49,14 @@ const ContentsPage = props => {
         config={config}
         onSwipeLeft={() => navigation.goBack()}>
         <Title />
-        <View style={styles.listContainer}>
-          <FlatList
-            data={contents}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-        </View>
+        {/* <View style={styles.listContainer}> */}
+        <FlatList
+          data={contents}
+          style={styles.listContainer}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+        {/* </View> */}
       </GestureRecognizer>
     </Container>
   );

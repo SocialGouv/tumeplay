@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {Colors, Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
-import bg from '../../assets/test.png';
 import config from '../../../config';
 
 const FreshContentCard = ({content, navigation, freshContentsIds}) => {
@@ -25,7 +24,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
         })
       }>
       <View>
-        <Image style={styles.image} source={bg} />
+        <Image style={styles.image} source={imageUrl} />
         <Text style={styles.level}>Niveau 1</Text>
         <Text style={styles.title}>{content?.title}</Text>
       </View>
