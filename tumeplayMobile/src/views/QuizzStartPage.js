@@ -18,10 +18,7 @@ import {useMutation} from '@apollo/client';
 
 const QuizzStartPage = ({navigation}) => {
   const context = useContext(AppContext);
-  const doneModules_ids = context.doneModules_ids;
-  const user_id = context.strapi_user_id;
-  const user = context.user;
-  const setUser = context.setUser;
+  const {doneModules_ids, strapi_user_id, user, setUser} = context;
   const {data, loading} = useQuery(GET_MODULES);
   const [modules, setModules] = useState(null);
   const [module, setModule] = useState();
@@ -72,7 +69,7 @@ const QuizzStartPage = ({navigation}) => {
     try {
       response = await createHistory({
         variables: {
-          user_id: user_id,
+          user_id: strapi_user_id,
           module_id: module?.id,
           status: 'pending',
         },

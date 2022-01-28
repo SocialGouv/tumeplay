@@ -17,11 +17,7 @@ import config from '../../../../config';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
-  const user = context.user;
-  const setUser = context.setUser;
-  const points = context.points;
-  const user_id = context.strapi_user_id;
-  const setPoints = context.setPoints;
+  const {user, setUser, points, user_id, setPoints} = context;
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
   const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
