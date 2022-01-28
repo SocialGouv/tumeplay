@@ -27,6 +27,8 @@ const OrdersLogistics = () => {
   const [openTab, setOpenTab] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [count, setCount] = useState()
+  const [countColissimo, setCountColissimo] = useState()
+  const [countMondialRelay, setCountMondialRelay] = useState()
   const [numberPerPage, setNumberPerPage] = useState(50)
   const [tmpSelectedItems, setTmpSelectedItems] = useState([])
   const [show, setShow] = useState(false)
@@ -100,9 +102,13 @@ const OrdersLogistics = () => {
 	}
 
   const retrieveOrders = async (searchParams) => {
-    let response = await OrdersAPI.countLogisticsOrders(token, searchParams);
-    setCount(response.data)
-    response = await OrdersAPI.getLogisticsOrders(token, Object.assign({
+    let responseColissimo = await OrdersAPI.countLogisticsOrdersColissimo(token, searchParams);
+    let responseMondialRelay = await OrdersAPI.countLogisticsOrdersMondialRelay(token, searchParams);
+    setCountColissimo(responseColissimo.data)
+    setCountMondialRelay(responseMondialRelay.data)
+    setCount(responseColissimo.data + responseMondialRelay.data)
+
+    let response = await OrdersAPI.getLogisticsOrders(token, Object.assign({
       _limit: numberPerPage,
       _start: numberPerPage * (currentPage - 1)
     }, searchParams))
@@ -188,7 +194,7 @@ const OrdersLogistics = () => {
     }
   }
 
-	const handlePrintAllClick = async (e) => {
+	const handlePrintAllClick = async (e, kind) => {
 		e.preventDefault();
     let response = await OrdersAPI.getLogisticsOrders(token, Object.assign({
       _limit: count,
@@ -197,24 +203,27 @@ const OrdersLogistics = () => {
 			box_number: openTab,
 			_sort: 'created_at:DESC',
 		}))
-
 		const items = response.data || []
-		const colissimoItems = items.filter(item => item.delivery === "home" || item.delivery === 'referent')
-    const mondialRelayItems = items.filter(item => item.delivery === "pickup")
-    if(colissimoItems.length > 0) {
-      const ids = colissimoItems.map((item) => {
-        return item.id
-      })
-			console.log('print colissimo')
-      printColissimoSticker(ids)
-    }
-    if (mondialRelayItems.length > 0) {
-      const ids = mondialRelayItems.map((item) => {
-        return item.id
-      })
-			console.log('print MR')
-        printMRStickers(ids)
-    }
+
+		if (kind === 'colissimo') {
+			const colissimoItems = items.filter(item => item.delivery === "home" || item.delivery === 'referent')
+			if(colissimoItems.length > 0) {
+				const ids = colissimoItems.map((item) => {
+					return item.id
+				})
+				console.log('print colissimo')
+				printColissimoSticker(ids)
+			}
+		} else if (kind === 'mr') {
+			const mondialRelayItems = items.filter(item => item.delivery === "pickup")
+			if (mondialRelayItems.length > 0) {
+				const ids = mondialRelayItems.map((item) => {
+					return item.id
+				})
+				console.log('print MR')
+				printMRStickers(ids)
+			}
+		}
 	}
 
   const handleSendClick = async (e) => {
@@ -375,13 +384,19 @@ const OrdersLogistics = () => {
         {renderTabs()}
       </div>
 			<div className="tmp-topest-buttons-container">
-					<button className={`tmp-button ${count === 0 && 'disabled'}`}
-									onClick={(e) => {
-											handlePrintAllClick(e)
-									}}>
-						<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer toutes les étiquettes ({count})
-					</button>
-				</div>
+				<button className={`tmp-button ${countColissimo === 0 && 'disabled'}`}
+								onClick={(e) => {
+										handlePrintAllClick(e, 'colissimo')
+								}}>
+					<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer toutes les étiquettes COLISSIMO ({countColissimo})
+				</button>
+				<button className={`tmp-button ${countMondialRelay === 0 && 'disabled'}`}
+								onClick={(e) => {
+										handlePrintAllClick(e, 'mr')
+								}}>
+					<FontAwesomeIcon icon={faPrint} color="white" className="mr-2" /> Imprimer toutes les étiquettes MONDIAL RELAY ({countMondialRelay})
+				</button>
+			</div>
 			<div className="tmp-table-option">
 				<div className="tmp-top-buttons-container">
 					<button className={`tmp-button ${tmpSelectedItems.length === 0 && 'disabled'}`}
