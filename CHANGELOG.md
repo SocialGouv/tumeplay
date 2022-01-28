@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/SocialGouv/Tumeplay/compare/v1.38.1...v1.39.0) (2022-01-28)
+
+
+### Features
+
+* handle print all orders for CAT ([#278](https://github.com/SocialGouv/Tumeplay/issues/278)) ([8ec31ca](https://github.com/SocialGouv/Tumeplay/commit/8ec31caee0135c6ad0e08fed3821a2178fbdd8e9))
+
 ## [1.38.1](https://github.com/SocialGouv/Tumeplay/compare/v1.38.0...v1.38.1) (2022-01-28)
 
 
