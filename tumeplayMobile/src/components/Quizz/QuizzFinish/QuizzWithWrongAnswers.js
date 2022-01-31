@@ -19,8 +19,9 @@ const QuizzWithWrongAnswers = props => {
 
   const context = useContext(AppContext);
   const {points, setPoints} = context;
+
   const restartQuizz = () => {
-    console.log('length', correctAnswers.length);
+    console.log('CorrectAnswers :', correctAnswers.length);
     if (correctAnswers.length < 10) {
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(wrongAnswers),
@@ -77,7 +78,7 @@ const QuizzWithWrongAnswers = props => {
         size={'large'}
         style={styles.button}
         icon={true}
-        onPress={() => restartQuizz()}
+        onPress={restartQuizz}
       />
     </Container>
   );

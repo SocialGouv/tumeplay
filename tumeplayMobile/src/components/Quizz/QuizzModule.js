@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  ImageBackground,
   Text,
   TouchableOpacity,
   StyleSheet,
@@ -17,6 +16,7 @@ import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../styles/Style';
 import config from '../../../config';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -31,6 +31,7 @@ const QuizzModule = ({navigation, route}) => {
   const retry = route?.params?.retry;
   const [disabled, setDisabled] = useState(false);
   const [showAnswer, setshowAnswer] = useState(false);
+  const [steps, setSteps] = useState(0);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -91,17 +92,23 @@ const QuizzModule = ({navigation, route}) => {
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     formatAnswers();
+    handleProgressBar();
     if (retry) {
       setDisplayResponse(!displayResponse);
       setHasAnswered(!hasAnswered);
       setDisabled(!disabled);
       setWrongAnswers([]);
       setCorrectAnswers([]);
+      setSteps(0);
     }
   }, [question]);
 
   const showMoreAnswer = () => {
     setshowAnswer(!showAnswer);
+  };
+
+  const handleProgressBar = () => {
+    setSteps(100 - questions.length * 10);
   };
 
   return (
@@ -119,9 +126,22 @@ const QuizzModule = ({navigation, route}) => {
           <TopLevelPointIndicator />
         </View>
         <View style={styles.stepIndicatorContainer}>
-          <View style={styles.stepIndicator}>
-            <Text style={styles.indicator}>{questions?.length}</Text>
-          </View>
+          <AnimatedCircularProgress
+            size={60}
+            width={7}
+            fill={steps}
+            rotation={360}
+            onFillChange={handleProgressBar}
+            onAnimationComplete={handleProgressBar}
+            tintColor="#EC6233"
+            style={styles.stepIndicator}
+            backgroundColor="#FFF">
+            {fill => (
+              <Text style={styles.indicator}>
+                {parseInt(questions.length, 10)}
+              </Text>
+            )}
+          </AnimatedCircularProgress>
         </View>
         <Text style={styles.question}>{question?.text_question}</Text>
         <View style={styles.answersContainer}>{displayAnswer}</View>
@@ -185,7 +205,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#FFF',
-    borderWidth: 5,
     marginBottom: 16,
   },
   indicator: {
