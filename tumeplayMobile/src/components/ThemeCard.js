@@ -3,12 +3,19 @@ import {TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {Fonts} from '../styles/Style';
 
 const ThemeCard = props => {
-  const {theme, backgroundColor, image, navigation} = props;
+  const {theme, backgroundColor, borderColors, image, navigation} = props;
 
   return (
     <TouchableOpacity
       key={theme?.id}
-      style={[styles.cardContainer, {backgroundColor: backgroundColor}]}
+      style={[
+        styles.cardContainer,
+        {
+          backgroundColor: backgroundColor,
+          borderColor: borderColors,
+          borderWidth: 1,
+        },
+      ]}
       onPress={() => {
         navigation.navigate('ContentsPage', {
           theme_id: theme.id,

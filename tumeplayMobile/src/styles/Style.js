@@ -25,3 +25,12 @@ export const bgColors = [
   '#E5EFFF',
   '#EAE2D7',
 ];
+
+export const borderColors = [
+  '#FE3F85',
+  '#FFA731',
+  '#07CE91',
+  '#6E48FF',
+  '#FF6F51',
+  '#4D91FF',
+];

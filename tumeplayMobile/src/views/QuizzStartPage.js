@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
@@ -15,6 +15,7 @@ import GestureRecognizer from '../lib/swipe';
 import AppContext from '../../AppContext';
 import {CREATE_HISTORY} from '../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
+import CustomModal from '../components/global/CustomModal';
 
 const QuizzStartPage = ({navigation}) => {
   const context = useContext(AppContext);
@@ -26,6 +27,8 @@ const QuizzStartPage = ({navigation}) => {
   const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
   const [remainingModules, setRemainingModules] = useState();
+  const [isVisible, setIsVisible] = useState(false);
+
   const [createHistory] = useMutation(CREATE_HISTORY);
 
   useEffect(() => {
@@ -76,6 +79,24 @@ const QuizzStartPage = ({navigation}) => {
       });
     } catch (error) {
       console.log('Erreur au lancement du quizz:', error);
+      Alert.alert(
+        "Une erreur s'est produite au lancement du quizz",
+        'Merci de relancer un quizz',
+        [
+          {
+            text: 'Annuler',
+            onPress: () => {
+              navigation.navigate('Home');
+            },
+          },
+          {
+            text: 'Ok',
+            onPress: () => {
+              navigation.navigate('Home');
+            },
+          },
+        ],
+      );
     }
     const history_id = response?.data?.createHistorique?.historique?.id;
     if (user) {

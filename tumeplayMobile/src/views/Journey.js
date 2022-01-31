@@ -40,6 +40,7 @@ const Journey = () => {
         key={level.id}
         level={level}
         associatedModules={associatedModules}
+        loading={loading1}
       />
     );
   });
