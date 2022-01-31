@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/SocialGouv/Tumeplay/compare/v1.40.0...v1.41.0) (2022-01-31)
+
+
+### Features
+
+* addign skeleton design for API loading content ([#280](https://github.com/SocialGouv/Tumeplay/issues/280)) ([2c302b4](https://github.com/SocialGouv/Tumeplay/commit/2c302b48fd7c00bcfdd933c8f2125a043010a6e2))
+
 # [1.40.0](https://github.com/SocialGouv/Tumeplay/compare/v1.39.0...v1.40.0) (2022-01-28)
 
 
