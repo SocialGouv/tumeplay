@@ -15,7 +15,7 @@ const CustomModal = props => {
         <Text>{text}</Text>
         <Button
           size="medium"
-          text="c'est facheux !"
+          text="Très bien c'est compris"
           onPress={() => {
             navigation.navigate('Home');
             setIsVisible(!isVisible);

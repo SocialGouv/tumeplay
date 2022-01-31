@@ -77,21 +77,6 @@ const HomePage = ({navigation}) => {
             onPress={() => navigation.navigate('QuizzStartPage')}
             icon
           />
-          <Button
-            size="medium"
-            text="modale!"
-            onPress={() => {
-              setIsVisible(!isVisible);
-            }}
-          />
-          <CustomModal
-            isVisible={isVisible}
-            setIsVisible={setIsVisible}
-            animation={'slide'}
-            navigation={navigation}
-            title={"C'est con y'a une erreure"}
-            text={" BRAVO T'ES NAZE !!"}
-          />
         </View>
         <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
         <View style={styles.carouselContainer}>
