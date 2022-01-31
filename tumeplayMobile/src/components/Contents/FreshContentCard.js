@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Colors, Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 import config from '../../../config';
+import FreshContentSkeleton from '../global/SkeletonDesign/FreshContentSkeleton';
 
 const FreshContentCard = ({content, navigation, freshContentsIds}) => {
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
-  return (
+  return content ? (
     <TouchableOpacity
       style={styles.container}
       onPress={() =>
@@ -29,6 +23,8 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
         <Text style={styles.title}>{content?.title}</Text>
       </View>
     </TouchableOpacity>
+  ) : (
+    <FreshContentSkeleton />
   );
 };
 

@@ -1,5 +1,12 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
@@ -49,6 +56,24 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
         setPoints(points + pointsEarned);
       } catch (error) {
         console.log("Erreur à l'update : ", error);
+        Alert.alert(
+          'Désolé !',
+          " Un problème est survenu à l'enregistrement de tes résultats",
+          [
+            {
+              text: 'Annuler',
+              onPress: () => {
+                navigation.navigate('Home');
+              },
+            },
+            {
+              text: 'Recommencer',
+              onPress: () => {
+                navigation.navigate('QuizzStartPage');
+              },
+            },
+          ],
+        );
       }
     }
   };

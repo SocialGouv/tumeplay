@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
-import {Colors, Fonts, bgColors} from '../styles/Style';
+import {Colors, Fonts, bgColors, borderColors} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
 import dynamite from '../assets/custom_images/dynamite.png';
 import hello from '../assets/custom_images/hello.png';
@@ -29,6 +29,7 @@ export default function Thematiques(props) {
         index={index}
         theme={item}
         backgroundColor={bgColors[index]}
+        borderColors={borderColors[index]}
         image={images[index]}
         navigation={navigation}
       />
