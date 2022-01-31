@@ -41,6 +41,7 @@
     "jest": "26.6.3",
     "lodash": "^4.17.21",
     "metro-react-native-babel-preset": "0.66.2",
+    "react-content-loader": "^6.1.0",
     "react-native-dotenv": "^3.3.0",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-step-indicator": "^1.0.3",

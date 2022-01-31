@@ -114,7 +114,7 @@ const App = () => {
     <AppContext.Provider value={contextValues}>
       {!isUserLoaded && (
         <View style={styles.loadingScreen}>
-          <Text>Chargement...</Text>
+          <Text>Chargement ...</Text>
         </View>
       )}
       {isUserLoaded && !user?.isOnboarded && (

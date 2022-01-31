@@ -1,13 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Platform,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, ScrollView} from 'react-native';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -19,6 +11,7 @@ import AppContext from '../../AppContext';
 import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
+import CustomModal from '../components/global/CustomModal';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -26,7 +19,7 @@ const HomePage = ({navigation}) => {
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);
-
+  const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     if (data && !loading) {
       setFreshContents(data.contents);
@@ -83,6 +76,21 @@ const HomePage = ({navigation}) => {
             size="large"
             onPress={() => navigation.navigate('QuizzStartPage')}
             icon
+          />
+          <Button
+            size="medium"
+            text="modale!"
+            onPress={() => {
+              setIsVisible(!isVisible);
+            }}
+          />
+          <CustomModal
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
+            animation={'slide'}
+            navigation={navigation}
+            title={"C'est con y'a une erreure"}
+            text={" BRAVO T'ES NAZE !!"}
           />
         </View>
         <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
