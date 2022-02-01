@@ -76,15 +76,19 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-    if (!loading2 && data2 && user?.isLoaded) {
+    if (!loading2 && user?.isLoaded) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-    if (data2?.utilisateursMobile) {
-      setUser({...data2?.utilisateursMobile});
-      setPoints(data2?.utilisateursMobile?.points);
+    try {
+      if (data2?.utilisateursMobile) {
+        setUser({...data2?.utilisateursMobile});
+        setPoints(data2?.utilisateursMobile?.points);
+      }
+    } catch (error) {
+      console.log('Error :', error);
     }
     setIsUserLoaded(true);
   };
