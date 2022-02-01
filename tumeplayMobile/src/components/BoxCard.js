@@ -1,51 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
 import {Fonts} from '../styles/Style';
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-} from 'react-native-simple-radio-button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useRoute} from '@react-navigation/native';
+import {setSelectedLog} from 'react-native/Libraries/LogBox/Data/LogBoxData';
 
 const BoxCard = props => {
-  const {index, title, description, moreInfo, box, image, navigation} = props;
-  const [value, setValue] = useState(0);
-  const route = useRoute();
+  const {index, title, box, description, navigation} = props;
+  const handleNavigation = () => {
+    navigation.navigate('BoxOrder', {box: box});
+  };
+
   return (
-    <View style={styles.boxCard}>
-      {route.name === 'Box' && (
-        <RadioForm style={styles.radio}>
-          <RadioButton key={index}>
-            <RadioButtonInput
-              obj={box}
-              index={index}
-              borderWidth={1}
-              isSelected={value === index}
-              onPress={(value, index) => {
-                navigation.navigate('BoxOrder', {
-                  index: index,
-                  box: box,
-                });
-                return setValue(value);
-              }}
-              buttonInnerColor={'#000'}
-              buttonOuterColor={'#000'}
-              buttonSize={10}
-              buttonOuterSize={15}
-              buttonStyle={{}}
-            />
-          </RadioButton>
-        </RadioForm>
-      )}
+    <TouchableOpacity onPress={() => handleNavigation()} style={styles.boxCard}>
       <View>
-        <Text style={styles.titleIndex}>BOX {index}</Text>
+        <Text style={styles.titleIndex}>KIT {index}</Text>
         <Text style={styles.titleBox}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.moreInfo}>+ d'infos</Text>
       </View>
-      <Image style={styles.image} source={image} />
-    </View>
+    </TouchableOpacity>
   );
 };
 

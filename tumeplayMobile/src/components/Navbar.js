@@ -63,7 +63,7 @@ const Navbar = ({navigation, route}) => {
         }}
       />
       <Tab.Screen
-        name="Box"
+        name="Kit"
         component={Box}
         options={{
           tabBarIcon: ({size, color}) => (

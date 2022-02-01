@@ -1,38 +1,51 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import wave from '../assets/wave.png';
 import BoxCard from '../components/BoxCard';
 import Container from '../components/global/Container';
 import {Colors, Fonts} from '../styles/Style';
-import box1 from '../assets/box1.png';
-import box2 from '../assets/box2.png';
-import box3 from '../assets/box3.png';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useQuery} from '@apollo/client';
+import {GET_BOXES} from '../services/api/boxes';
+import CustomModal from '../components/global/CustomModal';
 
 const Box = ({navigation}) => {
-  const boxes = [
-    {
-      label: 'param1',
-      title: 'DÉCOUVRE TON CORPS',
-      description: 'Un contenu ludique',
-      moreInfo: 'lorem ipsum',
-      image: box1,
-    },
-    {
-      label: 'param2',
-      title: 'LES PREMIÈRES FOIS',
-      description: 'Se lancer sans prise de tête',
-      moreInfo: 'lorem ipsum',
-      image: box2,
-    },
-    {
-      label: 'param3',
-      title: 'EXPLORE TA SEXUALITÉ',
-      description: 'Expérimente et développe ton plaisir',
-      moreInfo: 'lorem ipsum',
-      image: box3,
-    },
-  ];
+  const {data, loading} = useQuery(GET_BOXES);
+  const [boxes, setBoxes] = useState([]);
+  const [confirmation, setConfirmation] = useState(null);
+
+  useEffect(() => {
+    if (!loading && data) {
+      setBoxes([...data.boxes]);
+    }
+  }, [data, loading]);
+
+  const displayBoxes = boxes?.map((box, index) => {
+    return (
+      <View key={index} style={styles.box}>
+        <BoxCard
+          index={index + 1}
+          title={box.title}
+          description={box.description}
+          box={box}
+          navigation={navigation}
+        />
+      </View>
+    );
+  });
+
+  const modalInformation = {
+    title: 'Attention',
+    text: 'La commande de Kit est uniquement disponible en Ile-de-France et en Aquitaine',
+  };
+
   return (
     <Container style={styles.container}>
       <View style={styles.backButton}>
@@ -40,32 +53,27 @@ const Box = ({navigation}) => {
           <Icon name="md-arrow-back" size={30} color="#000" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>Ta box</Text>
+      <Text style={styles.title}>Ton Kit</Text>
       <Image style={styles.wave} source={wave} />
       <View style={styles.subtitleContainer}>
         <Text style={styles.congrats}>Bravo !</Text>
         <Text style={styles.description}>
-          Tu as assez de points pour commander une box de ton choix
+          Tu as assez de points pour commander un kit de ton choix
         </Text>
       </View>
-      <View style={styles.boxList}>
-        {boxes &&
-          boxes.map((box, index) => {
-            return (
-              <View key={index} style={styles.box}>
-                <BoxCard
-                  index={index + 1}
-                  title={box.title}
-                  description={box.description}
-                  moreInfo={box.moreInfo}
-                  box={box}
-                  image={box.image}
-                  navigation={navigation}
-                />
-              </View>
-            );
-          })}
-      </View>
+      <View style={styles.boxList}>{displayBoxes}</View>
+      {!confirmation && (
+        <View style={styles.modalBackground}>
+          <CustomModal
+            isVisible={true}
+            title={modalInformation.title}
+            text={modalInformation.text}
+            onPress={() => {
+              setConfirmation(!confirmation);
+            }}
+          />
+        </View>
+      )}
     </Container>
   );
 };
@@ -73,8 +81,17 @@ const Box = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    position: 'relative',
     alignItems: 'center',
     paddingVertical: 21,
+    zIndex: 1,
+  },
+  modalBackground: {
+    flex: 1,
+    height: '100%',
+    zIndex: 5,
+    position: 'absolute',
+    backgroundColor: '#000000',
   },
   title: {
     fontFamily: Fonts.title,

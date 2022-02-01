@@ -1,6 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import BoxCard from '../components/BoxCard';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import Container from '../components/global/Container';
 import {Colors, Fonts} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,12 +20,28 @@ const Box = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.boxContainer}>
-        <BoxCard
-          title={box.title}
-          description={box.description}
-          moreInfo={box.moreInfo}
-          image={box.image}
-        />
+        <Text>Tu as séléctionné</Text>
+        <View>
+          <Text>Kit {box.number}</Text>
+          <Text>{box.title}</Text>
+        </View>
+        <View>
+          <Text>Où souhaites-tu recevoir ton kit ?</Text>
+          <View>
+            <TouchableOpacity>
+              <Text>A DOMICILE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text>A DOMICILE</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TextInput />
+            <TextInput />
+            <TextInput />
+            <TextInput />
+          </View>
+        </View>
       </View>
     </Container>
   );
