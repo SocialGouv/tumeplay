@@ -76,8 +76,12 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-    if (!loading2 && data2 && user?.isLoaded) {
-      retrieveUserFromAPI();
+    try {
+      if (!loading2 && user?.isLoaded) {
+        retrieveUserFromAPI();
+      }
+    } catch (error) {
+      console.log('Error :', error);
     }
   }, [loading2, data2]);
 
