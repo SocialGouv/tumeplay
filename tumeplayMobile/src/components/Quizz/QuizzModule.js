@@ -134,6 +134,7 @@ const QuizzModule = ({navigation, route}) => {
             onFillChange={handleProgressBar}
             onAnimationComplete={handleProgressBar}
             tintColor="#EC6233"
+            duration={100}
             style={styles.stepIndicator}
             backgroundColor="#FFF">
             {fill => (
