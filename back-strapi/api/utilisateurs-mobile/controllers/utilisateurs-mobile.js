@@ -14,6 +14,11 @@ module.exports = {
     let user = await strapi.services["utilisateurs-mobile"].findOne({
       user_id: id,
     });
+
+    if (!user) {
+      return ctx.response.notFound("user not found : ", id);
+    }
+
     const history = await strapi.services["historique"].find(
       { user: user.id },
       ["module.niveau"]
