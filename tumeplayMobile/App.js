@@ -80,7 +80,7 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-    if (!loading2 && user?.isLoaded) {
+    if (!loading2 && data2 && user?.isLoaded) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);

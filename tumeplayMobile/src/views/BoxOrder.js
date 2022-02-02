@@ -7,12 +7,13 @@ import {
   TextInput,
 } from 'react-native';
 import Container from '../components/global/Container';
-import {Colors, Fonts} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
   const [selected, setSelected] = useState(true);
+  const [deliveryMode, setDeliveryMode] = useState('home');
   return (
     <Container style={styles.container}>
       <TouchableOpacity
@@ -34,29 +35,44 @@ const Box = ({navigation, route}) => {
           </Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
+              onPress={() => setDeliveryMode('home')}
               style={[
                 styles.buttons,
                 styles.buttonLeft,
-                {backgroundColor: selected ? '#000' : '#FFF'},
+                deliveryMode === 'home'
+                  ? styles.activeButton
+                  : styles.nonActiveButton,
               ]}>
-              <Text style={styles.buttonText}>A DOMICILE</Text>
+              <Text
+                style={
+                  deliveryMode === 'home' ? styles.whiteText : styles.blackText
+                }>
+                A DOMICILE
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              disabled={true}
+              // disabled={true}
+              onPress={() => setDeliveryMode('pickup')}
               style={[
                 styles.buttons,
                 styles.buttonRight,
-                // {backgroundColor: selected ? '#000' : '#FFF'},
+                deliveryMode === 'pickup'
+                  ? styles.activeButton
+                  : styles.nonActiveButton,
               ]}>
-              <Text>EN POINT RELAIS</Text>
+              <Text
+                style={
+                  deliveryMode === 'pickup'
+                    ? styles.whiteText
+                    : styles.blackText
+                }>
+                EN POINT RELAIS
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.divider} />
-          <View>
-            <TextInput style={styles.input} />
-            <TextInput style={styles.input} />
-            <TextInput style={styles.input} />
-            <TextInput style={styles.input} />
+          <View style={[styles.divider, {marginBottom: 0}]} />
+          <View style={styles.inputContainer}>
+            {deliveryMode === 'home' && <HomeOrdersInput />}
           </View>
         </View>
       </View>
@@ -131,13 +147,21 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
   },
-  buttonText: {
+  whiteText: {
     color: '#FFF',
   },
-  input: {
-    marginHorizontal: 22,
-    borderBottomWidth: 1,
-    borderBottomColor: '#EAE2D7',
+  blackText: {
+    color: '#000',
+  },
+  activeButton: {
+    backgroundColor: '#000',
+  },
+  nonActiveButton: {
+    backgroundColor: '#FFFF',
+  },
+  inputContainer: {
+    backgroundColor: '#FFFF',
+    minHeight: '100%',
   },
 });
 
