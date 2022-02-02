@@ -59,8 +59,10 @@ const App = () => {
     return [res1, res2];
   };
 
-  const [{data: data1, loading: loading1}, {data: data2, loading: loading2}] =
-    useMultipleQuery();
+  const [
+    {data: data1, loading: loading1},
+    {data: data2, loading: loading2, error: error2},
+  ] = useMultipleQuery();
 
   const retrieveDoneModulesIds = () => {
     let tmpIds = user?.history?.map(history => history.module_id);
@@ -84,13 +86,12 @@ const App = () => {
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-    try {
-      if (data2?.utilisateursMobile) {
-        setUser({...data2?.utilisateursMobile});
-        setPoints(data2?.utilisateursMobile?.points);
-      }
-    } catch (error) {
-      console.log('Error :', error);
+    if (error2?.networkError) {
+      console.log('ICI', error2.networkError.response);
+    }
+    if (data2?.utilisateursMobile) {
+      setUser({...data2?.utilisateursMobile});
+      setPoints(data2?.utilisateursMobile?.points);
     }
     setIsUserLoaded(true);
   };
