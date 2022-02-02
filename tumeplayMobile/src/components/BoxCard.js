@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
-import {Fonts} from '../styles/Style';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useRoute} from '@react-navigation/native';
-import {setSelectedLog} from 'react-native/Libraries/LogBox/Data/LogBoxData';
 
 const BoxCard = props => {
   const {index, title, box, description, navigation} = props;

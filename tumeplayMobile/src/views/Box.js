@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import wave from '../assets/wave.png';
 import BoxCard from '../components/BoxCard';
 import Container from '../components/global/Container';
@@ -41,11 +34,16 @@ const Box = ({navigation}) => {
     );
   });
 
-  const modalInformation = {
-    title: 'Attention',
-    text: 'La commande de Kit est uniquement disponible en Ile-de-France et en Aquitaine',
+  const htmlText = {
+    html: `<div>
+      <p>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
+      <ul>
+        <li>Ile-de-France</li>
+        <li>Nouvelle-Aquitaine</li>
+      </ul>
+    </div>
+    `,
   };
-
   return (
     <Container style={styles.container}>
       <View style={styles.backButton}>
@@ -66,8 +64,7 @@ const Box = ({navigation}) => {
         <View style={styles.modalBackground}>
           <CustomModal
             isVisible={true}
-            title={modalInformation.title}
-            text={modalInformation.text}
+            html={htmlText}
             onPress={() => {
               setConfirmation(!confirmation);
             }}
