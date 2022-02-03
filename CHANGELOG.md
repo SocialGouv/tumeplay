@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/SocialGouv/Tumeplay/compare/v1.41.1...v1.42.0) (2022-02-03)
+
+
+### Features
+
+* data update mobile ([#284](https://github.com/SocialGouv/Tumeplay/issues/284)) ([d2d8c9f](https://github.com/SocialGouv/Tumeplay/commit/d2d8c9f15d9f3aaac93e5814f60c3e87755c465a))
+
 ## [1.41.1](https://github.com/SocialGouv/Tumeplay/compare/v1.41.0...v1.41.1) (2022-02-01)
 
 
