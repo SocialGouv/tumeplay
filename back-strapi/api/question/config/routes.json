@@ -32,6 +32,14 @@
         "policies": []
       }
     },
+		{
+			"method": "POST",
+			"path": "/questions/mobile-update",
+			"handler": "question.updateForMobileApp",
+      "config": {
+        "policies": []
+      }
+		},
     {
       "method": "PUT",
       "path": "/questions/:id",

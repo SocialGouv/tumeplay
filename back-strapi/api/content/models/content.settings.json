@@ -43,6 +43,15 @@
     },
     "external_link": {
       "type": "string"
+    },
+    "title_mobile": {
+      "type": "string"
+    },
+    "niveau": {
+      "model": "niveau"
+    },
+    "thematique_mobile": {
+      "model": "thematique-mobile"
     }
   }
 }
