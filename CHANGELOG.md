@@ -1,3 +1,10 @@
+# [1.44.0](https://github.com/SocialGouv/Tumeplay/compare/v1.43.0...v1.44.0) (2022-02-03)
+
+
+### Features
+
+* update module link from Thematique to ThematiqueMobile ([e6658cf](https://github.com/SocialGouv/Tumeplay/commit/e6658cf48807e898c2d0b4b44163341e45269c61))
+
 # [1.43.0](https://github.com/SocialGouv/Tumeplay/compare/v1.42.0...v1.43.0) (2022-02-03)
 
 
