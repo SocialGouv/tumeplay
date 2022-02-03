@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/SocialGouv/Tumeplay/compare/v1.42.0...v1.43.0) (2022-02-03)
+
+
+### Features
+
+* add title to mudole ([a3c800c](https://github.com/SocialGouv/Tumeplay/commit/a3c800c86ce832d9bd1e40c2bd84f1e0c574a457))
+
 # [1.42.0](https://github.com/SocialGouv/Tumeplay/compare/v1.41.1...v1.42.0) (2022-02-03)
 
 
