@@ -45,6 +45,15 @@
         "C"
       ],
       "required": true
+    },
+    "response_A_mobile": {
+      "type": "string"
+    },
+    "response_B_mobile": {
+      "type": "string"
+    },
+    "response_C_mobile": {
+      "type": "string"
     }
   }
 }
