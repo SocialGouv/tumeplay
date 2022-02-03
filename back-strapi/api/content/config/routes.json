@@ -24,6 +24,14 @@
         "policies": []
       }
     },
+		{
+			"method": "POST",
+			"path": "/contents/mobile-update",
+			"handler": "content.updateForMobileApp",
+      "config": {
+        "policies": []
+      }
+		},
     {
       "method": "POST",
       "path": "/contents",
