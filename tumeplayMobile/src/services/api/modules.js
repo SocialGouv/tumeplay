@@ -2,8 +2,8 @@ import {gql} from '@apollo/client';
 // import {REACT_APP_ZONE} from '@env';
 
 export const GET_MODULES = gql`
-  query getModules {
-    modules {
+  query getModules($level: Int) {
+    modules(where: {niveau: {value: $level}}) {
       id
       thematique: thematique_mobile {
         id

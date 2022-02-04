@@ -17,6 +17,7 @@ export const GET_MOBILE_USER = gql`
         status
       }
       level
+      pending_module
     }
   }
 `;
