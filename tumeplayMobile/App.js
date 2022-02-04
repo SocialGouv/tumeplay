@@ -30,7 +30,6 @@ const App = () => {
   const {data: data1, loading: loading1} = useQuery(GET_THEMES);
 
   const checkUserIdInStorage = async () => {
-    console.log('checkUserIdInStorage');
     let encryptedUser = await EncryptedStorage.getItem('user');
     if (encryptedUser) {
       const tmpUser = JSON.parse(encryptedUser);
@@ -79,9 +78,6 @@ const App = () => {
       clearStorage();
       setPoints(0);
       setUser({points: 0});
-    }
-    if (error2?.networkError) {
-      console.log('ICI', error2.networkError.response);
     }
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
