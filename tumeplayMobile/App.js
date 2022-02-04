@@ -8,7 +8,7 @@ import ContentsPage from './src/views/Contents';
 import ContentPage from './src/views/Contents/ContentPage';
 import Navbar from './src/components/Navbar';
 import QuizzStartPage from './src/views/QuizzStartPage';
-import {useQuery} from '@apollo/client';
+import {useLazyQuery, useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
@@ -19,46 +19,39 @@ import {
   GET_MOBILE_USER,
 } from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
-
 const NavigationStack = createNativeStackNavigator();
-
 const App = () => {
   const [user, setUser] = useState({});
   const [points, setPoints] = useState(null);
   const [doneModules_ids, setDoneModules_ids] = useState([]);
-
   const [thematiques, setThematiques] = useState([]);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
 
+  const {data: data1, loading: loading1} = useQuery(GET_THEMES);
+
   const checkUserIdInStorage = async () => {
+    console.log('checkUserIdInStorage');
     let encryptedUser = await EncryptedStorage.getItem('user');
     if (encryptedUser) {
       const tmpUser = JSON.parse(encryptedUser);
       const tmpUser_id = tmpUser?.user_id;
       if (tmpUser_id) {
         user.user_id = tmpUser_id;
-        user.isLoaded = true;
         setUser({...user});
+        getMobileUser({
+          variables: {
+            user_id: user.user_id,
+          },
+        });
       }
     } else {
       setIsUserLoaded(true);
       setPoints(0);
-      setUser({isLoaded: true, points: 0});
+      setUser({points: 0});
     }
   };
 
-  const useMultipleQuery = () => {
-    const res1 = useQuery(GET_THEMES);
-    const res2 = useQuery(GET_MOBILE_USER, {
-      variables: {
-        user_id: user?.user_id,
-      },
-    });
-    return [res1, res2];
-  };
-
-  const [{data: data1, loading: loading1}, {data: data2, loading: loading2}] =
-    useMultipleQuery();
+  const [getMobileUser, { data: data2, loading: loading2, error: error2 }] = useLazyQuery(GET_MOBILE_USER, { errorPolicy: 'all' });
 
   const retrieveDoneModulesIds = () => {
     let tmpIds = user?.history?.map(history => history.module_id);
@@ -76,19 +69,23 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-    if (!loading2 && user?.isLoaded) {
+    if (!loading2 && data2) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-    try {
-      if (data2?.utilisateursMobile) {
-        setUser({...data2?.utilisateursMobile});
-        setPoints(data2?.utilisateursMobile?.points);
-      }
-    } catch (error) {
-      console.log('Error :', error);
+    if (data2?.statusCode === 404) {
+      clearStorage();
+      setPoints(0);
+      setUser({points: 0});
+    }
+    if (error2?.networkError) {
+      console.log('ICI', error2.networkError.response);
+    }
+    if (data2?.utilisateursMobile) {
+      setUser({...data2?.utilisateursMobile});
+      setPoints(data2?.utilisateursMobile?.points);
     }
     setIsUserLoaded(true);
   };
