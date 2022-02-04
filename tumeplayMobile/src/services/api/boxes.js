@@ -2,7 +2,7 @@ import {gql} from '@apollo/client';
 
 export const GET_BOXES = gql`
   query GetBoxes {
-    boxes(where: {environnement: {name: "Métropole"}}) {
+    boxes(where: {environnement: {slug: 'metropole'}}) {
       id
       title
       description
