@@ -53,11 +53,6 @@ const Box = ({navigation}) => {
   };
   return (
     <Container style={styles.container}>
-      <View style={styles.backButton}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="md-arrow-back" size={30} color="#000" />
-        </TouchableOpacity>
-      </View>
       <View style={styles.topContainer}>
         <Text style={styles.title}>Ton Kit</Text>
         <Image style={styles.wave} source={wave} />

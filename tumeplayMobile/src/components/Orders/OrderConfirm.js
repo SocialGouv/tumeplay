@@ -1,11 +1,47 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
 import Button from '../Button';
+import OrdersAPI from '../../services/api/orders';
+import config from '../../../config';
 
 const OrderConfirm = props => {
-  const {userInfos, setOrderConfirm} = props;
-  console.log(userInfos);
+  const {
+    userInfos,
+    setOrderConfirm,
+    userAdressInformations,
+    deliveryMode,
+    box,
+  } = props;
+
+  const sendOrder = async () => {
+    const deptcode = userAdressInformations?.context?.split(',')[0];
+    const dept = userAdressInformations?.context?.split(',')[1];
+    const region = userAdressInformations?.context?.split(',')[2];
+    let requestBody = {
+      first_name: userInfos.first_name,
+      last_name: userInfos.last_name,
+      email: userInfos.email,
+      phone: userInfos.phone_number,
+      address: userInfos.address,
+      address_region: region,
+      address_deptcode: deptcode,
+      address_dept: dept,
+      address_zipcode: userAdressInformations.postcode,
+      address_city: userAdressInformations.city,
+      box_name: box.title,
+      delivery: deliveryMode,
+      environnement: 'metropole',
+      content: [
+        {
+          __component: 'commandes.box',
+          box: box.id,
+        },
+      ],
+    };
+    await OrdersAPI.orderBoxes(requestBody);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -30,15 +66,20 @@ const OrderConfirm = props => {
       </View>
       <View style={styles.bottomContainer}>
         <Image source={image} style={styles.image} />
-        <View>
-          <Text style={styles.text}>
+        <View style={styles.bottomtextContainer}>
+          <Text style={styles.bottomText}>
             Disponible entre{' '}
-            <Text style={styles.boldText}>3 et 5 jours ouvrés.</Text> À noter,
-            pas d'envoi d'email de la part de Colissimo
+            <Text style={styles.bottomBoldText}>3 et 5 jours ouvrés.</Text> À
+            noter, pas d'envoi d'email de la part de Colissimo
           </Text>
         </View>
       </View>
-      <Button text="Je valide cette commande" size="intermediate" />
+      <Button
+        style={styles.button}
+        text="Je valide cette commande"
+        size="intermediate"
+        onPress={() => sendOrder()}
+      />
     </View>
   );
 };
@@ -66,28 +107,46 @@ const styles = StyleSheet.create({
     color: '#D42201',
     lineHeight: 22,
     fontWeight: '500',
-    fontSize: 15,
+    fontSize: config.deviceWidth > 375 ? 14 : 13,
     textDecorationLine: 'underline',
   },
   boldText: {
-    fontSize: 16,
+    fontSize: config.deviceWidth > 375 ? 14 : 14,
     lineHeight: 22,
     fontWeight: '600',
   },
   text: {
-    fontSize: 16,
+    fontSize: config.deviceWidth > 375 ? 14 : 14,
     lineHeight: 22,
     fontWeight: '400',
   },
   image: {
     width: 50,
     height: 50,
+    marginBottom: 20,
+  },
+  bottomText: {
+    fontSize: 13,
+    lineHeight: 20,
+    fontWeight: '400',
+  },
+  bottomBoldText: {
+    fontSize: 13,
+    lineHeight: 20,
+    fontWeight: '600',
+  },
+  bottomtextContainer: {
+    paddingBottom: 22,
+    width: config.deviceWidth > 375 ? 290 : 280,
   },
   bottomContainer: {
-    flex: 0.8,
+    flex: 0.9,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
+  },
+  button: {
+    alignSelf: 'center',
   },
 });
 

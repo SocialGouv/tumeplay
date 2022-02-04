@@ -8,10 +8,12 @@ import _ from 'lodash';
 import * as Yup from 'yup';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';
+import config from '../../../config';
 
 const HomeOrdersInput = props => {
   const navigation = useNavigation();
-  const {userInfos, setUserInfos, setOrderConfirm} = props;
+  const {userInfos, setUserInfos, setOrderConfirm, setUserAdressInformations} =
+    props;
 
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Champs Obligatoire'),
@@ -40,6 +42,7 @@ const HomeOrdersInput = props => {
     if (validateZipCode(item.postcode)) {
       values.address = item.label;
       setFieldValue('address', values.address);
+      setUserAdressInformations({...item});
       setHideResults(true);
     } else {
       Alert.alert(
@@ -158,7 +161,7 @@ const HomeOrdersInput = props => {
             }}
           />
           <TextInput
-            style={styles.input}
+            style={styles.lastInput}
             label="NUMERO DE TÉLÉPONE"
             onBlur={handleBlur('phone_number')}
             underlineColor="#EAE2D7"
@@ -193,7 +196,13 @@ const styles = StyleSheet.create({
   input: {
     marginHorizontal: 22,
     backgroundColor: '#FFFFFF',
-    marginVertical: 10,
+    marginVertical: config.deviceWidth > 375 ? 10 : 0,
+  },
+  lastInput: {
+    marginHorizontal: 22,
+    backgroundColor: '#FFFFFF',
+    marginTop: config.deviceWidth > 375 ? 10 : 8,
+    marginVertical: config.deviceWidth > 375 ? 15 : 15,
   },
   specialInput: {
     borderWidth: 0,

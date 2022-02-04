@@ -16,9 +16,8 @@ const Box = ({navigation, route}) => {
     address: '',
     phone_number: '',
   });
+  const [userAdressInformations, setUserAdressInformations] = useState();
   const [orderConfirm, setOrderConfirm] = useState(false);
-
-  console.log('USER', userInfos);
 
   return (
     <Container style={styles.container}>
@@ -85,11 +84,15 @@ const Box = ({navigation, route}) => {
             userInfos={userInfos}
             setUserInfos={setUserInfos}
             setOrderConfirm={setOrderConfirm}
+            setUserAdressInformations={setUserAdressInformations}
           />
         ) : (
           <OrderConfirm
             userInfos={userInfos}
             setOrderConfirm={setOrderConfirm}
+            deliveryMode={deliveryMode}
+            userAdressInformations={userAdressInformations}
+            box={box}
           />
         )}
       </View>
