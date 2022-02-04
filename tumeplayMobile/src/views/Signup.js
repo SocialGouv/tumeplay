@@ -30,6 +30,7 @@ const Signup = ({user, setUser}) => {
         isOnboarded: tmpUser.isOnboarded,
         isSignedUp: tmpUser.isSignedUp,
         isUnder25: tmpUser.isOnboarded,
+        ageRange: tmpUser.ageRange,
         points: tmpUser.points,
         region: tmpUser.region,
       }),
@@ -47,11 +48,8 @@ const Signup = ({user, setUser}) => {
   });
 
   const handleUserAge = value => {
-    if (value === '14-18 ans' || value === '18-25 ans') {
-      tmpUser.isUnder25 = true;
-    } else {
-      tmpUser.isUnder25 = false;
-    }
+    tmpUser.isUnder25 = value !== '25+';
+    tmpUser.ageRange = value;
     setUser({...tmpUser});
   };
 
@@ -72,6 +70,8 @@ const Signup = ({user, setUser}) => {
         isOnboarded: tmpUser.isOnboarded,
         isSignedUp: true,
         isUnder25: tmpUser.isUnder25,
+        ageRange: tmpUser.ageRange,
+        region: tmpUser.region,
         points: 0,
         user_id: tmpUser.user_id,
       },
@@ -79,23 +79,27 @@ const Signup = ({user, setUser}) => {
   };
 
   const radio_props_age = [
-    {label: '14-18 ans', value: '14-18 ans', key: '14-18 ans'},
-    {label: '18-25 ans', value: '18-25 ans', key: '18-25 ans'},
-    {label: '+ de 25 ans', value: '+ de 25 ans', key: '+ de 25 ans'},
+    {label: '- de 13 ans', value: '-13', key: '- de 13 ans'},
+    {label: '13-15 ans', value: '13-15', key: '13-15 ans'},
+    {label: '16-18 ans', value: '16-18', key: '16-18 ans'},
+    {label: '18-20 ans', value: '18-20', key: '18-20 ans'},
+    {label: '20-22 ans', value: '20-22', key: '20-22 ans'},
+    {label: '22-25 ans', value: '22-25', key: '22-25 ans'},
+    {label: '+ de 25 ans', value: '25+', key: '+ de 25 ans'},
   ];
 
   const radio_props_location = [
     {
-      label: 'Région Ile-de-France',
-      value: 'Région Ile-de-France',
+      label: 'Région Île-de-France',
+      value: 'Ile-de-France',
       key: 'Région Ile-de-France',
     },
     {
       label: 'Région Nouvelle Aquitaine',
-      value: 'Région Nouvelle Aquitaine',
+      value: 'Nouvelle Aquitaine',
       key: 'Région Nouvelle Aquitaine',
     },
-    {label: 'Région Guyane', value: 'Région Guyane', key: 'Région Guyane'},
+    {label: 'Région Guyane', value: 'Guyane', key: 'Région Guyane'},
     {label: 'Autres régions', value: 'Autres régions', key: 'Autres régions'},
   ];
 

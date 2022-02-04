@@ -46,6 +46,12 @@
     "points": {
       "type": "biginteger",
       "default": "0"
+    },
+    "ageRange": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
     }
   }
 }
