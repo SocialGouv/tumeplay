@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   listContainer: {
+    flex: 1,
     alignSelf: 'center',
   },
   themeContainer: {
