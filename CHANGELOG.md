@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/SocialGouv/Tumeplay/compare/v1.44.0...v1.45.0) (2022-02-04)
+
+
+### Features
+
+* add more ageRange for signup and add ageRange and region for mobile user model ([#286](https://github.com/SocialGouv/Tumeplay/issues/286)) ([b98ad04](https://github.com/SocialGouv/Tumeplay/commit/b98ad04d14b987c959df437d4c450543d51e493f))
+
 # [1.44.0](https://github.com/SocialGouv/Tumeplay/compare/v1.43.0...v1.44.0) (2022-02-03)
 
 
