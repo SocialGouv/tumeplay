@@ -55,15 +55,15 @@ const QuizzStartPage = ({navigation}) => {
 
   useEffect(() => {
     if (remainingModules) {
-      if (remainingModules?.length > 1) {
-        setModule(remainingModules[random]);
-        setQuestions(remainingModules[random]?.questionsArray);
-        setThematique(remainingModules[random]?.thematique.title);
-      } else {
-        setModule(remainingModules[0]);
-        setQuestions(remainingModules[0]?.questionsArray);
-        setThematique(remainingModules[0]?.thematique.title);
-      }
+      setModule(remainingModules[remainingModules?.length > 1 ? random : 0]);
+      setQuestions(
+        remainingModules[remainingModules?.length > 1 ? random : 0]
+          ?.questionsArray,
+      );
+      setThematique(
+        remainingModules[remainingModules?.length > 1 ? random : 0]?.thematique
+          .title,
+      );
     }
   }, [remainingModules]);
 

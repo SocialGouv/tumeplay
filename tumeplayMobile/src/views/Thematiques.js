@@ -38,7 +38,7 @@ export default function Thematiques(props) {
 
   useEffect(() => {
     if (data && !loading) {
-      setThematiques(data.thematiques);
+      setThematiques(data.thematiqueMobiles);
     }
   }, [data, loading]);
 

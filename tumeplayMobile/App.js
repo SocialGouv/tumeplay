@@ -50,7 +50,7 @@ const App = () => {
     }
   };
 
-  const [getMobileUser, { data: data2, loading: loading2, error: error2 }] = useLazyQuery(GET_MOBILE_USER, { errorPolicy: 'all' });
+  const [getMobileUser, { data: data2, loading: loading2, error: error2 }] = useLazyQuery(GET_MOBILE_USER);
 
   const retrieveDoneModulesIds = () => {
     let tmpIds = user?.history?.map(history => history.module_id);
@@ -63,7 +63,7 @@ const App = () => {
 
   useEffect(() => {
     if (!loading1 && data1) {
-      setThematiques([...data1.thematiques]);
+      setThematiques([...data1.thematiqueMobiles]);
     }
   }, [loading1, data1]);
 

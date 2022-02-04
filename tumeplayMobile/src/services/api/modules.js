@@ -5,7 +5,7 @@ export const GET_MODULES = gql`
   query getModules {
     modules {
       id
-      thematique {
+      thematique: thematique_mobile {
         id
         title
       }

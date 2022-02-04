@@ -2,23 +2,19 @@ import {gql} from '@apollo/client';
 
 export const GET_THEMES = gql`
   query GetThemes {
-    thematiques(where: {environnement: {slug: "metropole"}}) {
+    thematiqueMobiles {
       id
       title
       image {
         url
       }
-      sound {
-        url
-      }
-      display_quiz
     }
   }
 `;
 
 export const GET_SOSTHEME = gql`
   query {
-    thematiques(where: {environnement: {slug: "metropole"} title: "SOS à qui t'adresser"}) {
+    thematiqueMobiles(where: {title: "SOS à qui t'adresser"}) {
       id
       title
       image {

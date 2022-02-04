@@ -98,7 +98,7 @@ const QuizzModule = ({navigation, route}) => {
       setWrongAnswers([]);
       setCorrectAnswers([]);
     }
-  }, [question]);
+  }, [route]);
 
   const showMoreAnswer = () => {
     setshowAnswer(!showAnswer);

@@ -24,7 +24,7 @@ import config from '../../../../config';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
-  const {user, setUser, points, user_id, setPoints} = context;
+  const {user, setUser, points, strapi_user_id, setPoints} = context;
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
   const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
@@ -48,7 +48,7 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
         user.history = [...currentHistory];
         updatePoints({
           variables: {
-            user_id: user_id,
+            user_id: strapi_user_id,
             points: points + pointsEarned,
           },
         });
