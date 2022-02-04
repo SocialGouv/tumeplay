@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import wave from '../assets/wave.png';
 import BoxCard from '../components/BoxCard';
 import Container from '../components/global/Container';
@@ -51,15 +58,17 @@ const Box = ({navigation}) => {
           <Icon name="md-arrow-back" size={30} color="#000" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>Ton Kit</Text>
-      <Image style={styles.wave} source={wave} />
-      <View style={styles.subtitleContainer}>
-        <Text style={styles.congrats}>Bravo !</Text>
-        <Text style={styles.description}>
-          Tu as assez de points pour commander un kit de ton choix
-        </Text>
+      <View style={styles.topContainer}>
+        <Text style={styles.title}>Ton Kit</Text>
+        <Image style={styles.wave} source={wave} />
+        <View style={styles.subtitleContainer}>
+          <Text style={styles.congrats}>Bravo !</Text>
+          <Text style={styles.description}>
+            Tu as assez de points pour commander un kit de ton choix
+          </Text>
+        </View>
       </View>
-      <View style={styles.boxList}>{displayBoxes}</View>
+      <ScrollView style={styles.boxList}>{displayBoxes}</ScrollView>
       {!confirmation && (
         <View style={styles.modalBackground}>
           <CustomModal
@@ -77,7 +86,7 @@ const Box = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
     position: 'relative',
     alignItems: 'center',
     paddingVertical: 21,
@@ -89,6 +98,10 @@ const styles = StyleSheet.create({
     zIndex: 5,
     position: 'absolute',
     backgroundColor: '#000000',
+  },
+  topContainer: {
+    flex: 0.5,
+    alignItems: 'center',
   },
   title: {
     fontFamily: Fonts.title,
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
     height: 10,
   },
   boxList: {
-    width: '100%',
+    flex: 1,
   },
   box: {
     marginBottom: 2,

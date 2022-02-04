@@ -1,29 +1,35 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
+import OrderConfirm from '../components/Orders/OrderConfirm';
+import config from '../../config';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
-  const [selected, setSelected] = useState(true);
   const [deliveryMode, setDeliveryMode] = useState('home');
+  const [userInfos, setUserInfos] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    address: '',
+    phone_number: '',
+  });
+  const [orderConfirm, setOrderConfirm] = useState(false);
+
+  console.log('USER', userInfos);
+
   return (
     <Container style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backButton}>
-        <Icon name="md-arrow-back" size={30} color="#000" />
-        <Text>retour</Text>
-      </TouchableOpacity>
-      <View style={styles.boxContainer}>
-        <Text>Tu as séléctionné</Text>
+      <View style={styles.topInfoContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
+          <Icon name="md-arrow-back" size={30} color="#000" />
+          <Text>retour</Text>
+        </TouchableOpacity>
+        <Text style={styles.info}>Tu as séléctionné</Text>
         <View>
           <Text style={styles.redText}>KIT {box.number}</Text>
           <Text style={styles.boxTitle}>{box.title}</Text>
@@ -51,7 +57,7 @@ const Box = ({navigation, route}) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              // disabled={true}
+              disabled={true}
               onPress={() => setDeliveryMode('pickup')}
               style={[
                 styles.buttons,
@@ -71,10 +77,21 @@ const Box = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
           <View style={[styles.divider, {marginBottom: 0}]} />
-          <View style={styles.inputContainer}>
-            {deliveryMode === 'home' && <HomeOrdersInput />}
-          </View>
         </View>
+      </View>
+      <View style={styles.inputContainer}>
+        {deliveryMode === 'home' && !orderConfirm ? (
+          <HomeOrdersInput
+            userInfos={userInfos}
+            setUserInfos={setUserInfos}
+            setOrderConfirm={setOrderConfirm}
+          />
+        ) : (
+          <OrderConfirm
+            userInfos={userInfos}
+            setOrderConfirm={setOrderConfirm}
+          />
+        )}
       </View>
     </Container>
   );
@@ -82,14 +99,13 @@ const Box = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
     alignItems: 'center',
-    paddingVertical: 21,
   },
-  boxContainer: {
+  topInfoContainer: {
     width: '100%',
-    paddingTop: 20,
-    paddingBottom: 22,
+    flex: 1,
+    flexDirection: 'column',
   },
   backButton: {
     justifyContent: 'flex-start',
@@ -97,6 +113,13 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    paddingBottom: config.deviceWidth > 375 ? 20 : 5,
+  },
+  info: {
+    fontSize: 14,
+    lineHeight: 22,
+    paddingLeft: 22,
   },
   redText: {
     color: '#D42201',
@@ -115,19 +138,20 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#EAE2D7',
     borderWidth: 1,
-    marginVertical: 20,
+    marginTop: config.deviceWidth > 375 ? 23 : 15,
   },
   subtitle: {
     fontSize: 18,
     lineHeight: 22,
     fontWeight: '500',
     paddingLeft: 22,
+    paddingTop: config.deviceWidth > 375 ? 20 : 10,
   },
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 26,
+    paddingTop: config.deviceWidth > 375 ? 20 : 10,
   },
   buttons: {
     borderColor: '#EAE2D7',
@@ -160,8 +184,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFF',
   },
   inputContainer: {
+    width: '100%',
     backgroundColor: '#FFFF',
-    minHeight: '100%',
+    flex: 2,
   },
 });
 
