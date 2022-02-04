@@ -1,3 +1,10 @@
+## [1.45.2](https://github.com/SocialGouv/Tumeplay/compare/v1.45.1...v1.45.2) (2022-02-04)
+
+
+### Bug Fixes
+
+* user not found ([#285](https://github.com/SocialGouv/Tumeplay/issues/285)) ([010667c](https://github.com/SocialGouv/Tumeplay/commit/010667cb7d25ae3613d3e3f5847ba1222a943f67))
+
 ## [1.45.1](https://github.com/SocialGouv/Tumeplay/compare/v1.45.0...v1.45.1) (2022-02-04)
 
 
