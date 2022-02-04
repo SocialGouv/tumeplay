@@ -5,6 +5,7 @@ export const GET_MOBILE_USER = gql`
     utilisateursMobile(id: $user_id) {
       first_name
       isUnder25
+      ageRange
       isOnboarded
       isSignedUp
       points
@@ -26,6 +27,8 @@ export const POST_MOBILE_USER = gql`
     $isOnboarded: Boolean!
     $isSignedUp: Boolean!
     $isUnder25: Boolean!
+    $ageRange: String!
+    $region: String!
     $points: Long!
     $user_id: String!
   ) {
@@ -36,6 +39,8 @@ export const POST_MOBILE_USER = gql`
           isOnboarded: $isOnboarded
           isSignedUp: $isSignedUp
           isUnder25: $isUnder25
+          ageRange: $ageRange
+          region: $region
           points: $points
           user_id: $user_id
         }
@@ -47,6 +52,8 @@ export const POST_MOBILE_USER = gql`
         isOnboarded
         isSignedUp
         isUnder25
+        ageRange
+        region
         points
       }
     }
