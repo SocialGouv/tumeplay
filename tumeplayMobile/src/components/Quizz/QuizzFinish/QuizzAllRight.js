@@ -21,10 +21,11 @@ import {
 } from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
+import _ from 'lodash';
 
 const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const context = useContext(AppContext);
-  const {user, setUser, points, user_id, setPoints} = context;
+  const {user, setUser, points, strapi_user_id, setPoints} = context;
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
   const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
@@ -32,27 +33,28 @@ const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
   const checkUserHistory = async () => {
     let response = null;
     if (user?.history) {
-      let currentHistory = user?.history.filter(
+      let currentHistory = user?.history.find(
         history => history.module_id === module_id,
       );
       try {
         response = await updateHistory({
           variables: {
-            history_id: currentHistory[0]?.id,
-            module_id: currentHistory[0]?.module_id,
+            history_id: currentHistory?.id,
+            module_id: currentHistory?.module_id,
             status: 'success',
           },
         });
-        currentHistory[0].status =
-          response?.data?.updateHistorique?.historique?.status;
-        user.history = [...currentHistory];
+        let tmpUser = user;
+        tmpUser.history = _.without(user?.history, currentHistory);
+        tmpUser.history.push(response?.data?.updateHistorique?.historique);
+        delete tmpUser.pending_module;
         updatePoints({
           variables: {
-            user_id: user_id,
+            user_id: strapi_user_id,
             points: points + pointsEarned,
           },
         });
-        setUser({...user});
+        setUser({...tmpUser});
         setPoints(points + pointsEarned);
       } catch (error) {
         console.log("Erreur à l'update : ", error);

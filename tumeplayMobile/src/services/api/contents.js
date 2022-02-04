@@ -4,7 +4,7 @@ export const GET_CONTENTS = gql`
   query GetContents($theme_id: String!) {
     contents(where: {theme: {id: $theme_id}}) {
       id
-      title
+      title: title_mobile
       text
       image {
         url
@@ -21,7 +21,7 @@ export const GET_FRESH_CONTENTS = gql`
   query GetFreshContents {
     contents(limit: 10, sort: "created_at:desc") {
       id
-      title
+      title: title_mobile
       text
       image {
         url
@@ -30,7 +30,7 @@ export const GET_FRESH_CONTENTS = gql`
         url
       }
       external_link
-      theme {
+      theme: thematique_mobile {
         id
       }
     }
@@ -41,7 +41,7 @@ export const GET_SINGLE_CONTENT = gql`
   query GetSingleContent($content_id: String!) {
     contents(where: {id: $content_id}) {
       id
-      title
+      title: title_mobile
       text
       image {
         url
