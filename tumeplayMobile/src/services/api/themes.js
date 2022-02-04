@@ -1,5 +1,4 @@
 import {gql} from '@apollo/client';
-import {REACT_APP_ZONE} from '@env';
 
 export const GET_THEMES = gql`
   query GetThemes {
