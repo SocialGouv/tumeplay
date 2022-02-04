@@ -79,26 +79,30 @@ const ContentPage = ({navigation, route}) => {
       <ScrollView>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{content?.text}</Text>
-          <View style={styles.divider} />
-          <Feedback />
-          <View style={styles.divider} />
         </View>
       </ScrollView>
-      {count === 4 ? (
-        <Button
-          size="large"
-          text="Joue et teste tes connaissances"
-          style={styles.redButton}
-          onPress={() => goToQuizz()}
-        />
-      ) : (
-        <Button
-          size={'medium'}
-          text={'Suivant'}
-          style={styles.button}
-          onPress={() => nextContent()}
-        />
-      )}
+      <View style={styles.footerContainer}>
+        <View style={styles.divider} />
+        <Feedback />
+        <View style={styles.divider} />
+        <View style={styles.buttonsContainer}>
+          {count > 4 && (
+            <Button
+              size="medium"
+              text="Teste tes connaissances"
+              style={[styles.button, styles.redButton]}
+              styleText={{textAlign: 'center'}}
+              onPress={() => goToQuizz()}
+            />
+          )}
+          <Button
+            size={'medium'}
+            text={'Suivant'}
+            style={styles.button}
+            onPress={() => nextContent()}
+          />
+        </View>
+      </View>
     </Container>
   );
 };
@@ -176,14 +180,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEED7',
   },
   button: {
-    position: 'absolute',
-    bottom: 50,
+    display: 'flex',
+    textAlign: 'center',
   },
   redButton: {
-    position: 'absolute',
-    bottom: 50,
     backgroundColor: Colors.primary,
     color: '#FFFFFF',
+    marginRight: 10,
+  },
+  footerContainer: {
+    display: 'flex',
+    width: '80%',
+    marginBottom: 20,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '70%',
+    justifyContent: 'center',
   },
 });
 
