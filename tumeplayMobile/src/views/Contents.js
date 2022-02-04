@@ -1,11 +1,12 @@
 import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -48,7 +49,11 @@ const ContentsPage = props => {
         style={styles.container}
         config={config}
         onSwipeLeft={() => navigation.goBack()}>
-        <Title />
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="md-arrow-back" size={30} color="#000" />
+          </TouchableOpacity>
+        </View>
         {/* <View style={styles.listContainer}> */}
         <FlatList
           data={contents}
@@ -67,6 +72,12 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   listContainer: {
+    marginTop: 15,
+  },
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
     marginTop: 15,
   },
 });

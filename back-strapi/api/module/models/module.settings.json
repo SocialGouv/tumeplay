@@ -12,8 +12,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "thematique": {
-      "model": "thematique"
+    "thematique_mobile": {
+      "model": "thematique-mobile"
     },
     "niveau": {
       "model": "niveau"
@@ -22,6 +22,9 @@
       "type": "component",
       "repeatable": false,
       "component": "questions.questions"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

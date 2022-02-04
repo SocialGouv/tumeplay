@@ -16,7 +16,9 @@ module.exports = {
     });
 
     if (!user) {
-      return ctx.response.notFound("user not found : ", id);
+
+      return { user_id: '', id: 0, history: [], error: "User not found", status: 404 };
+
     }
 
     const history = await strapi.services["historique"].find(

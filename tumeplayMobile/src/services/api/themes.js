@@ -1,5 +1,4 @@
 import {gql} from '@apollo/client';
-import {REACT_APP_ZONE} from '@env';
 
 export const GET_THEMES = gql`
   query GetThemes {
@@ -19,9 +18,9 @@ export const GET_THEMES = gql`
 
 export const GET_SOSTHEME = gql`
   query {
-    thematiques(
-      where: {environnement: {slug: "metropole"}, title: "SOS à qui t'adresser"}
-    ) {
+
+    thematiques(where: {environnement: {slug: "metropole"} title: "SOS à qui t'adresser"}) {
+
       id
       title
       image {

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/thematique-mobiles",
+      "handler": "thematique-mobile.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/thematique-mobiles/count",
+      "handler": "thematique-mobile.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/thematique-mobiles/:id",
+      "handler": "thematique-mobile.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/thematique-mobiles",
+      "handler": "thematique-mobile.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/thematique-mobiles/:id",
+      "handler": "thematique-mobile.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/thematique-mobiles/:id",
+      "handler": "thematique-mobile.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -58,6 +58,19 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "related_content": {
+      "model": "content"
+    },
+    "text_question_mobile": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "QCM",
+        "Trou"
+      ]
     }
   }
 }

@@ -1,3 +1,59 @@
+## [1.46.1](https://github.com/SocialGouv/Tumeplay/compare/v1.46.0...v1.46.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* avoid override responses ([#290](https://github.com/SocialGouv/Tumeplay/issues/290)) ([2059cc1](https://github.com/SocialGouv/Tumeplay/commit/2059cc1910a1d009538d6bbc58a8fe7f3940560c))
+
+# [1.46.0](https://github.com/SocialGouv/Tumeplay/compare/v1.45.2...v1.46.0) (2022-02-04)
+
+
+### Features
+
+* add return arrow back button in Contents page ([#288](https://github.com/SocialGouv/Tumeplay/issues/288)) ([353c05b](https://github.com/SocialGouv/Tumeplay/commit/353c05b6788f13a84a2d95b73181b0a5d3b44289))
+
+## [1.45.2](https://github.com/SocialGouv/Tumeplay/compare/v1.45.1...v1.45.2) (2022-02-04)
+
+
+### Bug Fixes
+
+* user not found ([#285](https://github.com/SocialGouv/Tumeplay/issues/285)) ([010667c](https://github.com/SocialGouv/Tumeplay/commit/010667cb7d25ae3613d3e3f5847ba1222a943f67))
+
+## [1.45.1](https://github.com/SocialGouv/Tumeplay/compare/v1.45.0...v1.45.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* add flex: 1 to parent element of FlatList to enable full scroll ([#287](https://github.com/SocialGouv/Tumeplay/issues/287)) ([fd2867d](https://github.com/SocialGouv/Tumeplay/commit/fd2867d704b97d4830b511ff82b7a8d16131263d))
+
+# [1.45.0](https://github.com/SocialGouv/Tumeplay/compare/v1.44.0...v1.45.0) (2022-02-04)
+
+
+### Features
+
+* add more ageRange for signup and add ageRange and region for mobile user model ([#286](https://github.com/SocialGouv/Tumeplay/issues/286)) ([b98ad04](https://github.com/SocialGouv/Tumeplay/commit/b98ad04d14b987c959df437d4c450543d51e493f))
+
+# [1.44.0](https://github.com/SocialGouv/Tumeplay/compare/v1.43.0...v1.44.0) (2022-02-03)
+
+
+### Features
+
+* update module link from Thematique to ThematiqueMobile ([e6658cf](https://github.com/SocialGouv/Tumeplay/commit/e6658cf48807e898c2d0b4b44163341e45269c61))
+
+# [1.43.0](https://github.com/SocialGouv/Tumeplay/compare/v1.42.0...v1.43.0) (2022-02-03)
+
+
+### Features
+
+* add title to mudole ([a3c800c](https://github.com/SocialGouv/Tumeplay/commit/a3c800c86ce832d9bd1e40c2bd84f1e0c574a457))
+
+# [1.42.0](https://github.com/SocialGouv/Tumeplay/compare/v1.41.1...v1.42.0) (2022-02-03)
+
+
+### Features
+
+* data update mobile ([#284](https://github.com/SocialGouv/Tumeplay/issues/284)) ([d2d8c9f](https://github.com/SocialGouv/Tumeplay/commit/d2d8c9f15d9f3aaac93e5814f60c3e87755c465a))
+
 ## [1.41.1](https://github.com/SocialGouv/Tumeplay/compare/v1.41.0...v1.41.1) (2022-02-01)
 
 
