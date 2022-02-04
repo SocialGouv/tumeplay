@@ -1,3 +1,10 @@
+## [1.45.1](https://github.com/SocialGouv/Tumeplay/compare/v1.45.0...v1.45.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* add flex: 1 to parent element of FlatList to enable full scroll ([#287](https://github.com/SocialGouv/Tumeplay/issues/287)) ([fd2867d](https://github.com/SocialGouv/Tumeplay/commit/fd2867d704b97d4830b511ff82b7a8d16131263d))
+
 # [1.45.0](https://github.com/SocialGouv/Tumeplay/compare/v1.44.0...v1.45.0) (2022-02-04)
 
 
