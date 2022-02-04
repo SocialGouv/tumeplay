@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/SocialGouv/Tumeplay/compare/v1.45.2...v1.46.0) (2022-02-04)
+
+
+### Features
+
+* add return arrow back button in Contents page ([#288](https://github.com/SocialGouv/Tumeplay/issues/288)) ([353c05b](https://github.com/SocialGouv/Tumeplay/commit/353c05b6788f13a84a2d95b73181b0a5d3b44289))
+
 ## [1.45.2](https://github.com/SocialGouv/Tumeplay/compare/v1.45.1...v1.45.2) (2022-02-04)
 
 
