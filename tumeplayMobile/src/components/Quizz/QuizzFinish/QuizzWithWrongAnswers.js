@@ -21,13 +21,11 @@ const QuizzWithWrongAnswers = props => {
   const {points, setPoints} = context;
   const restartQuizz = () => {
     console.log('length', correctAnswers.length);
-    if (correctAnswers.length < 10) {
-      navigation.navigate('QuizzModule', {
-        questions: _.shuffle(wrongAnswers),
-        module_id: module_id,
-        retry: true,
-      });
-    }
+    navigation.navigate('QuizzModule', {
+      questions: _.shuffle(wrongAnswers),
+      module_id: module_id,
+      retry: true,
+    });
   };
 
   useEffect(() => {

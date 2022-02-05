@@ -19,8 +19,13 @@ import {useMutation} from '@apollo/client';
 const QuizzStartPage = ({navigation}) => {
   const context = useContext(AppContext);
   const {doneModules_ids, strapi_user_id, user, setUser} = context;
-  const {data, loading} = useQuery(GET_MODULES);
+  const {data, loading} = useQuery(GET_MODULES, {
+    variables: {
+      level: user?.level,
+    },
+  });
   const [modules, setModules] = useState(null);
+  const [isModulePending] = useState(user?.pending_module !== null);
   const [module, setModule] = useState();
   const [questions, setQuestions] = useState([]);
   const random = Math.floor(Math.random() * modules?.length);
@@ -53,59 +58,55 @@ const QuizzStartPage = ({navigation}) => {
 
   useEffect(() => {
     if (remainingModules) {
-      if (remainingModules?.length > 1) {
-        setModule(remainingModules[random]);
-        setQuestions(remainingModules[random]?.questionsArray);
-        setThematique(remainingModules[random]?.thematique.title);
-      } else {
-        setModule(remainingModules[0]);
-        setQuestions(remainingModules[0]?.questionsArray);
-        setThematique(remainingModules[0]?.thematique.title);
-      }
+      const currentModule = isModulePending
+        ? remainingModules.find(x => x.id === user.pending_module)
+        : remainingModules[remainingModules?.length > 1 ? random : 0];
+      setModule(currentModule);
+      setQuestions(currentModule?.questionsArray);
+      setThematique(currentModule?.thematique.title);
     }
   }, [remainingModules]);
 
   const handleStartQuizz = async () => {
     let response = null;
-    try {
-      response = await createHistory({
-        variables: {
-          user_id: strapi_user_id,
-          module_id: module?.id,
-          status: 'pending',
-        },
+    if (!isModulePending) {
+      try {
+        response = await createHistory({
+          variables: {
+            user_id: strapi_user_id,
+            module_id: module?.id,
+            status: 'pending',
+          },
+        });
+      } catch (error) {
+        console.log('Erreur au lancement du quizz:', error);
+        Alert.alert(
+          "Une erreur s'est produite au lancement du quizz",
+          'Merci de relancer un quizz',
+          [
+            {
+              text: 'Annuler',
+              onPress: () => {
+                navigation.navigate('Home');
+              },
+            },
+            {
+              text: 'Ok',
+              onPress: () => {
+                navigation.navigate('Home');
+              },
+            },
+          ],
+        );
+      }
+      const history_id = response?.data?.createHistorique?.historique?.id;
+      let tmpHistory = [...user.history];
+      tmpHistory.push({
+        id: history_id,
+        module_id: module?.id,
+        status: 'pending',
       });
-    } catch (error) {
-      console.log('Erreur au lancement du quizz:', error);
-      Alert.alert(
-        "Une erreur s'est produite au lancement du quizz",
-        'Merci de relancer un quizz',
-        [
-          {
-            text: 'Annuler',
-            onPress: () => {
-              navigation.navigate('Home');
-            },
-          },
-          {
-            text: 'Ok',
-            onPress: () => {
-              navigation.navigate('Home');
-            },
-          },
-        ],
-      );
-    }
-    const history_id = response?.data?.createHistorique?.historique?.id;
-    if (user) {
-      user.history = [
-        {
-          id: history_id,
-          module_id: module?.id,
-          status: 'pending',
-        },
-      ];
-      setUser({...user});
+      setUser({...user, history: tmpHistory});
     }
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(questions),
@@ -127,17 +128,23 @@ const QuizzStartPage = ({navigation}) => {
         <Text style={styles.title}> Joue et teste tes connaissances !</Text>
         <View style={styles.middleContent}>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Prêt.e ?</Text>
-            <Text style={styles.text}>
-              Réponds à <Text style={styles.redText}>10 questions</Text> et
-              gagne jusqu'à <Text style={styles.redText}>1000 points</Text>
-            </Text>
+            {isModulePending ? (
+              <Text style={styles.text}>Continue !</Text>
+            ) : (
+              <>
+                <Text style={styles.text}>Prêt.e ?</Text>
+                <Text style={styles.text}>
+                  Réponds à <Text style={styles.redText}>10 questions</Text> et
+                  gagne jusqu'à <Text style={styles.redText}>1000 points</Text>
+                </Text>
+              </>
+            )}
           </View>
           <CategorieIndicator thematique={thematique} />
         </View>
         <Button
           size="medium"
-          text="C'est parti"
+          text={isModulePending ? 'Je continue' : "C'est parti"}
           isDisabled={loading}
           icon
           onPress={() => handleStartQuizz()}
