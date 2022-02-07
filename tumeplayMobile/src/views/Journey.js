@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 28,
     lineHeight: 38,
-    color: Colors.black,
   },
   pointContainer: {
     marginVertical: 18,

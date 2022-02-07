@@ -1,6 +1,8 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
+
 import {Colors} from '../../styles/Style';
 import * as Progress from 'react-native-progress';
 
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignItems: 'center',
   },
+
   progressBar: {
     marginHorizontal: 18,
   },

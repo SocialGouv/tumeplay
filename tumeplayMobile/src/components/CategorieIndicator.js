@@ -1,6 +1,7 @@
 import React from 'react';
 import ContentLoader, {Rect} from 'react-content-loader/native';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import Text from '../components/Text';
 import {Colors} from '../styles/Style';
 
 const CategorieIndicator = ({thematique}) => {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: '500',
     textAlign: 'center',
-    color: Colors.black,
+
     textTransform: 'uppercase',
   },
   loader: {

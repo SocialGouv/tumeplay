@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import Text from '../components/Text';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
   },
   topInfoContainer: {
     width: '100%',
-    flex: 1,
     flexDirection: 'column',
   },
   backButton: {

@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.title,
     lineHeight: config.deviceWidth * 0.1,
-    color: Colors.black,
   },
   swipperContainer: {
     flex: 1,

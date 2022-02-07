@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 26,
-    color: Colors.black,
   },
   border: {
     borderBottomWidth: 1,
