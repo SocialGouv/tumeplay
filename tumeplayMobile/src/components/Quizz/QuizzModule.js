@@ -59,11 +59,11 @@ const QuizzModule = ({navigation, route}) => {
       setQuestionTitle(
         question.text_question.replace(
           /([_])\1{2,}/g,
-          question.responses['response_' + ans],
+          question.responses['response_' + answerKey],
         ),
       );
     }
-    
+
     setAnswerKey(answerKey);
     setDisabled(!disabled);
     setHasAnswered(!hasAnswered);
@@ -241,6 +241,7 @@ const styles = StyleSheet.create({
   },
   answersContainerTrou: {
     flexDirection: 'column',
+    marginTop: 20,
   },
   textAnswer: {
     marginTop: 10,

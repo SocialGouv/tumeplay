@@ -14,7 +14,7 @@ const QuizzAnswerButton = props => {
     answeredKey,
     disabled,
   } = props;
-  
+
   return (
     <TouchableOpacity disabled={disabled} onPress={onPress} name={name}>
       <View
@@ -31,6 +31,7 @@ const QuizzAnswerButton = props => {
           style={[
             styles.value,
             hasAnswered && answer.key === correctAnswer && {fontWeight: '700'},
+            answerTrou ? styles.valueTrou : '',
           ]}>
           {answer.value}
         </Text>
@@ -44,8 +45,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    minWidth: config.deviceWidth <= 375 ? '100%' : 170,
-    maxWidth: config.deviceWidth <= 375 ? '100%' : 170,
+    minWidth: config.deviceWidth <= 375 ? '100%' : 180,
+    maxWidth: config.deviceWidth <= 375 ? '100%' : 180,
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'center',
@@ -69,6 +70,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: Colors.black,
     textAlign: 'center',
+  },
+  valueTrou: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   emoji: {
     justifyContent: 'center',
