@@ -37,12 +37,6 @@ const HomeOrdersInput = props => {
 
   const itemFields = [
     {
-      id: 4,
-      kind: 'default',
-      label: 'EMAIL',
-      name: 'email',
-    },
-    {
       id: 1,
       kind: 'autocomplete',
       label: 'ADRESSE',
@@ -59,6 +53,12 @@ const HomeOrdersInput = props => {
       kind: 'default',
       label: 'PRÉNOM',
       name: 'first_name',
+    },
+    {
+      id: 4,
+      kind: 'default',
+      label: 'EMAIL',
+      name: 'email',
     },
     {
       id: 5,

@@ -24,60 +24,72 @@ const Box = ({navigation, route}) => {
     <Container style={styles.container}>
       <View style={styles.topInfoContainer}>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            if (orderConfirm) {
+              setOrderConfirm(false);
+            } else {
+              navigation.goBack();
+            }
+          }}
           style={styles.backButton}>
           <Icon name="md-arrow-back" size={30} color="#000" />
           <Text>retour</Text>
         </TouchableOpacity>
-        <Text style={styles.info}>Tu as séléctionné</Text>
-        <View>
-          <Text style={styles.redText}>KIT {box.number}</Text>
-          <Text style={styles.boxTitle}>{box.title}</Text>
-        </View>
-        <View style={styles.divider} />
-        <View>
-          <Text style={styles.subtitle}>
-            Où souhaites-tu recevoir ton kit ?
-          </Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => setDeliveryMode('home')}
-              style={[
-                styles.buttons,
-                styles.buttonLeft,
-                deliveryMode === 'home'
-                  ? styles.activeButton
-                  : styles.nonActiveButton,
-              ]}>
-              <Text
-                style={
-                  deliveryMode === 'home' ? styles.whiteText : styles.blackText
-                }>
-                A DOMICILE
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              disabled={true}
-              onPress={() => setDeliveryMode('pickup')}
-              style={[
-                styles.buttons,
-                styles.buttonRight,
-                deliveryMode === 'pickup'
-                  ? styles.activeButton
-                  : styles.nonActiveButton,
-              ]}>
-              <Text
-                style={
+        {orderConfirm ? (
+          <>
+            <Text style={styles.info}>Tu as séléctionné</Text>
+            <View>
+              <Text style={styles.redText}>KIT {box.number}</Text>
+              <Text style={styles.boxTitle}>{box.title}</Text>
+            </View>
+          </>
+        ) : (
+          <View>
+            <Text style={styles.subtitle}>
+              Où souhaites-tu recevoir ton kit ?
+            </Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={() => setDeliveryMode('home')}
+                style={[
+                  styles.buttons,
+                  styles.buttonLeft,
+                  deliveryMode === 'home'
+                    ? styles.activeButton
+                    : styles.nonActiveButton,
+                ]}>
+                <Text
+                  style={
+                    deliveryMode === 'home'
+                      ? styles.whiteText
+                      : styles.blackText
+                  }>
+                  A DOMICILE
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                disabled={true}
+                onPress={() => setDeliveryMode('pickup')}
+                style={[
+                  styles.buttons,
+                  styles.buttonRight,
                   deliveryMode === 'pickup'
-                    ? styles.whiteText
-                    : styles.blackText
-                }>
-                EN POINT RELAIS
-              </Text>
-            </TouchableOpacity>
+                    ? styles.activeButton
+                    : styles.nonActiveButton,
+                ]}>
+                <Text
+                  style={
+                    deliveryMode === 'pickup'
+                      ? styles.whiteText
+                      : styles.blackText
+                  }>
+                  EN POINT RELAIS
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={[styles.divider, {marginBottom: 0}]} />
           </View>
-          <View style={[styles.divider, {marginBottom: 0}]} />
-        </View>
+        )}
       </View>
       <View style={styles.inputContainer}>
         {deliveryMode === 'home' && !orderConfirm ? (
@@ -148,7 +160,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     fontWeight: '500',
     paddingLeft: 22,
-    paddingTop: config.deviceWidth > 375 ? 20 : 10,
+    paddingTop: 5,
   },
   buttonContainer: {
     display: 'flex',
