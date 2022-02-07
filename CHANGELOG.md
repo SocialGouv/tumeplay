@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/SocialGouv/Tumeplay/compare/v1.50.0...v1.51.0) (2022-02-07)
+
+
+### Features
+
+* create text component and formik validation ([#296](https://github.com/SocialGouv/Tumeplay/issues/296)) ([91990ed](https://github.com/SocialGouv/Tumeplay/commit/91990eda8067f4f5d5adbb7bb9adf0dbf7f2988d))
+
 # [1.50.0](https://github.com/SocialGouv/Tumeplay/compare/v1.49.0...v1.50.0) (2022-02-07)
 
 
