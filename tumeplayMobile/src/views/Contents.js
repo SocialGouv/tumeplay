@@ -7,6 +7,7 @@ import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -53,6 +54,9 @@ const ContentsPage = props => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon name="md-arrow-back" size={30} color="#000" />
           </TouchableOpacity>
+          <View>
+            <TopLevelPointIndicator />
+          </View>
         </View>
         {/* <View style={styles.listContainer}> */}
         <FlatList
@@ -69,16 +73,18 @@ const ContentsPage = props => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
   },
   listContainer: {
     marginTop: 15,
   },
   headerContainer: {
     display: 'flex',
+    width: '130%',
     flexDirection: 'row',
     paddingHorizontal: 15,
     marginTop: 15,
+    justifyContent: 'space-between',
   },
 });
 
