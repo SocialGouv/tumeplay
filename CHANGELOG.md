@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/SocialGouv/Tumeplay/compare/v1.48.0...v1.49.0) (2022-02-07)
+
+
+### Features
+
+* integrating progress bar in homepage ([#293](https://github.com/SocialGouv/Tumeplay/issues/293)) ([95a63bb](https://github.com/SocialGouv/Tumeplay/commit/95a63bbedeb535df0a780b3ad2e206aa873ac88d))
+
 # [1.48.0](https://github.com/SocialGouv/Tumeplay/compare/v1.47.0...v1.48.0) (2022-02-07)
 
 
