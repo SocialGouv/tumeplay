@@ -22,7 +22,7 @@ const HomeOrdersInput = props => {
       .email('Email non valide')
       .required('Champs Obligatoire'),
     address: Yup.string().required('Champs Obligatoire'),
-    phone_number: Yup.string().required('Champs Obligatoire'),
+    phone_number: Yup.string().length(10).required('Champs Obligatoire'),
   });
 
   const [geogouvData, setGeogouvData] = useState([]);

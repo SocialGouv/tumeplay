@@ -2,7 +2,7 @@ import {gql} from '@apollo/client';
 
 export const GET_CONTENTS = gql`
   query GetContents($theme_id: String!) {
-    contents(where: {theme: {id: $theme_id}}) {
+    contents(where: {thematique_mobile: {id: $theme_id}}) {
       id
       title: title_mobile
       text
