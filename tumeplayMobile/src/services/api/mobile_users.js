@@ -11,6 +11,7 @@ export const GET_MOBILE_USER = gql`
       points
       user_id
       id
+      percentage_level_completed
       history {
         id
         module_id

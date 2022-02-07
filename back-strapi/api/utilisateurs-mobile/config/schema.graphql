@@ -8,6 +8,7 @@ module.exports = {
     extend type UtilisateursMobile {
       history: [CustomHistorique!]!
       level: Int,
+      percentage_level_completed: Float,
       pending_module: String,
     }
   `,

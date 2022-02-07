@@ -25,7 +25,7 @@ const QuizzWithWrongAnswers = props => {
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(wrongAnswers),
       module_id: module_id,
-      retry: true,
+      improveWrongAnswers: true,
     });
   };
 
