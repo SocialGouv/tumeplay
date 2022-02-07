@@ -8,7 +8,6 @@ const JourneyTopInformation = ({level}) => {
     <View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{level.name}</Text>
-        <Text style={styles.text}>0 / 3000</Text>
       </View>
       <View style={styles.border} />
     </View>

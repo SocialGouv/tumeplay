@@ -58,15 +58,15 @@ const QuizzStartPage = ({navigation}) => {
   }, [modules]);
 
   useEffect(() => {
-    if (remainingModules) {
+    if (remainingModules && modules) {
       const currentModule = isModulePending
-        ? remainingModules.find(x => x.id === user.pending_module)
+        ? modules.find(x => x.id === user.pending_module)
         : remainingModules[remainingModules?.length > 1 ? random : 0];
       setModule(currentModule);
       setQuestions(currentModule?.questionsArray);
       setThematique(currentModule?.thematique.title);
     }
-  }, [remainingModules]);
+  }, [modules, remainingModules]);
 
   const handleStartQuizz = async () => {
     let response = null;

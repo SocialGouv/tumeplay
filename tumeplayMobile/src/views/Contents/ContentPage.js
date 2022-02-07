@@ -103,9 +103,9 @@ const ContentPage = ({navigation, route}) => {
           {count > 4 && (
             <Button
               size="medium"
-              text="Teste tes connaissances"
+              text="Jouer"
               style={[styles.button, styles.redButton]}
-              styleText={{textAlign: 'center'}}
+              styleText={{alignItems: 'center'}}
               onPress={() => goToQuizz()}
             />
           )}

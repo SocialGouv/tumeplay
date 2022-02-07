@@ -10,7 +10,7 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
   });
 
   //use to generate a fake line for skeleton design
-  const array = [0, 1, 2];
+  const array = [0, 1, 2, 3];
 
   const skeletonBadges = array.map((_, index) => (
     <BadgesSkeleton key={index} />

@@ -1,3 +1,24 @@
+# [1.50.0](https://github.com/SocialGouv/Tumeplay/compare/v1.49.0...v1.50.0) (2022-02-07)
+
+
+### Features
+
+* adding green color to correct answer + level indicator on page … ([#295](https://github.com/SocialGouv/Tumeplay/issues/295)) ([780d8dd](https://github.com/SocialGouv/Tumeplay/commit/780d8dd5a865febb6744a265e9b1ca991bc8d388))
+
+# [1.49.0](https://github.com/SocialGouv/Tumeplay/compare/v1.48.0...v1.49.0) (2022-02-07)
+
+
+### Features
+
+* integrating progress bar in homepage ([#293](https://github.com/SocialGouv/Tumeplay/issues/293)) ([95a63bb](https://github.com/SocialGouv/Tumeplay/commit/95a63bbedeb535df0a780b3ad2e206aa873ac88d))
+
+# [1.48.0](https://github.com/SocialGouv/Tumeplay/compare/v1.47.0...v1.48.0) (2022-02-07)
+
+
+### Features
+
+* adjusting api calls with new backend and finishing box order path with homepage redirectino ([#292](https://github.com/SocialGouv/Tumeplay/issues/292)) ([eb8bb41](https://github.com/SocialGouv/Tumeplay/commit/eb8bb41f16d8c6688e6671ca5ffe3245673412df))
+
 # [1.47.0](https://github.com/SocialGouv/Tumeplay/compare/v1.46.1...v1.47.0) (2022-02-07)
 
 

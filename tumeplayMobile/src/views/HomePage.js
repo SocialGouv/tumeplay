@@ -15,7 +15,6 @@ import config from '../../config';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
-  const points = useContext(AppContext).points;
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);
@@ -25,26 +24,6 @@ const HomePage = ({navigation}) => {
       setFreshContents(data.contents);
     }
   }, [data, loading]);
-
-  const displayText = () => {
-    if (points > 0 && points < 3000) {
-      return (
-        <Text style={styles.text}>
-          Plus que{' '}
-          <Text style={[styles.text, {color: Colors.primary}]}>
-            {3000 - points} points
-          </Text>{' '}
-          pour gagner ta box !
-        </Text>
-      );
-    } else if (points > 3000) {
-      return <Text>Bravo ! Tu as assez de points pour commander une box</Text>;
-    } else {
-      return (
-        <Text style={styles.text}>Gagne des points pour commander une box</Text>
-      );
-    }
-  };
 
   const renderItem = ({item}) => {
     return (
@@ -62,14 +41,17 @@ const HomePage = ({navigation}) => {
         <Title />
         <LevelPointsIndicator
           style={styles.levelIndicator}
-          points={points}
           onPress={() => navigation.navigate('Parcours')}
         />
         <View style={styles.middleContent}>
-          <Text style={styles.text}>{displayText()}</Text>
+          <Text style={styles.text}>
+            Prêt.e à tester tes connaissances sur la sexualité ?
+          </Text>
           <Button
-            text="Teste tes connaissances"
-            size="large"
+            text="Jouer"
+            size="medium"
+            special
+            left
             onPress={() => navigation.navigate('QuizzStartPage')}
             icon
           />
@@ -105,15 +87,14 @@ const styles = StyleSheet.create({
   middleContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: config.deviceWidth <= 375 ? 30 : 50,
-    width: '100%',
+    paddingHorizontal: config.deviceWidth <= 375 ? 30 : 30,
   },
   text: {
     textAlign: 'center',
     fontFamily: Fonts.strongText,
     fontWeight: '500',
     fontSize: 20,
-    lineHeight: 27,
+    lineHeight: 30,
     paddingBottom: 12,
   },
   carouselContainer: {
