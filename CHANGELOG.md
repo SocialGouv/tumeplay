@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/SocialGouv/Tumeplay/compare/v1.46.1...v1.47.0) (2022-02-07)
+
+
+### Features
+
+* add next button even after 4 content ([#289](https://github.com/SocialGouv/Tumeplay/issues/289)) ([0c456b2](https://github.com/SocialGouv/Tumeplay/commit/0c456b2ae7bd59cb3182e9ea4ee56382cd3052d4))
+
 ## [1.46.1](https://github.com/SocialGouv/Tumeplay/compare/v1.46.0...v1.46.1) (2022-02-04)
 
 
