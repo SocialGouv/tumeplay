@@ -14,18 +14,17 @@ import Text from '../../components/Text';
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
+  const clearModuleData = route?.params?.clearModuleData;
+  const improveWrongAnswers = route?.params?.improveWrongAnswers;
 
   const question = questions[0];
 
   const [questionTitle, setQuestionTitle] = useState(question.text_question);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
-  const [displayResponse, setDisplayResponse] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [remainingQuestions, setRemainingQuestions] = useState([]);
-  const retry = route?.params?.retry;
-  const [disabled, setDisabled] = useState(false);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
 
@@ -58,9 +57,7 @@ const QuizzModule = ({navigation, route}) => {
     }
 
     setAnswerKey(answerKey);
-    setDisabled(!disabled);
     setHasAnswered(!hasAnswered);
-    setDisplayResponse(!displayResponse);
   };
 
   const displayAnswer = responses?.map((ans, index) => {
@@ -70,7 +67,7 @@ const QuizzModule = ({navigation, route}) => {
           answer={ans}
           correctAnswer={responses[responses?.length - 1]?.value}
           hasAnswered={hasAnswered}
-          disabled={disabled}
+          disabled={hasAnswered}
           key={ans.key}
           answerTrou={question.kind === 'Trou'}
           answeredKey={answeredKey}
@@ -93,9 +90,7 @@ const QuizzModule = ({navigation, route}) => {
         questions: _.shuffle(remainingQuestions),
         module_id: module_id,
       });
-      setDisabled(!disabled);
       setHasAnswered(!hasAnswered);
-      setDisplayResponse(!displayResponse);
     }
   };
 
@@ -103,12 +98,15 @@ const QuizzModule = ({navigation, route}) => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     setQuestionTitle(questions[0]?.text_question);
     formatAnswers();
-    if (retry) {
-      setDisplayResponse(!displayResponse);
-      setHasAnswered(!hasAnswered);
-      setDisabled(!disabled);
-      setWrongAnswers([]);
+    setHasAnswered(false);
+
+    if (clearModuleData) {
       setCorrectAnswers([]);
+      setWrongAnswers([]);
+    }
+
+    if (improveWrongAnswers) {
+      setWrongAnswers([]);
     }
   }, [route]);
 
@@ -146,7 +144,7 @@ const QuizzModule = ({navigation, route}) => {
           ]}>
           {displayAnswer}
         </View>
-        {displayResponse ? (
+        {hasAnswered ? (
           <View style={styles.answerContainer}>
             <Text style={styles.textAnswer}>
               {!showAnswer && config.deviceWidth <= 375
@@ -229,6 +227,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     alignContent: 'center',
+    marginHorizontal: config.deviceWidth <= 375 ? 0 : -10,
   },
   answersContainerTrou: {
     flexDirection: 'column',

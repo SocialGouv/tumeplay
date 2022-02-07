@@ -112,6 +112,7 @@ const QuizzStartPage = ({navigation}) => {
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(questions),
       module_id: module?.id,
+      clearModuleData: true,
     });
   };
 
