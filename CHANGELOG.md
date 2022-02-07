@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/SocialGouv/Tumeplay/compare/v1.47.0...v1.48.0) (2022-02-07)
+
+
+### Features
+
+* adjusting api calls with new backend and finishing box order path with homepage redirectino ([#292](https://github.com/SocialGouv/Tumeplay/issues/292)) ([eb8bb41](https://github.com/SocialGouv/Tumeplay/commit/eb8bb41f16d8c6688e6671ca5ffe3245673412df))
+
 # [1.47.0](https://github.com/SocialGouv/Tumeplay/compare/v1.46.1...v1.47.0) (2022-02-07)
 
 
