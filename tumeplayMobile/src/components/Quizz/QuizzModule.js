@@ -14,7 +14,10 @@ import Text from '../../components/Text';
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
+
   const question = questions[0];
+
+  const [questionTitle, setQuestionTitle] = useState(question.text_question);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [responses, setResponses] = useState([]);
   const [displayResponse, setDisplayResponse] = useState(false);
@@ -44,6 +47,16 @@ const QuizzModule = ({navigation, route}) => {
       wrongAnswers.push(question);
       setWrongAnswers([...wrongAnswers]);
     }
+
+    if (question.kind === 'Trou') {
+      setQuestionTitle(
+        question.text_question.replace(
+          /([_])\1{2,}/g,
+          question.responses['response_' + answerKey],
+        ),
+      );
+    }
+
     setAnswerKey(answerKey);
     setDisabled(!disabled);
     setHasAnswered(!hasAnswered);
@@ -51,7 +64,7 @@ const QuizzModule = ({navigation, route}) => {
   };
 
   const displayAnswer = responses?.map((ans, index) => {
-    if (index < responses.length - 1)
+    if (index < responses.length - 1) {
       return (
         <QuizzAnswerButton
           answer={ans}
@@ -59,10 +72,12 @@ const QuizzModule = ({navigation, route}) => {
           hasAnswered={hasAnswered}
           disabled={disabled}
           key={ans.key}
+          answerTrou={question.kind === 'Trou'}
           answeredKey={answeredKey}
           onPress={() => displayAnswerText(ans.key)}
         />
       );
+    }
   });
 
   const goToNextQuestion = () => {
@@ -86,6 +101,7 @@ const QuizzModule = ({navigation, route}) => {
 
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
+    setQuestionTitle(questions[0]?.text_question);
     formatAnswers();
     if (retry) {
       setDisplayResponse(!displayResponse);
@@ -119,8 +135,17 @@ const QuizzModule = ({navigation, route}) => {
             <Text style={styles.indicator}>{questions?.length}</Text>
           </View>
         </View>
-        <Text style={styles.question}>{question?.text_question}</Text>
-        <View style={styles.answersContainer}>{displayAnswer}</View>
+        {question.kind === 'Trou' && (
+          <Text style={styles.completeText}>Complète cette phrase</Text>
+        )}
+        <Text style={styles.question}>{questionTitle}</Text>
+        <View
+          style={[
+            styles.answersContainer,
+            question.kind === 'Trou' ? styles.answersContainerTrou : '',
+          ]}>
+          {displayAnswer}
+        </View>
         {displayResponse ? (
           <View style={styles.answerContainer}>
             <Text style={styles.textAnswer}>
@@ -203,9 +228,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  answerContainer: {
     alignContent: 'center',
+  },
+  answersContainerTrou: {
+    flexDirection: 'column',
+    marginTop: 20,
   },
   textAnswer: {
     marginTop: 10,
@@ -225,6 +252,12 @@ const styles = StyleSheet.create({
   },
   action: {
     fontWeight: '600',
+  },
+  completeText: {
+    width: '100%',
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 18,
   },
 });
 
