@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import Text from '../components/Text';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
 import {Colors, Fonts} from '../styles/Style';
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 30,
     lineHeight: 38,
-    color: Colors.black,
+
     textAlign: 'center',
   },
   textContainer: {
@@ -183,7 +184,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 27,
     fontWeight: '600',
-    color: Colors.black,
   },
   redText: {
     color: Colors.primary,

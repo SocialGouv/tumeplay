@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {Colors, Fonts} from '../../styles/Style';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import Text from '../../components/Text';
+import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 import config from '../../../config';
 import FreshContentSkeleton from '../global/SkeletonDesign/FreshContentSkeleton';
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: config.deviceWidth <= 375 ? 14 : 16,
     lineHeight: 24,
-    color: Colors.black,
   },
   subtitle: {},
 });

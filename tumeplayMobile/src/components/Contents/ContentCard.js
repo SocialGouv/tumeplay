@@ -1,5 +1,6 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, View, Image} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
+import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 

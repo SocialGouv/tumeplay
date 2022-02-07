@@ -1,11 +1,11 @@
 import {
   StyleSheet,
   TouchableOpacity,
-  Text,
   Alert,
   View,
   FlatList,
 } from 'react-native';
+import Text from '../../components/Text';
 import React, {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
@@ -37,6 +37,12 @@ const HomeOrdersInput = props => {
 
   const itemFields = [
     {
+      id: 4,
+      kind: 'default',
+      label: 'EMAIL',
+      name: 'email',
+    },
+    {
       id: 1,
       kind: 'autocomplete',
       label: 'ADRESSE',
@@ -53,12 +59,6 @@ const HomeOrdersInput = props => {
       kind: 'default',
       label: 'PRÉNOM',
       name: 'first_name',
-    },
-    {
-      id: 4,
-      kind: 'default',
-      label: 'EMAIL',
-      name: 'email',
     },
     {
       id: 5,

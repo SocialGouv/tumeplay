@@ -1,7 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
-import {Colors} from '../../styles/Style';
+import {TouchableOpacity, StyleSheet, View} from 'react-native';
 import config from '../../../config';
+import Text from '../../components/Text';
 
 const QuizzAnswerButton = props => {
   const {answer, onPress, name, correctAnswer, hasAnswered, disabled} = props;
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   value: {
     justifyContent: 'center',
-    color: Colors.black,
+
     paddingRight: 10,
     textAlign: 'center',
   },

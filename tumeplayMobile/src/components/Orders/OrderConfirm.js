@@ -1,4 +1,5 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import Text from '../../components/Text';
 import React from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
 import Button from '../Button';

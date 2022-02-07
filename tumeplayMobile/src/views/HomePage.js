@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, Text, View, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -37,11 +38,7 @@ const HomePage = ({navigation}) => {
         </Text>
       );
     } else if (points > 3000) {
-      return (
-        <Text style={styles.text}>
-          Bravo ! Tu as assez de points pour commander une box
-        </Text>
-      );
+      return <Text>Bravo ! Tu as assez de points pour commander une box</Text>;
     } else {
       return (
         <Text style={styles.text}>Gagne des points pour commander une box</Text>
@@ -118,7 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 27,
     paddingBottom: 12,
-    color: Colors.black,
   },
   carouselContainer: {
     flex: 1,
@@ -129,7 +125,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: Fonts.subtitle,
-    color: Colors.black,
     alignSelf: 'flex-start',
     marginTop: 30,
     marginBottom: 12,

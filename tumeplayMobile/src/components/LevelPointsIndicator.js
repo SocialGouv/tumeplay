@@ -42,13 +42,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
-    color: Colors.black,
+
     paddingRight: 5,
   },
   level: {
     paddingRight: 15,
     fontWeight: 'bold',
-    color: Colors.black,
   },
   image: {
     width: 15,

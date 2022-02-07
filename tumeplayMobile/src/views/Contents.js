@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
-import Title from '../components/Title';
 import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
 import Icon from 'react-native-vector-icons/Ionicons';

@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ImageBackground,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  ScrollView,
-} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, ScrollView} from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
 import Button from '../Button';
@@ -15,8 +8,8 @@ import TopLevelPointIndicator from './TopLevelPointIndicator';
 import _ from 'lodash';
 import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Colors} from '../../styles/Style';
 import config from '../../../config';
+import Text from '../../components/Text';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -193,7 +186,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     lineHeight: 22,
-    color: Colors.black,
   },
   question: {
     marginBottom: 10,
@@ -201,7 +193,6 @@ const styles = StyleSheet.create({
     fontSize: config.deviceWidth <= 375 ? 16 : 22,
     lineHeight: 24,
     fontWeight: '700',
-    color: Colors.black,
   },
   answersContainer: {
     display: 'flex',
@@ -216,7 +207,6 @@ const styles = StyleSheet.create({
   textAnswer: {
     marginTop: 10,
     textAlign: 'left',
-    color: Colors.black,
   },
   buttonContainer: {
     width: '100%',

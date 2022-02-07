@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
 import coin from '../../assets/coin.png';
-import {Colors} from '../../styles/Style';
 
 const TopLevelPointIndicator = ({style}) => {
   const context = useContext(AppContext);
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     height: 15,
   },
   text: {
-    color: Colors.black,
     fontSize: 16,
     textTransform: 'uppercase',
     fontWeight: '600',

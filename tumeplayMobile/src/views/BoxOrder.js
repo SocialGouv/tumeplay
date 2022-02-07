@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import Text from '../components/Text';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
