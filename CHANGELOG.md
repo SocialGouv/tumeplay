@@ -1,3 +1,11 @@
+# [1.53.0](https://github.com/SocialGouv/Tumeplay/compare/v1.52.0...v1.53.0) (2022-02-07)
+
+
+### Features
+
+* adding some padding according to OS ([#298](https://github.com/SocialGouv/Tumeplay/issues/298)) ([c4669ae](https://github.com/SocialGouv/Tumeplay/commit/c4669aed74881cfacc7c96ee3ae771626a7b7fd8))
+* improve leveling & display progressBar ([#301](https://github.com/SocialGouv/Tumeplay/issues/301)) ([49aed8e](https://github.com/SocialGouv/Tumeplay/commit/49aed8ead5cea6b5596eb5c045af5619bce8723d))
+
 # [1.52.0](https://github.com/SocialGouv/Tumeplay/compare/v1.51.0...v1.52.0) (2022-02-07)
 
 
