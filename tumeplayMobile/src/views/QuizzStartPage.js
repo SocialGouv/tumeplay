@@ -15,7 +15,6 @@ import GestureRecognizer from '../lib/swipe';
 import AppContext from '../../AppContext';
 import {CREATE_HISTORY} from '../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
-import CustomModal from '../components/global/CustomModal';
 
 const QuizzStartPage = ({navigation}) => {
   const context = useContext(AppContext);
@@ -32,7 +31,6 @@ const QuizzStartPage = ({navigation}) => {
   const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
   const [remainingModules, setRemainingModules] = useState();
-  const [isVisible, setIsVisible] = useState(false);
 
   const [createHistory] = useMutation(CREATE_HISTORY);
 

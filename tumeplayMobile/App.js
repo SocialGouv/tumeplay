@@ -12,6 +12,8 @@ import {useLazyQuery, useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
+import BoxOrder from './src/views/BoxOrder';
+import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
 import {View, Text, StyleSheet} from 'react-native';
 import {
@@ -71,16 +73,19 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
+
     if (!loading2 && data2) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
+
     if (data2?.statusCode === 404) {
       clearStorage();
       setPoints(0);
       setUser({points: 0});
+
     }
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
@@ -147,6 +152,8 @@ const App = () => {
               name="QuizzFinishScreen"
               component={QuizzFinishScreen}
             />
+            <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
+            <NavigationStack.Screen name="Box" component={Box} />
             <NavigationStack.Screen name="Parcours" component={Journey} />
           </NavigationStack.Navigator>
         </NavigationContainer>

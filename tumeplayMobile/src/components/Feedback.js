@@ -13,9 +13,6 @@ const Feedback = () => {
           <Text>👍</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.badge}>
-          <Text>🤨</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.badge}>
           <Text>👎</Text>
         </TouchableOpacity>
       </View>

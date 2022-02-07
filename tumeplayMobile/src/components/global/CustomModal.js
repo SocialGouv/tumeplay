@@ -1,24 +1,46 @@
-import {Modal, StyleSheet, View, Text} from 'react-native';
-import React from 'react';
+import {Modal, StyleSheet, View, useWindowDimensions} from 'react-native';
+import React, {useState} from 'react';
 import Button from '../Button';
+import RenderHTML from 'react-native-render-html';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Fonts} from '../../styles/Style';
 
 const CustomModal = props => {
-  const {isVisible, setIsVisible, animation, title, text, navigation} = props;
+  const {isVisible, animation, html, onPress} = props;
+  const [displayModal, setDisplayModal] = useState(isVisible);
+  const {width} = useWindowDimensions();
+
   return (
     <Modal
       style={styles.container}
       animationType={animation}
-      visible={isVisible}
+      visible={displayModal}
       transparent={true}>
+      <View
+        style={[
+          styles.fullView,
+          displayModal ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
+        ]}
+      />
       <View style={styles.view}>
-        <Text>{title}</Text>
-        <Text>{text}</Text>
+        <MaterialIcons
+          name="error-outline"
+          color={'#D42201'}
+          size={25}
+          style={styles.icon}
+        />
+        <RenderHTML
+          contentWidth={width}
+          source={html}
+          baseStyle={styles.htmlText}
+        />
         <Button
-          size="medium"
-          text="Très bien c'est compris"
+          size="intermediate"
+          icon={true}
+          text="Ok, j'ai compris"
           onPress={() => {
-            navigation.navigate('Home');
-            setIsVisible(!isVisible);
+            onPress;
+            setDisplayModal(!isVisible);
           }}
         />
       </View>
@@ -31,14 +53,17 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
+  fullView: {
+    height: '100%',
+  },
   view: {
+    flex: 1,
     minWidth: '100%',
-    height: '80%',
-    borderRadius: 50,
+    height: '55%',
+    borderRadius: 25,
     paddingHorizontal: 10,
-    justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: '#FFFFFF',
     position: 'absolute',
     bottom: 0,
     shadowColor: '#000',
@@ -48,8 +73,21 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
-
     elevation: 6,
+    display: 'flex',
+    alignItems: 'center',
+    padding: 0,
+  },
+  icon: {
+    flex: 0.1,
+    paddingTop: 23.5,
+  },
+  htmlText: {
+    flex: 0.7,
+    paddingHorizontal: 40,
+    fontSize: 20,
+    fontFamily: Fonts.title,
+    lineHeight: 28,
   },
 });
 

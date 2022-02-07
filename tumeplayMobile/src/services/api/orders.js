@@ -1,8 +1,8 @@
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+import {REACT_APP_URL} from '@env';
 
 const OrdersAPI = {
   orderBoxes: async order => {
-    const res = await fetch(REACT_APP_API_URL + '/commandes', {
+    const res = await fetch(REACT_APP_URL + '/commandes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -24,7 +24,7 @@ const OrdersAPI = {
         address_city: order.address_city,
         poi_name: order.poi_name,
         poi_number: order.poi_number,
-        referent: order.referent
+        referent: order.referent,
       }),
     });
     return res;
