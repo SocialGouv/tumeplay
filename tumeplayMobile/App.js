@@ -84,8 +84,7 @@ const App = () => {
       clearStorage();
       setPoints(0);
       setUser({points: 0});
-    }
-    if (data2?.utilisateursMobile) {
+    } else if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
       setPoints(data2?.utilisateursMobile?.points);
     }

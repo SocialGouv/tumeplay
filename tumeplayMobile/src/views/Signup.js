@@ -22,6 +22,7 @@ const Signup = ({user, setUser}) => {
   const setUserInStorage = async () => {
     tmpUser.isSignedUp = true;
     tmpUser.points = 0;
+    tmpUser.level = 1;
     await EncryptedStorage.setItem(
       'user',
       JSON.stringify({
@@ -32,6 +33,7 @@ const Signup = ({user, setUser}) => {
         isUnder25: tmpUser.isOnboarded,
         ageRange: tmpUser.ageRange,
         points: tmpUser.points,
+        level: tmpUser.level,
         region: tmpUser.region,
       }),
     );

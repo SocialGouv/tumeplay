@@ -15,12 +15,13 @@ export const GET_MODULES = gql`
       }
       questionsArray {
         id
-        text_question
+        text_question: text_question_mobile
+				kind
         text_answer
         responses {
-          response_A
-          response_B
-          response_C
+          response_A: response_A_mobile
+          response_B: response_B_mobile
+          response_C: response_C_mobile
           right_answer
         }
       }

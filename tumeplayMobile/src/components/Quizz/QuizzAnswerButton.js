@@ -4,7 +4,15 @@ import {Colors} from '../../styles/Style';
 import config from '../../../config';
 
 const QuizzAnswerButton = props => {
-  const {answer, onPress, name, correctAnswer, hasAnswered, disabled} = props;
+  const {
+    answer,
+    onPress,
+    name,
+    correctAnswer,
+    hasAnswered,
+    answerTrou,
+    disabled,
+  } = props;
   return (
     <TouchableOpacity disabled={disabled} onPress={onPress} name={name}>
       <View
@@ -13,6 +21,7 @@ const QuizzAnswerButton = props => {
           hasAnswered && answer.key === correctAnswer
             ? styles.correctAnswer
             : '',
+          answerTrou ? styles.buttonTrou : '',
         ]}>
         <Text
           style={[
@@ -49,6 +58,9 @@ const styles = StyleSheet.create({
     height: config.deviceWidth <= 375 ? 50 : 80,
     backgroundColor: '#F3E1E8',
   },
+  buttonTrou: {
+    height: config.deviceWidth <= 375 ? 50 : 60,
+  },
   correctAnswer: {
     backgroundColor: '#fff',
     fontWeight: '600',
@@ -56,7 +68,6 @@ const styles = StyleSheet.create({
   value: {
     justifyContent: 'center',
     color: Colors.black,
-    paddingRight: 10,
     textAlign: 'center',
   },
   emoji: {

@@ -25,7 +25,7 @@ const QuizzStartPage = ({navigation}) => {
     },
   });
   const [modules, setModules] = useState(null);
-  const [isModulePending] = useState(user?.pending_module !== null);
+  const [isModulePending] = useState(!!user?.pending_module);
   const [module, setModule] = useState();
   const [questions, setQuestions] = useState([]);
   const random = Math.floor(Math.random() * modules?.length);
