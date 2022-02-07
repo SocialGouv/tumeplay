@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ImageBackground,
   ScrollView,
+  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import {REACT_APP_URL} from '@env';
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    paddingTop: 0,
+    paddingTop: Platform.OS === 'ios' ? 40 : 0,
   },
   backLevel: {
     flexDirection: 'row',
