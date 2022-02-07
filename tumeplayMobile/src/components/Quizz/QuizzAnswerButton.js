@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   },
   value: {
     justifyContent: 'center',
-    color: Colors.black,
     textAlign: 'center',
   },
   valueTrou: {
