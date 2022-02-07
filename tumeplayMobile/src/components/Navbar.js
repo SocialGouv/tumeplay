@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage';
 import Thematiques from '../views/Thematiques';
 import QuizzStartPage from '../views/QuizzStartPage';
 import Journey from '../views/Journey';
+import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -58,6 +59,15 @@ const Navbar = ({navigation, route}) => {
         options={{
           tabBarIcon: ({size, color}) => (
             <MaterialIcons name="timeline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Kit"
+        component={Box}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <MaterialIcons name="card-giftcard" color={color} size={size} />
           ),
         }}
       />

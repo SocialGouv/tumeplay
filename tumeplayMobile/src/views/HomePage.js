@@ -11,7 +11,6 @@ import AppContext from '../../AppContext';
 import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
-import CustomModal from '../components/global/CustomModal';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -19,7 +18,7 @@ const HomePage = ({navigation}) => {
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
   const {data, loading} = useQuery(GET_FRESH_CONTENTS);
-  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     if (data && !loading) {
       setFreshContents(data.contents);
