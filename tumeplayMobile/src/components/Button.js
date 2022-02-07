@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
 
 const Button = props => {
-  const {size, text, icon, isDisabled, onPress, style} = props;
+  const {size, text, icon, isDisabled, onPress, style, styleText} = props;
 
   const adjustStyle = () => {
     switch (size) {
@@ -25,7 +25,7 @@ const Button = props => {
       disabled={isDisabled}
       accessibilityRole="button"
       onPress={onPress}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, styleText]}>{text}</Text>
       {icon && (
         <Icon
           name="md-arrow-forward"
