@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontWeight: '600',
     letterSpacing: 0.6,
-    marginRight: 10,
+    paddingHorizontal: 5,
   },
   icon: {
     marginLeft: 8,

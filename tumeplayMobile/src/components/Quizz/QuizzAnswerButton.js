@@ -4,15 +4,23 @@ import {Colors} from '../../styles/Style';
 import config from '../../../config';
 
 const QuizzAnswerButton = props => {
-  const {answer, onPress, name, correctAnswer, hasAnswered, disabled} = props;
+  const {
+    answer,
+    onPress,
+    name,
+    correctAnswer,
+    hasAnswered,
+    disabled,
+    answeredKey,
+  } = props;
+
   return (
     <TouchableOpacity disabled={disabled} onPress={onPress} name={name}>
       <View
         style={[
           styles.button,
-          hasAnswered && answer.key === correctAnswer
-            ? styles.correctAnswer
-            : '',
+          hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
+          hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
         ]}>
         <Text
           style={[
@@ -23,13 +31,6 @@ const QuizzAnswerButton = props => {
           ]}>
           {answer.value}
         </Text>
-        {hasAnswered ? (
-          answer.key === correctAnswer ? (
-            <Text style={styles.emoji}>✅</Text>
-          ) : (
-            <Text style={styles.emoji}>❌</Text>
-          )
-        ) : null}
       </View>
     </TouchableOpacity>
   );
@@ -50,8 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3E1E8',
   },
   correctAnswer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#51B070',
     fontWeight: '600',
+  },
+  wrongAnswer: {
+    backgroundColor: '#FFF',
   },
   value: {
     justifyContent: 'center',
