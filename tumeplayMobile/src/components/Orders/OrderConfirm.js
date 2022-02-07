@@ -1,9 +1,10 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
 import Button from '../Button';
 import OrdersAPI from '../../services/api/orders';
 import config from '../../../config';
+import {useNavigation} from '@react-navigation/native';
 
 const OrderConfirm = props => {
   const {
@@ -13,6 +14,8 @@ const OrderConfirm = props => {
     deliveryMode,
     box,
   } = props;
+
+  const navigation = useNavigation();
 
   const sendOrder = async () => {
     const deptcode = userAdressInformations?.context?.split(',')[0];
@@ -40,6 +43,7 @@ const OrderConfirm = props => {
       ],
     };
     await OrdersAPI.orderBoxes(requestBody);
+    navigation.navigate('Home');
   };
 
   return (

@@ -21,8 +21,8 @@ import {
   GET_MOBILE_USER,
 } from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
-import { filter } from 'core-js/core/array';
 const NavigationStack = createNativeStackNavigator();
+
 const App = () => {
   const [user, setUser] = useState({});
   const [points, setPoints] = useState(null);
@@ -53,7 +53,8 @@ const App = () => {
     }
   };
 
-  const [getMobileUser, { data: data2, loading: loading2, error: error2 }] = useLazyQuery(GET_MOBILE_USER);
+  const [getMobileUser, {data: data2, loading: loading2, error: error2}] =
+    useLazyQuery(GET_MOBILE_USER);
 
   const retrieveDoneModulesIds = () => {
     let tmpIds = user?.history
@@ -73,19 +74,16 @@ const App = () => {
   }, [loading1, data1]);
 
   useEffect(() => {
-
     if (!loading2 && data2) {
       retrieveUserFromAPI();
     }
   }, [loading2, data2]);
 
   const retrieveUserFromAPI = async () => {
-
     if (data2?.statusCode === 404) {
       clearStorage();
       setPoints(0);
       setUser({points: 0});
-
     }
     if (data2?.utilisateursMobile) {
       setUser({...data2?.utilisateursMobile});
