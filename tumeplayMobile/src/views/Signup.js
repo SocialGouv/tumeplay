@@ -168,7 +168,6 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     fontFamily: Fonts.title,
     textAlign: 'center',
-    color: Colors.black,
   },
   subtitle: {
     fontSize: 18,
@@ -181,7 +180,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
     fontSize: 18,
-    color: Colors.black,
+
     paddingBottom: 20,
   },
 
@@ -214,7 +213,7 @@ const pickerSelectStyle = StyleSheet.create({
     paddingVertical: 12,
     borderColor: Colors.grey,
     borderRadius: 4,
-    color: Colors.black,
+
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputIOSContainer: {

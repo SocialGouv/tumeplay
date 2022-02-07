@@ -1,11 +1,12 @@
 import React, {useEffect, useContext} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
+import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import congrats from '../../../assets/custom_images/congrats.png';
 import clap from '../../../assets/custom_images/clap.png';
 import coin from '../../../assets/coin.png';
-import {Colors, Fonts} from '../../../styles/Style';
+import {Fonts} from '../../../styles/Style';
 import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
 import _ from 'lodash';
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Fonts.title,
-    color: Colors.black,
+
     fontSize: config.deviceWidth <= 375 ? 25 : 30,
     lineHeight: 38,
     paddingBottom: 5,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   points: {
     fontFamily: Fonts.strongText,
     fontSize: 22,
-    color: Colors.black,
+
     paddingRight: 10,
   },
   coin: {
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   },
   answerText: {
     fontSize: config.deviceWidth <= 375 ? 14 : 18,
-    color: Colors.black,
+
     lineHeight: 22,
   },
   firstAnswer: {
@@ -165,7 +166,6 @@ const styles = StyleSheet.create({
     bottom: config.deviceWidth <= 375 ? 80 : 110,
   },
   bottomText: {
-    color: Colors.black,
     fontWeight: '600',
     fontSize: config.deviceWidth <= 375 ? 14 : 18,
     paddingTop: 5,

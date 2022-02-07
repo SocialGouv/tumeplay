@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import Text from '../components/Text';
 import wave from '../assets/wave.png';
 import BoxCard from '../components/BoxCard';
 import Container from '../components/global/Container';
-import {Colors, Fonts} from '../styles/Style';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Fonts} from '../styles/Style';
 import {useQuery} from '@apollo/client';
 import {GET_BOXES} from '../services/api/boxes';
 import CustomModal from '../components/global/CustomModal';
@@ -102,7 +101,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.title,
     fontSize: 28,
     lineHeight: 38,
-    color: Colors.black,
   },
   subtitleContainer: {
     justifyContent: 'center',
@@ -120,7 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    color: Colors.black,
   },
   wave: {
     width: 26,

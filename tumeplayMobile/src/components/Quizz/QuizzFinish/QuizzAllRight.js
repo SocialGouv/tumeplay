@@ -1,17 +1,11 @@
 import React, {useContext, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
-import {Colors, Fonts} from '../../../styles/Style';
+import {Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
@@ -125,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: config.deviceWidth <= 375 ? 25 : 30,
     lineHeight: 38,
     marginTop: 49,
-    color: Colors.black,
+
     paddingBottom: 5,
   },
   subtitle: {
@@ -134,7 +128,6 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     marginTop: 28,
     marginBottom: 17,
-    color: Colors.black,
   },
   imageThumb: {
     width: config.deviceWidth <= 375 ? 30 : 60,
@@ -147,13 +140,12 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     textAlign: 'center',
     paddingHorizontal: 30,
-    color: Colors.black,
   },
   text: {
     fontSize: config.deviceWidth <= 375 ? 14 : 18,
     fontWeight: '600',
     lineHeight: 24,
-    color: Colors.black,
+
     textAlign: 'center',
     paddingBottom: 12,
   },
