@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
   ScrollView,
 } from 'react-native';
+import Text from '../../components/Text';
 import {REACT_APP_URL} from '@env';
 import {Colors, Fonts} from '../../styles/Style';
 import bg from '../../assets/test.png';
@@ -15,8 +15,12 @@ import {useQuery} from '@apollo/client';
 import {GET_SINGLE_CONTENT} from '../../services/api/contents';
 import Feedback from '../../components/Feedback';
 import Container from '../../components/global/Container';
+import Icon from 'react-native-vector-icons/Entypo';
+import config from '../../../config';
+import AppContext from '../../../AppContext';
 
 const ContentPage = ({navigation, route}) => {
+  const {user} = useContext(AppContext);
   const [content, setContent] = useState();
   const [nextContentID, setNextContentID] = useState('');
   const [remainingIDs, setRemainingIDs] = useState();
@@ -65,14 +69,24 @@ const ContentPage = ({navigation, route}) => {
       <View style={styles.imageContainer}>
         <ImageBackground style={styles.image} source={imageUrl}>
           <ImageBackground style={styles.image} source={bg}>
-            <TouchableOpacity
-              style={styles.linkContainer}
-              onPress={() => navigation.goBack()}>
-              <Text style={styles.chevron}>{'<'}</Text>
-              <Text style={styles.title} numberOfLines={4}>
-                {content?.title}
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.backLevel}>
+              <TouchableOpacity
+                style={styles.chevron}
+                onPress={() => navigation.goBack()}>
+                <Icon name="chevron-small-left" size={40} color="#000" />
+              </TouchableOpacity>
+              <Text style={styles.level}>NIVEAU {user.level}</Text>
+            </View>
+            <Text
+              style={[
+                styles.title,
+                content?.title.length > 50
+                  ? styles.bigTitle
+                  : styles.smallTitle,
+              ]}
+              numberOfLines={4}>
+              {content?.title}
+            </Text>
           </ImageBackground>
         </ImageBackground>
       </View>
@@ -114,10 +128,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    paddingTop: 0,
+  },
+  backLevel: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+  },
+  level: {
+    fontWeight: '600',
   },
   imageContainer: {
     width: '100%',
-    height: '35%',
+    height: '25%',
     display: 'flex',
     flexDirection: 'row',
   },
@@ -126,26 +149,21 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 1,
   },
-  linkContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 15,
-  },
-  chevron: {
-    fontSize: 35,
-    paddingVertical: 25,
-    alignContent: 'flex-start',
-  },
+  chevron: {},
   title: {
     width: '80%',
     height: '100%',
-    paddingHorizontal: 15,
-    paddingVertical: 35,
     fontFamily: Fonts.title,
-    fontSize: 30,
-    lineHeight: 30,
     zIndex: 2,
+    paddingLeft: 40,
+  },
+  smallTitle: {
+    fontSize: 30,
+    paddingTop: 10,
+    lineHeight: 30,
+  },
+  bigTitle: {
+    fontSize: 20,
   },
   textContainer: {
     paddingHorizontal: 30,

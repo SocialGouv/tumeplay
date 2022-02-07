@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {TouchableOpacity, StyleSheet, View} from 'react-native';
+import Text from '../components/Text';
 
 const BoxCard = props => {
   const {index, title, box, description, navigation} = props;
@@ -39,13 +39,11 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   titleBox: {
-    color: Colors.black,
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 24,
   },
   description: {
-    color: Colors.black,
     fontWeight: '400',
     fontSize: 14,
   },

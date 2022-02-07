@@ -1,4 +1,11 @@
-import {StyleSheet, TouchableOpacity, Text, Alert, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  View,
+  FlatList,
+} from 'react-native';
+import Text from '../../components/Text';
 import React, {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
@@ -27,6 +34,39 @@ const HomeOrdersInput = props => {
 
   const [geogouvData, setGeogouvData] = useState([]);
   const [hideResults, setHideResults] = useState(true);
+
+  const itemFields = [
+    {
+      id: 4,
+      kind: 'default',
+      label: 'EMAIL',
+      name: 'email',
+    },
+    {
+      id: 1,
+      kind: 'autocomplete',
+      label: 'ADRESSE',
+      name: 'address',
+    },
+    {
+      id: 2,
+      kind: 'default',
+      label: 'NOM',
+      name: 'last_name',
+    },
+    {
+      id: 3,
+      kind: 'default',
+      label: 'PRÉNOM',
+      name: 'first_name',
+    },
+    {
+      id: 5,
+      kind: 'default',
+      label: 'NUMERO DE TÉLÉPONE',
+      name: 'phone_number',
+    },
+  ];
 
   const handleFormValidation = values => {
     setUserInfos({...values});
@@ -87,99 +127,87 @@ const HomeOrdersInput = props => {
       validationSchema={validationSchema}>
       {({values, errors, touched, handleBlur, handleChange, setFieldValue}) => (
         <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            label="NOM"
-            onBlur={handleBlur('last_name')}
-            underlineColor="#EAE2D7"
-            activeUnderlineColor="#D42201"
-            value={values.last_name}
-            onChangeText={handleChange('last_name')}
-          />
-          {errors.last_name && touched.last_name && (
-            <Text style={styles.errorMessage}>{errors.last_name}</Text>
-          )}
-          <TextInput
-            style={styles.input}
-            label="PRÉNOM"
-            onBlur={handleBlur('first_name')}
-            underlineColor="#EAE2D7"
-            activeUnderlineColor="#D42201"
-            value={values.first_name}
-            onChangeText={handleChange('first_name')}
-          />
-          {errors.first_name && touched.first_name ? (
-            <Text style={styles.errorMessage}>{errors.first_name}</Text>
-          ) : null}
-          <TextInput
-            style={styles.input}
-            label="EMAIL"
-            onBlur={handleBlur('email')}
-            underlineColor="#EAE2D7"
-            activeUnderlineColor="#D42201"
-            value={values.email}
-            onChangeText={handleChange('email')}
-          />
-          {errors.email && touched.email ? (
-            <Text style={styles.errorMessage}>{errors.email}</Text>
-          ) : null}
-          <Autocomplete
-            containerStyle={styles.specialInput}
-            inputContainerStyle={styles.specialInput}
-            listStyle={styles.listResult}
-            data={geogouvData}
-            renderTextInput={() => (
-              <>
-                <TextInput
-                  style={styles.input}
-                  label="ADRESSE"
-                  onBlur={handleBlur('address')}
-                  underlineColor="#EAE2D7"
-                  activeUnderlineColor="#D42201"
-                  value={values.address}
-                  onChangeText={text => {
-                    setFieldValue('address', text);
-                    handleAutocomplete(text);
-                  }}
-                />
-                {errors.address && touched.address ? (
-                  <Text style={styles.errorMessage}>{errors.address}</Text>
-                ) : null}
-              </>
-            )}
-            hideResults={hideResults}
-            flatListProps={{
-              renderItem: ({item}) => (
-                <TouchableOpacity
-                  style={styles.displayResults}
-                  onPress={() =>
-                    handleAdressChange(item, values, setFieldValue)
-                  }>
-                  <Text>{item.label}</Text>
-                </TouchableOpacity>
-              ),
+          <FlatList
+            contentContainerStyle={{paddingBottom: 90}}
+            data={itemFields}
+            renderItem={({item}) => {
+              if (item.kind === 'autocomplete') {
+                return (
+                  <View>
+                    <Autocomplete
+                      containerStyle={styles.specialInput}
+                      inputContainerStyle={styles.specialInput}
+                      listStyle={styles.listResult}
+                      data={geogouvData}
+                      renderTextInput={() => (
+                        <>
+                          <TextInput
+                            style={styles.input}
+                            label={item.label}
+                            onBlur={handleBlur(item.name)}
+                            underlineColor="#EAE2D7"
+                            activeUnderlineColor="#D42201"
+                            value={values.address}
+                            onChangeText={text => {
+                              setFieldValue(item.name, text);
+                              handleAutocomplete(text);
+                            }}
+                          />
+                          {errors[item.name] && touched[item.name] ? (
+                            <Text style={styles.errorMessage}>
+                              {errors[item.name]}
+                            </Text>
+                          ) : null}
+                        </>
+                      )}
+                      hideResults={hideResults}
+                      flatListProps={{
+                        renderItem: ({item}) => (
+                          <TouchableOpacity
+                            style={styles.displayResults}
+                            onPress={() =>
+                              handleAdressChange(item, values, setFieldValue)
+                            }>
+                            <Text>{item.label}</Text>
+                          </TouchableOpacity>
+                        ),
+                      }}
+                    />
+                  </View>
+                );
+              } else {
+                return (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      label={item.label}
+                      onBlur={handleBlur(item.name)}
+                      underlineColor="#EAE2D7"
+                      activeUnderlineColor="#D42201"
+                      value={values[item.name]}
+                      onChangeText={handleChange(item.name)}
+                    />
+                    {errors[item.name] && touched[item.name] && (
+                      <Text style={styles.errorMessage}>
+                        {errors[item.name]}
+                      </Text>
+                    )}
+                  </>
+                );
+              }
             }}
+            keyExtractor={item => item.id}
           />
-          <TextInput
-            style={styles.lastInput}
-            label="NUMERO DE TÉLÉPONE"
-            onBlur={handleBlur('phone_number')}
-            underlineColor="#EAE2D7"
-            activeUnderlineColor="#D42201"
-            value={values.phone_number}
-            onChangeText={handleChange('phone_number')}
-          />
-          {errors.phone_number && touched.phone_number ? (
-            <Text style={styles.errorMessage}>{errors.phone_number}</Text>
-          ) : null}
-          {values.phone_number !== '' && !errors.phone_number && (
-            <Button
-              style={styles.button}
-              text="Je continue"
-              size="intermediate"
-              icon={true}
-              onPress={() => handleFormValidation(values)}
-            />
+          {!!values.first_name && !Object.keys(errors).length && (
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.button}
+                text="Je continue"
+                size="intermediate"
+                icon={true}
+                onPress={() => handleFormValidation(values)}
+              />
+            </View>
           )}
         </View>
       )}
@@ -190,9 +218,7 @@ const HomeOrdersInput = props => {
 export default HomeOrdersInput;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.5,
-  },
+  container: {},
   input: {
     marginHorizontal: 22,
     backgroundColor: '#FFFFFF',
@@ -224,4 +250,18 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
   },
+  buttonContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 10,
+  },
+  // autocompleteContainer: {
+  //   flex: 1,
+  //   left: 0,
+  //   position: 'absolute',
+  //   right: 0,
+  //   top: 0,
+  //   zIndex: 1,
+  // },
 });

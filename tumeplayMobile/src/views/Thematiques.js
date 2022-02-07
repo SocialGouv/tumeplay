@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
+import Text from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
-import {Colors, Fonts, bgColors, borderColors} from '../styles/Style';
+import {Fonts, bgColors, borderColors} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
 import dynamite from '../assets/custom_images/dynamite.png';
 import hello from '../assets/custom_images/hello.png';
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.title,
     lineHeight: 38,
-    color: Colors.black,
+
     marginTop: 12,
   },
   subtitle: {

@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, Text, View, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
 import {Colors, Fonts} from '../styles/Style';
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
     paddingBottom: 12,
-    color: Colors.black,
   },
   carouselContainer: {
     flex: 1,
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: Fonts.subtitle,
-    color: Colors.black,
     alignSelf: 'flex-start',
     marginTop: 30,
     marginBottom: 12,

@@ -40,16 +40,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   text: {
-    fontWeight: '400',
-    color: Colors.black,
+    fontWeight: 'bold',
     paddingRight: 5,
     fontSize: 20,
     lineHeight: 22,
     marginBottom: 6,
   },
+  level: {
+    paddingRight: 15,
+    fontWeight: 'bold',
+  },
   boldText: {
     fontWeight: '700',
-    color: Colors.black,
     paddingRight: 5,
     fontSize: 20,
     lineHeight: 22,

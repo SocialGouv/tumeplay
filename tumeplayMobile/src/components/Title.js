@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
+import Text from '../components/Text';
 import wave from '../assets/wave.png';
-import {Colors, Fonts} from '../styles/Style';
+import {Fonts} from '../styles/Style';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 const Title = ({title}) => {
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.title,
     lineHeight: 38,
-    color: Colors.black,
   },
   image: {
     marginTop: 3,
