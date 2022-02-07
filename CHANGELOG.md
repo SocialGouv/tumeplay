@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/SocialGouv/Tumeplay/compare/v1.51.0...v1.52.0) (2022-02-07)
+
+
+### Features
+
+* add Trou questions display & correct bugs at load ([#297](https://github.com/SocialGouv/Tumeplay/issues/297)) ([4aca5e3](https://github.com/SocialGouv/Tumeplay/commit/4aca5e3a96185b748758e8334b5535bd3a00a47d))
+
 # [1.51.0](https://github.com/SocialGouv/Tumeplay/compare/v1.50.0...v1.51.0) (2022-02-07)
 
 
