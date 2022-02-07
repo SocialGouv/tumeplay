@@ -10,8 +10,9 @@ const QuizzAnswerButton = props => {
     name,
     correctAnswer,
     hasAnswered,
-    disabled,
+    answerTrou,
     answeredKey,
+    disabled,
   } = props;
 
   return (
@@ -19,6 +20,10 @@ const QuizzAnswerButton = props => {
       <View
         style={[
           styles.button,
+          hasAnswered && answer.key === correctAnswer
+            ? styles.correctAnswer
+            : '',
+          answerTrou ? styles.buttonTrou : '',
           hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
         ]}>
@@ -26,6 +31,7 @@ const QuizzAnswerButton = props => {
           style={[
             styles.value,
             hasAnswered && answer.key === correctAnswer && {fontWeight: '700'},
+            answerTrou ? styles.valueTrou : '',
           ]}>
           {answer.value}
         </Text>
@@ -39,14 +45,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    minWidth: config.deviceWidth <= 375 ? '100%' : 170,
-    maxWidth: config.deviceWidth <= 375 ? '100%' : 170,
+    minWidth: config.deviceWidth <= 375 ? '100%' : 180,
+    maxWidth: config.deviceWidth <= 375 ? '100%' : 180,
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     height: config.deviceWidth <= 375 ? 50 : 80,
     backgroundColor: '#F3E1E8',
+  },
+  buttonTrou: {
+    height: config.deviceWidth <= 375 ? 50 : 60,
   },
   correctAnswer: {
     borderColor: '#51B070',
@@ -59,9 +68,12 @@ const styles = StyleSheet.create({
   },
   value: {
     justifyContent: 'center',
-
-    paddingRight: 10,
+    color: Colors.black,
     textAlign: 'center',
+  },
+  valueTrou: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   emoji: {
     justifyContent: 'center',
