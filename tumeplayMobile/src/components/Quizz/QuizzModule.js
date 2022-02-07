@@ -31,7 +31,6 @@ const QuizzModule = ({navigation, route}) => {
   const retry = route?.params?.retry;
   const [disabled, setDisabled] = useState(false);
   const [showAnswer, setshowAnswer] = useState(false);
-  const [selected, setSelected] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
 
   const formatAnswers = () => {
@@ -56,7 +55,6 @@ const QuizzModule = ({navigation, route}) => {
     setDisabled(!disabled);
     setHasAnswered(!hasAnswered);
     setDisplayResponse(!displayResponse);
-    setSelected(!selected);
   };
 
   const displayAnswer = responses?.map((ans, index) => {
@@ -68,7 +66,6 @@ const QuizzModule = ({navigation, route}) => {
           hasAnswered={hasAnswered}
           disabled={disabled}
           key={ans.key}
-          selected={selected}
           answeredKey={answeredKey}
           onPress={() => displayAnswerText(ans.key)}
         />
