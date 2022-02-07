@@ -22,8 +22,8 @@ const LevelPointsIndicator = ({style, onPress}) => {
         progress={progress}
         width={150}
         color={'#51B070'}
-        unfilledColor="#00000033"
-        borderColor="#00000033"
+        unfilledColor="#DFD7CD"
+        borderColor="#DFD7CD"
       />
     </TouchableOpacity>
   );

@@ -1,22 +1,29 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import AppContext from '../../../AppContext';
-import coin from '../../assets/coin.png';
 import {Colors} from '../../styles/Style';
+import * as Progress from 'react-native-progress';
 
 const TopLevelPointIndicator = ({style}) => {
-  const context = useContext(AppContext);
-  const points = context.points;
+  const {user, doneModules_ids} = useContext(AppContext);
+
+  const fullProgressLength = 6;
+
+  const progress = doneModules_ids.length / fullProgressLength;
 
   return (
     <View style={[style, styles.container]}>
-      <Text style={[styles.text, styles.textLevel]}>Niveau 1</Text>
-      <View style={styles.pointsContainer}>
-        <Image source={coin} style={styles.image} />
-        <Text style={styles.text}>
-          {''} {points} / 3000
-        </Text>
-      </View>
+      <Text style={[styles.text, styles.textLevel]}>
+        Niveau <Text>{user.level}</Text>
+      </Text>
+      <Progress.Bar
+        progress={progress}
+        width={70}
+        color={'#51B070'}
+        unfilledColor="#DFD7CD"
+        borderColor="#DFD7CD"
+        style={styles.progressBar}
+      />
     </View>
   );
 };
@@ -30,29 +37,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignItems: 'center',
   },
-  pointsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingRight: 12,
-    paddingLeft: 5,
-    paddingVertical: 5,
-    borderRadius: 8,
-  },
-  image: {
-    width: 15,
-    height: 15,
-  },
-  text: {
-    color: Colors.black,
-    fontSize: 16,
-    textTransform: 'uppercase',
-    fontWeight: '600',
-  },
-  textLevel: {
-    paddingRight: 11,
+  progressBar: {
+    marginHorizontal: 18,
   },
 });
 
