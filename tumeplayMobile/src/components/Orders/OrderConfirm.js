@@ -81,7 +81,8 @@ const OrderConfirm = props => {
       <Button
         style={styles.button}
         text="Je valide cette commande"
-        size="intermediate"
+        size="large"
+        special
         onPress={() => sendOrder()}
       />
     </View>

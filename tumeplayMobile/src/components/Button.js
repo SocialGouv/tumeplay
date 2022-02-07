@@ -5,7 +5,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
 
 const Button = props => {
-  const {size, text, icon, isDisabled, onPress, style, styleText} = props;
+  const {
+    size,
+    text,
+    icon,
+    isDisabled,
+    onPress,
+    style,
+    styleText,
+    special,
+    left,
+  } = props;
 
   const adjustStyle = () => {
     switch (size) {
@@ -21,16 +31,30 @@ const Button = props => {
   };
   return (
     <TouchableOpacity
-      style={[adjustStyle(), style]}
+      style={[
+        adjustStyle(),
+        style,
+        special && {backgroundColor: '#D3C8FB', height: 56},
+      ]}
       disabled={isDisabled}
       accessibilityRole="button"
       onPress={onPress}>
-      <Text style={[styles.text, styleText]}>{text}</Text>
-      {icon && (
+      {left && icon && (
+        <Icon
+          name="play"
+          size={22}
+          color={special ? '#000' : '#fff'}
+          style={styles.icon}
+        />
+      )}
+      <Text style={[styles.text, styleText, special && {color: '#000'}]}>
+        {text}
+      </Text>
+      {!left && icon && (
         <Icon
           name="md-arrow-forward"
           size={22}
-          color="#fff"
+          color={special ? '#000' : '#fff'}
           style={styles.icon}
         />
       )}
@@ -41,7 +65,7 @@ const Button = props => {
 const styles = StyleSheet.create({
   longPressable: {
     width: '100%',
-    borderRadius: 100,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
@@ -54,7 +78,7 @@ const styles = StyleSheet.create({
   intermediataPressable: {
     width: 290,
     height: 50,
-    borderRadius: 100,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
@@ -66,7 +90,7 @@ const styles = StyleSheet.create({
   },
   mediumPressable: {
     height: 50,
-    borderRadius: 100,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
@@ -80,7 +104,7 @@ const styles = StyleSheet.create({
   smallPressable: {
     width: 70,
     height: 35,
-    borderRadius: 100,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',

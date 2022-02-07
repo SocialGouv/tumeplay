@@ -25,9 +25,7 @@ const QuizzAnswerButton = props => {
         <Text
           style={[
             styles.value,
-            hasAnswered && answer.key === correctAnswer
-              ? styles.correctAnswer
-              : '',
+            hasAnswered && answer.key === correctAnswer && {fontWeight: '700'},
           ]}>
           {answer.value}
         </Text>
@@ -51,7 +49,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3E1E8',
   },
   correctAnswer: {
-    backgroundColor: '#51B070',
+    borderColor: '#51B070',
+    borderWidth: 1,
+    backgroundColor: '#DDF4ED',
     fontWeight: '600',
   },
   wrongAnswer: {
