@@ -11,8 +11,10 @@ const QuizzAnswerButton = props => {
     correctAnswer,
     hasAnswered,
     answerTrou,
+    answeredKey,
     disabled,
   } = props;
+  
   return (
     <TouchableOpacity disabled={disabled} onPress={onPress} name={name}>
       <View
@@ -22,23 +24,16 @@ const QuizzAnswerButton = props => {
             ? styles.correctAnswer
             : '',
           answerTrou ? styles.buttonTrou : '',
+          hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
+          hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
         ]}>
         <Text
           style={[
             styles.value,
-            hasAnswered && answer.key === correctAnswer
-              ? styles.correctAnswer
-              : '',
+            hasAnswered && answer.key === correctAnswer && {fontWeight: '700'},
           ]}>
           {answer.value}
         </Text>
-        {hasAnswered ? (
-          answer.key === correctAnswer ? (
-            <Text style={styles.emoji}>✅</Text>
-          ) : (
-            <Text style={styles.emoji}>❌</Text>
-          )
-        ) : null}
       </View>
     </TouchableOpacity>
   );
@@ -62,8 +57,13 @@ const styles = StyleSheet.create({
     height: config.deviceWidth <= 375 ? 50 : 60,
   },
   correctAnswer: {
-    backgroundColor: '#fff',
+    borderColor: '#51B070',
+    borderWidth: 1,
+    backgroundColor: '#DDF4ED',
     fontWeight: '600',
+  },
+  wrongAnswer: {
+    backgroundColor: '#FFF',
   },
   value: {
     justifyContent: 'center',

@@ -140,9 +140,9 @@ const Signup = ({user, setUser}) => {
       <View style={styles.buttonContainer}>
         <Button
           style={styles.button}
-          text={'Je continue'}
+          special
+          text={'Je valide mon profil'}
           size={'large'}
-          icon={true}
           onPress={() => handleValidation()}
         />
       </View>

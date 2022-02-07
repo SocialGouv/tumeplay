@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/SocialGouv/Tumeplay/compare/v1.49.0...v1.50.0) (2022-02-07)
+
+
+### Features
+
+* adding green color to correct answer + level indicator on page … ([#295](https://github.com/SocialGouv/Tumeplay/issues/295)) ([780d8dd](https://github.com/SocialGouv/Tumeplay/commit/780d8dd5a865febb6744a265e9b1ca991bc8d388))
+
 # [1.49.0](https://github.com/SocialGouv/Tumeplay/compare/v1.48.0...v1.49.0) (2022-02-07)
 
 
