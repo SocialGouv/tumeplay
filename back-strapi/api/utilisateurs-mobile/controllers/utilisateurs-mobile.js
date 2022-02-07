@@ -16,9 +16,13 @@ module.exports = {
     });
 
     if (!user) {
-
-      return { user_id: '', id: 0, history: [], error: "User not found", status: 404 };
-
+      return {
+        user_id: "",
+        id: 0,
+        history: [],
+        error: "User not found",
+        status: 404,
+      };
     }
 
     const history = await strapi.services["historique"].find(
@@ -50,6 +54,13 @@ module.exports = {
     }
 
     user.level = user_level;
+
+    const nb_modules_in_level = (modules_by_levels[user.level] || []).length;
+    const nb_modules_completed_in_level = (
+      history_modules_by_levels[user.level] || []
+    ).length;
+    user.percentage_level_completed =
+      nb_modules_completed_in_level / nb_modules_in_level || 0;
 
     user.history = history.map((item) => {
       return {

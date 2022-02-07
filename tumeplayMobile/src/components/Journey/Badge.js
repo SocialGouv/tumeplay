@@ -4,10 +4,12 @@ import {Image, StyleSheet, View} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
 import check from '../../assets/Check.png';
 import AppContext from '../../../AppContext';
+import {useNavigation} from '@react-navigation/native';
 
 const Badge = module => {
   const context = useContext(AppContext);
   const {user} = context;
+  const route = useNavigation();
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const [done, setDone] = useState(false);

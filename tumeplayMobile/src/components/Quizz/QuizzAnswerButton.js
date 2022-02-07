@@ -16,13 +16,15 @@ const QuizzAnswerButton = props => {
   } = props;
 
   return (
-    <TouchableOpacity disabled={disabled} onPress={onPress} name={name}>
+    <TouchableOpacity
+      style={answerTrou ? styles.buttonContainerTrou : styles.buttonContainer}
+      disabled={disabled}
+      onPress={onPress}
+      name={name}>
       <View
         style={[
           styles.button,
-          hasAnswered && answer.key === correctAnswer
-            ? styles.correctAnswer
-            : '',
+          hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
           answerTrou ? styles.buttonTrou : '',
           hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
@@ -41,12 +43,17 @@ const QuizzAnswerButton = props => {
 };
 
 const styles = StyleSheet.create({
+  buttonContainerTrou: {
+    width: 250,
+  },
+  buttonContainer: {
+    width: config.deviceWidth <= 375 ? '100%' : '50%',
+    paddingHorizontal: config.deviceWidth <= 375 ? 0 : 10,
+  },
   button: {
     display: 'flex',
-    flexDirection: 'row',
     alignSelf: 'center',
-    minWidth: config.deviceWidth <= 375 ? '100%' : 180,
-    maxWidth: config.deviceWidth <= 375 ? '100%' : 180,
+    width: '100%',
     marginVertical: 10,
     borderRadius: 8,
     justifyContent: 'center',
