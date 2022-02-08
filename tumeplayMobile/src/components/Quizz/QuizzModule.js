@@ -111,7 +111,7 @@ const QuizzModule = ({navigation, route}) => {
   }, [route]);
 
   return (
-    <View style={{height: '100%', backgroundColor: '#F9EEF2'}}>
+    <View style={styles.bgContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Container background={bg} style={styles.container}>
           <View style={styles.levelIndicator}>
@@ -166,6 +166,10 @@ const QuizzModule = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
+  bgContainer: {
+    height: '100%',
+    backgroundColor: '#F9EEF2',
+  },
   scrollContainer: {
     alignContent: 'center',
     paddingBottom: 60,
