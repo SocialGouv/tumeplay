@@ -1,3 +1,10 @@
+# [1.60.0](https://github.com/SocialGouv/Tumeplay/compare/v1.59.0...v1.60.0) (2022-02-08)
+
+
+### Features
+
+* embed next_module in get user ([248e591](https://github.com/SocialGouv/Tumeplay/commit/248e591c132526c9f40305d4049f9aa4993186a8))
+
 # [1.59.0](https://github.com/SocialGouv/Tumeplay/compare/v1.58.0...v1.59.0) (2022-02-08)
 
 
