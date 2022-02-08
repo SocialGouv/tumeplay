@@ -9,47 +9,31 @@ import {Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
-import {
-  UPDATE_MOBILE_USER_HISTORY,
-  UPDATE_MOBILE_USER_POINTS,
-} from '../../../services/api/mobile_users';
+import {UPDATE_MOBILE_USER_HISTORY} from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
 
-const QuizzAllRight = ({pointsEarned, navigation, module_id}) => {
+const QuizzAllRight = ({navigation, module_id}) => {
   const context = useContext(AppContext);
-  const {user, setUser, points, strapi_user_id, setPoints} = context;
+  const {user, reloadUser} = context;
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
-  const [updatePoints] = useMutation(UPDATE_MOBILE_USER_POINTS);
 
   const checkUserHistory = async () => {
-    let response = null;
     if (user?.history) {
       let currentHistory = user?.history.find(
         history => history.module_id === module_id,
       );
       try {
-        response = await updateHistory({
+        await updateHistory({
           variables: {
             history_id: currentHistory?.id,
             module_id: currentHistory?.module_id,
             status: 'success',
           },
         });
-        let tmpUser = user;
-        tmpUser.history = _.without(user?.history, currentHistory);
-        tmpUser.history.push(response?.data?.updateHistorique?.historique);
-        delete tmpUser.pending_module;
-        updatePoints({
-          variables: {
-            user_id: strapi_user_id,
-            points: points + pointsEarned,
-          },
-        });
-        setUser({...tmpUser});
-        setPoints(points + pointsEarned);
+        reloadUser();
       } catch (error) {
         console.log("Erreur à l'update : ", error);
         Alert.alert(
