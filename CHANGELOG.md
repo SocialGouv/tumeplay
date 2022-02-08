@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/SocialGouv/Tumeplay/compare/v1.53.2...v1.54.0) (2022-02-08)
+
+
+### Features
+
+* handling order address input to fix zIndex error on IOS ([#304](https://github.com/SocialGouv/Tumeplay/issues/304)) ([b0c77e5](https://github.com/SocialGouv/Tumeplay/commit/b0c77e586b86873168667c0a52491cb5d84b21f7))
+
 ## [1.53.2](https://github.com/SocialGouv/Tumeplay/compare/v1.53.1...v1.53.2) (2022-02-08)
 
 
