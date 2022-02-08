@@ -1,5 +1,5 @@
 import {useQuery} from '@apollo/client';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
@@ -7,15 +7,17 @@ import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
+import AppContext from '../../AppContext';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
+  const {user} = useContext(AppContext);
 
   const backgroundColor = route.params.backgroundColor;
   const [contents, setContents] = useState([]);
 
   const {data, loading} = useQuery(GET_CONTENTS, {
-    variables: {theme_id: route.params.theme_id},
+    variables: {theme_id: route.params.theme_id, level: user.level},
   });
 
   const contents_ids = contents.map(content => content.id);

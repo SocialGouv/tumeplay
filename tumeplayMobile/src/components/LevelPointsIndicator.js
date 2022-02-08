@@ -7,12 +7,9 @@ import Text from '../components/Text';
 
 const LevelPointsIndicator = ({style, onPress}) => {
   const context = useContext(AppContext);
-  const {user, doneModules_ids} = context;
+  const {user} = context;
 
-  const fullProgressLength = 6;
-
-  const progress = doneModules_ids.length / fullProgressLength;
-
+  const progress = user.percentage_level_completed || 0;
   return (
     <TouchableOpacity style={[style, styles.container]} onPress={onPress}>
       <Text style={styles.text}>

@@ -20,6 +20,7 @@ import {useMutation} from '@apollo/client';
 const QuizzStartPage = ({navigation, route}) => {
   const context = useContext(AppContext);
   const {doneModules_ids, strapi_user_id, user, reloadUser} = context;
+  console.log(strapi_user_id);
   const {data, loading} = useQuery(GET_MODULES, {
     variables: {
       level: user?.level,
