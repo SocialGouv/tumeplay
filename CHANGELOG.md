@@ -1,3 +1,10 @@
+# [1.58.0](https://github.com/SocialGouv/Tumeplay/compare/v1.57.0...v1.58.0) (2022-02-08)
+
+
+### Features
+
+* removing scroll ([955fffc](https://github.com/SocialGouv/Tumeplay/commit/955fffcca92303ffe9b15de310867dab31d92697))
+
 # [1.57.0](https://github.com/SocialGouv/Tumeplay/compare/v1.56.0...v1.57.0) (2022-02-08)
 
 
