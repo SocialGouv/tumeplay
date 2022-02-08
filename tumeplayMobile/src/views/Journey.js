@@ -7,8 +7,7 @@ import WrapperLevelBadges from '../components/Journey/WrapperLevelBadges';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import {GET_LEVELS} from '../services/api/levels';
 import {GET_MODULES} from '../services/api/modules';
-import {Fonts} from '../styles/Style';
-import Text from '../components/Text';
+import Title from '../components/Title';
 
 const Journey = () => {
   const useMultipleQuery = () => {
@@ -48,8 +47,7 @@ const Journey = () => {
 
   return (
     <Container style={styles.container}>
-      <Text style={styles.title}>Ton parcours</Text>
-      <Image style={styles.wave} source={wave} />
+      <Title title="Ton parcours" />
       <LevelPointsIndicator points={'500'} style={styles.pointContainer} />
       <ScrollView>{displayWrappers}</ScrollView>
     </Container>
@@ -62,17 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 21,
   },
-  title: {
-    fontFamily: Fonts.title,
-    fontSize: 28,
-    lineHeight: 38,
-  },
   pointContainer: {
     marginVertical: 18,
-  },
-  wave: {
-    width: 26,
-    height: 10,
   },
 });
 
