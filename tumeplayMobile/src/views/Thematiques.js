@@ -5,12 +5,16 @@ import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
 import {Fonts, bgColors, borderColors} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
-import dynamite from '../assets/custom_images/dynamite.png';
-import hello from '../assets/custom_images/hello.png';
-import metal from '../assets/custom_images/metal.png';
-import peach from '../assets/custom_images/peach.png';
-import peace from '../assets/custom_images/peace.png';
-import thumbs_up from '../assets/custom_images/thumbs_up.png';
+import pleasure from '../assets/custom_images/PLAISIR.png';
+import culture from '../assets/custom_images/CULTURE_G.png';
+import anatomie from '../assets/custom_images/ANATOMIE.png';
+import medical from '../assets/custom_images/MEDICAL.png';
+import law from '../assets/custom_images/LOI.png';
+import gender from '../assets/custom_images/IDENTITE.png';
+import relationship from '../assets/custom_images/RELATIONS.png';
+import orientation from '../assets/custom_images/ORIENTATION.png';
+import link from '../assets/custom_images/LIENS.png';
+
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
 import Container from '../components/global/Container';
@@ -21,7 +25,17 @@ export default function Thematiques(props) {
   const {data, loading} = useQuery(GET_THEMES);
   const [thematiques, setThematiques] = useState([]);
 
-  const images = [dynamite, peace, peach, thumbs_up, metal, hello];
+  const images = [
+    pleasure,
+    culture,
+    anatomie,
+    medical,
+    law,
+    gender,
+    relationship,
+    orientation,
+    link,
+  ];
 
   const renderItem = ({item, index}) => {
     return (
@@ -55,6 +69,7 @@ export default function Thematiques(props) {
           directionalLockEnabled={true}
           keyExtractor={item => item.id}
           numColumns={2}
+          showsVerticalScrollIndicator={false}
           style={styles.themeContainer}
         />
       </View>
