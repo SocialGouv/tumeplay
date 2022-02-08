@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.strongText,
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 30,
     paddingBottom: 12,
   },

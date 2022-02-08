@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
+import AppContext from '../../../AppContext';
 
 const ContentCard = ({item, backgroundColor, navigation, contents_ids}) => {
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
+  const {user} = useContext(AppContext);
 
   return (
     <TouchableOpacity
@@ -18,7 +20,7 @@ const ContentCard = ({item, backgroundColor, navigation, contents_ids}) => {
       style={[styles.container, {backgroundColor: backgroundColor}]}>
       <View style={styles.cardContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.level}>NIVEAU 1</Text>
+          <Text style={styles.level}>NIVEAU{user.level}</Text>
           <Text style={styles.title}>{item?.title}</Text>
         </View>
         <View style={styles.imageContainer}>

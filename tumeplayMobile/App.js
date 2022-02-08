@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContentsPage from './src/views/Contents';
 import ContentPage from './src/views/Contents/ContentPage';
@@ -20,6 +20,7 @@ import Text from './src/components/Text';
 import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
 const NavigationStack = createNativeStackNavigator();
+import {Colors} from './src/styles/Style';
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -28,6 +29,9 @@ const App = () => {
   const [isUserLoaded, setIsUserLoaded] = useState(false);
 
   const {data: data1, loading: loading1} = useQuery(GET_THEMES);
+
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = Colors.background;
 
   const checkUserIdInStorage = async () => {
     let encryptedUser = await EncryptedStorage.getItem('user');
@@ -133,7 +137,7 @@ const App = () => {
         <Signup user={user} setUser={setUser} />
       )}
       {user?.isOnboarded && user?.isSignedUp && (
-        <NavigationContainer>
+        <NavigationContainer theme={navTheme}>
           <NavigationStack.Navigator
             screenOptions={{
               headerShown: false,
