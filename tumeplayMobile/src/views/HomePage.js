@@ -15,9 +15,14 @@ import config from '../../config';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
+  const {user} = useContext(AppContext);
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
-  const {data, loading} = useQuery(GET_FRESH_CONTENTS);
+  const {data, loading} = useQuery(GET_FRESH_CONTENTS, {
+    variables: {
+      level: user.level,
+    },
+  });
 
   useEffect(() => {
     if (data && !loading) {

@@ -15,11 +15,9 @@ import Container from '../../global/Container';
 import config from '../../../../config';
 
 const QuizzWithWrongAnswers = props => {
-  const {correctAnswers, wrongAnswers, navigation, pointsEarned, module_id} =
-    props;
+  const {correctAnswers, wrongAnswers, navigation, module_id} = props;
 
   const context = useContext(AppContext);
-  const {points, setPoints} = context;
   const restartQuizz = () => {
     console.log('length', correctAnswers.length);
     navigation.navigate('QuizzModule', {
@@ -28,10 +26,6 @@ const QuizzWithWrongAnswers = props => {
       improveWrongAnswers: true,
     });
   };
-
-  useEffect(() => {
-    setPoints(points + pointsEarned);
-  }, []);
 
   return (
     <Container style={styles.container} background={bg}>
@@ -43,11 +37,7 @@ const QuizzWithWrongAnswers = props => {
         <Image source={wave} />
       </View>
       <View style={styles.pointsContainer}>
-        <Text style={styles.points}>
-          {' '}
-          <Text style={styles.boldPoints}>+ {pointsEarned} </Text>
-          points
-        </Text>
+        <Text style={styles.points}>{'CHANGER LE TEXT'}</Text>
         <Image source={coin} style={styles.coin} />
       </View>
       <Image style={styles.congratsImg} source={congrats} />

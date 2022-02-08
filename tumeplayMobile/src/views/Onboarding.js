@@ -51,7 +51,6 @@ export default function Onboarding({user, setUser}) {
   const finishOnboarding = () => {
     let tmpUser = user;
     tmpUser.isOnboarded = true;
-    tmpUser.points = 0;
     setUser({...tmpUser});
   };
   const displaySwipperContent = steps.map((step, i) => {
