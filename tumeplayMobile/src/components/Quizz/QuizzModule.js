@@ -118,31 +118,33 @@ const QuizzModule = ({navigation, route}) => {
 
   return (
     <View style={styles.bgContainer}>
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <Container background={bg} style={styles.container}>
-        <View style={styles.levelIndicator}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon
-              name="md-arrow-back"
-              size={30}
-              color="#000"
-              style={styles.icon}
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}>
+        <Container background={bg} style={styles.container}>
+          <View style={styles.levelIndicator}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="md-arrow-back"
+                size={30}
+                color="#000"
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+            <TopLevelPointIndicator />
+          </View>
+          <View style={styles.stepIndicatorContainer}>
+            <Progress.Circle
+              showsText={true}
+              borderWidth={0}
+              thickness={5}
+              formatText={() => questions.length}
+              unfilledColor={'#FFFFFF80'}
+              textStyle={styles.stepIndicator}
+              progress={progress}
+              size={60}
+              color={'#EC6233'}
             />
-          </TouchableOpacity>
-          <TopLevelPointIndicator />
-        </View>
-        <View style={styles.stepIndicatorContainer}>
-          <Progress.Circle
-            showsText={true}
-            borderWidth={0}
-            thickness={5}
-            formatText={() => questions.length}
-            unfilledColor={'#FFFFFF80'}
-            textStyle={styles.stepIndicator}
-            progress={progress}
-            size={60}
-            color={'#EC6233'}
-          />
           </View>
           {question.kind === 'Trou' && (
             <Text style={styles.completeText}>Complète cette phrase</Text>
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     position: config.deviceWidth <= 400 ? 'relative' : 'absolute',
-    bottom: 5,
+    bottom: 15,
     left: 0,
     right: 0,
   },
