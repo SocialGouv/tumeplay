@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/SocialGouv/Tumeplay/compare/v1.55.0...v1.56.0) (2022-02-08)
+
+
+### Features
+
+* review theme images ([#306](https://github.com/SocialGouv/Tumeplay/issues/306)) ([a8a455a](https://github.com/SocialGouv/Tumeplay/commit/a8a455a2fa16156bb88cf6c602d1ee96cba65854))
+
 # [1.55.0](https://github.com/SocialGouv/Tumeplay/compare/v1.54.0...v1.55.0) (2022-02-08)
 
 
