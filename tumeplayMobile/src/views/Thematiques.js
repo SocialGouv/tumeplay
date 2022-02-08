@@ -69,6 +69,7 @@ export default function Thematiques(props) {
           directionalLockEnabled={true}
           keyExtractor={item => item.id}
           numColumns={2}
+          showsVerticalScrollIndicator={false}
           style={styles.themeContainer}
         />
       </View>

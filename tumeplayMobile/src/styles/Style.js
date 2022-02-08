@@ -24,6 +24,8 @@ export const bgColors = [
   '#F7E6EC',
   '#E5EFFF',
   '#EAE2D7',
+  '#E0E6EE',
+  '#FFFFFF',
 ];
 
 export const borderColors = [
@@ -33,4 +35,7 @@ export const borderColors = [
   '#6E48FF',
   '#FF6F51',
   '#4D91FF',
+  '#C5BDB0',
+  '#AABBD1',
+  '#CDCDCD',
 ];
