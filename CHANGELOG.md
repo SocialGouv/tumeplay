@@ -1,3 +1,10 @@
+# [1.59.0](https://github.com/SocialGouv/Tumeplay/compare/v1.58.0...v1.59.0) (2022-02-08)
+
+
+### Features
+
+* mobile feedbacks implementation ([#307](https://github.com/SocialGouv/Tumeplay/issues/307)) ([f05008b](https://github.com/SocialGouv/Tumeplay/commit/f05008bbb0c8ebec05ad95eedd498df52df9d7dd))
+
 # [1.58.0](https://github.com/SocialGouv/Tumeplay/compare/v1.57.0...v1.58.0) (2022-02-08)
 
 
