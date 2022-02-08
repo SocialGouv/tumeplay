@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginBottom: 15,
+    width: 40,
+    height: 40,
   },
   text: {
     fontFamily: Fonts.subtitle,

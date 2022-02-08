@@ -48,8 +48,10 @@ const Journey = () => {
   return (
     <Container style={styles.container}>
       <Title title="Ton parcours" />
-      <LevelPointsIndicator points={'500'} style={styles.pointContainer} />
-      <ScrollView>{displayWrappers}</ScrollView>
+      <LevelPointsIndicator style={styles.pointContainer} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {displayWrappers}
+      </ScrollView>
     </Container>
   );
 };

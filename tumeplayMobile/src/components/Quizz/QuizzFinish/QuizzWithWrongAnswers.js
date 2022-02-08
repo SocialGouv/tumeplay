@@ -36,10 +36,6 @@ const QuizzWithWrongAnswers = props => {
         <Text style={styles.title}>BRAVO !</Text>
         <Image source={wave} />
       </View>
-      <View style={styles.pointsContainer}>
-        <Text style={styles.points}>{'CHANGER LE TEXT'}</Text>
-        <Image source={coin} style={styles.coin} />
-      </View>
       <Image style={styles.congratsImg} source={congrats} />
       <View style={styles.answerContainer}>
         <Text style={[styles.answerText, styles.firstAnswer]}>
@@ -58,7 +54,7 @@ const QuizzWithWrongAnswers = props => {
       <View style={styles.bottomTextContainer}>
         <Image source={clap} />
         <Text style={styles.bottomText}>
-          Continue pour débloquer le niveau 1{' '}
+          Complète le module en corrigeant tes mauvaises réponses
         </Text>
       </View>
       <Button
@@ -157,10 +153,12 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     fontWeight: '600',
-    fontSize: config.deviceWidth <= 375 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 12 : 16,
     paddingTop: 5,
+    textAlign: 'center',
   },
   congratsImg: {
+    marginVertical: 40,
     width: config.deviceWidth <= 375 ? 40 : 70,
     height: config.deviceWidth <= 375 ? 40 : 70,
   },
