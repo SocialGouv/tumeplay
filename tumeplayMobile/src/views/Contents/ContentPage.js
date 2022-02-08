@@ -98,7 +98,7 @@ const ContentPage = ({navigation, route}) => {
       </ScrollView>
       <View style={styles.footerContainer}>
         <View style={styles.divider} />
-        <Feedback />
+        <Feedback content={content} />
         <View style={styles.divider} />
         <View style={styles.buttonsContainer}>
           {count > 4 && (
