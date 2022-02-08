@@ -55,6 +55,18 @@ module.exports = {
 
     user.level = user_level;
 
+    const history_module_ids_in_level = _.map(
+      history_modules_by_levels[user.level],
+      "id"
+    );
+    const available_modules = _.filter(
+      modules_by_levels[user.level],
+      (module) => {
+        return !_.includes(history_module_ids_in_level, module.id);
+      }
+    );
+    user.next_module = _.get(_.sample(available_modules), "id", null);
+
     const nb_modules_in_level = (modules_by_levels[user.level] || []).length;
     const nb_modules_completed_in_level = (
       history_modules_by_levels[user.level] || []
