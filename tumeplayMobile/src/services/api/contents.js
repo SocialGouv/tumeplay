@@ -19,7 +19,7 @@ export const GET_CONTENTS = gql`
 
 export const GET_FRESH_CONTENTS = gql`
   query GetFreshContents {
-    contents(limit: 10, sort: "created_at:desc") {
+    contents(limit: 10, sort: "created_at:desc", where: {thematique_mobile_null: false}) {
       id
       title: title_mobile
       text
