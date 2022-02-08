@@ -8,18 +8,15 @@ import {useNavigation} from '@react-navigation/native';
 
 const Badge = module => {
   const context = useContext(AppContext);
-  const {user} = context;
+  const {doneModules_ids} = context;
   const route = useNavigation();
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const [done, setDone] = useState(false);
 
   const adjustModuleColor = () => {
-    (user.history || []).forEach(history => {
-      if (
-        history.module_id === module.module.id &&
-        history.status === 'success'
-      ) {
+    (doneModules_ids || []).forEach(id => {
+      if (id === module.module.id) {
         setStrokeColor('#51B070');
         setFillColor('#DDF4ED');
         setDone(true);
@@ -29,7 +26,7 @@ const Badge = module => {
 
   useEffect(() => {
     adjustModuleColor();
-  }, [user.history]);
+  }, [doneModules_ids]);
 
   return (
     <Svg style={styles.svgContainer}>
