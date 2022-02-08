@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
+import Text from '../components/Text';
 import RenderHtml from 'react-native-render-html';
 import {useWindowDimensions} from 'react-native';
 import Button from '../components/Button';

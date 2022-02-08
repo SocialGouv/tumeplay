@@ -41,8 +41,8 @@ const Box = ({navigation}) => {
   });
 
   const htmlText = {
-    html: `<div>
-      <p>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
+    html: `<div style=color:black;>
+      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
       <ul>
         <li>Ile-de-France</li>
         <li>Nouvelle-Aquitaine</li>
@@ -68,6 +68,7 @@ const Box = ({navigation}) => {
           <CustomModal
             isVisible={true}
             html={htmlText}
+            style={styles.text}
             onPress={() => {
               setConfirmation(!confirmation);
             }}
