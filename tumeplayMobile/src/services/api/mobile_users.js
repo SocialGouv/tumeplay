@@ -8,7 +8,6 @@ export const GET_MOBILE_USER = gql`
       ageRange
       isOnboarded
       isSignedUp
-      points
       user_id
       id
       percentage_level_completed
@@ -31,7 +30,6 @@ export const POST_MOBILE_USER = gql`
     $isUnder25: Boolean!
     $ageRange: String!
     $region: String!
-    $points: Long!
     $user_id: String!
   ) {
     createUtilisateursMobile(
@@ -43,7 +41,6 @@ export const POST_MOBILE_USER = gql`
           isUnder25: $isUnder25
           ageRange: $ageRange
           region: $region
-          points: $points
           user_id: $user_id
         }
       }
@@ -56,19 +53,6 @@ export const POST_MOBILE_USER = gql`
         isUnder25
         ageRange
         region
-        points
-      }
-    }
-  }
-`;
-
-export const UPDATE_MOBILE_USER_POINTS = gql`
-  mutation UpdateHistorique($user_id: ID!, $points: Long!) {
-    updateUtilisateursMobile(
-      input: {where: {id: $user_id}, data: {points: $points}}
-    ) {
-      utilisateursMobile {
-        points
       }
     }
   }
@@ -89,6 +73,9 @@ export const UPDATE_MOBILE_USER_HISTORY = gql`
       historique {
         id
         status
+        module {
+          id
+        }
       }
     }
   }

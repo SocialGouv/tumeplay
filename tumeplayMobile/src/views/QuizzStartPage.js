@@ -17,19 +17,17 @@ import AppContext from '../../AppContext';
 import {CREATE_HISTORY} from '../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
 
-const QuizzStartPage = ({navigation}) => {
+const QuizzStartPage = ({navigation, route}) => {
   const context = useContext(AppContext);
-  const {doneModules_ids, strapi_user_id, user, setUser} = context;
+  const {doneModules_ids, strapi_user_id, user, reloadUser} = context;
   const {data, loading} = useQuery(GET_MODULES, {
     variables: {
       level: user?.level,
     },
   });
   const [modules, setModules] = useState(null);
-  const [isModulePending] = useState(!!user?.pending_module);
   const [module, setModule] = useState();
   const [questions, setQuestions] = useState([]);
-  const random = Math.floor(Math.random() * modules?.length);
   const [thematique, setThematique] = useState();
   const [remainingModules, setRemainingModules] = useState();
 
@@ -49,36 +47,39 @@ const QuizzStartPage = ({navigation}) => {
       }
     });
     if (tmpRemainings) {
-      setRemainingModules([...tmpRemainings]);
+      setRemainingModules(tmpRemainings);
     }
   };
 
   useEffect(() => {
-    identifyRemainingModules();
-  }, [modules]);
+    if (doneModules_ids && modules) {
+      identifyRemainingModules();
+    }
+  }, [doneModules_ids, modules]);
 
   useEffect(() => {
     if (remainingModules && modules) {
-      const currentModule = isModulePending
+      const random = Math.floor(Math.random() * remainingModules?.length);
+      const currentModule = user?.pending_module
         ? modules.find(x => x.id === user.pending_module)
         : remainingModules[remainingModules?.length > 1 ? random : 0];
       setModule(currentModule);
       setQuestions(currentModule?.questionsArray);
       setThematique(currentModule?.thematique.title);
     }
-  }, [modules, remainingModules]);
+  }, [remainingModules]);
 
   const handleStartQuizz = async () => {
-    let response = null;
-    if (!isModulePending) {
+    if (!user.pending_module) {
       try {
-        response = await createHistory({
+        await createHistory({
           variables: {
             user_id: strapi_user_id,
             module_id: module?.id,
             status: 'pending',
           },
         });
+        reloadUser();
       } catch (error) {
         console.log('Erreur au lancement du quizz:', error);
         Alert.alert(
@@ -100,14 +101,6 @@ const QuizzStartPage = ({navigation}) => {
           ],
         );
       }
-      const history_id = response?.data?.createHistorique?.historique?.id;
-      let tmpHistory = [...user.history];
-      tmpHistory.push({
-        id: history_id,
-        module_id: module?.id,
-        status: 'pending',
-      });
-      setUser({...user, history: tmpHistory});
     }
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(questions),
@@ -130,28 +123,31 @@ const QuizzStartPage = ({navigation}) => {
         <Text style={styles.title}> Joue et teste tes connaissances !</Text>
         <View style={styles.middleContent}>
           <View style={styles.textContainer}>
-            {isModulePending ? (
+            {user.pending_module ? (
               <Text style={styles.text}>Continue !</Text>
             ) : (
               <>
                 <Text style={styles.text}>Prêt.e ?</Text>
                 <Text style={styles.text}>
                   Réponds à <Text style={styles.redText}>10 questions</Text> et
-                  gagne jusqu'à <Text style={styles.redText}>1000 points</Text>
+                  avance dans ton parcours
                 </Text>
               </>
             )}
           </View>
           <CategorieIndicator thematique={thematique} />
         </View>
-        <Button
-          size="medium"
-          text={isModulePending ? 'Je continue' : "C'est parti"}
-          isDisabled={loading}
-          icon
-          onPress={() => handleStartQuizz()}
-          style={styles.button}
-        />
+        <View style={styles.buttonContainer}>
+          {module && (
+            <Button
+              size="medium"
+              text={user.pending_module ? 'Je continue' : "C'est parti"}
+              isDisabled={loading}
+              icon
+              onPress={() => handleStartQuizz()}
+            />
+          )}
+        </View>
       </GestureRecognizer>
     </Container>
   );
@@ -193,7 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   middleContent: {paddingBottom: 50},
-  button: {
+  buttonContainer: {
     marginBottom: config.deviceWidth * 0.08,
   },
 });

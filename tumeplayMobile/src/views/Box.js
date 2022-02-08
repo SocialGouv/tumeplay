@@ -58,7 +58,8 @@ const Box = ({navigation}) => {
         <View style={styles.subtitleContainer}>
           <Text style={styles.congrats}>Bravo !</Text>
           <Text style={styles.description}>
-            Tu as assez de points pour commander un kit de ton choix
+            Tu as assez de points pour commander un kit de ton choix (CHANGER LE
+            TEXT)
           </Text>
         </View>
       </View>

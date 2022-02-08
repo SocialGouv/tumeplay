@@ -17,16 +17,12 @@ import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
 import {View, StyleSheet} from 'react-native';
 import Text from './src/components/Text';
-import {
-  GET_HISTORIQUES,
-  GET_MOBILE_USER,
-} from './src/services/api/mobile_users';
+import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
 const NavigationStack = createNativeStackNavigator();
 
 const App = () => {
   const [user, setUser] = useState({});
-  const [points, setPoints] = useState(null);
   const [doneModules_ids, setDoneModules_ids] = useState([]);
   const [thematiques, setThematiques] = useState([]);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
@@ -49,24 +45,37 @@ const App = () => {
       }
     } else {
       setIsUserLoaded(true);
-      setPoints(0);
-      setUser({points: 0});
+      setUser({});
     }
   };
 
+  const reloadUser = async () => {
+    getMobileUser({
+      variables: {
+        user_id: user.user_id,
+      },
+    });
+  };
+
   const [getMobileUser, {data: data2, loading: loading2, error: error2}] =
-    useLazyQuery(GET_MOBILE_USER);
+    useLazyQuery(GET_MOBILE_USER, {
+      fetchPolicy: 'network-only',
+    });
 
   const retrieveDoneModulesIds = () => {
-    let tmpIds = user?.history
-      ?.filter(history => history.status === 'success')
-      ?.map(history => history.module_id);
+    let successHistories = user?.history?.filter(
+      history => history.status === 'success',
+    );
+    let tmpIds = [];
+    if (successHistories) {
+      tmpIds = successHistories.map(history => history.module_id);
+    }
     setDoneModules_ids([...tmpIds]);
   };
 
   useEffect(() => {
-    if (points) retrieveDoneModulesIds();
-  }, [points]);
+    if (user && user.history) retrieveDoneModulesIds();
+  }, [user]);
 
   useEffect(() => {
     if (!loading1 && data1) {
@@ -83,11 +92,9 @@ const App = () => {
   const retrieveUserFromAPI = async () => {
     if (data2?.statusCode === 404) {
       clearStorage();
-      setPoints(0);
-      setUser({points: 0});
+      setUser({});
     } else if (data2?.utilisateursMobile) {
-      setUser({...data2?.utilisateursMobile});
-      setPoints(data2?.utilisateursMobile?.points);
+      setUser(data2?.utilisateursMobile);
     }
     setIsUserLoaded(true);
   };
@@ -104,11 +111,10 @@ const App = () => {
   const contextValues = {
     user,
     setUser,
+    reloadUser,
     user_id: user.user_id,
     strapi_user_id: user.id,
     thematiques,
-    points,
-    setPoints,
     doneModules_ids,
     setDoneModules_ids,
   };
