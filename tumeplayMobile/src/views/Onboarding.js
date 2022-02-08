@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {createRef, useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import RenderHtml from 'react-native-render-html';
@@ -14,7 +14,9 @@ import Container from '../components/global/Container';
 import config from '../../config';
 
 export default function Onboarding({user, setUser}) {
+  const swiper = createRef();
   const {width} = useWindowDimensions();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [steps, setSteps] = useState([
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
@@ -35,14 +37,15 @@ export default function Onboarding({user, setUser}) {
 
   const [customBackground, setCustomBackground] = useState(bg1);
 
-  const changeBackground = currentIndex => {
-    if (currentIndex === 0) {
+  const changeBackground = index => {
+    setCurrentIndex(index);
+    if (index === 0) {
       setCustomBackground(bg1);
     }
-    if (currentIndex === 1) {
+    if (index === 1) {
       setCustomBackground(bg2);
     }
-    if (currentIndex === 2) {
+    if (index === 2) {
       setCustomBackground(bg3);
     }
   };
@@ -73,6 +76,7 @@ export default function Onboarding({user, setUser}) {
         <Text style={styles.title}>{title}</Text>
         <Image style={styles.imgTitle} source={wave} />
         <Swiper
+          ref={swiper}
           onIndexChanged={index => changeBackground(index)}
           loop={false}
           containerStyle={styles.swipperContainer}
@@ -85,11 +89,17 @@ export default function Onboarding({user, setUser}) {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          text={'Je commence'}
+          text={currentIndex === 2 ? 'Je commence' : 'Suivant'}
           size={'large'}
           icon={true}
           style={styles.button}
-          onPress={() => finishOnboarding()}
+          onPress={() => {
+            if (currentIndex === 2) {
+              finishOnboarding();
+            } else {
+              swiper.current.scrollBy(currentIndex + 1, true);
+            }
+          }}
         />
       </View>
     </Container>

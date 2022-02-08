@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
   },
   smallTitle: {
-    fontSize: 30,
+    fontSize: config.deviceWidth <= 400 ? 20 : 30,
     paddingTop: 10,
     lineHeight: 30,
   },
   bigTitle: {
-    fontSize: 20,
+    fontSize: config.deviceWidth <= 400 ? 16 : 22,
   },
   textContainer: {
     paddingHorizontal: 30,
