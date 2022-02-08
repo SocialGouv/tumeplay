@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {TouchableOpacity, StyleSheet, View, ScrollView} from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
@@ -10,6 +10,8 @@ import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../../config';
 import Text from '../../components/Text';
+import * as Progress from 'react-native-progress';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -27,6 +29,11 @@ const QuizzModule = ({navigation, route}) => {
   const [remainingQuestions, setRemainingQuestions] = useState([]);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
+
+  const fullQuizzLength = useRef(questions.length);
+
+  const progress =
+    (correctAnswers.length + wrongAnswers.length) / fullQuizzLength.current;
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -55,7 +62,6 @@ const QuizzModule = ({navigation, route}) => {
         ),
       );
     }
-
     setAnswerKey(answerKey);
     setHasAnswered(!hasAnswered);
   };
@@ -112,23 +118,31 @@ const QuizzModule = ({navigation, route}) => {
 
   return (
     <View style={styles.bgContainer}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Container background={bg} style={styles.container}>
-          <View style={styles.levelIndicator}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                name="md-arrow-back"
-                size={30}
-                color="#000"
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-            <TopLevelPointIndicator />
-          </View>
-          <View style={styles.stepIndicatorContainer}>
-            <View style={styles.stepIndicator}>
-              <Text style={styles.indicator}>{questions?.length}</Text>
-            </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Container background={bg} style={styles.container}>
+        <View style={styles.levelIndicator}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon
+              name="md-arrow-back"
+              size={30}
+              color="#000"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <TopLevelPointIndicator />
+        </View>
+        <View style={styles.stepIndicatorContainer}>
+          <Progress.Circle
+            showsText={true}
+            borderWidth={0}
+            thickness={5}
+            formatText={() => questions.length}
+            unfilledColor={'#FFFFFF80'}
+            textStyle={styles.stepIndicator}
+            progress={progress}
+            size={60}
+            color={'#EC6233'}
+          />
           </View>
           {question.kind === 'Trou' && (
             <Text style={styles.completeText}>Complète cette phrase</Text>
@@ -191,16 +205,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    marginBottom: 16,
   },
   stepIndicator: {
-    width: 58,
-    height: 58,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#FFF',
-    borderWidth: 5,
-    marginBottom: 16,
+    fontSize: 18,
+    fontWeight: '600',
+    color: Colors.black,
   },
   indicator: {
     fontFamily: Fonts.subtitle,
