@@ -1,9 +1,9 @@
 import {PossibleFragmentSpreadsRule} from 'graphql';
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import AppContext from '../../AppContext';
-import {Colors} from '../styles/Style';
 import * as Progress from 'react-native-progress';
+import Text from '../components/Text';
 
 const LevelPointsIndicator = ({style, onPress}) => {
   const context = useContext(AppContext);

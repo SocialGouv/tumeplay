@@ -1,9 +1,7 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
-
-import {Colors} from '../../styles/Style';
 import * as Progress from 'react-native-progress';
 
 const TopLevelPointIndicator = ({style}) => {
@@ -15,7 +13,7 @@ const TopLevelPointIndicator = ({style}) => {
 
   return (
     <View style={[style, styles.container]}>
-      <Text style={[styles.text, styles.textLevel]}>
+      <Text>
         Niveau <Text>{user.level}</Text>
       </Text>
       <Progress.Bar
