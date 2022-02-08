@@ -20,7 +20,7 @@ const ContentCard = ({item, backgroundColor, navigation, contents_ids}) => {
       style={[styles.container, {backgroundColor: backgroundColor}]}>
       <View style={styles.cardContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.level}>NIVEAU{user.level}</Text>
+          <Text style={styles.level}>NIVEAU {user.level}</Text>
           <Text style={styles.title}>{item?.title}</Text>
         </View>
         <View style={styles.imageContainer}>

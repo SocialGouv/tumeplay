@@ -36,10 +36,6 @@ const QuizzWithWrongAnswers = props => {
         <Text style={styles.title}>BRAVO !</Text>
         <Image source={wave} />
       </View>
-      <View style={styles.pointsContainer}>
-        <Text style={styles.points}>{'CHANGER LE TEXT'}</Text>
-        <Image source={coin} style={styles.coin} />
-      </View>
       <Image style={styles.congratsImg} source={congrats} />
       <View style={styles.answerContainer}>
         <Text style={[styles.answerText, styles.firstAnswer]}>
@@ -162,6 +158,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   congratsImg: {
+    marginVertical: 40,
     width: config.deviceWidth <= 375 ? 40 : 70,
     height: config.deviceWidth <= 375 ? 40 : 70,
   },

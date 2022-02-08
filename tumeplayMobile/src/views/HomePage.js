@@ -1,5 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  Image,
+  Linking,
+  TouchableOpacity,
+} from 'react-native';
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
@@ -12,6 +20,8 @@ import AppContext from '../../AppContext';
 import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
+import instagram from '../assets/instagram.png';
+import tiktok from '../assets/Tiktok.png';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -74,6 +84,20 @@ const HomePage = ({navigation}) => {
             inactiveSlideOpacity={1}
           />
         </View>
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL('https://www.instagram.com/tumeplay/');
+            }}>
+            <Image source={instagram} style={styles.imageLink} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL('https://www.tiktok.com/@tu.me.play');
+            }}>
+            <Image source={tiktok} style={styles.imageLink} />
+          </TouchableOpacity>
+        </View>
       </Container>
     </ScrollView>
   );
@@ -103,7 +127,7 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   carouselContainer: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -117,7 +141,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginHorizontal: Dimensions.get('window').width > 375 ? 15 : 10,
   },
-  listContainer: {},
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '30%',
+  },
+  imageLink: {
+    width: 40,
+    height: 40,
+  },
 });
 
 export default HomePage;
