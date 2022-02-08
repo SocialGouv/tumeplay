@@ -110,12 +110,8 @@ const QuizzModule = ({navigation, route}) => {
     }
   }, [route]);
 
-  const showMoreAnswer = () => {
-    setshowAnswer(!showAnswer);
-  };
-
   return (
-    <>
+    <View style={{height: '100%', backgroundColor: '#F9EEF2'}}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Container background={bg} style={styles.container}>
           <View style={styles.levelIndicator}>
@@ -148,9 +144,7 @@ const QuizzModule = ({navigation, route}) => {
           {hasAnswered ? (
             <View style={styles.answerContainer}>
               <Text style={styles.textAnswer}>
-                {!showAnswer && config.deviceWidth <= 300
-                  ? question?.text_answer.substring(0, 80) + '...'
-                  : question?.text_answer}
+                {!showAnswer && question?.text_answer}
               </Text>
             </View>
           ) : null}
@@ -167,7 +161,7 @@ const QuizzModule = ({navigation, route}) => {
           />
         </View>
       ) : null}
-    </>
+    </View>
   );
 };
 
@@ -242,16 +236,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    // paddingVertical: 20,
     position: config.deviceWidth <= 400 ? 'relative' : 'absolute',
     bottom: 5,
     left: 0,
     right: 0,
   },
-  // bottomButton: {
-  //   position: config.deviceWidth <= 400 ? 'relative' : 'relative',
-  //   bottom: config.deviceWidth <= 400 ? 0 : 0,
-  // },
   action: {
     fontWeight: '600',
   },
