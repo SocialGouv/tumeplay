@@ -1,3 +1,10 @@
+# [1.55.0](https://github.com/SocialGouv/Tumeplay/compare/v1.54.0...v1.55.0) (2022-02-08)
+
+
+### Features
+
+* implement progressbar & correct Title component ([#305](https://github.com/SocialGouv/Tumeplay/issues/305)) ([5703fbd](https://github.com/SocialGouv/Tumeplay/commit/5703fbd21b63b2976deadf884a8fa8fe61676b23))
+
 # [1.54.0](https://github.com/SocialGouv/Tumeplay/compare/v1.53.2...v1.54.0) (2022-02-08)
 
 
