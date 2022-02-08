@@ -1,3 +1,10 @@
+## [1.53.2](https://github.com/SocialGouv/Tumeplay/compare/v1.53.1...v1.53.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* white text on android ([#302](https://github.com/SocialGouv/Tumeplay/issues/302)) ([30c85ee](https://github.com/SocialGouv/Tumeplay/commit/30c85eef7cdac1c082a73217603b82f8540b402a))
+
 ## [1.53.1](https://github.com/SocialGouv/Tumeplay/compare/v1.53.0...v1.53.1) (2022-02-08)
 
 
