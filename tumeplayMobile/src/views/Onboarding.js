@@ -19,17 +19,17 @@ export default function Onboarding({user, setUser}) {
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
       img: '✌️',
-      html: "Choisis une ou plusieurs thématiques et consulte des <span style='color:red'>contenus pensés pour toi </span>",
+      html: "Choisis une ou plusieurs thématiques et<span style='color:red'> consulte des contenus </span> pensés pour toi",
     },
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
       img: '🤓',
-      html: "Joue et teste tes connaissances sur la sexualité. <span style='color:red;'>Prêt.e ?</span>",
+      html: "Joue et <span style='color:red;'>teste tes connaissances</span> sur la sexualité. Prêt.e ?</span>",
     },
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
       img: '🎉',
-      html: "Grâce aux badges remportés, <span style='color:red;'>commande gratuitement une des box</span> de ton choix remplie de préservatifs et autres accessoires",
+      html: "Grâce aux badges remportés, joue, accumule des récompenses, et <span style='color:red;'> commande gratuitement un kit</span> de ton choix ...",
     },
   ]);
 
