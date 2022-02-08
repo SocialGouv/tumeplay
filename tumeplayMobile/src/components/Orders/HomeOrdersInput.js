@@ -41,30 +41,35 @@ const HomeOrdersInput = props => {
       kind: 'autocomplete',
       label: 'ADRESSE',
       name: 'address',
+      isNumber: false,
     },
     {
       id: 2,
       kind: 'default',
       label: 'NOM',
       name: 'last_name',
+      isNumber: false,
     },
     {
       id: 3,
       kind: 'default',
       label: 'PRÉNOM',
       name: 'first_name',
+      isNumber: false,
     },
     {
       id: 4,
       kind: 'default',
       label: 'EMAIL',
       name: 'email',
+      isNumber: true,
     },
     {
       id: 5,
       kind: 'default',
       label: 'NUMERO DE TÉLÉPONE',
       name: 'phone_number',
+      isNumber: false,
     },
   ];
 
@@ -137,6 +142,7 @@ const HomeOrdersInput = props => {
                     <Autocomplete
                       containerStyle={styles.specialInput}
                       inputContainerStyle={styles.specialInput}
+                      listContainerStyle={{}}
                       listStyle={styles.listResult}
                       data={geogouvData}
                       renderTextInput={() => (
@@ -178,16 +184,20 @@ const HomeOrdersInput = props => {
               } else {
                 return (
                   <>
-                    <TextInput
-                      style={styles.input}
-                      label={item.label}
-                      onBlur={handleBlur(item.name)}
-                      underlineColor="#EAE2D7"
-                      activeUnderlineColor="#D42201"
-                      value={values[item.name]}
-                      onChangeText={handleChange(item.name)}
-                    />
-                    {errors[item.name] && touched[item.name] && (
+                    {hideResults && (
+                      <TextInput
+                        style={styles.input}
+                        label={item.label}
+                        onBlur={handleBlur(item.name)}
+                        underlineColor="#EAE2D7"
+                        activeUnderlineColor="#D42201"
+                        value={values[item.name]}
+                        onChangeText={handleChange(item.name)}
+                        keyboardType={item.isNumber ? 'numeric' : 'default'}
+                      />
+                    )}
+
+                    {hideResults && errors[item.name] && touched[item.name] && (
                       <Text style={styles.errorMessage}>
                         {errors[item.name]}
                       </Text>
@@ -218,24 +228,20 @@ const HomeOrdersInput = props => {
 export default HomeOrdersInput;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   input: {
     marginHorizontal: 22,
     backgroundColor: '#FFFFFF',
     marginVertical: config.deviceWidth > 375 ? 10 : 0,
-  },
-  lastInput: {
-    marginHorizontal: 22,
-    backgroundColor: '#FFFFFF',
-    marginTop: config.deviceWidth > 375 ? 10 : 8,
-    marginVertical: config.deviceWidth > 375 ? 15 : 15,
   },
   specialInput: {
     borderWidth: 0,
   },
   listResult: {
     paddingHorizontal: 10,
-    width: '30',
+    width: 30,
   },
   errorMessage: {
     fontSize: 10,
@@ -243,9 +249,10 @@ const styles = StyleSheet.create({
     color: '#D42201',
   },
   displayResults: {
-    backgroundColor: '#FFF',
+    backgroundColor: '##FFF',
+    paddingVertical: 12,
     paddingLeft: 22,
-    height: 30,
+    height: 'auto',
   },
   button: {
     alignSelf: 'center',
@@ -254,14 +261,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 10,
+    bottom: 20,
   },
-  // autocompleteContainer: {
-  //   flex: 1,
-  //   left: 0,
-  //   position: 'absolute',
-  //   right: 0,
-  //   top: 0,
-  //   zIndex: 1,
-  // },
 });
