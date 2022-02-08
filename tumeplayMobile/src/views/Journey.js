@@ -1,13 +1,13 @@
 import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import {Image, StyleSheet, ScrollView} from 'react-native';
 import wave from '../assets/wave.png';
 import Container from '../components/global/Container';
 import WrapperLevelBadges from '../components/Journey/WrapperLevelBadges';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import {GET_LEVELS} from '../services/api/levels';
 import {GET_MODULES} from '../services/api/modules';
-import {Colors, Fonts} from '../styles/Style';
+import Title from '../components/Title';
 
 const Journey = () => {
   const useMultipleQuery = () => {
@@ -47,10 +47,11 @@ const Journey = () => {
 
   return (
     <Container style={styles.container}>
-      <Text style={styles.title}>Ton parcours</Text>
-      <Image style={styles.wave} source={wave} />
-      <LevelPointsIndicator points={'500'} style={styles.pointContainer} />
-      <ScrollView>{displayWrappers}</ScrollView>
+      <Title title="Ton parcours" />
+      <LevelPointsIndicator style={styles.pointContainer} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {displayWrappers}
+      </ScrollView>
     </Container>
   );
 };
@@ -61,17 +62,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 21,
   },
-  title: {
-    fontFamily: Fonts.title,
-    fontSize: 28,
-    lineHeight: 38,
-  },
   pointContainer: {
     marginVertical: 18,
-  },
-  wave: {
-    width: 26,
-    height: 10,
   },
 });
 

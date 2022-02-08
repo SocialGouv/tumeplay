@@ -1,3 +1,38 @@
+# [1.56.0](https://github.com/SocialGouv/Tumeplay/compare/v1.55.0...v1.56.0) (2022-02-08)
+
+
+### Features
+
+* review theme images ([#306](https://github.com/SocialGouv/Tumeplay/issues/306)) ([a8a455a](https://github.com/SocialGouv/Tumeplay/commit/a8a455a2fa16156bb88cf6c602d1ee96cba65854))
+
+# [1.55.0](https://github.com/SocialGouv/Tumeplay/compare/v1.54.0...v1.55.0) (2022-02-08)
+
+
+### Features
+
+* implement progressbar & correct Title component ([#305](https://github.com/SocialGouv/Tumeplay/issues/305)) ([5703fbd](https://github.com/SocialGouv/Tumeplay/commit/5703fbd21b63b2976deadf884a8fa8fe61676b23))
+
+# [1.54.0](https://github.com/SocialGouv/Tumeplay/compare/v1.53.2...v1.54.0) (2022-02-08)
+
+
+### Features
+
+* handling order address input to fix zIndex error on IOS ([#304](https://github.com/SocialGouv/Tumeplay/issues/304)) ([b0c77e5](https://github.com/SocialGouv/Tumeplay/commit/b0c77e586b86873168667c0a52491cb5d84b21f7))
+
+## [1.53.2](https://github.com/SocialGouv/Tumeplay/compare/v1.53.1...v1.53.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* white text on android ([#302](https://github.com/SocialGouv/Tumeplay/issues/302)) ([30c85ee](https://github.com/SocialGouv/Tumeplay/commit/30c85eef7cdac1c082a73217603b82f8540b402a))
+
+## [1.53.1](https://github.com/SocialGouv/Tumeplay/compare/v1.53.0...v1.53.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* user loading & refresh implementation ([#303](https://github.com/SocialGouv/Tumeplay/issues/303)) ([a28369a](https://github.com/SocialGouv/Tumeplay/commit/a28369a85a9db209020a675d35a203493edb5fbd))
+
 # [1.53.0](https://github.com/SocialGouv/Tumeplay/compare/v1.52.0...v1.53.0) (2022-02-07)
 
 

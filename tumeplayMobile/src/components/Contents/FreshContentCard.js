@@ -20,7 +20,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
       }>
       <View>
         <Image style={styles.image} source={imageUrl} />
-        <Text style={styles.level}>Niveau 1</Text>
+        <Text style={styles.level}>Niveau {content?.niveau?.value}</Text>
         <Text style={styles.title}>{content?.title}</Text>
       </View>
     </TouchableOpacity>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 5,
   },
-  image: {width: '100%', height: 150},
+  image: {width: '100%', height: 130},
   level: {
     fontFamily: Fonts.strongText,
     color: '#E85439',

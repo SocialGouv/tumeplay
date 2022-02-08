@@ -32,6 +32,7 @@ const Title = ({title}) => {
 const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
+    paddingTop: 15,
   },
   title: {
     fontSize: 30,

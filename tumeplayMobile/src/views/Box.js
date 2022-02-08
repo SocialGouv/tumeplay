@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import Text from '../components/Text';
-import wave from '../assets/wave.png';
 import BoxCard from '../components/BoxCard';
 import Container from '../components/global/Container';
-import {Fonts} from '../styles/Style';
 import {useQuery} from '@apollo/client';
 import {GET_BOXES} from '../services/api/boxes';
 import CustomModal from '../components/global/CustomModal';
+import Title from '../components/Title';
 
 const Box = ({navigation}) => {
   const {data, loading} = useQuery(GET_BOXES);
@@ -41,8 +34,8 @@ const Box = ({navigation}) => {
   });
 
   const htmlText = {
-    html: `<div>
-      <p>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
+    html: `<div style=color:black;>
+      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
       <ul>
         <li>Ile-de-France</li>
         <li>Nouvelle-Aquitaine</li>
@@ -53,12 +46,12 @@ const Box = ({navigation}) => {
   return (
     <Container style={styles.container}>
       <View style={styles.topContainer}>
-        <Text style={styles.title}>Ton Kit</Text>
-        <Image style={styles.wave} source={wave} />
+        <Title title="Ton Kit" />
         <View style={styles.subtitleContainer}>
           <Text style={styles.congrats}>Bravo !</Text>
           <Text style={styles.description}>
-            Tu as assez de points pour commander un kit de ton choix
+            Tu as assez de points pour commander un kit de ton choix (CHANGER LE
+            TEXT)
           </Text>
         </View>
       </View>
@@ -68,6 +61,7 @@ const Box = ({navigation}) => {
           <CustomModal
             isVisible={true}
             html={htmlText}
+            style={styles.text}
             onPress={() => {
               setConfirmation(!confirmation);
             }}
@@ -97,11 +91,6 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
   },
-  title: {
-    fontFamily: Fonts.title,
-    fontSize: 28,
-    lineHeight: 38,
-  },
   subtitleContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -118,10 +107,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-  },
-  wave: {
-    width: 26,
-    height: 10,
   },
   boxList: {
     flex: 1,

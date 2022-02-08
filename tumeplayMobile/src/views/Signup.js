@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
+import Text from '../components/Text';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Button from '../components/Button';
@@ -21,7 +22,6 @@ const Signup = ({user, setUser}) => {
 
   const setUserInStorage = async () => {
     tmpUser.isSignedUp = true;
-    tmpUser.points = 0;
     tmpUser.level = 1;
     await EncryptedStorage.setItem(
       'user',
@@ -32,7 +32,6 @@ const Signup = ({user, setUser}) => {
         isSignedUp: tmpUser.isSignedUp,
         isUnder25: tmpUser.isOnboarded,
         ageRange: tmpUser.ageRange,
-        points: tmpUser.points,
         level: tmpUser.level,
         region: tmpUser.region,
       }),
@@ -74,7 +73,6 @@ const Signup = ({user, setUser}) => {
         isUnder25: tmpUser.isUnder25,
         ageRange: tmpUser.ageRange,
         region: tmpUser.region,
-        points: 0,
         user_id: tmpUser.user_id,
       },
     });

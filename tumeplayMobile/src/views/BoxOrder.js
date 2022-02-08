@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
 import OrderConfirm from '../components/Orders/OrderConfirm';
 import config from '../../config';
+import {Divider} from 'react-native-paper';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -42,6 +44,7 @@ const Box = ({navigation, route}) => {
               <Text style={styles.redText}>KIT {box.number}</Text>
               <Text style={styles.boxTitle}>{box.title}</Text>
             </View>
+            <Divider style={[styles.divider, {marginBottom: 0}]} />
           </>
         ) : (
           <View>
@@ -87,7 +90,7 @@ const Box = ({navigation, route}) => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <View style={[styles.divider, {marginBottom: 0}]} />
+            <Divider style={[styles.divider, {marginBottom: 0}]} />
           </View>
         )}
       </View>
@@ -100,13 +103,15 @@ const Box = ({navigation, route}) => {
             setUserAdressInformations={setUserAdressInformations}
           />
         ) : (
-          <OrderConfirm
-            userInfos={userInfos}
-            setOrderConfirm={setOrderConfirm}
-            deliveryMode={deliveryMode}
-            userAdressInformations={userAdressInformations}
-            box={box}
-          />
+          <>
+            <OrderConfirm
+              userInfos={userInfos}
+              setOrderConfirm={setOrderConfirm}
+              deliveryMode={deliveryMode}
+              userAdressInformations={userAdressInformations}
+              box={box}
+            />
+          </>
         )}
       </View>
     </Container>

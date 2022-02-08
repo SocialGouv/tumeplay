@@ -1,21 +1,19 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
-
-import {Colors} from '../../styles/Style';
 import * as Progress from 'react-native-progress';
 
 const TopLevelPointIndicator = ({style}) => {
-  const {user, doneModules_ids} = useContext(AppContext);
+  const {user} = useContext(AppContext);
 
   const fullProgressLength = 6;
 
-  const progress = doneModules_ids.length / fullProgressLength;
+  const progress = user.percentage_level_completed || 0;
 
   return (
     <View style={[style, styles.container]}>
-      <Text style={[styles.text, styles.textLevel]}>
+      <Text>
         Niveau <Text>{user.level}</Text>
       </Text>
       <Progress.Bar
