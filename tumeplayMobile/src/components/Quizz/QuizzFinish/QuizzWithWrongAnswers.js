@@ -58,7 +58,7 @@ const QuizzWithWrongAnswers = props => {
       <View style={styles.bottomTextContainer}>
         <Image source={clap} />
         <Text style={styles.bottomText}>
-          Continue pour débloquer le niveau 1{' '}
+          Complète le module en corrigeant tes mauvaises réponses
         </Text>
       </View>
       <Button
@@ -157,8 +157,9 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     fontWeight: '600',
-    fontSize: config.deviceWidth <= 375 ? 14 : 18,
+    fontSize: config.deviceWidth <= 375 ? 12 : 16,
     paddingTop: 5,
+    textAlign: 'center',
   },
   congratsImg: {
     width: config.deviceWidth <= 375 ? 40 : 70,
