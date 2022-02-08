@@ -1,3 +1,10 @@
+## [1.53.1](https://github.com/SocialGouv/Tumeplay/compare/v1.53.0...v1.53.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* user loading & refresh implementation ([#303](https://github.com/SocialGouv/Tumeplay/issues/303)) ([a28369a](https://github.com/SocialGouv/Tumeplay/commit/a28369a85a9db209020a675d35a203493edb5fbd))
+
 # [1.53.0](https://github.com/SocialGouv/Tumeplay/compare/v1.52.0...v1.53.0) (2022-02-07)
 
 
