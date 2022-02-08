@@ -116,11 +116,8 @@ const QuizzModule = ({navigation, route}) => {
     }
   }, [route]);
 
-  const showMoreAnswer = () => {
-    setshowAnswer(!showAnswer);
-  };
-
   return (
+    <View style={styles.bgContainer}>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <Container background={bg} style={styles.container}>
         <View style={styles.levelIndicator}>
@@ -146,52 +143,50 @@ const QuizzModule = ({navigation, route}) => {
             size={60}
             color={'#EC6233'}
           />
-        </View>
-        {question.kind === 'Trou' && (
-          <Text style={styles.completeText}>Complète cette phrase</Text>
-        )}
-        <Text style={styles.question}>{questionTitle}</Text>
-        <View
-          style={[
-            styles.answersContainer,
-            question.kind === 'Trou' ? styles.answersContainerTrou : '',
-          ]}>
-          {displayAnswer}
-        </View>
-        {hasAnswered ? (
-          <View style={styles.answerContainer}>
-            <Text style={styles.textAnswer}>
-              {!showAnswer && config.deviceWidth <= 375
-                ? question?.text_answer.substring(0, 80) + '...'
-                : question?.text_answer}
-            </Text>
-            {config.deviceWidth <= 375 && (
-              <Text onPress={showMoreAnswer} style={styles.action}>
-                {showAnswer ? 'Voir moins' : 'Voir plus'}
+          </View>
+          {question.kind === 'Trou' && (
+            <Text style={styles.completeText}>Complète cette phrase</Text>
+          )}
+          <Text style={styles.question}>{questionTitle}</Text>
+          <View
+            style={[
+              styles.answersContainer,
+              question.kind === 'Trou' ? styles.answersContainerTrou : '',
+            ]}>
+            {displayAnswer}
+          </View>
+          {hasAnswered ? (
+            <View style={styles.answerContainer}>
+              <Text style={styles.textAnswer}>
+                {!showAnswer && question?.text_answer}
               </Text>
-            )}
-          </View>
-        ) : null}
-        {hasAnswered ? (
-          <View style={styles.buttonContainer}>
-            <Button
-              text={'Suivant'}
-              size="large"
-              icon={true}
-              style={styles.bottomButton}
-              onPress={() => goToNextQuestion()}
-            />
-          </View>
-        ) : null}
-      </Container>
-    </ScrollView>
+            </View>
+          ) : null}
+        </Container>
+      </ScrollView>
+      {hasAnswered ? (
+        <View style={styles.buttonContainer}>
+          <Button
+            text={'Suivant'}
+            size="large"
+            icon={true}
+            style={styles.bottomButton}
+            onPress={() => goToNextQuestion()}
+          />
+        </View>
+      ) : null}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  bgContainer: {
+    height: '100%',
+    backgroundColor: '#F9EEF2',
+  },
   scrollContainer: {
-    height: config.deviceWidth <= 375 ? 'auto' : '100%',
     alignContent: 'center',
+    paddingBottom: 60,
   },
   container: {
     height: '100%',
@@ -226,7 +221,7 @@ const styles = StyleSheet.create({
   question: {
     marginBottom: 10,
     fontFamily: Fonts.subtitle,
-    fontSize: config.deviceWidth <= 375 ? 16 : 22,
+    fontSize: config.deviceWidth <= 400 ? 16 : 22,
     lineHeight: 24,
     fontWeight: '700',
   },
@@ -237,27 +232,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     alignContent: 'center',
-    marginHorizontal: config.deviceWidth <= 375 ? 0 : -10,
+    marginHorizontal: config.deviceWidth <= 400 ? 0 : -10,
   },
   answersContainerTrou: {
     flexDirection: 'column',
-    marginTop: 20,
+    marginTop: 30,
   },
   textAnswer: {
     marginTop: 10,
+    marginBottom: 20,
     textAlign: 'left',
   },
   buttonContainer: {
+    paddingHorizontal: 15,
+    display: 'flex',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
-    paddingVertical: 20,
-    flex: 1,
-  },
-  bottomButton: {
-    position: config.deviceWidth <= 375 ? 'relative' : 'absolute',
-    bottom: config.deviceWidth <= 375 ? 0 : 30,
+    alignContent: 'center',
+    position: config.deviceWidth <= 400 ? 'relative' : 'absolute',
+    bottom: 5,
+    left: 0,
+    right: 0,
   },
   action: {
     fontWeight: '600',
