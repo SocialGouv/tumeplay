@@ -11,7 +11,7 @@ import {
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
-import {Colors, Fonts} from '../styles/Style';
+import {Fonts} from '../styles/Style';
 import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '30%',
+    paddingBottom: 30,
   },
   imageLink: {
     width: 40,
