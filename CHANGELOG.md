@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/SocialGouv/Tumeplay/compare/v1.60.0...v1.61.0) (2022-02-09)
+
+
+### Features
+
+* filter mobile themes ([#313](https://github.com/SocialGouv/Tumeplay/issues/313)) ([a18e5f9](https://github.com/SocialGouv/Tumeplay/commit/a18e5f95ce08baaad923d70fdcd3a588e798e91a))
+
 # [1.60.0](https://github.com/SocialGouv/Tumeplay/compare/v1.59.0...v1.60.0) (2022-02-08)
 
 
