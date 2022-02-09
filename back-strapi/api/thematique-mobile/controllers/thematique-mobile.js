@@ -7,6 +7,15 @@
 
 const { sanitizeEntity } = require("strapi-utils");
 
+const filter = async (arr, callback) => {
+  const fail = Symbol();
+  return (
+    await Promise.all(
+      arr.map(async (item) => ((await callback(item)) ? item : fail))
+    )
+  ).filter((i) => i !== fail);
+};
+
 module.exports = {
   /**
    * Retrieve records.
@@ -27,12 +36,12 @@ module.exports = {
     }
 
     if (level) {
-      entities = entities.filter(async (e) => {
+      entities = await filter(entities, async (entity) => {
         const countQuestions = await strapi.services["content"].count({
-          thematique_mobile: e.id,
+          thematique_mobile: entity.id,
           "niveau.value": level,
         });
-        return countQuestions && countQuestions > 0;
+        return countQuestions > 0;
       });
     }
 
