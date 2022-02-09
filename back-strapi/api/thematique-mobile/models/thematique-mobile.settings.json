@@ -17,14 +17,15 @@
     "image": {
       "model": "file",
       "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
+      "allowedTypes": ["images", "files", "videos"],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "level": {
+      "type": "integer",
+      "required": false,
+      "private": true
     }
   }
 }
