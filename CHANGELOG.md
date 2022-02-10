@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/SocialGouv/Tumeplay/compare/v1.62.2...v1.63.0) (2022-02-10)
+
+
+### Features
+
+* adding new logo to navbar and correction content cta color ([#318](https://github.com/SocialGouv/Tumeplay/issues/318)) ([8ff8231](https://github.com/SocialGouv/Tumeplay/commit/8ff823126c222ceb1caa442e32e19bf47aa4728e))
+
 ## [1.62.2](https://github.com/SocialGouv/Tumeplay/compare/v1.62.1...v1.62.2) (2022-02-10)
 
 
