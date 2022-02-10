@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/SocialGouv/Tumeplay/compare/v1.61.1...v1.62.0) (2022-02-10)
+
+
+### Features
+
+* reforging quizz module and journey logic to allow access quizz … ([#317](https://github.com/SocialGouv/Tumeplay/issues/317)) ([04dcc42](https://github.com/SocialGouv/Tumeplay/commit/04dcc4283cb1bf408dd7a73fff5d46f8cbe48f89))
+
 ## [1.61.1](https://github.com/SocialGouv/Tumeplay/compare/v1.61.0...v1.61.1) (2022-02-10)
 
 
