@@ -1,3 +1,11 @@
+## [1.62.2](https://github.com/SocialGouv/Tumeplay/compare/v1.62.1...v1.62.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* quizz answer font ([#315](https://github.com/SocialGouv/Tumeplay/issues/315)) ([89eb94c](https://github.com/SocialGouv/Tumeplay/commit/89eb94cabe3b8f420f4ab911f123c7818246da06))
+* remove socials icons in homepage ([#316](https://github.com/SocialGouv/Tumeplay/issues/316)) ([426b627](https://github.com/SocialGouv/Tumeplay/commit/426b627eaf339aeb87b647ef83f82f34ed66d177))
+
 ## [1.62.1](https://github.com/SocialGouv/Tumeplay/compare/v1.62.0...v1.62.1) (2022-02-10)
 
 
