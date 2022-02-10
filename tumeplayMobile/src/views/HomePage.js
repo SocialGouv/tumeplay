@@ -1,17 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  ScrollView,
-  Image,
-  Linking,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView, Platform} from 'react-native';
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
-import {Colors, Fonts} from '../styles/Style';
+import {Fonts} from '../styles/Style';
 import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
@@ -20,8 +12,6 @@ import AppContext from '../../AppContext';
 import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
-import instagram from '../assets/instagram.png';
-import tiktok from '../assets/Tiktok.png';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -67,7 +57,13 @@ const HomePage = ({navigation}) => {
             size="medium"
             special
             left
-            onPress={() => navigation.navigate('QuizzStartPage')}
+            onPress={() =>
+              navigation.navigate('Jouer', {
+                module_id: user.next_module,
+                questions: user.nextQuestions,
+                clearModuleData: true,
+              })
+            }
             icon
           />
         </View>
@@ -92,7 +88,7 @@ const HomePage = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: Platform.OS === 'android' ? 'center' : 'flex-start',
     width: '100%',
     minHeight: '100%',
   },
