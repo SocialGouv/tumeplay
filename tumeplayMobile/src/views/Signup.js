@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
     fontSize: 18,
-
+    color: 'black',
     paddingBottom: 20,
   },
 
@@ -205,13 +205,14 @@ const pickerSelectStyle = StyleSheet.create({
     borderBottomColor: Colors.grey,
     fontSize: 18,
     paddingVertical: 20,
+    color: 'black',
   },
   inputIOS: {
     fontSize: 18,
     paddingVertical: 12,
     borderColor: Colors.grey,
     borderRadius: 4,
-
+    color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputIOSContainer: {
