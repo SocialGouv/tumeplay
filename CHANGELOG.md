@@ -1,3 +1,10 @@
+## [1.62.1](https://github.com/SocialGouv/Tumeplay/compare/v1.62.0...v1.62.1) (2022-02-10)
+
+
+### Bug Fixes
+
+* truncate title card ([#314](https://github.com/SocialGouv/Tumeplay/issues/314)) ([0564cb8](https://github.com/SocialGouv/Tumeplay/commit/0564cb82ccfb708fc0671c7e2536925fa63e5cbc))
+
 # [1.62.0](https://github.com/SocialGouv/Tumeplay/compare/v1.61.1...v1.62.0) (2022-02-10)
 
 
