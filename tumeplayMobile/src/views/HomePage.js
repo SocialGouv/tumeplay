@@ -57,7 +57,13 @@ const HomePage = ({navigation}) => {
             size="medium"
             special
             left
-            onPress={() => navigation.navigate('QuizzStartPage')}
+            onPress={() =>
+              navigation.navigate('Jouer', {
+                module_id: user.next_module,
+                questions: user.nextQuestions,
+                clearModuleData: true,
+              })
+            }
             icon
           />
         </View>
