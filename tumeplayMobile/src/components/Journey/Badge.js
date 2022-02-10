@@ -16,8 +16,7 @@ const Badge = props => {
     if (status === 'done') {
       setStrokeColor('#51B070');
       setFillColor('#DDF4ED');
-    }
-    if (status === 'todo') {
+    } else if (status === 'todo') {
       setStrokeColor('#a690f5');
       setFillColor('#D3C8FB');
     }
