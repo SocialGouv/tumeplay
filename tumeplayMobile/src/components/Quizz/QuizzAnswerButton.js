@@ -33,7 +33,6 @@ const QuizzAnswerButton = props => {
           style={[
             styles.value,
             hasAnswered && answer.key === correctAnswer && {fontWeight: '700'},
-            answerTrou ? styles.valueTrou : '',
           ]}>
           {answer.value}
         </Text>
@@ -76,10 +75,9 @@ const styles = StyleSheet.create({
   value: {
     justifyContent: 'center',
     textAlign: 'center',
-  },
-  valueTrou: {
     fontSize: 18,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   emoji: {
     justifyContent: 'center',
