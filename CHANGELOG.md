@@ -1,3 +1,10 @@
+## [1.61.1](https://github.com/SocialGouv/Tumeplay/compare/v1.61.0...v1.61.1) (2022-02-10)
+
+
+### Bug Fixes
+
+* white text for inputs ([#311](https://github.com/SocialGouv/Tumeplay/issues/311)) ([ad96bc5](https://github.com/SocialGouv/Tumeplay/commit/ad96bc5c550a5d143d6cb644647fc8f99ee2b6a4))
+
 # [1.61.0](https://github.com/SocialGouv/Tumeplay/compare/v1.60.0...v1.61.0) (2022-02-09)
 
 
