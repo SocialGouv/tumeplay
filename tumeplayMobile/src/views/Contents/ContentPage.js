@@ -59,8 +59,12 @@ const ContentPage = ({navigation, route}) => {
     setCount(count + 1);
   };
 
-  const goToQuizz = () => {
-    navigation.navigate('QuizzStartPage');
+  const goToJourney = () => {
+    navigation.navigate('Jouer', {
+      module_id: user.next_module,
+      questions: user.nextQuestions,
+      clearModuleData: true,
+    });
   };
 
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
@@ -110,7 +114,7 @@ const ContentPage = ({navigation, route}) => {
               icon
               style={[styles.button, styles.redButton]}
               styleText={{alignItems: 'center'}}
-              onPress={() => goToQuizz()}
+              onPress={() => goToJourney()}
             />
           )}
           <Button
@@ -178,7 +182,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'justify',
   },
   divider: {
     borderBottomColor: '#EAE2D7',
