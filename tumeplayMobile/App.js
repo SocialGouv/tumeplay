@@ -19,6 +19,7 @@ import {View, StyleSheet} from 'react-native';
 import Text from './src/components/Text';
 import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
+import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
 
@@ -163,6 +164,7 @@ const App = () => {
             <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
             <NavigationStack.Screen name="Box" component={Box} />
             <NavigationStack.Screen name="Parcours" component={Journey} />
+            <NavigationStack.Screen name="Award" component={Award} />
           </NavigationStack.Navigator>
         </NavigationContainer>
       )}
