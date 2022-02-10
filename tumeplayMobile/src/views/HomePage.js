@@ -84,20 +84,6 @@ const HomePage = ({navigation}) => {
             inactiveSlideOpacity={1}
           />
         </View>
-        <View style={styles.bottomContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL('https://www.instagram.com/tumeplay/');
-            }}>
-            <Image source={instagram} style={styles.imageLink} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL('https://www.tiktok.com/@tu.me.play');
-            }}>
-            <Image source={tiktok} style={styles.imageLink} />
-          </TouchableOpacity>
-        </View>
       </Container>
     </ScrollView>
   );
@@ -140,15 +126,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontSize: 18,
     marginHorizontal: Dimensions.get('window').width > 375 ? 15 : 10,
-  },
-  bottomContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '30%',
-  },
-  imageLink: {
-    width: 40,
-    height: 40,
   },
 });
 
