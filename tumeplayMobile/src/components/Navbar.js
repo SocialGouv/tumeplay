@@ -1,30 +1,33 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomePage from '../views/HomePage';
 import Thematiques from '../views/Thematiques';
-import QuizzStartPage from '../views/QuizzStartPage';
 import Journey from '../views/Journey';
 import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Icons from 'react-native-vector-icons/FontAwesome5';
+import AppContext from '../../AppContext';
+import QuizzLoader from './global/QuizzLoader';
 
 const Tab = createBottomTabNavigator();
 
 const Navbar = ({navigation, route}) => {
+  const {user} = useContext(AppContext);
   return (
     <Tab.Navigator
       initialRouteName="Accueil"
-      screenOptions={{
+      screenOptions={() => ({
         headerShown: false,
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.black,
-        tabBarItemStyle: {padding: 5},
+        tabBarItemStyle: {padding: 0},
         tabBarStyle: {
           position: 'relative',
           bottom: 0,
           backgroundColor: Colors.lightCorail,
         },
-      }}>
+      })}>
       <Tab.Screen
         name="Accueil"
         component={HomePage}
@@ -45,13 +48,22 @@ const Navbar = ({navigation, route}) => {
         }}
       />
       <Tab.Screen
-        name="Quiz"
-        component={QuizzStartPage}
+        name="Jouer"
+        component={QuizzLoader}
         options={{
           tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="rule" color={color} size={size} />
+            <Icons
+              style={{
+                position: 'absolute',
+                bottom: 15,
+              }}
+              name="dice"
+              color={color}
+              size={50}
+            />
           ),
         }}
+        initialParams={{homeScreen: true}}
       />
       <Tab.Screen
         name="Parcours"
