@@ -8,7 +8,7 @@ import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import {GET_LEVELS} from '../services/api/levels';
 import {GET_MODULES} from '../services/api/modules';
 import Title from '../components/Title';
-
+import _ from 'lodash';
 const Journey = () => {
   const useMultipleQuery = () => {
     const res1 = useQuery(GET_MODULES);
@@ -31,10 +31,18 @@ const Journey = () => {
     }
   }, [data1, loading1, loading2, data2]);
 
+  let moduleIndex = 0;
   const displayWrappers = levels?.map(level => {
-    const associatedModules = modules?.filter(
+    let tmpModules = modules;
+    let associatedModules = tmpModules?.filter(
       module => module.niveau?.value === level.value,
     );
+    associatedModules = associatedModules.map(module => {
+      let tmpModule = JSON.parse(JSON.stringify(module));
+      const newModule = Object.assign(tmpModule, {module_index: moduleIndex});
+      moduleIndex += 1;
+      return newModule;
+    });
     return (
       <WrapperLevelBadges
         key={level.id}

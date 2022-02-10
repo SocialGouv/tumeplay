@@ -1,25 +1,21 @@
-import React, {useEffect, useContext} from 'react';
+import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import congrats from '../../../assets/custom_images/congrats.png';
 import clap from '../../../assets/custom_images/clap.png';
-import coin from '../../../assets/coin.png';
 import {Fonts} from '../../../styles/Style';
 import Button from '../../Button';
 import bg from '../../../assets/QuizzWrongBG.png';
 import _ from 'lodash';
-import AppContext from '../../../../AppContext';
 import Container from '../../global/Container';
 import config from '../../../../config';
 
 const QuizzWithWrongAnswers = props => {
   const {correctAnswers, wrongAnswers, navigation, module_id} = props;
 
-  const context = useContext(AppContext);
   const restartQuizz = () => {
-    console.log('length', correctAnswers.length);
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(wrongAnswers),
       module_id: module_id,

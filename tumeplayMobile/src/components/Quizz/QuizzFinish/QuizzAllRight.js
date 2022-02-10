@@ -5,7 +5,7 @@ import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
-import {Fonts} from '../../../styles/Style';
+import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
@@ -13,17 +13,18 @@ import {UPDATE_MOBILE_USER_HISTORY} from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
+import {ActivityIndicator} from 'react-native-paper';
+import NativeShareModule from 'react-native/Libraries/Share/NativeShareModule';
 
-const QuizzAllRight = ({navigation, module_id}) => {
+const QuizzAllRight = ({navigation, route, module_id}) => {
   const context = useContext(AppContext);
   const {user, reloadUser} = context;
-
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
 
   const checkUserHistory = async () => {
     if (user?.history) {
       let currentHistory = user?.history.find(
-        history => history.module_id === module_id,
+        history => history.module_id == module_id,
       );
       try {
         await updateHistory({
@@ -43,13 +44,13 @@ const QuizzAllRight = ({navigation, module_id}) => {
             {
               text: 'Annuler',
               onPress: () => {
-                navigation.navigate('Home');
+                () => navigation.navigate('Home', {screen: 'Parcours'});
               },
             },
             {
               text: 'Recommencer',
               onPress: () => {
-                navigation.navigate('QuizzStartPage');
+                checkUserHistory();
               },
             },
           ],
@@ -60,7 +61,7 @@ const QuizzAllRight = ({navigation, module_id}) => {
 
   useEffect(() => {
     checkUserHistory();
-  }, []);
+  }, [route]);
 
   return (
     <Container style={styles.container}>
@@ -73,16 +74,29 @@ const QuizzAllRight = ({navigation, module_id}) => {
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
       <View style={styles.bottomContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.text}>Non, pas tout de suite</Text>
-        </TouchableOpacity>
-        <Button
-          icon={true}
-          text={'Je continue'}
-          size={'large'}
-          style={styles.button}
-          onPress={() => navigation.navigate('QuizzStartPage')}
-        />
+        {user.next_module != module_id ? (
+          <>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
+              <Text style={styles.text}>Non, pas tout de suite</Text>
+            </TouchableOpacity>
+            <Button
+              icon={true}
+              text={'Je continue'}
+              size={'large'}
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate('QuizzModule', {
+                  module_id: user.next_module,
+                  questions: user.next_module_questions,
+                  clearModuleData: true,
+                })
+              }
+            />
+          </>
+        ) : (
+          <ActivityIndicator size="large" color={Colors.primary} />
+        )}
       </View>
     </Container>
   );

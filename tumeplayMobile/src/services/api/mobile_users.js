@@ -16,8 +16,33 @@ export const GET_MOBILE_USER = gql`
         module_id
         status
       }
+      next_module
+      next_module_questions {
+        id
+        text_question: text_question_mobile
+        text_answer
+        kind
+        responses {
+          response_A: response_A_mobile
+          response_B: response_B_mobile
+          response_C: response_C_mobile
+          right_answer
+        }
+      }
       level
       pending_module
+      pending_module_questions {
+        id
+        text_question: text_question_mobile
+        text_answer
+        kind
+        responses {
+          response_A: response_A_mobile
+          response_B: response_B_mobile
+          response_C: response_C_mobile
+          right_answer
+        }
+      }
     }
   }
 `;

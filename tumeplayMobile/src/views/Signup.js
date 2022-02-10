@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import Text from '../components/Text';
 import RNPickerSelect from 'react-native-picker-select';
@@ -9,9 +9,11 @@ import {useMutation} from '@apollo/client';
 import {POST_MOBILE_USER} from '../services/api/mobile_users';
 import bg from '../assets/BG_PROFIL.png';
 import Container from '../components/global/Container';
+import AppContext from '../../AppContext';
 
 const Signup = ({user, setUser}) => {
   let tmpUser = {...user};
+  const {reloadUser} = useContext(AppContext);
 
   const generateID = () => {
     const user_id =
@@ -27,16 +29,8 @@ const Signup = ({user, setUser}) => {
       'user',
       JSON.stringify({
         user_id: tmpUser.user_id,
-        first_name: tmpUser.first_name,
-        isOnboarded: tmpUser.isOnboarded,
-        isSignedUp: tmpUser.isSignedUp,
-        isUnder25: tmpUser.isOnboarded,
-        ageRange: tmpUser.ageRange,
-        level: tmpUser.level,
-        region: tmpUser.region,
       }),
     );
-    setUser({...tmpUser});
   };
 
   const [signUpUser] = useMutation(POST_MOBILE_USER, {
@@ -45,6 +39,7 @@ const Signup = ({user, setUser}) => {
     },
     onCompleted() {
       setUserInStorage();
+      reloadUser();
     },
   });
 

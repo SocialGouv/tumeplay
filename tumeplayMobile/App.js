@@ -21,6 +21,7 @@ import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
+import {REACT_APP_URL} from '@env';
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -40,12 +41,7 @@ const App = () => {
       const tmpUser_id = tmpUser?.user_id;
       if (tmpUser_id) {
         user.user_id = tmpUser_id;
-        setUser({...user});
-        getMobileUser({
-          variables: {
-            user_id: user.user_id,
-          },
-        });
+        getMobileUser(user.user_id);
       }
     } else {
       setIsUserLoaded(true);
@@ -53,18 +49,23 @@ const App = () => {
     }
   };
 
-  const reloadUser = async () => {
-    getMobileUser({
-      variables: {
-        user_id: user.user_id,
-      },
-    });
+  const getMobileUser = async user_id => {
+    const response = await fetch(
+      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id,
+    );
+    const tmpUser = await response.json();
+    if (tmpUser?.status === 404) {
+      clearStorage();
+      setUser({});
+    } else if (tmpUser) {
+      setUser(tmpUser);
+    }
+    setIsUserLoaded(true);
   };
 
-  const [getMobileUser, {data: data2, loading: loading2, error: error2}] =
-    useLazyQuery(GET_MOBILE_USER, {
-      fetchPolicy: 'network-only',
-    });
+  const reloadUser = () => {
+    getMobileUser(user.user_id);
+  };
 
   const retrieveDoneModulesIds = () => {
     let successHistories = user?.history?.filter(
@@ -86,22 +87,6 @@ const App = () => {
       setThematiques([...data1.thematiqueMobiles]);
     }
   }, [loading1, data1]);
-
-  useEffect(() => {
-    if (!loading2 && data2) {
-      retrieveUserFromAPI();
-    }
-  }, [loading2, data2]);
-
-  const retrieveUserFromAPI = async () => {
-    if (data2?.statusCode === 404) {
-      clearStorage();
-      setUser({});
-    } else if (data2?.utilisateursMobile) {
-      setUser(data2?.utilisateursMobile);
-    }
-    setIsUserLoaded(true);
-  };
 
   const clearStorage = async () => {
     await EncryptedStorage.clear();
