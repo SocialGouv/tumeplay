@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView, Platform} from 'react-native';
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
@@ -88,7 +88,7 @@ const HomePage = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: Platform.OS === 'android' ? 'center' : 'flex-start',
     width: '100%',
     minHeight: '100%',
   },
