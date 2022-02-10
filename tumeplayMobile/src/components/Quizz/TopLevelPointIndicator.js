@@ -7,8 +7,6 @@ import * as Progress from 'react-native-progress';
 const TopLevelPointIndicator = ({style}) => {
   const {user} = useContext(AppContext);
 
-  const fullProgressLength = 6;
-
   const progress = user.percentage_level_completed || 0;
 
   return (

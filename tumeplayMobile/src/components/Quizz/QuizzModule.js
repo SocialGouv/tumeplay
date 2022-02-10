@@ -1,5 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {TouchableOpacity, StyleSheet, View, ScrollView} from 'react-native';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
 import Button from '../Button';
@@ -12,12 +18,16 @@ import config from '../../../config';
 import Text from '../../components/Text';
 import * as Progress from 'react-native-progress';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AppContext from '../../../AppContext';
+import {CREATE_HISTORY} from '../../services/api/mobile_users';
+import {useMutation} from '@apollo/client';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
+  const retry = route?.params?.retry;
 
   const question = questions[0];
 
@@ -29,11 +39,13 @@ const QuizzModule = ({navigation, route}) => {
   const [remainingQuestions, setRemainingQuestions] = useState([]);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
+  const [createHistory] = useMutation(CREATE_HISTORY);
 
-  const fullQuizzLength = useRef(questions.length);
-
+  let fullQuizzLength = useRef(questions.length);
   const progress =
     (correctAnswers.length + wrongAnswers.length) / fullQuizzLength.current;
+
+  const {user, reloadUser} = useContext(AppContext);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -42,11 +54,11 @@ const QuizzModule = ({navigation, route}) => {
       tmpResponses?.push({key, value});
     }
     tmpResponses?.shift();
-    setResponses(tmpResponses);
+    setResponses([...tmpResponses]);
   };
 
   const displayAnswerText = answerKey => {
-    if (answerKey === responses[responses?.length - 1]?.value) {
+    if (answerKey === question.responses.right_answer) {
       correctAnswers.push(question);
       setCorrectAnswers([...correctAnswers]);
     } else {
@@ -67,20 +79,18 @@ const QuizzModule = ({navigation, route}) => {
   };
 
   const displayAnswer = responses?.map((ans, index) => {
-    if (index < responses.length - 1) {
-      return (
-        <QuizzAnswerButton
-          answer={ans}
-          correctAnswer={responses[responses?.length - 1]?.value}
-          hasAnswered={hasAnswered}
-          disabled={hasAnswered}
-          key={ans.key}
-          answerTrou={question.kind === 'Trou'}
-          answeredKey={answeredKey}
-          onPress={() => displayAnswerText(ans.key)}
-        />
-      );
-    }
+    return (
+      <QuizzAnswerButton
+        answer={ans}
+        correctAnswer={question.responses.right_answer}
+        hasAnswered={hasAnswered}
+        disabled={hasAnswered}
+        key={ans.key}
+        answerTrou={question.kind === 'Trou'}
+        answeredKey={answeredKey}
+        onPress={() => displayAnswerText(ans.key)}
+      />
+    );
   });
 
   const goToNextQuestion = () => {
@@ -100,6 +110,41 @@ const QuizzModule = ({navigation, route}) => {
     }
   };
 
+  const handleStartQuizz = async () => {
+    if (!user.pending_module) {
+      try {
+        await createHistory({
+          variables: {
+            user_id: user?.id,
+            module_id: module_id,
+            status: 'pending',
+          },
+        });
+        reloadUser();
+      } catch (error) {
+        console.log('Erreur au lancement du quizz:', error);
+        Alert.alert(
+          "Une erreur s'est produite au lancement du quizz",
+          'Merci de relancer un quizz',
+          [
+            {
+              text: 'Annuler',
+              onPress: () => {
+                navigation.navigate('Home', {screen: 'QuizzLoader'});
+              },
+            },
+            {
+              text: 'Ok',
+              onPress: () => {
+                navigation.navigate('Home');
+              },
+            },
+          ],
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     setQuestionTitle(questions[0]?.text_question);
@@ -109,6 +154,10 @@ const QuizzModule = ({navigation, route}) => {
     if (clearModuleData) {
       setCorrectAnswers([]);
       setWrongAnswers([]);
+      if (!retry) {
+        handleStartQuizz();
+      }
+      fullQuizzLength.current = questions.length;
     }
 
     if (improveWrongAnswers) {
@@ -123,7 +172,8 @@ const QuizzModule = ({navigation, route}) => {
         showsVerticalScrollIndicator={false}>
         <Container background={bg} style={styles.container}>
           <View style={styles.levelIndicator}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Home', {screen: 'Accueil'})}>
               <Icon
                 name="md-arrow-back"
                 size={30}
