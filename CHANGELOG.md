@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/SocialGouv/Tumeplay/compare/v1.63.0...v1.64.0) (2022-02-10)
+
+
+### Features
+
+* add credits to user & relation orders to user-mobile ([67c350c](https://github.com/SocialGouv/Tumeplay/commit/67c350cd7a41c41c4daf050fa631d08fe1b9b77b))
+
 # [1.63.0](https://github.com/SocialGouv/Tumeplay/compare/v1.62.2...v1.63.0) (2022-02-10)
 
 
