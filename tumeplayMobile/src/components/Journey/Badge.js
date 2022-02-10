@@ -4,8 +4,7 @@ import {Image, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
 import check from '../../assets/Check.png';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import diceIcon from '../../assets/diceHexagon.png';
 const Badge = props => {
   const navigation = useNavigation();
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
@@ -55,7 +54,7 @@ const Badge = props => {
         )}
       </Svg>
       {status === 'todo' && (
-        <Icon name="dice" style={styles.imageTodo} size={30} />
+        <Image source={diceIcon} style={styles.imageTodo} size={30} />
       )}
     </TouchableOpacity>
   );
@@ -75,9 +74,11 @@ const styles = StyleSheet.create({
     left: 45,
   },
   imageTodo: {
+    width: 40,
+    height: 40,
     position: 'absolute',
     top: 40,
-    left: 40,
+    left: 41,
   },
   iconContainer: {
     position: 'absolute',

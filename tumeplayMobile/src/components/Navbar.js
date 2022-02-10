@@ -6,9 +6,10 @@ import Journey from '../views/Journey';
 import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Icons from 'react-native-vector-icons/FontAwesome5';
 import AppContext from '../../AppContext';
 import QuizzLoader from './global/QuizzLoader';
+import diceIcon from '../assets/diceIcon.png';
+import {Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,14 +53,15 @@ const Navbar = ({navigation, route}) => {
         component={QuizzLoader}
         options={{
           tabBarIcon: ({size, color}) => (
-            <Icons
+            <Image
               style={{
                 position: 'absolute',
-                bottom: 15,
+                bottom: 7,
+                width: 50,
+                height: 50,
               }}
-              name="dice"
+              source={diceIcon}
               color={color}
-              size={50}
             />
           ),
         }}

@@ -105,6 +105,9 @@ const ContentPage = ({navigation, route}) => {
             <Button
               size="medium"
               text="Jouer"
+              special
+              left
+              icon
               style={[styles.button, styles.redButton]}
               styleText={{alignItems: 'center'}}
               onPress={() => goToQuizz()}
