@@ -21,7 +21,9 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
       <View>
         <Image style={styles.image} source={imageUrl} />
         <Text style={styles.level}>Niveau {content?.niveau?.value}</Text>
-        <Text style={styles.title}>{content?.title}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {content?.title}
+        </Text>
       </View>
     </TouchableOpacity>
   ) : (
