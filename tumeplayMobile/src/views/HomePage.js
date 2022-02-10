@@ -11,7 +11,7 @@ import {
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
-import {Colors, Fonts} from '../styles/Style';
+import {Fonts} from '../styles/Style';
 import Button from '../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_FRESH_CONTENTS} from '../services/api/contents';
@@ -22,6 +22,7 @@ import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
 import instagram from '../assets/instagram.png';
 import tiktok from '../assets/Tiktok.png';
+import Event from '../services/api/matomo';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -67,7 +68,10 @@ const HomePage = ({navigation}) => {
             size="medium"
             special
             left
-            onPress={() => navigation.navigate('QuizzStartPage')}
+            onPress={() => {
+              Event.playEvent();
+              navigation.navigate('QuizzStartPage');
+            }}
             icon
           />
         </View>

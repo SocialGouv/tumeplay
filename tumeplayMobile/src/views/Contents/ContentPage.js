@@ -17,8 +17,8 @@ import {GET_SINGLE_CONTENT} from '../../services/api/contents';
 import Feedback from '../../components/Feedback';
 import Container from '../../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
-import config from '../../../config';
 import AppContext from '../../../AppContext';
+import Event from '../../services/api/matomo';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -41,6 +41,9 @@ const ContentPage = ({navigation, route}) => {
     variables: {content_id: route?.params?.content_id},
   });
 
+  useEffect(() => {
+    Event.contentSeen();
+  }, []);
   useEffect(() => {
     if (data && !loading) {
       setContent(data.contents[0]);

@@ -1,3 +1,4 @@
+import Matomo from 'react-native-matomo';
 import React, {useState, useEffect} from 'react';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
@@ -110,6 +111,7 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
+    Matomo.initTracker('https://matomo.numericite.eu/', 20);
   }, []);
 
   const contextValues = {

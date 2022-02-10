@@ -13,6 +13,7 @@ import {UPDATE_MOBILE_USER_HISTORY} from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
+import Event from '../../../services/api/matomo';
 
 const QuizzAllRight = ({navigation, module_id}) => {
   const context = useContext(AppContext);
@@ -59,6 +60,7 @@ const QuizzAllRight = ({navigation, module_id}) => {
   };
 
   useEffect(() => {
+    Event.quizzDone();
     checkUserHistory();
   }, []);
 
