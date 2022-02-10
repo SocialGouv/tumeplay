@@ -136,6 +136,21 @@ module.exports = {
       user.hasFinished = true;
     }
 
+    const orders_count = await strapi.services["commande"].count({
+      utilisateurs_mobile: user.id,
+    });
+
+    let credits = 0;
+    if (user.level > 1) {
+      credits = 1;
+    } else if (user.level > 3) {
+      credits = 2;
+    } else if (user.level > 5) {
+      credits = 3;
+    }
+
+    user.credits = credits - orders_count;
+
     return user;
   },
 };

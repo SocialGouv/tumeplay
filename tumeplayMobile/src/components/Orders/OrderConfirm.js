@@ -1,11 +1,12 @@
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Text from '../../components/Text';
-import React from 'react';
+import React, {useContext} from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
 import Button from '../Button';
 import OrdersAPI from '../../services/api/orders';
 import config from '../../../config';
 import {useNavigation} from '@react-navigation/native';
+import AppContext from '../../../AppContext';
 
 const OrderConfirm = props => {
   const {
@@ -15,6 +16,8 @@ const OrderConfirm = props => {
     deliveryMode,
     box,
   } = props;
+
+  const {strapi_user_id} = useContext(AppContext);
 
   const navigation = useNavigation();
 
@@ -36,6 +39,7 @@ const OrderConfirm = props => {
       box_name: box.title,
       delivery: deliveryMode,
       environnement: 'metropole',
+      utilisateurs_mobile: strapi_user_id,
       content: [
         {
           __component: 'commandes.box',
