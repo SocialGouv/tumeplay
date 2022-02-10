@@ -35,7 +35,7 @@ const Box = ({navigation}) => {
 
   const htmlText = {
     html: `<div style=color:black;>
-      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
+      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoi uniquement</strong> dans les régions :</p>
       <ul>
         <li>Ile-de-France</li>
         <li>Nouvelle-Aquitaine</li>
