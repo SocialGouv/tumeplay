@@ -1,3 +1,10 @@
+# [1.71.0](https://github.com/SocialGouv/Tumeplay/compare/v1.70.1...v1.71.0) (2022-02-11)
+
+
+### Features
+
+* api call removing empty content in themes according to level ([045e3d8](https://github.com/SocialGouv/Tumeplay/commit/045e3d8c43a5f4d23a728ac8a15ab5d55cc7e3fa))
+
 ## [1.70.1](https://github.com/SocialGouv/Tumeplay/compare/v1.70.0...v1.70.1) (2022-02-11)
 
 
