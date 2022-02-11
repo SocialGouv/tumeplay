@@ -74,7 +74,6 @@ const HomePage = ({navigation}) => {
     );
   };
   useEffect(() => {
-    // TiktokAPI(tiktokIds);
     fetchData();
   }, []);
 
