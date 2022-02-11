@@ -1,12 +1,16 @@
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Text from '../../components/Text';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
 import Button from '../Button';
 import OrdersAPI from '../../services/api/orders';
 import config from '../../../config';
 import {useNavigation} from '@react-navigation/native';
 import AppContext from '../../../AppContext';
+import CheckBox from '@react-native-community/checkbox';
+import TextBase from '../../components/Text';
+import {Colors} from '../../styles/Style';
+import ContactsAPI from '../../services/api/contact';
 
 const OrderConfirm = props => {
   const {
@@ -16,6 +20,8 @@ const OrderConfirm = props => {
     deliveryMode,
     box,
   } = props;
+
+  const [checked, setChecked] = useState(false);
 
   const {strapi_user_id} = useContext(AppContext);
 
@@ -48,6 +54,16 @@ const OrderConfirm = props => {
       ],
     };
     await OrdersAPI.orderBoxes(requestBody);
+    if (checked) {
+      let userAddress = {
+        first_name: userInfos.first_name,
+        email: userInfos.email,
+        zipCode: userAdressInformations.postcode,
+        box_id: box.id,
+        type: 'enrollé',
+      };
+      await ContactsAPI.postContact(userAddress);
+    }
     navigation.navigate('Home');
   };
 
@@ -74,13 +90,26 @@ const OrderConfirm = props => {
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <Image source={image} style={styles.image} />
-        <View style={styles.bottomtextContainer}>
-          <Text style={styles.bottomText}>
-            Disponible entre{' '}
-            <Text style={styles.bottomBoldText}>3 et 5 jours ouvrés.</Text> À
-            noter, pas d'envoi d'email de la part de Colissimo
-          </Text>
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            style={styles.checkbox}
+            animationDuration={0.2}
+            value={checked}
+            onValueChange={() => setChecked(!checked)}
+          />
+          <TextBase style={[styles.bottomText, {paddingLeft: 2}]}>
+            J 'accepte d' être recontacté par Tumeplay pour améliorer le service
+          </TextBase>
+        </View>
+        <View style={styles.bottomColissimo}>
+          <Image source={image} style={styles.image} />
+          <View style={styles.bottomtextContainer}>
+            <Text style={styles.bottomText}>
+              Disponible entre{' '}
+              <Text style={styles.bottomBoldText}>3 et 5 jours ouvrés.</Text> À
+              noter, pas d'envoi d'email de la part de Colissimo
+            </Text>
+          </View>
         </View>
       </View>
       <Button
@@ -135,6 +164,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginBottom: 20,
+    marginRight: 10,
   },
   bottomText: {
     fontSize: 13,
@@ -146,15 +176,28 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontWeight: '600',
   },
+  checkbox: {
+    marginRight: 10,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   bottomtextContainer: {
     paddingBottom: 22,
     width: config.deviceWidth > 375 ? 290 : 280,
   },
+  bottomColissimo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+  },
   bottomContainer: {
     flex: 0.9,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'flex-end',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   button: {
     alignSelf: 'center',
