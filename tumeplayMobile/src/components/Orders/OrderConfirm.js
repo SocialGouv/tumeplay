@@ -64,7 +64,7 @@ const OrderConfirm = props => {
       };
       await ContactsAPI.postContact(userAddress);
     }
-    navigation.navigate('Home');
+    navigation.navigate('Home', {screen: 'Home'});
   };
 
   return (
