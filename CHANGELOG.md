@@ -1,3 +1,10 @@
+## [1.70.1](https://github.com/SocialGouv/Tumeplay/compare/v1.70.0...v1.70.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* correction white background on tiktok feed ([955dea8](https://github.com/SocialGouv/Tumeplay/commit/955dea870c5ed3e4b0cff238aaa886ec811bd020))
+
 # [1.70.0](https://github.com/SocialGouv/Tumeplay/compare/v1.69.0...v1.70.0) (2022-02-11)
 
 
