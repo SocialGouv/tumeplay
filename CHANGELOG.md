@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/SocialGouv/Tumeplay/compare/v1.64.0...v1.65.0) (2022-02-11)
+
+
+### Features
+
+* remove interrogation point when user answer in trou ([#321](https://github.com/SocialGouv/Tumeplay/issues/321)) ([a057404](https://github.com/SocialGouv/Tumeplay/commit/a0574044428db5db2f59d60f6a7363f1986b9810))
+
 # [1.64.0](https://github.com/SocialGouv/Tumeplay/compare/v1.63.0...v1.64.0) (2022-02-10)
 
 
