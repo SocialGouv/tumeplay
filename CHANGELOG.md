@@ -1,3 +1,10 @@
+# [1.70.0](https://github.com/SocialGouv/Tumeplay/compare/v1.69.0...v1.70.0) (2022-02-11)
+
+
+### Features
+
+* implementing all reward system in quizzFinish and Award component ([#324](https://github.com/SocialGouv/Tumeplay/issues/324)) ([019dc16](https://github.com/SocialGouv/Tumeplay/commit/019dc1632bf6b4986e06edf5974f70dcb3a35a10))
+
 # [1.69.0](https://github.com/SocialGouv/Tumeplay/compare/v1.68.0...v1.69.0) (2022-02-11)
 
 
