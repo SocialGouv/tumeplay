@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/SocialGouv/Tumeplay/compare/v1.67.0...v1.68.0) (2022-02-11)
+
+
+### Features
+
+* has-reward route implementation ([#323](https://github.com/SocialGouv/Tumeplay/issues/323)) ([566e0e5](https://github.com/SocialGouv/Tumeplay/commit/566e0e5fa7f9912a1de819cd5efb70489d8ea7c9))
+
 # [1.67.0](https://github.com/SocialGouv/Tumeplay/compare/v1.66.0...v1.67.0) (2022-02-11)
 
 
