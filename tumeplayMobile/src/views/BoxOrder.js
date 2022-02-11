@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -7,7 +12,8 @@ import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
 import OrderConfirm from '../components/Orders/OrderConfirm';
 import config from '../../config';
 import {Divider} from 'react-native-paper';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Tooltip from 'react-native-walkthrough-tooltip';
+import {Colors} from '../styles/Style';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -21,6 +27,7 @@ const Box = ({navigation, route}) => {
   });
   const [userAdressInformations, setUserAdressInformations] = useState();
   const [orderConfirm, setOrderConfirm] = useState(false);
+  const [toolTipVisible, setToolTipVisible] = useState(false);
 
   return (
     <Container style={styles.container}>
@@ -52,7 +59,7 @@ const Box = ({navigation, route}) => {
               Où souhaites-tu recevoir ton kit ?
             </Text>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
+              <TouchableHighlight
                 onPress={() => setDeliveryMode('home')}
                 style={[
                   styles.buttons,
@@ -69,26 +76,33 @@ const Box = ({navigation, route}) => {
                   }>
                   A DOMICILE
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                disabled={true}
-                onPress={() => setDeliveryMode('pickup')}
-                style={[
-                  styles.buttons,
-                  styles.buttonRight,
-                  deliveryMode === 'pickup'
-                    ? styles.activeButton
-                    : styles.nonActiveButton,
-                ]}>
-                <Text
-                  style={
+              </TouchableHighlight>
+              <Tooltip
+                isVisible={toolTipVisible}
+                content={
+                  <Text style={styles.tooltipText}>Bientôt disponible</Text>
+                }
+                placement="bottom"
+                onClose={() => setToolTipVisible(false)}>
+                <TouchableOpacity
+                  onPress={() => setToolTipVisible(true)}
+                  style={[
+                    styles.buttons,
+                    styles.buttonRight,
                     deliveryMode === 'pickup'
-                      ? styles.whiteText
-                      : styles.blackText
-                  }>
-                  EN POINT RELAIS
-                </Text>
-              </TouchableOpacity>
+                      ? styles.activeButton
+                      : styles.nonActiveButton,
+                  ]}>
+                  <Text
+                    style={
+                      deliveryMode === 'pickup'
+                        ? styles.whiteText
+                        : styles.blackText
+                    }>
+                    EN POINT RELAIS
+                  </Text>
+                </TouchableOpacity>
+              </Tooltip>
             </View>
             <Divider style={[styles.divider, {marginBottom: 0}]} />
           </View>
@@ -190,6 +204,11 @@ const styles = StyleSheet.create({
   buttonRight: {
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
+  },
+  tooltipText: {
+    padding: 5,
+    fontSize: 14,
+    color: Colors.primary,
   },
   whiteText: {
     color: '#FFF',

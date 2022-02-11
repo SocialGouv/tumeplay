@@ -14,7 +14,6 @@ const BoxCard = props => {
         <Text style={styles.titleIndex}>KIT {index}</Text>
         <Text style={styles.titleBox}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
-        <Text style={styles.moreInfo}>+ d'infos</Text>
       </View>
     </TouchableOpacity>
   );
