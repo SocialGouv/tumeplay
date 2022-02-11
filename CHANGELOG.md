@@ -1,3 +1,10 @@
+# [1.67.0](https://github.com/SocialGouv/Tumeplay/compare/v1.66.0...v1.67.0) (2022-02-11)
+
+
+### Features
+
+* add page award ([#319](https://github.com/SocialGouv/Tumeplay/issues/319)) ([17c7eb4](https://github.com/SocialGouv/Tumeplay/commit/17c7eb48d1af3dd48ed97b4e0b43fb57b0957598))
+
 # [1.66.0](https://github.com/SocialGouv/Tumeplay/compare/v1.65.0...v1.66.0) (2022-02-11)
 
 
