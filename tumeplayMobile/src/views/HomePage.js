@@ -90,7 +90,7 @@ const HomePage = ({navigation}) => {
         values.map(value => {
           value.html = value.html.replace(
             /style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi,
-            'style="width: 330px; margin: 0;"',
+            "style=\"width: 330px; margin: 0; background-color: '#FBF7F2'",
           );
           return value;
         }),
@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingLeft: 14,
+    backgroundColor: '#FBF7F2',
   },
   subtitle: {
     fontFamily: Fonts.subtitle,
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
   webview: {
     height: 440,
     width: 520,
-    backgroundColor: '#FBF7F2',
+    backgroundColor: '#FF7F2',
   },
 });
 
