@@ -1,20 +1,28 @@
 {
-	"routes": [
-		{
-			"method": "POST",
-			"path": "/users/change-password",
-			"handler": "custom.changePassword",
-			"config": {
-				"policies": []
-			}
-		},
-		{
-			"method": "POST",
-			"path": "/users/change-username",
-			"handler": "custom.changeUsername",
-			"config": {
-				"policies": []
-			}
-		}
-	]
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/has-reward",
+      "handler": "custom.hasReward",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/users/change-password",
+      "handler": "custom.changePassword",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/users/change-username",
+      "handler": "custom.changeUsername",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
 }
