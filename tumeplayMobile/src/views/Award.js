@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import wave from '../assets/wave.png';
@@ -10,9 +10,11 @@ import _ from 'lodash';
 import Container from '../components/global/Container';
 import config from '../../config';
 import AppContext from '../../AppContext';
+import {useNavigation} from '@react-navigation/native';
 
 const Award = props => {
   const {user} = useContext(AppContext);
+  const navigation = useNavigation();
 
   return (
     <Container style={styles.container} background={bg}>
@@ -21,9 +23,11 @@ const Award = props => {
         <Image source={wave} />
       </View>
       <View style={styles.middleContent}>
-        {user.level !== 5 ? (
+        {!user.hasFinished ? (
           <>
-            <Text style={styles.textLevel}>Niveau 1 terminé</Text>
+            <Text style={styles.textLevel}>
+              Niveau {user.level - 1} terminé
+            </Text>
             <Text style={styles.textAward}>Tu as gagné une récompense </Text>
             <Image style={styles.giftImg} source={gift} />
           </>
@@ -40,20 +44,30 @@ const Award = props => {
               size={'large'}
               style={styles.buttonContent}
               onPress={() => {
-                console.log('button');
+                navigation.navigate('Home', {screen: 'Posts'});
               }}
             />
           </>
         )}
       </View>
-      {user.level !== 5 && (
+      {!user.hasFinished ? (
         <Button
           text={'Je continue'}
           size={'large'}
           style={styles.button}
           icon={true}
           onPress={() => {
-            console.log('button');
+            navigation.navigate('Home', {screen: 'Parcours'});
+          }}
+        />
+      ) : (
+        <Button
+          text="Rejouer"
+          size="medium"
+          icon
+          special
+          onPress={() => {
+            navigation.navigate('Home', {screen: 'Parcours'});
           }}
         />
       )}

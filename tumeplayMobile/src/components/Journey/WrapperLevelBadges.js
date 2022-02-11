@@ -6,15 +6,18 @@ import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
 
 const WrapperLevelBadges = ({level, associatedModules, loading}) => {
-  const {doneModules_ids, user} = useContext(AppContext);
+  const {doneModules_ids} = useContext(AppContext);
 
-  const modulesToDisplay = associatedModules?.map(module => {
+  const modulesToDisplay = associatedModules?.map((module, index) => {
     if (module.module_index < doneModules_ids.length) {
       module.status = 'done';
     } else if (module.module_index === doneModules_ids.length) {
       module.status = 'todo';
     } else {
       module.status = 'locked';
+    }
+    if (index + 1 === associatedModules.length) {
+      module.reward = true;
     }
     return (
       <Badge

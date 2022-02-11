@@ -102,7 +102,7 @@ module.exports = {
       status: "success",
     });
 
-    const level_history = history.map((h) => h.module.niveau.id === level.id);
+    const level_history = history.filter((h) => h.module.niveau === level.id);
 
     return level_history.length === modules_in_level.length - 1;
   },
