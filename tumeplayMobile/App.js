@@ -8,7 +8,7 @@ import ContentsPage from './src/views/Contents';
 import ContentPage from './src/views/Contents/ContentPage';
 import Navbar from './src/components/Navbar';
 import QuizzStartPage from './src/views/QuizzStartPage';
-import {useLazyQuery, useQuery} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 import {GET_THEMES} from './src/services/api/themes';
 import AppContext from './AppContext';
 import QuizzModule from './src/components/Quizz/QuizzModule';
@@ -17,8 +17,8 @@ import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
 import {View, StyleSheet} from 'react-native';
 import Text from './src/components/Text';
-import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
+import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
 import {REACT_APP_URL} from '@env';
@@ -63,8 +63,8 @@ const App = () => {
     setIsUserLoaded(true);
   };
 
-  const reloadUser = () => {
-    getMobileUser(user.user_id);
+  const reloadUser = async () => {
+    await getMobileUser(user.user_id);
   };
 
   const retrieveDoneModulesIds = () => {
@@ -148,6 +148,7 @@ const App = () => {
             <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
             <NavigationStack.Screen name="Box" component={Box} />
             <NavigationStack.Screen name="Parcours" component={Journey} />
+            <NavigationStack.Screen name="Award" component={Award} />
           </NavigationStack.Navigator>
         </NavigationContainer>
       )}

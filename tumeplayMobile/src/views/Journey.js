@@ -39,7 +39,7 @@ const Journey = () => {
     );
     associatedModules = associatedModules.map(module => {
       let tmpModule = JSON.parse(JSON.stringify(module));
-      const newModule = Object.assign(tmpModule, {module_index: moduleIndex});
+      let newModule = Object.assign(tmpModule, {module_index: moduleIndex});
       moduleIndex += 1;
       return newModule;
     });

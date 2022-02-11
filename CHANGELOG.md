@@ -1,3 +1,45 @@
+# [1.70.0](https://github.com/SocialGouv/Tumeplay/compare/v1.69.0...v1.70.0) (2022-02-11)
+
+
+### Features
+
+* implementing all reward system in quizzFinish and Award component ([#324](https://github.com/SocialGouv/Tumeplay/issues/324)) ([019dc16](https://github.com/SocialGouv/Tumeplay/commit/019dc1632bf6b4986e06edf5974f70dcb3a35a10))
+
+# [1.69.0](https://github.com/SocialGouv/Tumeplay/compare/v1.68.0...v1.69.0) (2022-02-11)
+
+
+### Features
+
+* add labels for content ([#322](https://github.com/SocialGouv/Tumeplay/issues/322)) ([7ade439](https://github.com/SocialGouv/Tumeplay/commit/7ade439029ed23c5af000c38fa4a7acde75b6497))
+
+# [1.68.0](https://github.com/SocialGouv/Tumeplay/compare/v1.67.0...v1.68.0) (2022-02-11)
+
+
+### Features
+
+* has-reward route implementation ([#323](https://github.com/SocialGouv/Tumeplay/issues/323)) ([566e0e5](https://github.com/SocialGouv/Tumeplay/commit/566e0e5fa7f9912a1de819cd5efb70489d8ea7c9))
+
+# [1.67.0](https://github.com/SocialGouv/Tumeplay/compare/v1.66.0...v1.67.0) (2022-02-11)
+
+
+### Features
+
+* add page award ([#319](https://github.com/SocialGouv/Tumeplay/issues/319)) ([17c7eb4](https://github.com/SocialGouv/Tumeplay/commit/17c7eb48d1af3dd48ed97b4e0b43fb57b0957598))
+
+# [1.66.0](https://github.com/SocialGouv/Tumeplay/compare/v1.65.0...v1.66.0) (2022-02-11)
+
+
+### Features
+
+* tooltip integration ([#320](https://github.com/SocialGouv/Tumeplay/issues/320)) ([046a4ca](https://github.com/SocialGouv/Tumeplay/commit/046a4ca2388c2181f75b899ebab3d4da6c6344bc))
+
+# [1.65.0](https://github.com/SocialGouv/Tumeplay/compare/v1.64.0...v1.65.0) (2022-02-11)
+
+
+### Features
+
+* remove interrogation point when user answer in trou ([#321](https://github.com/SocialGouv/Tumeplay/issues/321)) ([a057404](https://github.com/SocialGouv/Tumeplay/commit/a0574044428db5db2f59d60f6a7363f1986b9810))
+
 # [1.64.0](https://github.com/SocialGouv/Tumeplay/compare/v1.63.0...v1.64.0) (2022-02-10)
 
 

@@ -62,14 +62,14 @@ const HomeOrdersInput = props => {
       kind: 'default',
       label: 'EMAIL',
       name: 'email',
-      isNumber: true,
+      isNumber: false,
     },
     {
       id: 5,
       kind: 'default',
       label: 'NUMERO DE TÉLÉPONE',
       name: 'phone_number',
-      isNumber: false,
+      isNumber: true,
     },
   ];
 

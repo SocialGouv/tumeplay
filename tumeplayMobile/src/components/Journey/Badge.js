@@ -1,10 +1,12 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Svg, {Polygon} from 'react-native-svg';
-import {Image, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
 import check from '../../assets/Check.png';
 import {useNavigation} from '@react-navigation/native';
 import diceIcon from '../../assets/diceHexagon.png';
+import gift from '../../assets/gift.png';
+
 const Badge = props => {
   const navigation = useNavigation();
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
@@ -53,7 +55,13 @@ const Badge = props => {
           </View>
         )}
       </Svg>
-      {status === 'todo' && (
+      {module.reward && status !== 'done' && (
+        <Image
+          style={[styles.imageTodo, {opacity: status === 'todo' ? 1 : 0.3}]}
+          source={gift}
+        />
+      )}
+      {status === 'todo' && !module.reward && (
         <Image source={diceIcon} style={styles.imageTodo} size={30} />
       )}
     </TouchableOpacity>
@@ -91,6 +99,11 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  rewardIcon: {
+    position: 'absolute',
+    right: 25,
+    top: 15,
   },
 });
 

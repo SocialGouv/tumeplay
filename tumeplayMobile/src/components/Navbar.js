@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const Navbar = ({navigation, route}) => {
   const {user} = useContext(AppContext);
+
   return (
     <Tab.Navigator
       initialRouteName="Accueil"
@@ -83,6 +84,7 @@ const Navbar = ({navigation, route}) => {
           tabBarIcon: ({size, color}) => (
             <MaterialIcons name="card-giftcard" color={color} size={size} />
           ),
+          tabBarBadge: user.credits !== 0 ? user.credits : null,
         }}
       />
     </Tab.Navigator>

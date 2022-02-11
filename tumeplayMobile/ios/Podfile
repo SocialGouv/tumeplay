@@ -16,6 +16,7 @@ target 'tumeplayMobile' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+  pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
 
   target 'tumeplayMobileTests' do
     inherit! :complete

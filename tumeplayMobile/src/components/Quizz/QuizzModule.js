@@ -67,12 +67,18 @@ const QuizzModule = ({navigation, route}) => {
     }
 
     if (question.kind === 'Trou') {
-      setQuestionTitle(
-        question.text_question.replace(
-          /([_])\1{2,}/g,
-          question.responses['response_' + answerKey],
-        ),
+      let newTitle = question.text_question.replace(
+        /([_])\1{2,}/g,
+        question.responses['response_' + answerKey],
       );
+
+      let interrogationPointIndex = newTitle.indexOf('?');
+      newTitle = interrogationPointIndex
+        ? newTitle.slice(0, interrogationPointIndex) +
+          newTitle.slice(interrogationPointIndex + 1)
+        : newTitle;
+
+      setQuestionTitle(newTitle);
     }
     setAnswerKey(answerKey);
     setHasAnswered(!hasAnswered);
