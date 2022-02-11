@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import React, {useContext} from 'react';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
@@ -7,61 +7,15 @@ import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
 import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
-import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
-import {UPDATE_MOBILE_USER_HISTORY} from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
 import {ActivityIndicator} from 'react-native-paper';
-import NativeShareModule from 'react-native/Libraries/Share/NativeShareModule';
 
 const QuizzAllRight = ({navigation, route, module_id}) => {
   const context = useContext(AppContext);
-  const {user, reloadUser} = context;
-  const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
-
-  const checkUserHistory = async () => {
-    if (user?.history) {
-      let currentHistory = user?.history.find(
-        history => history.module_id == module_id,
-      );
-      try {
-        await updateHistory({
-          variables: {
-            history_id: currentHistory?.id,
-            module_id: currentHistory?.module_id,
-            status: 'success',
-          },
-        });
-        reloadUser();
-      } catch (error) {
-        console.log("Erreur à l'update : ", error);
-        Alert.alert(
-          'Désolé !',
-          " Un problème est survenu à l'enregistrement de tes résultats",
-          [
-            {
-              text: 'Annuler',
-              onPress: () => {
-                () => navigation.navigate('Home', {screen: 'Parcours'});
-              },
-            },
-            {
-              text: 'Recommencer',
-              onPress: () => {
-                checkUserHistory();
-              },
-            },
-          ],
-        );
-      }
-    }
-  };
-
-  useEffect(() => {
-    checkUserHistory();
-  }, [route]);
+  const {user} = context;
 
   return (
     <Container style={styles.container}>
@@ -74,7 +28,7 @@ const QuizzAllRight = ({navigation, route, module_id}) => {
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
       <View style={styles.bottomContainer}>
-        {user.next_module != module_id ? (
+        {!user.pending_module ? (
           <>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
