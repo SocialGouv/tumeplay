@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
 import Text from '../components/Text';
 import {useQuery} from '@apollo/client';
@@ -19,10 +19,14 @@ import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
 import Container from '../components/global/Container';
 import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
+import AppContext from '../../AppContext';
 
 export default function Thematiques(props) {
   const {navigation} = props;
-  const {data, loading} = useQuery(GET_THEMES);
+  const {user} = useContext(AppContext);
+  const {data, loading} = useQuery(GET_THEMES, {
+    variables: {level: user.level},
+  });
   const [thematiques, setThematiques] = useState([]);
 
   const images = [
