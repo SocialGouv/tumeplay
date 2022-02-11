@@ -1,3 +1,10 @@
+# [1.72.0](https://github.com/SocialGouv/Tumeplay/compare/v1.71.0...v1.72.0) (2022-02-11)
+
+
+### Features
+
+* adding color to theme ([639da4a](https://github.com/SocialGouv/Tumeplay/commit/639da4aa5ee59397278863ac3d9ea52112223bd6))
+
 # [1.71.0](https://github.com/SocialGouv/Tumeplay/compare/v1.70.1...v1.71.0) (2022-02-11)
 
 
