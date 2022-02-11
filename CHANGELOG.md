@@ -1,3 +1,10 @@
+# [1.66.0](https://github.com/SocialGouv/Tumeplay/compare/v1.65.0...v1.66.0) (2022-02-11)
+
+
+### Features
+
+* tooltip integration ([#320](https://github.com/SocialGouv/Tumeplay/issues/320)) ([046a4ca](https://github.com/SocialGouv/Tumeplay/commit/046a4ca2388c2181f75b899ebab3d4da6c6344bc))
+
 # [1.65.0](https://github.com/SocialGouv/Tumeplay/compare/v1.64.0...v1.65.0) (2022-02-11)
 
 
