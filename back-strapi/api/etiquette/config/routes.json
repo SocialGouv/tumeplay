@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/etiquettes",
+      "handler": "etiquette.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/etiquettes/count",
+      "handler": "etiquette.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/etiquettes/:id",
+      "handler": "etiquette.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/etiquettes",
+      "handler": "etiquette.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/etiquettes/:id",
+      "handler": "etiquette.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/etiquettes/:id",
+      "handler": "etiquette.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
