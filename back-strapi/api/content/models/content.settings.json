@@ -52,6 +52,9 @@
     },
     "thematique_mobile": {
       "model": "thematique-mobile"
+    },
+    "etiquette": {
+      "model": "etiquette"
     }
   }
 }
