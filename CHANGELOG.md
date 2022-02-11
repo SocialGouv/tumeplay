@@ -1,3 +1,10 @@
+# [1.69.0](https://github.com/SocialGouv/Tumeplay/compare/v1.68.0...v1.69.0) (2022-02-11)
+
+
+### Features
+
+* add labels for content ([#322](https://github.com/SocialGouv/Tumeplay/issues/322)) ([7ade439](https://github.com/SocialGouv/Tumeplay/commit/7ade439029ed23c5af000c38fa4a7acde75b6497))
+
 # [1.68.0](https://github.com/SocialGouv/Tumeplay/compare/v1.67.0...v1.68.0) (2022-02-11)
 
 
