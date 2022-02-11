@@ -52,12 +52,12 @@ const Award = props => {
       </View>
       {!user.hasFinished ? (
         <Button
-          text={'Je continue'}
+          text={'Je commande !'}
           size={'large'}
           style={styles.button}
           icon={true}
           onPress={() => {
-            navigation.navigate('Home', {screen: 'Parcours'});
+            navigation.navigate('Home', {screen: 'Box'});
           }}
         />
       ) : (
