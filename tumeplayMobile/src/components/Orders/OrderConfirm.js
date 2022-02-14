@@ -1,4 +1,10 @@
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import Text from '../../components/Text';
 import React, {useContext, useState} from 'react';
 import image from '../../assets/LOGO_COLISSIMO.png';
@@ -21,12 +27,14 @@ const OrderConfirm = props => {
   } = props;
 
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {strapi_user_id, reloadUser} = useContext(AppContext);
 
   const navigation = useNavigation();
 
   const sendOrder = async () => {
+    setIsLoading(true);
     const deptcode = userAdressInformations?.context?.split(',')[0];
     const dept = userAdressInformations?.context?.split(',')[1];
     const region = userAdressInformations?.context?.split(',')[2];
@@ -63,8 +71,10 @@ const OrderConfirm = props => {
       };
       await ContactsAPI.postContact(userAddress);
     }
+
     reloadUser();
     navigation.navigate('Home', {screen: 'Accueil'});
+    setIsLoading(false);
   };
 
   return (
@@ -112,13 +122,17 @@ const OrderConfirm = props => {
           </View>
         </View>
       </View>
-      <Button
-        style={styles.button}
-        text="Je valide cette commande"
-        size="large"
-        special
-        onPress={() => sendOrder()}
-      />
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Button
+          style={styles.button}
+          text="Je valide cette commande"
+          size="large"
+          special
+          onPress={() => sendOrder()}
+        />
+      )}
     </View>
   );
 };
