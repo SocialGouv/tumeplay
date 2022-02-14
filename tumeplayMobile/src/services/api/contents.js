@@ -9,6 +9,11 @@ export const GET_CONTENTS = gql`
       id
       title: title_mobile
       text
+      etiquette {
+        image {
+          url
+        }
+      }
       niveau {
         value
       }
@@ -33,6 +38,11 @@ export const GET_FRESH_CONTENTS = gql`
       id
       title: title_mobile
       text
+      etiquette {
+        image {
+          url
+        }
+      }
       niveau {
         value
       }
@@ -56,6 +66,11 @@ export const GET_SINGLE_CONTENT = gql`
       id
       title: title_mobile
       text
+      etiquette {
+        image {
+          url
+        }
+      }
       image {
         url
       }

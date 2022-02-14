@@ -27,6 +27,10 @@ const ContentPage = ({navigation, route}) => {
   const [remainingIDs, setRemainingIDs] = useState();
   const [count, setCount] = useState(0);
 
+  const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
+    variables: {content_id: route?.params?.content_id},
+  });
+
   const randomNextID = () => {
     let contents_ids = route?.params?.contents_ids;
     let remaining_ids = contents_ids?.filter(id => content?.id !== id);
@@ -37,15 +41,17 @@ const ContentPage = ({navigation, route}) => {
     }
   };
 
-  const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
-    variables: {content_id: route?.params?.content_id},
-  });
-
   useEffect(() => {
     if (data && !loading) {
-      setContent(data.contents[0]);
+      let tmpContent = JSON.parse(JSON.stringify(data.contents[0]));
+      tmpContent.image = {
+        url: tmpContent.etiquette?.image?.url
+          ? tmpContent.etiquette?.image?.url
+          : tmpContent.image?.url,
+      };
+      setContent(tmpContent);
     }
-  }, [content, data, loading]);
+  }, [data, loading]);
 
   useEffect(() => {
     randomNextID();
