@@ -1,3 +1,10 @@
+# [1.73.0](https://github.com/SocialGouv/Tumeplay/compare/v1.72.0...v1.73.0) (2022-02-14)
+
+
+### Features
+
+* disable order button + fixing redirection on QuizzModule + fixi… ([#327](https://github.com/SocialGouv/Tumeplay/issues/327)) ([15d697c](https://github.com/SocialGouv/Tumeplay/commit/15d697cc23bab0c5ebb089b017bbf370658464b6))
+
 # [1.72.0](https://github.com/SocialGouv/Tumeplay/compare/v1.71.0...v1.72.0) (2022-02-11)
 
 

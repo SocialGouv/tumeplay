@@ -57,7 +57,7 @@ const Award = props => {
           style={styles.button}
           icon={true}
           onPress={() => {
-            navigation.navigate('Home', {screen: 'Box'});
+            navigation.navigate('Home', {screen: 'Kit'});
           }}
         />
       ) : (
