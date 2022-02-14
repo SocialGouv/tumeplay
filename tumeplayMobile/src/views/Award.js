@@ -40,11 +40,11 @@ const Award = props => {
             </Text>
             <Text style={styles.question}>Que souhaites-tu faire ?</Text>
             <Button
-              text={'Consulter les derniers contenus'}
+              text={'Commande ton kit'}
               size={'large'}
               style={styles.buttonContent}
               onPress={() => {
-                navigation.navigate('Home', {screen: 'Posts'});
+                navigation.navigate('Home', {screen: 'Kit'});
               }}
             />
           </>
