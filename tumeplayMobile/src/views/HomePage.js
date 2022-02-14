@@ -51,6 +51,8 @@ const HomePage = ({navigation}) => {
   const video = ({item}) => {
     return (
       <WebView
+        //   injectedJavaScript={`let container = document.getElementsByClassName('tiktokContainer');
+        // container.style.display = 'block'`}
         style={styles.webview}
         javaScriptEnabled={true}
         // scalesPageToFit={true}
@@ -90,8 +92,17 @@ const HomePage = ({navigation}) => {
         values.map(value => {
           value.html = value.html.replace(
             /style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi,
-            "style=\"width: 330px; margin: 0; background-color: '#FBF7F2'",
+            'style="width: 330px; margin: 0; background-color: #FBF7F2"',
           );
+          value.html = value.html.replace(
+            'class="tiktok-embed"',
+            'class="tiktok-embed tiktokContainer"',
+          );
+          const rx = new RegExp(
+            '<a target="_blank" title="♬[\\d\\D]*?/a>',
+            'g',
+          );
+          value.html = value.html.replace(rx, '');
           return value;
         }),
       );
@@ -196,7 +207,7 @@ const styles = StyleSheet.create({
   webview: {
     height: 440,
     width: 520,
-    backgroundColor: '#FF7F2',
+    backgroundColor: '#FBF7F2',
   },
 });
 
