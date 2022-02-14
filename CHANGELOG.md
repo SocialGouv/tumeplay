@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/SocialGouv/Tumeplay/compare/v1.73.0...v1.74.0) (2022-02-14)
+
+
+### Features
+
+* add loader at order create request ([#326](https://github.com/SocialGouv/Tumeplay/issues/326)) ([c222809](https://github.com/SocialGouv/Tumeplay/commit/c22280979c8861b6ebb28a8c29f96006fb3d5d3c))
+
 # [1.73.0](https://github.com/SocialGouv/Tumeplay/compare/v1.72.0...v1.73.0) (2022-02-14)
 
 
