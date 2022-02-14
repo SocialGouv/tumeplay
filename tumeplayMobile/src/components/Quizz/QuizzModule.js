@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   Alert,
-  BackHandler,
 } from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
