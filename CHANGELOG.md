@@ -1,3 +1,10 @@
+# [1.75.0](https://github.com/SocialGouv/Tumeplay/compare/v1.74.0...v1.75.0) (2022-02-14)
+
+
+### Features
+
+* user finished and retry ([#328](https://github.com/SocialGouv/Tumeplay/issues/328)) ([f960f04](https://github.com/SocialGouv/Tumeplay/commit/f960f04dcbd06fa3f0ad6c9f5283a49b6f839cc3))
+
 # [1.74.0](https://github.com/SocialGouv/Tumeplay/compare/v1.73.0...v1.74.0) (2022-02-14)
 
 
