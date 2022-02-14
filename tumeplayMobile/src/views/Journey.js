@@ -1,5 +1,5 @@
 import {useQuery} from '@apollo/client';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Image, StyleSheet, ScrollView} from 'react-native';
 import wave from '../assets/wave.png';
 import Container from '../components/global/Container';
@@ -9,6 +9,8 @@ import {GET_LEVELS} from '../services/api/levels';
 import {GET_MODULES} from '../services/api/modules';
 import Title from '../components/Title';
 import _ from 'lodash';
+import AppContext from '../../AppContext';
+
 const Journey = () => {
   const useMultipleQuery = () => {
     const res1 = useQuery(GET_MODULES);
@@ -16,6 +18,8 @@ const Journey = () => {
 
     return [res1, res2];
   };
+
+  const {user} = useContext(AppContext);
 
   const [{data: data1, loading: loading1}, {data: data2, loading: loading2}] =
     useMultipleQuery();
@@ -40,9 +44,16 @@ const Journey = () => {
     associatedModules = associatedModules.map(module => {
       let tmpModule = JSON.parse(JSON.stringify(module));
       let newModule = Object.assign(tmpModule, {module_index: moduleIndex});
+      let history = user.history.find(
+        h => h.module_id === module.id && h.status === 'success',
+      );
+      newModule.isDone = history ? true : false;
       moduleIndex += 1;
       return newModule;
     });
+    associatedModules = associatedModules
+      .filter(m => m.isDone)
+      .concat(associatedModules.filter(m => !m.isDone));
     return (
       <WrapperLevelBadges
         key={level.id}

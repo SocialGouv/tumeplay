@@ -39,7 +39,7 @@ module.exports = {
       entities = await filter(entities, async (entity) => {
         const countQuestions = await strapi.services["content"].count({
           thematique_mobile: entity.id,
-          "niveau.value": level,
+          "niveau.value_lte": level,
         });
         return countQuestions > 0;
       });

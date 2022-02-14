@@ -13,10 +13,16 @@ const LevelPointsIndicator = ({style, onPress}) => {
   return (
     <TouchableOpacity style={[style, styles.container]} onPress={onPress}>
       <Text style={styles.text}>
-        Niveau <Text style={styles.boldText}>{user.level}</Text>
+        {user.hasFinished ? (
+          <>Niveau expert 🥳</>
+        ) : (
+          <>
+            Niveau <Text style={styles.boldText}>{user.level}</Text>
+          </>
+        )}
       </Text>
       <Progress.Bar
-        progress={progress}
+        progress={user.hasFinished ? 1 : progress}
         width={150}
         color={'#51B070'}
         unfilledColor="#DFD7CD"

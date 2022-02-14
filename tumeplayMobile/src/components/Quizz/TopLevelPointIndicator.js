@@ -12,10 +12,16 @@ const TopLevelPointIndicator = ({style}) => {
   return (
     <View style={[style, styles.container]}>
       <Text>
-        Niveau <Text>{user.level}</Text>
+        {user.hasFinished ? (
+          <>Niveau expert 🥳</>
+        ) : (
+          <>
+            Niveau <Text>{user.level}</Text>
+          </>
+        )}
       </Text>
       <Progress.Bar
-        progress={progress}
+        progress={user.hasFinished ? 1 : progress}
         width={70}
         color={'#51B070'}
         unfilledColor="#DFD7CD"

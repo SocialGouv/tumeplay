@@ -134,6 +134,13 @@ module.exports = {
       }
     } else {
       user.hasFinished = true;
+
+      const random_module =
+        modules[Math.floor(Math.random() * (modules.length - 2))];
+      user.random_module_questions = await questionsModuleToArray(
+        random_module.questions
+      );
+      user.random_module = random_module.id;
     }
 
     const orders_count = await strapi.services["commande"].count({
