@@ -32,8 +32,8 @@ const Badge = props => {
       disabled={status === 'locked'}
       onPress={() =>
         navigation.navigate('Jouer', {
-          module_id: module?.module?.id,
-          questions: module?.module?.questionsArray,
+          module_id: module?.id,
+          questions: module?.questionsArray,
           clearModuleData: true,
           retry: status === 'done',
         })

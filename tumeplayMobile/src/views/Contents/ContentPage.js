@@ -80,7 +80,11 @@ const ContentPage = ({navigation, route}) => {
                 onPress={() => navigation.goBack()}>
                 <Icon name="chevron-small-left" size={40} color="#000" />
               </TouchableOpacity>
-              <Text style={styles.level}>NIVEAU {user.level}</Text>
+              {user.hasFinished ? (
+                <></>
+              ) : (
+                <Text style={styles.level}>NIVEAU {user.level}</Text>
+              )}
             </View>
             <Text
               style={[

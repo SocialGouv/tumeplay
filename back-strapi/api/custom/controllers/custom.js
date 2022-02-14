@@ -89,6 +89,14 @@ module.exports = {
       return ctx.badRequest("Module " + module_id + " does not exists");
     }
 
+    if (
+      module.niveau.value !== 1 &&
+      module.niveau.value !== 3 &&
+      module.niveau.value !== 5
+    ) {
+      return false;
+    }
+
     let level = await strapi.services.niveau.findOne({
       value: module.niveau.value,
     });
