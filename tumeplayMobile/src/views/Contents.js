@@ -24,7 +24,17 @@ const ContentsPage = props => {
 
   useEffect(() => {
     if (data && !loading) {
-      setContents(data.contents);
+      setContents(
+        data.contents.map(c => {
+          let tmpContent = JSON.parse(JSON.stringify(c));
+          tmpContent.image = {
+            url: tmpContent.etiquette?.image?.url
+              ? tmpContent.etiquette?.image?.url
+              : tmpContent.image?.url,
+          };
+          return tmpContent;
+        }),
+      );
     }
   }, [data, loading]);
 
