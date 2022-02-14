@@ -73,7 +73,6 @@ const Navbar = ({navigation}) => {
         component={Journey}
         options={{
           tabBarIcon: options => {
-            console.log(options);
             const {size, color} = options;
             return <MaterialIcons name="timeline" color={color} size={size} />;
           },
