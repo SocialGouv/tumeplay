@@ -42,7 +42,7 @@ const ContentsPage = props => {
 
   const config = {
     velocityThreshold: 0.3,
-    directionalOffsetThreshold: 80,
+    directionalOffsetThreshold: 10,
   };
 
   return (

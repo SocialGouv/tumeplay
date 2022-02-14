@@ -13,13 +13,13 @@ import {Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-const Navbar = ({navigation, route}) => {
+const Navbar = ({navigation}) => {
   const {user} = useContext(AppContext);
 
   return (
     <Tab.Navigator
       initialRouteName="Accueil"
-      screenOptions={() => ({
+      screenOptions={({route}) => ({
         headerShown: false,
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.black,
@@ -53,7 +53,7 @@ const Navbar = ({navigation, route}) => {
         name="Jouer"
         component={QuizzLoader}
         options={{
-          tabBarIcon: ({size, color}) => (
+          tabBarIcon: ({color}) => (
             <Image
               style={{
                 position: 'absolute',
@@ -72,18 +72,34 @@ const Navbar = ({navigation, route}) => {
         name="Parcours"
         component={Journey}
         options={{
-          tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="timeline" color={color} size={size} />
-          ),
+          tabBarIcon: options => {
+            const {size, color} = options;
+            return <MaterialIcons name="timeline" color={color} size={size} />;
+          },
         }}
       />
+
       <Tab.Screen
         name="Kit"
         component={Box}
+        listeners={{
+          tabPress: e => {
+            if (user.credits === 0) {
+              e.preventDefault();
+            }
+          },
+        }}
         options={{
-          tabBarIcon: ({size, color}) => (
-            <MaterialIcons name="card-giftcard" color={color} size={size} />
-          ),
+          tabBarIcon: ({size, color, focused}) => {
+            let tmpColor = focused ? color : Colors.grey;
+            return (
+              <MaterialIcons
+                name="card-giftcard"
+                color={tmpColor}
+                size={size}
+              />
+            );
+          },
           tabBarBadge: user.credits !== 0 ? user.credits : null,
         }}
       />
