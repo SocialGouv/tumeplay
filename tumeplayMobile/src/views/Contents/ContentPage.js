@@ -62,8 +62,12 @@ const ContentPage = ({navigation, route}) => {
     setCount(count + 1);
   };
 
-  const goToQuizz = () => {
-    navigation.navigate('QuizzStartPage');
+  const goToJourney = () => {
+    navigation.navigate('Jouer', {
+      module_id: user.next_module,
+      questions: user.nextQuestions,
+      clearModuleData: true,
+    });
   };
 
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
@@ -101,16 +105,19 @@ const ContentPage = ({navigation, route}) => {
       </ScrollView>
       <View style={styles.footerContainer}>
         <View style={styles.divider} />
-        <Feedback />
+        <Feedback content={content} />
         <View style={styles.divider} />
         <View style={styles.buttonsContainer}>
           {count > 4 && (
             <Button
               size="medium"
               text="Jouer"
+              special
+              left
+              icon
               style={[styles.button, styles.redButton]}
               styleText={{alignItems: 'center'}}
-              onPress={() => goToQuizz()}
+              onPress={() => goToJourney()}
             />
           )}
           <Button
@@ -162,12 +169,12 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
   },
   smallTitle: {
-    fontSize: 30,
+    fontSize: config.deviceWidth <= 400 ? 20 : 30,
     paddingTop: 10,
     lineHeight: 30,
   },
   bigTitle: {
-    fontSize: 20,
+    fontSize: config.deviceWidth <= 400 ? 16 : 22,
   },
   textContainer: {
     paddingHorizontal: 30,
@@ -178,7 +185,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'justify',
   },
   divider: {
     borderBottomColor: '#EAE2D7',

@@ -1,5 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {TouchableOpacity, StyleSheet, View, ScrollView} from 'react-native';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
 import Button from '../Button';
@@ -10,12 +16,19 @@ import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../../config';
 import Text from '../../components/Text';
+import * as Progress from 'react-native-progress';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AppContext from '../../../AppContext';
+import {CREATE_HISTORY} from '../../services/api/mobile_users';
+import {useMutation} from '@apollo/client';
+import GestureRecognizer from '../../lib/swipe';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
+  const retry = route?.params?.retry;
 
   const question = questions[0];
 
@@ -27,6 +40,13 @@ const QuizzModule = ({navigation, route}) => {
   const [remainingQuestions, setRemainingQuestions] = useState([]);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
+  const [createHistory] = useMutation(CREATE_HISTORY);
+
+  let fullQuizzLength = useRef(questions.length);
+  const progress =
+    (correctAnswers.length + wrongAnswers.length) / fullQuizzLength.current;
+
+  const {user, reloadUser} = useContext(AppContext);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -35,11 +55,11 @@ const QuizzModule = ({navigation, route}) => {
       tmpResponses?.push({key, value});
     }
     tmpResponses?.shift();
-    setResponses(tmpResponses);
+    setResponses([...tmpResponses]);
   };
 
   const displayAnswerText = answerKey => {
-    if (answerKey === responses[responses?.length - 1]?.value) {
+    if (answerKey === question.responses.right_answer) {
       correctAnswers.push(question);
       setCorrectAnswers([...correctAnswers]);
     } else {
@@ -48,33 +68,36 @@ const QuizzModule = ({navigation, route}) => {
     }
 
     if (question.kind === 'Trou') {
-      setQuestionTitle(
-        question.text_question.replace(
-          /([_])\1{2,}/g,
-          question.responses['response_' + answerKey],
-        ),
+      let newTitle = question.text_question.replace(
+        /([_])\1{2,}/g,
+        question.responses['response_' + answerKey],
       );
-    }
 
+      let interrogationPointIndex = newTitle.indexOf('?');
+      newTitle = interrogationPointIndex
+        ? newTitle.slice(0, interrogationPointIndex) +
+          newTitle.slice(interrogationPointIndex + 1)
+        : newTitle;
+
+      setQuestionTitle(newTitle);
+    }
     setAnswerKey(answerKey);
     setHasAnswered(!hasAnswered);
   };
 
   const displayAnswer = responses?.map((ans, index) => {
-    if (index < responses.length - 1) {
-      return (
-        <QuizzAnswerButton
-          answer={ans}
-          correctAnswer={responses[responses?.length - 1]?.value}
-          hasAnswered={hasAnswered}
-          disabled={hasAnswered}
-          key={ans.key}
-          answerTrou={question.kind === 'Trou'}
-          answeredKey={answeredKey}
-          onPress={() => displayAnswerText(ans.key)}
-        />
-      );
-    }
+    return (
+      <QuizzAnswerButton
+        answer={ans}
+        correctAnswer={question.responses.right_answer}
+        hasAnswered={hasAnswered}
+        disabled={hasAnswered}
+        key={ans.key}
+        answerTrou={question.kind === 'Trou'}
+        answeredKey={answeredKey}
+        onPress={() => displayAnswerText(ans.key)}
+      />
+    );
   });
 
   const goToNextQuestion = () => {
@@ -94,6 +117,41 @@ const QuizzModule = ({navigation, route}) => {
     }
   };
 
+  const handleStartQuizz = async () => {
+    if (!user.pending_module) {
+      try {
+        await createHistory({
+          variables: {
+            user_id: user?.id,
+            module_id: module_id,
+            status: 'pending',
+          },
+        });
+        reloadUser();
+      } catch (error) {
+        console.log('Erreur au lancement du quizz:', error);
+        Alert.alert(
+          "Une erreur s'est produite au lancement du quizz",
+          'Merci de relancer un quizz',
+          [
+            {
+              text: 'Annuler',
+              onPress: () => {
+                navigation.navigate('Home', {screen: 'QuizzLoader'});
+              },
+            },
+            {
+              text: 'Ok',
+              onPress: () => {
+                navigation.navigate('Home');
+              },
+            },
+          ],
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     setRemainingQuestions(questions?.filter(ques => ques.id !== question.id));
     setQuestionTitle(questions[0]?.text_question);
@@ -103,6 +161,10 @@ const QuizzModule = ({navigation, route}) => {
     if (clearModuleData) {
       setCorrectAnswers([]);
       setWrongAnswers([]);
+      if (!retry) {
+        handleStartQuizz();
+      }
+      fullQuizzLength.current = questions.length;
     }
 
     if (improveWrongAnswers) {
@@ -110,54 +172,69 @@ const QuizzModule = ({navigation, route}) => {
     }
   }, [route]);
 
-  const showMoreAnswer = () => {
-    setshowAnswer(!showAnswer);
+  const swipeConfig = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 10,
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <Container background={bg} style={styles.container}>
-        <View style={styles.levelIndicator}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon
-              name="md-arrow-back"
-              size={30}
-              color="#000"
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-          <TopLevelPointIndicator />
-        </View>
-        <View style={styles.stepIndicatorContainer}>
-          <View style={styles.stepIndicator}>
-            <Text style={styles.indicator}>{questions?.length}</Text>
-          </View>
-        </View>
-        {question.kind === 'Trou' && (
-          <Text style={styles.completeText}>Complète cette phrase</Text>
-        )}
-        <Text style={styles.question}>{questionTitle}</Text>
-        <View
-          style={[
-            styles.answersContainer,
-            question.kind === 'Trou' ? styles.answersContainerTrou : '',
-          ]}>
-          {displayAnswer}
-        </View>
-        {hasAnswered ? (
-          <View style={styles.answerContainer}>
-            <Text style={styles.textAnswer}>
-              {!showAnswer && config.deviceWidth <= 375
-                ? question?.text_answer.substring(0, 80) + '...'
-                : question?.text_answer}
-            </Text>
-            {config.deviceWidth <= 375 && (
-              <Text onPress={showMoreAnswer} style={styles.action}>
-                {showAnswer ? 'Voir moins' : 'Voir plus'}
-              </Text>
+    <GestureRecognizer
+      style={styles.swipeContainer}
+      config={swipeConfig}
+      onSwipeLeft={() => navigation.navigate('Home', {screen: 'Accueil'})}
+      onSwipeRight={() => navigation.navigate('Home', {screen: 'Accueil'})}>
+      <View style={styles.bgContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}>
+          <Container background={bg} style={styles.container}>
+            <View style={styles.levelIndicator}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Home', {screen: 'Accueil'})
+                }>
+                <Icon
+                  name="md-arrow-back"
+                  size={30}
+                  color="#000"
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+              <TopLevelPointIndicator />
+            </View>
+            <View style={styles.stepIndicatorContainer}>
+              <Progress.Circle
+                showsText={true}
+                borderWidth={0}
+                thickness={5}
+                formatText={() => questions.length}
+                unfilledColor={'#FFFFFF80'}
+                textStyle={styles.stepIndicator}
+                progress={progress}
+                size={60}
+                color={'#EC6233'}
+              />
+            </View>
+            {question.kind === 'Trou' && (
+              <Text style={styles.completeText}>Complète cette phrase</Text>
             )}
-          </View>
-        ) : null}
+            <Text style={styles.question}>{questionTitle}</Text>
+            <View
+              style={[
+                styles.answersContainer,
+                question.kind === 'Trou' ? styles.answersContainerTrou : '',
+              ]}>
+              {displayAnswer}
+            </View>
+            {hasAnswered ? (
+              <View style={styles.answerContainer}>
+                <Text style={styles.textAnswer}>
+                  {!showAnswer && question?.text_answer}
+                </Text>
+              </View>
+            ) : null}
+          </Container>
+        </ScrollView>
         {hasAnswered ? (
           <View style={styles.buttonContainer}>
             <Button
@@ -169,15 +246,22 @@ const QuizzModule = ({navigation, route}) => {
             />
           </View>
         ) : null}
-      </Container>
-    </ScrollView>
+      </View>
+    </GestureRecognizer>
   );
 };
 
 const styles = StyleSheet.create({
+  swipeContainer: {
+    flex: 1,
+  },
+  bgContainer: {
+    height: '100%',
+    backgroundColor: '#F9EEF2',
+  },
   scrollContainer: {
-    height: config.deviceWidth <= 375 ? 'auto' : '100%',
     alignContent: 'center',
+    paddingBottom: 60,
   },
   container: {
     height: '100%',
@@ -196,16 +280,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    marginBottom: 16,
   },
   stepIndicator: {
-    width: 58,
-    height: 58,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#FFF',
-    borderWidth: 5,
-    marginBottom: 16,
+    fontSize: 18,
+    fontWeight: '600',
+    color: Colors.black,
   },
   indicator: {
     fontFamily: Fonts.subtitle,
@@ -216,7 +296,7 @@ const styles = StyleSheet.create({
   question: {
     marginBottom: 10,
     fontFamily: Fonts.subtitle,
-    fontSize: config.deviceWidth <= 375 ? 16 : 22,
+    fontSize: config.deviceWidth <= 400 ? 16 : 22,
     lineHeight: 24,
     fontWeight: '700',
   },
@@ -227,27 +307,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     alignContent: 'center',
-    marginHorizontal: config.deviceWidth <= 375 ? 0 : -10,
+    marginHorizontal: config.deviceWidth <= 400 ? 0 : -10,
   },
   answersContainerTrou: {
     flexDirection: 'column',
-    marginTop: 20,
+    marginTop: 30,
   },
   textAnswer: {
     marginTop: 10,
+    marginBottom: 20,
     textAlign: 'left',
   },
   buttonContainer: {
+    paddingHorizontal: 15,
+    display: 'flex',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
-    paddingVertical: 20,
-    flex: 1,
-  },
-  bottomButton: {
-    position: config.deviceWidth <= 375 ? 'relative' : 'absolute',
-    bottom: config.deviceWidth <= 375 ? 0 : 30,
+    alignContent: 'center',
+    position: config.deviceWidth <= 400 ? 'relative' : 'absolute',
+    bottom: 15,
+    left: 0,
+    right: 0,
   },
   action: {
     fontWeight: '600',

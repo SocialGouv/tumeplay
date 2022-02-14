@@ -1,3 +1,158 @@
+# [1.74.0](https://github.com/SocialGouv/Tumeplay/compare/v1.73.0...v1.74.0) (2022-02-14)
+
+
+### Features
+
+* add loader at order create request ([#326](https://github.com/SocialGouv/Tumeplay/issues/326)) ([c222809](https://github.com/SocialGouv/Tumeplay/commit/c22280979c8861b6ebb28a8c29f96006fb3d5d3c))
+
+# [1.73.0](https://github.com/SocialGouv/Tumeplay/compare/v1.72.0...v1.73.0) (2022-02-14)
+
+
+### Features
+
+* disable order button + fixing redirection on QuizzModule + fixi… ([#327](https://github.com/SocialGouv/Tumeplay/issues/327)) ([15d697c](https://github.com/SocialGouv/Tumeplay/commit/15d697cc23bab0c5ebb089b017bbf370658464b6))
+
+# [1.72.0](https://github.com/SocialGouv/Tumeplay/compare/v1.71.0...v1.72.0) (2022-02-11)
+
+
+### Features
+
+* adding color to theme ([639da4a](https://github.com/SocialGouv/Tumeplay/commit/639da4aa5ee59397278863ac3d9ea52112223bd6))
+
+# [1.71.0](https://github.com/SocialGouv/Tumeplay/compare/v1.70.1...v1.71.0) (2022-02-11)
+
+
+### Features
+
+* api call removing empty content in themes according to level ([045e3d8](https://github.com/SocialGouv/Tumeplay/commit/045e3d8c43a5f4d23a728ac8a15ab5d55cc7e3fa))
+
+## [1.70.1](https://github.com/SocialGouv/Tumeplay/compare/v1.70.0...v1.70.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* correction white background on tiktok feed ([955dea8](https://github.com/SocialGouv/Tumeplay/commit/955dea870c5ed3e4b0cff238aaa886ec811bd020))
+
+# [1.70.0](https://github.com/SocialGouv/Tumeplay/compare/v1.69.0...v1.70.0) (2022-02-11)
+
+
+### Features
+
+* implementing all reward system in quizzFinish and Award component ([#324](https://github.com/SocialGouv/Tumeplay/issues/324)) ([019dc16](https://github.com/SocialGouv/Tumeplay/commit/019dc1632bf6b4986e06edf5974f70dcb3a35a10))
+
+# [1.69.0](https://github.com/SocialGouv/Tumeplay/compare/v1.68.0...v1.69.0) (2022-02-11)
+
+
+### Features
+
+* add labels for content ([#322](https://github.com/SocialGouv/Tumeplay/issues/322)) ([7ade439](https://github.com/SocialGouv/Tumeplay/commit/7ade439029ed23c5af000c38fa4a7acde75b6497))
+
+# [1.68.0](https://github.com/SocialGouv/Tumeplay/compare/v1.67.0...v1.68.0) (2022-02-11)
+
+
+### Features
+
+* has-reward route implementation ([#323](https://github.com/SocialGouv/Tumeplay/issues/323)) ([566e0e5](https://github.com/SocialGouv/Tumeplay/commit/566e0e5fa7f9912a1de819cd5efb70489d8ea7c9))
+
+# [1.67.0](https://github.com/SocialGouv/Tumeplay/compare/v1.66.0...v1.67.0) (2022-02-11)
+
+
+### Features
+
+* add page award ([#319](https://github.com/SocialGouv/Tumeplay/issues/319)) ([17c7eb4](https://github.com/SocialGouv/Tumeplay/commit/17c7eb48d1af3dd48ed97b4e0b43fb57b0957598))
+
+# [1.66.0](https://github.com/SocialGouv/Tumeplay/compare/v1.65.0...v1.66.0) (2022-02-11)
+
+
+### Features
+
+* tooltip integration ([#320](https://github.com/SocialGouv/Tumeplay/issues/320)) ([046a4ca](https://github.com/SocialGouv/Tumeplay/commit/046a4ca2388c2181f75b899ebab3d4da6c6344bc))
+
+# [1.65.0](https://github.com/SocialGouv/Tumeplay/compare/v1.64.0...v1.65.0) (2022-02-11)
+
+
+### Features
+
+* remove interrogation point when user answer in trou ([#321](https://github.com/SocialGouv/Tumeplay/issues/321)) ([a057404](https://github.com/SocialGouv/Tumeplay/commit/a0574044428db5db2f59d60f6a7363f1986b9810))
+
+# [1.64.0](https://github.com/SocialGouv/Tumeplay/compare/v1.63.0...v1.64.0) (2022-02-10)
+
+
+### Features
+
+* add credits to user & relation orders to user-mobile ([67c350c](https://github.com/SocialGouv/Tumeplay/commit/67c350cd7a41c41c4daf050fa631d08fe1b9b77b))
+
+# [1.63.0](https://github.com/SocialGouv/Tumeplay/compare/v1.62.2...v1.63.0) (2022-02-10)
+
+
+### Features
+
+* adding new logo to navbar and correction content cta color ([#318](https://github.com/SocialGouv/Tumeplay/issues/318)) ([8ff8231](https://github.com/SocialGouv/Tumeplay/commit/8ff823126c222ceb1caa442e32e19bf47aa4728e))
+
+## [1.62.2](https://github.com/SocialGouv/Tumeplay/compare/v1.62.1...v1.62.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* quizz answer font ([#315](https://github.com/SocialGouv/Tumeplay/issues/315)) ([89eb94c](https://github.com/SocialGouv/Tumeplay/commit/89eb94cabe3b8f420f4ab911f123c7818246da06))
+* remove socials icons in homepage ([#316](https://github.com/SocialGouv/Tumeplay/issues/316)) ([426b627](https://github.com/SocialGouv/Tumeplay/commit/426b627eaf339aeb87b647ef83f82f34ed66d177))
+
+## [1.62.1](https://github.com/SocialGouv/Tumeplay/compare/v1.62.0...v1.62.1) (2022-02-10)
+
+
+### Bug Fixes
+
+* truncate title card ([#314](https://github.com/SocialGouv/Tumeplay/issues/314)) ([0564cb8](https://github.com/SocialGouv/Tumeplay/commit/0564cb82ccfb708fc0671c7e2536925fa63e5cbc))
+
+# [1.62.0](https://github.com/SocialGouv/Tumeplay/compare/v1.61.1...v1.62.0) (2022-02-10)
+
+
+### Features
+
+* reforging quizz module and journey logic to allow access quizz … ([#317](https://github.com/SocialGouv/Tumeplay/issues/317)) ([04dcc42](https://github.com/SocialGouv/Tumeplay/commit/04dcc4283cb1bf408dd7a73fff5d46f8cbe48f89))
+
+## [1.61.1](https://github.com/SocialGouv/Tumeplay/compare/v1.61.0...v1.61.1) (2022-02-10)
+
+
+### Bug Fixes
+
+* white text for inputs ([#311](https://github.com/SocialGouv/Tumeplay/issues/311)) ([ad96bc5](https://github.com/SocialGouv/Tumeplay/commit/ad96bc5c550a5d143d6cb644647fc8f99ee2b6a4))
+
+# [1.61.0](https://github.com/SocialGouv/Tumeplay/compare/v1.60.0...v1.61.0) (2022-02-09)
+
+
+### Features
+
+* filter mobile themes ([#313](https://github.com/SocialGouv/Tumeplay/issues/313)) ([a18e5f9](https://github.com/SocialGouv/Tumeplay/commit/a18e5f95ce08baaad923d70fdcd3a588e798e91a))
+
+# [1.60.0](https://github.com/SocialGouv/Tumeplay/compare/v1.59.0...v1.60.0) (2022-02-08)
+
+
+### Features
+
+* embed next_module in get user ([248e591](https://github.com/SocialGouv/Tumeplay/commit/248e591c132526c9f40305d4049f9aa4993186a8))
+
+# [1.59.0](https://github.com/SocialGouv/Tumeplay/compare/v1.58.0...v1.59.0) (2022-02-08)
+
+
+### Features
+
+* mobile feedbacks implementation ([#307](https://github.com/SocialGouv/Tumeplay/issues/307)) ([f05008b](https://github.com/SocialGouv/Tumeplay/commit/f05008bbb0c8ebec05ad95eedd498df52df9d7dd))
+
+# [1.58.0](https://github.com/SocialGouv/Tumeplay/compare/v1.57.0...v1.58.0) (2022-02-08)
+
+
+### Features
+
+* removing scroll ([955fffc](https://github.com/SocialGouv/Tumeplay/commit/955fffcca92303ffe9b15de310867dab31d92697))
+
+# [1.57.0](https://github.com/SocialGouv/Tumeplay/compare/v1.56.0...v1.57.0) (2022-02-08)
+
+
+### Features
+
+* animation on quizz progression ([#309](https://github.com/SocialGouv/Tumeplay/issues/309)) ([85a78b9](https://github.com/SocialGouv/Tumeplay/commit/85a78b941ef100856ab3b0bb403147452375046c))
+
 # [1.56.0](https://github.com/SocialGouv/Tumeplay/compare/v1.55.0...v1.56.0) (2022-02-08)
 
 

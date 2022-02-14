@@ -27,6 +27,9 @@
       "min": -1,
       "required": true,
       "default": 0
+    },
+    "contenu": {
+      "model": "content"
     }
   }
 }

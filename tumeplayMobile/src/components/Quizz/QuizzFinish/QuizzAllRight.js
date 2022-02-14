@@ -1,21 +1,20 @@
-import React, {useContext, useEffect} from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import React, {useContext} from 'react';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
 import wave from '../../../assets/wave.png';
 import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
-import {Fonts} from '../../../styles/Style';
+import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
-import {useMutation} from '@apollo/client';
 import {bgColors} from '../../../styles/Style';
-import {UPDATE_MOBILE_USER_HISTORY} from '../../../services/api/mobile_users';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
 import Event from '../../../services/api/matomo';
+import {ActivityIndicator} from 'react-native-paper';
 
-const QuizzAllRight = ({navigation, module_id}) => {
+const QuizzAllRight = ({navigation, route, module_id}) => {
   const context = useContext(AppContext);
   const {user, reloadUser} = context;
 
@@ -63,7 +62,7 @@ const QuizzAllRight = ({navigation, module_id}) => {
     Event.quizzDone();
     checkUserHistory();
   }, []);
-
+  
   return (
     <Container style={styles.container}>
       <TopLevelPointIndicator style={styles.pointIndicator} />
@@ -75,16 +74,29 @@ const QuizzAllRight = ({navigation, module_id}) => {
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
       <View style={styles.bottomContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.text}>Non, pas tout de suite</Text>
-        </TouchableOpacity>
-        <Button
-          icon={true}
-          text={'Je continue'}
-          size={'large'}
-          style={styles.button}
-          onPress={() => navigation.navigate('QuizzStartPage')}
-        />
+        {!user.pending_module ? (
+          <>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
+              <Text style={styles.text}>Non, pas tout de suite</Text>
+            </TouchableOpacity>
+            <Button
+              icon={true}
+              text={'Je continue'}
+              size={'large'}
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate('QuizzModule', {
+                  module_id: user.next_module,
+                  questions: user.next_module_questions,
+                  clearModuleData: true,
+                })
+              }
+            />
+          </>
+        ) : (
+          <ActivityIndicator size="large" color={Colors.primary} />
+        )}
       </View>
     </Container>
   );

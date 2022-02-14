@@ -25,6 +25,7 @@ const OrdersAPI = {
         poi_name: order.poi_name,
         poi_number: order.poi_number,
         referent: order.referent,
+        utilisateurs_mobile: order.utilisateurs_mobile,
       }),
     });
     return res;

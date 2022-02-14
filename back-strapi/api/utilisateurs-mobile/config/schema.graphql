@@ -9,7 +9,10 @@ module.exports = {
       history: [CustomHistorique!]!
       level: Int,
       percentage_level_completed: Float,
+      next_module: Int,
+      next_module_questions: [Question!]!
       pending_module: String,
+      pending_module_questions: [Question!]
     }
   `,
 };

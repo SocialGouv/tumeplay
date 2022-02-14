@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
+import AppContext from '../../../AppContext';
 import BadgesSkeleton from '../global/SkeletonDesign/BadgesSkeleton';
 import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
 
 const WrapperLevelBadges = ({level, associatedModules, loading}) => {
-  const modulesToDisplay = associatedModules?.map(module => {
-    return <Badge key={module.id} module={module} />;
+  const {doneModules_ids} = useContext(AppContext);
+
+  const modulesToDisplay = associatedModules?.map((module, index) => {
+    if (module.module_index < doneModules_ids.length) {
+      module.status = 'done';
+    } else if (module.module_index === doneModules_ids.length) {
+      module.status = 'todo';
+    } else {
+      module.status = 'locked';
+    }
+    if (index + 1 === associatedModules.length) {
+      module.reward = true;
+    }
+    return (
+      <Badge
+        key={module.id}
+        module={module}
+        module_index={module.module_index}
+        status={module.status}
+      />
+    );
   });
 
   //use to generate a fake line for skeleton design

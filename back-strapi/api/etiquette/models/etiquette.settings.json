@@ -1,14 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "thematique_mobiles",
+  "collectionName": "tags",
   "info": {
-    "name": "ThematiqueMobile",
+    "name": "Étiquette",
     "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -19,21 +19,11 @@
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
-    },
-    "level": {
-      "type": "integer",
-      "required": false,
-      "private": true
-    },
-    "color": {
-      "type": "string"
     }
   }
 }

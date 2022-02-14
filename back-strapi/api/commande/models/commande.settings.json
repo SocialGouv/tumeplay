@@ -111,6 +111,9 @@
     "user_notified": {
       "type": "boolean",
       "default": false
+    },
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile"
     }
   }
 }

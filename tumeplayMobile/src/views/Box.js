@@ -35,7 +35,7 @@ const Box = ({navigation}) => {
 
   const htmlText = {
     html: `<div style=color:black;>
-      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoie uniquement</strong> dans les régions :</p>
+      <p style=text-align:center>Les kits sont <strong>disponibles à l'envoi uniquement</strong> dans les régions :</p>
       <ul>
         <li>Ile-de-France</li>
         <li>Nouvelle-Aquitaine</li>
@@ -50,8 +50,7 @@ const Box = ({navigation}) => {
         <View style={styles.subtitleContainer}>
           <Text style={styles.congrats}>Bravo !</Text>
           <Text style={styles.description}>
-            Tu as assez de points pour commander un kit de ton choix (CHANGER LE
-            TEXT)
+            Tu peux maintenant commander un kit
           </Text>
         </View>
       </View>
