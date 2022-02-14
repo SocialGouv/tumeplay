@@ -1,3 +1,10 @@
+# [1.76.0](https://github.com/SocialGouv/Tumeplay/compare/v1.75.0...v1.76.0) (2022-02-14)
+
+
+### Features
+
+* display etiquette image if defined on contents ([#330](https://github.com/SocialGouv/Tumeplay/issues/330)) ([6fb8aba](https://github.com/SocialGouv/Tumeplay/commit/6fb8aba89ef52bd74cbea9e9224a45ddd0d7da4f))
+
 # [1.75.0](https://github.com/SocialGouv/Tumeplay/compare/v1.74.0...v1.75.0) (2022-02-14)
 
 
