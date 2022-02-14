@@ -11,12 +11,25 @@ const QuizzLoader = ({route}) => {
 
   useEffect(() => {
     if (route.params.homeScreen) {
+      let module_id, questions;
+      let retry = false;
+      if (user.random_module) {
+        module_id = user.random_module;
+        questions = user.random_module_questions;
+        retry = true;
+      } else if (user.pending_module) {
+        module_id = user.pending_module;
+        questions = user.pending_module_questions;
+      } else {
+        module_id = user.next_module;
+        questions = user.next_module_questions;
+      }
+
       navigation.navigate('QuizzModule', {
-        module_id: user.pending_module ? user.pending_module : user.next_module,
-        questions: user.pending_module
-          ? user.pending_module_questions
-          : user.next_module_questions,
+        module_id: module_id,
+        questions: questions,
         clearModuleData: true,
+        retry,
       });
     } else {
       navigation.navigate('QuizzModule', {

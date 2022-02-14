@@ -16,7 +16,10 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
     } else {
       module.status = 'locked';
     }
-    if (index + 1 === associatedModules.length) {
+    if (
+      (level.value === 1 || level.value === 3 || level.value === 5) &&
+      index + 1 === associatedModules.length
+    ) {
       module.reward = true;
     }
     return (

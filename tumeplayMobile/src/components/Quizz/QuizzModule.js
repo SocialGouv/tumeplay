@@ -106,6 +106,7 @@ const QuizzModule = ({navigation, route}) => {
         correctAnswers: correctAnswers,
         wrongAnswers: wrongAnswers,
         module_id: module_id,
+        retry,
       });
     } else {
       setshowAnswer(false);

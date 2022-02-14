@@ -13,6 +13,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
   const wrongAnswers = route?.params?.wrongAnswers;
   const module_id = route?.params?.module_id;
+  const retry = route?.params?.retry;
   const {strapi_user_id, user, reloadUser} = useContext(AppContext);
 
   const [hasReward, setHasReward] = useState(null);
@@ -67,12 +68,14 @@ const QuizzFinishScreen = ({navigation, route}) => {
 
   useEffect(() => {
     if (wrongAnswers.length === 0) {
-      isRewarded().then(res => {
-        res.json().then(data => {
-          setHasReward(data);
-          checkUserHistory();
+      if (!retry) {
+        isRewarded().then(res => {
+          res.json().then(data => {
+            setHasReward(data);
+            checkUserHistory();
+          });
         });
-      });
+      }
     }
   }, [route]);
 
@@ -86,6 +89,8 @@ const QuizzFinishScreen = ({navigation, route}) => {
           module_id={module_id}
         />
       );
+    } else if (retry) {
+      return <QuizzAllRight navigation={navigation} module_id={module_id} />;
     } else if (hasReward === null || user.pending_module) {
       return (
         <View style={{flex: 1, justifyContent: 'center'}}>
