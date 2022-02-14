@@ -22,6 +22,7 @@ import {GET_MOBILE_USER} from './src/services/api/mobile_users';
 import Journey from './src/views/Journey';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
+import {MATOMO_SITE_URL, MATOMO_ID} from '@env';
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -111,7 +112,7 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
-    Matomo.initTracker('https://matomo.numericite.eu/', 20);
+    Matomo.initTracker(MATOMO_SITE_URL, MATOMO_ID);
   }, []);
 
   const contextValues = {
