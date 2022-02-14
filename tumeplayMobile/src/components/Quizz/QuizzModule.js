@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   Alert,
+  BackHandler,
 } from 'react-native';
 import bg from '../../assets/Quiiz_BG.png';
 import {Fonts} from '../../styles/Style';
@@ -21,6 +22,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppContext from '../../../AppContext';
 import {CREATE_HISTORY} from '../../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
+import GestureRecognizer from '../../lib/swipe';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -171,73 +173,89 @@ const QuizzModule = ({navigation, route}) => {
     }
   }, [route]);
 
+  const swipeConfig = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 10,
+  };
+
   return (
-    <View style={styles.bgContainer}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
-        <Container background={bg} style={styles.container}>
-          <View style={styles.levelIndicator}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Home', {screen: 'Accueil'})}>
-              <Icon
-                name="md-arrow-back"
-                size={30}
-                color="#000"
-                style={styles.icon}
+    <GestureRecognizer
+      style={styles.swipeContainer}
+      config={swipeConfig}
+      onSwipeLeft={() => navigation.navigate('Home', {screen: 'Accueil'})}
+      onSwipeRight={() => navigation.navigate('Home', {screen: 'Accueil'})}>
+      <View style={styles.bgContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}>
+          <Container background={bg} style={styles.container}>
+            <View style={styles.levelIndicator}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Home', {screen: 'Accueil'})
+                }>
+                <Icon
+                  name="md-arrow-back"
+                  size={30}
+                  color="#000"
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+              <TopLevelPointIndicator />
+            </View>
+            <View style={styles.stepIndicatorContainer}>
+              <Progress.Circle
+                showsText={true}
+                borderWidth={0}
+                thickness={5}
+                formatText={() => questions.length}
+                unfilledColor={'#FFFFFF80'}
+                textStyle={styles.stepIndicator}
+                progress={progress}
+                size={60}
+                color={'#EC6233'}
               />
-            </TouchableOpacity>
-            <TopLevelPointIndicator />
-          </View>
-          <View style={styles.stepIndicatorContainer}>
-            <Progress.Circle
-              showsText={true}
-              borderWidth={0}
-              thickness={5}
-              formatText={() => questions.length}
-              unfilledColor={'#FFFFFF80'}
-              textStyle={styles.stepIndicator}
-              progress={progress}
-              size={60}
-              color={'#EC6233'}
+            </View>
+            {question.kind === 'Trou' && (
+              <Text style={styles.completeText}>Complète cette phrase</Text>
+            )}
+            <Text style={styles.question}>{questionTitle}</Text>
+            <View
+              style={[
+                styles.answersContainer,
+                question.kind === 'Trou' ? styles.answersContainerTrou : '',
+              ]}>
+              {displayAnswer}
+            </View>
+            {hasAnswered ? (
+              <View style={styles.answerContainer}>
+                <Text style={styles.textAnswer}>
+                  {!showAnswer && question?.text_answer}
+                </Text>
+              </View>
+            ) : null}
+          </Container>
+        </ScrollView>
+        {hasAnswered ? (
+          <View style={styles.buttonContainer}>
+            <Button
+              text={'Suivant'}
+              size="large"
+              icon={true}
+              style={styles.bottomButton}
+              onPress={() => goToNextQuestion()}
             />
           </View>
-          {question.kind === 'Trou' && (
-            <Text style={styles.completeText}>Complète cette phrase</Text>
-          )}
-          <Text style={styles.question}>{questionTitle}</Text>
-          <View
-            style={[
-              styles.answersContainer,
-              question.kind === 'Trou' ? styles.answersContainerTrou : '',
-            ]}>
-            {displayAnswer}
-          </View>
-          {hasAnswered ? (
-            <View style={styles.answerContainer}>
-              <Text style={styles.textAnswer}>
-                {!showAnswer && question?.text_answer}
-              </Text>
-            </View>
-          ) : null}
-        </Container>
-      </ScrollView>
-      {hasAnswered ? (
-        <View style={styles.buttonContainer}>
-          <Button
-            text={'Suivant'}
-            size="large"
-            icon={true}
-            style={styles.bottomButton}
-            onPress={() => goToNextQuestion()}
-          />
-        </View>
-      ) : null}
-    </View>
+        ) : null}
+      </View>
+    </GestureRecognizer>
   );
 };
 
 const styles = StyleSheet.create({
+  swipeContainer: {
+    flex: 1,
+  },
   bgContainer: {
     height: '100%',
     backgroundColor: '#F9EEF2',

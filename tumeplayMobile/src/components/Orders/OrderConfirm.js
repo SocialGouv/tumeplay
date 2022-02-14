@@ -9,7 +9,6 @@ import {useNavigation} from '@react-navigation/native';
 import AppContext from '../../../AppContext';
 import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
-import {Colors} from '../../styles/Style';
 import ContactsAPI from '../../services/api/contact';
 
 const OrderConfirm = props => {
@@ -23,7 +22,7 @@ const OrderConfirm = props => {
 
   const [checked, setChecked] = useState(false);
 
-  const {strapi_user_id} = useContext(AppContext);
+  const {strapi_user_id, reloadUser} = useContext(AppContext);
 
   const navigation = useNavigation();
 
@@ -64,7 +63,8 @@ const OrderConfirm = props => {
       };
       await ContactsAPI.postContact(userAddress);
     }
-    navigation.navigate('Home', {screen: 'Home'});
+    reloadUser();
+    navigation.navigate('Home', {screen: 'Accueil'});
   };
 
   return (
@@ -83,9 +83,9 @@ const OrderConfirm = props => {
             <Text style={styles.text}>{userInfos.email}</Text>
           </View>
         </View>
-        <View style={styles.smallContainer}>
+        <View style={styles.leftSmallContainer}>
           <TouchableOpacity onPress={() => setOrderConfirm(false)}>
-            <Text style={styles.redText}>Modifier les informations</Text>
+            <Text style={styles.redText}>Modifier</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -134,10 +134,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   smallContainer: {
-    flex: 1,
-    width: '50%',
+    flex: 0.7,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    paddingTop: 12,
+  },
+  leftSmallContainer: {
+    flex: 0.3,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     paddingTop: 12,
   },
   nameContainer: {
