@@ -34,7 +34,17 @@ const HomePage = ({navigation}) => {
 
   useEffect(() => {
     if (data && !loading) {
-      setFreshContents(data.contents);
+      setFreshContents(
+        data.contents.map(c => {
+          let tmpContent = JSON.parse(JSON.stringify(c));
+          tmpContent.image = {
+            url: tmpContent.etiquette?.image?.url
+              ? tmpContent.etiquette?.image?.url
+              : tmpContent.image?.url,
+          };
+          return tmpContent;
+        }),
+      );
     }
   }, [data, loading]);
 
