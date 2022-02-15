@@ -1,5 +1,5 @@
 import {Modal, View, StyleSheet, Text} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Fonts} from '../../styles/Style';
 import Button from '../Button';
 
