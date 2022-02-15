@@ -18,6 +18,7 @@ import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
 import {Colors} from '../../styles/Style';
+import OrderConfirmModal from './OrderConfirmModal';
 
 const OrderConfirm = props => {
   const {
@@ -30,6 +31,7 @@ const OrderConfirm = props => {
 
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const {strapi_user_id, reloadUser} = useContext(AppContext);
 
@@ -75,8 +77,15 @@ const OrderConfirm = props => {
     }
 
     reloadUser();
-    navigation.navigate('Home', {screen: 'Accueil'});
     setIsLoading(false);
+    setIsVisible(true);
+  };
+
+  const handleClosingModal = () => {
+    if (!isLoading) {
+      navigation.navigate('Home', {screen: 'Accueil'});
+      setIsVisible(false);
+    }
   };
 
   return (
@@ -142,6 +151,9 @@ const OrderConfirm = props => {
           onPress={() => sendOrder()}
         />
       )}
+      {isVisible && (
+        <OrderConfirmModal isVisible={isVisible} onPress={handleClosingModal} />
+      )}
     </View>
   );
 };
@@ -205,7 +217,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   checkbox: {
-    position: 'absolute',
+    position: Platform.OS === 'ios' ? 'absolute' : 'relative',
+    marginRight: Platform.OS === 'android' ? 10 : 0,
     right: 10,
   },
   checkboxContainer: {
