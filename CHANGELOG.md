@@ -1,3 +1,10 @@
+## [1.76.3](https://github.com/SocialGouv/Tumeplay/compare/v1.76.2...v1.76.3) (2022-02-15)
+
+
+### Bug Fixes
+
+* remove bg + remove top title video ([#331](https://github.com/SocialGouv/Tumeplay/issues/331)) ([ea6d7ab](https://github.com/SocialGouv/Tumeplay/commit/ea6d7abd9e4ccc25c4e7a881e57db8b4c4929cad))
+
 ## [1.76.2](https://github.com/SocialGouv/Tumeplay/compare/v1.76.1...v1.76.2) (2022-02-15)
 
 
