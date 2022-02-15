@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   checkbox: {
     position: Platform.OS === 'ios' ? 'absolute' : 'relative',
     marginRight: Platform.OS === 'android' ? 10 : 0,
-    right: 10,
+    right: config.deviceWidth > 375 ? 20 : 10,
   },
   checkboxContainer: {
     flexDirection: 'row',
