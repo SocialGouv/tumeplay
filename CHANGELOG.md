@@ -1,3 +1,10 @@
+## [1.76.2](https://github.com/SocialGouv/Tumeplay/compare/v1.76.1...v1.76.2) (2022-02-15)
+
+
+### Bug Fixes
+
+* position absolute on checkbox ([#333](https://github.com/SocialGouv/Tumeplay/issues/333)) ([79def96](https://github.com/SocialGouv/Tumeplay/commit/79def96653f3c600e74487aa45a7ccf25f79d9b1))
+
 ## [1.76.1](https://github.com/SocialGouv/Tumeplay/compare/v1.76.0...v1.76.1) (2022-02-15)
 
 
