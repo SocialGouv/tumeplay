@@ -14,11 +14,11 @@ const OrderConfirmModal = props => {
       transparent={true}>
       <View
         style={[
-          styles.fullView,
+          styles.fullViewOrder,
           isVisible ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
         ]}>
-        <View style={styles.view}>
-          <Text style={styles.htmlText}>
+        <View style={styles.viewOrder}>
+          <Text style={styles.text}>
             🎉 Ta commande a bien été prise en compte 🎉
           </Text>
           <Button
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
-  fullView: {
+  fullViewOrder: {
     height: '100%',
   },
-  view: {
+  viewOrder: {
     flex: 1,
     minWidth: '100%',
     height: '55%',
@@ -64,11 +64,7 @@ const styles = StyleSheet.create({
     padding: 0,
     justifyContent: 'space-around',
   },
-  icon: {
-    flex: 0.1,
-    paddingTop: 23.5,
-  },
-  htmlText: {
+  text: {
     paddingHorizontal: 40,
     fontSize: 20,
     fontFamily: Fonts.title,
