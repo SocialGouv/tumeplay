@@ -1,3 +1,10 @@
+## [1.76.1](https://github.com/SocialGouv/Tumeplay/compare/v1.76.0...v1.76.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* fixing button on Award screen ([#332](https://github.com/SocialGouv/Tumeplay/issues/332)) ([b0ce6b5](https://github.com/SocialGouv/Tumeplay/commit/b0ce6b5e0f8794733f99253c3a4ee9f26eecd9da))
+
 # [1.76.0](https://github.com/SocialGouv/Tumeplay/compare/v1.75.0...v1.76.0) (2022-02-14)
 
 
