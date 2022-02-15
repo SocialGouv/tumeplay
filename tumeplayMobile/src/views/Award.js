@@ -41,8 +41,10 @@ const Award = props => {
             <Text style={styles.question}>Que souhaites-tu faire ?</Text>
             <Button
               text={'Commande ton kit'}
-              size={'large'}
+              size={'medium'}
               style={styles.buttonContent}
+              icon
+              left={false}
               onPress={() => {
                 navigation.navigate('Home', {screen: 'Kit'});
               }}
