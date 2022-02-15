@@ -107,7 +107,7 @@ const OrderConfirm = props => {
             value={checked}
             onValueChange={() => setChecked(!checked)}
           />
-          <TextBase style={[styles.bottomText, {paddingLeft: 2}]}>
+          <TextBase style={[styles.bottomText, {width: 290, paddingLeft: 10}]}>
             J 'accepte d' être recontacté par Tumeplay pour améliorer le service
           </TextBase>
         </View>
@@ -196,11 +196,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   checkbox: {
-    marginRight: 10,
+    position: 'absolute',
+    right: 10,
   },
   checkboxContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   bottomtextContainer: {
     paddingBottom: 22,
