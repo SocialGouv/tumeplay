@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import React, {useContext, useState} from 'react';
@@ -16,6 +17,8 @@ import AppContext from '../../../AppContext';
 import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
+import {Colors} from '../../styles/Style';
+import OrderConfirmModal from './OrderConfirmModal';
 
 const OrderConfirm = props => {
   const {
@@ -28,6 +31,7 @@ const OrderConfirm = props => {
 
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const {strapi_user_id, reloadUser} = useContext(AppContext);
 
@@ -73,8 +77,15 @@ const OrderConfirm = props => {
     }
 
     reloadUser();
-    navigation.navigate('Home', {screen: 'Accueil'});
     setIsLoading(false);
+    setIsVisible(true);
+  };
+
+  const handleClosingModal = () => {
+    if (!isLoading) {
+      navigation.navigate('Home', {screen: 'Accueil'});
+      setIsVisible(false);
+    }
   };
 
   return (
@@ -105,9 +116,16 @@ const OrderConfirm = props => {
             style={styles.checkbox}
             animationDuration={0.2}
             value={checked}
+            tintColors={
+              Platform.OS === 'android'
+                ? {true: Colors.primary, flase: Colors.black}
+                : '#000'
+            }
+            onTintColor={Colors.primary}
+            onCheckColor={Colors.primary}
             onValueChange={() => setChecked(!checked)}
           />
-          <TextBase style={[styles.bottomText, {paddingLeft: 2}]}>
+          <TextBase style={[styles.bottomText, {width: 290, paddingLeft: 10}]}>
             J 'accepte d' être recontacté par Tumeplay pour améliorer le service
           </TextBase>
         </View>
@@ -132,6 +150,9 @@ const OrderConfirm = props => {
           special
           onPress={() => sendOrder()}
         />
+      )}
+      {isVisible && (
+        <OrderConfirmModal isVisible={isVisible} onPress={handleClosingModal} />
       )}
     </View>
   );
@@ -196,11 +217,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   checkbox: {
-    marginRight: 10,
+    position: Platform.OS === 'ios' ? 'absolute' : 'relative',
+    marginRight: Platform.OS === 'android' ? 10 : 0,
+    right: config.deviceWidth > 375 ? 20 : 10,
   },
   checkboxContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   bottomtextContainer: {
     paddingBottom: 22,
