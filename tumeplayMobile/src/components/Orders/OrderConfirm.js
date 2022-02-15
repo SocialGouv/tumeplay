@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import React, {useContext, useState} from 'react';
@@ -16,6 +17,7 @@ import AppContext from '../../../AppContext';
 import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
+import {Colors} from '../../styles/Style';
 
 const OrderConfirm = props => {
   const {
@@ -105,6 +107,13 @@ const OrderConfirm = props => {
             style={styles.checkbox}
             animationDuration={0.2}
             value={checked}
+            tintColors={
+              Platform.OS === 'android'
+                ? {true: Colors.primary, flase: Colors.black}
+                : '#000'
+            }
+            onTintColor={Colors.primary}
+            onCheckColor={Colors.primary}
             onValueChange={() => setChecked(!checked)}
           />
           <TextBase style={[styles.bottomText, {width: 290, paddingLeft: 10}]}>
