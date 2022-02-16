@@ -19,6 +19,7 @@ import Container from '../../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
 import config from '../../../config';
 import AppContext from '../../../AppContext';
+import Event from '../../services/api/matomo';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -50,6 +51,7 @@ const ContentPage = ({navigation, route}) => {
           : tmpContent.image?.url,
       };
       setContent(tmpContent);
+      Event.contentSeen();
     }
   }, [data, loading]);
 

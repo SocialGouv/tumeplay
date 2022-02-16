@@ -21,7 +21,8 @@ import Journey from './src/views/Journey';
 import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
-import {REACT_APP_URL} from '@env';
+import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID} from '@env';
+import Matomo from 'react-native-matomo';
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -95,6 +96,7 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
+    Matomo.initTracker(MATOMO_SITE_URL, parseInt(MATOMO_ID));
   }, []);
 
   const contextValues = {
