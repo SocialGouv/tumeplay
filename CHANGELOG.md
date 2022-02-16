@@ -1,3 +1,10 @@
+# [1.78.0](https://github.com/SocialGouv/Tumeplay/compare/v1.77.0...v1.78.0) (2022-02-16)
+
+
+### Features
+
+* adding matomo to project + setting up trackers in app ([#335](https://github.com/SocialGouv/Tumeplay/issues/335)) ([b958a57](https://github.com/SocialGouv/Tumeplay/commit/b958a578150e664d3970783fda90cda6e5e28f82))
+
 # [1.77.0](https://github.com/SocialGouv/Tumeplay/compare/v1.76.3...v1.77.0) (2022-02-16)
 
 
