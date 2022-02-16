@@ -1,3 +1,10 @@
+## [1.78.1](https://github.com/SocialGouv/Tumeplay/compare/v1.78.0...v1.78.1) (2022-02-16)
+
+
+### Bug Fixes
+
+* matomo tracket init url ([932b0e7](https://github.com/SocialGouv/Tumeplay/commit/932b0e7ea97661185e2bedad0483ce03e96e634a))
+
 # [1.78.0](https://github.com/SocialGouv/Tumeplay/compare/v1.77.0...v1.78.0) (2022-02-16)
 
 
