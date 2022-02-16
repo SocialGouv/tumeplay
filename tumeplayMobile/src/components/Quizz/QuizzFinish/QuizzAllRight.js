@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
@@ -12,10 +12,15 @@ import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
 import {ActivityIndicator} from 'react-native-paper';
+import Event from '../../../services/api/matomo';
 
 const QuizzAllRight = ({navigation, route, module_id}) => {
   const context = useContext(AppContext);
   const {user} = context;
+
+  useEffect(() => {
+    Event.quizzDone();
+  }, []);
 
   return (
     <Container style={styles.container}>
