@@ -1,3 +1,10 @@
+# [1.77.0](https://github.com/SocialGouv/Tumeplay/compare/v1.76.3...v1.77.0) (2022-02-16)
+
+
+### Features
+
+* adding minimal ios folder files to ensure replicability ([#334](https://github.com/SocialGouv/Tumeplay/issues/334)) ([54e58e5](https://github.com/SocialGouv/Tumeplay/commit/54e58e542ca6c6543a49650d0f2e0140103ed38b))
+
 ## [1.76.3](https://github.com/SocialGouv/Tumeplay/compare/v1.76.2...v1.76.3) (2022-02-15)
 
 
