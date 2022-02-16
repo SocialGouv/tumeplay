@@ -96,7 +96,7 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
-    Matomo.initTracker(MATOMO_SITE_URL, parseInt(MATOMO_ID));
+    Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
   }, []);
 
   const contextValues = {
