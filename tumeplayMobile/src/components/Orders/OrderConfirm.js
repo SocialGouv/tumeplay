@@ -19,6 +19,7 @@ import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
 import {Colors} from '../../styles/Style';
 import OrderConfirmModal from './OrderConfirmModal';
+import Event from '../../services/api/matomo';
 
 const OrderConfirm = props => {
   const {
@@ -83,6 +84,7 @@ const OrderConfirm = props => {
 
   const handleClosingModal = () => {
     if (!isLoading) {
+      Event.boxOrdered();
       navigation.navigate('Home', {screen: 'Accueil'});
       setIsVisible(false);
     }
