@@ -4,6 +4,7 @@ import {
   Alert,
   View,
   FlatList,
+  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import React, {useState} from 'react';
@@ -16,6 +17,7 @@ import * as Yup from 'yup';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';
 import config from '../../../config';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const HomeOrdersInput = props => {
   const navigation = useNavigation();
@@ -126,109 +128,121 @@ const HomeOrdersInput = props => {
   };
 
   return (
-    <Formik
-      initialValues={userInfos}
-      onSubmit={handleFormValidation}
-      validationSchema={validationSchema}>
-      {({values, errors, touched, handleBlur, handleChange, setFieldValue}) => (
-        <View style={styles.container}>
-          <FlatList
-            contentContainerStyle={{paddingBottom: 90}}
-            data={itemFields}
-            renderItem={({item}) => {
-              if (item.kind === 'autocomplete') {
-                return (
-                  <View>
-                    <Autocomplete
-                      containerStyle={styles.specialInput}
-                      inputContainerStyle={styles.specialInput}
-                      listContainerStyle={{}}
-                      listStyle={styles.listResult}
-                      data={geogouvData}
-                      renderTextInput={() => (
-                        <>
-                          <TextInput
-                            style={styles.input}
-                            label={item.label}
-                            onBlur={handleBlur(item.name)}
-                            underlineColor="#EAE2D7"
-                            activeUnderlineColor="#D42201"
-                            value={values.address}
-                            onChangeText={text => {
-                              setFieldValue(item.name, text);
-                              handleAutocomplete(text);
-                            }}
-                          />
-                          {errors[item.name] && touched[item.name] ? (
-                            <Text style={styles.errorMessage}>
-                              {errors[item.name]}
-                            </Text>
-                          ) : null}
-                        </>
-                      )}
-                      hideResults={hideResults}
-                      flatListProps={{
-                        renderItem: ({item}) => (
-                          <TouchableOpacity
-                            style={styles.displayResults}
-                            onPress={() =>
-                              handleAdressChange(item, values, setFieldValue)
-                            }>
-                            <Text>{item.label}</Text>
-                          </TouchableOpacity>
-                        ),
-                      }}
-                    />
-                  </View>
-                );
-              } else {
-                return (
-                  <>
-                    {hideResults && (
-                      <TextInput
-                        style={styles.input}
-                        label={item.label}
-                        onBlur={handleBlur(item.name)}
-                        underlineColor="#EAE2D7"
-                        activeUnderlineColor="#D42201"
-                        value={values[item.name]}
-                        onChangeText={handleChange(item.name)}
-                        keyboardType={item.isNumber ? 'numeric' : 'default'}
+    <KeyboardAwareScrollView>
+      <Formik
+        initialValues={userInfos}
+        onSubmit={handleFormValidation}
+        validationSchema={validationSchema}>
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          setFieldValue,
+        }) => (
+          <View style={styles.innerContainer}>
+            <FlatList
+              contentContainerStyle={{paddingBottom: 90}}
+              showsVerticalScrollIndicator={false}
+              data={itemFields}
+              renderItem={({item}) => {
+                if (item.kind === 'autocomplete') {
+                  return (
+                    <View>
+                      <Autocomplete
+                        containerStyle={styles.specialInput}
+                        inputContainerStyle={styles.specialInput}
+                        listContainerStyle={{}}
+                        listStyle={styles.listResult}
+                        data={geogouvData}
+                        renderTextInput={() => (
+                          <>
+                            <TextInput
+                              style={styles.input}
+                              label={item.label}
+                              onBlur={handleBlur(item.name)}
+                              underlineColor="#EAE2D7"
+                              activeUnderlineColor="#D42201"
+                              value={values.address}
+                              onChangeText={text => {
+                                setFieldValue(item.name, text);
+                                handleAutocomplete(text);
+                              }}
+                            />
+                            {errors[item.name] && touched[item.name] ? (
+                              <Text style={styles.errorMessage}>
+                                {errors[item.name]}
+                              </Text>
+                            ) : null}
+                          </>
+                        )}
+                        hideResults={hideResults}
+                        flatListProps={{
+                          renderItem: ({item}) => (
+                            <TouchableOpacity
+                              style={styles.displayResults}
+                              onPress={() =>
+                                handleAdressChange(item, values, setFieldValue)
+                              }>
+                              <Text>{item.label}</Text>
+                            </TouchableOpacity>
+                          ),
+                        }}
                       />
-                    )}
+                    </View>
+                  );
+                } else {
+                  return (
+                    <>
+                      {hideResults && (
+                        <TextInput
+                          style={styles.input}
+                          label={item.label}
+                          onBlur={handleBlur(item.name)}
+                          underlineColor="#EAE2D7"
+                          activeUnderlineColor="#D42201"
+                          value={values[item.name]}
+                          onChangeText={handleChange(item.name)}
+                          keyboardType={item.isNumber ? 'numeric' : 'default'}
+                        />
+                      )}
 
-                    {hideResults && errors[item.name] && touched[item.name] && (
-                      <Text style={styles.errorMessage}>
-                        {errors[item.name]}
-                      </Text>
-                    )}
-                  </>
-                );
-              }
-            }}
-            keyExtractor={item => item.id}
-          />
-          {!!values.first_name && !Object.keys(errors).length && (
-            <View style={styles.buttonContainer}>
-              <Button
-                style={styles.button}
-                text="Je continue"
-                size="intermediate"
-                icon={true}
-                onPress={() => handleFormValidation(values)}
-              />
-            </View>
-          )}
-        </View>
-      )}
-    </Formik>
+                      {hideResults &&
+                        errors[item.name] &&
+                        touched[item.name] && (
+                          <Text style={styles.errorMessage}>
+                            {errors[item.name]}
+                          </Text>
+                        )}
+                    </>
+                  );
+                }
+              }}
+              keyExtractor={item => item.id}
+            />
+            {!!values.first_name && !Object.keys(errors).length && (
+              <View style={styles.buttonContainer}>
+                <Button
+                  style={styles.button}
+                  text="Je continue"
+                  size="intermediate"
+                  icon={true}
+                  onPress={() => handleFormValidation(values)}
+                />
+              </View>
+            )}
+          </View>
+        )}
+      </Formik>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default HomeOrdersInput;
 
 const styles = StyleSheet.create({
-  container: {
+  innerContainer: {
     flex: 1,
   },
   input: {
@@ -258,6 +272,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonContainer: {
+    // marginBottom: 20,
     position: 'absolute',
     left: 0,
     right: 0,

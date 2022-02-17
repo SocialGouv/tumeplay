@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
-import {Fonts} from '../styles/Style';
+import {Colors, Fonts} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
 
@@ -35,6 +35,7 @@ const Button = props => {
         adjustStyle(),
         style,
         special && {backgroundColor: '#D3C8FB', height: 56},
+        isDisabled && {backgroundColor: Colors.grey},
       ]}
       disabled={isDisabled}
       accessibilityRole="button"
