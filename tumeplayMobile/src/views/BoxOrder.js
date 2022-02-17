@@ -140,6 +140,8 @@ const styles = StyleSheet.create({
   topInfoContainer: {
     width: '100%',
     flexDirection: 'column',
+    backgroundColor: Colors.background,
+    zIndex: 1,
   },
   backButton: {
     justifyContent: 'flex-start',
@@ -224,6 +226,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '100%',
+    zIndex: 0,
     backgroundColor: '#FFFF',
     flex: 2,
   },

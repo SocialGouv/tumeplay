@@ -49,6 +49,7 @@
     "react-native-autocomplete-input": "^5.0.2",
     "react-native-dotenv": "^3.3.0",
     "react-native-encrypted-storage": "^4.0.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-matomo": "https://github.com/vivantehealth/react-native-matomo#master",
     "react-native-paper": "^4.11.2",
     "react-native-progress": "^5.0.0",
