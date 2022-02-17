@@ -1,0 +1,5 @@
+1,Super Admin,strapi-super-admin,Super Admins can access and manage all features and settings.,2021-05-17 17:25:41.301+02,2021-05-17 17:25:41.301+02
+5,Référent,referent-kr1up6yc,Rôle pour les référents,2021-07-13 11:27:15.062+02,2021-07-13 11:33:42.087+02
+4,Coordinateur Guyane,referent-guyane-kou62om9,Rôle pour les coordinateurs guyanais,2021-05-18 17:04:06.183+02,2021-07-13 11:33:56.334+02
+3,Coordinateur Métropole,strapi-author,Rôle pour les coordinateurs métropolitains,2021-05-17 17:25:41.344+02,2021-07-13 11:33:51.301+02
+6,Pilote guyane,pilote-guyane-krd9gze1,Pilote pour la guyane,2021-07-21 11:06:14.186+02,2021-07-21 12:23:40.669+02
