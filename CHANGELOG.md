@@ -1,3 +1,9 @@
+## [1.79.1](https://github.com/SocialGouv/Tumeplay/compare/v1.79.0...v1.79.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **k8s:** fix redirect ingress apiVersion ([#310](https://github.com/SocialGouv/Tumeplay/issues/310)) ([e73443f](https://github.com/SocialGouv/Tumeplay/commit/e73443f2308b76a26d10f01b1ac77df5abc1b892))
 
 # [1.79.0](https://github.com/SocialGouv/Tumeplay/compare/v1.78.0...v1.79.0) (2022-02-17)
 
