@@ -1,3 +1,10 @@
+## [1.83.1](https://github.com/SocialGouv/Tumeplay/compare/v1.83.0...v1.83.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* fixing inputs according to UX review ([#343](https://github.com/SocialGouv/Tumeplay/issues/343)) ([a84ca5e](https://github.com/SocialGouv/Tumeplay/commit/a84ca5e2e6e398676173d441df6a4cb214114d74))
+
 # [1.83.0](https://github.com/SocialGouv/Tumeplay/compare/v1.82.0...v1.83.0) (2022-02-21)
 
 
