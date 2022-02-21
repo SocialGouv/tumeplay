@@ -20,6 +20,11 @@ body {
   font-weight: bold;
 }
 
+.title .title-highlight {
+	font-size: 1.5em;
+	color: #E85439;
+}
+
 .subtitle,
 .description {
   font-size: 18px;
@@ -67,7 +72,7 @@ body {
 
 @media (min-width: 768px) {
   .logo {
-    margin-bottom: 100px;
+    margin-bottom: 80px;
   }
 
   .buttons-container {
