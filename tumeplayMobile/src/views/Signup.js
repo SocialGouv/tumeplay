@@ -74,13 +74,13 @@ const Signup = ({user, setUser}) => {
   };
 
   const radio_props_age = [
-    {label: '- de 13 ans', value: '-13', key: '- de 13 ans'},
     {label: '13-15 ans', value: '13-15', key: '13-15 ans'},
     {label: '16-18 ans', value: '16-18', key: '16-18 ans'},
     {label: '18-20 ans', value: '18-20', key: '18-20 ans'},
     {label: '20-22 ans', value: '20-22', key: '20-22 ans'},
     {label: '22-25 ans', value: '22-25', key: '22-25 ans'},
     {label: '+ de 25 ans', value: '25+', key: '+ de 25 ans'},
+    {label: 'Autre', value: '-13', key: 'Autre'},
   ];
 
   const radio_props_location = [
