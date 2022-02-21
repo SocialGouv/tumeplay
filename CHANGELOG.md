@@ -1,3 +1,10 @@
+## [1.79.2](https://github.com/SocialGouv/Tumeplay/compare/v1.79.1...v1.79.2) (2022-02-21)
+
+
+### Bug Fixes
+
+* adjusting age selector ([#338](https://github.com/SocialGouv/Tumeplay/issues/338)) ([3749c58](https://github.com/SocialGouv/Tumeplay/commit/3749c587f89acc67f159118beb2917da923f1d12))
+
 ## [1.79.1](https://github.com/SocialGouv/Tumeplay/compare/v1.79.0...v1.79.1) (2022-02-17)
 
 
