@@ -1,3 +1,10 @@
+# [1.83.0](https://github.com/SocialGouv/Tumeplay/compare/v1.82.0...v1.83.0) (2022-02-21)
+
+
+### Features
+
+* adding feedback to user on wrong answers ([#342](https://github.com/SocialGouv/Tumeplay/issues/342)) ([8e74513](https://github.com/SocialGouv/Tumeplay/commit/8e74513c98c98520d292d0056144959aef2a5c13))
+
 # [1.82.0](https://github.com/SocialGouv/Tumeplay/compare/v1.81.1...v1.82.0) (2022-02-21)
 
 
