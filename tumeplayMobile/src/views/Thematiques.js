@@ -30,18 +30,6 @@ export default function Thematiques(props) {
   });
   const [thematiques, setThematiques] = useState([]);
 
-  const images = [
-    pleasure,
-    culture,
-    anatomie,
-    medical,
-    law,
-    gender,
-    relationship,
-    orientation,
-    link,
-  ];
-
   const renderItem = ({item, index}) => {
     return (
       <ThemeCard
