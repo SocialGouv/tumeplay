@@ -41,9 +41,11 @@ const QuizzAnswerButton = props => {
         {hasAnswered && answer.key === correctAnswer && (
           <Image source={right} style={styles.image} />
         )}
-        {answer.key !== correctAnswer && answeredKey === answer.key && (
-          <Image source={wrong} style={styles.image} />
-        )}
+        {hasAnswered &&
+          answer.key !== correctAnswer &&
+          answeredKey === answer.key && (
+            <Image source={wrong} style={styles.image} />
+          )}
       </View>
     </TouchableOpacity>
   );
@@ -84,12 +86,13 @@ const styles = StyleSheet.create({
   value: {
     justifyContent: 'center',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: config.deviceWidth * 0.04,
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
   image: {
-    marginLeft: 15,
+    alignSelf: 'center',
+    marginLeft: 10,
   },
 });
 

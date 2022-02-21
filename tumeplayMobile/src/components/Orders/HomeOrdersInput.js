@@ -4,7 +4,6 @@ import {
   Alert,
   View,
   FlatList,
-  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import React, {useState} from 'react';
@@ -162,7 +161,9 @@ const HomeOrdersInput = props => {
                               style={styles.input}
                               label={item.label}
                               onBlur={handleBlur(item.name)}
-                              underlineColor="#EAE2D7"
+                              underlineColor={
+                                errors[item.name] ? '#D42201' : '#EAE2D7'
+                              }
                               activeUnderlineColor="#D42201"
                               value={values.address}
                               onChangeText={text => {
@@ -200,7 +201,9 @@ const HomeOrdersInput = props => {
                           style={styles.input}
                           label={item.label}
                           onBlur={handleBlur(item.name)}
-                          underlineColor="#EAE2D7"
+                          underlineColor={
+                            errors[item.name] ? '#D42201' : '#EAE2D7'
+                          }
                           activeUnderlineColor="#D42201"
                           value={values[item.name]}
                           onChangeText={handleChange(item.name)}
