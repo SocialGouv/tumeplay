@@ -1,3 +1,10 @@
+# [1.81.0](https://github.com/SocialGouv/Tumeplay/compare/v1.80.0...v1.81.0) (2022-02-21)
+
+
+### Features
+
+* adding main loader and adding loader to signup ([#339](https://github.com/SocialGouv/Tumeplay/issues/339)) ([93fbcde](https://github.com/SocialGouv/Tumeplay/commit/93fbcde8ccbf044b1c39637a1147fdacec97ae0b))
+
 # [1.80.0](https://github.com/SocialGouv/Tumeplay/compare/v1.79.2...v1.80.0) (2022-02-21)
 
 
