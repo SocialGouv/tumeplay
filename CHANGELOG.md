@@ -1,3 +1,10 @@
+## [1.81.1](https://github.com/SocialGouv/Tumeplay/compare/v1.81.0...v1.81.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* loader design ([#340](https://github.com/SocialGouv/Tumeplay/issues/340)) ([3e04780](https://github.com/SocialGouv/Tumeplay/commit/3e047806f7de6c5b286062ad8ce4dcd496144f29))
+
 # [1.81.0](https://github.com/SocialGouv/Tumeplay/compare/v1.80.0...v1.81.0) (2022-02-21)
 
 
