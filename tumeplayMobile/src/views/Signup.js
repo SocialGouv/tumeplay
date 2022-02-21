@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, StyleSheet, TextInput, ActivityIndicator} from 'react-native';
 import Text from '../components/Text';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -14,6 +14,7 @@ import AppContext from '../../AppContext';
 const Signup = ({user, setUser}) => {
   let tmpUser = {...user};
   const {reloadUser} = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const generateID = () => {
     const user_id =
@@ -40,13 +41,13 @@ const Signup = ({user, setUser}) => {
     onCompleted() {
       setUserInStorage();
       reloadUser();
+      setIsLoading(false);
     },
   });
 
   const handleUserAge = value => {
     tmpUser.isUnder25 = value !== '25+';
     tmpUser.ageRange = value;
-    setUser({...tmpUser});
   };
 
   const handleChangeName = e => {
@@ -60,6 +61,7 @@ const Signup = ({user, setUser}) => {
   };
 
   const handleValidation = async () => {
+    setIsLoading(true);
     await signUpUser({
       variables: {
         first_name: tmpUser.first_name,
@@ -131,13 +133,17 @@ const Signup = ({user, setUser}) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          special
-          text={'Je valide mon profil'}
-          size={'large'}
-          onPress={() => handleValidation()}
-        />
+        {isLoading ? (
+          <ActivityIndicator size="large" color={Colors.primary} />
+        ) : (
+          <Button
+            style={styles.button}
+            special
+            text={'Je valide mon profil'}
+            size={'large'}
+            onPress={() => handleValidation()}
+          />
+        )}
       </View>
     </Container>
   );
