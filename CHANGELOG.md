@@ -1,3 +1,10 @@
+# [1.82.0](https://github.com/SocialGouv/Tumeplay/compare/v1.81.1...v1.82.0) (2022-02-21)
+
+
+### Features
+
+* themes image & color from back-office ([#341](https://github.com/SocialGouv/Tumeplay/issues/341)) ([aa4d970](https://github.com/SocialGouv/Tumeplay/commit/aa4d9705f117056a5737a3233f224a84067af286))
+
 ## [1.81.1](https://github.com/SocialGouv/Tumeplay/compare/v1.81.0...v1.81.1) (2022-02-21)
 
 
