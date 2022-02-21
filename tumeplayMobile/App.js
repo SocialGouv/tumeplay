@@ -23,6 +23,7 @@ const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
 import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID} from '@env';
 import Matomo from 'react-native-matomo';
+import Loader from './src/components/global/Loader';
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -112,11 +113,7 @@ const App = () => {
 
   return (
     <AppContext.Provider value={contextValues}>
-      {!isUserLoaded && (
-        <View style={styles.loadingScreen}>
-          <Text>Chargement ...</Text>
-        </View>
-      )}
+      {!isUserLoaded && <Loader />}
       {isUserLoaded && !user?.isOnboarded && (
         <Onboarding user={user} setUser={setUser} />
       )}
@@ -157,13 +154,5 @@ const App = () => {
     </AppContext.Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  loadingScreen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;
