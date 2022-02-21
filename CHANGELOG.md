@@ -1,3 +1,10 @@
+# [1.80.0](https://github.com/SocialGouv/Tumeplay/compare/v1.79.2...v1.80.0) (2022-02-21)
+
+
+### Features
+
+* add landing redirection for metropole ([#336](https://github.com/SocialGouv/Tumeplay/issues/336)) ([5985890](https://github.com/SocialGouv/Tumeplay/commit/5985890a7771711930b629eba6142b1fbde91165))
+
 ## [1.79.2](https://github.com/SocialGouv/Tumeplay/compare/v1.79.1...v1.79.2) (2022-02-21)
 
 
