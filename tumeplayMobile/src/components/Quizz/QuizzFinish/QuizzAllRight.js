@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingHorizontal: 10,
-    backgroundColor: bgColors[2],
+    backgroundColor: '#DDF4ED',
   },
   pointIndicator: {
     justifyContent: 'flex-end',
