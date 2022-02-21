@@ -7,7 +7,6 @@ import thumbsup from '../../../assets/custom_images/thumbs_up.png';
 import Button from '../../Button';
 import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
-import {bgColors} from '../../../styles/Style';
 import Container from '../../global/Container';
 import config from '../../../../config';
 import _ from 'lodash';
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingHorizontal: 10,
-    backgroundColor: bgColors[2],
+    backgroundColor: '#DDF4ED',
   },
   pointIndicator: {
     justifyContent: 'flex-end',

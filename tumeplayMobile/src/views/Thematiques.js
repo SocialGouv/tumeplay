@@ -3,7 +3,7 @@ import {View, StyleSheet, FlatList} from 'react-native';
 import Text from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
-import {Fonts, bgColors, borderColors} from '../styles/Style';
+import {Fonts} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
 import pleasure from '../assets/custom_images/PLAISIR.png';
 import culture from '../assets/custom_images/CULTURE_G.png';
@@ -14,6 +14,7 @@ import gender from '../assets/custom_images/IDENTITE.png';
 import relationship from '../assets/custom_images/RELATIONS.png';
 import orientation from '../assets/custom_images/ORIENTATION.png';
 import link from '../assets/custom_images/LIENS.png';
+import {REACT_APP_URL} from '@env'
 
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
@@ -29,27 +30,15 @@ export default function Thematiques(props) {
   });
   const [thematiques, setThematiques] = useState([]);
 
-  const images = [
-    pleasure,
-    culture,
-    anatomie,
-    medical,
-    law,
-    gender,
-    relationship,
-    orientation,
-    link,
-  ];
-
   const renderItem = ({item, index}) => {
     return (
       <ThemeCard
         key={item.id}
         index={index}
         theme={item}
-        backgroundColor={bgColors[index]}
-        borderColors={borderColors[index]}
-        image={images[index]}
+        backgroundColor={item.color}
+        borderColors={item.border_color}
+        image={REACT_APP_URL + item.image?.url}
         navigation={navigation}
       />
     );

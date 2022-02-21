@@ -24,7 +24,7 @@ const ThemeCard = props => {
           image: image,
         });
       }}>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} source={{uri: image}} />
       <Text style={styles.text}>{theme?.title}</Text>
     </TouchableOpacity>
   );
