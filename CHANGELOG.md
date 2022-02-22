@@ -1,3 +1,31 @@
+## [1.83.1](https://github.com/SocialGouv/Tumeplay/compare/v1.83.0...v1.83.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* fixing inputs according to UX review ([#343](https://github.com/SocialGouv/Tumeplay/issues/343)) ([a84ca5e](https://github.com/SocialGouv/Tumeplay/commit/a84ca5e2e6e398676173d441df6a4cb214114d74))
+
+# [1.83.0](https://github.com/SocialGouv/Tumeplay/compare/v1.82.0...v1.83.0) (2022-02-21)
+
+
+### Features
+
+* adding feedback to user on wrong answers ([#342](https://github.com/SocialGouv/Tumeplay/issues/342)) ([8e74513](https://github.com/SocialGouv/Tumeplay/commit/8e74513c98c98520d292d0056144959aef2a5c13))
+
+# [1.82.0](https://github.com/SocialGouv/Tumeplay/compare/v1.81.1...v1.82.0) (2022-02-21)
+
+
+### Features
+
+* themes image & color from back-office ([#341](https://github.com/SocialGouv/Tumeplay/issues/341)) ([aa4d970](https://github.com/SocialGouv/Tumeplay/commit/aa4d9705f117056a5737a3233f224a84067af286))
+
+## [1.81.1](https://github.com/SocialGouv/Tumeplay/compare/v1.81.0...v1.81.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* loader design ([#340](https://github.com/SocialGouv/Tumeplay/issues/340)) ([3e04780](https://github.com/SocialGouv/Tumeplay/commit/3e047806f7de6c5b286062ad8ce4dcd496144f29))
+
 # [1.81.0](https://github.com/SocialGouv/Tumeplay/compare/v1.80.0...v1.81.0) (2022-02-21)
 
 

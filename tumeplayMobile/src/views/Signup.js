@@ -36,12 +36,12 @@ const Signup = ({user, setUser}) => {
 
   const [signUpUser] = useMutation(POST_MOBILE_USER, {
     onError(error) {
+      setIsLoading(false);
       console.log('error on signup', error);
     },
     onCompleted() {
       setUserInStorage();
       reloadUser();
-      setIsLoading(false);
     },
   });
 

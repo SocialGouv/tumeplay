@@ -1,7 +1,9 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import config from '../../../config';
 import Text from '../../components/Text';
+import right from '../../assets/Right.png';
+import wrong from '../../assets/Wrong.png';
 
 const QuizzAnswerButton = props => {
   const {
@@ -36,6 +38,14 @@ const QuizzAnswerButton = props => {
           ]}>
           {answer.value}
         </Text>
+        {hasAnswered && answer.key === correctAnswer && (
+          <Image source={right} style={styles.image} />
+        )}
+        {hasAnswered &&
+          answer.key !== correctAnswer &&
+          answeredKey === answer.key && (
+            <Image source={wrong} style={styles.image} />
+          )}
       </View>
     </TouchableOpacity>
   );
@@ -51,6 +61,7 @@ const styles = StyleSheet.create({
   },
   button: {
     display: 'flex',
+    flexDirection: 'row',
     alignSelf: 'center',
     width: '100%',
     marginVertical: 10,
@@ -75,12 +86,13 @@ const styles = StyleSheet.create({
   value: {
     justifyContent: 'center',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: config.deviceWidth * 0.04,
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
-  emoji: {
-    justifyContent: 'center',
+  image: {
+    alignSelf: 'center',
+    marginLeft: 10,
   },
 });
 
