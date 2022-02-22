@@ -1,3 +1,10 @@
+## [1.83.2](https://github.com/SocialGouv/Tumeplay/compare/v1.83.1...v1.83.2) (2022-02-22)
+
+
+### Bug Fixes
+
+* remove hotjar from old webapp ([c857502](https://github.com/SocialGouv/Tumeplay/commit/c85750204a498054f15b39cf70a2e0dfa76ae4e3))
+
 ## [1.83.1](https://github.com/SocialGouv/Tumeplay/compare/v1.83.0...v1.83.1) (2022-02-21)
 
 
