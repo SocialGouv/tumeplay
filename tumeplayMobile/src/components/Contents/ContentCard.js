@@ -1,20 +1,20 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
-import AppContext from '../../../AppContext';
 
-const ContentCard = ({item, backgroundColor, navigation, contents_ids}) => {
+const ContentCard = props => {
+  const {item, backgroundColor, navigation, content_ids} = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
-  const {user} = useContext(AppContext);
 
   return (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('Content', {
           content_id: item?.id,
-          contents_ids: contents_ids,
+          content_ids: content_ids,
+          initial: true,
         })
       }
       style={[styles.container, {backgroundColor: backgroundColor}]}>

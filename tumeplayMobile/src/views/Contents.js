@@ -8,6 +8,7 @@ import GestureRecognizer from '../lib/swipe';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
 import AppContext from '../../AppContext';
+import _ from 'lodash';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -20,7 +21,7 @@ const ContentsPage = props => {
     variables: {theme_id: route.params.theme_id, level: user.level},
   });
 
-  const contents_ids = contents.map(content => content.id);
+  const content_ids = contents.map(content => content.id);
 
   useEffect(() => {
     if (data && !loading) {
@@ -43,7 +44,7 @@ const ContentsPage = props => {
       <ContentCard
         key={item.id}
         item={item}
-        contents_ids={contents_ids}
+        content_ids={content_ids}
         backgroundColor={backgroundColor}
         navigation={navigation}
       />

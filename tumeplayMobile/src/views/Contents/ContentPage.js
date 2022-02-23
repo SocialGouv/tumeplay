@@ -15,32 +15,21 @@ import Button from '../../components/Button';
 import {useQuery} from '@apollo/client';
 import {GET_SINGLE_CONTENT} from '../../services/api/contents';
 import Feedback from '../../components/Feedback';
-import Container from '../../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
 import config from '../../../config';
 import AppContext from '../../../AppContext';
 import Event from '../../services/api/matomo';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
   const [content, setContent] = useState();
-  const [nextContentID, setNextContentID] = useState('');
-  const [remainingIDs, setRemainingIDs] = useState();
   const [count, setCount] = useState(0);
+  const content_ids = route?.params?.content_ids;
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {content_id: route?.params?.content_id},
   });
-
-  const randomNextID = () => {
-    let contents_ids = route?.params?.contents_ids;
-    let remaining_ids = contents_ids?.filter(id => content?.id !== id);
-    setRemainingIDs(remaining_ids);
-    const random = Math.floor(Math.random() * remaining_ids?.length);
-    if (remaining_ids) {
-      setNextContentID(remaining_ids[random]);
-    }
-  };
 
   useEffect(() => {
     if (data && !loading) {
@@ -55,19 +44,27 @@ const ContentPage = ({navigation, route}) => {
     }
   }, [data, loading]);
 
-  useEffect(() => {
-    randomNextID();
-  }, [content]);
-
   const nextContent = () => {
     navigation.navigate('Content', {
-      content_id: nextContentID,
-      contents_ids: remainingIDs,
+      content_id: content_ids[count + 1],
+      content_ids: content_ids,
     });
     setCount(count + 1);
   };
 
-  const goToJourney = () => {
+  const previousContent = () => {
+    if (count === 0) {
+      navigation.goBack();
+    } else {
+      setCount(count - 1);
+      navigation.navigate('Content', {
+        content_id: content_ids[count - 1],
+        content_ids: content_ids,
+      });
+    }
+  };
+
+  const goToQuizz = () => {
     navigation.navigate('Jouer', {
       module_id: user.next_module,
       questions: user.nextQuestions,
@@ -75,10 +72,20 @@ const ContentPage = ({navigation, route}) => {
     });
   };
 
+  const onSwipe = direction => {
+    if (direction === 'SWIPE_LEFT') {
+      nextContent();
+    } else if (direction === 'SWIPE_RIGHT') {
+      previousContent();
+    }
+  };
+
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
   return (
-    <Container style={styles.container}>
+    <GestureRecognizer
+      style={styles.container}
+      onSwipe={direction => onSwipe(direction)}>
       <View style={styles.imageContainer}>
         <ImageBackground style={styles.image} source={imageUrl}>
           <ImageBackground style={styles.image} source={bg}>
@@ -126,7 +133,7 @@ const ContentPage = ({navigation, route}) => {
               icon
               style={[styles.button, styles.redButton]}
               styleText={{alignItems: 'center'}}
-              onPress={() => goToJourney()}
+              onPress={() => goToQuizz()}
             />
           )}
           <Button
@@ -137,7 +144,7 @@ const ContentPage = ({navigation, route}) => {
           />
         </View>
       </View>
-    </Container>
+    </GestureRecognizer>
   );
 };
 
