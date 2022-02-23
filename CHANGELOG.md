@@ -1,3 +1,10 @@
+# [1.85.0](https://github.com/SocialGouv/Tumeplay/compare/v1.84.1...v1.85.0) (2022-02-23)
+
+
+### Features
+
+* adding sentri on mobile app ([#346](https://github.com/SocialGouv/Tumeplay/issues/346)) ([dfffaba](https://github.com/SocialGouv/Tumeplay/commit/dfffabab783347066c73b68afe72501161ddf8a5))
+
 ## [1.84.1](https://github.com/SocialGouv/Tumeplay/compare/v1.84.0...v1.84.1) (2022-02-23)
 
 
