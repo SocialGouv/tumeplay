@@ -3,9 +3,10 @@ import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
+import _ from 'lodash';
 
 const ContentCard = props => {
-  const {item, backgroundColor, navigation, content_ids} = props;
+  const {item, backgroundColor, navigation, content_ids, index} = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
 
   return (
@@ -13,7 +14,8 @@ const ContentCard = props => {
       onPress={() =>
         navigation.navigate('Content', {
           content_id: item?.id,
-          content_ids: content_ids,
+          content_ids: _.shuffle(content_ids),
+          index: index,
           initial: true,
         })
       }

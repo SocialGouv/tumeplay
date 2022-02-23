@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -26,6 +26,7 @@ const ContentPage = ({navigation, route}) => {
   const [content, setContent] = useState();
   const [count, setCount] = useState(0);
   const content_ids = route?.params?.content_ids;
+  const content_id = useRef(route.params.content_id);
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {content_id: route?.params?.content_id},
@@ -58,7 +59,7 @@ const ContentPage = ({navigation, route}) => {
     } else {
       setCount(count - 1);
       navigation.navigate('Content', {
-        content_id: content_ids[count - 1],
+        content_id: count > 1 ? content_ids[count - 1] : content_id.current,
         content_ids: content_ids,
       });
     }

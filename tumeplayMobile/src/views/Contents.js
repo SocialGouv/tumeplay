@@ -39,7 +39,7 @@ const ContentsPage = props => {
     }
   }, [data, loading]);
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <ContentCard
         key={item.id}
