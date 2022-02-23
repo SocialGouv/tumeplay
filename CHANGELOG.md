@@ -1,3 +1,10 @@
+# [1.84.0](https://github.com/SocialGouv/Tumeplay/compare/v1.83.2...v1.84.0) (2022-02-23)
+
+
+### Features
+
+* integrating swipe on contents ([#344](https://github.com/SocialGouv/Tumeplay/issues/344)) ([ca80f50](https://github.com/SocialGouv/Tumeplay/commit/ca80f504e61a17d3c7dce2e226ae20245c1259d3))
+
 ## [1.83.2](https://github.com/SocialGouv/Tumeplay/compare/v1.83.1...v1.83.2) (2022-02-22)
 
 
