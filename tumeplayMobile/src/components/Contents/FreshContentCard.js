@@ -15,7 +15,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
       onPress={() =>
         navigation.navigate('Content', {
           content_id: content.id,
-          contents_ids: freshContentsIds,
+          content_ids: freshContentsIds,
         })
       }>
       <View>
