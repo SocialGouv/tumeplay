@@ -1,3 +1,10 @@
+## [1.84.1](https://github.com/SocialGouv/Tumeplay/compare/v1.84.0...v1.84.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* fixing back behavior on swipe ([#345](https://github.com/SocialGouv/Tumeplay/issues/345)) ([1772115](https://github.com/SocialGouv/Tumeplay/commit/1772115257290fc2c1fa0b826b1e1cdd9c688012))
+
 # [1.84.0](https://github.com/SocialGouv/Tumeplay/compare/v1.83.2...v1.84.0) (2022-02-23)
 
 
