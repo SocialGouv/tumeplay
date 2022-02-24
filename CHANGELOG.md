@@ -1,3 +1,10 @@
+## [1.86.1](https://github.com/SocialGouv/Tumeplay/compare/v1.86.0...v1.86.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* fixing accepted deptCode ([#348](https://github.com/SocialGouv/Tumeplay/issues/348)) ([ca540c1](https://github.com/SocialGouv/Tumeplay/commit/ca540c19c254b249d00a4a1a305e9d257cf07eba))
+
 # [1.86.0](https://github.com/SocialGouv/Tumeplay/compare/v1.85.0...v1.86.0) (2022-02-24)
 
 
