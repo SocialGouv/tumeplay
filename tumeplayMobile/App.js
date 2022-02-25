@@ -21,7 +21,16 @@ import Journey from './src/views/Journey';
 import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
-import {REACT_APP_URL} from '@env';
+import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID, SENTRI_URL} from '@env';
+import Matomo from 'react-native-matomo';
+import Loader from './src/components/global/Loader';
+
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: SENTRI_URL,
+  enableNative: false,
+});
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -95,6 +104,7 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
+    Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
   }, []);
 
   const contextValues = {
@@ -110,11 +120,7 @@ const App = () => {
 
   return (
     <AppContext.Provider value={contextValues}>
-      {!isUserLoaded && (
-        <View style={styles.loadingScreen}>
-          <Text>Chargement ...</Text>
-        </View>
-      )}
+      {!isUserLoaded && <Loader />}
       {isUserLoaded && !user?.isOnboarded && (
         <Onboarding user={user} setUser={setUser} />
       )}
@@ -156,12 +162,4 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  loadingScreen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
-export default App;
+export default Sentry.wrap(App);

@@ -12,7 +12,6 @@ const LandingPage = props => {
   const param = '?zone_choice=true';
 
   const handleRedirection = name => {
-    console.log(navigator.userAgent);
     if (REACT_APP_ZONE === name) {
       if (name === 'metropole') {
         window.location.href = 'landing.html';

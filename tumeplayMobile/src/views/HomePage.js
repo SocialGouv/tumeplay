@@ -13,6 +13,7 @@ import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
 import {WebView} from 'react-native-webview';
+import Event from '../services/api/matomo';
 
 const HomePage = ({navigation}) => {
   //here we calculate the number of point from the user
@@ -136,13 +137,14 @@ const HomePage = ({navigation}) => {
             size="medium"
             special
             left
-            onPress={() =>
+            onPress={() => {
+              Event.playEvent();
               navigation.navigate('Jouer', {
                 module_id: user.next_module,
                 questions: user.nextQuestions,
                 clearModuleData: true,
-              })
-            }
+              });
+            }}
             icon
           />
         </View>

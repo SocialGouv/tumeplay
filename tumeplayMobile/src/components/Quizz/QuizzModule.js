@@ -257,10 +257,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bgContainer: {
-    height: '100%',
+    flex: 1,
     backgroundColor: '#F9EEF2',
   },
   scrollContainer: {
+    flex: 1,
     alignContent: 'center',
     paddingBottom: 60,
   },

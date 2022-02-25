@@ -54,7 +54,7 @@ const Award = props => {
       </View>
       {!user.hasFinished ? (
         <Button
-          text={'Je commande !'}
+          text={'Commande ton kit'}
           size={'large'}
           style={styles.button}
           icon={true}

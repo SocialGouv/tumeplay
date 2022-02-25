@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, StyleSheet, TextInput, ActivityIndicator} from 'react-native';
 import Text from '../components/Text';
 import RNPickerSelect from 'react-native-picker-select';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -14,6 +14,7 @@ import AppContext from '../../AppContext';
 const Signup = ({user, setUser}) => {
   let tmpUser = {...user};
   const {reloadUser} = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const generateID = () => {
     const user_id =
@@ -35,6 +36,7 @@ const Signup = ({user, setUser}) => {
 
   const [signUpUser] = useMutation(POST_MOBILE_USER, {
     onError(error) {
+      setIsLoading(false);
       console.log('error on signup', error);
     },
     onCompleted() {
@@ -46,7 +48,6 @@ const Signup = ({user, setUser}) => {
   const handleUserAge = value => {
     tmpUser.isUnder25 = value !== '25+';
     tmpUser.ageRange = value;
-    setUser({...tmpUser});
   };
 
   const handleChangeName = e => {
@@ -60,6 +61,7 @@ const Signup = ({user, setUser}) => {
   };
 
   const handleValidation = async () => {
+    setIsLoading(true);
     await signUpUser({
       variables: {
         first_name: tmpUser.first_name,
@@ -74,13 +76,12 @@ const Signup = ({user, setUser}) => {
   };
 
   const radio_props_age = [
-    {label: '- de 13 ans', value: '-13', key: '- de 13 ans'},
     {label: '13-15 ans', value: '13-15', key: '13-15 ans'},
     {label: '16-18 ans', value: '16-18', key: '16-18 ans'},
-    {label: '18-20 ans', value: '18-20', key: '18-20 ans'},
-    {label: '20-22 ans', value: '20-22', key: '20-22 ans'},
-    {label: '22-25 ans', value: '22-25', key: '22-25 ans'},
+    {label: '19-21 ans', value: '19-21', key: '18-20 ans'},
+    {label: '22-25 ans', value: '22-25', key: '20-22 ans'},
     {label: '+ de 25 ans', value: '25+', key: '+ de 25 ans'},
+    {label: 'Autre', value: '-13', key: 'Autre'},
   ];
 
   const radio_props_location = [
@@ -131,13 +132,17 @@ const Signup = ({user, setUser}) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          special
-          text={'Je valide mon profil'}
-          size={'large'}
-          onPress={() => handleValidation()}
-        />
+        {isLoading ? (
+          <ActivityIndicator size="large" color={Colors.primary} />
+        ) : (
+          <Button
+            style={styles.button}
+            special
+            text={'Je valide mon profil'}
+            size={'large'}
+            onPress={() => handleValidation()}
+          />
+        )}
       </View>
     </Container>
   );
