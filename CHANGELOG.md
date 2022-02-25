@@ -1,3 +1,10 @@
+## [1.86.2](https://github.com/SocialGouv/Tumeplay/compare/v1.86.1...v1.86.2) (2022-02-25)
+
+
+### Bug Fixes
+
+* landing meta ([e815c73](https://github.com/SocialGouv/Tumeplay/commit/e815c73ab46d7f696f39c945bccd4d563a615a20))
+
 ## [1.86.1](https://github.com/SocialGouv/Tumeplay/compare/v1.86.0...v1.86.1) (2022-02-24)
 
 
