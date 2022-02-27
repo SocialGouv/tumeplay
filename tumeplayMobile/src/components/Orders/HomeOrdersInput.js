@@ -82,6 +82,7 @@ const HomeOrdersInput = props => {
   const validateZipCode = zipcode => {
     const authorizedZipCode = [
       '75',
+      '77',
       '78',
       '91',
       '92',
