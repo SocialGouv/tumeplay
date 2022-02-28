@@ -1,3 +1,10 @@
+# [1.87.0](https://github.com/SocialGouv/Tumeplay/compare/v1.86.3...v1.87.0) (2022-02-28)
+
+
+### Features
+
+* adding retour label on every page + uniformization of the icon used ([#350](https://github.com/SocialGouv/Tumeplay/issues/350)) ([9035de2](https://github.com/SocialGouv/Tumeplay/commit/9035de2e5b332112d9bcc7cceccff87967a5677c))
+
 ## [1.86.3](https://github.com/SocialGouv/Tumeplay/compare/v1.86.2...v1.86.3) (2022-02-27)
 
 
