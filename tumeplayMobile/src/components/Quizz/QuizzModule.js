@@ -13,7 +13,7 @@ import QuizzAnswerButton from './QuizzAnswerButton';
 import TopLevelPointIndicator from './TopLevelPointIndicator';
 import _ from 'lodash';
 import Container from '../global/Container';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 import config from '../../../config';
 import Text from '../../components/Text';
 import * as Progress from 'react-native-progress';
@@ -191,15 +191,12 @@ const QuizzModule = ({navigation, route}) => {
           <Container background={bg} style={styles.container}>
             <View style={styles.levelIndicator}>
               <TouchableOpacity
+                style={styles.chevron}
                 onPress={() =>
                   navigation.navigate('Home', {screen: 'Accueil'})
                 }>
-                <Icon
-                  name="md-arrow-back"
-                  size={30}
-                  color="#000"
-                  style={styles.icon}
-                />
+                <Icon name="chevron-small-left" size={40} color="#000" />
+                <Text>Retour</Text>
               </TouchableOpacity>
               <TopLevelPointIndicator />
             </View>
@@ -277,6 +274,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 26,
+  },
+  chevron: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   stepIndicatorContainer: {
     justifyContent: 'center',
