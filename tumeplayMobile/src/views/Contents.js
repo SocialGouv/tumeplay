@@ -1,6 +1,7 @@
 import {useQuery} from '@apollo/client';
 import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, FlatList, View, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
+import Text from '../components/Text';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
 import {GET_CONTENTS} from '../services/api/contents';
