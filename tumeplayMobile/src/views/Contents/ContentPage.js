@@ -99,9 +99,9 @@ const ContentPage = ({navigation, route}) => {
           <Text>Retour</Text>
         </TouchableOpacity>
         <View style={styles.topInfoContainer}>
-          <Text>{route?.params?.theme_title}</Text>
+          <Text style={styles.topRightInfo}>{route?.params?.theme_title}</Text>
           <View style={styles.borderVertical} />
-          <Text>NIV {route?.params?.level}</Text>
+          <Text style={styles.topRightInfo}>NIV {route?.params?.level}</Text>
         </View>
       </View>
       <View style={styles.imageContainer}>
@@ -195,7 +195,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
+  topRightInfo: {
+    fontWeight: '700',
+  },
   title: {
     width: '80%',
     height: '100%',

@@ -104,9 +104,6 @@ const ContentsPage = props => {
             name="theme"
             onValueChange={e => handleNewTheme(e)}
             items={thematiques_props}
-            Icon={() => {
-              return <Icon name="chevron-down" />;
-            }}
           />
           <RNPickerSelect
             style={{...pickerSelectStyle}}
@@ -175,7 +172,6 @@ const pickerSelectStyle = StyleSheet.create({
     borderBottomColor: Colors.black,
     borderRadius: 4,
     color: 'black',
-    paddingRight: 30,
   },
   inputIOSContainer: {
     borderBottomWidth: 1,
