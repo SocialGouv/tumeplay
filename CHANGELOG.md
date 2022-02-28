@@ -1,3 +1,10 @@
+# [1.88.0](https://github.com/SocialGouv/Tumeplay/compare/v1.87.0...v1.88.0) (2022-02-28)
+
+
+### Features
+
+* new logo on app icon for android ([#351](https://github.com/SocialGouv/Tumeplay/issues/351)) ([59e45cc](https://github.com/SocialGouv/Tumeplay/commit/59e45cc91ec94ca010f7a5464ac0a26ef8a27bb9))
+
 # [1.87.0](https://github.com/SocialGouv/Tumeplay/compare/v1.86.3...v1.87.0) (2022-02-28)
 
 
