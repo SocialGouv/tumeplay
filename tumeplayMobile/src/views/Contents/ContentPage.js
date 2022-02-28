@@ -95,23 +95,26 @@ const ContentPage = ({navigation, route}) => {
                 style={styles.chevron}
                 onPress={() => navigation.goBack()}>
                 <Icon name="chevron-small-left" size={40} color="#000" />
+                <Text>Retour</Text>
               </TouchableOpacity>
+            </View>
+            <View style={styles.l}>
               {user.hasFinished ? (
                 <></>
               ) : (
                 <Text style={styles.level}>NIVEAU {user.level}</Text>
               )}
+              <Text
+                style={[
+                  styles.title,
+                  content?.title.length > 50
+                    ? styles.bigTitle
+                    : styles.smallTitle,
+                ]}
+                numberOfLines={4}>
+                {content?.title}
+              </Text>
             </View>
-            <Text
-              style={[
-                styles.title,
-                content?.title.length > 50
-                  ? styles.bigTitle
-                  : styles.smallTitle,
-              ]}
-              numberOfLines={4}>
-              {content?.title}
-            </Text>
           </ImageBackground>
         </ImageBackground>
       </View>
@@ -165,6 +168,7 @@ const styles = StyleSheet.create({
   },
   level: {
     fontWeight: '600',
+    paddingLeft: 40,
   },
   imageContainer: {
     width: '100%',
@@ -177,7 +181,10 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 1,
   },
-  chevron: {},
+  chevron: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   title: {
     width: '80%',
     height: '100%',

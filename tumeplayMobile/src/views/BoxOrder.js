@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
-import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
 import OrderConfirm from '../components/Orders/OrderConfirm';
 import config from '../../config';
 import {Divider} from 'react-native-paper';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {Colors} from '../styles/Style';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -41,8 +41,8 @@ const Box = ({navigation, route}) => {
             }
           }}
           style={styles.backButton}>
-          <Icon name="md-arrow-back" size={30} color="#000" />
-          <Text>retour</Text>
+          <Icon name="chevron-small-left" size={40} color="#000" />
+          <Text>Retour</Text>
         </TouchableOpacity>
         {orderConfirm ? (
           <>

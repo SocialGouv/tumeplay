@@ -1,11 +1,11 @@
 import {useQuery} from '@apollo/client';
 import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, FlatList, View, Text} from 'react-native';
 import ContentCard from '../components/Contents/ContentCard';
 import Container from '../components/global/Container';
 import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
 import AppContext from '../../AppContext';
 import _ from 'lodash';
@@ -63,8 +63,11 @@ const ContentsPage = props => {
         config={config}
         onSwipeLeft={() => navigation.goBack()}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="md-arrow-back" size={30} color="#000" />
+          <TouchableOpacity
+            style={styles.chevron}
+            onPress={() => navigation.goBack()}>
+            <Icon name="chevron-small-left" size={40} color="#000" />
+            <Text>Retour</Text>
           </TouchableOpacity>
           <View>
             <TopLevelPointIndicator />
@@ -94,9 +97,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     width: '130%',
     flexDirection: 'row',
-    paddingHorizontal: 15,
+    paddingRight: 15,
     marginTop: 15,
     justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  chevron: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
