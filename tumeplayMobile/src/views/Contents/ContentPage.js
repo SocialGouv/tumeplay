@@ -49,6 +49,8 @@ const ContentPage = ({navigation, route}) => {
     navigation.navigate('Content', {
       content_id: content_ids[count + 1],
       content_ids: content_ids,
+      theme_title: route?.params?.theme_title,
+      level: route?.params?.level,
     });
     setCount(count + 1);
   };
@@ -61,6 +63,8 @@ const ContentPage = ({navigation, route}) => {
       navigation.navigate('Content', {
         content_id: count > 1 ? content_ids[count - 1] : content_id.current,
         content_ids: content_ids,
+        theme_title: route?.params?.theme_title,
+        level: route?.params?.level,
       });
     }
   };
@@ -87,34 +91,32 @@ const ContentPage = ({navigation, route}) => {
     <GestureRecognizer
       style={styles.container}
       onSwipe={direction => onSwipe(direction)}>
+      <View style={styles.backLevel}>
+        <TouchableOpacity
+          style={styles.chevron}
+          onPress={() => navigation.goBack()}>
+          <Icon name="chevron-small-left" size={40} color="#000" />
+          <Text>Retour</Text>
+        </TouchableOpacity>
+        <View style={styles.topInfoContainer}>
+          <Text>{route?.params?.theme_title}</Text>
+          <View style={styles.borderVertical} />
+          <Text>NIV {route?.params?.level}</Text>
+        </View>
+      </View>
       <View style={styles.imageContainer}>
         <ImageBackground style={styles.image} source={imageUrl}>
           <ImageBackground style={styles.image} source={bg}>
-            <View style={styles.backLevel}>
-              <TouchableOpacity
-                style={styles.chevron}
-                onPress={() => navigation.goBack()}>
-                <Icon name="chevron-small-left" size={40} color="#000" />
-                <Text>Retour</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.l}>
-              {user.hasFinished ? (
-                <></>
-              ) : (
-                <Text style={styles.level}>NIVEAU {user.level}</Text>
-              )}
-              <Text
-                style={[
-                  styles.title,
-                  content?.title.length > 50
-                    ? styles.bigTitle
-                    : styles.smallTitle,
-                ]}
-                numberOfLines={4}>
-                {content?.title}
-              </Text>
-            </View>
+            <Text
+              style={[
+                styles.title,
+                content?.title.length > 50
+                  ? styles.bigTitle
+                  : styles.smallTitle,
+              ]}
+              numberOfLines={4}>
+              {content?.title}
+            </Text>
           </ImageBackground>
         </ImageBackground>
       </View>
@@ -165,10 +167,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop: 10,
+    paddingRight: 20,
+    width: '100%',
+    justifyContent: 'space-between',
   },
-  level: {
-    fontWeight: '600',
-    paddingLeft: 40,
+  topInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  borderVertical: {
+    borderWidth: 1,
+    marginHorizontal: 10,
+    borderColor: Colors.grey,
   },
   imageContainer: {
     width: '100%',
@@ -185,12 +195,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   title: {
     width: '80%',
     height: '100%',
     fontFamily: Fonts.title,
-    zIndex: 2,
     paddingLeft: 40,
+    zIndex: 2,
   },
   smallTitle: {
     fontSize: config.deviceWidth <= 400 ? 20 : 30,
@@ -206,7 +217,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 24,
   },

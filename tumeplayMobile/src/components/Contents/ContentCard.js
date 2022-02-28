@@ -3,9 +3,11 @@ import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
+import lock from '../../assets/custom_images/Vector.png';
 
 const ContentCard = props => {
-  const {item, backgroundColor, navigation, content_ids} = props;
+  const {item, backgroundColor, navigation, content_ids, locked, theme_title} =
+    props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
 
   return (
@@ -14,11 +16,18 @@ const ContentCard = props => {
         navigation.navigate('Content', {
           content_id: item?.id,
           content_ids: content_ids,
+          theme_title: theme_title,
+          level: item?.niveau?.value,
           initial: true,
         })
       }
+      disabled={locked}
       style={[styles.container, {backgroundColor: backgroundColor}]}>
-      <View style={styles.cardContainer}>
+      <View
+        style={[
+          styles.cardContainer,
+          locked && {backgroundColor: 'rgba(0,0,0,0.3)'},
+        ]}>
         <View style={styles.titleContainer}>
           <Text style={styles.level}>NIVEAU {item?.niveau?.value}</Text>
           <Text style={styles.title}>{item?.title}</Text>
@@ -27,6 +36,12 @@ const ContentCard = props => {
           <Image source={imageUrl} style={styles.image} />
         </View>
       </View>
+      {locked && (
+        <View
+          style={[styles.iconContainer, {backgroundColor: backgroundColor}]}>
+          <Image source={lock} style={styles.imageLock} />
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
@@ -40,6 +55,20 @@ const styles = StyleSheet.create({
   cardContainer: {
     display: 'flex',
     flexDirection: 'row',
+    position: 'relative',
+    zIndex: 0,
+  },
+  iconContainer: {
+    padding: 4,
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+    position: 'absolute',
+    right: '47%',
+    top: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 1,
   },
   level: {
     fontFamily: Fonts.strongText,
