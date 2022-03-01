@@ -1,3 +1,10 @@
+# [1.89.0](https://github.com/SocialGouv/Tumeplay/compare/v1.88.0...v1.89.0) (2022-03-01)
+
+
+### Features
+
+* renaming app for Android releases ([#353](https://github.com/SocialGouv/Tumeplay/issues/353)) ([8b36329](https://github.com/SocialGouv/Tumeplay/commit/8b36329f45c1cb7425034b85145f201f6cc5a65f))
+
 # [1.88.0](https://github.com/SocialGouv/Tumeplay/compare/v1.87.0...v1.88.0) (2022-02-28)
 
 
