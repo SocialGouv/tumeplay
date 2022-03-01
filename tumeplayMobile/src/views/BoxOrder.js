@@ -14,6 +14,8 @@ import {Divider} from 'react-native-paper';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
+import PickupOrder from '../components/Orders/Pickup/PickupOrder';
+import PickupOrderConfirm from '../components/Orders/Pickup/PickupOrderConfirm';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -85,7 +87,7 @@ const Box = ({navigation, route}) => {
                 placement="bottom"
                 onClose={() => setToolTipVisible(false)}>
                 <TouchableOpacity
-                  onPress={() => setToolTipVisible(true)}
+                  onPress={() => setDeliveryMode('pickup')}
                   style={[
                     styles.buttons,
                     styles.buttonRight,
@@ -109,23 +111,29 @@ const Box = ({navigation, route}) => {
         )}
       </View>
       <View style={styles.inputContainer}>
-        {deliveryMode === 'home' && !orderConfirm ? (
-          <HomeOrdersInput
-            userInfos={userInfos}
-            setUserInfos={setUserInfos}
-            setOrderConfirm={setOrderConfirm}
-            setUserAdressInformations={setUserAdressInformations}
-          />
-        ) : (
-          <>
-            <OrderConfirm
+        {deliveryMode === 'home' ? (
+          deliveryMode === 'home' && !orderConfirm ? (
+            <HomeOrdersInput
               userInfos={userInfos}
+              setUserInfos={setUserInfos}
               setOrderConfirm={setOrderConfirm}
-              deliveryMode={deliveryMode}
-              userAdressInformations={userAdressInformations}
-              box={box}
+              setUserAdressInformations={setUserAdressInformations}
             />
-          </>
+          ) : (
+            <>
+              <OrderConfirm
+                userInfos={userInfos}
+                setOrderConfirm={setOrderConfirm}
+                deliveryMode={deliveryMode}
+                userAdressInformations={userAdressInformations}
+                box={box}
+              />
+            </>
+          )
+        ) : deliveryMode === 'pickup' && !orderConfirm ? (
+          <PickupOrder />
+        ) : (
+          <PickupOrderConfirm />
         )}
       </View>
     </Container>
