@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/SocialGouv/Tumeplay/compare/v1.89.0...v1.90.0) (2022-03-01)
+
+
+### Features
+
+* update matomo events app ([#354](https://github.com/SocialGouv/Tumeplay/issues/354)) ([1ea3d78](https://github.com/SocialGouv/Tumeplay/commit/1ea3d781f7c5bc12243cd9487774dd3c606c6d00))
+
 # [1.89.0](https://github.com/SocialGouv/Tumeplay/compare/v1.88.0...v1.89.0) (2022-03-01)
 
 
