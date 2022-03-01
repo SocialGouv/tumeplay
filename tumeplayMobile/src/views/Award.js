@@ -11,6 +11,7 @@ import Container from '../components/global/Container';
 import config from '../../config';
 import AppContext from '../../AppContext';
 import {useNavigation} from '@react-navigation/native';
+import Event from '../services/api/matomo';
 
 const Award = props => {
   const {user} = useContext(AppContext);
@@ -46,6 +47,7 @@ const Award = props => {
               icon
               left={false}
               onPress={() => {
+                Event.orderPageEvent('quizzOrderButton');
                 navigation.navigate('Home', {screen: 'Kit'});
               }}
             />

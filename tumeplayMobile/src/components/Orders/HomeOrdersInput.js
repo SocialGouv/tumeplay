@@ -17,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';
 import config from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Event from '../../services/api/matomo';
 
 const HomeOrdersInput = props => {
   const navigation = useNavigation();
@@ -75,6 +76,7 @@ const HomeOrdersInput = props => {
   ];
 
   const handleFormValidation = values => {
+    Event.orderNextButtonEvent('nextHomedeliveryButton');
     setUserInfos({...values});
     setOrderConfirm(true);
   };

@@ -41,7 +41,7 @@ const ContentPage = ({navigation, route}) => {
           : tmpContent.image?.url,
       };
       setContent(tmpContent);
-      Event.contentSeen();
+      Event.contentSeen(tmpContent.id);
     }
   }, [data, loading]);
 
@@ -66,6 +66,7 @@ const ContentPage = ({navigation, route}) => {
   };
 
   const goToQuizz = () => {
+    Event.playEvent('content');
     navigation.navigate('Jouer', {
       module_id: user.next_module,
       questions: user.nextQuestions,
