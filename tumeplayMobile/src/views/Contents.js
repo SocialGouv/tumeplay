@@ -20,6 +20,7 @@ const ContentsPage = props => {
   const [selectedLevel, setSelectedLevel] = useState(user.level);
   const [levels, setLevels] = useState([]);
   const thematiques = route?.params?.thematiques;
+  const image = route?.params?.image;
   const backgroundColor = route.params.backgroundColor;
   const [contents, setContents] = useState([]);
   const content_ids = contents.map(content => content.id);
@@ -54,6 +55,7 @@ const ContentsPage = props => {
       <ContentCard
         key={item.id}
         item={item}
+        image={image}
         theme_title={route?.params?.theme_title}
         locked={user.level !== selectedLevel}
         content_ids={content_ids}

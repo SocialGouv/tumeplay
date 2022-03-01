@@ -3,11 +3,18 @@ import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
-import lock from '../../assets/custom_images/Vector.png';
+import lock from '../../assets/Cadenas.png';
 
 const ContentCard = props => {
-  const {item, backgroundColor, navigation, content_ids, locked, theme_title} =
-    props;
+  const {
+    item,
+    backgroundColor,
+    navigation,
+    content_ids,
+    locked,
+    theme_title,
+    image,
+  } = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
 
   return (
@@ -18,6 +25,7 @@ const ContentCard = props => {
           content_ids: content_ids,
           theme_title: theme_title,
           level: item?.niveau?.value,
+          image: image,
           initial: true,
         })
       }
@@ -26,7 +34,7 @@ const ContentCard = props => {
       <View
         style={[
           styles.cardContainer,
-          locked && {backgroundColor: 'rgba(0,0,0,0.3)'},
+          locked && {backgroundColor: 'rgba(0,0,0,0.2)'},
         ]}>
         <View style={styles.titleContainer}>
           <Text style={styles.level}>NIVEAU {item?.niveau?.value}</Text>

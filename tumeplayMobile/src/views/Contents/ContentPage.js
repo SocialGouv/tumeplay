@@ -6,6 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   Platform,
+  Image,
 } from 'react-native';
 import Text from '../../components/Text';
 import {REACT_APP_URL} from '@env';
@@ -27,6 +28,7 @@ const ContentPage = ({navigation, route}) => {
   const [count, setCount] = useState(0);
   const content_ids = route?.params?.content_ids;
   const content_id = useRef(route.params.content_id);
+  const theme_image = route?.params?.image;
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {content_id: route?.params?.content_id},
@@ -51,6 +53,7 @@ const ContentPage = ({navigation, route}) => {
       content_ids: content_ids,
       theme_title: route?.params?.theme_title,
       level: route?.params?.level,
+      image: route?.params?.image,
     });
     setCount(count + 1);
   };
@@ -65,6 +68,7 @@ const ContentPage = ({navigation, route}) => {
         content_ids: content_ids,
         theme_title: route?.params?.theme_title,
         level: route?.params?.level,
+        image: route?.params?.image,
       });
     }
   };
@@ -99,6 +103,7 @@ const ContentPage = ({navigation, route}) => {
           <Text>Retour</Text>
         </TouchableOpacity>
         <View style={styles.topInfoContainer}>
+          <Image source={{uri: theme_image}} style={styles.themeImage} />
           <Text style={styles.topRightInfo}>{route?.params?.theme_title}</Text>
           <View style={styles.borderVertical} />
           <Text style={styles.topRightInfo}>NIV {route?.params?.level}</Text>
@@ -179,6 +184,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 10,
     borderColor: Colors.grey,
+  },
+  themeImage: {
+    width: 20,
+    height: 20,
+    marginHorizontal: 5,
   },
   imageContainer: {
     width: '100%',
