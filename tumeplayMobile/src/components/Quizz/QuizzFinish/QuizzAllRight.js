@@ -17,10 +17,6 @@ const QuizzAllRight = ({navigation, route, module_id}) => {
   const context = useContext(AppContext);
   const {user} = context;
 
-  useEffect(() => {
-    Event.quizzDone();
-  }, []);
-
   return (
     <Container style={styles.container}>
       <TopLevelPointIndicator style={styles.pointIndicator} />

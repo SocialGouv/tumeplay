@@ -8,6 +8,7 @@ import {ActivityIndicator, View} from 'react-native';
 import {Alert} from 'react-native';
 import {useMutation} from '@apollo/client';
 import {UPDATE_MOBILE_USER_HISTORY} from '../../services/api/mobile_users';
+import Event from '../../services/api/matomo';
 
 const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
@@ -68,6 +69,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
 
   useEffect(() => {
     if (wrongAnswers.length === 0) {
+      Event.quizzDone();
       if (!retry) {
         isRewarded().then(res => {
           res.json().then(data => {

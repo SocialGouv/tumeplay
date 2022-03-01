@@ -92,6 +92,8 @@ const Navbar = ({navigation}) => {
           tabPress: e => {
             if (user.credits === 0) {
               e.preventDefault();
+            } else {
+              Event.orderPageEvent('navbarOrderButton');
             }
           },
         }}
