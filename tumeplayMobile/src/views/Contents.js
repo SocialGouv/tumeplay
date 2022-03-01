@@ -56,8 +56,8 @@ const ContentsPage = props => {
         key={item.id}
         item={item}
         image={image}
-        theme_title={route?.params?.theme_title}
-        locked={user.level !== selectedLevel}
+        theme_id={theme_id}
+        locked={user.level < selectedLevel}
         content_ids={content_ids}
         backgroundColor={backgroundColor}
         navigation={navigation}
@@ -140,9 +140,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingRight: 15,
-    marginTop: 15,
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   chevron: {
     flexDirection: 'row',
@@ -160,13 +159,13 @@ const pickerSelectStyle = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.black,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '700',
     paddingVertical: 5,
     color: 'black',
   },
   inputIOS: {
-    fontSize: 16,
+    fontSize: 14,
     marginTop: 4,
     fontWeight: '700',
     paddingVertical: 5,

@@ -25,13 +25,17 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
   const [content, setContent] = useState();
+  const [theme, setTheme] = useState();
   const [count, setCount] = useState(0);
   const content_ids = route?.params?.content_ids;
   const content_id = useRef(route.params.content_id);
-  const theme_image = route?.params?.image;
+  const theme_id = route?.params?.theme_id;
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
-    variables: {content_id: route?.params?.content_id},
+    variables: {
+      content_id: route?.params?.content_id,
+      theme_id: theme_id,
+    },
   });
 
   useEffect(() => {
@@ -43,6 +47,7 @@ const ContentPage = ({navigation, route}) => {
           : tmpContent.image?.url,
       };
       setContent(tmpContent);
+      setTheme(data.thematiqueMobile);
       Event.contentSeen();
     }
   }, [data, loading]);
@@ -51,9 +56,7 @@ const ContentPage = ({navigation, route}) => {
     navigation.navigate('Content', {
       content_id: content_ids[count + 1],
       content_ids: content_ids,
-      theme_title: route?.params?.theme_title,
-      level: route?.params?.level,
-      image: route?.params?.image,
+      theme_id: theme_id,
     });
     setCount(count + 1);
   };
@@ -66,9 +69,7 @@ const ContentPage = ({navigation, route}) => {
       navigation.navigate('Content', {
         content_id: count > 1 ? content_ids[count - 1] : content_id.current,
         content_ids: content_ids,
-        theme_title: route?.params?.theme_title,
-        level: route?.params?.level,
-        image: route?.params?.image,
+        theme_id: theme_id,
       });
     }
   };
@@ -99,12 +100,15 @@ const ContentPage = ({navigation, route}) => {
         <TouchableOpacity
           style={styles.chevron}
           onPress={() => navigation.goBack()}>
-          <Icon name="chevron-small-left" size={40} color="#000" />
+          <Icon name="chevron-small-left" size={25} color="#000" />
           <Text>Retour</Text>
         </TouchableOpacity>
         <View style={styles.topInfoContainer}>
-          <Image source={{uri: theme_image}} style={styles.themeImage} />
-          <Text style={styles.topRightInfo}>{route?.params?.theme_title}</Text>
+          <Image
+            source={{uri: REACT_APP_URL + theme?.image?.url}}
+            style={styles.themeImage}
+          />
+          <Text style={styles.topRightInfo}>{theme?.title}</Text>
           <View style={styles.borderVertical} />
           <Text style={styles.topRightInfo}>NIV {route?.params?.level}</Text>
         </View>
@@ -175,10 +179,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     width: '100%',
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
   topInfoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignSelf: 'flex-end',
   },
   borderVertical: {
     borderWidth: 1,
@@ -189,6 +195,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginHorizontal: 5,
+    alignSelf: 'flex-end',
   },
   imageContainer: {
     width: '100%',
@@ -207,6 +214,7 @@ const styles = StyleSheet.create({
   },
   topRightInfo: {
     fontWeight: '700',
+    alignSelf: 'flex-end',
   },
   title: {
     width: '80%',

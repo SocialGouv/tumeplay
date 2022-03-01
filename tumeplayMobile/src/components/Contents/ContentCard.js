@@ -6,15 +6,8 @@ import {REACT_APP_URL} from '@env';
 import lock from '../../assets/Cadenas.png';
 
 const ContentCard = props => {
-  const {
-    item,
-    backgroundColor,
-    navigation,
-    content_ids,
-    locked,
-    theme_title,
-    image,
-  } = props;
+  const {item, backgroundColor, navigation, content_ids, locked, theme_id} =
+    props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
 
   return (
@@ -23,9 +16,8 @@ const ContentCard = props => {
         navigation.navigate('Content', {
           content_id: item?.id,
           content_ids: content_ids,
-          theme_title: theme_title,
+          theme_id: theme_id,
           level: item?.niveau?.value,
-          image: image,
           initial: true,
         })
       }

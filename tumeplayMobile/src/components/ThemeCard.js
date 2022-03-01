@@ -7,8 +7,6 @@ const ThemeCard = props => {
   const {theme, backgroundColor, borderColors, image, navigation, thematiques} =
     props;
 
-  console.log(image);
-
   return (
     <TouchableOpacity
       key={theme?.id}
@@ -25,7 +23,6 @@ const ThemeCard = props => {
           theme_id: theme.id,
           theme_title: theme.title,
           backgroundColor: backgroundColor,
-          image: image,
           thematiques: thematiques,
         });
       }}>
