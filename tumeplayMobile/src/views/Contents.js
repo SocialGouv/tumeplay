@@ -12,6 +12,7 @@ import _ from 'lodash';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
+import {GET_COLOR_THEME} from '../services/api/themes';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -21,7 +22,9 @@ const ContentsPage = props => {
   const [levels, setLevels] = useState([]);
   const thematiques = route?.params?.thematiques;
   const image = route?.params?.image;
-  const backgroundColor = route.params.backgroundColor;
+  const [backgroundColor, setBackgroundColor] = useState(
+    route.params.backgroundColor,
+  );
   const [contents, setContents] = useState([]);
   const content_ids = contents.map(content => content.id);
 
@@ -30,6 +33,10 @@ const ContentsPage = props => {
   });
 
   const {data: data2, loading: loading2} = useQuery(GET_LEVELS);
+
+  const {data: data3, loading: loading3} = useQuery(GET_COLOR_THEME, {
+    variables: {theme_id: theme_id},
+  });
 
   useEffect(() => {
     if (data && !loading) {
@@ -48,7 +55,10 @@ const ContentsPage = props => {
     if (data2 && !loading2) {
       setLevels(data2.niveaus);
     }
-  }, [data, loading, data2, loading2]);
+    if (data3 && !loading3) {
+      setBackgroundColor(data3.thematiqueMobiles[0].color);
+    }
+  }, [data, loading, data2, loading2, data3, loading3]);
 
   const renderItem = ({item}) => {
     return (

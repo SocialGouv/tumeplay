@@ -23,11 +23,8 @@ const ContentCard = props => {
       }
       disabled={locked}
       style={[styles.container, {backgroundColor: backgroundColor}]}>
-      <View
-        style={[
-          styles.cardContainer,
-          locked && {backgroundColor: 'rgba(0,0,0,0.2)'},
-        ]}>
+      {locked && <View style={styles.lockedOverlay} />}
+      <View style={styles.cardContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.level}>NIVEAU {item?.niveau?.value}</Text>
           <Text style={styles.title}>{item?.title}</Text>
@@ -68,7 +65,6 @@ const styles = StyleSheet.create({
     top: '40%',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 1,
   },
   level: {
     fontFamily: Fonts.strongText,
@@ -96,6 +92,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     opacity: 0.6,
+  },
+  lockedOverlay: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    height: '100%',
   },
 });
 
