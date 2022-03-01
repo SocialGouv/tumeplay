@@ -94,11 +94,13 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   lockedOverlay: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: '#000000',
+    opacity: 0.2,
     position: 'absolute',
     top: 0,
     width: '100%',
     height: '100%',
+    zIndex: 1,
   },
 });
 
