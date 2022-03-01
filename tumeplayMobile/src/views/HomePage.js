@@ -138,7 +138,7 @@ const HomePage = ({navigation}) => {
             special
             left
             onPress={() => {
-              Event.playEvent();
+              Event.playEvent('home');
               navigation.navigate('Jouer', {
                 module_id: user.next_module,
                 questions: user.nextQuestions,

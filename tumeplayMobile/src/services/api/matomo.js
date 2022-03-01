@@ -1,17 +1,17 @@
 import Matomo from 'react-native-matomo';
 
 const Event = {
-  playEvent: () => {
-    Matomo.trackEvent('Quizz', 'Jouer', 'label', 1);
+  playEvent: from => {
+    Matomo.trackEvent('Quizz', 'Jouer', from, 1);
   },
   quizzDone: () => {
-    Matomo.trackScreen('QuizzAllRight', 'Quizz terminé');
+    Matomo.trackScreen('/quizz-all-right', 'Quizz terminé');
   },
-  contentSeen: () => {
-    Matomo.trackScreen('QuizzAllRight', 'Contenu visioné');
+  contentSeen: id => {
+    Matomo.trackScreen('/content/' + id, 'Contenu visioné');
   },
   boxOrdered: () => {
-    Matomo.trackScreen('BoxOrdered', 'Kit commandé');
+    Matomo.trackScreen('/order-confirmation', 'Kit commandé');
   },
 };
 export default Event;

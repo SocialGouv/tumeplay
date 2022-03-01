@@ -10,6 +10,7 @@ import AppContext from '../../AppContext';
 import QuizzLoader from './global/QuizzLoader';
 import diceIcon from '../assets/diceIcon.png';
 import {Image} from 'react-native';
+import Event from '../services/api/matomo';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,6 +66,11 @@ const Navbar = ({navigation}) => {
               color={color}
             />
           ),
+        }}
+        listeners={{
+          tabPress: e => {
+            Event.playEvent('navbar');
+          },
         }}
         initialParams={{homeScreen: true}}
       />
