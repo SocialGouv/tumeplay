@@ -19,19 +19,26 @@ import axios from 'axios';
 import Text from '../../Text';
 import _ from 'lodash';
 import {useNavigation} from '@react-navigation/native';
+import Button from '../../Button';
 
-const PickupOrder = () => {
+const PickupOrder = props => {
+  const {setSelectedPOI} = props;
   const navigation = useNavigation();
-  const latitudeDelta = 0.03;
-  const longitudeDelta = 0.03;
+
+  const [delta, setDelta] = useState({
+    latitudeDelta: 0.03,
+    longitudeDelta: 0.03,
+  });
 
   const [coordinates, setCoordinates] = useState({
     latitude: 48.856614,
     longitude: 2.3522219,
-    latitudeDelta: latitudeDelta,
-    longitudeDelta: longitudeDelta,
+    latitudeDelta: delta.latitudeDelta,
+    longitudeDelta: delta.longitudeDelta,
   });
 
+  const [currentPOI, setCurrentPOI] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
   const [mrPOI, setMrPoi] = useState([]);
   const [displayMap, setDisplayMap] = useState(false);
   const [geogouvData, setGeogouvData] = useState([]);
@@ -77,8 +84,8 @@ const PickupOrder = () => {
       let tmpCoordinates = {};
       tmpCoordinates.latitude = info.coords.latitude;
       tmpCoordinates.longitude = info.coords.longitude;
-      tmpCoordinates.latitudeDelta = latitudeDelta;
-      tmpCoordinates.longitudeDelta = longitudeDelta;
+      tmpCoordinates.latitudeDelta = delta.latitudeDelta;
+      tmpCoordinates.longitudeDelta = delta.longitudeDelta;
       setCoordinates({
         ...tmpCoordinates,
       });
@@ -91,37 +98,38 @@ const PickupOrder = () => {
   useEffect(() => {
     fetchPOI();
     setDisplayMap(true);
-  }, [coordinates]);
+  }, [isSearching]);
 
   const handleMarkerSelection = item => {
-    console.log(item);
     const tmpMrPOI = _.without(mrPOI, item).map(poi => {
       poi.selected = false;
       return poi;
     });
     item.selected = true;
-    // setCoordinates({
-    //   latitude: parseFloat(item.Latitude.replace(',', '.')),
-    //   longitude: parseFloat(item.Longitude.replace(',', '.')),
-    //   latitudeDelta: latitudeDelta,
-    //   longitudeDelta: longitudeDelta,
-    // });
     setMrPoi(_.orderBy([...tmpMrPOI, item], ['LgAdr1'], ['asc']));
+    setCoordinates({
+      latitude: parseFloat(item?.Latitude?.replace(',', '.')),
+      longitude: parseFloat(item?.Longitude?.replace(',', '.')),
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+    });
+    setCurrentPOI(item);
   };
 
-  const displayMarker = mrPOI.map((item, index) => {
+  const displayMarker = mrPOI?.map((item, index) => {
     const LatLng = {
-      latitude: parseFloat(item.Latitude.replace(',', '.')),
-      longitude: parseFloat(item.Longitude.replace(',', '.')),
+      latitude: parseFloat(item?.Latitude?.replace(',', '.')),
+      longitude: parseFloat(item?.Longitude?.replace(',', '.')),
     };
     return (
       <Marker
         key={index}
         onPress={() => handleMarkerSelection(item)}
         coordinate={LatLng}
-        title={item.title}
-        image={item.selected ? orangeMapMarker : blackMapMarker}
-      />
+        style={styles.marker}
+        image={item.selected ? orangeMapMarker : blackMapMarker}>
+        <Text style={styles.markerText}>{index + 1}</Text>
+      </Marker>
     );
   });
 
@@ -136,6 +144,8 @@ const PickupOrder = () => {
   );
 
   const handleAutocomplete = async address => {
+    setCurrentPOI(null);
+    setIsSearching(true);
     setDisplayMap(false);
     if (address) {
       const res = await axios.get(
@@ -152,7 +162,7 @@ const PickupOrder = () => {
           setGeogouvData(tmpRes);
           setHideResults(false);
         }
-      }, 1000);
+      }, 500);
     } else {
       setHideResults(true);
     }
@@ -163,11 +173,13 @@ const PickupOrder = () => {
       const tmpCoordinates = {
         latitude: address.coordinates[1],
         longitude: address.coordinates[0],
-        latitudeDelta: latitudeDelta,
-        longitudeDelta: longitudeDelta,
+        latitudeDelta: delta.latitudeDelta,
+        longitudeDelta: delta.longitudeDelta,
       };
+      console.log(tmpCoordinates);
       setCoordinates({...tmpCoordinates});
       setHideResults(true);
+      setIsSearching(false);
     } else {
       Alert.alert(
         "La commande de kit n'est pas disponible dans ta région",
@@ -198,7 +210,7 @@ const PickupOrder = () => {
         renderTextInput={() => (
           <TextInput
             style={styles.input}
-            label=""
+            placeholder="Saisissez une adresse"
             underlineColor="#EAE2D7"
             activeUnderlineColor="#D42201"
             onChangeText={text => {
@@ -232,6 +244,15 @@ const PickupOrder = () => {
           <FlatList style={styles.list} data={mrPOI} renderItem={renderItem} />
         </>
       )}
+      {currentPOI && (
+        <Button
+          style={styles.button}
+          text="Je confirme ce point relais"
+          size="medium"
+          icon={true}
+          onPress={() => setSelectedPOI(currentPOI)}
+        />
+      )}
     </View>
   );
 };
@@ -264,6 +285,20 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingLeft: 22,
     height: 'auto',
+  },
+  button: {
+    alignSelf: 'center',
+    marginBottom: 15,
+  },
+  marker: {
+    width: config.deviceWidth < 340 ? 5 : 30,
+  },
+  markerText: {
+    fontSize: 12,
+    color: '#FFFF',
+    position: 'absolute',
+    top: 0,
+    left: 5,
   },
 });
 

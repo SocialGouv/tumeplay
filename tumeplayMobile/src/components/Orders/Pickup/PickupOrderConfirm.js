@@ -1,12 +1,193 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import Text from '../../Text';
+import {Colors} from '../../../styles/Style';
+import config from '../../../../config';
+import axios from 'axios';
+import Button from '../../Button';
+import AppContext from '../../../../AppContext';
+import OrdersAPI from '../../../services/api/orders';
+import ContactsAPI from '../../../services/api/contact';
+import OrderConfirmModal from '../OrderConfirmModal';
+import {useNavigation} from '@react-navigation/native';
+import mrLogo from '../../../assets/MR_logo.png';
 
-const PickupOrderConfirm = () => {
+const PickupOrderConfirm = props => {
+  const navigation = useNavigation();
+  const {selectedPOI, userInfos, setOrderConfirm, setSelectedPOI, box} = props;
+  const {strapi_user_id, reloadUser} = useContext(AppContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const sendOrder = async () => {
+    setIsLoading(true);
+    let requestBody = {
+      first_name: userInfos.first_name,
+      last_name: userInfos.last_name,
+      email: userInfos.email,
+      phone_number: userInfos.phone_number,
+      address: selectedPOI.LgAdr3,
+      address_zipcode: selectedPOI.CP,
+      address_region: selectedPOI.address_region,
+      address_deptcode: selectedPOI.deptcode,
+      address_dept: selectedPOI.dept,
+      poi_name: selectedPOI.LgAdr1,
+      address_city: selectedPOI.Ville,
+      poi_number: selectedPOI.Num,
+      delivery: 'pickup',
+      box_name: box.title,
+      environnement: 'metropole',
+      utilisateurs_mobile: strapi_user_id,
+      content: [
+        {
+          __component: 'commandes.box',
+          box: box.id,
+        },
+      ],
+    };
+    await OrdersAPI.orderBoxes(requestBody);
+    if (checked) {
+      let userAddress = {
+        first_name: userInfos.first_name,
+        email: userInfos.email,
+        zipCode: selectedPOI.deptcode,
+        box_id: box.id,
+        type: 'enrollé',
+      };
+      await ContactsAPI.postContact(userAddress);
+    }
+    reloadUser();
+    setIsLoading(false);
+    setIsVisible(true);
+  };
+
+  const retrievePOIFullAddress = async () => {
+    const latLng = {
+      lat: parseFloat(selectedPOI.Latitude.replace(',', '.')),
+      long: parseFloat(selectedPOI.Longitude.replace(',', '.')),
+    };
+    let response = await axios.get(
+      `https://api-adresse.data.gouv.fr/reverse/?lon=${latLng.long}&lat=${latLng.lat}`,
+    );
+    const tmpPOI = {...selectedPOI};
+    tmpPOI.deptcode =
+      response?.data?.features[0]?.properties?.context?.split(',')[0];
+    tmpPOI.dept =
+      response?.data?.features[0]?.properties?.context?.split(',')[1];
+    tmpPOI.address_region =
+      response?.data?.features[0]?.properties?.context?.split(',')[2];
+    setSelectedPOI({...tmpPOI});
+  };
+
+  const handleClosingModal = () => {
+    if (!isLoading) {
+      navigation.navigate('Home', {screen: 'Accueil'});
+      setIsVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    retrievePOIFullAddress();
+  }, []);
+
   return (
-    <View>
-      <Text>PickupOrderConfirm</Text>
+    <View style={styles.container}>
+      <View style={styles.userInfosContainer}>
+        <View>
+          <Text style={styles.title}>
+            {userInfos.first_name + ' ' + userInfos.last_name}
+          </Text>
+          <Text style={styles.text}>{userInfos.phone_number}</Text>
+          <Text style={styles.text}>{userInfos.email}</Text>
+        </View>
+        <TouchableOpacity onPress={() => setOrderConfirm(false)}>
+          <Text style={styles.redText}>Modifier</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.bottomContainer}>
+        <Image source={mrLogo} style={styles.logo} />
+        <Text style={styles.bottomText}>
+          Disponible entre <Text>3 et 7 jours ouvrés.</Text>
+          Tu seras notifié.e par email à la prise en charge de ton colis et à la
+          réception en point relais
+        </Text>
+      </View>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Button
+          style={styles.button}
+          text="Je valide cette commande"
+          size="large"
+          special
+          onPress={() => sendOrder()}
+        />
+      )}
+      {isVisible && (
+        <OrderConfirmModal isVisible={isVisible} onPress={handleClosingModal} />
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+    height: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    justifyContent: 'space-between',
+  },
+  userInfosContainer: {
+    flex: 0.8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  link: {
+    width: '100%',
+    alignItems: 'flex-end',
+  },
+  title: {
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  text: {
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  redText: {
+    color: '#D42201',
+    lineHeight: 22,
+    fontWeight: '500',
+    fontSize: config.deviceWidth > 375 ? 14 : 13,
+    textDecorationLine: 'underline',
+  },
+  button: {
+    marginBottom: 20,
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  bottomText: {
+    width: 270,
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  logo: {
+    alignSelf: 'center',
+  },
+});
 
 export default PickupOrderConfirm;

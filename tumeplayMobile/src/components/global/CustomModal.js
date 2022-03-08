@@ -6,20 +6,21 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Fonts} from '../../styles/Style';
 
 const CustomModal = props => {
-  const {isVisible, animation, html, onPress} = props;
-  const [displayModal, setDisplayModal] = useState(isVisible);
+  const {isVisible, animation, html, onPress, setIsVisible} = props;
   const {width} = useWindowDimensions();
+
+  console.log('MODAL VISIBLE', isVisible);
 
   return (
     <Modal
       style={styles.container}
       animationType={animation}
-      visible={displayModal}
+      visible={isVisible}
       transparent={true}>
       <View
         style={[
           styles.fullView,
-          displayModal ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
+          isVisible ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
         ]}
       />
       <View style={styles.view}>
@@ -40,7 +41,7 @@ const CustomModal = props => {
           text="Ok, j'ai compris"
           onPress={() => {
             onPress;
-            setDisplayModal(!isVisible);
+            setIsVisible(false);
           }}
         />
       </View>

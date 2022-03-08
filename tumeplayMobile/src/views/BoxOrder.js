@@ -16,6 +16,7 @@ import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
 import PickupOrder from '../components/Orders/Pickup/PickupOrder';
 import PickupOrderConfirm from '../components/Orders/Pickup/PickupOrderConfirm';
+import PickupOrderUserInfos from '../components/Orders/Pickup/PickupOrderUserInfos';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -30,6 +31,7 @@ const Box = ({navigation, route}) => {
   const [userAdressInformations, setUserAdressInformations] = useState();
   const [orderConfirm, setOrderConfirm] = useState(false);
   const [toolTipVisible, setToolTipVisible] = useState(false);
+  const [selectedPOI, setSelectedPOI] = useState(null);
 
   return (
     <Container style={styles.container}>
@@ -130,10 +132,18 @@ const Box = ({navigation, route}) => {
               />
             </>
           )
-        ) : deliveryMode === 'pickup' && !orderConfirm ? (
-          <PickupOrder />
+        ) : deliveryMode === 'pickup' && selectedPOI === null ? (
+          <PickupOrder setSelectedPOI={setSelectedPOI} />
         ) : (
-          <PickupOrderConfirm />
+          <PickupOrderUserInfos
+            selectedPOI={selectedPOI}
+            userInfos={userInfos}
+            orderConfirm={orderConfirm}
+            setUserInfos={setUserInfos}
+            setOrderConfirm={setOrderConfirm}
+            setSelectedPOI={setSelectedPOI}
+            box={box}
+          />
         )}
       </View>
     </Container>

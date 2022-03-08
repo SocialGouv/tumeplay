@@ -3,39 +3,44 @@ import Text from '../../Text';
 import React from 'react';
 import blackMapMarker from '../../../assets/mapMarker.png';
 import orangeMapMarker from '../../../assets/orangeMarker.png';
+import {Divider} from 'react-native-paper';
+import config from '../../../../config';
 
 const PickupCard = props => {
   const {item, onPress, index} = props;
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.cardContainer,
-        item.selected && {backgroundColor: '#FEF0DC'},
-      ]}
-      onPress={onPress}>
-      <View style={styles.imageContainer}>
-        <Image
-          source={item.selected ? orangeMapMarker : blackMapMarker}
-          style={styles.image}
-        />
-        <Text style={styles.number}>{index + 1}</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.name}>{item.LgAdr1}</Text>
-        <Text style={styles.address}>{item.LgAdr3}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-          <Text style={styles.address}>{item.Ville}</Text>
-          <Text style={[styles.address, {paddingLeft: 10}]}>{item.CP}</Text>
+    <>
+      <TouchableOpacity
+        style={[
+          styles.cardContainer,
+          item.selected && {backgroundColor: '#FEF0DC'},
+        ]}
+        onPress={onPress}>
+        <View style={styles.imageContainer}>
+          <Image
+            source={item.selected ? orangeMapMarker : blackMapMarker}
+            style={styles.image}
+          />
+          <Text style={styles.number}>{index + 1}</Text>
         </View>
-      </View>
-    </TouchableOpacity>
+        <View style={styles.textContainer}>
+          <Text style={styles.name}>{item.LgAdr1}</Text>
+          <Text style={styles.address}>{item.LgAdr3}</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+            <Text style={styles.address}>{item.Ville}</Text>
+            <Text style={[styles.address, {paddingLeft: 10}]}>{item.CP}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+      <Divider style={[styles.divider, {marginBottom: 0}]} />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
-    height: 75,
+    height: 85,
     flexDirection: 'row',
   },
   textContainer: {
@@ -52,11 +57,11 @@ const styles = StyleSheet.create({
   },
   number: {
     position: 'absolute',
-    top: '25%',
-    left: '100%',
+    top: '20%',
+    left: '98%',
     color: '#FFF',
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: config.deviceWidth * 0.04,
   },
   imageContainer: {
     paddingHorizontal: 20,
@@ -66,6 +71,11 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     position: 'relative',
+  },
+  divider: {
+    width: '100%',
+    borderColor: '#EAE2D7',
+    borderWidth: 1,
   },
 });
 

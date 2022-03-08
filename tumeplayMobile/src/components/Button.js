@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: config.deviceWidth * 0.045,
     lineHeight: 24,
-    fontFamily: Fonts.strongText,
     fontWeight: '600',
     letterSpacing: 0.6,
     paddingHorizontal: 5,
