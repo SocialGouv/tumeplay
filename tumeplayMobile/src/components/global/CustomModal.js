@@ -1,5 +1,5 @@
 import {Modal, StyleSheet, View, useWindowDimensions} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '../Button';
 import RenderHTML from 'react-native-render-html';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -9,7 +9,15 @@ const CustomModal = props => {
   const {isVisible, animation, html, onPress, setIsVisible} = props;
   const {width} = useWindowDimensions();
 
-  console.log('MODAL VISIBLE', isVisible);
+  const onText = text => {
+    if (text.data === ',') {
+      text.data = text.data.replace(/[,]/g, '');
+    }
+  };
+
+  const domVisitors = {
+    onText: onText,
+  };
 
   return (
     <Modal
@@ -33,6 +41,7 @@ const CustomModal = props => {
         <RenderHTML
           contentWidth={width}
           source={html}
+          domVisitors={domVisitors}
           baseStyle={styles.htmlText}
         />
         <Button
@@ -41,7 +50,7 @@ const CustomModal = props => {
           text="Ok, j'ai compris"
           onPress={() => {
             onPress;
-            setIsVisible(false);
+            setIsVisible(!isVisible);
           }}
         />
       </View>

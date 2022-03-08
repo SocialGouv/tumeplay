@@ -60,26 +60,25 @@ const PoiInfos = ({selectedPOI, setSelectedPOI}) => {
 
   const html = {
     html: `<div style=color:black;>
-    ${timeTable.map(
-      el =>
-        '<ul>' +
-        '<li>' +
-        el.day +
-        ' ' +
-        el.value[0] +
-        ' ' +
-        '- ' +
-        el.value[1] +
-        '</li>' +
-        '</ul>',
-    )}
+      <ul>
+        ${timeTable.map(
+          el =>
+            '<li style=padding-left:15px;>' +
+            el.day +
+            ' :' +
+            ' ' +
+            el.value[0] +
+            ' ' +
+            '- ' +
+            el.value[1] +
+            '</li>',
+        )}
+      </ul>
     </div>
     `,
   };
 
   useEffect(() => formatTimeTable(), []);
-
-  console.log(modalVisible);
 
   return (
     <>

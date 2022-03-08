@@ -176,7 +176,6 @@ const PickupOrder = props => {
         latitudeDelta: delta.latitudeDelta,
         longitudeDelta: delta.longitudeDelta,
       };
-      console.log(tmpCoordinates);
       setCoordinates({...tmpCoordinates});
       setHideResults(true);
       setIsSearching(false);
