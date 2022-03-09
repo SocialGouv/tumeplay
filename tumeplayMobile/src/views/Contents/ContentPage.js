@@ -48,7 +48,7 @@ const ContentPage = ({navigation, route}) => {
       };
       setContent(tmpContent);
       setTheme(data.thematiqueMobile);
-      Event.contentSeen();
+      Event.contentSeen(tmpContent.id);
     }
   }, [data, loading]);
 
@@ -75,6 +75,7 @@ const ContentPage = ({navigation, route}) => {
   };
 
   const goToQuizz = () => {
+    Event.playEvent('content');
     navigation.navigate('Jouer', {
       module_id: user.next_module,
       questions: user.nextQuestions,

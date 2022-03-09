@@ -79,6 +79,7 @@ const OrderConfirm = props => {
 
     reloadUser();
     setIsLoading(false);
+    Event.orderConfirmEvent('homedeliveryOrderconfirmedButton');
     setIsVisible(true);
   };
 

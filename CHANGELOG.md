@@ -1,3 +1,31 @@
+# [1.91.0](https://github.com/SocialGouv/Tumeplay/compare/v1.90.0...v1.91.0) (2022-03-01)
+
+
+### Features
+
+* adding last build infos ([#355](https://github.com/SocialGouv/Tumeplay/issues/355)) ([62cde46](https://github.com/SocialGouv/Tumeplay/commit/62cde46b23e13569ba97d7c60966f742293be520))
+
+# [1.90.0](https://github.com/SocialGouv/Tumeplay/compare/v1.89.0...v1.90.0) (2022-03-01)
+
+
+### Features
+
+* update matomo events app ([#354](https://github.com/SocialGouv/Tumeplay/issues/354)) ([1ea3d78](https://github.com/SocialGouv/Tumeplay/commit/1ea3d781f7c5bc12243cd9487774dd3c606c6d00))
+
+# [1.89.0](https://github.com/SocialGouv/Tumeplay/compare/v1.88.0...v1.89.0) (2022-03-01)
+
+
+### Features
+
+* renaming app for Android releases ([#353](https://github.com/SocialGouv/Tumeplay/issues/353)) ([8b36329](https://github.com/SocialGouv/Tumeplay/commit/8b36329f45c1cb7425034b85145f201f6cc5a65f))
+
+# [1.88.0](https://github.com/SocialGouv/Tumeplay/compare/v1.87.0...v1.88.0) (2022-02-28)
+
+
+### Features
+
+* new logo on app icon for android ([#351](https://github.com/SocialGouv/Tumeplay/issues/351)) ([59e45cc](https://github.com/SocialGouv/Tumeplay/commit/59e45cc91ec94ca010f7a5464ac0a26ef8a27bb9))
+
 # [1.87.0](https://github.com/SocialGouv/Tumeplay/compare/v1.86.3...v1.87.0) (2022-02-28)
 
 

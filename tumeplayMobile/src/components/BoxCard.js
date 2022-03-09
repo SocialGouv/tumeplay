@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, View} from 'react-native';
 import Text from '../components/Text';
+import Event from '../services/api/matomo';
 
 const BoxCard = props => {
   const {index, title, box, description, navigation} = props;
@@ -9,7 +10,12 @@ const BoxCard = props => {
   };
 
   return (
-    <TouchableOpacity onPress={() => handleNavigation()} style={styles.boxCard}>
+    <TouchableOpacity
+      onPress={() => {
+        Event.boxChoiceEvent(title);
+        handleNavigation();
+      }}
+      style={styles.boxCard}>
       <View>
         <Text style={styles.titleIndex}>KIT {index}</Text>
         <Text style={styles.titleBox}>{title}</Text>
