@@ -75,8 +75,12 @@ const PickupOrder = props => {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     });
-    response = _.orderBy(response, ['LgAdr1'], ['asc']);
-    setMrPoi(response);
+    if (response.statusCode === 400) {
+      setMrPoi([]);
+    } else {
+      response = _.orderBy(response, ['LgAdr1'], ['asc']);
+      setMrPoi(response);
+    }
   };
 
   useEffect(() => {
@@ -107,12 +111,14 @@ const PickupOrder = props => {
     });
     item.selected = true;
     setMrPoi(_.orderBy([...tmpMrPOI, item], ['LgAdr1'], ['asc']));
-    setCoordinates({
-      latitude: parseFloat(item?.Latitude?.replace(',', '.')),
-      longitude: parseFloat(item?.Longitude?.replace(',', '.')),
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    });
+    if (item) {
+      setCoordinates({
+        latitude: parseFloat(item?.Latitude?.replace(',', '.')),
+        longitude: parseFloat(item?.Longitude?.replace(',', '.')),
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    }
     setCurrentPOI(item);
   };
 
@@ -149,7 +155,7 @@ const PickupOrder = props => {
     setDisplayMap(false);
     if (address) {
       const res = await axios.get(
-        `https://api-adresse.data.gouv.fr/search/?q=${address}&type=housenumber&autocomplete=1`,
+        `https://api-adresse.data.gouv.fr/search/?q=${address}&autocomplete=1`,
       );
       setTimeout(async () => {
         let tmpRes = res?.data?.features;
@@ -170,12 +176,17 @@ const PickupOrder = props => {
 
   const handleAdressSelection = address => {
     if (validateZipCode(address.postcode)) {
+      console.log({
+        lat: address.coordinates[1].toFixed(7),
+        long: address.coordinates[0].toFixed(7),
+      });
       const tmpCoordinates = {
-        latitude: address.coordinates[1],
-        longitude: address.coordinates[0],
+        latitude: parseFloat(address.coordinates[1].toFixed(7)),
+        longitude: parseFloat(address.coordinates[0].toFixed(7)),
         latitudeDelta: delta.latitudeDelta,
         longitudeDelta: delta.longitudeDelta,
       };
+      console.log({tmpCoordinates, address});
       setCoordinates({...tmpCoordinates});
       setHideResults(true);
       setIsSearching(false);
