@@ -176,17 +176,12 @@ const PickupOrder = props => {
 
   const handleAdressSelection = address => {
     if (validateZipCode(address.postcode)) {
-      console.log({
-        lat: address.coordinates[1].toFixed(7),
-        long: address.coordinates[0].toFixed(7),
-      });
       const tmpCoordinates = {
-        latitude: parseFloat(address.coordinates[1].toFixed(7)),
-        longitude: parseFloat(address.coordinates[0].toFixed(7)),
+        latitude: parseFloat(address.coordinates[1]).toFixed(7),
+        longitude: parseFloat(address.coordinates[0]).toFixed(7),
         latitudeDelta: delta.latitudeDelta,
         longitudeDelta: delta.longitudeDelta,
       };
-      console.log({tmpCoordinates, address});
       setCoordinates({...tmpCoordinates});
       setHideResults(true);
       setIsSearching(false);
