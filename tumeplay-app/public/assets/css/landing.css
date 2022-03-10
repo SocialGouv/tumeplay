@@ -21,8 +21,8 @@ body {
 }
 
 .title .title-highlight {
-	font-size: 1.5em;
-	color: #E85439;
+  font-size: 1.5em;
+  color: #e85439;
 }
 
 .subtitle,
@@ -67,6 +67,25 @@ body {
   opacity: 0.7;
 }
 
+.footer {
+  margin-top: 80px;
+  font-size: 12px;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+}
+
+.footer ul li {
+  margin-right: 5px;
+}
+
+.footer ul li:not(:last-child)::after {
+  content: '|';
+  margin-left: 5px;
+}
+
 @media (min-width: 576px) {
 }
 
@@ -83,6 +102,14 @@ body {
   .store-button {
     margin-bottom: 0;
   }
+
+  .footer ul li {
+    margin-right: 10px;
+  }
+
+  .footer ul li:not(:last-child)::after {
+    margin-left: 10px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -94,5 +121,13 @@ body {
 
   .divider {
     margin-top: 70px;
+  }
+
+  .footer ul li {
+    margin-right: 15px;
+  }
+
+  .footer ul li:not(:last-child)::after {
+    margin-left: 15px;
   }
 }
