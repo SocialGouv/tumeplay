@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/SocialGouv/Tumeplay/compare/v1.91.0...v1.92.0) (2022-03-10)
+
+
+### Features
+
+* **landing:** ML & CGU in landing ([6cba230](https://github.com/SocialGouv/Tumeplay/commit/6cba23096d56e193a59e511372a0cfe668482be6))
+
 # [1.91.0](https://github.com/SocialGouv/Tumeplay/compare/v1.90.0...v1.91.0) (2022-03-01)
 
 
