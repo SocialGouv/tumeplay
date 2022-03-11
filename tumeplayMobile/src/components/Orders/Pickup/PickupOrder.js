@@ -4,8 +4,10 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  Platform,
+  ImageBackground,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import POIAPI from '../../../services/api/poi';
@@ -18,12 +20,13 @@ import {TextInput} from 'react-native-paper';
 import axios from 'axios';
 import Text from '../../Text';
 import _ from 'lodash';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Button from '../../Button';
 
 const PickupOrder = props => {
   const {setSelectedPOI} = props;
   const navigation = useNavigation();
+  const flatlistRef = useRef();
 
   const [delta, setDelta] = useState({
     latitudeDelta: 0.03,
@@ -35,6 +38,11 @@ const PickupOrder = props => {
     longitude: 2.3522219,
     latitudeDelta: delta.latitudeDelta,
     longitudeDelta: delta.longitudeDelta,
+  });
+
+  const [currentUserPosition, setCurrentUserPosition] = useState({
+    latitude: 48.856614,
+    longitude: 2.3522219,
   });
 
   const [currentPOI, setCurrentPOI] = useState(null);
@@ -93,6 +101,12 @@ const PickupOrder = props => {
       setCoordinates({
         ...tmpCoordinates,
       });
+      setCurrentUserPosition({
+        ...{
+          latitude: tmpCoordinates.latitude,
+          longitude: tmpCoordinates.longitude,
+        },
+      });
     });
     if (coordinates) {
       fetchPOI();
@@ -133,13 +147,18 @@ const PickupOrder = props => {
         onPress={() => handleMarkerSelection(item)}
         coordinate={LatLng}
         style={styles.marker}
-        image={item.selected ? orangeMapMarker : blackMapMarker}>
-        <Text style={styles.markerText}>{index + 1}</Text>
+        // image={item.selected ? orangeMapMarker : blackMapMarker}
+      >
+        <ImageBackground
+          source={item.selected ? orangeMapMarker : blackMapMarker}
+          style={styles.markerImage}>
+          <Text style={styles.markerText}>{index + 1}</Text>
+        </ImageBackground>
       </Marker>
     );
   });
 
-  const handleRegionChange = e => {};
+  const userPosition = <Marker coordinate={currentUserPosition} />;
 
   const renderItem = ({item, index}) => (
     <PickupCard
@@ -177,8 +196,8 @@ const PickupOrder = props => {
   const handleAdressSelection = address => {
     if (validateZipCode(address.postcode)) {
       const tmpCoordinates = {
-        latitude: parseFloat(address.coordinates[1]).toFixed(7),
-        longitude: parseFloat(address.coordinates[0]).toFixed(7),
+        latitude: address.coordinates[1].toFixed(7),
+        longitude: address.coordinates[0].toFixed(7),
         latitudeDelta: delta.latitudeDelta,
         longitudeDelta: delta.longitudeDelta,
       };
@@ -204,6 +223,21 @@ const PickupOrder = props => {
       );
     }
   };
+
+  const scrollToIndex = () => {
+    if (mrPOI) {
+      let index = (mrPOI || []).indexOf(currentPOI);
+      if (index >= 0) {
+        flatlistRef?.current?.scrollToIndex({animated: true, index: index});
+      }
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      scrollToIndex();
+    }, [currentPOI]),
+  );
 
   return (
     <View
@@ -239,14 +273,23 @@ const PickupOrder = props => {
       {displayMap && (
         <>
           <MapView
-            region={coordinates}
-            liteMode={true}
+            region={{
+              latitude: parseFloat(coordinates.latitude),
+              longitude: parseFloat(coordinates.longitude),
+              latitudeDelta: coordinates.latitudeDelta,
+              longitudeDelta: coordinates.longitudeDelta,
+            }}
             rotateEnabled={false}
-            onRegionChange={e => handleRegionChange(e)}
             style={styles.map}>
+            {userPosition}
             {displayMarker}
           </MapView>
-          <FlatList style={styles.list} data={mrPOI} renderItem={renderItem} />
+          <FlatList
+            style={styles.list}
+            data={mrPOI}
+            renderItem={renderItem}
+            ref={flatlistRef}
+          />
         </>
       )}
       {currentPOI && (
@@ -265,12 +308,11 @@ const PickupOrder = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
   },
   input: {
     marginHorizontal: 22,
     backgroundColor: '#FFFFFF',
-    marginVertical: config.deviceWidth > 375 ? 10 : 0,
+    marginVertical: config.deviceWidth > 375 ? 10 : 10,
   },
   specialInput: {
     borderWidth: 0,
@@ -281,12 +323,13 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+    minHeight: Platform.OS === 'android' ? 150 : 100,
   },
   list: {
     height: 100,
   },
   displayResults: {
-    backgroundColor: '##FFF',
+    backgroundColor: '#FFF',
     paddingVertical: 12,
     paddingLeft: 22,
     height: 'auto',
@@ -296,14 +339,22 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   marker: {
-    width: config.deviceWidth < 340 ? 5 : 30,
+    width: config.deviceWidth < 340 ? 5 : 20,
+    height: config.deviceHeight < 340 ? 5 : 20,
+    display: 'flex',
+    position: 'relative',
+  },
+  markerImage: {
+    width: config.deviceWidth < 340 ? 15 : 25,
+    height: config.deviceHeight < 340 ? 15 : 25,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   markerText: {
+    display: 'flex',
     fontSize: 12,
-    color: '#FFFF',
-    position: 'absolute',
-    top: 0,
-    left: 5,
+    fontWeight: '600',
+    color: '#FFF',
   },
 });
 

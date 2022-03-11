@@ -33,7 +33,7 @@ const PickupOrderConfirm = props => {
       first_name: userInfos.first_name,
       last_name: userInfos.last_name,
       email: userInfos.email,
-      phone_number: userInfos.phone_number,
+      phone: userInfos.phone_number,
       address: selectedPOI.LgAdr3,
       address_zipcode: selectedPOI.CP,
       address_region: selectedPOI.address_region,
@@ -115,7 +115,8 @@ const PickupOrderConfirm = props => {
       <View style={styles.bottomContainer}>
         <Image source={mrLogo} style={styles.logo} />
         <Text style={styles.bottomText}>
-          Disponible entre <Text>3 et 7 jours ouvrés.</Text>
+          Disponible entre{' '}
+          <Text style={styles.boldText}>3 et 7 jours ouvrés.</Text>
           Tu seras notifié.e par email à la prise en charge de ton colis et à la
           réception en point relais
         </Text>
@@ -182,8 +183,12 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     width: 270,
-    fontSize: 13,
+    fontSize: config.deviceWidth * 0.035,
     lineHeight: 20,
+  },
+  boldText: {
+    fontSize: config.deviceWidth * 0.035,
+    fontWeight: '600',
   },
   logo: {
     alignSelf: 'center',
