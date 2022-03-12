@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import Text from '../../Text';
@@ -17,6 +18,7 @@ import ContactsAPI from '../../../services/api/contact';
 import OrderConfirmModal from '../OrderConfirmModal';
 import {useNavigation} from '@react-navigation/native';
 import mrLogo from '../../../assets/MR_logo.png';
+import CheckBox from '@react-native-community/checkbox';
 
 const PickupOrderConfirm = props => {
   const navigation = useNavigation();
@@ -113,13 +115,33 @@ const PickupOrderConfirm = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.bottomContainer}>
-        <Image source={mrLogo} style={styles.logo} />
-        <Text style={styles.bottomText}>
-          Disponible entre{' '}
-          <Text style={styles.boldText}>3 et 7 jours ouvrés.</Text>
-          Tu seras notifié.e par email à la prise en charge de ton colis et à la
-          réception en point relais
-        </Text>
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            style={styles.checkbox}
+            animationDuration={0.2}
+            value={checked}
+            tintColors={
+              Platform.OS === 'android'
+                ? {true: Colors.primary, flase: Colors.black}
+                : '#000'
+            }
+            onTintColor={Colors.primary}
+            onCheckColor={Colors.primary}
+            onValueChange={() => setChecked(!checked)}
+          />
+          <Text style={[styles.bottomText, {width: 290, paddingLeft: 25}]}>
+            J 'accepte d' être recontacté par Tumeplay pour améliorer le service
+          </Text>
+        </View>
+        <View style={styles.bottomtextContainer}>
+          <Image source={mrLogo} style={styles.logo} />
+          <Text style={styles.bottomText}>
+            Disponible entre{' '}
+            <Text style={styles.boldText}>3 et 7 jours ouvrés.</Text>
+            Tu seras notifié.e par email à la prise en charge de ton colis et à
+            la réception en point relais
+          </Text>
+        </View>
       </View>
       {isLoading ? (
         <ActivityIndicator />
@@ -159,12 +181,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: config.deviceWidth * 0.043,
     lineHeight: 22,
   },
   text: {
     fontWeight: '400',
-    fontSize: 16,
+    fontSize: config.deviceWidth * 0.04,
     lineHeight: 22,
   },
   redText: {
@@ -178,20 +200,30 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   bottomContainer: {
+    flex: 0.6,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+  },
+  checkboxContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  bottomText: {
-    width: 270,
-    fontSize: config.deviceWidth * 0.035,
-    lineHeight: 20,
+  bottomtextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingBottom: 22,
+    width: config.deviceWidth > 375 ? 290 : 285,
   },
   boldText: {
     fontSize: config.deviceWidth * 0.035,
     fontWeight: '600',
   },
   logo: {
-    alignSelf: 'center',
+    marginRight: 15,
+    width: config.deviceWidth * 0.12,
+    height: config.deviceWidth * 0.12,
   },
 });
 

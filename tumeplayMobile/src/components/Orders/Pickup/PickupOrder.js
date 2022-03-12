@@ -51,6 +51,7 @@ const PickupOrder = props => {
   const [displayMap, setDisplayMap] = useState(false);
   const [geogouvData, setGeogouvData] = useState([]);
   const [hideResults, setHideResults] = useState(true);
+  const [chosenAddress, setChosenAddress] = useState('');
 
   const validateZipCode = zipcode => {
     const authorizedZipCode = [
@@ -172,6 +173,7 @@ const PickupOrder = props => {
     setCurrentPOI(null);
     setIsSearching(true);
     setDisplayMap(false);
+    setChosenAddress(address);
     if (address) {
       const res = await axios.get(
         `https://api-adresse.data.gouv.fr/search/?q=${address}&autocomplete=1`,
@@ -201,6 +203,7 @@ const PickupOrder = props => {
         latitudeDelta: delta.latitudeDelta,
         longitudeDelta: delta.longitudeDelta,
       };
+      setChosenAddress(address.label);
       setCoordinates({...tmpCoordinates});
       setHideResults(true);
       setIsSearching(false);
@@ -249,6 +252,7 @@ const PickupOrder = props => {
         renderTextInput={() => (
           <TextInput
             style={styles.input}
+            value={chosenAddress}
             placeholder="Saisissez une adresse"
             underlineColor="#EAE2D7"
             activeUnderlineColor="#D42201"
