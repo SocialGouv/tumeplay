@@ -60,7 +60,7 @@ const PickupOrderConfirm = props => {
       let userAddress = {
         first_name: userInfos.first_name,
         email: userInfos.email,
-        zipCode: selectedPOI.deptcode,
+        zipCode: selectedPOI.CP,
         box_id: box.id,
         type: 'enrollé',
       };

@@ -44,6 +44,7 @@ const PickupOrder = props => {
     latitude: 48.856614,
     longitude: 2.3522219,
   });
+  const [geolocationGranted, setGeolocationGranted] = useState(false);
 
   const [currentPOI, setCurrentPOI] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
@@ -108,6 +109,7 @@ const PickupOrder = props => {
           longitude: tmpCoordinates.longitude,
         },
       });
+      setGeolocationGranted(true);
     });
     if (coordinates) {
       fetchPOI();
@@ -147,9 +149,7 @@ const PickupOrder = props => {
         key={index}
         onPress={() => handleMarkerSelection(item)}
         coordinate={LatLng}
-        style={styles.marker}
-        // image={item.selected ? orangeMapMarker : blackMapMarker}
-      >
+        style={styles.marker}>
         <ImageBackground
           source={item.selected ? orangeMapMarker : blackMapMarker}
           style={styles.markerImage}>
@@ -285,7 +285,7 @@ const PickupOrder = props => {
             }}
             rotateEnabled={false}
             style={styles.map}>
-            {userPosition}
+            {geolocationGranted && userPosition}
             {displayMarker}
           </MapView>
           <FlatList
@@ -343,20 +343,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   marker: {
-    width: config.deviceWidth < 340 ? 5 : 20,
-    height: config.deviceHeight < 340 ? 5 : 20,
-    display: 'flex',
-    position: 'relative',
+    width: config.deviceWidth < 340 ? 10 : 20,
+    height: config.deviceHeight < 340 ? 10 : 20,
   },
   markerImage: {
-    width: config.deviceWidth < 340 ? 15 : 25,
-    height: config.deviceHeight < 340 ? 15 : 25,
+    width: config.deviceWidth < 340 ? 10 : 25,
+    height: config.deviceHeight < 340 ? 10 : 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
   markerText: {
     display: 'flex',
-    fontSize: 12,
+    fontSize: config.deviceWidth * 0.03,
     fontWeight: '600',
     color: '#FFF',
   },
