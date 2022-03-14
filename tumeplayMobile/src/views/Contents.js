@@ -13,6 +13,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
 import {GET_COLOR_THEME} from '../services/api/themes';
+import config from '../../config';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -27,7 +28,7 @@ const ContentsPage = props => {
   );
   const [contents, setContents] = useState([]);
   const content_ids = contents.map(content => content.id);
-
+  const currentThematique = thematiques.find(theme => theme.id === theme_id);
   const {data, loading} = useQuery(GET_CONTENTS, {
     variables: {theme_id: theme_id, level: selectedLevel},
   });
@@ -112,18 +113,29 @@ const ContentsPage = props => {
           <RNPickerSelect
             style={{...pickerSelectStyle}}
             useNativeAndroidPickerStyle={false}
-            placeholder={{label: 'Catégorie', value: null}}
+            placeholder={{label: currentThematique?.title, value: null}}
             name="theme"
             onValueChange={e => handleNewTheme(e)}
             items={thematiques_props}
+            Icon={() => {
+              return <Icon name="chevron-small-down" size={30} color="#000" />;
+            }}
           />
           <RNPickerSelect
-            style={{...pickerSelectStyle}}
+            style={{
+              ...pickerSelectStyle,
+            }}
             useNativeAndroidPickerStyle={false}
-            placeholder={{label: `NIV ${selectedLevel}`, value: selectedLevel}}
+            placeholder={{
+              label: `NIV ${selectedLevel}`,
+              value: selectedLevel,
+            }}
             onValueChange={e => handleNewLevel(e)}
             name="level"
             items={levels_props}
+            Icon={() => {
+              return <Icon name="chevron-small-down" size={30} color="#000" />;
+            }}
           />
         </View>
         {/* <View style={styles.listContainer}> */}
@@ -169,13 +181,15 @@ const pickerSelectStyle = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.black,
-    fontSize: 14,
+    fontSize: config.deviceWidth * 0.035,
     fontWeight: '700',
     paddingVertical: 5,
     color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputIOS: {
-    fontSize: 14,
+    width: '100%',
+    fontSize: config.deviceWidth * 0.035,
     marginTop: 4,
     fontWeight: '700',
     paddingVertical: 5,
@@ -183,10 +197,14 @@ const pickerSelectStyle = StyleSheet.create({
     borderBottomColor: Colors.black,
     borderRadius: 4,
     color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputIOSContainer: {
     borderBottomWidth: 1,
     borderBottomColor: Colors.grey,
+  },
+  chevronDown: {
+    color: Colors.black,
   },
 });
 
