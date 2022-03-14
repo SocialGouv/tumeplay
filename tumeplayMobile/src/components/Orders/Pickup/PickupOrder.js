@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
   input: {
     marginHorizontal: 22,
     backgroundColor: '#FFFFFF',
-    marginVertical: config.deviceWidth > 375 ? 10 : 10,
+    marginVertical: 10,
   },
   specialInput: {
     borderWidth: 0,

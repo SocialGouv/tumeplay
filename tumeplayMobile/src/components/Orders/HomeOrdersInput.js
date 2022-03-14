@@ -11,7 +11,6 @@ import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
 import Autocomplete from 'react-native-autocomplete-input';
 import axios from 'axios';
-import _ from 'lodash';
 import * as Yup from 'yup';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';

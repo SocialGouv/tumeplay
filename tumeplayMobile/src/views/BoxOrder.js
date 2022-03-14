@@ -15,7 +15,6 @@ import Tooltip from 'react-native-walkthrough-tooltip';
 import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
 import PickupOrder from '../components/Orders/Pickup/PickupOrder';
-import PickupOrderConfirm from '../components/Orders/Pickup/PickupOrderConfirm';
 import PickupOrderUserInfos from '../components/Orders/Pickup/PickupOrderUserInfos';
 
 const Box = ({navigation, route}) => {
