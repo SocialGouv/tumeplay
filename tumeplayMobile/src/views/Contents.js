@@ -84,13 +84,12 @@ const ContentsPage = props => {
     return {label: `NIV ${level.value}`, value: level.value, key: level.id};
   });
 
-  const config = {
+  const configSwipe = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 10,
   };
 
   const handleNewTheme = value => {
-    console.log(value);
     setTheme_id(value);
   };
 
@@ -102,7 +101,7 @@ const ContentsPage = props => {
     <Container style={styles.container}>
       <GestureRecognizer
         style={styles.container}
-        config={config}
+        config={configSwipe}
         onSwipeLeft={() => navigation.goBack()}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
