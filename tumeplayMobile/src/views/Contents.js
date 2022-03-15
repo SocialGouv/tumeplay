@@ -7,8 +7,8 @@ import Container from '../components/global/Container';
 import {GET_CONTENTS} from '../services/api/contents';
 import GestureRecognizer from '../lib/swipe';
 import Icon from 'react-native-vector-icons/Entypo';
+import FontAwsomeIcon from 'react-native-vector-icons/FontAwesome5';
 import AppContext from '../../AppContext';
-import _ from 'lodash';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
@@ -27,7 +27,7 @@ const ContentsPage = props => {
     route.params.backgroundColor,
   );
   const [contents, setContents] = useState([]);
-  const content_ids = contents.map(content => content.id);
+  const content_ids = contents?.map(content => content.id);
   const currentThematique = thematiques.find(theme => theme.id === theme_id);
   const {data, loading} = useQuery(GET_CONTENTS, {
     variables: {theme_id: theme_id, level: selectedLevel},
@@ -118,7 +118,14 @@ const ContentsPage = props => {
             onValueChange={e => handleNewTheme(e)}
             items={thematiques_props}
             Icon={() => {
-              return <Icon name="chevron-small-down" size={30} color="#000" />;
+              return (
+                <FontAwsomeIcon
+                  name="caret-down"
+                  size={15}
+                  style={styles.icon}
+                  color="#000"
+                />
+              );
             }}
           />
           <RNPickerSelect
@@ -134,7 +141,14 @@ const ContentsPage = props => {
             name="level"
             items={levels_props}
             Icon={() => {
-              return <Icon name="chevron-small-down" size={30} color="#000" />;
+              return (
+                <FontAwsomeIcon
+                  name="caret-down"
+                  size={15}
+                  style={styles.icon}
+                  color="#000"
+                />
+              );
             }}
           />
         </View>
@@ -168,6 +182,10 @@ const styles = StyleSheet.create({
   chevron: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  icon: {
+    alignSelf: 'center',
+    marginTop: 10,
   },
 });
 
