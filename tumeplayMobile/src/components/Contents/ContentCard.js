@@ -35,7 +35,13 @@ const ContentCard = props => {
       </View>
       {locked && (
         <View
-          style={[styles.iconContainer, {backgroundColor: backgroundColor}]}>
+          style={[
+            styles.iconContainer,
+            {
+              backgroundColor: backgroundColor,
+            },
+            styles.lockShadow,
+          ]}>
           <Image source={lock} style={styles.imageLock} />
         </View>
       )}
@@ -101,6 +107,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 1,
+  },
+  lockShadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
 });
 

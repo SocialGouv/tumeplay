@@ -27,7 +27,7 @@ const ContentsPage = props => {
     route.params.backgroundColor,
   );
   const [contents, setContents] = useState([]);
-  const content_ids = contents?.map(content => content.id);
+  const content_ids = contents.map(content => content.id);
   const currentThematique = thematiques.find(theme => theme.id === theme_id);
   const {data, loading} = useQuery(GET_CONTENTS, {
     variables: {theme_id: theme_id, level: selectedLevel},
@@ -90,6 +90,7 @@ const ContentsPage = props => {
   };
 
   const handleNewTheme = value => {
+    console.log(value);
     setTheme_id(value);
   };
 
@@ -113,7 +114,10 @@ const ContentsPage = props => {
           <RNPickerSelect
             style={{...pickerSelectStyle}}
             useNativeAndroidPickerStyle={false}
-            placeholder={{label: currentThematique?.title, value: null}}
+            placeholder={{
+              label: currentThematique?.title,
+              value: currentThematique.id,
+            }}
             name="theme"
             onValueChange={e => handleNewTheme(e)}
             items={thematiques_props}
