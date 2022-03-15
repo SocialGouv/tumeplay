@@ -80,6 +80,8 @@ const PickupOrder = props => {
     return authorizedZipCode.includes(zipcode.substring(0, 2));
   };
 
+  console.log({widht: config.deviceWidth, height: config.deviceHeight});
+
   const fetchPOI = async () => {
     let response = await POIAPI.fetchMondialRelaisPOI({
       latitude: coordinates.latitude,
@@ -343,12 +345,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   marker: {
-    width: config.deviceWidth < 340 ? 10 : 20,
-    height: config.deviceHeight < 340 ? 10 : 20,
+    width: config.deviceWidth < 340 ? 10 : 30,
+    height: config.deviceWidth < 340 ? 10 : 30,
   },
   markerImage: {
-    width: config.deviceWidth < 340 ? 10 : 25,
-    height: config.deviceHeight < 340 ? 10 : 25,
+    width: config.deviceWidth < 340 ? 10 : 20,
+    height: config.deviceWidth < 340 ? 10 : 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -357,6 +359,7 @@ const styles = StyleSheet.create({
     fontSize: config.deviceWidth * 0.03,
     fontWeight: '600',
     color: '#FFF',
+    paddingBottom: 2,
   },
 });
 

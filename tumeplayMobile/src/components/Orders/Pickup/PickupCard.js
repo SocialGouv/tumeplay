@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: config.deviceWidth * 0.04,
     zIndex: 10,
+    paddingBottom: 5,
   },
   imageContainer: {
     paddingHorizontal: 20,
