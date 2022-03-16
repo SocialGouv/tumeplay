@@ -5,16 +5,7 @@ import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
 import {Fonts} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
-import pleasure from '../assets/custom_images/PLAISIR.png';
-import culture from '../assets/custom_images/CULTURE_G.png';
-import anatomie from '../assets/custom_images/ANATOMIE.png';
-import medical from '../assets/custom_images/MEDICAL.png';
-import law from '../assets/custom_images/LOI.png';
-import gender from '../assets/custom_images/IDENTITE.png';
-import relationship from '../assets/custom_images/RELATIONS.png';
-import orientation from '../assets/custom_images/ORIENTATION.png';
-import link from '../assets/custom_images/LIENS.png';
-import {REACT_APP_URL} from '@env'
+import {REACT_APP_URL} from '@env';
 
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';

@@ -15,8 +15,6 @@ import QuizzModule from './src/components/Quizz/QuizzModule';
 import BoxOrder from './src/views/BoxOrder';
 import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
-import {View, StyleSheet} from 'react-native';
-import Text from './src/components/Text';
 import Journey from './src/views/Journey';
 import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
@@ -38,7 +36,9 @@ const App = () => {
   const [thematiques, setThematiques] = useState([]);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
 
-  const {data: data1, loading: loading1} = useQuery(GET_THEMES);
+  const {data: data1, loading: loading1} = useQuery(GET_THEMES, {
+    variables: {level: user.level},
+  });
 
   const navTheme = DefaultTheme;
   navTheme.colors.background = Colors.background;

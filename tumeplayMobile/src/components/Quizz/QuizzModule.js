@@ -26,9 +26,12 @@ import GestureRecognizer from '../../lib/swipe';
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
+  const theme = route?.params?.theme;
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
   const retry = route?.params?.retry;
+
+  console.log('LOADED', theme);
 
   const question = questions[0];
 

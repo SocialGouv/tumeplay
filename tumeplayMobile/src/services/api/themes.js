@@ -8,8 +8,8 @@ export const GET_THEMES = gql`
       image {
         url
       }
-			color
-			border_color
+      color
+      border_color
     }
   }
 `;
@@ -22,8 +22,8 @@ export const GET_SOSTHEME = gql`
       image {
         url
       }
-			color
-			border_color
+      color
+      border_color
     }
   }
 `;
