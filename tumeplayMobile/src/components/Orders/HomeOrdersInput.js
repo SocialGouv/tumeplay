@@ -6,7 +6,7 @@ import {
   FlatList,
 } from 'react-native';
 import Text from '../../components/Text';
-import React, {useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -17,6 +17,7 @@ import Button from '../Button';
 import config from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Event from '../../services/api/matomo';
+import _, {add} from 'lodash';
 
 const HomeOrdersInput = props => {
   const navigation = useNavigation();
@@ -35,6 +36,7 @@ const HomeOrdersInput = props => {
 
   const [geogouvData, setGeogouvData] = useState([]);
   const [hideResults, setHideResults] = useState(true);
+  const [chosenAddress, setChosenAddress] = useState('');
 
   const itemFields = [
     {
@@ -132,10 +134,15 @@ const HomeOrdersInput = props => {
     }
   };
 
-  const handleAutocomplete = async address => {
-    if (address) {
+  const debouncedAPICall = useMemo(
+    () => _.debounce(() => handleAutocomplete(), 300),
+    [chosenAddress],
+  );
+
+  const handleAutocomplete = async () => {
+    if (chosenAddress !== '') {
       const res = await axios.get(
-        `https://api-adresse.data.gouv.fr/search/?q=${address}&type=housenumber&autocomplete=1`,
+        `https://api-adresse.data.gouv.fr/search/?q=${chosenAddress}&type=housenumber&autocomplete=1`,
       );
       let tmpRes = res?.data?.features;
       tmpRes = tmpRes.map(_ => _.properties);
@@ -190,7 +197,8 @@ const HomeOrdersInput = props => {
                               value={values.address}
                               onChangeText={text => {
                                 setFieldValue(item.name, text);
-                                handleAutocomplete(text);
+                                setChosenAddress(text);
+                                debouncedAPICall();
                               }}
                             />
                             {errors[item.name] && touched[item.name] ? (
