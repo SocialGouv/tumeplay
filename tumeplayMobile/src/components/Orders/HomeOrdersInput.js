@@ -6,7 +6,7 @@ import {
   FlatList,
 } from 'react-native';
 import Text from '../../components/Text';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -17,7 +17,7 @@ import Button from '../Button';
 import config from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Event from '../../services/api/matomo';
-import _, {add} from 'lodash';
+import _ from 'lodash';
 
 const HomeOrdersInput = props => {
   const navigation = useNavigation();
