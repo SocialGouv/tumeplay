@@ -7,7 +7,7 @@ import {
   Platform,
   ImageBackground,
 } from 'react-native';
-import React, {useState, useEffect, useRef, useCallback, useMemo} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import POIAPI from '../../../services/api/poi';
@@ -28,7 +28,7 @@ const PickupOrder = props => {
   const navigation = useNavigation();
   const flatlistRef = useRef();
 
-  const [delta, setDelta] = useState({
+  const [delta] = useState({
     latitudeDelta: 0.03,
     longitudeDelta: 0.03,
   });
