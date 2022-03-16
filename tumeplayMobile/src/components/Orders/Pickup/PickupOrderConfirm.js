@@ -71,7 +71,7 @@ const PickupOrderConfirm = props => {
     setIsVisible(true);
   };
 
-  const retrievePOIFullAddress = async () => {
+  const retrievePOILocationInformations = async () => {
     const latLng = {
       lat: parseFloat(selectedPOI.Latitude.replace(',', '.')),
       long: parseFloat(selectedPOI.Longitude.replace(',', '.')),
@@ -97,7 +97,7 @@ const PickupOrderConfirm = props => {
   };
 
   useEffect(() => {
-    retrievePOIFullAddress();
+    retrievePOILocationInformations();
   }, []);
 
   return (

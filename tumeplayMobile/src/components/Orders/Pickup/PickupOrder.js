@@ -7,7 +7,7 @@ import {
   Platform,
   ImageBackground,
 } from 'react-native';
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useRef, useCallback, useMemo} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import POIAPI from '../../../services/api/poi';
@@ -79,8 +79,6 @@ const PickupOrder = props => {
     ];
     return authorizedZipCode.includes(zipcode.substring(0, 2));
   };
-
-  console.log({widht: config.deviceWidth, height: config.deviceHeight});
 
   const fetchPOI = async () => {
     let response = await POIAPI.fetchMondialRelaisPOI({
@@ -171,27 +169,35 @@ const PickupOrder = props => {
     />
   );
 
-  const handleAutocomplete = async address => {
+  const debounced = useCallback(
+    _.debounce(() => retrieveAutoCompleteAPI(), 300),
+    [chosenAddress],
+  );
+
+  const handleAutocomplete = address => {
     setCurrentPOI(null);
     setIsSearching(true);
     setDisplayMap(false);
     setChosenAddress(address);
-    if (address) {
+    debounced();
+  };
+
+  const retrieveAutoCompleteAPI = async () => {
+    if (chosenAddress) {
       const res = await axios.get(
-        `https://api-adresse.data.gouv.fr/search/?q=${address}&autocomplete=1`,
+        `https://api-adresse.data.gouv.fr/search/?q=${chosenAddress}&autocomplete=1`,
       );
-      setTimeout(async () => {
-        let tmpRes = res?.data?.features;
-        tmpRes = tmpRes.map(_ => {
-          _.properties.coordinates = _.geometry.coordinates;
-          return _;
-        });
-        tmpRes = tmpRes.map(_ => _.properties);
-        if (tmpRes.length > 0) {
-          setGeogouvData(tmpRes);
-          setHideResults(false);
-        }
-      }, 500);
+
+      let tmpRes = res?.data?.features;
+      tmpRes = tmpRes.map(_ => {
+        _.properties.coordinates = _.geometry.coordinates;
+        return _;
+      });
+      tmpRes = tmpRes.map(_ => _.properties);
+      if (tmpRes.length > 0) {
+        setGeogouvData(tmpRes);
+        setHideResults(false);
+      }
     } else {
       setHideResults(true);
     }
@@ -258,9 +264,7 @@ const PickupOrder = props => {
             placeholder="Saisissez une adresse"
             underlineColor="#EAE2D7"
             activeUnderlineColor="#D42201"
-            onChangeText={text => {
-              handleAutocomplete(text);
-            }}
+            onChangeText={handleAutocomplete}
           />
         )}
         hideResults={hideResults}
