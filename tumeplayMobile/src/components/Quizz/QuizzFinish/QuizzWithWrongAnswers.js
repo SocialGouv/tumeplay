@@ -13,12 +13,21 @@ import Container from '../../global/Container';
 import config from '../../../../config';
 
 const QuizzWithWrongAnswers = props => {
-  const {correctAnswers, wrongAnswers, navigation, module_id} = props;
+  const {
+    correctAnswers,
+    wrongAnswers,
+    navigation,
+    module_id,
+    theme,
+    module_title,
+  } = props;
 
   const restartQuizz = () => {
     navigation.navigate('QuizzModule', {
       questions: _.shuffle(wrongAnswers),
       module_id: module_id,
+      module_title: module_title,
+      theme: theme,
       improveWrongAnswers: true,
     });
   };

@@ -33,7 +33,13 @@ const Badge = props => {
       onPress={() =>
         navigation.navigate('Jouer', {
           module_id: module?.id,
+          module_title: module.title,
           questions: module?.questionsArray,
+          theme: {
+            title: module?.thematique?.title,
+            color: module?.thematique?.color,
+            image: module?.thematique?.image,
+          },
           clearModuleData: true,
           retry: status === 'done',
         })

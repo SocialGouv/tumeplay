@@ -14,6 +14,8 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
   const wrongAnswers = route?.params?.wrongAnswers;
   const module_id = route?.params?.module_id;
+  const module_title = route?.params?.module_title;
+  const theme = route?.params?.theme;
   const retry = route?.params?.retry;
   const {strapi_user_id, user, reloadUser} = useContext(AppContext);
 
@@ -34,6 +36,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
       let currentHistory = user?.history.find(
         history => history.module_id == module_id,
       );
+      console.log('history', currentHistory);
       try {
         await updateHistory({
           variables: {
@@ -89,6 +92,8 @@ const QuizzFinishScreen = ({navigation, route}) => {
           wrongAnswers={wrongAnswers}
           navigation={navigation}
           module_id={module_id}
+          module_title={module_title}
+          theme={theme}
         />
       );
     } else if (retry) {

@@ -5,9 +5,14 @@ export const GET_MODULES = gql`
   query getModules($level: Int) {
     modules(where: {niveau: {value: $level}}) {
       id
+      title
       thematique: thematique_mobile {
         id
         title
+        color
+        image {
+          url
+        }
       }
       niveau {
         name
@@ -36,7 +41,10 @@ export const GET_SINGLE_MODULE = gql`
       title
       thematique_mobile {
         title
-        id
+        color
+        image {
+          url
+        }
       }
     }
   }

@@ -28,7 +28,7 @@ const QuizzAnswerButton = props => {
           styles.button,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
           answerTrou ? styles.buttonTrou : '',
-          hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
+          hasAnswered && answer.key !== correctAnswer && styles.wrongAnswer,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
         ]}>
         <Text
@@ -38,14 +38,14 @@ const QuizzAnswerButton = props => {
           ]}>
           {answer.value}
         </Text>
-        {hasAnswered && answer.key === correctAnswer && (
-          <Image source={right} style={styles.image} />
-        )}
         {hasAnswered &&
-          answer.key !== correctAnswer &&
-          answeredKey === answer.key && (
-            <Image source={wrong} style={styles.image} />
+          answer.key === correctAnswer &&
+          answeredKey === correctAnswer && (
+            <Image source={right} style={styles.image} />
           )}
+        {hasAnswered && hasAnswered && answer.key !== correctAnswer && (
+          <Image source={wrong} style={styles.image} />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: config.deviceWidth <= 375 ? 50 : 80,
-    backgroundColor: '#F3E1E8',
+    backgroundColor: '#F2E9DF',
   },
   buttonTrou: {
     height: config.deviceWidth <= 375 ? 50 : 60,
