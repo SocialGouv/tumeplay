@@ -43,7 +43,7 @@ const QuizzAnswerButton = props => {
           answeredKey === correctAnswer && (
             <Image source={right} style={styles.image} />
           )}
-        {hasAnswered && hasAnswered && answer.key !== correctAnswer && (
+        {hasAnswered && answer.key !== correctAnswer && (
           <Image source={wrong} style={styles.image} />
         )}
       </View>
