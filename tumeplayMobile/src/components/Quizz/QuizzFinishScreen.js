@@ -36,7 +36,6 @@ const QuizzFinishScreen = ({navigation, route}) => {
       let currentHistory = user?.history.find(
         history => history.module_id == module_id,
       );
-      console.log('history', currentHistory);
       try {
         await updateHistory({
           variables: {

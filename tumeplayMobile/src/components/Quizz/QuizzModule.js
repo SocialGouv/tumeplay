@@ -40,6 +40,7 @@ const QuizzModule = ({navigation, route}) => {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [remainingQuestions, setRemainingQuestions] = useState([]);
+  const [selected, setSelected] = useState(null);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
   const [createHistory] = useMutation(CREATE_HISTORY);
@@ -57,10 +58,11 @@ const QuizzModule = ({navigation, route}) => {
       tmpResponses?.push({key, value});
     }
     tmpResponses?.shift();
+    _.remove(tmpResponses, {key: 'w'});
     setResponses([...tmpResponses]);
   };
 
-  const displayAnswerText = answerKey => {
+  const displayAnswerText = (answerKey, index) => {
     if (answerKey === question.responses.right_answer) {
       correctAnswers.push(question);
       setCorrectAnswers([...correctAnswers]);
@@ -83,21 +85,24 @@ const QuizzModule = ({navigation, route}) => {
 
       setQuestionTitle(newTitle);
     }
+    setSelected(index);
     setAnswerKey(answerKey);
     setHasAnswered(!hasAnswered);
   };
 
-  const displayAnswer = responses?.map(ans => {
+  const displayAnswer = responses?.map((ans, index) => {
     return (
       <QuizzAnswerButton
         answer={ans}
+        selected={selected}
+        index={index}
         correctAnswer={question.responses.right_answer}
         hasAnswered={hasAnswered}
         disabled={hasAnswered}
-        key={ans.key}
+        key={index}
         answerTrou={question.kind === 'Trou'}
         answeredKey={answeredKey}
-        onPress={() => displayAnswerText(ans.key)}
+        onPress={() => displayAnswerText(ans.key, index)}
       />
     );
   });
@@ -203,21 +208,21 @@ const QuizzModule = ({navigation, route}) => {
           <View style={styles.stepIndicatorContainer}>
             <Text style={styles.moduleTitle}>{module_title}</Text>
             <View style={styles.progressionContainer}>
-              <Progress.Bar
+              <Progress.Circle
                 showsText={true}
                 borderWidth={0}
                 thickness={5}
-                style={{maxHeight: 10, alignSelf: 'center'}}
-                formatText={() => questions.length}
+                formatText={() => {
+                  return `${correctAnswers.length + wrongAnswers.length} / ${
+                    fullQuizzLength.current
+                  }`;
+                }}
+                textStyle={styles.stepIndicator}
                 unfilledColor={'#FFFFFF80'}
                 progress={progress}
                 size={60}
                 color={'#51B070'}
               />
-              <Text style={styles.stepIndicatorText}>
-                {correctAnswers.length + wrongAnswers.length}/
-                {fullQuizzLength.current}
-              </Text>
             </View>
           </View>
           <View style={styles.questionContainer}>
@@ -230,7 +235,7 @@ const QuizzModule = ({navigation, route}) => {
                 styles.answersContainer,
                 question.kind === 'Trou' ? styles.answersContainerTrou : '',
               ]}>
-              <ScrollView>{displayAnswer}</ScrollView>
+              <ScrollView style={{width: '100%'}}>{displayAnswer}</ScrollView>
             </View>
           </View>
         </View>
@@ -306,23 +311,23 @@ const styles = StyleSheet.create({
   moduleTitle: {
     paddingVertical: 10,
     fontWeight: '500',
-    fontSize: config.deviceWidth * 0.04,
-  },
-  stepIndicatorText: {
     fontSize: config.deviceWidth * 0.03,
-    paddingLeft: 15,
+  },
+  stepIndicator: {
+    fontSize: config.deviceWidth * 0.03,
+    color: Colors.black,
+    fontWeight: '700',
   },
   indicator: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
   },
   question: {
     paddingHorizontal: 16,
-    textAlign: 'center',
     fontFamily: Fonts.subtitle,
-    fontSize: config.deviceWidth <= 400 ? 16 : 22,
-    lineHeight: 24,
+    fontSize: config.deviceWidth <= 400 ? 20 : 22,
+    lineHeight: 30,
     fontWeight: '700',
   },
   answersContainer: {
