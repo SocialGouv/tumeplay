@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
 import {REACT_APP_URL} from '@env';
 import lock from '../../assets/Cadenas.png';
+import _ from 'lodash';
+import ReadIndicator from './ReadIndicator';
 
 const ContentCard = props => {
-  const {item, backgroundColor, navigation, content_ids, locked, theme_id} =
-    props;
+  const {
+    item,
+    backgroundColor,
+    navigation,
+    content_ids,
+    locked,
+    theme_id,
+    readContentIDs,
+  } = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
+  const [displayReadIndicator, setDisplayReadIndicator] = useState(false);
+
+  useEffect(() => {
+    setDisplayReadIndicator(_.includes(readContentIDs, item.id));
+  }, [readContentIDs]);
 
   return (
     <TouchableOpacity
@@ -19,12 +33,20 @@ const ContentCard = props => {
           theme_id: theme_id,
           level: item?.niveau?.value,
           initial: true,
+          readContentIDs: readContentIDs,
+          backgroundColor: backgroundColor,
         })
       }
       disabled={locked}
       style={[styles.container, {backgroundColor: backgroundColor}]}>
       {locked && <View style={styles.lockedOverlay} />}
       <View style={styles.cardContainer}>
+        {displayReadIndicator && (
+          <ReadIndicator
+            style={styles.readIndicator}
+            backgroundColor={backgroundColor}
+          />
+        )}
         <View style={styles.titleContainer}>
           <Text style={styles.level}>NIVEAU {item?.niveau?.value}</Text>
           <Text style={styles.title}>{item?.title}</Text>
@@ -118,6 +140,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+  },
+  readIndicator: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 

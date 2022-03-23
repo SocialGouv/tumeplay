@@ -14,6 +14,7 @@ import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
 import {GET_COLOR_THEME} from '../services/api/themes';
 import config from '../../config';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -38,6 +39,22 @@ const ContentsPage = props => {
   const {data: data3, loading: loading3} = useQuery(GET_COLOR_THEME, {
     variables: {theme_id: theme_id},
   });
+
+  const [readContentIDs, setReadContentIDs] = useState([]);
+
+  const retrieveReadContentIds = async () => {
+    let encryptedContentIds = await EncryptedStorage.getItem('readContentIDs');
+    if (encryptedContentIds) {
+      let tmpContentIDs = JSON.parse(encryptedContentIds);
+      setReadContentIDs([...tmpContentIDs.content_ids]);
+    } else {
+      setReadContentIDs([]);
+    }
+  };
+
+  useEffect(() => {
+    retrieveReadContentIds();
+  }, []);
 
   useEffect(() => {
     if (data && !loading) {
@@ -72,6 +89,7 @@ const ContentsPage = props => {
         content_ids={content_ids}
         backgroundColor={backgroundColor}
         navigation={navigation}
+        readContentIDs={readContentIDs}
       />
     );
   };

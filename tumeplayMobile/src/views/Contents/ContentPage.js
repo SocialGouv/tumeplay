@@ -21,6 +21,9 @@ import config from '../../../config';
 import AppContext from '../../../AppContext';
 import Event from '../../services/api/matomo';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import _ from 'lodash';
+import ReadIndicator from '../../components/Contents/ReadIndicator';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -30,6 +33,12 @@ const ContentPage = ({navigation, route}) => {
   const content_ids = route?.params?.content_ids;
   const content_id = useRef(route.params.content_id);
   const theme_id = route?.params?.theme_id;
+  const [readContentIDs, setReadContentIDs] = useState(
+    route?.params?.readContentIDs,
+  );
+  const current_content_id = route?.params?.content_id;
+  const [displayReadIndicator, setDisplayReadIndicator] = useState(false);
+  const backgroundColor = route?.params?.backgroundColor;
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {
@@ -37,6 +46,44 @@ const ContentPage = ({navigation, route}) => {
       theme_id: theme_id,
     },
   });
+
+  const saveContentID = async () => {
+    let tmpContent_ids = [...readContentIDs];
+    tmpContent_ids.push(current_content_id);
+    tmpContent_ids = _.uniq(tmpContent_ids);
+    await EncryptedStorage.setItem(
+      'readContentIDs',
+      JSON.stringify({
+        content_ids: tmpContent_ids,
+      }),
+    );
+  };
+
+  const retrieveReadContentIds = async () => {
+    let encryptedContentIds = await EncryptedStorage.getItem('readContentIDs');
+    if (encryptedContentIds) {
+      let tmpContentIDs = JSON.parse(encryptedContentIds);
+      setReadContentIDs([...tmpContentIDs.content_ids]);
+    } else {
+      setReadContentIDs([]);
+    }
+    setDisplayReadIndicator(_.includes(readContentIDs, current_content_id));
+  };
+
+  const clearStorage = async () => {
+    await EncryptedStorage.removeItem('readContentIDs');
+  };
+
+  // useEffect(() => {
+  //   clearStorage();
+  // }, []);
+
+  useEffect(() => {
+    retrieveReadContentIds();
+    setTimeout(() => {
+      saveContentID();
+    }, 5000);
+  }, [current_content_id]);
 
   useEffect(() => {
     if (data && !loading) {
@@ -57,6 +104,7 @@ const ContentPage = ({navigation, route}) => {
       content_id: content_ids[count + 1],
       content_ids: content_ids,
       theme_id: theme_id,
+      level: route.params.level,
     });
     setCount(count + 1);
   };
@@ -70,6 +118,7 @@ const ContentPage = ({navigation, route}) => {
         content_id: count > 1 ? content_ids[count - 1] : content_id.current,
         content_ids: content_ids,
         theme_id: theme_id,
+        level: route.params.level,
       });
     }
   };
@@ -117,6 +166,12 @@ const ContentPage = ({navigation, route}) => {
       <View style={styles.imageContainer}>
         <ImageBackground style={styles.image} source={imageUrl}>
           <ImageBackground style={styles.image} source={bg}>
+            {displayReadIndicator && (
+              <ReadIndicator
+                style={styles.readIndicator}
+                backgroundColor={backgroundColor}
+              />
+            )}
             <Text
               style={[
                 styles.title,
@@ -284,6 +339,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '70%',
     justifyContent: 'center',
+  },
+  readIndicator: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 
