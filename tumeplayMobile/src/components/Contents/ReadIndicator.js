@@ -4,7 +4,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
 
 const ReadIndicator = props => {
-  const {style, backgroundColor, borderColor} = props;
+  const {style, backgroundColor} = props;
   return (
     <View
       style={[

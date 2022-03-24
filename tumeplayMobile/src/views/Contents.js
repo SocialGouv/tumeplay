@@ -115,6 +115,17 @@ const ContentsPage = props => {
     setSelectedLevel(value);
   };
 
+  const displayIcon = () => {
+    return (
+      <FontAwsomeIcon
+        name="caret-down"
+        size={15}
+        style={styles.icon}
+        color="#000"
+      />
+    );
+  };
+
   return (
     <Container style={styles.container}>
       <GestureRecognizer
@@ -138,16 +149,7 @@ const ContentsPage = props => {
             name="theme"
             onValueChange={e => handleNewTheme(e)}
             items={thematiques_props}
-            Icon={() => {
-              return (
-                <FontAwsomeIcon
-                  name="caret-down"
-                  size={15}
-                  style={styles.icon}
-                  color="#000"
-                />
-              );
-            }}
+            Icon={() => displayIcon()}
           />
           <RNPickerSelect
             style={{
@@ -161,16 +163,7 @@ const ContentsPage = props => {
             onValueChange={e => handleNewLevel(e)}
             name="level"
             items={levels_props}
-            Icon={() => {
-              return (
-                <FontAwsomeIcon
-                  name="caret-down"
-                  size={15}
-                  style={styles.icon}
-                  color="#000"
-                />
-              );
-            }}
+            Icon={() => displayIcon()}
           />
         </View>
         {/* <View style={styles.listContainer}> */}
