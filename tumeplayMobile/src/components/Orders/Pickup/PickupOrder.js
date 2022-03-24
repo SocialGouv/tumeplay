@@ -189,11 +189,11 @@ const PickupOrder = props => {
       );
 
       let tmpRes = res?.data?.features;
-      tmpRes = tmpRes.map(_ => {
-        _.properties.coordinates = _.geometry.coordinates;
-        return _;
+      tmpRes = tmpRes.map(item => {
+        item.properties.coordinates = item.geometry.coordinates;
+        return item;
       });
-      tmpRes = tmpRes.map(_ => _.properties);
+      tmpRes = tmpRes.map(item => item.properties);
       if (tmpRes.length > 0) {
         setGeogouvData(tmpRes);
         setHideResults(false);
