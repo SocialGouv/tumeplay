@@ -8,8 +8,16 @@ export const GET_THEMES = gql`
       image {
         url
       }
-			color
-			border_color
+      color
+      border_color
+    }
+  }
+`;
+
+export const GET_COLOR_THEME = gql`
+  query GetColorTheme($theme_id: ID!) {
+    thematiqueMobiles(where: {id: $theme_id}) {
+      color
     }
   }
 `;
@@ -22,8 +30,8 @@ export const GET_SOSTHEME = gql`
       image {
         url
       }
-			color
-			border_color
+      color
+      border_color
     }
   }
 `;
