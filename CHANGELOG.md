@@ -1,3 +1,10 @@
+# [1.93.0](https://github.com/SocialGouv/Tumeplay/compare/v1.92.0...v1.93.0) (2022-03-24)
+
+
+### Features
+
+* filtering by thematiques and levels in contentsList ([#352](https://github.com/SocialGouv/Tumeplay/issues/352)) ([4c76623](https://github.com/SocialGouv/Tumeplay/commit/4c76623515a443e231d521025f6bda07bff7c424))
+
 # [1.92.0](https://github.com/SocialGouv/Tumeplay/compare/v1.91.0...v1.92.0) (2022-03-10)
 
 
