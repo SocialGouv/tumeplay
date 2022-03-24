@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../../../components/Text';
 import TopLevelPointIndicator from '../TopLevelPointIndicator';
@@ -9,11 +9,9 @@ import {Colors, Fonts} from '../../../styles/Style';
 import AppContext from '../../../../AppContext';
 import Container from '../../global/Container';
 import config from '../../../../config';
-import _ from 'lodash';
 import {ActivityIndicator} from 'react-native-paper';
-import Event from '../../../services/api/matomo';
 
-const QuizzAllRight = ({navigation, route, module_id}) => {
+const QuizzAllRight = ({navigation}) => {
   const context = useContext(AppContext);
   const {user} = context;
 
@@ -41,7 +39,13 @@ const QuizzAllRight = ({navigation, route, module_id}) => {
               style={styles.button}
               onPress={() =>
                 navigation.navigate('QuizzModule', {
-                  module_id: user.next_module,
+                  module_id: user.next_module.id,
+                  module_title: user.next_module.title,
+                  theme: {
+                    title: user.next_module.theme_title,
+                    image: user.next_module.theme_image,
+                    color: user.next_module.theme_color,
+                  },
                   questions: user.next_module_questions,
                   clearModuleData: true,
                 })

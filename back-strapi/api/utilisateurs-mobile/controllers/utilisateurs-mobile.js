@@ -112,7 +112,14 @@ module.exports = {
         }
       );
       const next_module = _.sample(available_modules);
-      user.next_module = _.get(next_module, "id", null);
+      user.next_module = {
+        id: _.get(next_module, "id", null),
+        title: _.get(next_module, "title", ""),
+        theme_id: _.get(next_module, "thematique_mobile.id", null),
+        theme_title: _.get(next_module, "thematique_mobile.title", " "),
+        theme_color: _.get(next_module, "thematique_mobile.color", " "),
+        theme_image: _.get(next_module, "thematique_mobile.image", ""),
+      };
       user.next_module_questions = await questionsModuleToArray(
         next_module.questions
       );
@@ -130,7 +137,28 @@ module.exports = {
         user.pending_module_questions = await questionsModuleToArray(
           pending_history.module.questions
         );
-        user.pending_module = pending_history.module.id;
+        const pending_module_id = pending_history.module.id;
+        history.pending_module = _.find(modules, { id: pending_module_id });
+        user.pending_module = {
+          id: _.get(history, "pending_module.id", null),
+          title: _.get(history, "pending_module.title", ""),
+          theme_id: _.get(history, "pending_module.thematique_mobile.id", null),
+          theme_title: _.get(
+            history,
+            "pending_module.thematique_mobile.title",
+            ""
+          ),
+          theme_color: _.get(
+            history,
+            "pending_module.thematique_mobile.color",
+            ""
+          ),
+          theme_image: _.get(
+            history,
+            "pending_module.thematique_mobile.image",
+            ""
+          ),
+        };
       }
     } else {
       user.hasFinished = true;
@@ -139,7 +167,15 @@ module.exports = {
       user.random_module_questions = await questionsModuleToArray(
         random_module.questions
       );
-      user.random_module = random_module.id;
+
+      user.random_module = {
+        id: _.get(random_module, "id", null),
+        title: _.get(random_module, "title", ""),
+        theme_id: _.get(random_module, "thematique_mobile.id", null),
+        theme_title: _.get(random_module, "thematique_mobile.title", ""),
+        theme_color: _.get(random_module, "thematique_mobile.color", ""),
+        theme_image: _.get(random_module, "thematique_mobile.image", ""),
+      };
     }
 
     const orders_count = await strapi.services["commande"].count({

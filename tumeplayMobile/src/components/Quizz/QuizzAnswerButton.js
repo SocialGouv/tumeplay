@@ -2,7 +2,6 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import config from '../../../config';
 import Text from '../../components/Text';
-import right from '../../assets/Right.png';
 import wrong from '../../assets/Wrong.png';
 
 const QuizzAnswerButton = props => {
@@ -13,8 +12,9 @@ const QuizzAnswerButton = props => {
     correctAnswer,
     hasAnswered,
     answerTrou,
-    answeredKey,
     disabled,
+    index,
+    selected,
   } = props;
 
   return (
@@ -28,8 +28,10 @@ const QuizzAnswerButton = props => {
           styles.button,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
           answerTrou ? styles.buttonTrou : '',
-          hasAnswered && answeredKey === answer.key && styles.wrongAnswer,
-          hasAnswered && answer.key === correctAnswer && styles.correctAnswer,
+          hasAnswered &&
+            answer.key !== correctAnswer &&
+            index === selected &&
+            styles.wrongAnswer,
         ]}>
         <Text
           style={[
@@ -38,14 +40,9 @@ const QuizzAnswerButton = props => {
           ]}>
           {answer.value}
         </Text>
-        {hasAnswered && answer.key === correctAnswer && (
-          <Image source={right} style={styles.image} />
+        {hasAnswered && answer.key !== correctAnswer && index === selected && (
+          <Image style={styles.image} source={wrong} />
         )}
-        {hasAnswered &&
-          answer.key !== correctAnswer &&
-          answeredKey === answer.key && (
-            <Image source={wrong} style={styles.image} />
-          )}
       </View>
     </TouchableOpacity>
   );
@@ -54,10 +51,12 @@ const QuizzAnswerButton = props => {
 const styles = StyleSheet.create({
   buttonContainerTrou: {
     width: 250,
+    alignSelf: 'center',
   },
   buttonContainer: {
     width: config.deviceWidth <= 375 ? '100%' : '50%',
     paddingHorizontal: config.deviceWidth <= 375 ? 0 : 10,
+    alignSelf: 'center',
   },
   button: {
     display: 'flex',
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: config.deviceWidth <= 375 ? 50 : 80,
-    backgroundColor: '#F3E1E8',
+    backgroundColor: '#F2E9DF',
   },
   buttonTrou: {
     height: config.deviceWidth <= 375 ? 50 : 60,
@@ -91,8 +90,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   image: {
-    alignSelf: 'center',
     marginLeft: 10,
+    width: 10,
+    height: 10,
   },
 });
 

@@ -14,9 +14,9 @@ import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
 import {WebView} from 'react-native-webview';
 import Event from '../services/api/matomo';
+import handleRedirection from '../services/handleRedirection';
 
 const HomePage = ({navigation}) => {
-  //here we calculate the number of point from the user
   const {user} = useContext(AppContext);
   const [tiktokHtmls, setTiktokHtmls] = useState([]);
   const tiktokIds = [
@@ -139,11 +139,7 @@ const HomePage = ({navigation}) => {
             left
             onPress={() => {
               Event.playEvent('home');
-              navigation.navigate('Jouer', {
-                module_id: user.next_module,
-                questions: user.nextQuestions,
-                clearModuleData: true,
-              });
+              navigation.navigate('Jouer', handleRedirection(user));
             }}
             icon
           />

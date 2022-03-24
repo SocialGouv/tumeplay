@@ -5,31 +5,33 @@ import {
   View,
   ScrollView,
   Alert,
+  Image,
 } from 'react-native';
-import bg from '../../assets/Quiiz_BG.png';
-import {Fonts} from '../../styles/Style';
+import {Colors, Fonts} from '../../styles/Style';
 import Button from '../Button';
 import QuizzAnswerButton from './QuizzAnswerButton';
-import TopLevelPointIndicator from './TopLevelPointIndicator';
+import ThemeIndicator from '../ThemeIndicator';
 import _ from 'lodash';
 import Container from '../global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
 import config from '../../../config';
 import Text from '../../components/Text';
 import * as Progress from 'react-native-progress';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppContext from '../../../AppContext';
 import {CREATE_HISTORY} from '../../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
 import GestureRecognizer from '../../lib/swipe';
+import right from '../../assets/Right.png';
+import wrong from '../../assets/Wrong.png';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
   const module_id = route?.params?.module_id;
+  const module_title = route?.params?.module_title;
+  const theme = route?.params?.theme;
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
   const retry = route?.params?.retry;
-
   const question = questions[0];
 
   const [questionTitle, setQuestionTitle] = useState(question.text_question);
@@ -38,6 +40,7 @@ const QuizzModule = ({navigation, route}) => {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [remainingQuestions, setRemainingQuestions] = useState([]);
+  const [selected, setSelected] = useState(null);
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
   const [createHistory] = useMutation(CREATE_HISTORY);
@@ -55,10 +58,11 @@ const QuizzModule = ({navigation, route}) => {
       tmpResponses?.push({key, value});
     }
     tmpResponses?.shift();
+    _.remove(tmpResponses, {key: 'w'});
     setResponses([...tmpResponses]);
   };
 
-  const displayAnswerText = answerKey => {
+  const displayAnswerText = (answerKey, index) => {
     if (answerKey === question.responses.right_answer) {
       correctAnswers.push(question);
       setCorrectAnswers([...correctAnswers]);
@@ -81,6 +85,7 @@ const QuizzModule = ({navigation, route}) => {
 
       setQuestionTitle(newTitle);
     }
+    setSelected(index);
     setAnswerKey(answerKey);
     setHasAnswered(!hasAnswered);
   };
@@ -89,13 +94,15 @@ const QuizzModule = ({navigation, route}) => {
     return (
       <QuizzAnswerButton
         answer={ans}
+        selected={selected}
+        index={index}
         correctAnswer={question.responses.right_answer}
         hasAnswered={hasAnswered}
         disabled={hasAnswered}
-        key={ans.key}
+        key={index}
         answerTrou={question.kind === 'Trou'}
         answeredKey={answeredKey}
-        onPress={() => displayAnswerText(ans.key)}
+        onPress={() => displayAnswerText(ans.key, index)}
       />
     );
   });
@@ -106,13 +113,16 @@ const QuizzModule = ({navigation, route}) => {
         correctAnswers: correctAnswers,
         wrongAnswers: wrongAnswers,
         module_id: module_id,
+        theme: theme,
         retry,
       });
     } else {
       setshowAnswer(false);
       navigation.navigate('QuizzModule', {
         questions: _.shuffle(remainingQuestions),
+        theme: theme,
         module_id: module_id,
+        module_title: module_title,
       });
       setHasAnswered(!hasAnswered);
     }
@@ -184,35 +194,38 @@ const QuizzModule = ({navigation, route}) => {
       config={swipeConfig}
       onSwipeLeft={() => navigation.navigate('Home', {screen: 'Accueil'})}
       onSwipeRight={() => navigation.navigate('Home', {screen: 'Accueil'})}>
-      <View style={styles.bgContainer}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          showsVerticalScrollIndicator={false}>
-          <Container background={bg} style={styles.container}>
-            <View style={styles.levelIndicator}>
-              <TouchableOpacity
-                style={styles.chevron}
-                onPress={() =>
-                  navigation.navigate('Home', {screen: 'Accueil'})
-                }>
-                <Icon name="chevron-small-left" size={40} color="#000" />
-                <Text>Retour</Text>
-              </TouchableOpacity>
-              <TopLevelPointIndicator />
-            </View>
-            <View style={styles.stepIndicatorContainer}>
+      <Container style={styles.container}>
+        <View style={styles.topContainer}>
+          <View style={styles.levelIndicator}>
+            <TouchableOpacity
+              style={styles.chevron}
+              onPress={() => navigation.navigate('Home', {screen: 'Accueil'})}>
+              <Icon name="chevron-small-left" size={40} color="#000" />
+              <Text>Retour</Text>
+            </TouchableOpacity>
+            <ThemeIndicator theme={theme} />
+          </View>
+          <View style={styles.stepIndicatorContainer}>
+            <Text style={styles.moduleTitle}>{module_title}</Text>
+            <View style={styles.progressionContainer}>
               <Progress.Circle
                 showsText={true}
                 borderWidth={0}
                 thickness={5}
-                formatText={() => questions.length}
-                unfilledColor={'#FFFFFF80'}
+                formatText={() => {
+                  return `${correctAnswers.length + wrongAnswers.length} / ${
+                    fullQuizzLength.current
+                  }`;
+                }}
                 textStyle={styles.stepIndicator}
+                unfilledColor={'#FFFFFF80'}
                 progress={progress}
                 size={60}
-                color={'#EC6233'}
+                color={'#51B070'}
               />
             </View>
+          </View>
+          <View style={styles.questionContainer}>
             {question.kind === 'Trou' && (
               <Text style={styles.completeText}>Complète cette phrase</Text>
             )}
@@ -222,29 +235,42 @@ const QuizzModule = ({navigation, route}) => {
                 styles.answersContainer,
                 question.kind === 'Trou' ? styles.answersContainerTrou : '',
               ]}>
-              {displayAnswer}
+              <ScrollView style={{width: '100%'}}>{displayAnswer}</ScrollView>
             </View>
-            {hasAnswered ? (
-              <View style={styles.answerContainer}>
-                <Text style={styles.textAnswer}>
-                  {!showAnswer && question?.text_answer}
-                </Text>
-              </View>
-            ) : null}
-          </Container>
-        </ScrollView>
+          </View>
+        </View>
         {hasAnswered ? (
-          <View style={styles.buttonContainer}>
-            <Button
-              text={'Suivant'}
-              size="large"
-              icon={true}
-              style={styles.bottomButton}
-              onPress={() => goToNextQuestion()}
-            />
+          <View style={styles.bottomContainer}>
+            {answeredKey === question.responses.right_answer ? (
+              <View style={styles.responseContainer}>
+                <Image style={styles.bottomImage} source={right} />
+                <Text style={styles.answerTitle}> Bonne réponse !</Text>
+              </View>
+            ) : (
+              <View style={styles.responseContainer}>
+                <Image style={styles.bottomImage} source={wrong} />
+                <Text style={styles.answerTitle}>Mauvaise réponse</Text>
+              </View>
+            )}
+            <ScrollView>
+              <Text style={styles.textAnswer}>
+                {!showAnswer && question?.text_answer}
+              </Text>
+            </ScrollView>
           </View>
         ) : null}
-      </View>
+      </Container>
+      {hasAnswered ? (
+        <View style={styles.buttonContainer}>
+          <Button
+            text={'Suivant'}
+            size="large"
+            icon={true}
+            style={styles.bottomButton}
+            onPress={() => goToNextQuestion()}
+          />
+        </View>
+      ) : null}
     </GestureRecognizer>
   );
 };
@@ -253,19 +279,14 @@ const styles = StyleSheet.create({
   swipeContainer: {
     flex: 1,
   },
-  bgContainer: {
-    flex: 1,
-    backgroundColor: '#F9EEF2',
-  },
-  scrollContainer: {
-    flex: 1,
-    alignContent: 'center',
-    paddingBottom: 60,
-  },
   container: {
-    height: '100%',
+    flex: 1,
     alignItems: 'flex-start',
-    paddingHorizontal: 16,
+  },
+  topContainer: {
+    flex: 0.7,
+    backgroundColor: Colors.background,
+    paddingBottom: 60,
   },
   levelIndicator: {
     width: '100%',
@@ -273,7 +294,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 26,
   },
   chevron: {
     flexDirection: 'row',
@@ -282,44 +302,53 @@ const styles = StyleSheet.create({
   stepIndicatorContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    marginBottom: 16,
+    width: config.deviceWidth,
+    marginBottom: 20,
+  },
+  progressionContainer: {
+    flexDirection: 'row',
+  },
+  moduleTitle: {
+    paddingVertical: 10,
+    fontWeight: '500',
+    fontSize: config.deviceWidth * 0.03,
   },
   stepIndicator: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: config.deviceWidth * 0.03,
     color: Colors.black,
+    fontWeight: '700',
   },
   indicator: {
-    fontFamily: Fonts.subtitle,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
   },
   question: {
-    marginBottom: 10,
+    paddingHorizontal: 16,
     fontFamily: Fonts.subtitle,
-    fontSize: config.deviceWidth <= 400 ? 16 : 22,
-    lineHeight: 24,
+    fontSize: config.deviceWidth <= 400 ? 20 : 22,
+    lineHeight: 30,
     fontWeight: '700',
   },
   answersContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
     alignContent: 'center',
-    marginHorizontal: config.deviceWidth <= 400 ? 0 : -10,
+    marginHorizontal: config.deviceWidth <= 400 ? 10 : -10,
   },
   answersContainerTrou: {
     flexDirection: 'column',
     marginTop: 30,
   },
+
   textAnswer: {
     marginTop: 10,
     marginBottom: 20,
     textAlign: 'left',
+    paddingLeft: 26,
+    fontWeight: '500',
+    fontSize: config.deviceWidth * 0.035,
   },
   buttonContainer: {
     paddingHorizontal: 15,
@@ -336,11 +365,31 @@ const styles = StyleSheet.create({
   action: {
     fontWeight: '600',
   },
+  questionContainer: {
+    width: config.deviceWidth,
+  },
   completeText: {
-    width: '100%',
     textAlign: 'center',
     fontSize: 18,
     marginBottom: 18,
+  },
+  bottomContainer: {
+    width: config.deviceWidth,
+    backgroundColor: '#FFF',
+    flex: 0.3,
+    paddingHorizontal: 24,
+    paddingVertical: 10,
+  },
+  responseContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    textAlignVertical: 'center',
+    alignItems: 'center',
+  },
+  answerTitle: {
+    fontSize: config.deviceWidth * 0.045,
+    fontWeight: '700',
+    paddingLeft: 14,
   },
 });
 
