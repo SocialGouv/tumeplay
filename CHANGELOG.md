@@ -1,3 +1,10 @@
+# [1.95.0](https://github.com/SocialGouv/Tumeplay/compare/v1.94.0...v1.95.0) (2022-03-24)
+
+
+### Features
+
+* init map and MR process ([#356](https://github.com/SocialGouv/Tumeplay/issues/356)) ([a7303ce](https://github.com/SocialGouv/Tumeplay/commit/a7303ce4d7bb17839a3d1438a5b2f994bd2b41cb))
+
 # [1.94.0](https://github.com/SocialGouv/Tumeplay/compare/v1.93.0...v1.94.0) (2022-03-24)
 
 
