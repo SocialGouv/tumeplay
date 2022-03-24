@@ -1,3 +1,10 @@
+# [1.94.0](https://github.com/SocialGouv/Tumeplay/compare/v1.93.0...v1.94.0) (2022-03-24)
+
+
+### Features
+
+* init process to retrieve theme from quizzloader component ([#357](https://github.com/SocialGouv/Tumeplay/issues/357)) ([ab00587](https://github.com/SocialGouv/Tumeplay/commit/ab005879f2511379f20f47f7951ccecabb736fb5))
+
 # [1.93.0](https://github.com/SocialGouv/Tumeplay/compare/v1.92.0...v1.93.0) (2022-03-24)
 
 
