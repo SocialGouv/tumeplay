@@ -49,14 +49,16 @@ const ContentPage = ({navigation, route}) => {
 
   const saveContentID = async () => {
     let tmpContent_ids = [...readContentIDs];
-    tmpContent_ids.push(current_content_id);
-    tmpContent_ids = _.uniq(tmpContent_ids);
-    await EncryptedStorage.setItem(
-      'readContentIDs',
-      JSON.stringify({
-        content_ids: tmpContent_ids,
-      }),
-    );
+    if (!tmpContent_ids.includes(current_content_id)) {
+      tmpContent_ids.push(current_content_id);
+      tmpContent_ids = _.uniq(tmpContent_ids);
+      await EncryptedStorage.setItem(
+        'readContentIDs',
+        JSON.stringify({
+          content_ids: tmpContent_ids,
+        }),
+      );
+    }
   };
 
   const retrieveReadContentIds = async () => {
@@ -69,14 +71,6 @@ const ContentPage = ({navigation, route}) => {
     }
     setDisplayReadIndicator(_.includes(readContentIDs, current_content_id));
   };
-
-  const clearStorage = async () => {
-    await EncryptedStorage.removeItem('readContentIDs');
-  };
-
-  // useEffect(() => {
-  //   clearStorage();
-  // }, []);
 
   useEffect(() => {
     retrieveReadContentIds();
