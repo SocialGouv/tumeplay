@@ -113,12 +113,12 @@ module.exports = {
       );
       const next_module = _.sample(available_modules);
       user.next_module = {
-        id: next_module.id,
-        title: next_module.title,
-        theme_id: next_module.thematique_mobile.id,
-        theme_title: next_module.thematique_mobile.title,
-        theme_color: next_module.thematique_mobile.color,
-        theme_image: next_module.thematique_mobile.image,
+        id: _.get(next_module, "id", null),
+        title: _.get(next_module, "title", ""),
+        theme_id: _.get(next_module, "thematique_mobile.id", null),
+        theme_title: _.get(next_module, "thematique_mobile.title", " "),
+        theme_color: _.get(next_module, "thematique_mobile.color", " "),
+        theme_image: _.get(next_module, "thematique_mobile.image", ""),
       };
       user.next_module_questions = await questionsModuleToArray(
         next_module.questions
@@ -140,12 +140,24 @@ module.exports = {
         const pending_module_id = pending_history.module.id;
         history.pending_module = _.find(modules, { id: pending_module_id });
         user.pending_module = {
-          id: history.pending_module.id,
-          title: history.pending_module.title,
-          theme_id: history.pending_module.thematique_mobile.id,
-          theme_title: history.pending_module.thematique_mobile.title,
-          theme_color: history.pending_module.thematique_mobile.color,
-          theme_image: history.pending_module.thematique_mobile.image,
+          id: _.get(history, "pending_module.id", null),
+          title: _.get(history, "pending_module.title", ""),
+          theme_id: _.get(history, "pending_module.thematique_mobile.id", null),
+          theme_title: _.get(
+            history,
+            "pending_module.thematique_mobile.title",
+            ""
+          ),
+          theme_color: _.get(
+            history,
+            "pending_module.thematique_mobile.color",
+            ""
+          ),
+          theme_image: _.get(
+            history,
+            "pending_module.thematique_mobile.image",
+            ""
+          ),
         };
       }
     } else {
@@ -157,12 +169,12 @@ module.exports = {
       );
 
       user.random_module = {
-        id: random_module.id,
-        title: random_module.title,
-        theme_id: random_module.thematique_mobile.id,
-        theme_title: random_module.thematique_mobile.title,
-        theme_color: random_module.thematique_mobile.color,
-        theme_image: random_module.thematique_mobile.image,
+        id: _.get(random_module, "id", null),
+        title: _.get(random_module, "title", ""),
+        theme_id: _.get(random_module, "thematique_mobile.id", null),
+        theme_title: _.get(random_module, "thematique_mobile.title", ""),
+        theme_color: _.get(random_module, "thematique_mobile.color", ""),
+        theme_image: _.get(random_module, "thematique_mobile.image", ""),
       };
     }
 
