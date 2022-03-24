@@ -4,7 +4,8 @@ import Text from '../components/Text';
 import {Fonts} from '../styles/Style';
 
 const ThemeCard = props => {
-  const {theme, backgroundColor, borderColors, image, navigation} = props;
+  const {theme, backgroundColor, borderColors, image, navigation, thematiques} =
+    props;
 
   return (
     <TouchableOpacity
@@ -20,8 +21,9 @@ const ThemeCard = props => {
       onPress={() => {
         navigation.navigate('ContentsPage', {
           theme_id: theme.id,
+          theme_title: theme.title,
           backgroundColor: backgroundColor,
-          image: image,
+          thematiques: thematiques,
         });
       }}>
       <Image style={styles.image} source={{uri: image}} />

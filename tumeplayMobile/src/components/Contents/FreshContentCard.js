@@ -16,6 +16,8 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
         navigation.navigate('Content', {
           content_id: content.id,
           content_ids: freshContentsIds,
+          theme_id: content.theme.id,
+          level: content.niveau.value,
         })
       }>
       <View>

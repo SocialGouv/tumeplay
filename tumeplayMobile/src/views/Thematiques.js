@@ -27,6 +27,7 @@ export default function Thematiques(props) {
         key={item.id}
         index={index}
         theme={item}
+        thematiques={thematiques}
         backgroundColor={item.color}
         borderColors={item.border_color}
         image={REACT_APP_URL + item.image?.url}
@@ -99,6 +100,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // justifyContent: 'center',
   },
 });
