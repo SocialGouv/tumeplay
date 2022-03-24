@@ -1,25 +1,34 @@
 import {Modal, StyleSheet, View, useWindowDimensions} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '../Button';
 import RenderHTML from 'react-native-render-html';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Fonts} from '../../styles/Style';
 
 const CustomModal = props => {
-  const {isVisible, animation, html, onPress} = props;
-  const [displayModal, setDisplayModal] = useState(isVisible);
+  const {isVisible, animation, html, onPress, setIsVisible} = props;
   const {width} = useWindowDimensions();
+
+  const onText = text => {
+    if (text.data === ',') {
+      text.data = text.data.replace(/[,]/g, '');
+    }
+  };
+
+  const domVisitors = {
+    onText: onText,
+  };
 
   return (
     <Modal
       style={styles.container}
       animationType={animation}
-      visible={displayModal}
+      visible={isVisible}
       transparent={true}>
       <View
         style={[
           styles.fullView,
-          displayModal ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
+          isVisible ? {backgroundColor: 'rgba(0,0,0,0.6)'} : '',
         ]}
       />
       <View style={styles.view}>
@@ -32,6 +41,7 @@ const CustomModal = props => {
         <RenderHTML
           contentWidth={width}
           source={html}
+          domVisitors={domVisitors}
           baseStyle={styles.htmlText}
         />
         <Button
@@ -40,7 +50,7 @@ const CustomModal = props => {
           text="Ok, j'ai compris"
           onPress={() => {
             onPress;
-            setDisplayModal(!isVisible);
+            setIsVisible(!isVisible);
           }}
         />
       </View>

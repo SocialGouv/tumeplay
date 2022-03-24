@@ -14,6 +14,8 @@ import {Divider} from 'react-native-paper';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
+import PickupOrder from '../components/Orders/Pickup/PickupOrder';
+import PickupOrderUserInfos from '../components/Orders/Pickup/PickupOrderUserInfos';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -28,6 +30,7 @@ const Box = ({navigation, route}) => {
   const [userAdressInformations, setUserAdressInformations] = useState();
   const [orderConfirm, setOrderConfirm] = useState(false);
   const [toolTipVisible, setToolTipVisible] = useState(false);
+  const [selectedPOI, setSelectedPOI] = useState(null);
 
   return (
     <Container style={styles.container}>
@@ -85,7 +88,7 @@ const Box = ({navigation, route}) => {
                 placement="bottom"
                 onClose={() => setToolTipVisible(false)}>
                 <TouchableOpacity
-                  onPress={() => setToolTipVisible(true)}
+                  onPress={() => setDeliveryMode('pickup')}
                   style={[
                     styles.buttons,
                     styles.buttonRight,
@@ -109,23 +112,37 @@ const Box = ({navigation, route}) => {
         )}
       </View>
       <View style={styles.inputContainer}>
-        {deliveryMode === 'home' && !orderConfirm ? (
-          <HomeOrdersInput
+        {deliveryMode === 'home' ? (
+          deliveryMode === 'home' && !orderConfirm ? (
+            <HomeOrdersInput
+              userInfos={userInfos}
+              setUserInfos={setUserInfos}
+              setOrderConfirm={setOrderConfirm}
+              setUserAdressInformations={setUserAdressInformations}
+            />
+          ) : (
+            <>
+              <OrderConfirm
+                userInfos={userInfos}
+                setOrderConfirm={setOrderConfirm}
+                deliveryMode={deliveryMode}
+                userAdressInformations={userAdressInformations}
+                box={box}
+              />
+            </>
+          )
+        ) : deliveryMode === 'pickup' && selectedPOI === null ? (
+          <PickupOrder setSelectedPOI={setSelectedPOI} />
+        ) : (
+          <PickupOrderUserInfos
+            selectedPOI={selectedPOI}
             userInfos={userInfos}
+            orderConfirm={orderConfirm}
             setUserInfos={setUserInfos}
             setOrderConfirm={setOrderConfirm}
-            setUserAdressInformations={setUserAdressInformations}
+            setSelectedPOI={setSelectedPOI}
+            box={box}
           />
-        ) : (
-          <>
-            <OrderConfirm
-              userInfos={userInfos}
-              setOrderConfirm={setOrderConfirm}
-              deliveryMode={deliveryMode}
-              userAdressInformations={userAdressInformations}
-              box={box}
-            />
-          </>
         )}
       </View>
     </Container>

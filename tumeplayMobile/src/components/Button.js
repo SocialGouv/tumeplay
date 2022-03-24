@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
-import {Colors, Fonts} from '../styles/Style';
+import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
 
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: config.deviceWidth * 0.045,
     lineHeight: 24,
-    fontFamily: Fonts.strongText,
     fontWeight: '600',
     letterSpacing: 0.6,
     paddingHorizontal: 5,

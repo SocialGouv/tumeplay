@@ -1,7 +1,8 @@
-import {Modal, View, StyleSheet, Text} from 'react-native';
+import {Modal, View, StyleSheet} from 'react-native';
 import React from 'react';
 import {Fonts} from '../../styles/Style';
 import Button from '../Button';
+import Text from '../../components/Text';
 
 const OrderConfirmModal = props => {
   const {isVisible, animation, onPress} = props;

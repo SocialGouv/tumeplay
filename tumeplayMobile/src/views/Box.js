@@ -12,6 +12,7 @@ const Box = ({navigation}) => {
   const {data, loading} = useQuery(GET_BOXES);
   const [boxes, setBoxes] = useState([]);
   const [confirmation, setConfirmation] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (!loading && data) {
@@ -58,7 +59,8 @@ const Box = ({navigation}) => {
       {!confirmation && (
         <View style={styles.modalBackground}>
           <CustomModal
-            isVisible={true}
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
             html={htmlText}
             style={styles.text}
             onPress={() => {
