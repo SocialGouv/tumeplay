@@ -1,3 +1,10 @@
+## [1.95.4](https://github.com/SocialGouv/Tumeplay/compare/v1.95.3...v1.95.4) (2022-03-25)
+
+
+### Bug Fixes
+
+* fixing user.permission position for build purpose ([4dd03b9](https://github.com/SocialGouv/Tumeplay/commit/4dd03b9e12fa7e92baa17f9984ac29d62968f4d2))
+
 ## [1.95.3](https://github.com/SocialGouv/Tumeplay/compare/v1.95.2...v1.95.3) (2022-03-25)
 
 
