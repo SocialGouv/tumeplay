@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+    opacity: 1,
+    zIndex: 2,
   },
 });
 
