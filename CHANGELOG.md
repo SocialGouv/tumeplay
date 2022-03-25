@@ -1,3 +1,10 @@
+## [1.95.1](https://github.com/SocialGouv/Tumeplay/compare/v1.95.0...v1.95.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* fixing small items before test release ([5a46dbf](https://github.com/SocialGouv/Tumeplay/commit/5a46dbf106d98c47a5e664921e1379e632d7006b))
+
 # [1.95.0](https://github.com/SocialGouv/Tumeplay/compare/v1.94.0...v1.95.0) (2022-03-24)
 
 
