@@ -9,7 +9,7 @@ const ThemeIndicator = props => {
   return (
     <View style={[styles.container, {backgroundColor: theme?.color}]}>
       <Image
-        source={`${REACT_APP_URL}${theme?.image?.url}`}
+        source={{uri: `${REACT_APP_URL}${theme?.image?.url}`}}
         style={{width: 30, height: 30}}
       />
       <TextBase>{theme?.title}</TextBase>

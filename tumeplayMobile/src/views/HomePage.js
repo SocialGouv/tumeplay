@@ -120,6 +120,8 @@ const HomePage = ({navigation}) => {
     });
   };
 
+  console.log(user);
+
   return (
     <ScrollView>
       <Container background={null} style={styles.container}>
