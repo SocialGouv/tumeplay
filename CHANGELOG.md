@@ -1,3 +1,10 @@
+## [1.95.3](https://github.com/SocialGouv/Tumeplay/compare/v1.95.2...v1.95.3) (2022-03-25)
+
+
+### Bug Fixes
+
+* fixing ZIndex on read indicator ([#358](https://github.com/SocialGouv/Tumeplay/issues/358)) ([61051a3](https://github.com/SocialGouv/Tumeplay/commit/61051a3efd1680e0bfd4290566ee74d0ba765dd7))
+
 ## [1.95.2](https://github.com/SocialGouv/Tumeplay/compare/v1.95.1...v1.95.2) (2022-03-25)
 
 
