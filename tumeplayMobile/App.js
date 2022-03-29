@@ -22,8 +22,11 @@ import {Colors} from './src/styles/Style';
 import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID, SENTRI_URL} from '@env';
 import Matomo from 'react-native-matomo';
 import Loader from './src/components/global/Loader';
+import {TourGuideProvider} from 'rn-tourguide';
 
 import * as Sentry from '@sentry/react-native';
+import Copilot from './src/components/Copilot/Copilot';
+import CustomToolTip from './src/components/Copilot/CustomToolTip';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -119,46 +122,56 @@ const App = () => {
   };
 
   return (
-    <AppContext.Provider value={contextValues}>
-      {!isUserLoaded && <Loader />}
-      {isUserLoaded && !user?.isOnboarded && (
-        <Onboarding user={user} setUser={setUser} />
-      )}
-      {isUserLoaded && user?.isOnboarded && !user?.isSignedUp && (
-        <Signup user={user} setUser={setUser} />
-      )}
-      {user?.isOnboarded && user?.isSignedUp && (
-        <NavigationContainer theme={navTheme}>
-          <NavigationStack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}>
-            <NavigationStack.Screen name="Home" component={Navbar} />
-            <NavigationStack.Screen
-              name="ContentsPage"
-              component={ContentsPage}
-            />
-            <NavigationStack.Screen name="Content" component={ContentPage} />
-            <NavigationStack.Screen
-              name="QuizzStartPage"
-              component={QuizzStartPage}
-            />
-            <NavigationStack.Screen
-              name="QuizzModule"
-              component={QuizzModule}
-            />
-            <NavigationStack.Screen
-              name="QuizzFinishScreen"
-              component={QuizzFinishScreen}
-            />
-            <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
-            <NavigationStack.Screen name="Box" component={Box} />
-            <NavigationStack.Screen name="Parcours" component={Journey} />
-            <NavigationStack.Screen name="Award" component={Award} />
-          </NavigationStack.Navigator>
-        </NavigationContainer>
-      )}
-    </AppContext.Provider>
+    <TourGuideProvider
+      dismissOnPress={true}
+      tooltipComponent={CustomToolTip}
+      verticalOffset={-10}
+      animationDuration={300}>
+      <AppContext.Provider value={contextValues}>
+        {!isUserLoaded && <Loader />}
+        {isUserLoaded && !user?.isOnboarded && (
+          <Onboarding user={user} setUser={setUser} />
+        )}
+        {isUserLoaded && user?.isOnboarded && !user?.isSignedUp && (
+          <Signup user={user} setUser={setUser} />
+        )}
+        {isUserLoaded &&
+          user?.isSignedUp &&
+          user?.isSignedUp &&
+          !user?.has_followed_tutorial && <Copilot />}
+        {user?.isOnboarded && user?.isSignedUp && user?.has_followed_tutorial && (
+          <NavigationContainer theme={navTheme}>
+            <NavigationStack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}>
+              <NavigationStack.Screen name="Home" component={Navbar} />
+              <NavigationStack.Screen
+                name="ContentsPage"
+                component={ContentsPage}
+              />
+              <NavigationStack.Screen name="Content" component={ContentPage} />
+              <NavigationStack.Screen
+                name="QuizzStartPage"
+                component={QuizzStartPage}
+              />
+              <NavigationStack.Screen
+                name="QuizzModule"
+                component={QuizzModule}
+              />
+              <NavigationStack.Screen
+                name="QuizzFinishScreen"
+                component={QuizzFinishScreen}
+              />
+              <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
+              <NavigationStack.Screen name="Box" component={Box} />
+              <NavigationStack.Screen name="Parcours" component={Journey} />
+              <NavigationStack.Screen name="Award" component={Award} />
+            </NavigationStack.Navigator>
+          </NavigationContainer>
+        )}
+      </AppContext.Provider>
+    </TourGuideProvider>
   );
 };
 

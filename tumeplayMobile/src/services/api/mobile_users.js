@@ -53,6 +53,7 @@ export const POST_MOBILE_USER = gql`
     $isOnboarded: Boolean!
     $isSignedUp: Boolean!
     $isUnder25: Boolean!
+    $has_followed_tutorial: Boolean!
     $ageRange: String!
     $region: String!
     $user_id: String!
@@ -66,6 +67,7 @@ export const POST_MOBILE_USER = gql`
           isUnder25: $isUnder25
           ageRange: $ageRange
           region: $region
+          has_followed_tutorial: $has_followed_tutorial
           user_id: $user_id
         }
       }
@@ -78,6 +80,47 @@ export const POST_MOBILE_USER = gql`
         isUnder25
         ageRange
         region
+      }
+    }
+  }
+`;
+
+export const UPDATE_MOBILE_USER = gql`
+  mutation UpdateMobileUser(
+    $first_name: String!
+    $isOnboarded: Boolean!
+    $isSignedUp: Boolean!
+    $isUnder25: Boolean!
+    $has_followed_tutorial: Boolean!
+    $ageRange: String!
+    $region: String!
+    $user_id: String!
+    $id: ID!
+  ) {
+    updateUtilisateursMobile(
+      input: {
+        where: {id: $id}
+        data: {
+          first_name: $first_name
+          isOnboarded: $isOnboarded
+          isSignedUp: $isSignedUp
+          isUnder25: $isUnder25
+          ageRange: $ageRange
+          region: $region
+          has_followed_tutorial: $has_followed_tutorial
+          user_id: $user_id
+        }
+      }
+    ) {
+      utilisateursMobile {
+        user_id
+        first_name
+        isOnboarded
+        isSignedUp
+        isUnder25
+        ageRange
+        region
+        has_followed_tutorial
       }
     }
   }

@@ -269,9 +269,9 @@ const styles = StyleSheet.create({
   title: {
     width: '80%',
     height: '100%',
-    fontFamily: Fonts.title,
     paddingLeft: 40,
     zIndex: 2,
+    fontWeight: '800',
   },
   smallTitle: {
     fontSize: config.deviceWidth <= 400 ? 20 : 30,
