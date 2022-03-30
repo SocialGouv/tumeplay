@@ -15,6 +15,8 @@ import {GET_LEVELS} from '../services/api/levels';
 import {GET_COLOR_THEME} from '../services/api/themes';
 import config from '../../config';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import Snackbar from '../components/Contents/Snackbar';
+import handleRedirection from '../services/handleRedirection';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -174,6 +176,9 @@ const ContentsPage = props => {
           keyExtractor={item => item.id}
         />
         {/* </View> */}
+        {user.level < selectedLevel && (
+          <Snackbar module={handleRedirection(user)} navigation={navigation} />
+        )}
       </GestureRecognizer>
     </Container>
   );

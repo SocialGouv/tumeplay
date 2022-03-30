@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '../../config';
@@ -45,12 +45,14 @@ const Button = props => {
           name="play"
           size={22}
           color={special ? '#000' : '#fff'}
-          style={styles.icon}
+          style={styles.playIcon}
         />
       )}
-      <Text style={[styles.text, styleText, special && {color: '#000'}]}>
-        {text}
-      </Text>
+      {text !== '' && (
+        <Text style={[styles.text, styleText, special && {color: '#000'}]}>
+          {text}
+        </Text>
+      )}
       {!left && icon && (
         <Icon
           name="md-arrow-forward"
@@ -125,6 +127,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 8,
+  },
+  playIcon: {
+    alignSelf: 'center',
+    textAlignVertical: 'center',
   },
 });
 
