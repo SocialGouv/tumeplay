@@ -1,29 +1,20 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import Button from '../Button';
-import Event from '../../services/api/matomo';
 
 const Snackbar = props => {
-  const {module, navigation} = props;
-
-  const handleNavigation = () => {
-    Event.playEvent('Snackbar');
-    navigation.navigate('Jouer', module);
-  };
+  const {text, onPress} = props;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Plus que quelques quizz à répondre pour débloquer ce niveau, vas-y fonce
-        ! 🙂
-      </Text>
+      <Text style={styles.text}>{text}</Text>
       <Button
         special
         style={styles.button}
         icon
         left
         text=""
-        onPress={() => handleNavigation()}
+        onPress={onPress}
       />
     </View>
   );
