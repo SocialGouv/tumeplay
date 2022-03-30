@@ -59,6 +59,7 @@ const ContentPage = ({navigation, route}) => {
         }),
       );
     }
+    Event.contentRead(current_content_id);
   };
 
   const retrieveReadContentIds = async () => {
