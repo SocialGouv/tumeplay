@@ -1,11 +1,13 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import Button from '../Button';
+import Event from '../../services/api/matomo';
 
 const Snackbar = props => {
   const {module, navigation} = props;
 
   const handleNavigation = () => {
+    Event.playEvent('Snackbar');
     navigation.navigate('Jouer', module);
   };
 
