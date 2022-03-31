@@ -6,6 +6,12 @@ platform :ios, '11.0'
 target 'tumeplayMobile' do
   config = use_native_modules!
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+    pod 'Permission-LocationAccuracy', :path => "#{permissions_path}/LocationAccuracy"
+  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods

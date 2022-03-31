@@ -22,6 +22,7 @@ import Text from '../../Text';
 import _ from 'lodash';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Button from '../../Button';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const PickupOrder = props => {
   const {setSelectedPOI} = props;
@@ -40,10 +41,7 @@ const PickupOrder = props => {
     longitudeDelta: delta.longitudeDelta,
   });
 
-  const [currentUserPosition, setCurrentUserPosition] = useState({
-    latitude: 48.856614,
-    longitude: 2.3522219,
-  });
+  const [currentUserPosition, setCurrentUserPosition] = useState(null);
   const [geolocationGranted, setGeolocationGranted] = useState(false);
 
   const [currentPOI, setCurrentPOI] = useState(null);
@@ -93,28 +91,47 @@ const PickupOrder = props => {
     }
   };
 
+  const getUserGeolocation = () => {
+    Geolocation.getCurrentPosition(
+      info => {
+        let tmpCoordinates = {};
+        tmpCoordinates.latitude = info.coords.latitude;
+        tmpCoordinates.longitude = info.coords.longitude;
+        tmpCoordinates.latitudeDelta = delta.latitudeDelta;
+        tmpCoordinates.longitudeDelta = delta.longitudeDelta;
+        setCoordinates({
+          ...tmpCoordinates,
+        });
+        setCurrentUserPosition({
+          ...{
+            latitude: tmpCoordinates.latitude,
+            longitude: tmpCoordinates.longitude,
+          },
+        });
+      },
+      error => {
+        console.log('ERROR', error);
+      },
+    );
+  };
+
   useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      let tmpCoordinates = {};
-      tmpCoordinates.latitude = info.coords.latitude;
-      tmpCoordinates.longitude = info.coords.longitude;
-      tmpCoordinates.latitudeDelta = delta.latitudeDelta;
-      tmpCoordinates.longitudeDelta = delta.longitudeDelta;
-      setCoordinates({
-        ...tmpCoordinates,
-      });
-      setCurrentUserPosition({
-        ...{
-          latitude: tmpCoordinates.latitude,
-          longitude: tmpCoordinates.longitude,
-        },
-      });
-      setGeolocationGranted(true);
+    getUserGeolocation();
+  }, [geolocationGranted]);
+
+  useEffect(() => {
+    request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(statues => {
+      if (statues === 'granted') {
+        setGeolocationGranted(true);
+      }
     });
-    if (coordinates) {
+  }, []);
+
+  useEffect(() => {
+    if (currentUserPosition) {
       fetchPOI();
     }
-  }, []);
+  }, [coordinates, currentUserPosition]);
 
   useEffect(() => {
     fetchPOI();
@@ -280,7 +297,7 @@ const PickupOrder = props => {
           },
         }}
       />
-      {displayMap && (
+      {(displayMap || geolocationGranted) && (
         <>
           <MapView
             region={{
