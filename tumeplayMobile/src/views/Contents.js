@@ -15,6 +15,9 @@ import {GET_LEVELS} from '../services/api/levels';
 import {GET_COLOR_THEME} from '../services/api/themes';
 import config from '../../config';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import Snackbar from '../components/Contents/Snackbar';
+import handleRedirection from '../services/handleRedirection';
+import Event from '../services/api/matomo';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -126,6 +129,12 @@ const ContentsPage = props => {
     );
   };
 
+  const handleSnackBarQuizzLaunch = () => {
+    let module = handleRedirection(user);
+    Event.playEvent('Snackbar');
+    navigation.navigate('Jouer', module);
+  };
+
   return (
     <Container style={styles.container}>
       <GestureRecognizer
@@ -174,6 +183,13 @@ const ContentsPage = props => {
           keyExtractor={item => item.id}
         />
         {/* </View> */}
+        {user.level < selectedLevel && (
+          <Snackbar
+            onPress={() => handleSnackBarQuizzLaunch()}
+            text="  Plus que quelques quizz à répondre pour débloquer ce niveau, vas-y fonce
+        ! 🙂"
+          />
+        )}
       </GestureRecognizer>
     </Container>
   );
