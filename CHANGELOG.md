@@ -1,3 +1,12 @@
+# [1.97.0](https://github.com/SocialGouv/Tumeplay/compare/v1.96.0...v1.97.0) (2022-04-04)
+
+
+### Features
+
+* adding matomo tracker to read contents ([#361](https://github.com/SocialGouv/Tumeplay/issues/361)) ([f5e1093](https://github.com/SocialGouv/Tumeplay/commit/f5e10930f92f6b1be5e5340f6fb6ce1f91585bdd))
+* create snackbar for quizz redirection ([#360](https://github.com/SocialGouv/Tumeplay/issues/360)) ([870c08e](https://github.com/SocialGouv/Tumeplay/commit/870c08e8e3547e2db521bf0020aac90feb30d48a))
+* creating tutorial process inside app on first connexion ([#359](https://github.com/SocialGouv/Tumeplay/issues/359)) ([638f421](https://github.com/SocialGouv/Tumeplay/commit/638f421ca73106b51eb0d0d97f766852fbf5f918))
+
 # [1.96.0](https://github.com/SocialGouv/Tumeplay/compare/v1.95.4...v1.96.0) (2022-03-25)
 
 
