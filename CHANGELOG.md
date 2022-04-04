@@ -1,3 +1,10 @@
+## [1.97.1](https://github.com/SocialGouv/Tumeplay/compare/v1.97.0...v1.97.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* fixing geolocation request and map udpating when user grants per… ([#362](https://github.com/SocialGouv/Tumeplay/issues/362)) ([73921af](https://github.com/SocialGouv/Tumeplay/commit/73921af8916990d46d792f7a104a62424ace02c5))
+
 # [1.97.0](https://github.com/SocialGouv/Tumeplay/compare/v1.96.0...v1.97.0) (2022-04-04)
 
 
