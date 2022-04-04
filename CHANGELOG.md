@@ -1,3 +1,10 @@
+## [1.97.2](https://github.com/SocialGouv/Tumeplay/compare/v1.97.1...v1.97.2) (2022-04-04)
+
+
+### Bug Fixes
+
+* position of the tooltips on Android ([#363](https://github.com/SocialGouv/Tumeplay/issues/363)) ([528bd27](https://github.com/SocialGouv/Tumeplay/commit/528bd27c317257a5f7a0d467ed98723b25938ac2))
+
 ## [1.97.1](https://github.com/SocialGouv/Tumeplay/compare/v1.97.0...v1.97.1) (2022-04-04)
 
 
