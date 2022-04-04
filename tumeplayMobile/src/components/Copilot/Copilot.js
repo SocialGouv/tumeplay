@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Platform} from 'react-native';
 import React, {useEffect, useContext} from 'react';
 import HomePage from '../../views/HomePage';
 import {TourGuideZone, useTourGuideController} from 'rn-tourguide';
@@ -137,14 +137,16 @@ const styles = StyleSheet.create({
     zIndex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    height: config.deviceHeight * 0.09,
+    height:
+      Platform.OS === 'ios'
+        ? config.deviceHeight * 0.09
+        : config.deviceHeight * 0.07,
     backgroundColor: Colors.lightCorail,
   },
   navItem: {
     alignItems: 'center',
     justifyContent: 'space-around',
     height: config.deviceHeight * 0.06,
-    paddingTop: 10,
   },
   text: {
     fontSize: config.deviceWidth * 0.03,

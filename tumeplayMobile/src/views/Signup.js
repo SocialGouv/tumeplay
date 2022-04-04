@@ -70,6 +70,7 @@ const Signup = ({user, setUser}) => {
         isUnder25: tmpUser.isUnder25,
         ageRange: tmpUser.ageRange,
         region: tmpUser.region,
+        has_followed_tutorial: false,
         user_id: tmpUser.user_id,
       },
     });
