@@ -92,27 +92,30 @@ const PickupOrder = props => {
   };
 
   const getUserGeolocation = () => {
-    Geolocation.getCurrentPosition(
-      info => {
-        let tmpCoordinates = {};
-        tmpCoordinates.latitude = info.coords.latitude;
-        tmpCoordinates.longitude = info.coords.longitude;
-        tmpCoordinates.latitudeDelta = delta.latitudeDelta;
-        tmpCoordinates.longitudeDelta = delta.longitudeDelta;
-        setCoordinates({
-          ...tmpCoordinates,
-        });
-        setCurrentUserPosition({
-          ...{
-            latitude: tmpCoordinates.latitude,
-            longitude: tmpCoordinates.longitude,
-          },
-        });
-      },
-      error => {
-        console.log('ERROR', error);
-      },
-    );
+    if (geolocationGranted) {
+      Geolocation.getCurrentPosition(
+        info => {
+          let tmpCoordinates = {};
+          tmpCoordinates.latitude = info.coords.latitude;
+          tmpCoordinates.longitude = info.coords.longitude;
+          tmpCoordinates.latitudeDelta = delta.latitudeDelta;
+          tmpCoordinates.longitudeDelta = delta.longitudeDelta;
+          setCoordinates({
+            ...tmpCoordinates,
+          });
+          setCurrentUserPosition({
+            ...{
+              latitude: tmpCoordinates.latitude,
+              longitude: tmpCoordinates.longitude,
+            },
+          });
+        },
+        error => {
+          console.log('ERROR', error);
+        },
+        {timeout: 10000, enableHighAccuracy: true},
+      );
+    }
   };
 
   useEffect(() => {
@@ -120,18 +123,28 @@ const PickupOrder = props => {
   }, [geolocationGranted]);
 
   useEffect(() => {
-    request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(statues => {
-      if (statues === 'granted') {
-        setGeolocationGranted(true);
-      }
-    });
+    if (Platform.OS === 'ios') {
+      request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(statues => {
+        if (statues === 'granted') {
+          setGeolocationGranted(true);
+        }
+      });
+    } else if (Platform.OS === 'android') {
+      request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(statues => {
+        if (statues === 'granted') {
+          setGeolocationGranted(true);
+        }
+      });
+    } else {
+      setCoordinates({...coordinates});
+    }
   }, []);
 
   useEffect(() => {
     if (currentUserPosition) {
       fetchPOI();
     }
-  }, [coordinates, currentUserPosition]);
+  }, [currentUserPosition]);
 
   useEffect(() => {
     fetchPOI();
@@ -165,7 +178,7 @@ const PickupOrder = props => {
       <Marker
         key={index}
         onPress={() => handleMarkerSelection(item)}
-        coordinate={LatLng}
+        coordinate={mrPOI.length > 0 ? LatLng : {latitude: 0, longitude: 0}}
         style={styles.marker}>
         <ImageBackground
           source={item.selected ? orangeMapMarker : blackMapMarker}
@@ -297,27 +310,29 @@ const PickupOrder = props => {
           },
         }}
       />
-      {(displayMap || geolocationGranted) && (
+      {displayMap && (
         <>
           <MapView
             region={{
-              latitude: parseFloat(coordinates.latitude),
-              longitude: parseFloat(coordinates.longitude),
+              latitude: coordinates ? parseFloat(coordinates.latitude) : 0,
+              longitude: coordinates ? parseFloat(coordinates.longitude) : 0,
               latitudeDelta: coordinates.latitudeDelta,
               longitudeDelta: coordinates.longitudeDelta,
             }}
             rotateEnabled={false}
             style={styles.map}>
-            {geolocationGranted && userPosition}
+            {Platform.OS === 'ios' && geolocationGranted && userPosition}
             {displayMarker}
           </MapView>
-          <FlatList
-            style={styles.list}
-            data={mrPOI}
-            renderItem={renderItem}
-            ref={flatlistRef}
-          />
         </>
+      )}
+      {!isSearching && (
+        <FlatList
+          style={styles.list}
+          data={mrPOI}
+          renderItem={renderItem}
+          ref={flatlistRef}
+        />
       )}
       {currentPOI && (
         <Button

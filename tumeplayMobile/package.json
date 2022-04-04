@@ -27,7 +27,7 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^12.1.1",
     "react-native-swiper": "^1.6.0",
-    "react-native-webview": "^11.17.2",
+    "react-native-webview": "11.17.2",
     "react-polygon": "^0.2.0"
   },
   "devDependencies": {
