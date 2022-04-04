@@ -22,6 +22,9 @@ const Event = {
   contentSeen: id => {
     Matomo.trackScreen('/content/' + id, 'Contenu visioné');
   },
+  contentRead: id => {
+    Matomo.trackScreen('/content/' + id, 'Contenu lu');
+  },
   boxOrdered: () => {
     Matomo.trackScreen('/order-confirmation', 'Kit commandé');
   },
