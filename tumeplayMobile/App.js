@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Platform} from 'react-native';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -125,7 +126,7 @@ const App = () => {
     <TourGuideProvider
       dismissOnPress={true}
       tooltipComponent={CustomToolTip}
-      verticalOffset={-10}
+      verticalOffset={Platform.OS === 'android' ? 10 : -10}
       animationDuration={300}>
       <AppContext.Provider value={contextValues}>
         {!isUserLoaded && <Loader />}
