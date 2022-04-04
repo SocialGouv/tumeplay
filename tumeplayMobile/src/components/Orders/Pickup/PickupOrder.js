@@ -22,6 +22,7 @@ import Text from '../../Text';
 import _ from 'lodash';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Button from '../../Button';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const PickupOrder = props => {
   const {setSelectedPOI} = props;
@@ -40,10 +41,7 @@ const PickupOrder = props => {
     longitudeDelta: delta.longitudeDelta,
   });
 
-  const [currentUserPosition, setCurrentUserPosition] = useState({
-    latitude: 48.856614,
-    longitude: 2.3522219,
-  });
+  const [currentUserPosition, setCurrentUserPosition] = useState(null);
   const [geolocationGranted, setGeolocationGranted] = useState(false);
 
   const [currentPOI, setCurrentPOI] = useState(null);
@@ -93,28 +91,60 @@ const PickupOrder = props => {
     }
   };
 
-  useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      let tmpCoordinates = {};
-      tmpCoordinates.latitude = info.coords.latitude;
-      tmpCoordinates.longitude = info.coords.longitude;
-      tmpCoordinates.latitudeDelta = delta.latitudeDelta;
-      tmpCoordinates.longitudeDelta = delta.longitudeDelta;
-      setCoordinates({
-        ...tmpCoordinates,
-      });
-      setCurrentUserPosition({
-        ...{
-          latitude: tmpCoordinates.latitude,
-          longitude: tmpCoordinates.longitude,
+  const getUserGeolocation = () => {
+    if (geolocationGranted) {
+      Geolocation.getCurrentPosition(
+        info => {
+          let tmpCoordinates = {};
+          tmpCoordinates.latitude = info.coords.latitude;
+          tmpCoordinates.longitude = info.coords.longitude;
+          tmpCoordinates.latitudeDelta = delta.latitudeDelta;
+          tmpCoordinates.longitudeDelta = delta.longitudeDelta;
+          setCoordinates({
+            ...tmpCoordinates,
+          });
+          setCurrentUserPosition({
+            ...{
+              latitude: tmpCoordinates.latitude,
+              longitude: tmpCoordinates.longitude,
+            },
+          });
         },
+        error => {
+          console.log('ERROR', error);
+        },
+        {timeout: 10000, enableHighAccuracy: true},
+      );
+    }
+  };
+
+  useEffect(() => {
+    getUserGeolocation();
+  }, [geolocationGranted]);
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(statues => {
+        if (statues === 'granted') {
+          setGeolocationGranted(true);
+        }
       });
-      setGeolocationGranted(true);
-    });
-    if (coordinates) {
-      fetchPOI();
+    } else if (Platform.OS === 'android') {
+      request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(statues => {
+        if (statues === 'granted') {
+          setGeolocationGranted(true);
+        }
+      });
+    } else {
+      setCoordinates({...coordinates});
     }
   }, []);
+
+  useEffect(() => {
+    if (currentUserPosition) {
+      fetchPOI();
+    }
+  }, [currentUserPosition]);
 
   useEffect(() => {
     fetchPOI();
@@ -148,7 +178,7 @@ const PickupOrder = props => {
       <Marker
         key={index}
         onPress={() => handleMarkerSelection(item)}
-        coordinate={LatLng}
+        coordinate={mrPOI.length > 0 ? LatLng : {latitude: 0, longitude: 0}}
         style={styles.marker}>
         <ImageBackground
           source={item.selected ? orangeMapMarker : blackMapMarker}
@@ -284,23 +314,25 @@ const PickupOrder = props => {
         <>
           <MapView
             region={{
-              latitude: parseFloat(coordinates.latitude),
-              longitude: parseFloat(coordinates.longitude),
+              latitude: coordinates ? parseFloat(coordinates.latitude) : 0,
+              longitude: coordinates ? parseFloat(coordinates.longitude) : 0,
               latitudeDelta: coordinates.latitudeDelta,
               longitudeDelta: coordinates.longitudeDelta,
             }}
             rotateEnabled={false}
             style={styles.map}>
-            {geolocationGranted && userPosition}
+            {Platform.OS === 'ios' && geolocationGranted && userPosition}
             {displayMarker}
           </MapView>
-          <FlatList
-            style={styles.list}
-            data={mrPOI}
-            renderItem={renderItem}
-            ref={flatlistRef}
-          />
         </>
+      )}
+      {!isSearching && (
+        <FlatList
+          style={styles.list}
+          data={mrPOI}
+          renderItem={renderItem}
+          ref={flatlistRef}
+        />
       )}
       {currentPOI && (
         <Button

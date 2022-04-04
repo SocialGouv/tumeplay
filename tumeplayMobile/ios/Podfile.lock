@@ -76,6 +76,12 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
+  - Permission-LocationAccuracy (3.3.1):
+    - RNPermissions
+  - Permission-LocationAlways (3.3.1):
+    - RNPermissions
+  - Permission-LocationWhenInUse (3.3.1):
+    - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -276,9 +282,13 @@ PODS:
     - glog
   - react-native-encrypted-storage (4.0.2):
     - React-Core
+  - react-native-geolocation (2.0.2):
+    - React
+  - react-native-maps (0.30.1):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
-  - react-native-webview (11.17.2):
+  - react-native-webview (11.18.0):
     - React-Core
   - React-perflogger (0.67.2)
   - React-RCTActionSheet (0.67.2):
@@ -345,17 +355,25 @@ PODS:
     - React-jsi (= 0.67.2)
     - React-logger (= 0.67.2)
     - React-perflogger (= 0.67.2)
-  - RNCCheckbox (0.5.9):
+  - RNCCheckbox (0.5.12):
     - React-Core
   - RNCPicker (2.2.1):
+    - React-Core
+  - RNPermissions (3.3.1):
     - React-Core
   - RNScreens (3.9.0):
     - React-Core
     - React-RCTImage
+  - RNSentry (3.3.6):
+    - React-Core
+    - Sentry (= 7.11.0)
   - RNSVG (12.1.1):
     - React
   - RNVectorIcons (9.0.0):
     - React-Core
+  - Sentry (7.11.0):
+    - Sentry/Core (= 7.11.0)
+  - Sentry/Core (7.11.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -389,6 +407,9 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OpenSSL-Universal (= 1.1.180)
+  - Permission-LocationAccuracy (from `../node_modules/react-native-permissions/ios/LocationAccuracy`)
+  - Permission-LocationAlways (from `../node_modules/react-native-permissions/ios/LocationAlways`)
+  - Permission-LocationWhenInUse (from `../node_modules/react-native-permissions/ios/LocationWhenInUse`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -404,6 +425,8 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -420,7 +443,9 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -440,6 +465,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - Sentry
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -455,6 +481,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-LocationAccuracy:
+    :path: "../node_modules/react-native-permissions/ios/LocationAccuracy"
+  Permission-LocationAlways:
+    :path: "../node_modules/react-native-permissions/ios/LocationAlways"
+  Permission-LocationWhenInUse:
+    :path: "../node_modules/react-native-permissions/ios/LocationWhenInUse"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -481,6 +513,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-encrypted-storage:
     :path: "../node_modules/react-native-encrypted-storage"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -513,8 +549,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/checkbox"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -528,7 +568,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/vivantehealth/react-native-matomo.git
 
 SPEC CHECKSUMS:
-  BNFMatomo: 38cb63f5f19acabad0b46b87ba0b629163277586
+  BNFMatomo: 9953e25e6c5fc70e5a9c465a9bc315cfc43495b5
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
@@ -547,6 +587,9 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
+  Permission-LocationAccuracy: 43d7a6b3d736a90168e9fc7117a721ca44722f83
+  Permission-LocationAlways: fbf36cbdcabc3101f1168ad1ec45cfc5a6448cc4
+  Permission-LocationWhenInUse: 006c85c8de0c05b5d8be8e8029e4f6b813270293
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: cd47794163052d2b8318c891a7a14fcfaccc75ab
   RCTTypeSafety: 393bb40b3e357b224cde53d3fec26813c52428b1
@@ -559,9 +602,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 52beb652bbc61201bd70cbe4f0b8edb607e8da4f
   React-jsinspector: 595f76eba2176ebd8817a1fffd47b84fbdab9383
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
-  react-native-encrypted-storage: 837c733334debf626204f03d867c7e01d8741e2f
-  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
-  react-native-webview: 77ee909f73e1fcab76380f7dcc3344771fe61bd8
+  react-native-encrypted-storage: e78d848ce0fb663c2ce306e37921d026809322e6
+  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
+  react-native-maps: d752b0dd0e1951d815b1336332835aab6b4a836f
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-webview: b07bc0bc16fa9d855df07530faccbb0a3475cb88
   React-perflogger: 3c9bb7372493e49036f07a82c44c8cf65cbe88db
   React-RCTActionSheet: 052606483045a408693aa7e864410b4a052f541a
   React-RCTAnimation: 08d4cac13222bb1348c687a0158dfd3b577cdb63
@@ -574,14 +619,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: 99c7f67fba7a5ade46e98e870c6ff2444484f995
   React-runtimeexecutor: 2450b43df7ffe8e805a0b3dcb2abd4282f1f1836
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
-  RNCCheckbox: 7e2cd6ea8e200210c36fe0898bbe200826bdaf56
+  RNCCheckbox: ed1b4ca295475b41e7251ebae046360a703b6eb5
   RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
+  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
+  RNSentry: 6fbe6a4194cf632e5dc02a640741512faa943dbf
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
+  Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 45dbf63b017a8f2ad55352f7a8cf87db9794fee6
+PODFILE CHECKSUM: 442bfd37dc03b25c37f22bba38b63b0912379325
 
 COCOAPODS: 1.11.2
