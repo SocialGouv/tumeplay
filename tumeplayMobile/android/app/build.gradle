@@ -135,8 +135,8 @@ android {
         applicationId "com.tumeplaymobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 35
-        versionName "1.10"
+        versionCode 36
+        versionName "1.11"
         manifestPlaceholders = [GOOGLE_MAPS_API: '$process.env[GOOGLE_MAPS_API]']
     }
     splits {
