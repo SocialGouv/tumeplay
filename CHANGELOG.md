@@ -1,3 +1,10 @@
+## [1.98.2](https://github.com/SocialGouv/Tumeplay/compare/v1.98.1...v1.98.2) (2022-04-06)
+
+
+### Bug Fixes
+
+* handle version conflict get user ([50c5b5a](https://github.com/SocialGouv/Tumeplay/commit/50c5b5a9ba86ef8de85a6c1d4787936ef4c02571))
+
 ## [1.98.1](https://github.com/SocialGouv/Tumeplay/compare/v1.98.0...v1.98.1) (2022-04-06)
 
 
