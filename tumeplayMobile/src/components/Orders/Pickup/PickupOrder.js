@@ -295,6 +295,7 @@ const PickupOrder = props => {
             underlineColor="#EAE2D7"
             activeUnderlineColor="#D42201"
             onChangeText={handleAutocomplete}
+            returnKeyType="search"
           />
         )}
         hideResults={hideResults}
