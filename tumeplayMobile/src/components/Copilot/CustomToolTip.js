@@ -7,7 +7,7 @@ const CustomToolTip = props => {
   const {isLastStep, handleNext, handleStop, currentStep} = props;
   return (
     <View style={styles.tooltipContainer}>
-      <View style={{width: '70%'}}>
+      <View style={{width: '70%', position: 'absolute', top: 16, left: 16}}>
         <Text style={styles.toolTipText}>
           {currentStep && currentStep.text}
         </Text>
@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 5,
     paddingHorizontal: 24,
-    alignItems: 'center',
-    // justifyContent: 'center',
+
     width: '80%',
-    height: config.deviceHeight * 0.15,
+    height: config.deviceHeight * 0.13,
     backgroundColor: '#ffffff',
   },
   button: {
@@ -43,8 +42,9 @@ const styles = StyleSheet.create({
   toolTipText: {
     fontSize:
       config.deviceWidth > 375
-        ? config.deviceWidth * 0.04
+        ? config.deviceWidth * 0.036
         : config.deviceWidth * 0.035,
+    fontWeight: '600',
   },
 });
 
