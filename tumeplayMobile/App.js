@@ -64,7 +64,7 @@ const App = () => {
 
   const getMobileUser = async user_id => {
     const response = await fetch(
-      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id,
+      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=2',
     );
     const tmpUser = await response.json();
     if (tmpUser?.status === 404) {
