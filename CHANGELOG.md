@@ -1,3 +1,10 @@
+## [1.98.1](https://github.com/SocialGouv/Tumeplay/compare/v1.98.0...v1.98.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* clear read content timeout on leave ([#365](https://github.com/SocialGouv/Tumeplay/issues/365)) ([0c2dca7](https://github.com/SocialGouv/Tumeplay/commit/0c2dca7b6db2e189f2f066e5d9e6f02c182d9937))
+
 # [1.98.0](https://github.com/SocialGouv/Tumeplay/compare/v1.97.2...v1.98.0) (2022-04-06)
 
 
