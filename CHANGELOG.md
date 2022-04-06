@@ -1,3 +1,10 @@
+# [1.100.0](https://github.com/SocialGouv/Tumeplay/compare/v1.99.0...v1.100.0) (2022-04-06)
+
+
+### Features
+
+* adding force update logic in App.js ([#366](https://github.com/SocialGouv/Tumeplay/issues/366)) ([b92d920](https://github.com/SocialGouv/Tumeplay/commit/b92d9209484502428955a82e629bcb25ec5cf506))
+
 # [1.99.0](https://github.com/SocialGouv/Tumeplay/compare/v1.98.2...v1.99.0) (2022-04-06)
 
 
