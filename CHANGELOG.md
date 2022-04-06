@@ -1,3 +1,16 @@
+# [1.99.0](https://github.com/SocialGouv/Tumeplay/compare/v1.98.2...v1.99.0) (2022-04-06)
+
+
+### Bug Fixes
+
+* fix font size and absolute position for text in tooltip ([#367](https://github.com/SocialGouv/Tumeplay/issues/367)) ([3ff103c](https://github.com/SocialGouv/Tumeplay/commit/3ff103cd3c775e73ef7022d49067eefb202d1954))
+
+
+### Features
+
+* adding rechercher label to keyboard on MR ([#368](https://github.com/SocialGouv/Tumeplay/issues/368)) ([c574d3d](https://github.com/SocialGouv/Tumeplay/commit/c574d3ddcfb17dbb70730d4dcb2ef228bc4603ad))
+* new label for confirm modal button ([#369](https://github.com/SocialGouv/Tumeplay/issues/369)) ([10d2975](https://github.com/SocialGouv/Tumeplay/commit/10d2975d14517cc8f26a608062e7f5083234695e))
+
 ## [1.98.2](https://github.com/SocialGouv/Tumeplay/compare/v1.98.1...v1.98.2) (2022-04-06)
 
 
