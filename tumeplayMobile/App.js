@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Platform} from 'react-native';
+import {Platform, Alert, BackHandler, Linking} from 'react-native';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -24,6 +24,7 @@ import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID, SENTRI_URL} from '@env';
 import Matomo from 'react-native-matomo';
 import Loader from './src/components/global/Loader';
 import {TourGuideProvider} from 'rn-tourguide';
+import VersionCheck from 'react-native-version-check';
 
 import * as Sentry from '@sentry/react-native';
 import Copilot from './src/components/Copilot/Copilot';
@@ -105,10 +106,35 @@ const App = () => {
     await EncryptedStorage.clear();
   };
 
+  const checkUpdateNeeded = async () => {
+    try {
+      const updateNeeded = await VersionCheck.needUpdate();
+      if (updateNeeded && updateNeeded?.isNeeded) {
+        Alert.alert(
+          'Oups !',
+          "Tu as une ancienne version. Mets à jour l'application pour l'utiliser",
+          [
+            {
+              text: "Mettre à jour l'application",
+              onPress: () => {
+                BackHandler.exitApp();
+                Linking.openURL(updateNeeded?.storeUrl);
+              },
+            },
+          ],
+          {cancelable: false},
+        );
+      }
+    } catch (error) {
+      console.log({error});
+    }
+  };
+
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
     Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
+    checkUpdateNeeded();
   }, []);
 
   const contextValues = {

@@ -48,6 +48,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = tumeplayMobile;
 		};
+		ED43839F27FD8C04009EAAA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED43839A27FD8C04009EAAA3 /* RNVersionCheck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNVersionCheck;
+		};
 		EDA4064027CE688100E8ABB1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EDA4063C27CE688100E8ABB1 /* AirMaps.xcodeproj */;
@@ -93,6 +100,7 @@
 		E5FEE3B9A6569A4CBC4A8BF4 /* libPods-tumeplayMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tumeplayMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64A5A4B0711F2B60EF83478 /* Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-tumeplayMobile-tumeplayMobileTests/Pods-tumeplayMobile-tumeplayMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED43839A27FD8C04009EAAA3 /* RNVersionCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVersionCheck.xcodeproj; path = "../node_modules/react-native-version-check/ios/RNVersionCheck.xcodeproj"; sourceTree = "<group>"; };
 		ED8785EE35254126AADF5065 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		EDA4063C27CE688100E8ABB1 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		F033A891B877452A94D37BAE /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -199,6 +207,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				ED43839A27FD8C04009EAAA3 /* RNVersionCheck.xcodeproj */,
 				EDA4063C27CE688100E8ABB1 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
@@ -225,6 +234,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* tumeplayMobile.app */,
 				00E356EE1AD99517003FC87E /* tumeplayMobileTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED43839B27FD8C04009EAAA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED4383A027FD8C04009EAAA3 /* libRNVersionCheck.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,6 +334,10 @@
 					ProductGroup = EDA4063D27CE688100E8ABB1 /* Products */;
 					ProjectRef = EDA4063C27CE688100E8ABB1 /* AirMaps.xcodeproj */;
 				},
+				{
+					ProductGroup = ED43839B27FD8C04009EAAA3 /* Products */;
+					ProjectRef = ED43839A27FD8C04009EAAA3 /* RNVersionCheck.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -327,6 +348,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		ED4383A027FD8C04009EAAA3 /* libRNVersionCheck.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVersionCheck.a;
+			remoteRef = ED43839F27FD8C04009EAAA3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EDA4064127CE688100E8ABB1 /* libAirMaps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
