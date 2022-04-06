@@ -75,9 +75,11 @@ const ContentPage = ({navigation, route}) => {
 
   useEffect(() => {
     retrieveReadContentIds();
-    setTimeout(() => {
-      saveContentID();
-    }, 5000);
+    let readTimeout = setTimeout(saveContentID, 5000);
+
+    return () => {
+      clearTimeout(readTimeout);
+    };
   }, [current_content_id]);
 
   useEffect(() => {
