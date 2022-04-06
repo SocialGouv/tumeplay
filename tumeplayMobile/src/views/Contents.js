@@ -186,7 +186,7 @@ const ContentsPage = props => {
         {user.level < selectedLevel && (
           <Snackbar
             onPress={() => handleSnackBarQuizzLaunch()}
-            text="  Plus que quelques quizz à répondre pour débloquer ce niveau, vas-y fonce
+            text="Plus que quelques quiz à répondre pour débloquer ce niveau, vas-y fonce
         ! 🙂"
           />
         )}
