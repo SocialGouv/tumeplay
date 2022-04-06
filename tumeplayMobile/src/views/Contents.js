@@ -150,6 +150,7 @@ const ContentsPage = props => {
           </TouchableOpacity>
           <RNPickerSelect
             style={{...pickerSelectStyle}}
+            doneText="Valider"
             useNativeAndroidPickerStyle={false}
             placeholder={{
               label: currentThematique?.title,
@@ -164,6 +165,7 @@ const ContentsPage = props => {
             style={{
               ...pickerSelectStyle,
             }}
+            doneText="Valider"
             useNativeAndroidPickerStyle={false}
             placeholder={{
               label: `NIV ${selectedLevel}`,
