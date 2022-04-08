@@ -1,3 +1,10 @@
+## [1.100.1](https://github.com/SocialGouv/Tumeplay/compare/v1.100.0...v1.100.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* preprod email smtp config ([dd0c792](https://github.com/SocialGouv/Tumeplay/commit/dd0c792c9c723f986ee314c99a9d090e40004a80))
+
 # [1.100.0](https://github.com/SocialGouv/Tumeplay/compare/v1.99.0...v1.100.0) (2022-04-06)
 
 
