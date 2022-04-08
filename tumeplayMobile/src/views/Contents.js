@@ -18,6 +18,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import Snackbar from '../components/Contents/Snackbar';
 import handleRedirection from '../services/handleRedirection';
 import Event from '../services/api/matomo';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ContentsPage = props => {
   const {route, navigation} = props;
@@ -55,9 +56,9 @@ const ContentsPage = props => {
     }
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
     retrieveReadContentIds();
-  }, []);
+  });
 
   useEffect(() => {
     if (data && !loading) {
