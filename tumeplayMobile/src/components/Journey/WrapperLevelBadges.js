@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     width: 80,
     fontSize: config.deviceWidth * 0.026,
     fontWeight: '700',
-    paddingHorizontal: 5,
+    paddingHorizontal: 6,
   },
 });
 
