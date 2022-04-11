@@ -43,7 +43,8 @@ const Badge = props => {
           clearModuleData: true,
           retry: status === 'done',
         })
-      }>
+      }
+      style={{marginHorizontal: 15}}>
       <Svg style={styles.svgContainer}>
         <Polygon
           points="45,0 75,20 75,55 45,75 15,55 15,20"
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginRight: 10,
   },
-  imageLock: {},
   imageValidate: {
     position: 'absolute',
     top: 45,

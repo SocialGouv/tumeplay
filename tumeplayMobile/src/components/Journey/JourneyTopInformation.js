@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+    marginTop: 15,
   },
   text: {
     fontSize: 16,
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: 5,
     borderBottomColor: '#EAE2D7',
+    marginBottom: 10,
   },
 });
 

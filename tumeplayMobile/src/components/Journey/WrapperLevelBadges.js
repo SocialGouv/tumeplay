@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
 import BadgesSkeleton from '../global/SkeletonDesign/BadgesSkeleton';
 import Badge from './Badge';
@@ -37,7 +38,7 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
         <View style={styles.textContainer}>
           <Image
             source={{uri: REACT_APP_URL + module?.thematique?.image?.url}}
-            style={{width: 20, height: 20}}
+            style={{width: 20, height: 20, marginLeft: 15}}
           />
           <Text style={styles.textDescription}>{module?.title}</Text>
         </View>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
   },
   textContainer: {
     flexDirection: 'row',
@@ -78,10 +79,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textDescription: {
-    width: 80,
+    width: 85,
     fontSize: config.deviceWidth * 0.026,
     fontWeight: '700',
-    paddingHorizontal: 6,
+    paddingHorizontal: 5,
+    alignSelf: 'center',
   },
 });
 
