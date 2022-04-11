@@ -37,7 +37,9 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
             source={{uri: REACT_APP_URL + module?.thematique?.image?.url}}
             style={{width: 20, height: 20, marginLeft: 15}}
           />
-          <Text style={styles.textDescription}>{module?.title}</Text>
+          <Text style={styles.textDescription}>
+            {module.niveau.value + '.' + (index + 1) + ' ' + module?.title}
+          </Text>
         </View>
       </View>
     );
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textDescription: {
-    width: 85,
+    width: 95,
     fontSize: config.deviceWidth * 0.026,
     fontWeight: '700',
     paddingHorizontal: 5,
