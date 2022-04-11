@@ -11,9 +11,6 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
   const {doneModules_ids} = useContext(AppContext);
 
   const modulesToDisplay = associatedModules?.map((module, index) => {
-    console.log({module});
-    console.log(REACT_APP_URL + '/' + module?.thematique?.image?.url);
-
     if (module.module_index < doneModules_ids.length) {
       module.status = 'done';
     } else if (module.module_index === doneModules_ids.length) {
