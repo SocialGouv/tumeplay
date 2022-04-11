@@ -6,7 +6,6 @@ import {
   Alert,
   Platform,
   ImageBackground,
-  Keyboard,
 } from 'react-native';
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import MapView, {Marker} from 'react-native-maps';
@@ -52,7 +51,6 @@ const PickupOrder = props => {
   const [geogouvData, setGeogouvData] = useState([]);
   const [hideResults, setHideResults] = useState(true);
   const [chosenAddress, setChosenAddress] = useState('');
-  const [keyboardDisplay, setKeyboardDisplay] = useState(false);
 
   const validateZipCode = zipcode => {
     const authorizedZipCode = [
