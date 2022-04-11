@@ -3,6 +3,7 @@ import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import config from '../../../config';
 import Text from '../../components/Text';
 import wrong from '../../assets/Wrong.png';
+import right from '../../assets/Right.png';
 
 const QuizzAnswerButton = props => {
   const {
@@ -42,6 +43,9 @@ const QuizzAnswerButton = props => {
         </Text>
         {hasAnswered && answer.key !== correctAnswer && index === selected && (
           <Image style={styles.image} source={wrong} />
+        )}
+        {hasAnswered && answer.key === correctAnswer && index === selected && (
+          <Image style={styles.image} source={right} />
         )}
       </View>
     </TouchableOpacity>
