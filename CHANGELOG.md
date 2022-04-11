@@ -1,3 +1,10 @@
+## [1.101.1](https://github.com/SocialGouv/Tumeplay/compare/v1.101.0...v1.101.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* adding tick image for correct answers ([#375](https://github.com/SocialGouv/Tumeplay/issues/375)) ([d63aaf6](https://github.com/SocialGouv/Tumeplay/commit/d63aaf68678e5774dcdbc2d3abb631104def034a))
+
 # [1.101.0](https://github.com/SocialGouv/Tumeplay/compare/v1.100.2...v1.101.0) (2022-04-11)
 
 
