@@ -281,8 +281,7 @@ const PickupOrder = props => {
   );
 
   return (
-    <View
-      style={[styles.container, !displayMap && {justifyContent: 'flex-start'}]}>
+    <View style={[styles.container]}>
       <AutocompleteInput
         containerStyle={styles.specialInput}
         inputContainerStyle={styles.specialInput}
