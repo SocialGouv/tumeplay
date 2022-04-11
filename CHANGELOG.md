@@ -1,3 +1,11 @@
+## [1.100.2](https://github.com/SocialGouv/Tumeplay/compare/v1.100.1...v1.100.2) (2022-04-11)
+
+
+### Bug Fixes
+
+* display read indicator on goBack from Content Page to Contents List ([#372](https://github.com/SocialGouv/Tumeplay/issues/372)) ([d8e2b79](https://github.com/SocialGouv/Tumeplay/commit/d8e2b7957adfb5834df32af26713a5fb331a7746))
+* fixing keyboard behavior and android by passing the adjustPan pr… ([#373](https://github.com/SocialGouv/Tumeplay/issues/373)) ([342189d](https://github.com/SocialGouv/Tumeplay/commit/342189d5624660d176bf2b653ccc670f84f7f582))
+
 ## [1.100.1](https://github.com/SocialGouv/Tumeplay/compare/v1.100.0...v1.100.1) (2022-04-08)
 
 
