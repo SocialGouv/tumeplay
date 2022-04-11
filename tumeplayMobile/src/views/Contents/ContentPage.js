@@ -24,6 +24,7 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import _ from 'lodash';
 import ReadIndicator from '../../components/Contents/ReadIndicator';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -81,6 +82,10 @@ const ContentPage = ({navigation, route}) => {
       clearTimeout(readTimeout);
     };
   }, [current_content_id]);
+
+  useFocusEffect(() => {
+    retrieveReadContentIds();
+  });
 
   useEffect(() => {
     if (data && !loading) {

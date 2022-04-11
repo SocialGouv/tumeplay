@@ -18,7 +18,7 @@ const ContentCard = props => {
     readContentIDs,
   } = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
-  const [displayReadIndicator, setDisplayReadIndicator] = useState(false);
+  const [displayReadIndicator, setDisplayReadIndicator] = useState();
 
   useEffect(() => {
     setDisplayReadIndicator(_.includes(readContentIDs, item.id));

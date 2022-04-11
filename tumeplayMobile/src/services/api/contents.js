@@ -3,7 +3,7 @@ import {gql} from '@apollo/client';
 export const GET_CONTENTS = gql`
   query GetContents($theme_id: String!, $level: Int!) {
     contents(
-      where: {thematique_mobile: {id: $theme_id}, niveau: {value_lte: $level}}
+      where: {thematique_mobile: {id: $theme_id}, niveau: {value: $level}}
       sort: "niveau.value:desc"
     ) {
       id
