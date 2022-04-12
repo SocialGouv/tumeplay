@@ -6,6 +6,7 @@ import {
   ScrollView,
   Alert,
   Image,
+  Vibration,
 } from 'react-native';
 import {Colors, Fonts} from '../../styles/Style';
 import Button from '../Button';
@@ -69,6 +70,7 @@ const QuizzModule = ({navigation, route}) => {
     } else {
       wrongAnswers.push(question);
       setWrongAnswers([...wrongAnswers]);
+      Vibration.vibrate(200);
     }
 
     if (question.kind === 'Trou') {
@@ -141,6 +143,7 @@ const QuizzModule = ({navigation, route}) => {
         reloadUser();
       } catch (error) {
         console.log('Erreur au lancement du quizz:', error);
+        Vibration.vibrate(200);
         Alert.alert(
           "Une erreur s'est produite au lancement du quizz",
           'Merci de relancer un quizz',

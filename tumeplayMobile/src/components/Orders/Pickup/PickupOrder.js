@@ -6,6 +6,7 @@ import {
   Alert,
   Platform,
   ImageBackground,
+  Vibration,
 } from 'react-native';
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import MapView, {Marker} from 'react-native-maps';
@@ -246,6 +247,7 @@ const PickupOrder = props => {
       setHideResults(true);
       setIsSearching(false);
     } else {
+      Vibration.vibrate(200);
       Alert.alert(
         "La commande de kit n'est pas disponible dans ta région",
         'La commande de kit est uniquement disponible en Île-de-France et en Aquitaine',

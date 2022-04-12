@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Platform, Alert, BackHandler, Linking} from 'react-native';
+import {Platform, Alert, BackHandler, Linking, Vibration} from 'react-native';
 import Onboarding from './src/views/Onboarding';
 import Signup from './src/views/Signup';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -110,6 +110,7 @@ const App = () => {
     try {
       const updateNeeded = await VersionCheck.needUpdate();
       if (updateNeeded && updateNeeded?.isNeeded) {
+        Vibration.vibrate(200);
         Alert.alert(
           'Oups !',
           "Tu as une ancienne version. Mets à jour l'application pour l'utiliser",
