@@ -5,7 +5,7 @@ import AppContext from '../../../AppContext';
 import {REACT_APP_URL} from '@env';
 import Award from '../../views/Award';
 import {ActivityIndicator, View} from 'react-native';
-import {Alert} from 'react-native';
+import {Alert, Vibration} from 'react-native';
 import {useMutation} from '@apollo/client';
 import {UPDATE_MOBILE_USER_HISTORY} from '../../services/api/mobile_users';
 import Event from '../../services/api/matomo';
@@ -47,6 +47,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
         reloadUser();
       } catch (error) {
         console.log("Erreur à l'update : ", error);
+        Vibration.vibrate(200);
         Alert.alert(
           'Désolé !',
           " Un problème est survenu à l'enregistrement de tes résultats",

@@ -1,5 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Vibration,
+} from 'react-native';
 import Text from '../components/Text';
 import Button from '../components/Button';
 import CategorieIndicator from '../components/CategorieIndicator';
@@ -82,6 +88,7 @@ const QuizzStartPage = ({navigation}) => {
         reloadUser();
       } catch (error) {
         console.log('Erreur au lancement du quizz:', error);
+        Vibration.vibrate(200);
         Alert.alert(
           "Une erreur s'est produite au lancement du quizz",
           'Merci de relancer un quizz',

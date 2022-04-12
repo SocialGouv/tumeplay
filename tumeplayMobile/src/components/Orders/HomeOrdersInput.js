@@ -4,6 +4,7 @@ import {
   Alert,
   View,
   FlatList,
+  Vibration,
 } from 'react-native';
 import Text from '../../components/Text';
 import React, {useMemo, useState} from 'react';
@@ -115,6 +116,7 @@ const HomeOrdersInput = props => {
       setUserAdressInformations({...item});
       setHideResults(true);
     } else {
+      Vibration.vibrate(200);
       Alert.alert(
         "La commande de kit n'est pas disponible dans ta région",
         'La commande de kit est uniquement disponible en Île-de-France et en Aquitaine',
