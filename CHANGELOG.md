@@ -1,3 +1,10 @@
+# [1.102.0](https://github.com/SocialGouv/Tumeplay/compare/v1.101.1...v1.102.0) (2022-04-12)
+
+
+### Features
+
+* adding vibration on quizzModule and on every alerts ([#376](https://github.com/SocialGouv/Tumeplay/issues/376)) ([7b77085](https://github.com/SocialGouv/Tumeplay/commit/7b77085f1cff8799a8e5022a12b8854e889acea5))
+
 ## [1.101.1](https://github.com/SocialGouv/Tumeplay/compare/v1.101.0...v1.101.1) (2022-04-11)
 
 
