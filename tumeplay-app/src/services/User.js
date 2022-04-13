@@ -448,15 +448,15 @@ const User = {
       await Storage.set(User.localHmacKey, hmac);
     }
   },
-	getPath: () => {
-		try {
+  getPath: () => {
+    try {
       if (User.localUser) {
         return User.localUser.path;
       }
     } catch (e) {
       throw Error(e);
     }
-	},
+  },
   setPath: async path => {
     try {
       if (!User.localUser) {
