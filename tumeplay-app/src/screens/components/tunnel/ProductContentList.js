@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
-import UserService from '../../../services/User';
 
 ProductContentList.propTypes = {
   item: PropTypes.object,
@@ -13,6 +12,7 @@ export default function ProductContentList(props) {
   const [productBox] = useState(props.item);
   const [customProducts] = useState(props.products);
   const [shortMode] = useState(props.shortMode);
+  console.log(shortMode);
 
   function renderRow(key, itemQty, itemText) {
     const itemLabel = itemQty ? itemQty + ' ' + itemText : itemText;
