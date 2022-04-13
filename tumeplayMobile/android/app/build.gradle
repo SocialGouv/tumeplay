@@ -138,6 +138,8 @@ android {
         versionCode 36
         versionName "1.11"
         manifestPlaceholders = [GOOGLE_MAPS_API: '$process.env[GOOGLE_MAPS_API]']
+				testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+      	testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     splits {
         abi {
@@ -170,6 +172,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+						proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
         }
     }
 
@@ -220,12 +223,15 @@ dependencies {
         implementation jscFlavor
     }
 
-     implementation(project(':react-native-maps')){
-          exclude group: 'com.google.android.gms', module: 'play-services-base'
-          exclude group: 'com.google.android.gms', module: 'play-services-maps'
-        }
-        implementation 'com.google.android.gms:play-services-base:18.0.1'
-        implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation(project(':react-native-maps')){
+			exclude group: 'com.google.android.gms', module: 'play-services-base'
+			exclude group: 'com.google.android.gms', module: 'play-services-maps'
+		}
+
+		implementation 'com.google.android.gms:play-services-base:18.0.1'
+		implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+		androidTestImplementation('com.wix:detox:+')
 }
 
 // Run this once to be able to run the application with BUCK

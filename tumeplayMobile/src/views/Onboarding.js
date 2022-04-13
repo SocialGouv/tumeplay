@@ -72,7 +72,7 @@ export default function Onboarding({user, setUser}) {
 
   return (
     <Container style={styles.container} background={customBackground}>
-      <View style={styles.topContainer}>
+      <View style={styles.topContainer} testID="e2e-onboarding-container">
         <Text style={styles.title}>{title}</Text>
         <Image style={styles.imgTitle} source={wave} />
         <Swiper
@@ -87,9 +87,10 @@ export default function Onboarding({user, setUser}) {
           {displaySwipperContent}
         </Swiper>
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.buttonContainer} testID="e2e-onboarding-next-view">
         <Button
           text={currentIndex === 2 ? 'Je commence' : 'Suivant'}
+          testID="e2e-onboarding-next-button"
           size={'large'}
           icon={true}
           style={styles.button}

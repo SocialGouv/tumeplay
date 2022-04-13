@@ -133,8 +133,11 @@ const App = () => {
   useEffect(() => {
     // clearStorage();
     checkUserIdInStorage();
-    Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
-    checkUpdateNeeded();
+
+    if (!__DEV__) {
+      Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
+      checkUpdateNeeded();
+    }
   }, []);
 
   const contextValues = {
