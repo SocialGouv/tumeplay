@@ -13,9 +13,6 @@ export default function ProductContentList(props) {
   const [productBox] = useState(props.item);
   const [customProducts] = useState(props.products);
   const [shortMode] = useState(props.shortMode);
-  //added for ABTesting
-  const ABtestingPath =
-    UserService.localUser.path === 'C' || UserService.localUser.path === 'D';
 
   function renderRow(key, itemQty, itemText) {
     const itemLabel = itemQty ? itemQty + ' ' + itemText : itemText;
@@ -28,19 +25,10 @@ export default function ProductContentList(props) {
       </View>
     );
   }
-  //modified for ABTesting purpose
   function _renderProductList(items) {
     if (items !== undefined) {
       return items.map((item, key) => {
-        // When shortmode, it's a sub-sub-item
-        var itemText = ABtestingPath ? item.title : item.produit.title;
-        if (shortMode && typeof item.item !== 'undefined') {
-          if (typeof item.produit.title !== 'undefined') {
-            itemText = ABtestingPath ? item.title : item.produit.title;
-          } else {
-            itemText = ABtestingPath ? item.title : item.produit.title;
-          }
-        }
+        var itemText = item.produit.title;
 
         let displayRow = true;
         let quantity = null;
@@ -72,14 +60,8 @@ export default function ProductContentList(props) {
     _targetList =
       productBox.produits.length > 0 ? productBox.produits : customProducts;
   } else {
-    //modified for ABTesting purpose
-    if (ABtestingPath) {
-      _targetList =
-        productBox.ABProduct.length > 0 ? productBox.ABProduct : customProducts;
-    } else {
-      _targetList =
-        productBox.products.length > 0 ? productBox.products : customProducts;
-    }
+    _targetList =
+      productBox.products.length > 0 ? productBox.products : customProducts;
   }
 
   return _renderProductList(_targetList);
