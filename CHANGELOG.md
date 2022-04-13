@@ -1,3 +1,10 @@
+## [1.102.3](https://github.com/SocialGouv/Tumeplay/compare/v1.102.2...v1.102.3) (2022-04-13)
+
+
+### Bug Fixes
+
+* remove a/b testing old app ([#378](https://github.com/SocialGouv/Tumeplay/issues/378)) ([4793f10](https://github.com/SocialGouv/Tumeplay/commit/4793f1009520579cee5cf0c2a68a3520784ca1e8))
+
 ## [1.102.2](https://github.com/SocialGouv/Tumeplay/compare/v1.102.1...v1.102.2) (2022-04-13)
 
 
