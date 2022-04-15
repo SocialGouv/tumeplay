@@ -156,8 +156,6 @@ describe('Test tumeplay app', () => {
       .toBeVisible()
       .withTimeout(5000);
     await expect(element(by.id('e2e-content-page-description'))).toBeVisible();
-    const attr = await element(by.id('e2e-feedback-good')).getAttributes();
-    console.log(attr);
   });
 
   it('should be able to play quizz from home button', async () => {
@@ -176,4 +174,6 @@ describe('Test tumeplay app', () => {
       .toBeVisible()
       .withTimeout(5000);
   });
+
+  it('should access journey screen', async () => {});
 });
