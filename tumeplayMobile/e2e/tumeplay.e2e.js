@@ -175,5 +175,16 @@ describe('Test tumeplay app', () => {
       .withTimeout(5000);
   });
 
-  it('should access journey screen', async () => {});
+  it('should access journey screen', async () => {
+    await expect(element(by.text('Parcours'))).toBeVisible();
+    await element(by.text('Parcours')).tap();
+
+    await waitFor(element(by.id('e2e-journey-badge-1-0')))
+      .toBeVisible()
+      .withTimeout(5000);
+    await element(by.id('e2e-journey-badge-1-0')).tap();
+    await waitFor(element(by.id('e2e-question-container')))
+      .toBeVisible()
+      .withTimeout(5000);
+  });
 });

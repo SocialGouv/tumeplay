@@ -5,7 +5,7 @@ import BadgesSkeleton from '../global/SkeletonDesign/BadgesSkeleton';
 import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
 
-const WrapperLevelBadges = ({level, associatedModules, loading}) => {
+const WrapperLevelBadges = ({level, associatedModules, loading, index}) => {
   const {doneModules_ids} = useContext(AppContext);
 
   const modulesToDisplay = associatedModules?.map((module, index) => {
@@ -16,14 +16,14 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
     } else {
       module.status = 'locked';
     }
-    if (
+
+    module.reward =
       (level.value === 1 || level.value === 3 || level.value === 5) &&
-      index + 1 === associatedModules.length
-    ) {
-      module.reward = true;
-    }
+      index + 1 === associatedModules.length;
+
     return (
       <Badge
+        index={level.value + '-' + index}
         key={module.id}
         module={module}
         module_index={module.module_index}

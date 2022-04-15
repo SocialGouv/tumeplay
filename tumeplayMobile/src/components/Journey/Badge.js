@@ -11,7 +11,7 @@ const Badge = props => {
   const navigation = useNavigation();
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
-  const {module, status} = props;
+  const {module, status, index} = props;
 
   const adjustModuleColor = () => {
     if (status === 'done') {
@@ -30,6 +30,7 @@ const Badge = props => {
   return (
     <TouchableOpacity
       disabled={status === 'locked'}
+      testID={`e2e-journey-badge-${index}`}
       onPress={() =>
         navigation.navigate('Jouer', {
           module_id: module?.id,

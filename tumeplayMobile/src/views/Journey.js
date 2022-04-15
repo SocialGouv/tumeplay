@@ -36,7 +36,7 @@ const Journey = () => {
   }, [data1, loading1, loading2, data2]);
 
   let moduleIndex = 0;
-  const displayWrappers = levels?.map(level => {
+  const displayWrappers = levels?.map((level, index) => {
     let tmpModules = modules;
     let associatedModules = tmpModules?.filter(
       module => module.niveau?.value === level.value,
@@ -56,6 +56,7 @@ const Journey = () => {
       .concat(associatedModules.filter(m => !m.isDone));
     return (
       <WrapperLevelBadges
+        index={index}
         key={level.id}
         level={level}
         associatedModules={associatedModules}
