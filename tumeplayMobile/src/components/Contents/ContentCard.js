@@ -16,6 +16,7 @@ const ContentCard = props => {
     locked,
     theme_id,
     readContentIDs,
+    index,
   } = props;
   const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
   const [displayReadIndicator, setDisplayReadIndicator] = useState(false);
@@ -26,6 +27,7 @@ const ContentCard = props => {
 
   return (
     <TouchableOpacity
+      testID={`e2e-content-card-${index}`}
       onPress={() =>
         navigation.navigate('Content', {
           content_id: item?.id,

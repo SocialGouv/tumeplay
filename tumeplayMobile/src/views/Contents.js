@@ -81,12 +81,13 @@ const ContentsPage = props => {
     }
   }, [data, loading, data2, loading2, data3, loading3]);
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <ContentCard
         key={item.id}
         item={item}
         image={image}
+        index={index}
         theme_id={theme_id}
         locked={user.level < selectedLevel}
         content_ids={content_ids}

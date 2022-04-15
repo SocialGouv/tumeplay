@@ -61,8 +61,8 @@ export const GET_FRESH_CONTENTS = gql`
 `;
 
 export const GET_SINGLE_CONTENT = gql`
-  query GetSingleContent($content_id: String!, $theme_id: ID!) {
-    contents(where: {id: $content_id}) {
+  query GetSingleContent($content_id: ID!) {
+    content(id: $content_id) {
       id
       title: title_mobile
       text
@@ -75,13 +75,13 @@ export const GET_SINGLE_CONTENT = gql`
         url
       }
       external_link
-    }
-    thematiqueMobile(id: $theme_id) {
-      color
-      image {
-        url
+      thematique_mobile {
+        color
+        image {
+          url
+        }
+        title
       }
-      title
     }
   }
 `;

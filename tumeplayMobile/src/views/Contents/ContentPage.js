@@ -24,6 +24,7 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import _ from 'lodash';
 import ReadIndicator from '../../components/Contents/ReadIndicator';
+import {ActivityIndicator} from 'react-native-paper';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -43,7 +44,6 @@ const ContentPage = ({navigation, route}) => {
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {
       content_id: route?.params?.content_id,
-      theme_id: theme_id,
     },
   });
 
@@ -84,14 +84,14 @@ const ContentPage = ({navigation, route}) => {
 
   useEffect(() => {
     if (data && !loading) {
-      let tmpContent = JSON.parse(JSON.stringify(data.contents[0]));
+      let tmpContent = JSON.parse(JSON.stringify(data.content));
       tmpContent.image = {
         url: tmpContent.etiquette?.image?.url
           ? tmpContent.etiquette?.image?.url
           : tmpContent.image?.url,
       };
       setContent(tmpContent);
-      setTheme(data.thematiqueMobile);
+      setTheme(data.content.thematique_mobile);
       Event.contentSeen(tmpContent.id);
     }
   }, [data, loading]);
@@ -150,7 +150,7 @@ const ContentPage = ({navigation, route}) => {
           <Icon name="chevron-small-left" size={25} color="#000" />
           <Text>Retour</Text>
         </TouchableOpacity>
-        <View style={styles.topInfoContainer}>
+        <View style={styles.topInfoContainer} testID="e2e-content-page-topbar">
           <Image
             source={{uri: REACT_APP_URL + theme?.image?.url}}
             style={styles.themeImage}
@@ -160,58 +160,68 @@ const ContentPage = ({navigation, route}) => {
           <Text style={styles.topRightInfo}>NIV {route?.params?.level}</Text>
         </View>
       </View>
-      <View style={styles.imageContainer}>
-        <ImageBackground style={styles.image} source={imageUrl}>
-          <ImageBackground style={styles.image} source={bg}>
-            {displayReadIndicator && (
-              <ReadIndicator
-                style={styles.readIndicator}
-                backgroundColor={backgroundColor}
+      {loading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <>
+          <View style={styles.imageContainer} testID="e2e-content-page-header">
+            <ImageBackground style={styles.image} source={imageUrl}>
+              <ImageBackground style={styles.image} source={bg}>
+                {displayReadIndicator && (
+                  <ReadIndicator
+                    style={styles.readIndicator}
+                    backgroundColor={backgroundColor}
+                  />
+                )}
+                <Text
+                  style={[
+                    styles.title,
+                    content?.title.length > 50
+                      ? styles.bigTitle
+                      : styles.smallTitle,
+                  ]}
+                  numberOfLines={4}>
+                  {content?.title}
+                </Text>
+              </ImageBackground>
+            </ImageBackground>
+          </View>
+          <ScrollView>
+            <View
+              style={styles.textContainer}
+              testID="e2e-content-page-description">
+              <Text style={styles.text}>{content?.text}</Text>
+            </View>
+          </ScrollView>
+          <View style={styles.footerContainer}>
+            <View style={styles.divider} />
+            <Feedback content={content} />
+            <View style={styles.divider} />
+            <View style={styles.buttonsContainer}>
+              {count > 4 && (
+                <Button
+                  size="medium"
+                  text="Jouer"
+                  special
+                  left
+                  icon
+                  style={[styles.button, styles.redButton]}
+                  styleText={{alignItems: 'center'}}
+                  onPress={() => goToQuizz()}
+                />
+              )}
+              <Button
+                size={'medium'}
+                text={'Suivant'}
+                style={styles.button}
+                onPress={() => nextContent()}
               />
-            )}
-            <Text
-              style={[
-                styles.title,
-                content?.title.length > 50
-                  ? styles.bigTitle
-                  : styles.smallTitle,
-              ]}
-              numberOfLines={4}>
-              {content?.title}
-            </Text>
-          </ImageBackground>
-        </ImageBackground>
-      </View>
-      <ScrollView>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{content?.text}</Text>
-        </View>
-      </ScrollView>
-      <View style={styles.footerContainer}>
-        <View style={styles.divider} />
-        <Feedback content={content} />
-        <View style={styles.divider} />
-        <View style={styles.buttonsContainer}>
-          {count > 4 && (
-            <Button
-              size="medium"
-              text="Jouer"
-              special
-              left
-              icon
-              style={[styles.button, styles.redButton]}
-              styleText={{alignItems: 'center'}}
-              onPress={() => goToQuizz()}
-            />
-          )}
-          <Button
-            size={'medium'}
-            text={'Suivant'}
-            style={styles.button}
-            onPress={() => nextContent()}
-          />
-        </View>
-      </View>
+            </View>
+          </View>
+        </>
+      )}
     </GestureRecognizer>
   );
 };
@@ -224,6 +234,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     paddingTop: Platform.OS === 'ios' ? 40 : 0,
+  },
+  loaderContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '94%',
   },
   backLevel: {
     flexDirection: 'row',

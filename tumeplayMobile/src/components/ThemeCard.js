@@ -4,12 +4,20 @@ import Text from '../components/Text';
 import {Fonts} from '../styles/Style';
 
 const ThemeCard = props => {
-  const {theme, backgroundColor, borderColors, image, navigation, thematiques} =
-    props;
+  const {
+    theme,
+    backgroundColor,
+    borderColors,
+    image,
+    navigation,
+    thematiques,
+    index,
+  } = props;
 
   return (
     <TouchableOpacity
       key={theme?.id}
+      testID={`e2e-theme-card-${index}`}
       style={[
         styles.cardContainer,
         {

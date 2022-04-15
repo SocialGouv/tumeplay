@@ -6,7 +6,7 @@ import {REACT_APP_URL} from '@env';
 import config from '../../../config';
 import FreshContentSkeleton from '../global/SkeletonDesign/FreshContentSkeleton';
 
-const FreshContentCard = ({content, navigation, freshContentsIds}) => {
+const FreshContentCard = ({content, navigation, freshContentsIds, index}) => {
   const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
 
   return content ? (
@@ -20,7 +20,7 @@ const FreshContentCard = ({content, navigation, freshContentsIds}) => {
           level: content.niveau.value,
         })
       }>
-      <View>
+      <View testID={`e2e-fresh-content-card-${index}`}>
         <Image style={styles.image} source={imageUrl} />
         <Text style={styles.level}>Niveau {content?.niveau?.value}</Text>
         <Text style={styles.title} numberOfLines={2}>

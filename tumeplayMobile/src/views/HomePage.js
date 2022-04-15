@@ -49,10 +49,11 @@ const HomePage = ({navigation}) => {
     }
   }, [data, loading]);
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <FreshContentCard
         content={item}
+        index={index}
         navigation={navigation}
         freshContentsIds={freshContentsIds}
       />
@@ -145,7 +146,7 @@ const HomePage = ({navigation}) => {
           />
         </View>
         <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
-        <View style={styles.carouselContainer}>
+        <View style={styles.carouselContainer} testID="e2e-carousel-view">
           <Carousel
             data={freshContents}
             renderItem={renderItem}

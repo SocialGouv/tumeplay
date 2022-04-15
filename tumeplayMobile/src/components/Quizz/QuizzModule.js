@@ -225,7 +225,9 @@ const QuizzModule = ({navigation, route}) => {
               />
             </View>
           </View>
-          <View style={styles.questionContainer}>
+          <View
+            style={styles.questionContainer}
+            testID="e2e-question-container">
             {question.kind === 'Trou' && (
               <Text style={styles.completeText}>Complète cette phrase</Text>
             )}

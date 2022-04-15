@@ -110,6 +110,7 @@ const Signup = ({user, setUser}) => {
       <View style={styles.infoContainer}>
         <TextInput
           style={styles.textInput}
+          testID="e2e-signup-firstname"
           name="firstname"
           placeholder="Ton prénom"
           placeholderTextColor={Colors.darkgrey}
@@ -117,6 +118,7 @@ const Signup = ({user, setUser}) => {
         />
         <RNPickerSelect
           onValueChange={e => handleUserAge(e)}
+          testID="e2e-signup-age"
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
           placeholder={{label: "Ta tranche d'âge", value: null}}

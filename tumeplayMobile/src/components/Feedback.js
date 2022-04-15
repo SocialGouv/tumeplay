@@ -39,6 +39,7 @@ const Feedback = ({content}) => {
       </Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
+          testID="e2e-feedback-good"
           style={[
             styles.badge,
             hasFeedback && isFeedbackPositive && styles.selectedGood,
@@ -50,6 +51,7 @@ const Feedback = ({content}) => {
           <Text>👍</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          testID="e2e-feedback-bad"
           style={[
             styles.badge,
             hasFeedback && !isFeedbackPositive && styles.selectedWrong,
