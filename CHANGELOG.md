@@ -1,3 +1,10 @@
+# [1.103.0](https://github.com/SocialGouv/Tumeplay/compare/v1.102.4...v1.103.0) (2022-04-19)
+
+
+### Features
+
+* new design + module title in Journey component ([#371](https://github.com/SocialGouv/Tumeplay/issues/371)) ([0005520](https://github.com/SocialGouv/Tumeplay/commit/00055208d9e65af7df5495f8e1c91925951c09f2))
+
 ## [1.102.4](https://github.com/SocialGouv/Tumeplay/compare/v1.102.3...v1.102.4) (2022-04-19)
 
 
