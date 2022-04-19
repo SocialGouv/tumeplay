@@ -1,10 +1,12 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {View, StyleSheet, Image} from 'react-native';
+import Text from '../../components/Text';
 import AppContext from '../../../AppContext';
 import BadgesSkeleton from '../global/SkeletonDesign/BadgesSkeleton';
 import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
-
+import {REACT_APP_URL} from '@env';
+import config from '../../../config';
 const WrapperLevelBadges = ({level, associatedModules, loading}) => {
   const {doneModules_ids} = useContext(AppContext);
 
@@ -23,12 +25,23 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
       module.reward = true;
     }
     return (
-      <Badge
-        key={module.id}
-        module={module}
-        module_index={module.module_index}
-        status={module.status}
-      />
+      <View key={module.id}>
+        <Badge
+          key={module.id}
+          module={module}
+          module_index={module.module_index}
+          status={module.status}
+        />
+        <View style={styles.textContainer}>
+          <Image
+            source={{uri: REACT_APP_URL + module?.thematique?.image?.url}}
+            style={{width: 20, height: 20, marginLeft: 15}}
+          />
+          <Text style={styles.textDescription}>
+            {module.niveau.value + '.' + (index + 1) + ' ' + module?.title}
+          </Text>
+        </View>
+      </View>
     );
   });
 
@@ -57,6 +70,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+  },
+  textContainer: {
+    flexDirection: 'row',
+    textAlignVertical: 'center',
+    alignItems: 'center',
+  },
+  textDescription: {
+    width: 95,
+    fontSize: config.deviceWidth * 0.026,
+    fontWeight: '700',
+    paddingHorizontal: 5,
+    alignSelf: 'center',
   },
 });
 
