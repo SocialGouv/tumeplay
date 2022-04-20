@@ -25,7 +25,7 @@ const QuizzAllRight = ({navigation}) => {
       <Text style={styles.description}>
         Aucune mauvaise réponse dans cette série de questions :)
       </Text>
-      <View style={styles.bottomContainer}>
+      <View style={styles.bottomContainer} testID="e2e-quizz-all-right">
         {!user.pending_module ? (
           <>
             <TouchableOpacity

@@ -42,7 +42,9 @@ const QuizzWithWrongAnswers = props => {
         <Image source={wave} />
       </View>
       <Image style={styles.congratsImg} source={congrats} />
-      <View style={styles.answerContainer}>
+      <View
+        style={styles.answerContainer}
+        testID="e2e-quizz-with-wrong-answers">
         <Text style={[styles.answerText, styles.firstAnswer]}>
           ✅ {correctAnswers?.length}{' '}
           {correctAnswers.length > 1

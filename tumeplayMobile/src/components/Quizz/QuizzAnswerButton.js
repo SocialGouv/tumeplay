@@ -24,6 +24,11 @@ const QuizzAnswerButton = props => {
       onPress={onPress}
       name={name}>
       <View
+        testID={
+          answer.key === correctAnswer
+            ? 'e2e-quizz-module-correct-answer'
+            : 'e2e-quizz-module-wrong-answer'
+        }
         style={[
           styles.button,
           hasAnswered && answer.key === correctAnswer && styles.correctAnswer,

@@ -1,11 +1,39 @@
+const playQuizzFullRightAnswers = async () => {
+  while (true) {
+    try {
+      await expect(element(by.id('e2e-quizz-all-right'))).toExist();
+      break;
+    } catch (e) {
+      await element(by.id('e2e-quizz-module-correct-answer')).tap();
+      await expect(element(by.text('Suivant'))).toBeVisible();
+      await element(by.text('Suivant')).tap();
+    }
+  }
+};
+
+const playQuizzWithWrongAnswers = async () => {
+  for (var i = 0; true; i++) {
+    try {
+      await expect(element(by.id('e2e-quizz-with-wrong-answers'))).toExist();
+      break;
+    } catch (e) {
+      if (i === 0) {
+        await element(by.id('e2e-quizz-module-wrong-answer')).atIndex(0).tap();
+      } else {
+        await element(by.id('e2e-quizz-module-correct-answer')).tap();
+      }
+      await expect(element(by.text('Suivant'))).toBeVisible();
+      await element(by.text('Suivant')).tap();
+    }
+  }
+  await element(by.text('Je continue')).tap();
+  await playQuizzFullRightAnswers();
+};
+
 describe('Test tumeplay app', () => {
   beforeEach(async () => {
     await device.launchApp({newInstance: true});
   });
-
-  // beforeEach(async () => {
-  //   await device.reloadReactNative();
-  // });
 
   it('should pass onboarding & signup', async () => {
     await expect(element(by.id('e2e-onboarding-container'))).toBeVisible();
@@ -158,33 +186,58 @@ describe('Test tumeplay app', () => {
     await expect(element(by.id('e2e-content-page-description'))).toBeVisible();
   });
 
-  it('should be able to play quizz from home button', async () => {
+  it('should be able to play quizz from home button - only right answers', async () => {
     await expect(element(by.text('Jouer')).atIndex(0)).toBeVisible();
     await element(by.text('Jouer')).atIndex(0).tap();
     await waitFor(element(by.id('e2e-question-container')))
       .toBeVisible()
       .withTimeout(5000);
-    await element(by.text('VRAI')).tap();
+    await playQuizzFullRightAnswers();
   });
 
-  it('should be able to play quizz from navbar button', async () => {
+  it('should be able to play quizz from home button - with wrong answers', async () => {
+    await expect(element(by.text('Jouer')).atIndex(0)).toBeVisible();
+    await element(by.text('Jouer')).atIndex(0).tap();
+    await waitFor(element(by.id('e2e-question-container')))
+      .toBeVisible()
+      .withTimeout(5000);
+    await playQuizzWithWrongAnswers();
+  });
+
+  it('should be able to play quizz from navbar button - with wrong answers', async () => {
     await expect(element(by.text('Jouer')).atIndex(1)).toBeVisible();
     await element(by.text('Jouer')).atIndex(1).tap();
     await waitFor(element(by.id('e2e-question-container')))
       .toBeVisible()
       .withTimeout(5000);
+    await playQuizzWithWrongAnswers();
   });
 
-  it('should access journey screen', async () => {
+  it('should access journey screen & play from it - only right answers', async () => {
     await expect(element(by.text('Parcours'))).toBeVisible();
     await element(by.text('Parcours')).tap();
 
-    await waitFor(element(by.id('e2e-journey-badge-1-0')))
+    await waitFor(element(by.id('e2e-journey-badge-1-3')))
       .toBeVisible()
       .withTimeout(5000);
-    await element(by.id('e2e-journey-badge-1-0')).tap();
+    await element(by.id('e2e-journey-badge-1-3')).tap();
     await waitFor(element(by.id('e2e-question-container')))
       .toBeVisible()
       .withTimeout(5000);
+    await playQuizzFullRightAnswers();
+  });
+
+  it('should access journey screen & play from it - with wrong answers', async () => {
+    await expect(element(by.text('Parcours'))).toBeVisible();
+    await element(by.text('Parcours')).tap();
+
+    await waitFor(element(by.id('e2e-journey-badge-1-4')))
+      .toBeVisible()
+      .withTimeout(5000);
+    await element(by.id('e2e-journey-badge-1-4')).tap();
+    await waitFor(element(by.id('e2e-question-container')))
+      .toBeVisible()
+      .withTimeout(5000);
+    await playQuizzWithWrongAnswers();
   });
 });
