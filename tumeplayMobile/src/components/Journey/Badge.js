@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Svg, {Polygon} from 'react-native-svg';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import lock from '../../assets/custom_images/Vector.png';
@@ -6,9 +6,12 @@ import check from '../../assets/Check.png';
 import {useNavigation} from '@react-navigation/native';
 import diceIcon from '../../assets/diceHexagon.png';
 import gift from '../../assets/gift.png';
+import handleRedirection from '../../services/handleRedirection';
+import AppContext from '../../../AppContext';
 
 const Badge = props => {
   const navigation = useNavigation();
+  const {user} = useContext(AppContext);
   const [strokeColor, setStrokeColor] = useState('#EAE2D7');
   const [fillColor, setFillColor] = useState('#FEF0DC66');
   const {module, status} = props;
@@ -31,18 +34,23 @@ const Badge = props => {
     <TouchableOpacity
       disabled={status === 'locked'}
       onPress={() =>
-        navigation.navigate('Jouer', {
-          module_id: module?.id,
-          module_title: module.title,
-          questions: module?.questionsArray,
-          theme: {
-            title: module?.thematique?.title,
-            color: module?.thematique?.color,
-            image: module?.thematique?.image,
-          },
-          clearModuleData: true,
-          retry: status === 'done',
-        })
+        navigation.navigate(
+          'Jouer',
+          status === 'todo'
+            ? handleRedirection(user)
+            : {
+                module_id: module?.id,
+                module_title: module.title,
+                questions: module?.questionsArray,
+                theme: {
+                  title: module?.thematique?.title,
+                  color: module?.thematique?.color,
+                  image: module?.thematique?.image,
+                },
+                clearModuleData: true,
+                retry: status === 'done',
+              },
+        )
       }
       style={{marginHorizontal: 15}}>
       <Svg style={styles.svgContainer}>
