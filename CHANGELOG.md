@@ -1,3 +1,10 @@
+## [1.104.1](https://github.com/SocialGouv/Tumeplay/compare/v1.104.0...v1.104.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* handleRedirection on todo badge (journey screen) ([#379](https://github.com/SocialGouv/Tumeplay/issues/379)) ([ee993b6](https://github.com/SocialGouv/Tumeplay/commit/ee993b6f1d0130c0758d1d4a5bdefa08403b41c7))
+
 # [1.104.0](https://github.com/SocialGouv/Tumeplay/compare/v1.103.0...v1.104.0) (2022-04-21)
 
 
