@@ -52,10 +52,10 @@ const Badge = props => {
               },
         )
       }
-      style={{marginHorizontal: 15}}>
+      style={{marginHorizontal: 0}}>
       <Svg style={styles.svgContainer}>
         <Polygon
-          points="45,0 75,20 75,55 45,75 15,55 15,20"
+          points="50,0 95,25 95,50 95,75 50,100 10,75 10,25"
           stroke={strokeColor}
           strokeWidth="3"
           fill={fillColor}
@@ -86,32 +86,31 @@ const Badge = props => {
 const styles = StyleSheet.create({
   svgContainer: {
     position: 'relative',
-    width: 80,
-    height: 80,
-    marginVertical: 10,
-    marginRight: 10,
+    width: 100,
+    height: 100,
+    margin: 10,
   },
   imageValidate: {
     position: 'absolute',
     top: 45,
-    left: 30,
+    left: 45,
   },
   imageTodo: {
     width: 40,
     height: 40,
     position: 'absolute',
-    top: 29,
-    left: 25,
+    top: 40,
+    left: 41,
   },
   iconContainer: {
     position: 'absolute',
-    bottom: -80,
-    left: 50,
+    bottom: -100,
+    left: 60,
     backgroundColor: '#EAE2D7',
     padding: 4,
     borderRadius: 50,
-    width: 25,
-    height: 25,
+    width: 30,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
