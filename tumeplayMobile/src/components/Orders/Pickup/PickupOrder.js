@@ -97,10 +97,8 @@ const PickupOrder = props => {
       Geolocation.getCurrentPosition(
         info => {
           let tmpCoordinates = {};
-          tmpCoordinates.latitude = parseFloat(info.coords.latitude.toFixed(7));
-          tmpCoordinates.longitude = parseFloat(
-            info.coords.longitude.toFixed(7),
-          );
+          tmpCoordinates.latitude = info.coords.latitude;
+          tmpCoordinates.longitude = info.coords.longitude;
           tmpCoordinates.latitudeDelta = delta.latitudeDelta;
           tmpCoordinates.longitudeDelta = delta.longitudeDelta;
           setCoordinates({
