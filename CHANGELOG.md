@@ -1,3 +1,15 @@
+# [1.105.0](https://github.com/SocialGouv/Tumeplay/compare/v1.104.1...v1.105.0) (2022-04-22)
+
+
+### Bug Fixes
+
+* play from navbar bug ([#382](https://github.com/SocialGouv/Tumeplay/issues/382)) ([4fd4e9d](https://github.com/SocialGouv/Tumeplay/commit/4fd4e9dece923be47cfd4a5db68624c1ab27ccb2))
+
+
+### Features
+
+* remove work on badges ([#383](https://github.com/SocialGouv/Tumeplay/issues/383)) ([47344a3](https://github.com/SocialGouv/Tumeplay/commit/47344a318956e46964da1720e54bd58f47127140))
+
 ## [1.104.1](https://github.com/SocialGouv/Tumeplay/compare/v1.104.0...v1.104.1) (2022-04-21)
 
 
