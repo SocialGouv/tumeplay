@@ -32,7 +32,7 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
           module_index={module.module_index}
           status={module.status}
         />
-        <View style={styles.textContainer}>
+        {/* <View style={styles.textContainer}>
           <Image
             source={{uri: REACT_APP_URL + module?.thematique?.image?.url}}
             style={{width: 20, height: 20, marginLeft: 15}}
@@ -40,7 +40,7 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
           <Text style={styles.textDescription}>
             {module.niveau.value + '.' + (index + 1) + ' ' + module?.title}
           </Text>
-        </View>
+        </View> */}
       </View>
     );
   });
@@ -70,20 +70,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
   },
-  textContainer: {
-    flexDirection: 'row',
-    textAlignVertical: 'center',
-    alignItems: 'center',
-  },
-  textDescription: {
-    width: 95,
-    fontSize: config.deviceWidth * 0.026,
-    fontWeight: '700',
-    paddingHorizontal: 5,
-    alignSelf: 'center',
-  },
+  // textContainer: {
+  //   flexDirection: 'row',
+  //   textAlignVertical: 'center',
+  //   alignItems: 'center',
+  // },
+  // textDescription: {
+  //   width: 95,
+  //   fontSize: config.deviceWidth * 0.026,
+  //   fontWeight: '700',
+  //   paddingHorizontal: 5,
+  //   alignSelf: 'center',
+  // },
 });
 
 export default WrapperLevelBadges;
