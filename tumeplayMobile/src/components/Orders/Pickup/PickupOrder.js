@@ -80,6 +80,7 @@ const PickupOrder = props => {
   };
 
   const fetchPOI = async () => {
+    console.log('fetchPOI');
     let response = await POIAPI.fetchMondialRelaisPOI({
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
@@ -93,17 +94,21 @@ const PickupOrder = props => {
   };
 
   const getUserGeolocation = () => {
+    console.log('getUserGeolocation');
     if (geolocationGranted) {
       Geolocation.getCurrentPosition(
         info => {
           let tmpCoordinates = {};
-          tmpCoordinates.latitude = info.coords.latitude;
-          tmpCoordinates.longitude = info.coords.longitude;
+          tmpCoordinates.latitude = parseFloat(info.coords.latitude.toFixed(6));
+          tmpCoordinates.longitude = parseFloat(
+            info.coords.longitude.toFixed(6),
+          );
           tmpCoordinates.latitudeDelta = delta.latitudeDelta;
           tmpCoordinates.longitudeDelta = delta.longitudeDelta;
           setCoordinates({
             ...tmpCoordinates,
           });
+          console.log(coordinates);
           setCurrentUserPosition({
             ...{
               latitude: tmpCoordinates.latitude,
@@ -131,9 +136,11 @@ const PickupOrder = props => {
         }
       });
     } else if (Platform.OS === 'android') {
+      console.log('android');
       request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(statues => {
         if (statues === 'granted') {
           setGeolocationGranted(true);
+          console.log('GRANTED');
         }
       });
     } else {

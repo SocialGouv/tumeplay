@@ -91,7 +91,7 @@ const Navbar = ({navigation}) => {
         component={Box}
         listeners={{
           tabPress: e => {
-            if (user.credits === 0) {
+            if (user.credits !== 0) {
               e.preventDefault();
             } else {
               Event.orderPageEvent('navbarOrderButton');
