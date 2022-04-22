@@ -82,7 +82,7 @@ const PickupOrder = props => {
   const fetchPOI = async () => {
     console.log('fetchPOI');
     let response = await POIAPI.fetchMondialRelaisPOI({
-      latitude: coordinates.latitude,
+      latitude: Number(coordinates.latitude.toFixed(7)),
       longitude: coordinates.longitude,
     });
     if (response.statusCode === 400) {
@@ -95,13 +95,14 @@ const PickupOrder = props => {
 
   const getUserGeolocation = () => {
     console.log('getUserGeolocation');
+    console.log('geolocationGranted', geolocationGranted);
     if (geolocationGranted) {
       Geolocation.getCurrentPosition(
         info => {
           let tmpCoordinates = {};
-          tmpCoordinates.latitude = parseFloat(info.coords.latitude.toFixed(6));
+          tmpCoordinates.latitude = parseFloat(info.coords.latitude.toFixed(7));
           tmpCoordinates.longitude = parseFloat(
-            info.coords.longitude.toFixed(6),
+            info.coords.longitude.toFixed(7),
           );
           tmpCoordinates.latitudeDelta = delta.latitudeDelta;
           tmpCoordinates.longitudeDelta = delta.longitudeDelta;
