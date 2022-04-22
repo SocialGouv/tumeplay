@@ -11,7 +11,6 @@ import QuizzLoader from './global/QuizzLoader';
 import diceIcon from '../assets/diceIcon.png';
 import {Image} from 'react-native';
 import Event from '../services/api/matomo';
-import handleRedirection from '../services/handleRedirection';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,7 +72,7 @@ const Navbar = ({navigation}) => {
             Event.playEvent('navbar');
           },
         }}
-        initialParams={handleRedirection(user)}
+        initialParams={{from: 'navbar'}}
       />
       <Tab.Screen
         name="Parcours"
