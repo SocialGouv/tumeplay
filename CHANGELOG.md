@@ -1,3 +1,10 @@
+## [1.107.1](https://github.com/SocialGouv/Tumeplay/compare/v1.107.0...v1.107.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* fixing api call to MR and refreshing map ([#386](https://github.com/SocialGouv/Tumeplay/issues/386)) ([f4c7332](https://github.com/SocialGouv/Tumeplay/commit/f4c733266c3c60154b3a4cc46389f1576891fd31))
+
 # [1.107.0](https://github.com/SocialGouv/Tumeplay/compare/v1.106.0...v1.107.0) (2022-04-22)
 
 
