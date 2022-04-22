@@ -81,8 +81,8 @@ const PickupOrder = props => {
 
   const fetchPOI = async () => {
     let response = await POIAPI.fetchMondialRelaisPOI({
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
+      latitude: coordinates.latitude.toFixed(7),
+      longitude: coordinates.longitude.toFixed(7),
     });
     if (response.statusCode === 400) {
       setMrPoi([]);
