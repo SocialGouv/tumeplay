@@ -106,7 +106,6 @@ const PickupOrder = props => {
           setCoordinates({
             ...tmpCoordinates,
           });
-          console.log({coordinates});
           setCurrentUserPosition({
             ...{
               latitude: tmpCoordinates.latitude,
