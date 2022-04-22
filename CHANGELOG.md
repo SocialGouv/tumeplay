@@ -1,3 +1,10 @@
+# [1.106.0](https://github.com/SocialGouv/Tumeplay/compare/v1.105.0...v1.106.0) (2022-04-22)
+
+
+### Features
+
+* box unavailable management ([#381](https://github.com/SocialGouv/Tumeplay/issues/381)) ([8b7360b](https://github.com/SocialGouv/Tumeplay/commit/8b7360b4404bdede7261dd09ea1b23fe47318d51))
+
 # [1.105.0](https://github.com/SocialGouv/Tumeplay/compare/v1.104.1...v1.105.0) (2022-04-22)
 
 
