@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, Platform} from 'react-native';
+import {View, StyleSheet, Image, Platform} from 'react-native';
 import React, {useEffect, useContext} from 'react';
 import HomePage from '../../views/HomePage';
 import {TourGuideZone, useTourGuideController} from 'rn-tourguide';
@@ -9,6 +9,7 @@ import AppContext from '../../../AppContext';
 import {Colors} from '../../styles/Style';
 import {UPDATE_MOBILE_USER} from '../../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
+import Text from '../Text.js';
 
 const Copilot = props => {
   const {user, setUser, reloadUser} = useContext(AppContext);

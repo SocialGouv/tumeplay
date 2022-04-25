@@ -106,10 +106,9 @@ const App = () => {
     await EncryptedStorage.clear();
   };
 
-  const checkUpdateNeeded = async () => {
-    try {
-      const updateNeeded = await VersionCheck.needUpdate();
-      if (updateNeeded && updateNeeded?.isNeeded) {
+  const checkUpdateNeeded = () => {
+    VersionCheck.needUpdate({country: 'fr'}).then(update => {
+      if (update?.isNeeded) {
         Vibration.vibrate(200);
         Alert.alert(
           'Oups !',
@@ -119,16 +118,14 @@ const App = () => {
               text: "Mettre à jour l'application",
               onPress: () => {
                 BackHandler.exitApp();
-                Linking.openURL(updateNeeded?.storeUrl);
+                Linking.openURL(update?.storeUrl);
               },
             },
           ],
           {cancelable: false},
         );
       }
-    } catch (error) {
-      console.log({error});
-    }
+    });
   };
 
   useEffect(() => {
