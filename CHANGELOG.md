@@ -1,3 +1,10 @@
+## [1.107.2](https://github.com/SocialGouv/Tumeplay/compare/v1.107.1...v1.107.2) (2022-04-25)
+
+
+### Bug Fixes
+
+* fixing force update on Ios ([#387](https://github.com/SocialGouv/Tumeplay/issues/387)) ([d4bd063](https://github.com/SocialGouv/Tumeplay/commit/d4bd0631a58c79559399b853f771332b3f755a7e))
+
 ## [1.107.1](https://github.com/SocialGouv/Tumeplay/compare/v1.107.0...v1.107.1) (2022-04-22)
 
 
