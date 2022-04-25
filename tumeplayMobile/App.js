@@ -25,6 +25,7 @@ import Matomo from 'react-native-matomo';
 import Loader from './src/components/global/Loader';
 import {TourGuideProvider} from 'rn-tourguide';
 import VersionCheck from 'react-native-version-check';
+import InAppReview from 'react-native-in-app-review';
 
 import * as Sentry from '@sentry/react-native';
 import Copilot from './src/components/Copilot/Copilot';
@@ -60,6 +61,19 @@ const App = () => {
     } else {
       setIsUserLoaded(true);
       setUser({});
+    }
+  };
+
+  const handleAppReview = () => {
+    console.log(InAppReview.isAvailable());
+    if (InAppReview.isAvailable()) {
+      InAppReview.RequestInAppReview()
+        .then(hasFlowFinishedSuccessfully => {
+          console.log('InAppReview in Android', hasFlowFinishedSuccessfully);
+        })
+        .catch(error => {
+          console.log('InAppReview error', error);
+        });
     }
   };
 
@@ -130,6 +144,7 @@ const App = () => {
 
   useEffect(() => {
     // clearStorage();
+    handleAppReview();
     checkUserIdInStorage();
     Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
     checkUpdateNeeded();

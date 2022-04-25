@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.ibits.react_native_in_app_review.AppReviewPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.reactnativecommunity.webview .RNCWebViewPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
@@ -19,6 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import de.bonify.reactnativematomo.MatomoPackage;
 
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -31,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
           new MatomoPackage();
+          new AppReviewPackage();
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
@@ -42,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
       };
 
   @Override
