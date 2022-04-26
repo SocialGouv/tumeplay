@@ -9,7 +9,7 @@ export default function useAppReview() {
           console.log('InAppReview', hasFlowFinishedSuccessfully);
         })
         .catch(error => {
-          Alert.alert();
+          console.log(error);
         });
     }
   };
