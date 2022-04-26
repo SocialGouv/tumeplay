@@ -80,7 +80,7 @@ const PickupOrderUserInfos = props => {
                     <TextInput
                       label={item.label}
                       style={styles.input}
-                      value={values[item.name]}
+                      value={values[item.name].trim()}
                       onBlur={handleBlur(item.name)}
                       onChangeText={handleChange(item.name)}
                       underlineColor={errors[item.name] ? '#D42201' : '#EAE2D7'}

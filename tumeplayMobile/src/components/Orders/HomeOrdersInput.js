@@ -237,7 +237,7 @@ const HomeOrdersInput = props => {
                             errors[item.name] ? '#D42201' : '#EAE2D7'
                           }
                           activeUnderlineColor="#D42201"
-                          value={values[item.name]}
+                          value={values[item.name].trim()}
                           onChangeText={handleChange(item.name)}
                           keyboardType={item.isNumber ? 'numeric' : 'default'}
                         />
