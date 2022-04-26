@@ -1,4 +1,3 @@
-import {Alert} from 'react-native';
 import InAppReview from 'react-native-in-app-review';
 
 export default function useAppReview() {
