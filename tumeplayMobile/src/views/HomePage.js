@@ -15,9 +15,11 @@ import config from '../../config';
 import {WebView} from 'react-native-webview';
 import Event from '../services/api/matomo';
 import handleRedirection from '../services/handleRedirection';
+import useAppReview from '../hooks/useAppReview';
 
-const HomePage = ({navigation}) => {
+const HomePage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
+  const {onReview} = useAppReview();
   const [tiktokHtmls, setTiktokHtmls] = useState([]);
   const tiktokIds = [
     '7058603040588188933',
@@ -48,6 +50,10 @@ const HomePage = ({navigation}) => {
       );
     }
   }, [data, loading]);
+
+  useEffect(() => {
+    route?.params?.shouldReview && onReview();
+  }, [route]);
 
   const renderItem = ({item}) => {
     return (
