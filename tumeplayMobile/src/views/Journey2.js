@@ -13,13 +13,6 @@ const Journey2 = () => {
     <Container>
       <Title title="Ton parcours" />
       <Condom />
-      <Svg style={styles.svgContainer}>
-        <Polygon
-          points="100,100 0,25"
-          stroke={strokeColor}
-          strokeWidth="3"
-          fill={fillColor}></Polygon>
-      </Svg>
     </Container>
   );
 };

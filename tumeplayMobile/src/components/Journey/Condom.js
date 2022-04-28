@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -9,19 +9,18 @@ const Condom = () => {
     const stepStyles = [
       {
         width: 25,
-        height: 16,
+        height: 18,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         border: 1,
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderColor: '#F7EFE6',
-        backgroundColor: '#D42201',
       },
       {
         width: 55,
         height: 16,
         border: 1,
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderColor: '#F7EFE6',
         borderTopLeftRadius: 60,
         borderTopRightRadius: 60,
@@ -35,7 +34,6 @@ const Condom = () => {
         topWidth: 0.5,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 60,
@@ -43,7 +41,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 60,
@@ -51,7 +48,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#ECC055',
       },
       {
         width: 60,
@@ -59,7 +55,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 60,
@@ -67,7 +62,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 60,
@@ -75,7 +69,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 60,
@@ -83,15 +76,6 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-        backgroundColor: '#F22F',
       },
       {
         width: 76,
@@ -100,22 +84,21 @@ const Condom = () => {
         border: 1,
         borderWidth: 0.5,
         borderColor: '#F7EFE6',
-        backgroundColor: '#51B070',
       },
     ];
 
-    const colors = [
-      ['#D42201'],
-      [' #DB4D18', '#DE6525'],
-      ['#E0722C', '#E38737'],
-      ['#E5903C', '#E9AB4A'],
-      ['#EBB54F', '#E2BF57'],
-      ['#D8BE59', '#C4BC5C'],
-      ['#BABB5E', '#A7B961'],
-      ['#9DB863', '#88B667'],
-      ['#80B568', '#6BB36C'],
-      ['#51B070'],
-    ];
+    const colors = {
+      0: ['#D42201', '#D42201'],
+      1: ['#DB4D18', '#DE6525'],
+      2: ['#E0722C', '#E38737'],
+      3: ['#E5903C', '#E9AB4A'],
+      4: ['#EBB54F', '#E2BF57'],
+      5: ['#D8BE59', '#C4BC5C'],
+      6: ['#BABB5E', '#A7B961'],
+      7: ['#9DB863', '#88B667'],
+      8: ['#80B568', '#6BB36C'],
+      9: ['#51B070', '#51B070'],
+    };
 
     return (
       <LinearGradient
@@ -136,14 +119,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
     marginRight: 50,
-  },
-  condom: {
-    width: 100,
-    height: 20,
-    backgroundColor: '#F22F',
-    border: 1,
-    borderWidth: 1,
-    borderColor: '#FFF',
   },
 });
 

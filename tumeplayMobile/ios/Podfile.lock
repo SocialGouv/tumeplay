@@ -2,6 +2,8 @@ PODS:
   - BNFMatomo (0.2.1):
     - React
   - boost (1.76.0)
+  - BVLinearGradient (2.5.6):
+    - React
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.67.2)
@@ -385,6 +387,7 @@ PODS:
 DEPENDENCIES:
   - BNFMatomo (from `../node_modules/react-native-matomo/BNFMatomo.podspec`)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -479,6 +482,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-matomo/BNFMatomo.podspec"
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
+  BVLinearGradient:
+    :path: "../node_modules/react-native-linear-gradient"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -580,6 +585,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   BNFMatomo: 9953e25e6c5fc70e5a9c465a9bc315cfc43495b5
   boost: a7c83b31436843459a1961bfd74b96033dc77234
+  BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 244195e30d63d7f564c55da4410b9a24e8fbceaa
@@ -642,6 +648,6 @@ SPEC CHECKSUMS:
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f555dfd1a4031075a5da3876657db547fdecf61e
+PODFILE CHECKSUM: 0868c6581e26099da162c244afefebde9862abe6
 
 COCOAPODS: 1.11.2
