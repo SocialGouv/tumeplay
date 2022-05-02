@@ -9,7 +9,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AppContext from '../../AppContext';
 import QuizzLoader from './global/QuizzLoader';
 import diceIcon from '../assets/diceIcon.png';
-import {Image} from 'react-native';
+import {Image, Alert} from 'react-native';
 import Event from '../services/api/matomo';
 
 const Tab = createBottomTabNavigator();
@@ -90,7 +90,13 @@ const Navbar = ({navigation}) => {
         component={Box}
         listeners={{
           tabPress: e => {
-            if (user.credits === 0) {
+            if (user.credits === 0 || !user.isUnder25) {
+              if (!user.isUnder25) {
+                Alert.alert(
+                  "La commande de kit n'est pas disponible",
+                  'Vous devez avoir moins de 25 ans pour commander un kit',
+                );
+              }
               e.preventDefault();
             } else {
               Event.orderPageEvent('navbarOrderButton');
