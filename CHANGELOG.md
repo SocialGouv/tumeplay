@@ -1,3 +1,10 @@
+## [1.107.3](https://github.com/SocialGouv/Tumeplay/compare/v1.107.2...v1.107.3) (2022-05-02)
+
+
+### Bug Fixes
+
+* fixing adress validation on geoloc ([#390](https://github.com/SocialGouv/Tumeplay/issues/390)) ([e1fd703](https://github.com/SocialGouv/Tumeplay/commit/e1fd7032f11d2042d371e1f6922f2111d8ca93bd))
+
 ## [1.107.2](https://github.com/SocialGouv/Tumeplay/compare/v1.107.1...v1.107.2) (2022-04-25)
 
 
