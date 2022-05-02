@@ -1,11 +1,12 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-const Condom = () => {
+const Condom = props => {
+  const {style} = props;
   const condomsStep = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const condom = condomsStep.map((condom, index) => {
+  const _condom = condomsStep.map((condom, index) => {
     const stepStyles = [
       {
         width: 25,
@@ -14,6 +15,7 @@ const Condom = () => {
         borderTopRightRadius: 50,
         border: 1,
         borderWidth: 1,
+        marginBottom: 1,
         borderColor: '#F7EFE6',
       },
       {
@@ -21,6 +23,7 @@ const Condom = () => {
         height: 16,
         border: 1,
         borderWidth: 1,
+        marginBottom: 1,
         borderColor: '#F7EFE6',
         borderTopLeftRadius: 60,
         borderTopRightRadius: 60,
@@ -109,12 +112,11 @@ const Condom = () => {
     );
   });
 
-  return <View style={styles.container}>{condom}</View>;
+  return <View style={[styles.container, style]}>{_condom}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
