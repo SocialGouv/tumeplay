@@ -276,6 +276,30 @@ const PickupOrder = props => {
     }
   };
 
+  const handleValidationBeforeOrder = () => {
+    if (validateZipCode(currentPOI.CP)) {
+      setSelectedPOI(currentPOI);
+    } else {
+      Vibration.vibrate(200);
+      Alert.alert(
+        "La commande de kit n'est pas disponible dans ta région",
+        'La commande de kit est uniquement disponible en Île-de-France et en Aquitaine',
+        [
+          {
+            text: "Revenir à l'accueil",
+            onPress: () => navigation.navigate('Home'),
+          },
+          {
+            text: "Modifier l'adresse",
+            onPress: () => {
+              console.log('return screen');
+            },
+          },
+        ],
+      );
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
       scrollToIndex();
@@ -342,7 +366,7 @@ const PickupOrder = props => {
           text="Je confirme ce point relais"
           size="medium"
           icon={true}
-          onPress={() => setSelectedPOI(currentPOI)}
+          onPress={handleValidationBeforeOrder}
         />
       )}
     </View>
