@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
@@ -11,11 +11,14 @@ import {SvgXml} from 'react-native-svg';
 
 const Journey2 = () => {
   const {thematiques} = useContext(AppContext);
-  const data = [...thematiques];
+  //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
+  const data = [...thematiques, ...thematiques];
 
-  const _keyExtractor = item => (item?.id ? item?.id : '');
+  const _keyExtractor = item => (item?.id ? item?.id : Math.random());
 
-  const _renderItem = ({item}) => <ThemePicker theme={item} />;
+  const _renderItem = ({item, index}) => (
+    <ThemePicker theme={item} index={index} />
+  );
 
   const xml = `
    <svg width="157" height="336" viewBox="0 0 157 336" fill="none">
@@ -26,60 +29,59 @@ const Journey2 = () => {
       </svg>
   `;
 
+  const handleInitPosition = () => {};
+
+  useEffect(() => {
+    handleInitPosition(3);
+  }, []);
+
   return (
     <Container style={styles.container}>
       <Title title="Ton parcours" />
-      <View
-        style={{
-          transform: [{rotate: '270deg'}],
-          zIndex: 0,
-          position: 'absolute',
-          top: config.deviceHeight / 2 - config.deviceWidth / 2,
-          width: config.deviceHeight,
-          height: config.deviceWidth * 1.5,
-        }}>
+      <View style={styles.wheel}>
         <CircleList
+          containerStyle={{height: '100%'}}
           data={data}
           keyExtractor={_keyExtractor}
-          elementCount={12}
+          elementCount={13}
+          selectedItemScale={1}
           renderItem={_renderItem}
-          radius={config.deviceWidth / 1.5}
-          swipeSpeedMultiplier={30}
-          style={[
-            styles.wheel,
-            {
-              transform: [{rotate: '90deg'}],
-            },
-          ]}
+          radius={config.deviceWidth / 1.7}
+          swipeSpeedMultiplier={35}
+          visiblityPadding={0}
+          scrollToIndex={3}
+          onScroll={e => console.log(e)}
+          style={[styles.wheel]}
         />
       </View>
-      <SvgXml xml={xml} width="60%" height="60%" style={styles.image} />
+      <SvgXml xml={xml} width="50%" height="50%" style={styles.image} />
       <Condom style={styles.condom} />
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   position: 'relative',
-  // },
   image: {
     position: 'absolute',
-    top: config.deviceHeight / 3.8,
+    top: config.deviceHeight / 3.5,
     zIndex: -1,
     right: 0,
   },
   wheel: {
-    width: config.deviceWidth / 2,
-    height: config.deviceHeight / 2,
-    zIndex: 0,
-    backgroundColor: '#F2F',
+    transform: [{rotate: '270deg'}],
+    zIndex: 1,
+    position: 'absolute',
+    left: 0,
+    top: config.deviceHeight / 2 - config.deviceWidth / 1,
+    width: config.deviceHeight * 1.15,
+    height: config.deviceWidth * 2,
+    backgroundColor: 'transparent',
   },
   condom: {
     position: 'relative',
-    top: 140,
-    right: 0,
-    zIndex: 0,
+    top: config.deviceHeight / 4,
+    right: -15,
+    zIndex: 2,
   },
 });
 

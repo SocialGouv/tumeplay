@@ -1,9 +1,9 @@
-import {TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
 import React from 'react';
 import {REACT_APP_URL} from '@env';
 
 const ThemePicker = props => {
-  const {theme} = props;
+  const {theme, index} = props;
 
   return (
     <TouchableOpacity
@@ -12,6 +12,7 @@ const ThemePicker = props => {
         source={{uri: REACT_APP_URL + theme?.image?.url}}
         style={styles.image}
       />
+      <Text>{index}</Text>
     </TouchableOpacity>
   );
 };
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    transform: [{rotate: '90deg'}],
   },
   triangle: {
     position: 'absolute',
