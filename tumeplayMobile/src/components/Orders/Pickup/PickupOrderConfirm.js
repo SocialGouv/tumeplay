@@ -91,7 +91,10 @@ const PickupOrderConfirm = props => {
 
   const handleClosingModal = () => {
     if (!isLoading) {
-      navigation.navigate('Home', {screen: 'Accueil'});
+      navigation.navigate('Home', {
+        screen: 'Accueil',
+        params: {shouldReview: true},
+      });
       setIsVisible(false);
     }
   };

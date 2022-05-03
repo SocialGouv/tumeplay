@@ -25,6 +25,8 @@ target 'tumeplayMobile' do
   pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
 
 
+  pod 'react-native-in-app-review', :path => '../node_modules/react-native-in-app-review'
+
   target 'tumeplayMobileTests' do
     inherit! :complete
     # Pods for testing

@@ -86,7 +86,10 @@ const OrderConfirm = props => {
   const handleClosingModal = () => {
     if (!isLoading) {
       Event.boxOrdered();
-      navigation.navigate('Home', {screen: 'Accueil'});
+      navigation.navigate('Home', {
+        screen: 'Accueil',
+        params: {shouldReview: true},
+      });
       setIsVisible(false);
     }
   };
