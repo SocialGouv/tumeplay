@@ -1,0 +1,13 @@
+app-backend:
+  enabled: true
+  imagePackage: backend
+  probesPath: /_health
+
+app-frontend-metropole:
+  enabled: false
+
+app-frontend-guyane:
+  enabled: false
+
+app-dashboard:
+  enabled: false

@@ -12,46 +12,30 @@ concurrency:
   group: review-${{ github.ref }}
 
 jobs:
-  ##############################################################################
-  ## BUILD AND REGISTER BACKEND IMAGE
-  ##############################################################################
   register-backend:
     name: Build & Register application
     runs-on: ubuntu-latest
     steps:
-
-    - name: Get project name
-      run: |
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@v1
       with:
-        imageName: ${{ env.project }}/backend
+        environment: dev
+        imagePackage: backend
         dockercontext: ./back-strapi
         dockerfile: ./back-strapi/Dockerfile
-        project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
-  ##############################################################################
-  ## BUILD AND REGISTER FRONTEND GUYANE
-  ##############################################################################
   register-frontend-guyane:
     name: Register frontend Guyane
     runs-on: ubuntu-latest
     steps:
-
-    - name: Get project name
-      run: |
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@v1
       with:
-        imageName: ${{ env.project }}/frontend-guyane
+        environment: dev
+        imagePackage: frontend-guyane
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
           buildenv=dev.guyane
@@ -59,25 +43,17 @@ jobs:
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
-  ##############################################################################
-  ## BUILD AND REGISTER FRONTEND GUYANE
-  ##############################################################################
   register-frontend-metropole:
     name: Register frontend Metropole
     runs-on: ubuntu-latest
     steps:
-
-    - name: Get project name
-      run: |
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@v1
       with:
-        imageName: ${{ env.project }}/frontend-metropole
+        environment: dev
+        imagePackage: frontend-metropole
         dockercontext: ./tumeplay-app
         dockerfile: ./tumeplay-app/Dockerfile
-        project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
           buildenv=dev.metropole
@@ -85,67 +61,37 @@ jobs:
           REACT_APP_ZONE=%%REACT_APP_ZONE%%
           REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
 
-    - name: debug backend URL
-      run: |
-        echo https://backend-${{ env.project }}-${{ env.branch }}.${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
-
-  ##############################################################################
-  ## BUILD AND REGISTER DASHBOARD
-  ##############################################################################
   register-dashboard:
     name: Register dashboard
     runs-on: ubuntu-latest
     steps:
-
-    - name: Get project name
-      run: |
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
     - name: Use autodevops build and register
       uses: SocialGouv/actions/autodevops-build-register@v1
       with:
-        imageName: ${{ env.project }}/dashboard
+        environment: dev
+        imagePackage: dashboard
         dockercontext: ./tumeplay-dashboard
         dockerfile: ./tumeplay-dashboard/Dockerfile
-        project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
         dockerbuildargs: |
           REACT_APP_API_URL=%%REACT_APP_API_URL%%
 
-  ##############################################################################
-  ## GENERATE KUBERNETES MANIFESTS
-  ##############################################################################
-  manifests:
-    name: Generate k8s manifests
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Use autodevops manifests generation
-      uses: SocialGouv/actions/k8s-manifests@v1
-      with:
-        environment: "dev"
-        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
-        socialgouvBaseDomain: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
-
-  ##############################################################################
-  ## DEPLOY BACKEND & FRONT-END
-  ##############################################################################
   deploy:
     name: Deploy review branch
     runs-on: ubuntu-latest
     needs:
       [
-        manifests,
         register-backend,
         register-dashboard,
         register-frontend-guyane,
         register-frontend-metropole,
       ]
     steps:
-
-    - name: Use autodevops deployment
-      uses: SocialGouv/actions/autodevops-deploy@v1
+    - name: Use kube-workflow deployment
+      uses: SocialGouv/kube-workflow@v1
       with:
-        environment: "dev"
+        environment: dev
         token: ${{ secrets.GITHUB_TOKEN }}
-        kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV2 }}
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+        rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
+        rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
