@@ -4,9 +4,9 @@ app-backend:
     - secretRef:
         name: pg-user-{{ .Values.global.branchSlug }}
     - secretRef:
-        name: carnets-sealed-secret
+        name: backend-sealed-secret
     - configMapRef:
-        name: carnets-configmap
+        name: backend-configmap
 
 jobs:
   enabled: true

@@ -2,6 +2,13 @@ app-backend:
   enabled: true
   imagePackage: backend
   probesPath: /_health
+  envFrom:
+    - secretRef:
+        name: pg-user
+    - secretRef:
+        name: backend-sealed-secret
+    - configMapRef:
+        name: backend-configmap
 
 app-frontend-metropole:
   enabled: false
