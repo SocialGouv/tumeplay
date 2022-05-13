@@ -2,6 +2,21 @@ app-backend:
   enabled: true
   imagePackage: backend
   probesPath: /_health
+  env: 
+    - name: DATABASE_CLIENT
+      value: "postgres"
+    - name: DATABASE_NAME
+      value: "$(PGDATABASE)"
+    - name: DATABASE_HOST
+      value: "$(PGHOST)"
+    - name: DATABASE_PORT
+      value: "$(PGPORT)"
+    - name: DATABASE_USERNAME
+      value: "$(PGUSER)"
+    - name: DATABASE_PASSWORD
+      value: "$(PGPASSWORD)"
+    - name: DATABASE_SSL
+      value: "true"
   envFrom:
     - secretRef:
         name: pg-user
