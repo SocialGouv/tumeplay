@@ -11,8 +11,6 @@ RUN yarn --frozen-lockfile --prefer-offline && yarn cache clean
 
 RUN yarn build
 
-FROM ghcr.io/socialgouv/docker/nginx4spa:6.24.0
+FROM ghcr.io/socialgouv/docker/nginx4spa:7.0.0
 
 COPY --from=builder /app/build /usr/share/nginx/html
-
-ENV NGINX_PORT=8080

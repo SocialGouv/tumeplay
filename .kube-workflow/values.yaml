@@ -1,6 +1,7 @@
 app-backend:
   enabled: true
   imagePackage: backend
+  containerPort: 1337
   probesPath: /_health
   env: 
     - name: DATABASE_CLIENT
@@ -26,10 +27,16 @@ app-backend:
         name: backend-configmap
 
 app-frontend-metropole:
-  enabled: false
+  enabled: true
+  imagePackage: frontend-metropole
+  containerPort: 8080
 
 app-frontend-guyane:
-  enabled: false
+  enabled: true 
+  imagePackage: frontend-guyane
+  containerPort: 8080
 
 app-dashboard:
-  enabled: false
+  enabled: true
+  imagePackage: dashboard
+  containerPort: 8080
