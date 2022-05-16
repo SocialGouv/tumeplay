@@ -1,4 +1,10 @@
-import React, {useContext, useEffect} from 'react';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
@@ -8,16 +14,36 @@ import ThemePicker from '../components/Journey/ThemePicker';
 import AppContext from '../../AppContext';
 import CircleList from 'react-native-circle-list';
 import {SvgXml} from 'react-native-svg';
+import ThemeCard from '../components/Journey/ThemeCard';
+import Button from '../components/Button';
+import TextBase from '../components/Text';
+import {useQuery} from '@apollo/client';
+import {GET_ALL_MODULES} from '../services/api/modules';
+import {useNavigation} from '@react-navigation/native';
 
 const Journey2 = () => {
-  const {thematiques} = useContext(AppContext);
-  //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
-  const data = [...thematiques, ...thematiques];
+  const navigation = useNavigation();
 
-  const _keyExtractor = item => (item?.id ? item?.id : Math.random());
+  const {thematiques} = useContext(AppContext);
+  const [themes, setThemes] = useState(thematiques);
+  //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
+  const data = [...themes, ...themes];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedTheme, setSelectedTheme] = useState(themes[0]);
+  const [fullModuleList, setFullModuleList] = useState([]);
+  const [moduleCount, setModuleCount] = useState(0);
+
+  const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
+
+  const _keyExtractor = (item, index) => index;
 
   const _renderItem = ({item, index}) => (
-    <ThemePicker theme={item} index={index} />
+    <ThemePicker
+      theme={item}
+      index={index}
+      selectedIndex={selectedIndex}
+      onPress={handleNavigation}
+    />
   );
 
   const xml = `
@@ -29,41 +55,83 @@ const Journey2 = () => {
       </svg>
   `;
 
-  const handleInitPosition = () => {};
+  const handleNavigation = () => {
+    navigation.navigate('ModuleList', {
+      theme: selectedTheme,
+      count: moduleCount,
+    });
+  };
 
   useEffect(() => {
-    handleInitPosition(3);
+    if (selectedIndex + 1 === data.length) {
+      setSelectedTheme(data[0]);
+    } else {
+      setSelectedTheme(data[selectedIndex + 1]);
+    }
+  }, [selectedIndex]);
+
+  useEffect(() => {
+    let modules = fullModuleList.filter(item => {
+      return item?.thematique_mobile?.title === selectedTheme?.title;
+    });
+    setModuleCount(modules.length);
+  }, [selectedTheme]);
+
+  useEffect(() => {
+    if (!loading) {
+      setFullModuleList(data2.modules);
+    }
+    setSelectedIndex(0);
   }, []);
 
   return (
     <Container style={styles.container}>
       <Title title="Ton parcours" />
+      <ThemeCard
+        style={styles.theme_card}
+        selectedTheme={selectedTheme}
+        moduleCount={moduleCount}
+      />
       <View style={styles.wheel}>
         <CircleList
-          containerStyle={{height: '100%'}}
+          containerStyle={{height: config.deviceHeight}}
           data={data}
           keyExtractor={_keyExtractor}
           elementCount={13}
           selectedItemScale={1}
           renderItem={_renderItem}
           radius={config.deviceWidth / 1.7}
-          swipeSpeedMultiplier={35}
-          visiblityPadding={0}
-          scrollToIndex={3}
-          onScroll={e => console.log(e)}
+          swipeSpeedMultiplier={15}
+          visiblityPadding={50}
+          onScroll={e => setSelectedIndex(e)}
           style={[styles.wheel]}
         />
       </View>
       <SvgXml xml={xml} width="50%" height="50%" style={styles.image} />
       <Condom style={styles.condom} />
+      <TextBase style={styles.description}>
+        Choisis un thème pour trouver ton prochain défi !
+      </TextBase>
+      <Button
+        size="large"
+        text={'Je choisis ce thème'}
+        style={styles.bottom_buttom}
+        icon
+        isDisabled={false}
+        onPress={handleNavigation}
+      />
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+  },
   image: {
     position: 'absolute',
-    top: config.deviceHeight / 3.5,
+    top: config.deviceHeight / 4,
     zIndex: -1,
     right: 0,
   },
@@ -72,16 +140,37 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: 'absolute',
     left: 0,
-    top: config.deviceHeight / 2 - config.deviceWidth / 1,
-    width: config.deviceHeight * 1.15,
+    top: config.deviceHeight / 2.15 - config.deviceWidth / 1,
+    width: config.deviceHeight * 1.18,
     height: config.deviceWidth * 2,
     backgroundColor: 'transparent',
   },
   condom: {
     position: 'relative',
-    top: config.deviceHeight / 4,
+    top: config.deviceHeight / 4.5,
     right: -15,
     zIndex: 2,
+  },
+  theme_card: {
+    position: 'absolute',
+    left: config.deviceWidth / 30,
+    top: config.deviceHeight / 5,
+    zIndex: 10,
+  },
+  description: {
+    position: 'absolute',
+    width: config.deviceWidth * 0.45,
+    bottom: config.deviceHeight * 0.12,
+    marginLeft: 15,
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '700',
+  },
+  bottom_buttom: {
+    position: 'absolute',
+    bottom: 25,
+    alignSelf: 'center',
+    zIndex: 20,
   },
 });
 

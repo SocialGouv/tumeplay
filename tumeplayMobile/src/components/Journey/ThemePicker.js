@@ -1,19 +1,31 @@
-import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
-import React from 'react';
+import {TouchableOpacity, StyleSheet, Image, View} from 'react-native';
+import TextBase from '../Text';
+import React, {useEffect} from 'react';
 import {REACT_APP_URL} from '@env';
 
 const ThemePicker = props => {
-  const {theme, index} = props;
+  const {theme, index, selectedIndex, onPress} = props;
+
+  const isSelected = selectedIndex + 1 === index;
 
   return (
-    <TouchableOpacity
-      style={[styles.roundedView, {backgroundColor: theme?.color}]}>
-      <Image
-        source={{uri: REACT_APP_URL + theme?.image?.url}}
-        style={styles.image}
-      />
-      <Text>{index}</Text>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity
+        disabled={!isSelected}
+        onPress={onPress}
+        style={[
+          styles.roundedView,
+          {
+            backgroundColor: theme?.color,
+            borderColor: isSelected ? '#000' : '#C6C6FE',
+          },
+        ]}>
+        <Image
+          source={{uri: REACT_APP_URL + theme?.image?.url}}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+    </>
   );
 };
 
@@ -23,16 +35,11 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 50,
     border: 8,
-    borderColor: '#C6C6FE',
-    borderWidth: 10,
+    borderWidth: 6,
+    padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
     transform: [{rotate: '90deg'}],
-  },
-  triangle: {
-    position: 'absolute',
-    bottom: 0,
-    right: 40,
   },
   image: {
     width: 30,
