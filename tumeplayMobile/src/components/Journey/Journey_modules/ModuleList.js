@@ -1,12 +1,12 @@
 import {View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import TextBase from '../Text';
+import TextBase from '../../Text';
 import Icon from 'react-native-vector-icons/Entypo';
-import Container from '../global/Container';
-import ThemeIndicator from '../ThemeIndicator';
+import Container from '../../global/Container';
+import ThemeIndicator from '../../ThemeIndicator';
 import {useQuery} from '@apollo/client';
-import {GET_MODULES_BY_THEMATIQUES} from '../../services/api/modules';
-import Title from '../Title';
+import {GET_MODULES_BY_THEMATIQUES} from '../../../services/api/modules';
+import Title from '../../Title';
 import ModuleLine from './ModuleLine';
 
 const ModuleList = ({navigation, route}) => {

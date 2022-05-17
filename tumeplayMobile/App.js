@@ -30,7 +30,7 @@ import * as Sentry from '@sentry/react-native';
 import Copilot from './src/components/Copilot/Copilot';
 import CustomToolTip from './src/components/Copilot/CustomToolTip';
 import Journey2 from './src/views/Journey2';
-import ModuleList from './src/components/Journey/ModuleList';
+import ModuleList from './src/components/Journey/Journey_modules/ModuleList';
 
 Sentry.init({
   dsn: SENTRI_URL,
