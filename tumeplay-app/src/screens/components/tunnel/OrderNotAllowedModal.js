@@ -15,7 +15,7 @@ OrderNotAllowedModal.propTypes = {
 };
 
 export default function OrderNotAllowedModal(props) {
-  const {showModal, nbDays} = props
+  const {showModal, nbDays} = props;
 
   const customModal = StyleSheet.create({
     innerModal: {
@@ -60,8 +60,9 @@ export default function OrderNotAllowedModal(props) {
           <View>
             <Text style={customModal.modalTitle}>Presque</Text>
             <Text style={customModal.text}>
-              Il te reste encore <Text style={{fontWeight: 'bold'}}>{7 - nbDays} jours</Text> avant
-              de pouvoir commander à nouveau
+              Il te reste encore{' '}
+              <Text style={{fontWeight: 'bold'}}>{30 - nbDays} jours</Text>{' '}
+              avant de pouvoir commander à nouveau
             </Text>
           </View>
         </View>
