@@ -6,6 +6,7 @@ import {REACT_APP_URL} from '@env';
 
 const ThemeCard = props => {
   const {style, selectedTheme, moduleCount} = props;
+
   return (
     <View style={[style, styles.box]}>
       <View style={styles.textContainer}>
@@ -17,7 +18,7 @@ const ThemeCard = props => {
         </View>
         <TextBase style={styles.text}>{selectedTheme?.title}</TextBase>
       </View>
-      <TextBase style={[styles.text, {marginRight: 10}]}>
+      <TextBase style={[styles.text, {marginRight: 10, marginVertical: 5}]}>
         {moduleCount} défis restants{' '}
       </TextBase>
     </View>
@@ -28,7 +29,10 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#000',
     width: config.deviceWidth * 0.35,
-    height: config.deviceHeight * 0.07,
+    height:
+      config.deviceHeight > 667
+        ? config.deviceHeight * 0.08
+        : config.deviceHeight * 0.09,
     borderRadius: config.deviceWidth * 0.03,
     padding: 15,
     justifyContent: 'center',
@@ -42,11 +46,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: config.deviceHeight * 0.012,
+    fontSize:
+      config.deviceHeight > 667
+        ? config.deviceHeight * 0.012
+        : config.deviceHeight * 0.015,
     fontWeight: 'bold',
     paddingVertical: 1,
     textAlign: 'center',
-    marginLeft: 10,
+    marginHorizontal: 7,
   },
   imageContainer: {
     width: 30,

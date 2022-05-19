@@ -1,4 +1,10 @@
-import {View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import TextBase from '../../Text';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -8,10 +14,14 @@ import {useQuery} from '@apollo/client';
 import {GET_MODULES_BY_THEMATIQUES} from '../../../services/api/modules';
 import Title from '../../Title';
 import ModuleLine from './ModuleLine';
+import _ from 'lodash';
+import config from '../../../../config';
+import BottomAction from './BottomAction';
 
 const ModuleList = ({navigation, route}) => {
   const theme = route.params.theme;
   const [modules, setModules] = useState([]);
+  const [selectedModule, setSelectedModule] = useState(null);
 
   const {data: data1, loading: loading1} = useQuery(
     GET_MODULES_BY_THEMATIQUES,
@@ -22,9 +32,17 @@ const ModuleList = ({navigation, route}) => {
     },
   );
 
-  const displayModule = modules.map((module, index) => (
-    <ModuleLine module={module} index={index} />
-  ));
+  const displayModule = _.orderBy(modules, ['niveau.value'], ['asc']).map(
+    (module, index) => {
+      return (
+        <ModuleLine
+          module={module}
+          key={index}
+          setSelectedModule={setSelectedModule}
+        />
+      );
+    },
+  );
 
   useEffect(() => {
     if (!loading1) {
@@ -43,9 +61,21 @@ const ModuleList = ({navigation, route}) => {
         </TouchableOpacity>
         <ThemeIndicator theme={theme} />
       </View>
-      <Title title={modules.length + ' ' + 'DÉFIS'} />
-      <TextBase> Difficulté</TextBase>
-      {displayModule}
+      <View style={{flex: selectedModule?.isSelected ? 0.8 : 1}}>
+        <Title title={modules.length + ' ' + 'DÉFIS'} />
+        <TextBase style={styles.difficulty}> DIFFICULTÉ</TextBase>
+        <ScrollView
+          disableScrollViewPanResponder={false}
+          showsVerticalScrollIndicator={false}>
+          {displayModule}
+        </ScrollView>
+      </View>
+      {selectedModule?.isSelected && (
+        <BottomAction
+          style={styles.bottom_part}
+          selectedModule={selectedModule}
+        />
+      )}
     </Container>
   );
 };
@@ -70,6 +100,17 @@ const styles = StyleSheet.create({
   chevron: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  difficulty: {
+    alignSelf: 'flex-end',
+    marginRight: config.deviceWidth >= 390 ? 12 : 0,
+  },
+  bottom_part: {
+    backgroundColor: '#FFF',
+    flex: 0.2,
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
   },
 });
 

@@ -1,18 +1,39 @@
-import {View, Text} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import React from 'react';
+import condom_full from '../../../assets/condom-full.png';
+import condom_empty from '../../../assets/condom-empty.png';
+import config from '../../../../config';
 
 const ModuleDifficultyBadge = ({level}) => {
-  const displayLevelIndicator = () => {
-    for (let i = 0; i === level; i++) {
-      console.log(level);
-    }
-  };
+  const images = [
+    <Image source={condom_full} style={styles.condom} key={0} />,
+    <Image source={condom_full} style={styles.condom} key={1} />,
+    <Image source={condom_full} style={styles.condom} key={2} />,
+    <Image source={condom_full} style={styles.condom} key={3} />,
+    <Image source={condom_full} style={styles.condom} key={4} />,
+  ];
 
-  return (
-    <View>
-      <Text>{level}</Text>
-    </View>
-  );
+  const condom_to_display = images.map((image, index) => {
+    if (index < level) {
+      return image;
+    }
+    return <Image source={condom_empty} style={styles.condom} key={index} />;
+  });
+
+  return <View style={styles.condom_container}>{condom_to_display}</View>;
 };
+
+const styles = StyleSheet.create({
+  condom_container: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: config.deviceWidth * 0.24,
+  },
+  condom: {
+    width: 15,
+    height: 15,
+  },
+});
 
 export default ModuleDifficultyBadge;

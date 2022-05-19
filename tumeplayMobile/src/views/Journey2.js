@@ -1,11 +1,5 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useContext, useState, useEffect, useMemo} from 'react';
+import {Platform, StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
 import Title from '../components/Title';
@@ -28,10 +22,11 @@ const Journey2 = () => {
   const [themes, setThemes] = useState(thematiques);
   //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
   const data = [...themes, ...themes];
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
   const [fullModuleList, setFullModuleList] = useState([]);
-  const [moduleCount, setModuleCount] = useState(0);
+  const [moduleCount, setModuleCount] = useState();
 
   const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
 
@@ -75,14 +70,13 @@ const Journey2 = () => {
       return item?.thematique_mobile?.title === selectedTheme?.title;
     });
     setModuleCount(modules.length);
-  }, [selectedTheme]);
+  }, [selectedTheme, fullModuleList]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && data2.modules) {
       setFullModuleList(data2.modules);
     }
-    setSelectedIndex(0);
-  }, []);
+  }, [data2, loading]);
 
   return (
     <Container style={styles.container}>
@@ -100,7 +94,11 @@ const Journey2 = () => {
           elementCount={13}
           selectedItemScale={1}
           renderItem={_renderItem}
-          radius={config.deviceWidth / 1.7}
+          radius={
+            config.deviceHeight > 667
+              ? config.deviceWidth / 1.7
+              : config.deviceWidth / 2
+          }
           swipeSpeedMultiplier={15}
           visiblityPadding={50}
           onScroll={e => setSelectedIndex(e)}
@@ -141,14 +139,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: config.deviceHeight / 2.15 - config.deviceWidth / 1,
-    width: config.deviceHeight * 1.18,
+    width:
+      Platform.OS === 'ios'
+        ? config.deviceWidth >= 390
+          ? config.deviceHeight * 1.18
+          : config.deviceHeight * 1.45
+        : config.deviceHeight * 1.3,
     height: config.deviceWidth * 2,
     backgroundColor: 'transparent',
   },
   condom: {
     position: 'relative',
-    top: config.deviceHeight / 4.5,
-    right: -15,
+    top: config.deviceHeight / 5,
+    right: -20,
     zIndex: 2,
   },
   theme_card: {
@@ -160,7 +163,7 @@ const styles = StyleSheet.create({
   description: {
     position: 'absolute',
     width: config.deviceWidth * 0.45,
-    bottom: config.deviceHeight * 0.12,
+    bottom: config.deviceHeight * 0.14,
     marginLeft: 15,
     fontSize: 18,
     lineHeight: 24,

@@ -1,15 +1,25 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import TextBase from '../../Text';
-import React from 'react';
-
+import React, {useContext} from 'react';
 import ModuleDifficultyBadge from './ModuleDifficultyBadge';
+import CompletionIcon from './CompletionIcon';
 import config from '../../../../config';
+import AppContext from '../../../../AppContext.js';
 
-const ModuleLine = ({module, index}) => {
+const ModuleLine = ({module, index, setSelectedModule}) => {
+  const {doneModules_ids} = useContext(AppContext);
+  const done = doneModules_ids.includes(parseInt(module.id));
+
   return (
     <View style={styles.line}>
-      <View style={styles.round} />
-      <TextBase>{module?.title}</TextBase>
+      <CompletionIcon
+        done={done}
+        isSelected={module?.isSelected}
+        module={module}
+        index={index}
+        setSelectedModule={setSelectedModule}
+      />
+      <TextBase style={styles.text}>{module?.title}</TextBase>
       <ModuleDifficultyBadge level={module?.niveau?.value} />
     </View>
   );
@@ -24,11 +34,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10,
   },
-  round: {
+  radioButton: {
     width: 20,
     height: 20,
     borderRadius: 50,
-    backgroundColor: '#51B070',
+  },
+  text: {
+    flex: 1,
+    marginHorizontal: 15,
+    justifyContent: 'flex-start',
+    textAlign: 'left',
   },
 });
 
