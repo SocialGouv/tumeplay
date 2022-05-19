@@ -3,6 +3,13 @@ app-backend:
   imagePackage: backend
   containerPort: 1337
   probesPath: /_health
+  resources:
+    requests:
+      cpu: 0.3
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
   env: 
     - name: DATABASE_CLIENT
       value: "postgres"
@@ -23,8 +30,18 @@ app-backend:
         name: pg-user
     - secretRef:
         name: backend-sealed-secret
+    - secretRef:
+        name: azure-tumeplay-volume
     - configMapRef:
         name: backend-configmap
+  volumeMounts:
+    - name: uploads
+      mountPath: /app/public/uploads
+      readOnly: true
+  volumes:
+    - name: uploads
+      persistentVolumeClaim:
+        claimName: uploads
 
 app-frontend-metropole:
   enabled: true

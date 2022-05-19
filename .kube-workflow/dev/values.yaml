@@ -1,5 +1,5 @@
 app-backend:
-  needs: [seed]
+  needs: [db]
   volumes:
     - name: uploads
       emptyDir: {}
@@ -20,8 +20,3 @@ jobs:
       use: SocialGouv/kube-workflow/jobs/create-db@v1
       with:
         pgAdminSecretRefName: azure-pg-admin-user
-    - name: seed
-      needs: [db]
-      use: SocialGouv/kube-workflow/jobs/seed-db@v1
-      with:
-        seedPath: dumps/dump_tumeplay.sql
