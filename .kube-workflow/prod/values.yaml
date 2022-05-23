@@ -1,0 +1,19 @@
+app-backend:
+  host: backend-tumeplay.fabrique.social.gouv.fr
+  certSecretName: backend-crt
+
+app-frontend-metropole:
+  host: metropole-tumeplay.fabrique.social.gouv.fr
+  certSecretName: metropole-crt
+  redirectFrom:
+    - tumeplay.fabrique.social.gouv.fr
+
+app-frontend-guyane:
+  host: guyane-tumeplay.fabrique.social.gouv.fr
+  certSecretName: guyane-crt
+  redirectFrom:
+    - guyane.tumeplay.fabrique.social.gouv.fr
+
+app-dashboard:
+  host: bo-tumeplay.fabrique.social.gouv.fr
+  certSecretName: dashboard-crt

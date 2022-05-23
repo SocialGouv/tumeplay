@@ -8,7 +8,7 @@ app-backend:
       name: uploads
   envFrom:
     - secretRef:
-        name: pg-user-{{ .Values.global.branchSlug }}
+        name: "{{ $.Values.global.pgSecretName }}"
     - secretRef:
         name: backend-sealed-secret
     - configMapRef:

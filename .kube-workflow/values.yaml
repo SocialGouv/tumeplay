@@ -1,5 +1,6 @@
 app-backend:
   enabled: true
+  host: "backend-{{ $.Values.global.host }}"
   imagePackage: backend
   containerPort: 1337
   probesPath: /_health
@@ -10,7 +11,7 @@ app-backend:
     limits:
       cpu: 1
       memory: 1Gi
-  env: 
+  env:
     - name: DATABASE_CLIENT
       value: "postgres"
     - name: DATABASE_NAME
@@ -37,7 +38,6 @@ app-backend:
   volumeMounts:
     - name: uploads
       mountPath: /app/public/uploads
-      readOnly: true
   volumes:
     - name: uploads
       persistentVolumeClaim:
@@ -47,13 +47,16 @@ app-frontend-metropole:
   enabled: true
   imagePackage: frontend-metropole
   containerPort: 8080
+  host: "metropole-{{ $.Values.global.host }}"
 
 app-frontend-guyane:
-  enabled: true 
+  enabled: true
   imagePackage: frontend-guyane
   containerPort: 8080
+  host: "guyane-{{ $.Values.global.host }}"
 
 app-dashboard:
   enabled: true
+  host: "dashboard-{{ $.Values.global.host }}"
   imagePackage: dashboard
   containerPort: 8080
