@@ -20,6 +20,10 @@ export const GET_MODULES_BY_THEMATIQUES = gql`
       title
       thematique_mobile {
         title
+        color
+        image {
+          url
+        }
       }
       niveau {
         value

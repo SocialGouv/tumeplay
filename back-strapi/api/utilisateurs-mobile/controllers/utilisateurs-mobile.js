@@ -139,16 +139,21 @@ module.exports = {
       user.percentage_level_completed =
         nb_modules_completed_in_level / nb_modules_in_level || 0;
 
-      const pending_history = history.find((h) => h.status === "pending");
+      const pending_history =
+        version === "3"
+          ? history.filter((h) => h.status === "pending")
+          : history.find((h) => h.status === "pending");
 
       if (pending_history) {
-        user.pending_module_questions = await questionsModuleToArray(
-          pending_history.module.questions
-        );
-
-        if (version === 1) {
-          user.pending_module = _.get(pending_history, "module.id", null);
+        if (version === "3") {
+          const pending_modules = _.uniq(
+            pending_history.map((h) => h.module.id)
+          );
+          user.pending_modules = pending_modules;
         } else {
+          user.pending_module_questions = await questionsModuleToArray(
+            pending_history.module.questions
+          );
           const pending_module_id = pending_history.module.id;
           history.pending_module = _.find(modules, { id: pending_module_id });
           user.pending_module = {
@@ -185,9 +190,7 @@ module.exports = {
         random_module.questions
       );
 
-      if (version === 1) {
-        user.random_module = random_module.id;
-      } else {
+      if (version === 2) {
         user.random_module = {
           id: _.get(random_module, "id", null),
           title: _.get(random_module, "title", ""),

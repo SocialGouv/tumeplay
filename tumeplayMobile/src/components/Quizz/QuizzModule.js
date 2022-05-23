@@ -131,7 +131,7 @@ const QuizzModule = ({navigation, route}) => {
   };
 
   const handleStartQuizz = async () => {
-    if (!user.pending_module) {
+    if (!user.pending_modules?.includes(parseInt(module_id)) && !retry) {
       try {
         await createHistory({
           variables: {

@@ -67,7 +67,7 @@ const App = () => {
 
   const getMobileUser = async user_id => {
     const response = await fetch(
-      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=2',
+      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=3',
     );
     const tmpUser = await response.json();
     if (tmpUser?.status === 404) {
@@ -107,6 +107,8 @@ const App = () => {
   const clearStorage = async () => {
     await EncryptedStorage.clear();
   };
+
+  console.log(user);
 
   const checkUpdateNeeded = () => {
     VersionCheck.needUpdate({country: 'fr'}).then(update => {

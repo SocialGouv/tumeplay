@@ -1,11 +1,32 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import TextBase from '../../Text';
 import Button from '../../Button';
 import config from '../../../../config';
+import {useNavigation} from '@react-navigation/native';
+import AppContext from '../../../../AppContext';
 
 const BottomAction = ({style, selectedModule}) => {
-  console.log(selectedModule);
+  const {doneModules_ids} = useContext(AppContext);
+
+  const done = doneModules_ids.includes(parseInt(selectedModule.id));
+  const navigation = useNavigation();
+  const handleNavigation = () => {
+    if (selectedModule) {
+      navigation.navigate('QuizzModule', {
+        module_id: selectedModule?.id,
+        module_title: selectedModule?.title,
+        questions: selectedModule?.questionsArray,
+        theme: {
+          title: selectedModule?.thematique?.title,
+          color: selectedModule?.thematique?.color,
+          image: selectedModule?.thematique?.image,
+        },
+        clearModuleData: true,
+        retry: done,
+      });
+    }
+  };
 
   return (
     <View style={style}>
@@ -18,6 +39,7 @@ const BottomAction = ({style, selectedModule}) => {
         icon
         left
         style={styles.button}
+        onPress={handleNavigation}
       />
     </View>
   );
