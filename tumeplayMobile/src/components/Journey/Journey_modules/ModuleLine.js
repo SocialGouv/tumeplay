@@ -1,4 +1,4 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import TextBase from '../../Text';
 import React, {useContext, useEffect, useRef} from 'react';
 import ModuleDifficultyBadge from './ModuleDifficultyBadge';

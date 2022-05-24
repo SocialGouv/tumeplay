@@ -18,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 const Journey2 = () => {
   const navigation = useNavigation();
   const {thematiques} = useContext(AppContext);
-  const [themes, setThemes] = useState(thematiques);
+  const [themes] = useState(thematiques);
   //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
   const data = [...themes, ...themes];
 
