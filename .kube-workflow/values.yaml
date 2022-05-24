@@ -60,3 +60,6 @@ app-dashboard:
   host: "dashboard-{{ $.Values.global.host }}"
   imagePackage: dashboard
   containerPort: 8080
+
+metabase:
+  enabled: false

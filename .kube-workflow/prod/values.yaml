@@ -17,3 +17,13 @@ app-frontend-guyane:
 app-dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
   certSecretName: dashboard-crt
+
+metabase:
+  enabled: true
+  # ingress:
+  #   enabled: false
+  envFrom:
+    - secretRef:
+        name: metabase-pg-user
+    - configMapRef:
+        name: metabase-configmap
