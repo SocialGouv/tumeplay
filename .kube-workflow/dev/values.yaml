@@ -1,0 +1,22 @@
+app-backend:
+  needs: [db]
+  volumes:
+    - name: uploads
+      emptyDir: {}
+  volumeMounts:
+    - mountPath: /app/public/uploads
+      name: uploads
+  envFrom:
+    - secretRef:
+        name: "{{ $.Values.global.pgSecretName }}"
+    - secretRef:
+        name: backend-sealed-secret
+    - configMapRef:
+        name: backend-configmap
+
+jobs:
+  runs:
+    - name: db
+      use: SocialGouv/kube-workflow/jobs/create-db@v1
+      with:
+        pgAdminSecretRefName: azure-pg-admin-user

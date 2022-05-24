@@ -19,8 +19,8 @@ RUN yarn build
 
 EXPOSE 1337
 
-RUN chown -R node: /app/public
+RUN chown -R 1001 /app/public
+USER 1001
 
-USER node
 
 CMD ["yarn", "start"]

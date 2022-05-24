@@ -32,8 +32,6 @@ COPY ${ENVFILE} .env
 
 RUN npm run build
 
-FROM ghcr.io/socialgouv/docker/nginx4spa:6.24.0
+FROM ghcr.io/socialgouv/docker/nginx4spa:7.0.0
 
 COPY --from=builder /build /usr/share/nginx/html
-
-ENV NGINX_PORT=80
