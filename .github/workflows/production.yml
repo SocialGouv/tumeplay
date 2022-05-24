@@ -14,87 +14,88 @@ jobs:
     name: Build & Register application
     runs-on: ubuntu-latest
     steps:
-    - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
-      with:
-        environment: prod
-        imagePackage: backend
-        dockercontext: ./back-strapi
-        dockerfile: ./back-strapi/Dockerfile
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use autodevops build and register
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          environment: prod
+          imagePackage: backend
+          dockercontext: ./back-strapi
+          dockerfile: ./back-strapi/Dockerfile
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   register-frontend-guyane:
     name: Register frontend Guyane
     runs-on: ubuntu-latest
     steps:
-    - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
-      with:
-        environment: prod
-        imagePackage: frontend-guyane
-        dockercontext: ./tumeplay-app
-        dockerfile: ./tumeplay-app/Dockerfile
-        token: ${{ secrets.GITHUB_TOKEN }}
-        dockerbuildargs: |
-          buildenv=preprod.guyane
-          REACT_APP_API_URL=%%REACT_APP_API_URL%%
-          REACT_APP_ZONE=%%REACT_APP_ZONE%%
-          REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
-          REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
+      - name: Use autodevops build and register
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          environment: prod
+          imagePackage: frontend-guyane
+          dockercontext: ./tumeplay-app
+          dockerfile: ./tumeplay-app/Dockerfile
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            buildenv=preprod.guyane
+            REACT_APP_MATOMO_ID=45
+            REACT_APP_ZONE=guyane
+            REACT_APP_API_URL=https://backend-tumeplay.fabrique.social.gouv.fr/
+            REACT_APP_OTHER_ZONE_URL=https://metropole-tumeplay.fabrique.social.gouv.fr/
 
   register-frontend-metropole:
     name: Register frontend Metropole
     runs-on: ubuntu-latest
     steps:
-    - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
-      with:
-        environment: prod
-        imagePackage: frontend-metropole
-        dockercontext: ./tumeplay-app
-        dockerfile: ./tumeplay-app/Dockerfile
-        token: ${{ secrets.GITHUB_TOKEN }}
-        dockerbuildargs: |
-          buildenv=preprod.metropole
-          REACT_APP_API_URL=%%REACT_APP_API_URL%%
-          REACT_APP_ZONE=%%REACT_APP_ZONE%%
-          REACT_APP_OTHER_ZONE_URL=%%REACT_APP_OTHER_ZONE_URL%%
-          REACT_APP_MATOMO_ID=%%REACT_APP_MATOMO_ID%%
+      - name: Use autodevops build and register
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          environment: prod
+          imagePackage: frontend-metropole
+          dockercontext: ./tumeplay-app
+          dockerfile: ./tumeplay-app/Dockerfile
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            buildenv=preprod.metropole
+            REACT_APP_MATOMO_ID=21
+            REACT_APP_ZONE=metropole
+            REACT_APP_API_URL=https://backend-tumeplay.fabrique.social.gouv.fr/
+            REACT_APP_OTHER_ZONE_URL=https://guyane-tumeplay.fabrique.social.gouv.fr/
 
   register-dashboard:
     name: Register dashboard
     runs-on: ubuntu-latest
     steps:
-    - name: Use autodevops build and register
-      uses: SocialGouv/actions/autodevops-build-register@v1
-      with:
-        environment: prod
-        imagePackage: dashboard
-        dockercontext: ./tumeplay-dashboard
-        dockerfile: ./tumeplay-dashboard/Dockerfile
-        token: ${{ secrets.GITHUB_TOKEN }}
-        dockerbuildargs: |
-          REACT_APP_API_URL=%%REACT_APP_API_URL%%
+      - name: Use autodevops build and register
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          environment: prod
+          imagePackage: dashboard
+          dockercontext: ./tumeplay-dashboard
+          dockerfile: ./tumeplay-dashboard/Dockerfile
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            REACT_APP_API_URL=https://backend-tumeplay.fabrique.social.gouv.fr/
 
   deploy:
     name: Deploy production
     runs-on: ubuntu-latest
-    needs: [
-      register-backend,
-      register-dashboard,
-      register-frontend-guyane,
-      register-frontend-metropole
-    ]
+    needs:
+      [
+        register-backend,
+        register-dashboard,
+        register-frontend-guyane,
+        register-frontend-metropole,
+      ]
     environment:
       name: production
-      url: https://dashboard.fabrique.social-gouv.fr
+      url: https://bo-tumeplay.fabrique.social.gouv.fr
     steps:
-    - name: Use autodevops deployment
-      uses: SocialGouv/actions/autodevops-deploy@v1
-      id: deploy
-      with:
-        environment: prod
-        token: ${{ secrets.GITHUB_TOKEN }}
-        kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_PROD }}
-        rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
-        rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
+      - name: Use autodevops deployment
+        uses: SocialGouv/actions/autodevops-deploy@v1
+        id: deploy
+        with:
+          environment: prod
+          token: ${{ secrets.GITHUB_TOKEN }}
+          kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_PROD }}
+          rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
+          rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
