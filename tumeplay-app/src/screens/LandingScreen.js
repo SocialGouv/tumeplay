@@ -78,7 +78,7 @@ export default function LandingScreen(props) {
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
     if (!loading) {
-      return data.thematiques && (
+      return data && data.thematiques && (
         <LandingThemeGrid
           onPress={_onSelectedTheme}
           themes={data.thematiques}></LandingThemeGrid>
