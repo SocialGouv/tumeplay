@@ -1,3 +1,10 @@
+## [1.108.3](https://github.com/SocialGouv/Tumeplay/compare/v1.108.2...v1.108.3) (2022-05-24)
+
+
+### Bug Fixes
+
+* **ci:** build urls ([e1c50ec](https://github.com/SocialGouv/Tumeplay/commit/e1c50ec86e2153c1a6726422deec784857eff346))
+
 ## [1.108.2](https://github.com/SocialGouv/Tumeplay/compare/v1.108.1...v1.108.2) (2022-05-24)
 
 
