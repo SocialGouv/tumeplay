@@ -108,8 +108,6 @@ const App = () => {
     await EncryptedStorage.clear();
   };
 
-  console.log(user);
-
   const checkUpdateNeeded = () => {
     VersionCheck.needUpdate({country: 'fr'}).then(update => {
       if (update?.isNeeded) {

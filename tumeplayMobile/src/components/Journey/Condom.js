@@ -6,7 +6,7 @@ const Condom = props => {
   const {style} = props;
   const condomsStep = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const _condom = condomsStep.map((condom, index) => {
+  const condom = condomsStep.map((_condom, index) => {
     const stepStyles = [
       {
         width: 25,
@@ -112,7 +112,7 @@ const Condom = props => {
     );
   });
 
-  return <View style={[styles.container, style]}>{_condom}</View>;
+  return <View style={[styles.container, style]}>{condom}</View>;
 };
 
 const styles = StyleSheet.create({
