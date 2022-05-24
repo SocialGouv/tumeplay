@@ -1,3 +1,10 @@
+## [1.108.1](https://github.com/SocialGouv/Tumeplay/compare/v1.108.0...v1.108.1) (2022-05-24)
+
+
+### Bug Fixes
+
+* **ci:** use sre/kube-workflow ([#391](https://github.com/SocialGouv/Tumeplay/issues/391)) ([f28d1c7](https://github.com/SocialGouv/Tumeplay/commit/f28d1c7756f13a59495b6d3642808436141fad3f))
+
 # [1.108.0](https://github.com/SocialGouv/Tumeplay/compare/v1.107.3...v1.108.0) (2022-05-02)
 
 
