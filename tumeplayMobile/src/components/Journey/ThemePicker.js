@@ -5,7 +5,8 @@ import {REACT_APP_URL} from '@env';
 const ThemePicker = props => {
   const {theme, index, selectedIndex, onPress} = props;
 
-  const isSelected = selectedIndex + 1 === index;
+  const isSelected =
+    selectedIndex === 13 ? index === 0 : selectedIndex + 1 === index;
 
   return (
     <>

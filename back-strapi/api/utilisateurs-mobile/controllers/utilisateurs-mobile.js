@@ -73,16 +73,15 @@ module.exports = {
     );
 
     let user_level = 1;
-    for (const [level, user_modules] of Object.entries(
-      history_modules_by_levels
-    )) {
-      if (parseInt(level) >= user_level) {
-        user_level = parseInt(level);
-
-        if (modules_by_levels[level].length === user_modules.length) {
-          user_level += 1;
-        }
-      }
+    //Based on the number of modules available in backend
+    if (success_history.length >= 26) {
+      user_level = 5;
+    } else if (success_history.length >= 18) {
+      user_level = 4;
+    } else if (success_history.length >= 12) {
+      user_level = 3;
+    } else if (success_history.length >= 6) {
+      user_level = 2;
     }
 
     user.level = user_level;

@@ -15,8 +15,6 @@ const QuizzAllRight = ({navigation, theme}) => {
   const context = useContext(AppContext);
   const {user} = context;
 
-  console.log(theme);
-
   return (
     <Container style={styles.container}>
       <TopLevelPointIndicator style={styles.pointIndicator} />
