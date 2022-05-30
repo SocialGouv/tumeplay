@@ -19,6 +19,7 @@ export const GET_MODULES_BY_THEMATIQUES = gql`
       id
       title
       thematique_mobile {
+        id
         title
         color
         image {
@@ -83,6 +84,7 @@ export const GET_SINGLE_MODULE = gql`
       id
       title
       thematique_mobile {
+        id
         title
         color
         image {

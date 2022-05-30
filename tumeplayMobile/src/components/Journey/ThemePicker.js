@@ -1,6 +1,5 @@
-import {TouchableOpacity, StyleSheet, Image, View} from 'react-native';
-import TextBase from '../Text';
-import React, {useEffect} from 'react';
+import {TouchableOpacity, StyleSheet, Image} from 'react-native';
+import React from 'react';
 import {REACT_APP_URL} from '@env';
 
 const ThemePicker = props => {

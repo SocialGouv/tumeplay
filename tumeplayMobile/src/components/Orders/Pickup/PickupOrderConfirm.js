@@ -137,7 +137,7 @@ const PickupOrderConfirm = props => {
           <Image source={mrLogo} style={styles.logo} />
           <Text style={styles.bottomText}>
             Disponible entre{' '}
-            <Text style={styles.boldText}>3 et 7 jours ouvrés.</Text>
+            <Text style={styles.boldText}>1 à 2 semaines.</Text>
             Tu seras notifié.e par email à la prise en charge de ton colis et à
             la réception en point relais
           </Text>

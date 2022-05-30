@@ -97,7 +97,13 @@ const QuizzFinishScreen = ({navigation, route}) => {
         />
       );
     } else if (retry) {
-      return <QuizzAllRight navigation={navigation} module_id={module_id} />;
+      return (
+        <QuizzAllRight
+          navigation={navigation}
+          module_id={module_id}
+          theme={theme}
+        />
+      );
     } else if (hasReward === null || user.pending_module) {
       return (
         <View style={{flex: 1, justifyContent: 'center'}}>
@@ -112,7 +118,11 @@ const QuizzFinishScreen = ({navigation, route}) => {
       return hasReward ? (
         <Award />
       ) : (
-        <QuizzAllRight navigation={navigation} module_id={module_id} />
+        <QuizzAllRight
+          navigation={navigation}
+          module_id={module_id}
+          theme={theme}
+        />
       );
     }
   };

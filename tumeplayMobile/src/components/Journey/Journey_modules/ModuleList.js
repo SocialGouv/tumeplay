@@ -22,12 +22,13 @@ const ModuleList = ({navigation, route}) => {
   const theme = route.params.theme;
   const [modules, setModules] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
+  console.log(theme.id);
 
   const {data: data1, loading: loading1} = useQuery(
     GET_MODULES_BY_THEMATIQUES,
     {
       variables: {
-        theme_id: theme.id,
+        theme_id: theme?.id?.toString(),
       },
     },
   );
@@ -46,7 +47,8 @@ const ModuleList = ({navigation, route}) => {
 
   useEffect(() => {
     if (!loading1) {
-      setModules([...data1.modules]);
+      console.log(data1);
+      setModules([...data1?.modules]);
     }
   }, [data1, loading1]);
 

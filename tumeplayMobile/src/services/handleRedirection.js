@@ -4,6 +4,7 @@ const handleRedirection = user => {
       module_id: user?.pending_module?.id,
       module_title: user?.pending_module?.title,
       theme: {
+        id: user?.pending_module?.theme_id,
         title: user?.pending_module?.theme_title,
         image: user?.pending_module?.theme_image,
         color: user?.pending_module?.theme_color,
@@ -18,6 +19,7 @@ const handleRedirection = user => {
       module_id: user?.next_module?.id,
       module_title: user?.next_module?.title,
       theme: {
+        id: user?.next_module?.theme_id,
         title: user?.next_module?.theme_title,
         image: user?.next_module?.theme_image,
         color: user?.next_module?.theme_color,

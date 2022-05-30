@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const Journey2 = () => {
   const navigation = useNavigation();
-  const {thematiques} = useContext(AppContext);
+  const {thematiques, doneModules_ids} = useContext(AppContext);
   const [themes] = useState(thematiques);
   //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
   const data = [...themes, ...themes];
@@ -64,7 +64,24 @@ const Journey2 = () => {
     }
   }, [selectedIndex]);
 
+  // const handleModuleCount = () => {
+  //   let modules = fullModuleList.filter(item => {
+  //     return item?.thematique_mobile?.title === selectedTheme?.title;
+  //   });
+  //   let doneModule_count = modules.map(m => {
+  //     let tmp = 0;
+  //     if (doneModules_ids?.includes(m.id)) {
+  //       tmp++;
+  //     }
+  //     return tmp;
+  //   });
+  //   if (modules.length > 0) {
+  //     setModuleCount(modules.length - doneModule_count[0]);
+  //   }
+  // };
+
   useEffect(() => {
+    // handleModuleCount();
     let modules = fullModuleList.filter(item => {
       return item?.thematique_mobile?.title === selectedTheme?.title;
     });

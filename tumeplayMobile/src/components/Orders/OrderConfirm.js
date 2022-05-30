@@ -137,7 +137,7 @@ const OrderConfirm = props => {
           <View style={styles.bottomtextContainer}>
             <Text style={styles.bottomText}>
               Disponible entre{' '}
-              <Text style={styles.bottomBoldText}>3 et 5 jours ouvrés.</Text> À
+              <Text style={styles.bottomBoldText}>1 à 2 semaines.</Text> À
               noter, pas d'envoi d'email de la part de Colissimo
             </Text>
           </View>

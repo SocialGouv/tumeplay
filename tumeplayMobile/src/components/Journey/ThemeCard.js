@@ -28,7 +28,7 @@ const ThemeCard = props => {
 const styles = StyleSheet.create({
   box: {
     backgroundColor: '#000',
-    width: config.deviceWidth * 0.35,
+    width: config.deviceWidth * 0.4,
     height:
       config.deviceHeight > 667
         ? config.deviceHeight * 0.08

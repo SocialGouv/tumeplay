@@ -9,6 +9,8 @@ import AppContext from '../../../../AppContext';
 const BottomAction = ({style, selectedModule}) => {
   const {doneModules_ids} = useContext(AppContext);
 
+  console.log(selectedModule);
+
   const done = doneModules_ids.includes(parseInt(selectedModule.id));
   const navigation = useNavigation();
   const handleNavigation = () => {
@@ -18,9 +20,10 @@ const BottomAction = ({style, selectedModule}) => {
         module_title: selectedModule?.title,
         questions: selectedModule?.questionsArray,
         theme: {
-          title: selectedModule?.thematique?.title,
-          color: selectedModule?.thematique?.color,
-          image: selectedModule?.thematique?.image,
+          id: selectedModule?.thematique_mobile?.id,
+          title: selectedModule?.thematique_mobile?.title,
+          color: selectedModule?.thematique_mobile?.color,
+          image: selectedModule?.thematique_mobile?.image,
         },
         clearModuleData: true,
         retry: done,
