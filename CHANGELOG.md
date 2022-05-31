@@ -1,3 +1,10 @@
+# [1.109.0](https://github.com/SocialGouv/Tumeplay/compare/v1.108.3...v1.109.0) (2022-05-31)
+
+
+### Features
+
+* changing delay for next order & changing contact adress ([#392](https://github.com/SocialGouv/Tumeplay/issues/392)) ([d727645](https://github.com/SocialGouv/Tumeplay/commit/d72764566f741a000d08eff6944da8fe6c07cc4d))
+
 ## [1.108.3](https://github.com/SocialGouv/Tumeplay/compare/v1.108.2...v1.108.3) (2022-05-24)
 
 
