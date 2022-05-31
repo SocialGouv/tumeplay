@@ -122,12 +122,12 @@ export default function CustomHeaderRight(props) {
     const userLastOrderDateNumber = JsonLocalStorage.lastOrder;
     // 2. Convert into date ?
     const userLastOrderDate = new Date(userLastOrderDateNumber);
-    // 3. Compare if date lastOrder - new Date().now < 7
+    // 3. Compare if date lastOrder - new Date().now < 30
     const currentDate = Date.now();
     const diffTime = Math.abs(currentDate - userLastOrderDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     setNbDays(diffDays);
-    return !(userLastOrderDateNumber && diffDays < 7);
+    return !(userLastOrderDateNumber && diffDays < 30);
   };
 
   function _gotoProductSelect() {

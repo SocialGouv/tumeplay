@@ -55,8 +55,8 @@ export default function ContactUsScreen(props) {
         <Text style={contentStyle.text}>
           Tu as une question, une remarque, une suggestion (ou un message de
           soutien!) à nous envoyer ? Écris-nous à{' '}
-          <TextLink targetUrl={'mailto:info.tumeplay@fabrique.social.gouv.fr'}>
-            info.tumeplay@fabrique.social.gouv.fr
+          <TextLink targetUrl={'mailto:l.blondy@ch-ouestguyane.fr'}>
+            l.blondy@ch-ouestguyane.fr
           </TextLink>{' '}
           !
         </Text>
