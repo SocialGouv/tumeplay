@@ -22,8 +22,8 @@ const Condom = props => {
 
   const condom = condomsStep.map((_condom, index) => {
     let stepstyles = [];
-    for (let i = 0; i < condomsStep.length; i++) {
-      if (i === 0) {
+    condomsStep.forEach((_condom, index) => {
+      if (index === 0) {
         stepstyles.push({
           width: 25,
           height: 18,
@@ -35,7 +35,7 @@ const Condom = props => {
           borderColor: '#F7EFE6',
           backgroundColor: '#FBF7F2',
         });
-      } else if (i === 1) {
+      } else if (index === 1) {
         stepstyles.push({
           width: 55,
           height: 16,
@@ -47,7 +47,7 @@ const Condom = props => {
           borderTopRightRadius: 60,
           backgroundColor: '#FBF7F2',
         });
-      } else if (i === 2) {
+      } else if (index === 2) {
         stepstyles.push({
           width: 60,
           height: 16,
@@ -60,7 +60,7 @@ const Condom = props => {
           borderColor: '#F7EFE6',
           backgroundColor: '#FBF7F2',
         });
-      } else if (i === 9) {
+      } else if (index === 9) {
         stepstyles.push({
           width: 76,
           height: 16,
@@ -82,7 +82,7 @@ const Condom = props => {
           backgroundColor: '#FBF7F2',
         });
       }
-    }
+    });
 
     const colors = {
       0: ['#D42201', '#D42201'],

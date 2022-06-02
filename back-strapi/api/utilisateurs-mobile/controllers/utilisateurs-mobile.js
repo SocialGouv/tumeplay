@@ -65,21 +65,12 @@ module.exports = {
 
     const success_history = history.filter((h) => h.status === "success");
     const success_modules = success_history.map((h) => h.module);
+    const success_modules_id = success_modules.map((m) => m.id);
     const remaining_modules = modules.filter((m) => {
-      return !success_modules.find((sm) => sm.id === m.id);
+      return !success_modules_id.includes(m.id);
     });
 
-    let user_level = 1;
-    //Based on the number of modules available in backend
-    if (success_history.length >= modules.length) {
-      user_level = 5;
-    } else if (success_history.length >= 30) {
-      user_level = 4;
-    } else if (success_history.length >= 20) {
-      user_level = 3;
-    } else if (success_history.length >= 10) {
-      user_level = 2;
-    }
+    let user_level = Math.trunc(success_history.length / 10) + 1;
 
     user.level = user_level;
 

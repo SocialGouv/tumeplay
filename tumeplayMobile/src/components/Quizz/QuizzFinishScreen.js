@@ -16,7 +16,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const module_title = route?.params?.module_title;
   const theme = route?.params?.theme;
   const retry = route?.params?.retry;
-  const {strapi_user_id, user, reloadUser} = useContext(AppContext);
+  const {user, reloadUser} = useContext(AppContext);
 
   const [hasReward, setHasReward] = useState(null);
 
@@ -26,7 +26,9 @@ const QuizzFinishScreen = ({navigation, route}) => {
     const success_history = user.history.filter(
       history => history.status === 'success',
     );
-    success_history.length % 10 === 0 && setHasReward(true);
+    user.level !== 1
+      ? success_history.length % 10 === 0 && setHasReward(true)
+      : setHasReward(false);
   };
 
   const checkUserHistory = async () => {
