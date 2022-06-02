@@ -29,7 +29,7 @@ const Journey2 = () => {
 
   const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
 
-  const _keyExtractor = (item, index) => index;
+  const _keyExtractor = (_item, index) => index;
 
   const _renderItem = ({item, index}) => (
     <ThemePicker
@@ -64,28 +64,26 @@ const Journey2 = () => {
     }
   }, [selectedIndex]);
 
-  // const handleModuleCount = () => {
-  //   let modules = fullModuleList.filter(item => {
-  //     return item?.thematique_mobile?.title === selectedTheme?.title;
-  //   });
-  //   let doneModule_count = modules.map(m => {
-  //     let tmp = 0;
-  //     if (doneModules_ids?.includes(m.id)) {
-  //       tmp++;
-  //     }
-  //     return tmp;
-  //   });
-  //   if (modules.length > 0) {
-  //     setModuleCount(modules.length - doneModule_count[0]);
-  //   }
-  // };
-
-  useEffect(() => {
-    // handleModuleCount();
+  const handleModuleCount = () => {
     let modules = fullModuleList.filter(item => {
       return item?.thematique_mobile?.title === selectedTheme?.title;
     });
-    setModuleCount(modules.length);
+    let doneModule_count = modules.map(m => {
+      let tmp = 0;
+      if (doneModules_ids?.includes(parseInt(m.id, 10))) {
+        tmp++;
+      }
+      return tmp;
+    });
+    if (modules.length > 0) {
+      setModuleCount(modules.length - doneModule_count.reduce((a, b) => a + b));
+    } else {
+      setModuleCount(0);
+    }
+  };
+
+  useEffect(() => {
+    handleModuleCount();
   }, [selectedTheme, fullModuleList]);
 
   useEffect(() => {
@@ -103,6 +101,7 @@ const Journey2 = () => {
         moduleCount={moduleCount}
       />
       <View style={styles.wheel}>
+        <View style={styles.roundTrait} />
         <CircleList
           containerStyle={{height: config.deviceHeight}}
           data={data}
@@ -122,7 +121,11 @@ const Journey2 = () => {
         />
       </View>
       <SvgXml xml={xml} width="50%" height="50%" style={styles.image} />
-      <Condom style={styles.condom} />
+      <Condom
+        style={styles.condom}
+        fullModuleLength={fullModuleList.length}
+        doneModules_ids={doneModules_ids}
+      />
       <TextBase style={styles.description}>
         Choisis un thème pour trouver ton prochain défi !
       </TextBase>
@@ -148,6 +151,18 @@ const styles = StyleSheet.create({
     top: config.deviceHeight / 4,
     zIndex: -1,
     right: 0,
+  },
+  roundTrait: {
+    transform: [{rotate: '270deg'}],
+    borderWidth: 2,
+    position: 'absolute',
+    bottom: config.deviceHeight / 2.7,
+    left: config.deviceHeight / 2.8,
+    zIndex: 0,
+    borderRadius: 380,
+    borderStyle: 'dotted',
+    width: config.deviceWidth * 1,
+    height: config.deviceHeight / 1.9,
   },
   wheel: {
     transform: [{rotate: '270deg'}],

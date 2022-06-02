@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import QuizzWithWrongAnswers from './QuizzFinish/QuizzWithWrongAnswers';
 import QuizzAllRight from './QuizzFinish/QuizzAllRight';
 import AppContext from '../../../AppContext';
-import {REACT_APP_URL} from '@env';
 import Award from '../../views/Award';
 import {ActivityIndicator, View} from 'react-native';
 import {Alert, Vibration} from 'react-native';
@@ -24,12 +23,14 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
 
   const isRewarded = () => {
-    let res = fetch(
-      REACT_APP_URL +
-        `/has-reward?module_id=${module_id}&user_id=${strapi_user_id}`,
+    const success_history = user.history.filter(
+      history => history.status === 'success',
     );
-    return res;
+    console.log('success_history', success_history.length);
+    success_history.length % 10 === 0 && setHasReward(true);
   };
+
+  console.log(hasReward);
 
   const checkUserHistory = async () => {
     if (user?.history) {
@@ -70,16 +71,21 @@ const QuizzFinishScreen = ({navigation, route}) => {
     }
   };
 
+  useLayoutEffect(() => {
+    checkUserHistory();
+  }, [hasReward]);
+
   useEffect(() => {
     if (wrongAnswers.length === 0) {
       Event.quizzDone();
       if (!retry) {
-        isRewarded().then(res => {
-          res.json().then(data => {
-            setHasReward(data);
-            checkUserHistory();
-          });
-        });
+        isRewarded();
+        // isRewarded().then(res => {
+        //   res.json().then(data => {
+        //     setHasReward(data);
+        //     checkUserHistory();
+        //   });
+        // });
       }
     }
   }, [route]);

@@ -65,22 +65,19 @@ module.exports = {
 
     const success_history = history.filter((h) => h.status === "success");
     const success_modules = success_history.map((h) => h.module);
-
-    const modules_by_levels = _.groupBy(modules, "niveau.value");
-    const history_modules_by_levels = _.groupBy(
-      success_modules,
-      "niveau.value"
-    );
+    const remaining_modules = modules.filter((m) => {
+      return !success_modules.find((sm) => sm.id === m.id);
+    });
 
     let user_level = 1;
     //Based on the number of modules available in backend
-    if (success_history.length >= 26) {
+    if (success_history.length >= modules.length) {
       user_level = 5;
-    } else if (success_history.length >= 18) {
+    } else if (success_history.length >= 30) {
       user_level = 4;
-    } else if (success_history.length >= 12) {
+    } else if (success_history.length >= 20) {
       user_level = 3;
-    } else if (success_history.length >= 6) {
+    } else if (success_history.length >= 10) {
       user_level = 2;
     }
 
@@ -94,25 +91,8 @@ module.exports = {
       };
     });
 
-    if (
-      modules_by_levels[user.level] &&
-      modules_by_levels[user.level].length > 0
-    ) {
-      const history_module_ids_in_level = _.map(
-        (history_modules_by_levels[user.level] || []).filter((_) => {
-          const tmpHistory = success_history.find((h) => h.module.id === _.id);
-          return tmpHistory && tmpHistory.status === "success";
-        }),
-        "id"
-      );
-
-      const available_modules = _.filter(
-        modules_by_levels[user.level],
-        (module) => {
-          return !_.includes(history_module_ids_in_level, module.id);
-        }
-      );
-      const next_module = _.sample(available_modules);
+    if (remaining_modules.length > 0) {
+      const next_module = _.sample(remaining_modules);
 
       if (version === 1) {
         user.next_module = _.get(next_module, "id", null);
@@ -128,15 +108,13 @@ module.exports = {
       }
 
       user.next_module_questions = await questionsModuleToArray(
-        next_module.questions
+        next_module?.questions
       );
 
-      const nb_modules_in_level = (modules_by_levels[user.level] || []).length;
-      const nb_modules_completed_in_level = (
-        history_modules_by_levels[user.level] || []
-      ).length;
       user.percentage_level_completed =
-        nb_modules_completed_in_level / nb_modules_in_level || 0;
+        success_modules.length < 10
+          ? success_modules.length / 10
+          : (success_modules.length % 10) / 10;
 
       const pending_history =
         version === "3"
@@ -189,16 +167,14 @@ module.exports = {
         random_module.questions
       );
 
-      if (version === 2) {
-        user.random_module = {
-          id: _.get(random_module, "id", null),
-          title: _.get(random_module, "title", ""),
-          theme_id: _.get(random_module, "thematique_mobile.id", null),
-          theme_title: _.get(random_module, "thematique_mobile.title", ""),
-          theme_color: _.get(random_module, "thematique_mobile.color", ""),
-          theme_image: _.get(random_module, "thematique_mobile.image", ""),
-        };
-      }
+      user.random_module = {
+        id: _.get(random_module, "id", null),
+        title: _.get(random_module, "title", ""),
+        theme_id: _.get(random_module, "thematique_mobile.id", null),
+        theme_title: _.get(random_module, "thematique_mobile.title", ""),
+        theme_color: _.get(random_module, "thematique_mobile.color", ""),
+        theme_image: _.get(random_module, "thematique_mobile.image", ""),
+      };
     }
 
     const orders_count = await strapi.services["commande"].count({

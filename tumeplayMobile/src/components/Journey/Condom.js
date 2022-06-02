@@ -1,94 +1,88 @@
 import {View, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Condom = props => {
-  const {style} = props;
+  const {style, doneModules_ids} = props;
   const condomsStep = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const [condomStratCompleted, setCondomStratCompleted] = useState(1);
+
+  const handleCondomStratCompleted = () => {
+    if (doneModules_ids.length <= 10) {
+      setCondomStratCompleted(doneModules_ids.length);
+    } else {
+      setCondomStratCompleted(doneModules_ids.length % 10);
+    }
+  };
+
+  useEffect(() => {
+    handleCondomStratCompleted();
+  }, [doneModules_ids]);
+
   const condom = condomsStep.map((_condom, index) => {
-    const stepStyles = [
-      {
-        width: 25,
-        height: 18,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        border: 1,
-        borderWidth: 1,
-        marginBottom: 1,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 55,
-        height: 16,
-        border: 1,
-        borderWidth: 1,
-        marginBottom: 1,
-        borderColor: '#F7EFE6',
-        borderTopLeftRadius: 60,
-        borderTopRightRadius: 60,
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderTopEndRadius: 5,
-        borderTopStartRadius: 5,
-        topWidth: 0.5,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 60,
-        height: 16,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-      {
-        width: 76,
-        height: 16,
-        borderRadius: 50,
-        border: 1,
-        borderWidth: 0.5,
-        borderColor: '#F7EFE6',
-      },
-    ];
+    let stepstyles = [];
+    for (let i = 0; i < condomsStep.length; i++) {
+      if (i === 0) {
+        stepstyles.push({
+          width: 25,
+          height: 18,
+          borderTopLeftRadius: 50,
+          borderTopRightRadius: 50,
+          border: 1,
+          borderWidth: 1,
+          marginBottom: 1,
+          borderColor: '#F7EFE6',
+          backgroundColor: '#FBF7F2',
+        });
+      } else if (i === 1) {
+        stepstyles.push({
+          width: 55,
+          height: 16,
+          border: 1,
+          borderWidth: 1,
+          marginBottom: 1,
+          borderColor: '#F7EFE6',
+          borderTopLeftRadius: 60,
+          borderTopRightRadius: 60,
+          backgroundColor: '#FBF7F2',
+        });
+      } else if (i === 2) {
+        stepstyles.push({
+          width: 60,
+          height: 16,
+          border: 1,
+          borderTopEndRadius: 5,
+          borderTopStartRadius: 5,
+          topWidth: 0.5,
+          borderWidth: 0.5,
+          marginBottom: 1,
+          borderColor: '#F7EFE6',
+          backgroundColor: '#FBF7F2',
+        });
+      } else if (i === 9) {
+        stepstyles.push({
+          width: 76,
+          height: 16,
+          borderRadius: 50,
+          border: 1,
+          borderWidth: 0.5,
+          marginBottom: 1,
+          borderColor: '#F7EFE6',
+          backgroundColor: '#FBF7F2',
+        });
+      } else {
+        stepstyles.push({
+          width: 60,
+          height: 16,
+          border: 1,
+          borderWidth: 0.5,
+          marginBottom: 1,
+          borderColor: '#F7EFE6',
+          backgroundColor: '#FBF7F2',
+        });
+      }
+    }
 
     const colors = {
       0: ['#D42201', '#D42201'],
@@ -103,12 +97,14 @@ const Condom = props => {
       9: ['#51B070', '#51B070'],
     };
 
-    return (
+    return 10 - condomStratCompleted <= index ? (
       <LinearGradient
         colors={colors[index]}
         key={index}
-        style={stepStyles[index]}
+        style={stepstyles[index]}
       />
+    ) : (
+      <View key={index} style={stepstyles[index]} />
     );
   });
 

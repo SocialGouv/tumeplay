@@ -9,8 +9,6 @@ import AppContext from '../../../../AppContext';
 const BottomAction = ({style, selectedModule}) => {
   const {doneModules_ids} = useContext(AppContext);
 
-  console.log(selectedModule);
-
   const done = doneModules_ids.includes(parseInt(selectedModule.id));
   const navigation = useNavigation();
   const handleNavigation = () => {
