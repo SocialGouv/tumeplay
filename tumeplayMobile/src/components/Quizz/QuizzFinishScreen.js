@@ -26,11 +26,8 @@ const QuizzFinishScreen = ({navigation, route}) => {
     const success_history = user.history.filter(
       history => history.status === 'success',
     );
-    console.log('success_history', success_history.length);
     success_history.length % 10 === 0 && setHasReward(true);
   };
-
-  console.log(hasReward);
 
   const checkUserHistory = async () => {
     if (user?.history) {
@@ -80,12 +77,6 @@ const QuizzFinishScreen = ({navigation, route}) => {
       Event.quizzDone();
       if (!retry) {
         isRewarded();
-        // isRewarded().then(res => {
-        //   res.json().then(data => {
-        //     setHasReward(data);
-        //     checkUserHistory();
-        //   });
-        // });
       }
     }
   }, [route]);
