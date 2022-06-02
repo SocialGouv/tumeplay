@@ -22,7 +22,7 @@ const Condom = props => {
 
   const condom = condomsStep.map((_condom, index) => {
     let stepstyles = [];
-    condomsStep.forEach((_condom, index) => {
+    condomsStep.forEach((_c, index) => {
       if (index === 0) {
         stepstyles.push({
           width: 25,
