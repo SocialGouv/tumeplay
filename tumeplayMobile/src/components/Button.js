@@ -67,7 +67,7 @@ const Button = props => {
 
 const styles = StyleSheet.create({
   longPressable: {
-    width: '100%',
+    width: '95%',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',

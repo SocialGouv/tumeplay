@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import QuizzWithWrongAnswers from './QuizzFinish/QuizzWithWrongAnswers';
 import QuizzAllRight from './QuizzFinish/QuizzAllRight';
 import AppContext from '../../../AppContext';
-import {REACT_APP_URL} from '@env';
 import Award from '../../views/Award';
 import {ActivityIndicator, View} from 'react-native';
 import {Alert, Vibration} from 'react-native';
@@ -17,18 +16,19 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const module_title = route?.params?.module_title;
   const theme = route?.params?.theme;
   const retry = route?.params?.retry;
-  const {strapi_user_id, user, reloadUser} = useContext(AppContext);
+  const {user, reloadUser} = useContext(AppContext);
 
   const [hasReward, setHasReward] = useState(null);
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
 
   const isRewarded = () => {
-    let res = fetch(
-      REACT_APP_URL +
-        `/has-reward?module_id=${module_id}&user_id=${strapi_user_id}`,
+    const success_history = user.history.filter(
+      history => history.status === 'success',
     );
-    return res;
+    user.level !== 1
+      ? success_history.length % 10 === 0 && setHasReward(true)
+      : setHasReward(false);
   };
 
   const checkUserHistory = async () => {
@@ -70,16 +70,15 @@ const QuizzFinishScreen = ({navigation, route}) => {
     }
   };
 
+  useLayoutEffect(() => {
+    checkUserHistory();
+  }, [hasReward]);
+
   useEffect(() => {
     if (wrongAnswers.length === 0) {
       Event.quizzDone();
       if (!retry) {
-        isRewarded().then(res => {
-          res.json().then(data => {
-            setHasReward(data);
-            checkUserHistory();
-          });
-        });
+        isRewarded();
       }
     }
   }, [route]);
@@ -97,7 +96,13 @@ const QuizzFinishScreen = ({navigation, route}) => {
         />
       );
     } else if (retry) {
-      return <QuizzAllRight navigation={navigation} module_id={module_id} />;
+      return (
+        <QuizzAllRight
+          navigation={navigation}
+          module_id={module_id}
+          theme={theme}
+        />
+      );
     } else if (hasReward === null || user.pending_module) {
       return (
         <View style={{flex: 1, justifyContent: 'center'}}>
@@ -112,7 +117,11 @@ const QuizzFinishScreen = ({navigation, route}) => {
       return hasReward ? (
         <Award />
       ) : (
-        <QuizzAllRight navigation={navigation} module_id={module_id} />
+        <QuizzAllRight
+          navigation={navigation}
+          module_id={module_id}
+          theme={theme}
+        />
       );
     }
   };

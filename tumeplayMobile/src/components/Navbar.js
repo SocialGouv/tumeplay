@@ -11,6 +11,7 @@ import QuizzLoader from './global/QuizzLoader';
 import diceIcon from '../assets/diceIcon.png';
 import {Image, Alert} from 'react-native';
 import Event from '../services/api/matomo';
+import Journey2 from '../views/Journey2';
 
 const Tab = createBottomTabNavigator();
 
@@ -76,7 +77,7 @@ const Navbar = ({navigation}) => {
       />
       <Tab.Screen
         name="Parcours"
-        component={Journey}
+        component={Journey2}
         options={{
           tabBarIcon: options => {
             const {size, color} = options;

@@ -11,7 +11,7 @@ import Container from '../../global/Container';
 import config from '../../../../config';
 import {ActivityIndicator} from 'react-native-paper';
 
-const QuizzAllRight = ({navigation}) => {
+const QuizzAllRight = ({navigation, theme}) => {
   const context = useContext(AppContext);
   const {user} = context;
 
@@ -38,16 +38,8 @@ const QuizzAllRight = ({navigation}) => {
               size={'large'}
               style={styles.button}
               onPress={() =>
-                navigation.navigate('QuizzModule', {
-                  module_id: user.next_module.id,
-                  module_title: user.next_module.title,
-                  theme: {
-                    title: user.next_module.theme_title,
-                    image: user.next_module.theme_image,
-                    color: user.next_module.theme_color,
-                  },
-                  questions: user.next_module_questions,
-                  clearModuleData: true,
+                navigation.navigate('ModuleList', {
+                  theme: theme,
                 })
               }
             />

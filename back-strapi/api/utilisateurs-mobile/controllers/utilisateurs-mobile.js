@@ -65,25 +65,12 @@ module.exports = {
 
     const success_history = history.filter((h) => h.status === "success");
     const success_modules = success_history.map((h) => h.module);
+    const success_modules_id = success_modules.map((m) => m.id);
+    const remaining_modules = modules.filter((m) => {
+      return !success_modules_id.includes(m.id);
+    });
 
-    const modules_by_levels = _.groupBy(modules, "niveau.value");
-    const history_modules_by_levels = _.groupBy(
-      success_modules,
-      "niveau.value"
-    );
-
-    let user_level = 1;
-    for (const [level, user_modules] of Object.entries(
-      history_modules_by_levels
-    )) {
-      if (parseInt(level) >= user_level) {
-        user_level = parseInt(level);
-
-        if (modules_by_levels[level].length === user_modules.length) {
-          user_level += 1;
-        }
-      }
-    }
+    let user_level = Math.trunc(success_history.length / 10) + 1;
 
     user.level = user_level;
 
@@ -95,25 +82,8 @@ module.exports = {
       };
     });
 
-    if (
-      modules_by_levels[user.level] &&
-      modules_by_levels[user.level].length > 0
-    ) {
-      const history_module_ids_in_level = _.map(
-        (history_modules_by_levels[user.level] || []).filter((_) => {
-          const tmpHistory = success_history.find((h) => h.module.id === _.id);
-          return tmpHistory && tmpHistory.status === "success";
-        }),
-        "id"
-      );
-
-      const available_modules = _.filter(
-        modules_by_levels[user.level],
-        (module) => {
-          return !_.includes(history_module_ids_in_level, module.id);
-        }
-      );
-      const next_module = _.sample(available_modules);
+    if (remaining_modules.length > 0) {
+      const next_module = _.sample(remaining_modules);
 
       if (version === 1) {
         user.next_module = _.get(next_module, "id", null);
@@ -129,26 +99,29 @@ module.exports = {
       }
 
       user.next_module_questions = await questionsModuleToArray(
-        next_module.questions
+        next_module?.questions
       );
 
-      const nb_modules_in_level = (modules_by_levels[user.level] || []).length;
-      const nb_modules_completed_in_level = (
-        history_modules_by_levels[user.level] || []
-      ).length;
       user.percentage_level_completed =
-        nb_modules_completed_in_level / nb_modules_in_level || 0;
+        success_modules.length < 10
+          ? success_modules.length / 10
+          : (success_modules.length % 10) / 10;
 
-      const pending_history = history.find((h) => h.status === "pending");
+      const pending_history =
+        version === "3"
+          ? history.filter((h) => h.status === "pending")
+          : history.find((h) => h.status === "pending");
 
       if (pending_history) {
-        user.pending_module_questions = await questionsModuleToArray(
-          pending_history.module.questions
-        );
-
-        if (version === 1) {
-          user.pending_module = _.get(pending_history, "module.id", null);
+        if (version === "3") {
+          const pending_modules = _.uniq(
+            pending_history.map((h) => h.module.id)
+          );
+          user.pending_modules = pending_modules;
         } else {
+          user.pending_module_questions = await questionsModuleToArray(
+            pending_history.module.questions
+          );
           const pending_module_id = pending_history.module.id;
           history.pending_module = _.find(modules, { id: pending_module_id });
           user.pending_module = {
@@ -185,18 +158,14 @@ module.exports = {
         random_module.questions
       );
 
-      if (version === 1) {
-        user.random_module = random_module.id;
-      } else {
-        user.random_module = {
-          id: _.get(random_module, "id", null),
-          title: _.get(random_module, "title", ""),
-          theme_id: _.get(random_module, "thematique_mobile.id", null),
-          theme_title: _.get(random_module, "thematique_mobile.title", ""),
-          theme_color: _.get(random_module, "thematique_mobile.color", ""),
-          theme_image: _.get(random_module, "thematique_mobile.image", ""),
-        };
-      }
+      user.random_module = {
+        id: _.get(random_module, "id", null),
+        title: _.get(random_module, "title", ""),
+        theme_id: _.get(random_module, "thematique_mobile.id", null),
+        theme_title: _.get(random_module, "thematique_mobile.title", ""),
+        theme_color: _.get(random_module, "thematique_mobile.color", ""),
+        theme_image: _.get(random_module, "thematique_mobile.image", ""),
+      };
     }
 
     const orders_count = await strapi.services["commande"].count({

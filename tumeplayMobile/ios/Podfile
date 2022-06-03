@@ -23,6 +23,7 @@ target 'tumeplayMobile' do
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
   pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
 
   target 'tumeplayMobileTests' do

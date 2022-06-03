@@ -29,6 +29,8 @@ import VersionCheck from 'react-native-version-check';
 import * as Sentry from '@sentry/react-native';
 import Copilot from './src/components/Copilot/Copilot';
 import CustomToolTip from './src/components/Copilot/CustomToolTip';
+import Journey2 from './src/views/Journey2';
+import ModuleList from './src/components/Journey/Journey_modules/ModuleList';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -65,7 +67,7 @@ const App = () => {
 
   const getMobileUser = async user_id => {
     const response = await fetch(
-      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=2',
+      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=3',
     );
     const tmpUser = await response.json();
     if (tmpUser?.status === 404) {
@@ -190,7 +192,11 @@ const App = () => {
               />
               <NavigationStack.Screen name="BoxOrder" component={BoxOrder} />
               <NavigationStack.Screen name="Box" component={Box} />
-              <NavigationStack.Screen name="Parcours" component={Journey} />
+              <NavigationStack.Screen name="Parcours" component={Journey2} />
+              <NavigationStack.Screen
+                name="ModuleList"
+                component={ModuleList}
+              />
               <NavigationStack.Screen name="Award" component={Award} />
             </NavigationStack.Navigator>
           </NavigationContainer>
