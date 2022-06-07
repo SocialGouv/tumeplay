@@ -12,6 +12,7 @@ const ThemePicker = props => {
       <TouchableOpacity
         disabled={!isSelected}
         onPress={onPress}
+        activeOpacity={0.95}
         style={[
           styles.roundedView,
           {

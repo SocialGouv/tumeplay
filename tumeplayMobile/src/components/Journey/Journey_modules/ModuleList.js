@@ -18,6 +18,7 @@ import ModuleLine from './ModuleLine';
 import _ from 'lodash';
 import config from '../../../../config';
 import BottomAction from './BottomAction';
+import {Colors} from '../../../styles/Style';
 
 const ModuleList = ({navigation, route}) => {
   const theme = route.params.theme;
@@ -63,12 +64,16 @@ const ModuleList = ({navigation, route}) => {
         <ThemeIndicator theme={theme} />
       </View>
       {loading1 ? (
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={Colors.primary} />
       ) : (
         <>
           <View style={{flex: selectedModule?.isSelected ? 0.8 : 1}}>
             <Title title={modules.length + ' ' + 'DÉFIS'} />
-            <TextBase style={styles.difficulty}> DIFFICULTÉ</TextBase>
+            {modules.length > 0 && (
+              <>
+                <TextBase style={styles.difficulty}> DIFFICULTÉ</TextBase>
+              </>
+            )}
             <ScrollView
               disableScrollViewPanResponder={false}
               showsVerticalScrollIndicator={false}>
