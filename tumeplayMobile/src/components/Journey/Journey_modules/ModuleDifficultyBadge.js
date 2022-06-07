@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: config.deviceWidth * 0.24,
+    width: config.deviceWidth * 0.26,
   },
   condom: {
     width: 15,
     height: 15,
+    marginLeft: 5,
   },
 });
 

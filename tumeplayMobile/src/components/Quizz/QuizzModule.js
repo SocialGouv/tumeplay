@@ -33,6 +33,7 @@ const QuizzModule = ({navigation, route}) => {
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
   const retry = route?.params?.retry;
+  const from_journey = route?.params?.from_journey;
   const question = questions[0];
 
   const [questionTitle, setQuestionTitle] = useState(question.text_question);
@@ -202,7 +203,11 @@ const QuizzModule = ({navigation, route}) => {
           <View style={styles.levelIndicator}>
             <TouchableOpacity
               style={styles.chevron}
-              onPress={() => navigation.navigate('Home', {screen: 'Accueil'})}>
+              onPress={() =>
+                from_journey
+                  ? navigation.goBack()
+                  : navigation.navigate('Home', {screen: 'Accueil'})
+              }>
               <Icon name="chevron-small-left" size={40} color="#000" />
               <Text>Retour</Text>
             </TouchableOpacity>
