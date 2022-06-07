@@ -5,13 +5,13 @@ import React from 'react';
 const CompletionIcon = ({done, module, handleModuleSelection}) => {
   const completeStyle = {
     backgroundColor: done ? '#51B070' : 'transparent',
-    borderColor: done ? '#51B070' : '#D8D8D8',
+    borderColor: done ? '#51B070' : '#000',
     borderWidth: 2,
   };
 
   const isSelectedStyle = {
     padding: 5,
-    borderColor: '#D8D8D8',
+    borderColor: '#000',
   };
 
   return (
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderRadius: 50,
-    backgroundColor: '#D8D8D8',
+    backgroundColor: '#000',
   },
 });
 

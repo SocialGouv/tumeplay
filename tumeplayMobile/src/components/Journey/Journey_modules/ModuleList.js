@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Platform,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import TextBase from '../../Text';
@@ -61,20 +62,26 @@ const ModuleList = ({navigation, route}) => {
         </TouchableOpacity>
         <ThemeIndicator theme={theme} />
       </View>
-      <View style={{flex: selectedModule?.isSelected ? 0.8 : 1}}>
-        <Title title={modules.length + ' ' + 'DÉFIS'} />
-        <TextBase style={styles.difficulty}> DIFFICULTÉ</TextBase>
-        <ScrollView
-          disableScrollViewPanResponder={false}
-          showsVerticalScrollIndicator={false}>
-          {displayModule}
-        </ScrollView>
-      </View>
-      {selectedModule?.isSelected && (
-        <BottomAction
-          style={styles.bottom_part}
-          selectedModule={selectedModule}
-        />
+      {loading1 ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <>
+          <View style={{flex: selectedModule?.isSelected ? 0.8 : 1}}>
+            <Title title={modules.length + ' ' + 'DÉFIS'} />
+            <TextBase style={styles.difficulty}> DIFFICULTÉ</TextBase>
+            <ScrollView
+              disableScrollViewPanResponder={false}
+              showsVerticalScrollIndicator={false}>
+              {displayModule}
+            </ScrollView>
+          </View>
+          {selectedModule?.isSelected && (
+            <BottomAction
+              style={styles.bottom_part}
+              selectedModule={selectedModule}
+            />
+          )}
+        </>
       )}
     </Container>
   );

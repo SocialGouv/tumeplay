@@ -18,8 +18,10 @@ const ThemeCard = props => {
         </View>
         <TextBase style={styles.text}>{selectedTheme?.title}</TextBase>
       </View>
-      <TextBase style={[styles.text, {marginRight: 10, marginVertical: 5}]}>
-        {moduleCount} défis restants{' '}
+      <TextBase style={[styles.text, {marginRight: 10, marginVertical: 0}]}>
+        {moduleCount > 0
+          ? moduleCount + ' ' + 'défis restants'
+          : moduleCount + ' ' + 'défi'}
       </TextBase>
     </View>
   );
