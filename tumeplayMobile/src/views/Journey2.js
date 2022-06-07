@@ -36,6 +36,7 @@ const Journey2 = () => {
       theme={item}
       index={index}
       selectedIndex={selectedIndex}
+      length={data.length}
       onPress={handleNavigation}
     />
   );
