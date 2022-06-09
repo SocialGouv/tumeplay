@@ -18,7 +18,7 @@ const ThemeCard = props => {
         </View>
         <TextBase style={styles.text}>{selectedTheme?.title}</TextBase>
       </View>
-      <TextBase style={[styles.text, {marginRight: 10, marginVertical: 0}]}>
+      <TextBase style={[styles.text]}>
         {moduleCount > 0
           ? moduleCount + ' ' + 'défis restants'
           : moduleCount + ' ' + 'défi'}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         ? config.deviceHeight * 0.08
         : config.deviceHeight * 0.09,
     borderRadius: config.deviceWidth * 0.03,
-    padding: 15,
+    paddingLeft: 5,
     justifyContent: 'center',
     alignContent: 'center',
   },
@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize:
-      config.deviceHeight > 667
+      config.deviceHeight >= 667
         ? config.deviceHeight * 0.012
         : config.deviceHeight * 0.015,
     fontWeight: 'bold',
     paddingVertical: 1,
     textAlign: 'center',
-    marginHorizontal: 7,
+    // marginHorizontal: 5,
   },
   imageContainer: {
     width: 30,
@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: 5,
+    marginRight: 5,
   },
   image: {
     width: 25,

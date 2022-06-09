@@ -1,7 +1,7 @@
 import {View, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import condom_full from '../../../assets/condom-full.png';
-import condom_empty from '../../../assets/condom-empty.png';
+import condom_full from '../../../assets/capote.png';
+import condom_empty from '../../../assets/capote_grise.png';
 import config from '../../../../config';
 
 const ModuleDifficultyBadge = ({level}) => {
