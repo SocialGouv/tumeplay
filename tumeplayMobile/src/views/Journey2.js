@@ -36,6 +36,7 @@ const Journey2 = () => {
       theme={item}
       index={index}
       selectedIndex={selectedIndex}
+      length={data.length}
       onPress={handleNavigation}
     />
   );
@@ -100,30 +101,26 @@ const Journey2 = () => {
         selectedTheme={selectedTheme}
         moduleCount={moduleCount}
       />
-      <View style={styles.wheel}>
-        <View style={styles.roundTrait} />
-        <CircleList
-          containerStyle={{height: config.deviceHeight}}
-          data={data}
-          keyExtractor={_keyExtractor}
-          elementCount={13}
-          selectedItemScale={1}
-          renderItem={_renderItem}
-          radius={
-            config.deviceHeight > 667
-              ? config.deviceWidth / 1.7
-              : config.deviceWidth / 2
-          }
-          swipeSpeedMultiplier={15}
-          visiblityPadding={50}
-          onScroll={e => setSelectedIndex(e)}
-          style={[styles.wheel]}
-        />
-      </View>
+      <View style={styles.roundTrait} />
+      <CircleList
+        containerStyle={styles.wheel}
+        data={data}
+        keyExtractor={_keyExtractor}
+        elementCount={13}
+        selectedItemScale={1}
+        renderItem={_renderItem}
+        radius={config.deviceWidth / 1.85}
+        swipeSpeedMultiplier={15}
+        visiblityPadding={50}
+        onScroll={e => setSelectedIndex(e)}
+        style={[styles.wheel]}
+      />
       <SvgXml
         xml={backgroundSvg}
         width="50%"
-        height="50%"
+        height={
+          Platform.OS === 'ios' && config.deviceHeight <= 667 ? '55%' : '47%'
+        }
         style={styles.image}
       />
       <Condom
@@ -149,66 +146,41 @@ const Journey2 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
+    // position: 'relative',
   },
   image: {
     position: 'absolute',
     top: config.deviceHeight / 4,
     zIndex: -1,
-    right: 0,
+    right: -10,
   },
   roundTrait: {
     transform: [{rotate: '270deg'}],
     borderWidth: 2,
     position: 'absolute',
-    bottom:
-      Platform.OS === 'ios'
-        ? config.deviceWidth >= 390
-          ? config.deviceHeight / 2.7
-          : config.deviceHeight / 2.4
-        : config.deviceHeight / 2.3,
-    left:
-      Platform.OS === 'ios'
-        ? config.deviceWidth >= 390
-          ? config.deviceHeight / 2.8
-          : config.deviceHeight / 2.5
-        : config.deviceHeight / 2.4,
+    top: config.deviceHeight / 6,
+    left: config.deviceWidth / 2,
     zIndex: 0,
     borderRadius: 360,
     borderStyle: 'dotted',
-    width:
-      Platform.OS === 'ios'
-        ? config.deviceWidth >= 390
-          ? config.deviceWidth * 1
-          : config.deviceWidth * 1.2
-        : config.deviceWidth * 0.94,
-    height:
-      Platform.OS === 'ios'
-        ? config.deviceWidth >= 390
-          ? config.deviceHeight / 1.9
-          : config.deviceHeight / 1.7
-        : config.deviceHeight / 1.8,
+    width: config.deviceWidth * 0.7 * 1.5,
+    height: config.deviceWidth * 1.2,
   },
   wheel: {
     transform: [{rotate: '270deg'}],
     zIndex: 1,
     position: 'absolute',
     left: 0,
-    top: config.deviceHeight / 2.15 - config.deviceWidth / 1,
-    width:
-      Platform.OS === 'ios'
-        ? config.deviceWidth >= 390
-          ? config.deviceHeight * 1.18
-          : config.deviceHeight * 1.45
-        : config.deviceHeight * 1.3,
-    height: config.deviceWidth * 2,
+    top: config.deviceHeight / 3.75,
+    minWidth: config.deviceWidth * 0.7 * 2,
+    height: config.deviceWidth * 0.8,
     backgroundColor: 'transparent',
   },
   condom: {
     position: 'relative',
     top: config.deviceHeight / 5,
-    right: -20,
-    zIndex: 2,
+    right: -25,
+    zIndex: -1,
   },
   theme_card: {
     position: 'absolute',

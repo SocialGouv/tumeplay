@@ -25,6 +25,7 @@ const BottomAction = ({style, selectedModule}) => {
         },
         clearModuleData: true,
         retry: done,
+        from_journey: true,
       });
     }
   };

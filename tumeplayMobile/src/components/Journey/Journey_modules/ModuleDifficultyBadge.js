@@ -1,7 +1,7 @@
 import {View, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import condom_full from '../../../assets/condom-full.png';
-import condom_empty from '../../../assets/condom-empty.png';
+import condom_full from '../../../assets/capote.png';
+import condom_empty from '../../../assets/capote_grise.png';
 import config from '../../../../config';
 
 const ModuleDifficultyBadge = ({level}) => {
@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: config.deviceWidth * 0.24,
+    width: config.deviceWidth * 0.26,
   },
   condom: {
     width: 15,
     height: 15,
+    marginLeft: 5,
   },
 });
 
