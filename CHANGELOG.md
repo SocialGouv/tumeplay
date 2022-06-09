@@ -1,3 +1,10 @@
+# [1.110.0](https://github.com/SocialGouv/Tumeplay/compare/v1.109.0...v1.110.0) (2022-06-09)
+
+
+### Features
+
+* checkbox color modification / adding loader to module list / re… ([#393](https://github.com/SocialGouv/Tumeplay/issues/393)) ([15bc0c1](https://github.com/SocialGouv/Tumeplay/commit/15bc0c1f8ea0ab6dbf80a058bddadea6d9409ffd))
+
 # [1.109.0](https://github.com/SocialGouv/Tumeplay/compare/v1.108.3...v1.109.0) (2022-05-31)
 
 
