@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_THEMES = gql`
-  query GetThemes($level: Int!) {
-    thematiqueMobiles(where: {level: $level}) {
+  query GetThemes {
+    thematiqueMobiles {
       id
       title
       image {

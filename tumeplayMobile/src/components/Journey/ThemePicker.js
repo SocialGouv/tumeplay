@@ -3,14 +3,12 @@ import React from 'react';
 import {REACT_APP_URL} from '@env';
 
 const ThemePicker = props => {
-  const {theme, index, selectedIndex, length, onPress} = props;
-  const isSelected =
-    selectedIndex === length - 1 ? index === 0 : selectedIndex + 1 === index;
+  const {theme, index, selectedIndex, onPress} = props;
+  const isSelected = selectedIndex === index;
 
   return (
     <>
       <TouchableOpacity
-        disabled={!isSelected}
         onPress={onPress}
         activeOpacity={0.95}
         style={[

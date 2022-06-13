@@ -9,20 +9,24 @@ const ThemeCard = props => {
 
   return (
     <View style={[style, styles.box]}>
-      <View style={styles.textContainer}>
+      <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
             source={{uri: REACT_APP_URL + selectedTheme?.image?.url}}
             style={styles.image}
           />
         </View>
-        <TextBase style={styles.text}>{selectedTheme?.title}</TextBase>
+        <View style={styles.textContainer}>
+          <TextBase numberOfLines={2} style={styles.text}>
+            {selectedTheme?.title}
+          </TextBase>
+          <TextBase style={styles.text}>
+            {moduleCount > 0
+              ? moduleCount + ' ' + 'défis restants'
+              : moduleCount + ' ' + 'défi'}
+          </TextBase>
+        </View>
       </View>
-      <TextBase style={[styles.text]}>
-        {moduleCount > 0
-          ? moduleCount + ' ' + 'défis restants'
-          : moduleCount + ' ' + 'défi'}
-      </TextBase>
     </View>
   );
 };
@@ -40,11 +44,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
   },
-  textContainer: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  textContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginLeft: 5,
   },
   text: {
     color: '#fff',
@@ -54,8 +65,8 @@ const styles = StyleSheet.create({
         : config.deviceHeight * 0.015,
     fontWeight: 'bold',
     paddingVertical: 1,
-    textAlign: 'center',
-    // marginHorizontal: 5,
+    textAlign: 'left',
+    width: config.deviceWidth * 0.3,
   },
   imageContainer: {
     width: 30,
