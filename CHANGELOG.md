@@ -1,3 +1,10 @@
+## [1.111.1](https://github.com/SocialGouv/Tumeplay/compare/v1.111.0...v1.111.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* repeat requests on command to create complete csv ([#394](https://github.com/SocialGouv/Tumeplay/issues/394)) ([03873cd](https://github.com/SocialGouv/Tumeplay/commit/03873cdc625f515c9d315244a5c6937d08a2012a))
+
 # [1.111.0](https://github.com/SocialGouv/Tumeplay/compare/v1.110.0...v1.111.0) (2022-06-10)
 
 
