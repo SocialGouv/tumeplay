@@ -1,5 +1,11 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
 import Title from '../components/Title';
@@ -20,26 +26,40 @@ const Journey2 = () => {
   const {thematiques, doneModules_ids} = useContext(AppContext);
   const [themes] = useState(thematiques);
   //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
-  const data = [...themes, ...themes];
+  const data = [
+    ...themes.map((t, index) => ({
+      ...t,
+      index: index,
+    })),
+    ...themes
+      .filter((t, index) => index < 3)
+      .map((t, index) => ({
+        ...t,
+        index: index + themes.length,
+      })),
+  ];
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
   const [fullModuleList, setFullModuleList] = useState([]);
   const [moduleCount, setModuleCount] = useState();
+  const circleList = useRef(null);
 
   const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
 
-  const _keyExtractor = (_item, index) => index;
+  const _keyExtractor = _item => _item.index;
 
-  const _renderItem = ({item, index}) => (
-    <ThemePicker
-      theme={item}
-      index={index}
-      selectedIndex={selectedIndex}
-      length={data.length}
-      onPress={handleNavigation}
-    />
-  );
+  const _renderItem = ({item}) => {
+    return (
+      <ThemePicker
+        theme={item}
+        index={item.index}
+        selectedIndex={selectedIndex}
+        length={data.length}
+        onPress={() => setSelectedIndex(item.index)}
+      />
+    );
+  };
 
   const backgroundSvg = `
    <svg width="157" height="336" viewBox="0 0 157 336" fill="none">
@@ -58,12 +78,28 @@ const Journey2 = () => {
   };
 
   useEffect(() => {
-    if (selectedIndex + 1 === data.length) {
-      setSelectedTheme(data[0]);
-    } else {
-      setSelectedTheme(data[selectedIndex + 1]);
+    if (selectedIndex !== null) {
+      // Code to reset package data to avoid the bug from low index to last
+      if (selectedIndex === 0) {
+        circleList.current.rotationOffset = 0;
+        circleList.current.dataIndex = 0;
+      }
+
+      circleList.current.scrollToIndex(
+        selectedIndex === 0 ? data.length - 1 : selectedIndex - 1,
+      );
+
+      if (selectedIndex === 0) {
+        setSelectedTheme(data[data.length - 1]);
+      } else {
+        setSelectedTheme(data[selectedIndex]);
+      }
     }
   }, [selectedIndex]);
+
+  useLayoutEffect(() => {
+    setSelectedIndex(0);
+  }, []);
 
   const handleModuleCount = () => {
     let modules = fullModuleList.filter(item => {
@@ -106,21 +142,19 @@ const Journey2 = () => {
         containerStyle={styles.wheel}
         data={data}
         keyExtractor={_keyExtractor}
-        elementCount={13}
+        elementCount={data.length}
         selectedItemScale={1}
         renderItem={_renderItem}
         radius={config.deviceWidth / 1.85}
-        swipeSpeedMultiplier={15}
-        visiblityPadding={50}
-        onScroll={e => setSelectedIndex(e)}
+        swipeSpeedMultiplier={0}
+        visiblityPadding={1}
         style={[styles.wheel]}
+        ref={circleList}
       />
       <SvgXml
         xml={backgroundSvg}
         width="50%"
-        height={
-          Platform.OS === 'ios' && config.deviceHeight <= 667 ? '55%' : '47%'
-        }
+        height={config.deviceWidth * 0.85}
         style={styles.image}
       />
       <Condom

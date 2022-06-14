@@ -43,9 +43,7 @@ const App = () => {
   const [thematiques, setThematiques] = useState([]);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
 
-  const {data: data1, loading: loading1} = useQuery(GET_THEMES, {
-    variables: {level: user.level},
-  });
+  const {data: data1, loading: loading1} = useQuery(GET_THEMES);
 
   const navTheme = DefaultTheme;
   navTheme.colors.background = Colors.background;
