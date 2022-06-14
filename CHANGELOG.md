@@ -1,3 +1,10 @@
+# [1.112.0](https://github.com/SocialGouv/Tumeplay/compare/v1.111.1...v1.112.0) (2022-06-14)
+
+
+### Features
+
+* removing scroll on wheel / Adding onClick logic to modify theme… ([#395](https://github.com/SocialGouv/Tumeplay/issues/395)) ([f9b5429](https://github.com/SocialGouv/Tumeplay/commit/f9b5429edc7909b0e763f489ae83fee38ca3580c))
+
 ## [1.111.1](https://github.com/SocialGouv/Tumeplay/compare/v1.111.0...v1.111.1) (2022-06-13)
 
 
