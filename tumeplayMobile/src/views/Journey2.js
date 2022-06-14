@@ -32,7 +32,7 @@ const Journey2 = () => {
       index: index,
     })),
     ...themes
-      .filter((t, index) => index < 3)
+      .filter((_t, index) => index < 3)
       .map((t, index) => ({
         ...t,
         index: index + themes.length,
@@ -87,6 +87,7 @@ const Journey2 = () => {
 
       circleList.current.scrollToIndex(
         selectedIndex === 0 ? data.length - 1 : selectedIndex - 1,
+        70,
       );
 
       if (selectedIndex === 0) {
