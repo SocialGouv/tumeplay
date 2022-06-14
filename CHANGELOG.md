@@ -1,3 +1,10 @@
+# [1.113.0](https://github.com/SocialGouv/Tumeplay/compare/v1.112.0...v1.113.0) (2022-06-14)
+
+
+### Features
+
+* changing wheel speed ([febb7c1](https://github.com/SocialGouv/Tumeplay/commit/febb7c1b4f51d55c6e7e04e8e0b7412fd5addece))
+
 # [1.112.0](https://github.com/SocialGouv/Tumeplay/compare/v1.111.1...v1.112.0) (2022-06-14)
 
 
