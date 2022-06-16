@@ -33,6 +33,7 @@ const QuizzModule = ({navigation, route}) => {
   const clearModuleData = route?.params?.clearModuleData;
   const improveWrongAnswers = route?.params?.improveWrongAnswers;
   const retry = route?.params?.retry;
+  const firstTry = route?.params?.firstTry;
   const from_journey = route?.params?.from_journey;
   const question = questions[0];
 
@@ -118,6 +119,7 @@ const QuizzModule = ({navigation, route}) => {
         module_id: module_id,
         theme: theme,
         retry,
+        firstTry,
       });
     } else {
       setshowAnswer(false);
@@ -126,6 +128,7 @@ const QuizzModule = ({navigation, route}) => {
         theme: theme,
         module_id: module_id,
         module_title: module_title,
+        firstTry,
       });
       setHasAnswered(!hasAnswered);
     }
