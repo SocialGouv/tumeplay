@@ -27,7 +27,9 @@ const QuizzFinishScreen = ({navigation, route}) => {
       history => history.status === 'success',
     );
     user.level !== 1
-      ? success_history.length % 10 === 0 && setHasReward(true)
+      ? success_history.length % 10 === 0
+        ? setHasReward(true)
+        : setHasReward(false)
       : setHasReward(false);
   };
 
