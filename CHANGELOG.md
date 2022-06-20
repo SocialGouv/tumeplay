@@ -1,3 +1,10 @@
+# [1.114.0](https://github.com/SocialGouv/Tumeplay/compare/v1.113.1...v1.114.0) (2022-06-20)
+
+
+### Features
+
+* save module first try percentage correct answers ([#396](https://github.com/SocialGouv/Tumeplay/issues/396)) ([9476b7a](https://github.com/SocialGouv/Tumeplay/commit/9476b7a6c10779ff98ecec37d6b0d4add50ea0cc))
+
 ## [1.113.1](https://github.com/SocialGouv/Tumeplay/compare/v1.113.0...v1.113.1) (2022-06-20)
 
 
