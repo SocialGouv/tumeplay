@@ -32,9 +32,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
     const success_history = user.history.filter(
       history => history.status === 'success',
     );
-    user.level !== 1
-      ? success_history.length % 10 === 0 && setHasReward(true)
-      : setHasReward(false);
+    setHasReward(user.level !== 1 && success_history.length % 10 === 0);
   };
 
   const checkUserHistory = async () => {

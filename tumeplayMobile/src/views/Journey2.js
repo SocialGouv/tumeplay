@@ -91,7 +91,7 @@ const Journey2 = () => {
       );
 
       if (selectedIndex === 0) {
-        setSelectedTheme(data[data.length - 1]);
+        setSelectedTheme(data[0]);
       } else {
         setSelectedTheme(data[selectedIndex]);
       }
