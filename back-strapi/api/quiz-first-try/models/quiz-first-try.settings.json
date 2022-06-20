@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_first_tries",
+  "info": {
+    "name": "Quiz first try"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "percentage_right_answers": {
+      "type": "float"
+    },
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile"
+    },
+    "module": {
+      "model": "module"
+    }
+  }
+}
