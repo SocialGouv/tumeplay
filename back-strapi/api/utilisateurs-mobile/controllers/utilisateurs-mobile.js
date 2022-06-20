@@ -70,6 +70,12 @@ module.exports = {
       return !success_modules_id.includes(m.id);
     });
 
+    const modules_by_levels = _.groupBy(modules, "niveau.value");
+    const history_modules_by_levels = _.groupBy(
+      success_modules,
+      "niveau.value"
+    );
+
     let user_level = Math.trunc(success_history.length / 10) + 1;
 
     user.level = user_level;
@@ -102,10 +108,20 @@ module.exports = {
         next_module?.questions
       );
 
-      user.percentage_level_completed =
-        success_modules.length < 10
-          ? success_modules.length / 10
-          : (success_modules.length % 10) / 10;
+      if (version === "3") {
+        user.percentage_level_completed =
+          success_modules.length < 10
+            ? success_modules.length / 10
+            : (success_modules.length % 10) / 10;
+      } else {
+        const nb_modules_in_level = (modules_by_levels[user.level] || [])
+          .length;
+        const nb_modules_completed_in_level = (
+          history_modules_by_levels[user.level] || []
+        ).length;
+        user.percentage_level_completed =
+          nb_modules_completed_in_level / nb_modules_in_level || 0;
+      }
 
       const pending_history =
         version === "3"
