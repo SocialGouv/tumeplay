@@ -1,3 +1,10 @@
+## [1.113.1](https://github.com/SocialGouv/Tumeplay/compare/v1.113.0...v1.113.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* security on old metropole website ([#400](https://github.com/SocialGouv/Tumeplay/issues/400)) ([077069a](https://github.com/SocialGouv/Tumeplay/commit/077069a1e3857c354d94a7513bcacdad97f14cf3))
+
 # [1.113.0](https://github.com/SocialGouv/Tumeplay/compare/v1.112.0...v1.113.0) (2022-06-14)
 
 
