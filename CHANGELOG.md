@@ -1,3 +1,10 @@
+## [1.114.1](https://github.com/SocialGouv/Tumeplay/compare/v1.114.0...v1.114.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* wheel correction and quizz logic improvement ([#398](https://github.com/SocialGouv/Tumeplay/issues/398)) ([72cd490](https://github.com/SocialGouv/Tumeplay/commit/72cd490b4fc1debae0a0b23bb29f9b15e2119644))
+
 # [1.114.0](https://github.com/SocialGouv/Tumeplay/compare/v1.113.1...v1.114.0) (2022-06-20)
 
 
