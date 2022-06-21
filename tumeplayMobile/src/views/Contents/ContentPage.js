@@ -25,6 +25,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import _ from 'lodash';
 import ReadIndicator from '../../components/Contents/ReadIndicator';
 import {useFocusEffect} from '@react-navigation/native';
+import handleRedirection from '../../services/handleRedirection';
 
 const ContentPage = ({navigation, route}) => {
   const {user} = useContext(AppContext);
@@ -127,11 +128,7 @@ const ContentPage = ({navigation, route}) => {
 
   const goToQuizz = () => {
     Event.playEvent('content');
-    navigation.navigate('Jouer', {
-      module_id: user.next_module,
-      questions: user.nextQuestions,
-      clearModuleData: true,
-    });
+    navigation.navigate('Jouer', handleRedirection(user));
   };
 
   const onSwipe = direction => {
