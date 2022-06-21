@@ -20,10 +20,11 @@ import TextBase from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_ALL_MODULES} from '../services/api/modules';
 import {useNavigation} from '@react-navigation/native';
+import Event from '../services/api/matomo';
 
 const Journey2 = () => {
   const navigation = useNavigation();
-  const {thematiques, doneModules_ids} = useContext(AppContext);
+  const {thematiques, doneModules_ids, user} = useContext(AppContext);
   const [themes] = useState(thematiques);
   //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
   const data = [
@@ -74,6 +75,10 @@ const Journey2 = () => {
     navigation.navigate('ModuleList', {
       theme: selectedTheme,
       count: moduleCount,
+    });
+    Event.thematiqueJourneyEvent({
+      title: selectedTheme.title,
+      user_id: user.id,
     });
   };
 

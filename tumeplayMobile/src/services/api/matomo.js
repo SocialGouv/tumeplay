@@ -16,6 +16,12 @@ const Event = {
   orderConfirmEvent: label => {
     Matomo.trackEvent('Order', 'Confirm', label, 1);
   },
+  thematiquePostEvent: label => {
+    Matomo.trackEvent('Thematique', `post_${label.title}`, label.user_id, 1);
+  },
+  thematiqueJourneyEvent: label => {
+    Matomo.trackEvent('Thematique', `journey_${label.title}`, label.user_id, 1);
+  },
   quizzDone: () => {
     Matomo.trackScreen('/quizz-all-right', 'Quizz terminé');
   },

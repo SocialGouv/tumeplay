@@ -11,7 +11,6 @@ import {
   CREATE_MOBILE_USER_FIRST_TRY,
 } from '../../services/api/mobile_users';
 import Event from '../../services/api/matomo';
-import {first} from 'lodash';
 
 const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;

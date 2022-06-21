@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import {Fonts} from '../styles/Style';
+import Event from '../services/api/matomo';
+import AppContext from '../../AppContext';
 
 const ThemeCard = props => {
   const {theme, backgroundColor, borderColors, image, navigation, thematiques} =
     props;
+
+  const {user} = useContext(AppContext);
+
+  const handlePress = () => {
+    navigation.navigate('ContentsPage', {
+      theme_id: theme.id,
+      theme_title: theme.title,
+      backgroundColor: backgroundColor,
+      thematiques: thematiques,
+    });
+    Event.thematiquePostEvent({title: theme.title, user_id: user.id});
+  };
 
   return (
     <TouchableOpacity
@@ -18,14 +32,7 @@ const ThemeCard = props => {
           borderWidth: 1,
         },
       ]}
-      onPress={() => {
-        navigation.navigate('ContentsPage', {
-          theme_id: theme.id,
-          theme_title: theme.title,
-          backgroundColor: backgroundColor,
-          thematiques: thematiques,
-        });
-      }}>
+      onPress={handlePress}>
       <Image style={styles.image} source={{uri: image}} />
       <Text style={styles.text}>{theme?.title}</Text>
     </TouchableOpacity>
