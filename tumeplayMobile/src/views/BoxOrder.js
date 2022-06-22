@@ -1,10 +1,5 @@
-import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
 import HomeOrdersInput from '../components/Orders/HomeOrdersInput';
@@ -16,9 +11,12 @@ import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
 import PickupOrder from '../components/Orders/Pickup/PickupOrder';
 import PickupOrderUserInfos from '../components/Orders/Pickup/PickupOrderUserInfos';
+import AppContext from '../../AppContext';
+import ReferentIntention from '../components/Orders/ReferentIntention';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
+  const {user} = useContext(AppContext);
   const [deliveryMode, setDeliveryMode] = useState('home');
   const [userInfos, setUserInfos] = useState({
     first_name: '',
@@ -31,6 +29,45 @@ const Box = ({navigation, route}) => {
   const [orderConfirm, setOrderConfirm] = useState(false);
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [selectedPOI, setSelectedPOI] = useState(null);
+
+  const displayCorrectScreen = () => {
+    if (deliveryMode === 'home') {
+      return !orderConfirm ? (
+        <HomeOrdersInput
+          userInfos={userInfos}
+          setUserInfos={setUserInfos}
+          setOrderConfirm={setOrderConfirm}
+          setUserAdressInformations={setUserAdressInformations}
+        />
+      ) : (
+        <>
+          <OrderConfirm
+            userInfos={userInfos}
+            setOrderConfirm={setOrderConfirm}
+            deliveryMode={deliveryMode}
+            userAdressInformations={userAdressInformations}
+            box={box}
+          />
+        </>
+      );
+    } else if (deliveryMode === 'pickup') {
+      return selectedPOI === null ? (
+        <PickupOrder setSelectedPOI={setSelectedPOI} />
+      ) : (
+        <PickupOrderUserInfos
+          selectedPOI={selectedPOI}
+          userInfos={userInfos}
+          orderConfirm={orderConfirm}
+          setUserInfos={setUserInfos}
+          setOrderConfirm={setOrderConfirm}
+          setSelectedPOI={setSelectedPOI}
+          box={box}
+        />
+      );
+    } else {
+      return <ReferentIntention user={user} />;
+    }
+  };
 
   return (
     <Container style={styles.container}>
@@ -62,7 +99,7 @@ const Box = ({navigation, route}) => {
               Où souhaites-tu recevoir ton kit ?
             </Text>
             <View style={styles.buttonContainer}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => setDeliveryMode('home')}
                 style={[
                   styles.buttons,
@@ -79,7 +116,7 @@ const Box = ({navigation, route}) => {
                   }>
                   A DOMICILE
                 </Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
               <Tooltip
                 isVisible={toolTipVisible}
                 content={
@@ -106,45 +143,23 @@ const Box = ({navigation, route}) => {
                   </Text>
                 </TouchableOpacity>
               </Tooltip>
+              <TouchableOpacity
+                onPress={() => setDeliveryMode('referent')}
+                style={[
+                  styles.buttons,
+                  styles.buttonRight,
+                  deliveryMode === 'referent'
+                    ? styles.activeButton
+                    : styles.nonActiveButton,
+                ]}>
+                <Text>Chez un référent</Text>
+              </TouchableOpacity>
             </View>
             <Divider style={[styles.divider, {marginBottom: 0}]} />
           </View>
         )}
       </View>
-      <View style={styles.inputContainer}>
-        {deliveryMode === 'home' ? (
-          deliveryMode === 'home' && !orderConfirm ? (
-            <HomeOrdersInput
-              userInfos={userInfos}
-              setUserInfos={setUserInfos}
-              setOrderConfirm={setOrderConfirm}
-              setUserAdressInformations={setUserAdressInformations}
-            />
-          ) : (
-            <>
-              <OrderConfirm
-                userInfos={userInfos}
-                setOrderConfirm={setOrderConfirm}
-                deliveryMode={deliveryMode}
-                userAdressInformations={userAdressInformations}
-                box={box}
-              />
-            </>
-          )
-        ) : deliveryMode === 'pickup' && selectedPOI === null ? (
-          <PickupOrder setSelectedPOI={setSelectedPOI} />
-        ) : (
-          <PickupOrderUserInfos
-            selectedPOI={selectedPOI}
-            userInfos={userInfos}
-            orderConfirm={orderConfirm}
-            setUserInfos={setUserInfos}
-            setOrderConfirm={setOrderConfirm}
-            setSelectedPOI={setSelectedPOI}
-            box={box}
-          />
-        )}
-      </View>
+      <View style={styles.inputContainer}>{displayCorrectScreen()}</View>
     </Container>
   );
 };
