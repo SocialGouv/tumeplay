@@ -1,3 +1,31 @@
+## [1.114.2](https://github.com/SocialGouv/Tumeplay/compare/v1.114.1...v1.114.2) (2022-06-21)
+
+
+### Bug Fixes
+
+* updating redirection from contents to quizz ([#401](https://github.com/SocialGouv/Tumeplay/issues/401)) ([b0e2386](https://github.com/SocialGouv/Tumeplay/commit/b0e238681423123790c04e252f6862b121633906))
+
+## [1.114.1](https://github.com/SocialGouv/Tumeplay/compare/v1.114.0...v1.114.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* wheel correction and quizz logic improvement ([#398](https://github.com/SocialGouv/Tumeplay/issues/398)) ([72cd490](https://github.com/SocialGouv/Tumeplay/commit/72cd490b4fc1debae0a0b23bb29f9b15e2119644))
+
+# [1.114.0](https://github.com/SocialGouv/Tumeplay/compare/v1.113.1...v1.114.0) (2022-06-20)
+
+
+### Features
+
+* save module first try percentage correct answers ([#396](https://github.com/SocialGouv/Tumeplay/issues/396)) ([9476b7a](https://github.com/SocialGouv/Tumeplay/commit/9476b7a6c10779ff98ecec37d6b0d4add50ea0cc))
+
+## [1.113.1](https://github.com/SocialGouv/Tumeplay/compare/v1.113.0...v1.113.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* security on old metropole website ([#400](https://github.com/SocialGouv/Tumeplay/issues/400)) ([077069a](https://github.com/SocialGouv/Tumeplay/commit/077069a1e3857c354d94a7513bcacdad97f14cf3))
+
 # [1.113.0](https://github.com/SocialGouv/Tumeplay/compare/v1.112.0...v1.113.0) (2022-06-14)
 
 

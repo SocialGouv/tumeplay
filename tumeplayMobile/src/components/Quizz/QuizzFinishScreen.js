@@ -6,12 +6,17 @@ import Award from '../../views/Award';
 import {ActivityIndicator, View} from 'react-native';
 import {Alert, Vibration} from 'react-native';
 import {useMutation} from '@apollo/client';
-import {UPDATE_MOBILE_USER_HISTORY} from '../../services/api/mobile_users';
+import {
+  UPDATE_MOBILE_USER_HISTORY,
+  CREATE_MOBILE_USER_FIRST_TRY,
+} from '../../services/api/mobile_users';
 import Event from '../../services/api/matomo';
+import {first} from 'lodash';
 
 const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
   const wrongAnswers = route?.params?.wrongAnswers;
+  const firstTry = route?.params?.firstTry;
   const module_id = route?.params?.module_id;
   const module_title = route?.params?.module_title;
   const theme = route?.params?.theme;
@@ -21,14 +26,13 @@ const QuizzFinishScreen = ({navigation, route}) => {
   const [hasReward, setHasReward] = useState(null);
 
   const [updateHistory] = useMutation(UPDATE_MOBILE_USER_HISTORY);
+  const [createQuizFirstTry] = useMutation(CREATE_MOBILE_USER_FIRST_TRY);
 
   const isRewarded = () => {
     const success_history = user.history.filter(
       history => history.status === 'success',
     );
-    user.level !== 1
-      ? success_history.length % 10 === 0 && setHasReward(true)
-      : setHasReward(false);
+    setHasReward(user.level !== 1 && success_history.length % 10 === 0);
   };
 
   const checkUserHistory = async () => {
@@ -75,6 +79,18 @@ const QuizzFinishScreen = ({navigation, route}) => {
   }, [hasReward]);
 
   useEffect(() => {
+    if (firstTry) {
+      createQuizFirstTry({
+        variables: {
+          percentage_right_answers:
+            correctAnswers.length /
+            (correctAnswers.length + wrongAnswers.length),
+          utilisateurs_mobile: user.id,
+          module: module_id,
+        },
+      });
+    }
+
     if (wrongAnswers.length === 0) {
       Event.quizzDone();
       if (!retry) {

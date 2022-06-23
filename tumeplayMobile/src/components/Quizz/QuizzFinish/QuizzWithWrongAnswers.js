@@ -29,6 +29,7 @@ const QuizzWithWrongAnswers = props => {
       module_title: module_title,
       theme: theme,
       improveWrongAnswers: true,
+      firstTry: false,
     });
   };
 

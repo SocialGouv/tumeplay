@@ -23,6 +23,8 @@ import StayInTouchConfirmScreen from '../screens/StayInTouchConfirmScreen';
 import GlobalStatisticsScreen from '../screens/GlobalStatisticsScreen';
 import LandingPage from '../screens/LandingPage';
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 const AppStack = createStackNavigator(
   {
     LandingPage: {
@@ -121,7 +123,8 @@ const AppStack = createStackNavigator(
   },
   {
     initialRouteName:
-      window.location.search === '?zone_choice=true'
+      window.location.search === '?zone_choice=true' &&
+      REACT_APP_ZONE === 'guyane'
         ? 'LandingScreen'
         : 'LandingPage',
     headerLayoutPreset: 'center',

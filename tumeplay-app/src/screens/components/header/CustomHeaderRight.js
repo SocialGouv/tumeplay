@@ -17,6 +17,8 @@ CustomHeaderRight.propTypes = {
   availableTokens: PropTypes.number,
 };
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 export default function CustomHeaderRight(props) {
   const [availableTokens, setAvailableTokens] = useState(props.availableTokens);
   const [eventListener, setEventListener] = useState(false);
@@ -171,15 +173,17 @@ export default function CustomHeaderRight(props) {
 
   return (
     <View style={headerStyle.container}>
-      <View style={headerStyle.textContainer}>
-        <TouchableOpacity onPress={_gotoProductSelect}>
-          <Text style={headerStyle.text}>{availableTokens}</Text>
-          <Image
-            source={require('../../../assets/pictures/header-right.png')}
-            style={headerStyle.picture}
-          />
-        </TouchableOpacity>
-      </View>
+      {REACT_APP_ZONE === 'guyane' && (
+        <View style={headerStyle.textContainer}>
+          <TouchableOpacity onPress={_gotoProductSelect}>
+            <Text style={headerStyle.text}>{availableTokens}</Text>
+            <Image
+              source={require('../../../assets/pictures/header-right.png')}
+              style={headerStyle.picture}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
       <ForwardedNotEnoughModal />
       <OrderNotAllowedModal
         showModal={showOrderModal}

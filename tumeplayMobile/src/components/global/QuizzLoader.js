@@ -18,6 +18,7 @@ const QuizzLoader = ({route}) => {
     questions,
     homeScreen,
     retry,
+    firstTry,
     clearModuleData,
   } = route.params.from === 'navbar' ? handleRedirection(user) : route.params;
 
@@ -29,6 +30,7 @@ const QuizzLoader = ({route}) => {
       theme: theme,
       clearModuleData: clearModuleData,
       retry: retry,
+      firstTry: firstTry,
     });
   }, [route]);
 

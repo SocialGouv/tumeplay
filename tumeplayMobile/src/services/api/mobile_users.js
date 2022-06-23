@@ -149,6 +149,26 @@ export const UPDATE_MOBILE_USER_HISTORY = gql`
   }
 `;
 
+export const CREATE_MOBILE_USER_FIRST_TRY = gql`
+  mutation CreateQuizFirstTry(
+    $percentage_right_answers: Float!
+    $utilisateurs_mobile: ID!
+    $module: ID!
+  ) {
+    createQuizFirstTry(
+      input: {
+        data: {
+          percentage_right_answers: $percentage_right_answers
+          utilisateurs_mobile: $utilisateurs_mobile
+          module: $module
+        }
+      }
+    ) {
+      __typename
+    }
+  }
+`;
+
 export const CREATE_HISTORY = gql`
   mutation UpdateHistorique(
     $user_id: ID

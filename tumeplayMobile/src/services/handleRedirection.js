@@ -13,6 +13,7 @@ const handleRedirection = user => {
       homeScreen: true,
       clearModuleData: true,
       retry: false,
+      firstTry: true,
     };
   } else {
     return {
@@ -27,6 +28,7 @@ const handleRedirection = user => {
       homeScreen: true,
       clearModuleData: true,
       retry: false,
+      firstTry: true,
     };
   }
 };
