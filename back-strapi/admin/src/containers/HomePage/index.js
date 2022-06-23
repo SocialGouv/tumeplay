@@ -556,12 +556,12 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
     data = data.concat(response);
 
-    if (data.length === (start + 1) * exportParams._limit) {
+    if (data.length === start + exportParams._limit) {
       data = await repeatRequest(
         data,
         route,
         exportParams,
-        start + exportParams._limit - 1
+        start + exportParams._limit
       );
     }
 
