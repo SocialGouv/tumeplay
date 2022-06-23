@@ -1,3 +1,10 @@
+## [1.114.3](https://github.com/SocialGouv/Tumeplay/compare/v1.114.2...v1.114.3) (2022-06-23)
+
+
+### Bug Fixes
+
+* **strapi:** export orders repeat requests ([9bba211](https://github.com/SocialGouv/Tumeplay/commit/9bba21146f9ffc8cb54046ad50a63f238756006a))
+
 ## [1.114.2](https://github.com/SocialGouv/Tumeplay/compare/v1.114.1...v1.114.2) (2022-06-21)
 
 
