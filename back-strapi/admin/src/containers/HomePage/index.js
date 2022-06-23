@@ -561,7 +561,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
         data,
         route,
         exportParams,
-        start + exportParams._limit
+        start + exportParams._limit - 1
       );
     }
 
