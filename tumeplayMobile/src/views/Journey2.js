@@ -20,6 +20,7 @@ import TextBase from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_ALL_MODULES} from '../services/api/modules';
 import {useNavigation} from '@react-navigation/native';
+import _ from 'lodash';
 
 const Journey2 = () => {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ const Journey2 = () => {
       index: index,
     })),
     ...themes
-      .filter((_t, index) => index < 3)
+      .filter((_t, index) => index > 3)
       .map((t, index) => ({
         ...t,
         index: index + themes.length,
