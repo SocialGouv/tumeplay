@@ -76,7 +76,22 @@ module.exports = {
       "niveau.value"
     );
 
-    let user_level = Math.trunc(success_history.length / 10) + 1;
+    let user_level = 1;
+    if (version === "3") {
+      user_level = Math.trunc(success_history.length / 10) + 1;
+    } else {
+      for (const [level, user_modules] of Object.entries(
+        history_modules_by_levels
+      )) {
+        if (parseInt(level) >= user_level) {
+          user_level = parseInt(level);
+
+          if (modules_by_levels[level].length === user_modules.length) {
+            user_level += 1;
+          }
+        }
+      }
+    }
 
     user.level = user_level;
 
@@ -89,8 +104,33 @@ module.exports = {
     });
 
     if (remaining_modules.length > 0) {
-      const next_module = _.sample(remaining_modules);
+      let next_module = {};
+      if (version === "3") {
+        next_module = _.sample(remaining_modules);
+      } else {
+        if (
+          modules_by_levels[user.level] &&
+          modules_by_levels[user.level].length > 0
+        ) {
+          const history_module_ids_in_level = _.map(
+            (history_modules_by_levels[user.level] || []).filter((_) => {
+              const tmpHistory = success_history.find(
+                (h) => h.module.id === _.id
+              );
+              return tmpHistory && tmpHistory.status === "success";
+            }),
+            "id"
+          );
 
+          const available_modules = _.filter(
+            modules_by_levels[user.level],
+            (module) => {
+              return !_.includes(history_module_ids_in_level, module.id);
+            }
+          );
+          next_module = _.sample(available_modules);
+        }
+      }
       if (version === 1) {
         user.next_module = _.get(next_module, "id", null);
       } else {
