@@ -1,3 +1,10 @@
+## [1.114.5](https://github.com/SocialGouv/Tumeplay/compare/v1.114.4...v1.114.5) (2022-06-24)
+
+
+### Bug Fixes
+
+* shuffling themes in parcours wheel + tracking version updates ([#404](https://github.com/SocialGouv/Tumeplay/issues/404)) ([3e470b5](https://github.com/SocialGouv/Tumeplay/commit/3e470b550829b28b3db8274ecead2e5115d5dc94))
+
 ## [1.114.4](https://github.com/SocialGouv/Tumeplay/compare/v1.114.3...v1.114.4) (2022-06-23)
 
 
