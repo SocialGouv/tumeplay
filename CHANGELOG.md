@@ -1,3 +1,10 @@
+## [1.114.6](https://github.com/SocialGouv/Tumeplay/compare/v1.114.5...v1.114.6) (2022-06-24)
+
+
+### Bug Fixes
+
+* fixing user modules  management to avoidside effect on update ([#405](https://github.com/SocialGouv/Tumeplay/issues/405)) ([9e67ef5](https://github.com/SocialGouv/Tumeplay/commit/9e67ef562f7dec3fa525fa050c1a3d7d9b02f39c))
+
 ## [1.114.5](https://github.com/SocialGouv/Tumeplay/compare/v1.114.4...v1.114.5) (2022-06-24)
 
 
