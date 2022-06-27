@@ -57,7 +57,7 @@ const ModuleList = ({navigation, route}) => {
       <View style={styles.backLevel}>
         <TouchableOpacity
           style={styles.chevron}
-          onPress={() => navigation.goBack()}>
+          onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
           <Icon name="chevron-small-left" size={25} color="#000" />
           <TextBase>Retour</TextBase>
         </TouchableOpacity>
