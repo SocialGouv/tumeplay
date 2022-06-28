@@ -1,3 +1,10 @@
+# [1.115.0](https://github.com/SocialGouv/Tumeplay/compare/v1.114.6...v1.115.0) (2022-06-28)
+
+
+### Features
+
+* last update on new parcours before MEP ([#406](https://github.com/SocialGouv/Tumeplay/issues/406)) ([bc0ae58](https://github.com/SocialGouv/Tumeplay/commit/bc0ae581826910125d08aa4f55ebf8e74ce7ec32))
+
 ## [1.114.6](https://github.com/SocialGouv/Tumeplay/compare/v1.114.5...v1.114.6) (2022-06-24)
 
 
