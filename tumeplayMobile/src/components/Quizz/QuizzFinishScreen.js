@@ -11,7 +11,6 @@ import {
   CREATE_MOBILE_USER_FIRST_TRY,
 } from '../../services/api/mobile_users';
 import Event from '../../services/api/matomo';
-import {first} from 'lodash';
 
 const QuizzFinishScreen = ({navigation, route}) => {
   const correctAnswers = route?.params?.correctAnswers;
@@ -32,7 +31,8 @@ const QuizzFinishScreen = ({navigation, route}) => {
     const success_history = user.history.filter(
       history => history.status === 'success',
     );
-    setHasReward(user.level !== 1 && success_history.length % 10 === 0);
+    const futureHistoryLength = success_history.length + 1;
+    setHasReward(futureHistoryLength >= 10 && futureHistoryLength % 10 === 0);
   };
 
   const checkUserHistory = async () => {
@@ -48,6 +48,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
             status: 'success',
           },
         });
+        isRewarded();
         reloadUser();
       } catch (error) {
         console.log("Erreur à l'update : ", error);
@@ -74,9 +75,9 @@ const QuizzFinishScreen = ({navigation, route}) => {
     }
   };
 
-  useLayoutEffect(() => {
-    checkUserHistory();
-  }, [hasReward]);
+  // useLayoutEffect(() => {
+  //   checkUserHistory();
+  // }, [hasReward]);
 
   useEffect(() => {
     if (firstTry) {
@@ -93,9 +94,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
 
     if (wrongAnswers.length === 0) {
       Event.quizzDone();
-      if (!retry) {
-        isRewarded();
-      }
+      checkUserHistory();
     }
   }, [route]);
 
@@ -119,7 +118,7 @@ const QuizzFinishScreen = ({navigation, route}) => {
           theme={theme}
         />
       );
-    } else if (hasReward === null || user.pending_module) {
+    } else if (hasReward === null) {
       return (
         <View style={{flex: 1, justifyContent: 'center'}}>
           <ActivityIndicator

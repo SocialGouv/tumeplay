@@ -130,15 +130,15 @@ export const UPDATE_MOBILE_USER_HISTORY = gql`
   mutation UpdateHistorique(
     $history_id: ID!
     $module_id: ID!
-    $status: ENUM_HISTORIQUE_STATUS
+    $status: ENUM_HISTORIQUEV2_STATUS
   ) {
-    updateHistorique(
+    updateHistoriqueV2(
       input: {
         where: {id: $history_id}
         data: {module: $module_id, status: $status}
       }
     ) {
-      historique {
+      historiqueV2 {
         id
         status
         module {
@@ -173,12 +173,12 @@ export const CREATE_HISTORY = gql`
   mutation UpdateHistorique(
     $user_id: ID
     $module_id: ID
-    $status: ENUM_HISTORIQUE_STATUS
+    $status: ENUM_HISTORIQUEV2_STATUS
   ) {
-    createHistorique(
+    createHistoriqueV2(
       input: {data: {user: $user_id, module: $module_id, status: $status}}
     ) {
-      historique {
+      historiqueV2 {
         id
       }
     }

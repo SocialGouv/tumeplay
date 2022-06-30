@@ -114,6 +114,10 @@
     },
     "utilisateurs_mobile": {
       "model": "utilisateurs-mobile"
+    },
+    "version": {
+      "type": "integer",
+      "private": false
     }
   }
 }
