@@ -5,14 +5,13 @@ import React, {
   useRef,
   useLayoutEffect,
 } from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
 import Title from '../components/Title';
 import config from '../../config';
 import ThemePicker from '../components/Journey/ThemePicker';
 import AppContext from '../../AppContext';
-import CircleList from 'react-native-circle-list';
 import {SvgXml} from 'react-native-svg';
 import ThemeCard from '../components/Journey/ThemeCard';
 import Button from '../components/Button';
@@ -25,42 +24,25 @@ import _ from 'lodash';
 const Journey2 = () => {
   const navigation = useNavigation();
   const {thematiques, doneModules_ids} = useContext(AppContext);
-  const [themes] = useState(thematiques);
-  //the CircleList package require to have an array with a minimum of 12 elements to work properly. So we duplicate the data to fit the requirements
-  const data = [
-    ...themes.map((t, index) => ({
+  const [themes] = useState([
+    ...thematiques.map((t, index) => ({
       ...t,
       index: index,
     })),
-    ...themes
+    ...thematiques
       .filter((_t, index) => index > 3)
       .map((t, index) => ({
         ...t,
-        index: index + themes.length,
+        index: index + thematiques.length,
       })),
-  ];
+  ]);
 
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
   const [fullModuleList, setFullModuleList] = useState([]);
   const [moduleCount, setModuleCount] = useState();
-  const circleList = useRef(null);
 
   const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
-
-  const _keyExtractor = _item => _item.index;
-
-  const _renderItem = ({item}) => {
-    return (
-      <ThemePicker
-        theme={item}
-        index={item.index}
-        selectedIndex={selectedIndex}
-        length={data.length}
-        onPress={() => setSelectedIndex(item.index)}
-      />
-    );
-  };
 
   const backgroundSvg = `
    <svg width="157" height="336" viewBox="0 0 157 336" fill="none">
@@ -77,31 +59,6 @@ const Journey2 = () => {
       count: moduleCount,
     });
   };
-
-  useEffect(() => {
-    if (selectedIndex !== null) {
-      // Code to reset package data to avoid the bug from low index to last
-      if (selectedIndex === 0) {
-        circleList.current.rotationOffset = 0;
-        circleList.current.dataIndex = 0;
-      }
-
-      circleList.current.scrollToIndex(
-        selectedIndex === 0 ? data.length - 1 : selectedIndex - 1,
-        70,
-      );
-
-      if (selectedIndex === 0) {
-        setSelectedTheme(data[0]);
-      } else {
-        setSelectedTheme(data[selectedIndex]);
-      }
-    }
-  }, [selectedIndex]);
-
-  useLayoutEffect(() => {
-    setSelectedIndex(0);
-  }, []);
 
   const handleModuleCount = () => {
     let modules = fullModuleList.filter(item => {
@@ -125,6 +82,8 @@ const Journey2 = () => {
     handleModuleCount();
   }, [selectedTheme, fullModuleList]);
 
+  useEffect(() => {}, [selectedIndex]);
+
   useEffect(() => {
     if (!loading && data2.modules) {
       setFullModuleList(data2.modules);
@@ -140,19 +99,21 @@ const Journey2 = () => {
         moduleCount={moduleCount}
       />
       <View style={styles.roundTrait} />
-      <CircleList
-        containerStyle={styles.wheel}
-        data={data}
-        keyExtractor={_keyExtractor}
-        elementCount={data.length}
-        selectedItemScale={1}
-        renderItem={_renderItem}
-        radius={config.deviceWidth / 1.85}
-        swipeSpeedMultiplier={0}
-        visiblityPadding={1}
-        style={[styles.wheel]}
-        ref={circleList}
-      />
+      <View style={[styles.wheel]}>
+        {themes.map(t => {
+          return (
+            <ThemePicker
+              key={t.index}
+              theme={t}
+              index={t.index}
+              selectedIndex={selectedIndex}
+              circleSize={config.deviceWidth * 1.07}
+              length={themes.length}
+              onPress={() => setSelectedIndex(t.index)}
+            />
+          );
+        })}
+      </View>
       <SvgXml
         xml={backgroundSvg}
         width="50%"
@@ -190,27 +151,18 @@ const styles = StyleSheet.create({
     zIndex: -1,
     right: -10,
   },
-  roundTrait: {
-    transform: [{rotate: '270deg'}],
-    borderWidth: 2,
-    position: 'absolute',
-    top: config.deviceHeight / 6,
-    left: config.deviceWidth / 2,
-    zIndex: 0,
-    borderRadius: 360,
-    borderStyle: 'dotted',
-    width: config.deviceWidth * 0.7 * 1.5,
-    height: config.deviceWidth * 1.2,
-  },
   wheel: {
-    transform: [{rotate: '270deg'}],
     zIndex: 1,
     position: 'absolute',
-    left: 0,
-    top: config.deviceHeight / 3.75,
-    minWidth: config.deviceWidth * 0.7 * 2,
-    height: config.deviceWidth * 0.8,
+    right: -(config.deviceWidth / 2),
+    top: config.deviceHeight / 5.2,
+    width: config.deviceWidth * 1.07,
+    height: config.deviceWidth * 1.07,
+    transform: [{rotate: '180deg'}],
     backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderStyle: 'dotted',
+    borderRadius: 360,
   },
   condom: {
     position: 'relative',
