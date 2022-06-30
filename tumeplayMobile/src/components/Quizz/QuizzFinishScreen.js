@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import QuizzWithWrongAnswers from './QuizzFinish/QuizzWithWrongAnswers';
 import QuizzAllRight from './QuizzFinish/QuizzAllRight';
 import AppContext from '../../../AppContext';
@@ -74,10 +74,6 @@ const QuizzFinishScreen = ({navigation, route}) => {
       }
     }
   };
-
-  // useLayoutEffect(() => {
-  //   checkUserHistory();
-  // }, [hasReward]);
 
   useEffect(() => {
     if (firstTry) {
