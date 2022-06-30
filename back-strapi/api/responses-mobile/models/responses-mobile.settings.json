@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "responses_mobiles",
+  "info": {
+    "name": "ResponsesMobile"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "model": "question"
+    },
+    "response": {
+      "type": "string"
+    },
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile"
+    }
+  }
+}

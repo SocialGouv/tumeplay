@@ -71,6 +71,10 @@
         "QCM",
         "Trou"
       ]
+    },
+    "save_response": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

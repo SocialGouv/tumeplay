@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/responses-mobiles",
+      "handler": "responses-mobile.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/responses-mobiles/count",
+      "handler": "responses-mobile.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/responses-mobiles/:id",
+      "handler": "responses-mobile.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/responses-mobiles",
+      "handler": "responses-mobile.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/responses-mobiles/:id",
+      "handler": "responses-mobile.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/responses-mobiles/:id",
+      "handler": "responses-mobile.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

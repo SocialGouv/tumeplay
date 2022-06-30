@@ -1,18 +1,17 @@
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_URL = process.env.REACT_APP_URL;
 
 const ResponsesAPI = {
-  publishResponses: async (id, iteration, answer) => {
-    const res = await fetch(REACT_APP_API_URL + '/reponses', {
+  saveResponseMobile: async (response, question, utilisateurs_mobile) => {
+    const res = await fetch(REACT_APP_URL + '/responses-mobiles', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user_id: id,
-        question: answer.questionId,
-        quizz_iteration: iteration,
-        response: answer.givenAnswer
+        response,
+        question,
+        utilisateurs_mobile,
       }),
     });
     return res.ok;
