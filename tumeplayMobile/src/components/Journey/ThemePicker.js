@@ -1,10 +1,4 @@
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  Animated,
-  Text,
-} from 'react-native';
+import {TouchableOpacity, StyleSheet, Image, Animated} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {REACT_APP_URL} from '@env';
 
@@ -12,32 +6,75 @@ const ThemePicker = props => {
   const {theme, index, selectedIndex, length, circleSize, onPress} = props;
   const [rotation, setRotation] = useState(0);
   const [oldRotation, setOldRotation] = useState(0);
+  const [oldSpin, setOldSpin] = useState(0);
   const [animation1] = useState(new Animated.Value(0));
-  const isSelected = selectedIndex === index;
+  const [animation2] = useState(new Animated.Value(0));
+  const isSelected = selectedIndex.index === index;
   const angle = 360 / length;
+
+  const calculateMoveDiff = () => {
+    return selectedIndex.oldIndex <= 4 && selectedIndex.index >= 9
+      ? selectedIndex.oldIndex + (length - selectedIndex.index)
+      : selectedIndex.oldIndex >= 9 && selectedIndex.index <= 4
+      ? selectedIndex.index + (length - selectedIndex.oldIndex)
+      : Math.abs(selectedIndex.index - selectedIndex.oldIndex);
+  };
+
+  const calculateRotationValue = () => {
+    return oldRotation > rotation
+      ? selectedIndex.direction === 'right'
+        ? 360 + rotation
+        : rotation
+      : selectedIndex.direction === 'right'
+      ? rotation
+      : oldRotation - (360 - rotation + oldRotation);
+  };
+
+  const calculateSpinvalue = () => {
+    return oldSpin > -rotation
+      ? selectedIndex.direction === 'left'
+        ? -1 * (360 + oldSpin)
+        : oldSpin
+      : selectedIndex.direction === 'right'
+      ? 360 + oldSpin
+      : oldSpin;
+  };
 
   useEffect(() => {
     let tmpRotation = 0;
     const limit =
-      selectedIndex <= index
-        ? index - selectedIndex
-        : index + (length - selectedIndex);
+      selectedIndex.index <= index
+        ? index - selectedIndex.index
+        : index + (length - selectedIndex.index);
     for (var i = 0; i < limit; i++) {
       tmpRotation += angle;
     }
     setRotation(tmpRotation);
-  }, [selectedIndex]);
+  }, [selectedIndex.index]);
 
   useEffect(() => {
-    animation1.setValue(oldRotation);
-    if (animation1) {
+    if (animation1 && animation2) {
+      animation1.setValue(oldRotation);
+      animation2.setValue(calculateSpinvalue());
+
+      const moveDiff = calculateMoveDiff();
+      const toValue1 = calculateRotationValue();
+      const duration = 200 * moveDiff;
       Animated.timing(animation1, {
-        toValue: oldRotation > rotation ? 360 + rotation : rotation,
-        duration: 1000,
+        toValue: toValue1,
+        duration: selectedIndex.duration || duration,
         useNativeDriver: true,
       }).start();
+
+      Animated.timing(animation2, {
+        toValue: -rotation,
+        duration: selectedIndex.duration || duration,
+        useNativeDriver: true,
+      }).start();
+
+      setOldRotation(rotation);
+      setOldSpin(-rotation);
     }
-    setOldRotation(rotation);
   }, [rotation]);
 
   return (
@@ -58,14 +95,19 @@ const ThemePicker = props => {
               {translateX: circleSize / 2 - 68},
               {translateY: circleSize / 2 - 68},
               {
-                rotate: '-' + rotation + 'deg',
+                rotate: animation2.interpolate({
+                  inputRange: [-360, 360],
+                  outputRange: ['-360deg', '360deg'],
+                }),
               },
               {rotate: '180deg'},
             ],
           },
         ]}>
-        <TouchableOpacity onPress={onPress} activeOpacity={0.95}>
-          <Text>{rotation}</Text>
+        <TouchableOpacity
+          onPress={onPress}
+          activeOpacity={0.95}
+          style={styles.touchZone}>
           <Image
             source={{uri: REACT_APP_URL + theme?.image?.url}}
             style={styles.image}
@@ -87,9 +129,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     border: 8,
     borderWidth: 6,
-    padding: 15,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  touchZone: {
+    padding: 15,
+    borderRadius: 50,
   },
   image: {
     width: 30,

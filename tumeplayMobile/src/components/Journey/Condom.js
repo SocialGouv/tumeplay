@@ -26,7 +26,7 @@ const Condom = props => {
       if (index === 0) {
         stepstyles.push({
           width: 25,
-          height: 18,
+          height: 24,
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
           border: 1,
@@ -38,7 +38,7 @@ const Condom = props => {
       } else if (index === 1) {
         stepstyles.push({
           width: 55,
-          height: 16,
+          height: 20,
           border: 1,
           borderWidth: 1,
           marginBottom: 1,
@@ -50,7 +50,7 @@ const Condom = props => {
       } else if (index === 2) {
         stepstyles.push({
           width: 60,
-          height: 16,
+          height: 20,
           border: 1,
           borderTopEndRadius: 5,
           borderTopStartRadius: 5,
@@ -63,7 +63,7 @@ const Condom = props => {
       } else if (index === 9) {
         stepstyles.push({
           width: 76,
-          height: 16,
+          height: 20,
           borderRadius: 50,
           border: 1,
           borderWidth: 0.5,
@@ -74,7 +74,7 @@ const Condom = props => {
       } else {
         stepstyles.push({
           width: 60,
-          height: 16,
+          height: 20,
           border: 1,
           borderWidth: 0.5,
           marginBottom: 1,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    marginRight: 50,
+    marginRight: 47,
   },
 });
 

@@ -37,8 +37,14 @@ const Journey2 = () => {
       })),
   ]);
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState({
+    index: 0,
+    oldIndex: 0,
+    direction: 'right',
+    duration: 1,
+  });
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
+  const [wheelLoaded, setWheelLoaded] = useState(false);
   const [fullModuleList, setFullModuleList] = useState([]);
   const [moduleCount, setModuleCount] = useState();
 
@@ -82,13 +88,15 @@ const Journey2 = () => {
     handleModuleCount();
   }, [selectedTheme, fullModuleList]);
 
-  useEffect(() => {}, [selectedIndex]);
-
   useEffect(() => {
     if (!loading && data2.modules) {
       setFullModuleList(data2.modules);
     }
   }, [data2, loading]);
+
+  useEffect(() => {
+    setWheelLoaded(true);
+  }, []);
 
   return (
     <Container style={styles.container}>
@@ -99,7 +107,13 @@ const Journey2 = () => {
         moduleCount={moduleCount}
       />
       <View style={styles.roundTrait} />
-      <View style={[styles.wheel]}>
+      <View
+        style={[
+          styles.wheel,
+          {
+            opacity: wheelLoaded ? 1 : 0,
+          },
+        ]}>
         {themes.map(t => {
           return (
             <ThemePicker
@@ -109,7 +123,20 @@ const Journey2 = () => {
               selectedIndex={selectedIndex}
               circleSize={config.deviceWidth * 1.07}
               length={themes.length}
-              onPress={() => setSelectedIndex(t.index)}
+              onPress={() =>
+                setSelectedIndex({
+                  direction:
+                    t.index > selectedIndex.index
+                      ? selectedIndex.index <= 4 && t.index > 4
+                        ? 'right'
+                        : 'left'
+                      : selectedIndex.index >= 12 && t.index < 4
+                      ? 'left'
+                      : 'right',
+                  oldIndex: selectedIndex.index,
+                  index: t.index,
+                })
+              }
             />
           );
         })}
@@ -117,7 +144,7 @@ const Journey2 = () => {
       <SvgXml
         xml={backgroundSvg}
         width="50%"
-        height={config.deviceWidth * 0.85}
+        height={config.deviceWidth * 0.78}
         style={styles.image}
       />
       <Condom
@@ -143,11 +170,10 @@ const Journey2 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // position: 'relative',
   },
   image: {
     position: 'absolute',
-    top: config.deviceHeight / 4,
+    top: config.deviceHeight / 3.75,
     zIndex: -1,
     right: -10,
   },
@@ -166,7 +192,7 @@ const styles = StyleSheet.create({
   },
   condom: {
     position: 'relative',
-    top: config.deviceHeight / 5,
+    top: config.deviceHeight / 4.7,
     right: -25,
     zIndex: -1,
   },
