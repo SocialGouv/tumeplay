@@ -56,7 +56,10 @@ module.exports = {
     }
 
     const levels = await strapi.services["niveau"].find({});
-    let history = await strapi.services["historique"].find({ user: user.id });
+    let history = await (version === "3"
+      ? strapi.services["historique-v2"]
+      : strapi.services["historique"]
+    ).find({ user: user.id });
     history = history.map((h) => {
       h.module.niveau = levels.find((l) => l.id === h.module.niveau);
       return h;
@@ -224,9 +227,17 @@ module.exports = {
       };
     }
 
-    const orders_count = await strapi.services["commande"].count({
+    const countOrdersQuery = {
       utilisateurs_mobile: user.id,
-    });
+    };
+
+    if (version === "3") {
+      countOrdersQuery.version = 3;
+    }
+
+    const orders_count = await strapi.services["commande"].count(
+      countOrdersQuery
+    );
 
     let credits = 0;
     if (user.level > 5) {
