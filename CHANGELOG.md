@@ -1,3 +1,10 @@
+# [1.117.0](https://github.com/SocialGouv/Tumeplay/compare/v1.116.0...v1.117.0) (2022-06-30)
+
+
+### Features
+
+* adding historiqueV2 and revamping front logic to fit new model ([#407](https://github.com/SocialGouv/Tumeplay/issues/407)) ([7fa0578](https://github.com/SocialGouv/Tumeplay/commit/7fa057826326de62e52f1230ea0978520b3c9a84))
+
 # [1.116.0](https://github.com/SocialGouv/Tumeplay/compare/v1.115.0...v1.116.0) (2022-06-30)
 
 
