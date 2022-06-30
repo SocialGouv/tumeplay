@@ -1,3 +1,10 @@
+# [1.116.0](https://github.com/SocialGouv/Tumeplay/compare/v1.115.0...v1.116.0) (2022-06-30)
+
+
+### Features
+
+* special questions save answer integration ([#399](https://github.com/SocialGouv/Tumeplay/issues/399)) ([491f424](https://github.com/SocialGouv/Tumeplay/commit/491f424589639594eb4d2fcdb527f044ad857eb9))
+
 # [1.115.0](https://github.com/SocialGouv/Tumeplay/compare/v1.114.6...v1.115.0) (2022-06-28)
 
 
