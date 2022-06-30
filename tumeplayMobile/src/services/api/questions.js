@@ -6,7 +6,8 @@ export const GET_QUESTIONS = gql`
       id
       text_question: text_question_mobile
       text_answer
-			kind
+      kind
+      save_response
       responses {
         response_A: response_A_mobile
         response_B: response_B_mobile

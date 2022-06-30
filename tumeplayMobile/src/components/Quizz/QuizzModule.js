@@ -21,6 +21,7 @@ import * as Progress from 'react-native-progress';
 import AppContext from '../../../AppContext';
 import {CREATE_HISTORY} from '../../services/api/mobile_users';
 import {useMutation} from '@apollo/client';
+import response_api from '../../services/api/responses';
 import GestureRecognizer from '../../lib/swipe';
 import right from '../../assets/Right.png';
 import wrong from '../../assets/Wrong.png';
@@ -72,6 +73,14 @@ const QuizzModule = ({navigation, route}) => {
       wrongAnswers.push(question);
       setWrongAnswers([...wrongAnswers]);
       Vibration.vibrate(200);
+    }
+
+    if (question.save_response) {
+      response_api.saveResponseMobile(
+        question.responses['response_' + answerKey],
+        question.id,
+        user.id,
+      );
     }
 
     if (question.kind === 'Trou') {
