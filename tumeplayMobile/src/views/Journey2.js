@@ -47,6 +47,7 @@ const Journey2 = () => {
   const [wheelLoaded, setWheelLoaded] = useState(false);
   const [fullModuleList, setFullModuleList] = useState([]);
   const [moduleCount, setModuleCount] = useState();
+  const [buttonDateStamp, setButtonDateStamp] = useState(new Date().getTime());
 
   const {data: data2, loading: loading} = useQuery(GET_ALL_MODULES);
 
@@ -89,6 +90,10 @@ const Journey2 = () => {
   }, [selectedTheme, fullModuleList]);
 
   useEffect(() => {
+    setSelectedTheme(themes[selectedIndex.index]);
+  }, [selectedIndex]);
+
+  useEffect(() => {
     if (!loading && data2.modules) {
       setFullModuleList(data2.modules);
     }
@@ -123,20 +128,26 @@ const Journey2 = () => {
               selectedIndex={selectedIndex}
               circleSize={config.deviceWidth * 1.07}
               length={themes.length}
-              onPress={() =>
-                setSelectedIndex({
-                  direction:
-                    t.index > selectedIndex.index
-                      ? selectedIndex.index <= 4 && t.index > 4
-                        ? 'right'
-                        : 'left'
-                      : selectedIndex.index >= 12 && t.index < 4
-                      ? 'left'
-                      : 'right',
-                  oldIndex: selectedIndex.index,
-                  index: t.index,
-                })
-              }
+              onPress={e => {
+                let currentTime = new Date().getTime();
+                if (currentTime - buttonDateStamp > 1000) {
+                  setSelectedIndex({
+                    direction:
+                      t.index > selectedIndex.index
+                        ? selectedIndex.index <= 4 && t.index > 4
+                          ? 'right'
+                          : 'left'
+                        : selectedIndex.index >= 12 && t.index < 4
+                        ? 'left'
+                        : 'right',
+                    oldIndex: selectedIndex.index,
+                    index: t.index,
+                  });
+                  setButtonDateStamp(currentTime);
+                } else {
+                  e.preventDefault();
+                }
+              }}
             />
           );
         })}
@@ -192,7 +203,7 @@ const styles = StyleSheet.create({
   },
   condom: {
     position: 'relative',
-    top: config.deviceHeight / 4.7,
+    top: config.deviceHeight / 5.5,
     right: -25,
     zIndex: -1,
   },
