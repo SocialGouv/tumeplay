@@ -1,11 +1,5 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useContext, useState, useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import Condom from '../components/Journey/Condom';
 import Title from '../components/Title';
@@ -19,7 +13,6 @@ import TextBase from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_ALL_MODULES} from '../services/api/modules';
 import {useNavigation} from '@react-navigation/native';
-import _ from 'lodash';
 
 const Journey2 = () => {
   const navigation = useNavigation();
