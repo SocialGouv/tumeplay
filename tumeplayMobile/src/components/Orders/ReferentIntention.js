@@ -1,4 +1,4 @@
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, Alert} from 'react-native';
 import React, {useState} from 'react';
 import warning from '../../assets/Exclamation.png';
 import RenderHTML from 'react-native-render-html';
@@ -6,9 +6,14 @@ import RadioButton from '../global/RadioButton';
 import config from '../../../config';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../../styles/Style';
+import Button from '../Button';
+import {useMutation} from '@apollo/client';
+import {CREATE_REFERENT_INTENTION} from '../../services/api/referents';
 
 const ReferentIntention = ({user}) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [precisedAnswer, setPrecisedAnswer] = useState(null);
+  const [isDone, setIsDone] = useState(false);
   const [answers, setAnswers] = useState([
     {
       text: 'Oui',
@@ -21,6 +26,15 @@ const ReferentIntention = ({user}) => {
       id: 2,
     },
   ]);
+
+  const [create_referent_intention] = useMutation(CREATE_REFERENT_INTENTION, {
+    onError(error) {
+      console.log('error on signup', error);
+    },
+    onCompleted() {
+      setIsDone(true);
+    },
+  });
 
   const htmlText = {
     html: '<ul><li>Infirmier.e de collège / lycée</li><li>Personne travaillant dans un CeGID / CRIPS etc.</li></ul>',
@@ -88,8 +102,21 @@ const ReferentIntention = ({user}) => {
     setSelectedAnswer(answer);
   };
 
-  const handleAnswerChange = a => {
-    console.log(a);
+  const handlePickerAnswerSelection = a => {
+    setPrecisedAnswer(a);
+  };
+
+  const handleSave = async () => {
+    try {
+      await create_referent_intention({
+        variables: {
+          is_interested: selectedAnswer.id === 1 ? true : false,
+          detailed_informations: precisedAnswer.toString(),
+        },
+      });
+    } catch {
+      Alert.alert('Erreur', "Une erreur est survenue lors de l'enregistrement");
+    }
   };
 
   return (
@@ -112,37 +139,55 @@ const ReferentIntention = ({user}) => {
         contentWidth={config.deviceWidth}
         baseStyle={styles.description}
       />
-      <Text style={[styles.title, styles.bold]}>
-        Serais-tu intéressé.e pour récupérer ton kit auprès d'un référent.e ?
-      </Text>
-      {answers.map((answer, i) => {
-        return (
-          <RadioButton
-            key={answer.id}
-            text={answer.text}
-            selected={answer.selected}
-            onPress={() => handleAnswerSelection(answer)}
-          />
-        );
-      })}
-      {selectedAnswer && selectedAnswer?.text === 'oui' ? (
+      {!isDone && (
+        <Text style={[styles.title, styles.bold]}>
+          Serais-tu intéressé.e pour récupérer ton kit auprès d'un référent.e ?
+        </Text>
+      )}
+      {!isDone &&
+        answers.map((answer, i) => {
+          return (
+            <RadioButton
+              key={answer.id}
+              text={answer.text}
+              selected={answer.selected}
+              onPress={() => handleAnswerSelection(answer)}
+            />
+          );
+        })}
+      {!isDone && selectedAnswer && selectedAnswer?.text === 'Oui' && (
         <RNPickerSelect
           placeholder={{label: 'Pour quelle raison ?', value: null}}
           name="yesAnswer"
           items={yes_picker_props}
-          onValueChange={e => handleAnswerChange(e)}
+          onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
         />
-      ) : (
+      )}
+      {!isDone && selectedAnswer && selectedAnswer?.text === 'Non' && (
         <RNPickerSelect
           placeholder={{label: 'Pour quelle raison ?', value: null}}
           name="noAnswer"
           items={no_picker_props}
-          onValueChange={e => handleAnswerChange(e)}
+          onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
         />
+      )}
+      {!isDone && precisedAnswer !== null && (
+        <Button
+          style={styles.button}
+          onPress={handleSave}
+          text="Je valide la réponse"
+          size="large"
+          icon={true}
+        />
+      )}
+      {isDone && (
+        <Text style={[styles.title, styles.bold, {alignSelf: 'center'}]}>
+          Merci ! Ton retour a été envoyé !
+        </Text>
       )}
     </View>
   );
@@ -175,6 +220,12 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '600',
+  },
+  button: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 30,
+    marginVertical: '5%',
   },
 });
 

@@ -103,7 +103,6 @@ const Box = ({navigation, route}) => {
                 onPress={() => setDeliveryMode('home')}
                 style={[
                   styles.buttons,
-                  styles.buttonLeft,
                   deliveryMode === 'home'
                     ? styles.activeButton
                     : styles.nonActiveButton,
@@ -152,7 +151,14 @@ const Box = ({navigation, route}) => {
                     ? styles.activeButton
                     : styles.nonActiveButton,
                 ]}>
-                <Text>Chez un référent</Text>
+                <Text
+                  style={
+                    deliveryMode === 'referent'
+                      ? styles.whiteText
+                      : styles.blackText
+                  }>
+                  Chez un référent
+                </Text>
               </TouchableOpacity>
             </View>
             <Divider style={[styles.divider, {marginBottom: 0}]} />
@@ -218,26 +224,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     paddingTop: config.deviceWidth > 375 ? 20 : 10,
   },
   buttons: {
     borderColor: '#EAE2D7',
     borderWidth: 1,
+    borderRadius: 50,
     minHeight: 38,
     width: 125,
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-  },
-  buttonLeft: {
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    backgroundColor: '#000',
-  },
-  buttonRight: {
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
   },
   tooltipText: {
     padding: 5,
