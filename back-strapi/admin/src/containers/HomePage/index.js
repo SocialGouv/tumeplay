@@ -605,6 +605,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
     let exportParams = {
       _limit: 1000,
+      created_at_gte: new Date("01/01/2022").getTime(),
     };
 
     if (userRole.includes("pilote-guyane")) {
