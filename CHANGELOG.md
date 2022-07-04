@@ -1,3 +1,10 @@
+## [1.117.2](https://github.com/SocialGouv/Tumeplay/compare/v1.117.1...v1.117.2) (2022-07-04)
+
+
+### Bug Fixes
+
+* export orders from 2022 ([#409](https://github.com/SocialGouv/Tumeplay/issues/409)) ([1ec9766](https://github.com/SocialGouv/Tumeplay/commit/1ec9766d19fdf636471f61db3fd5b470fc464585))
+
 ## [1.117.1](https://github.com/SocialGouv/Tumeplay/compare/v1.117.0...v1.117.1) (2022-07-01)
 
 
