@@ -9,6 +9,8 @@ import {Colors} from '../../styles/Style';
 import Button from '../Button';
 import {useMutation} from '@apollo/client';
 import {CREATE_REFERENT_INTENTION} from '../../services/api/referents';
+import hand from '../../assets/hand.png';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const ReferentIntention = ({user}) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -125,20 +127,25 @@ const ReferentIntention = ({user}) => {
       <Text
         style={[
           styles.title,
-          {alignSelf: 'center', textAlign: 'center', paddingHorizontal: '5%'},
+          {alignSelf: 'center', textAlign: 'center', paddingHorizontal: 35},
         ]}>
         La livraison de kit chez un référent{' '}
         <Text style={styles.bold}>n'est pas encore disponible.</Text>
       </Text>
-      <Text style={styles.description}>
-        Un.e référent.e t'accompagne pour répondre à tes questions autour de la
-        sexualité :
-      </Text>
-      <RenderHTML
-        source={htmlText}
-        contentWidth={config.deviceWidth}
-        baseStyle={styles.description}
-      />
+      <View style={styles.middleContainer}>
+        <Image source={hand} style={styles.imageHand} />
+        <Text style={styles.description}>
+          Un.e référent.e t'accompagne pour répondre à tes questions autour de
+          la sexualité :
+        </Text>
+      </View>
+      <View style={{paddingLeft: 10, width: '90%'}}>
+        <RenderHTML
+          source={htmlText}
+          contentWidth={config.deviceWidth * 0.8}
+          baseStyle={styles.description}
+        />
+      </View>
       {!isDone && (
         <Text style={[styles.title, styles.bold]}>
           Serais-tu intéressé.e pour récupérer ton kit auprès d'un référent.e ?
@@ -163,6 +170,14 @@ const ReferentIntention = ({user}) => {
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
+          Icon={() => (
+            <Icon
+              name="chevron-down"
+              size={20}
+              style={pickerSelectStyle.icon}
+              color={Colors.grey}
+            />
+          )}
         />
       )}
       {!isDone && selectedAnswer && selectedAnswer?.text === 'Non' && (
@@ -173,6 +188,14 @@ const ReferentIntention = ({user}) => {
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
+          Icon={() => (
+            <Icon
+              name="chevron-down"
+              size={20}
+              style={pickerSelectStyle.icon}
+              color={Colors.grey}
+            />
+          )}
         />
       )}
       {!isDone && precisedAnswer !== null && (
@@ -211,6 +234,11 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: config.deviceWidth * 0.04,
+    width: '100%',
+  },
+  middleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   dropdown: {
     fontSize: config.deviceWidth * 0.04,
@@ -226,6 +254,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: 30,
     marginVertical: '5%',
+  },
+  imageHand: {
+    width: 30,
+    height: 30,
+    left: -10,
   },
 });
 
@@ -254,6 +287,11 @@ const pickerSelectStyle = StyleSheet.create({
   inputIOSContainer: {
     borderBottomWidth: 1,
     borderBottomColor: Colors.grey,
+  },
+  icon: {
+    position: 'absolute',
+    right: 0,
+    top: 10,
   },
 });
 

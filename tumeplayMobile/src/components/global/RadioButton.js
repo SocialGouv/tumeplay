@@ -14,7 +14,9 @@ const RadioButton = ({selected, text, onPress}) => {
         onPress={onPress}>
         {selected && <View style={styles.innerCircle} />}
       </TouchableOpacity>
-      {text && <Text style={styles.text}>{text}</Text>}
+      {text && (
+        <Text style={[styles.text, selected && styles.bold]}>{text}</Text>
+      )}
     </View>
   );
 };
@@ -44,6 +46,9 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingHorizontal: 10,
+  },
+  bold: {
+    fontWeight: '600',
   },
 });
 

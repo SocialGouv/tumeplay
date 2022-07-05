@@ -157,7 +157,7 @@ const Box = ({navigation, route}) => {
                       ? styles.whiteText
                       : styles.blackText
                   }>
-                  Chez un référent
+                  CHEZ UN RÉFÉRENT
                 </Text>
               </TouchableOpacity>
             </View>

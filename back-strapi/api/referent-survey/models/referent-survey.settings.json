@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "referent_surveys",
+  "info": {
+    "name": "Referent Survey"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "is_interested": {
+      "type": "boolean"
+    },
+    "detailed_informations": {
+      "type": "text"
+    }
+  }
+}
