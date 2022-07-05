@@ -283,6 +283,7 @@ const pickerSelectStyle = StyleSheet.create({
     borderRadius: 4,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
+    marginTop: '5%',
   },
   inputIOSContainer: {
     borderBottomWidth: 1,
@@ -291,7 +292,7 @@ const pickerSelectStyle = StyleSheet.create({
   icon: {
     position: 'absolute',
     right: 0,
-    top: 10,
+    top: 30,
   },
 });
 
