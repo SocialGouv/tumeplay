@@ -1,5 +1,11 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
@@ -124,6 +130,15 @@ const HomePage = ({navigation}) => {
     <ScrollView>
       <Container background={null} style={styles.container}>
         <Title />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() =>
+            navigation.navigate('Menu', {
+              user: user,
+            })
+          }>
+          <Text>Menu</Text>
+        </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}
           onPress={() => navigation.navigate('Parcours')}
@@ -216,6 +231,11 @@ const styles = StyleSheet.create({
     height: 440,
     width: 520,
     backgroundColor: '#FBF7F2',
+  },
+  menuButton: {
+    position: 'absolute',
+    top: config.deviceHeight * 0.1,
+    right: 20,
   },
 });
 

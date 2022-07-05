@@ -31,6 +31,7 @@ import Copilot from './src/components/Copilot/Copilot';
 import CustomToolTip from './src/components/Copilot/CustomToolTip';
 import Journey2 from './src/views/Journey2';
 import ModuleList from './src/components/Journey/Journey_modules/ModuleList';
+import Menu from './src/views/Menu';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -195,6 +196,7 @@ const App = () => {
                 name="ModuleList"
                 component={ModuleList}
               />
+              <NavigationStack.Screen name="Menu" component={Menu} />
               <NavigationStack.Screen name="Award" component={Award} />
             </NavigationStack.Navigator>
           </NavigationContainer>
