@@ -110,7 +110,7 @@ const ReferentIntention = props => {
   ];
 
   const handleAnswerSelection = answer => {
-    setSelectedAnswer(answer);
+    setSelectedAnswer(answer.id);
   };
 
   const handlePickerAnswerSelection = a => {
@@ -167,7 +167,7 @@ const ReferentIntention = props => {
             <RadioButton
               key={answer.id}
               text={answer.text}
-              selected={answer.id === selectedAnswer?.id}
+              selected={answer.id === selectedAnswer}
               onPress={() => handleAnswerSelection(answer)}
             />
           );
