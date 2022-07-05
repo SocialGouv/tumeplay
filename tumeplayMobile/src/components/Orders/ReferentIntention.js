@@ -52,7 +52,7 @@ const ReferentIntention = props => {
     if (get_user_intention) {
       setIsDone(get_user_intention.data?.referentSurveys.length !== 0);
     }
-  }, []);
+  }, [get_user_intention]);
 
   const htmlText = {
     html: '<ul><li>Infirmier.e de collège / lycée</li><li>Personne travaillant dans un CeGID / CRIPS etc.</li></ul>',
@@ -62,27 +62,27 @@ const ReferentIntention = props => {
     {
       label: 'C’est l’occasion de poser des questions',
       value: 'C’est l’occasion de poser des questions',
-      key: 'C’est l’occasion de poser des questions',
+      key: 1,
     },
     {
       label: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
       value: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
-      key: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
+      key: 2,
     },
     {
       label: 'Il n’y a pas de point relais près de chez moi ',
       value: 'Il n’y a pas de point relais près de chez moi ',
-      key: 'Il n’y a pas de point relais près de chez moi ',
+      key: 3,
     },
     {
       label: 'Je peux y aller accompagné.e',
       value: 'Je peux y aller accompagné.e',
-      key: 'Je peux y aller accompagné.e',
+      key: 4,
     },
     {
       label: 'Autre (Précise la raison en quelques mots)',
       value: 'Autre (Précise la raison en quelques mots)',
-      key: 'Autre (Précise la raison en quelques mots)',
+      key: 5,
     },
   ];
 
@@ -90,33 +90,26 @@ const ReferentIntention = props => {
     {
       label: 'Je ne veux pas parler de sexualité avec un référent.e',
       value: 'Je ne veux pas parler de sexualité avec un référent.e',
-      key: 'Je ne veux pas parler de sexualité avec un référent.e',
+      key: 1,
     },
     {
       label: 'Je n’ai pas besoin de parler à un référent.e',
       value: 'Je n’ai pas besoin de parler à un référent.e',
-      key: 'Je n’ai pas besoin de parler à un référent.e',
+      key: 2,
     },
     {
       label: 'C’est contraignant pour récupérer le kit (rdv etc.)',
       value: 'C’est contraignant pour récupérer le kit (rdv etc.)',
-      key: 'C’est contraignant pour récupérer le kit (rdv etc.)',
+      key: 3,
     },
     {
       label: 'Autre (Précise la raison en quelques mots)',
       value: 'Autre (Précise la raison en quelques mots)',
-      key: 'Autre (Précise la raison en quelques mots)',
+      key: 4,
     },
   ];
 
   const handleAnswerSelection = answer => {
-    const newAnswers = answers.map(a => {
-      if (a.id === answer.id) {
-        return {...a, selected: true};
-      }
-      return {...a, selected: false};
-    });
-    setAnswers(newAnswers);
     setSelectedAnswer(answer);
   };
 
@@ -174,34 +167,18 @@ const ReferentIntention = props => {
             <RadioButton
               key={answer.id}
               text={answer.text}
-              selected={answer.selected}
+              selected={answer.id === selectedAnswer?.id}
               onPress={() => handleAnswerSelection(answer)}
             />
           );
         })}
-      {!isDone && selectedAnswer && selectedAnswer?.text === 'Oui' && (
+      {!isDone && selectedAnswer && (
         <RNPickerSelect
           placeholder={{label: 'Pour quelle raison ?', value: null}}
-          name="yesAnswer"
-          items={yes_picker_props}
-          onValueChange={e => handlePickerAnswerSelection(e)}
-          style={{...pickerSelectStyle}}
-          useNativeAndroidPickerStyle={false}
-          Icon={() => (
-            <Icon
-              name="chevron-down"
-              size={20}
-              style={pickerSelectStyle.icon}
-              color={Colors.grey}
-            />
-          )}
-        />
-      )}
-      {!isDone && selectedAnswer && selectedAnswer?.text === 'Non' && (
-        <RNPickerSelect
-          placeholder={{label: 'Pour quelle raison ?', value: null}}
-          name="noAnswer"
-          items={no_picker_props}
+          name={selectedAnswer.text === 'Oui' ? 'yesAnswer' : 'noAnswer'}
+          items={
+            selectedAnswer.text === 'Oui' ? yes_picker_props : no_picker_props
+          }
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
