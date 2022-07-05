@@ -1,5 +1,5 @@
 import {View, Image, Text, StyleSheet, Alert} from 'react-native';
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import warning from '../../assets/Exclamation.png';
 import RenderHTML from 'react-native-render-html';
 import RadioButton from '../global/RadioButton';
@@ -20,7 +20,7 @@ const ReferentIntention = props => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [precisedAnswer, setPrecisedAnswer] = useState(null);
   const [isDone, setIsDone] = useState(false);
-  const [answers, setAnswers] = useState([
+  const [answers] = useState([
     {
       text: 'Oui',
       selected: false,
@@ -162,7 +162,7 @@ const ReferentIntention = props => {
         </Text>
       )}
       {!isDone &&
-        answers.map((answer, i) => {
+        answers.map((answer, _i) => {
           return (
             <RadioButton
               key={answer.id}

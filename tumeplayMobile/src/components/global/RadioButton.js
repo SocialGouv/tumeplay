@@ -1,5 +1,5 @@
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 
 const RadioButton = ({selected, text, onPress}) => {
   const isSelectedStyle = {
