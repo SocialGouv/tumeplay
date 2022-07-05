@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "referent_surveys",
   "info": {
-    "name": "Referent Survey"
+    "name": "Referent Survey",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -16,6 +17,9 @@
     },
     "detailed_informations": {
       "type": "text"
+    },
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile"
     }
   }
 }

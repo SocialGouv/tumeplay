@@ -1,5 +1,5 @@
 import {View, Image, Text, StyleSheet, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import warning from '../../assets/Exclamation.png';
 import RenderHTML from 'react-native-render-html';
 import RadioButton from '../global/RadioButton';
@@ -7,12 +7,16 @@ import config from '../../../config';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../../styles/Style';
 import Button from '../Button';
-import {useMutation} from '@apollo/client';
-import {CREATE_REFERENT_INTENTION} from '../../services/api/referents';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  CREATE_REFERENT_INTENTION,
+  GET_SURVEY_BY_USER,
+} from '../../services/api/referents';
 import hand from '../../assets/hand.png';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const ReferentIntention = ({user}) => {
+const ReferentIntention = props => {
+  const {user} = props;
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [precisedAnswer, setPrecisedAnswer] = useState(null);
   const [isDone, setIsDone] = useState(false);
@@ -37,6 +41,18 @@ const ReferentIntention = ({user}) => {
       setIsDone(true);
     },
   });
+
+  const get_user_intention = useQuery(GET_SURVEY_BY_USER, {
+    variables: {
+      utilisateurs_mobile: user.id,
+    },
+  });
+
+  useEffect(() => {
+    if (get_user_intention) {
+      setIsDone(get_user_intention.data?.referentSurveys.length !== 0);
+    }
+  }, []);
 
   const htmlText = {
     html: '<ul><li>Infirmier.e de collège / lycée</li><li>Personne travaillant dans un CeGID / CRIPS etc.</li></ul>',
@@ -114,6 +130,7 @@ const ReferentIntention = ({user}) => {
         variables: {
           is_interested: selectedAnswer.id === 1 ? true : false,
           detailed_informations: precisedAnswer.toString(),
+          utilisateurs_mobile: user.id,
         },
       });
     } catch {
