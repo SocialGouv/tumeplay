@@ -121,7 +121,7 @@ const ReferentIntention = props => {
     try {
       await create_referent_intention({
         variables: {
-          is_interested: selectedAnswer.id === 1 ? true : false,
+          is_interested: selectedAnswer === 1 ? true : false,
           detailed_informations: precisedAnswer.toString(),
           utilisateurs_mobile: user.id,
         },
