@@ -156,7 +156,7 @@ const ReferentIntention = props => {
           la sexualité :
         </Text>
       </View>
-      <View style={{paddingLeft: 10, width: '90%'}}>
+      <View style={{paddingLeft: 10, width: '90%', marginBottom: 30}}>
         <RenderHTML
           source={htmlText}
           contentWidth={config.deviceWidth * 0.8}
