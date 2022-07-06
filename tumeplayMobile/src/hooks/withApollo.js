@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Platform} from 'react-native';
+import Container from '../components/global/Container';
 import {ApolloProvider} from '@apollo/client/react';
 import {ApolloClient, InMemoryCache, HttpLink, from} from '@apollo/client';
 import {
@@ -70,7 +71,11 @@ const withAppolo = Component => props => {
   }, [client]);
 
   if (isLoading) {
-    return <ActivityIndicator />;
+    return (
+      <Container style={{justifyContent: 'center'}}>
+        <ActivityIndicator />
+      </Container>
+    );
   }
 
   return (

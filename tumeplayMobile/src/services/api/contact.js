@@ -1,6 +1,6 @@
 const ContactsAPI = {
-  postContact: async (url, userAdress) => {
-    await fetch(url + '/contacts', {
+  postContact: async (apiUrl, userAdress) => {
+    await fetch(apiUrl + '/contacts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
