@@ -50,6 +50,7 @@ const ReferentIntention = props => {
 
   useEffect(() => {
     if (get_user_intention) {
+      console.log('get_user_intention', get_user_intention.data);
       setIsDone(get_user_intention.data?.referentSurveys.length !== 0);
     }
   }, [get_user_intention]);
@@ -175,10 +176,8 @@ const ReferentIntention = props => {
       {!isDone && selectedAnswer && (
         <RNPickerSelect
           placeholder={{label: 'Pour quelle raison ?', value: null}}
-          name={selectedAnswer.text === 'Oui' ? 'yesAnswer' : 'noAnswer'}
-          items={
-            selectedAnswer.text === 'Oui' ? yes_picker_props : no_picker_props
-          }
+          name={selectedAnswer === 1 ? 'yesAnswer' : 'noAnswer'}
+          items={selectedAnswer === 1 ? yes_picker_props : no_picker_props}
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
