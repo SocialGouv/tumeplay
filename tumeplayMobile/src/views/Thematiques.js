@@ -5,7 +5,6 @@ import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
 import {Fonts} from '../styles/Style';
 import ThemeCard from '../components/ThemeCard';
-import {REACT_APP_URL} from '@env';
 
 import Title from '../components/Title';
 import background from '../assets/Main_BG.png';
@@ -15,7 +14,7 @@ import AppContext from '../../AppContext';
 
 export default function Thematiques(props) {
   const {navigation} = props;
-  const {user} = useContext(AppContext);
+  const {user, apiUrl} = useContext(AppContext);
   const {data, loading} = useQuery(GET_THEMES, {
     variables: {level: user.level},
   });
@@ -30,7 +29,7 @@ export default function Thematiques(props) {
         thematiques={thematiques}
         backgroundColor={item.color}
         borderColors={item.border_color}
-        image={REACT_APP_URL + item.image?.url}
+        image={apiUrl + item.image?.url}
         navigation={navigation}
       />
     );

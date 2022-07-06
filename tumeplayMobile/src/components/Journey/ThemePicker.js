@@ -1,6 +1,6 @@
 import {TouchableOpacity, StyleSheet, Image, Animated} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {REACT_APP_URL} from '@env';
+import React, {useState, useEffect, useContext} from 'react';
+import AppContext from '../../../AppContext';
 
 const ThemePicker = props => {
   const {theme, index, selectedIndex, length, circleSize, onPress} = props;
@@ -9,6 +9,7 @@ const ThemePicker = props => {
   const [oldSpin, setOldSpin] = useState(0);
   const [animation1] = useState(new Animated.Value(0));
   const [animation2] = useState(new Animated.Value(0));
+  const {apiUrl} = useContext(AppContext);
   const isSelected = selectedIndex.index === index;
   const angle = 360 / length;
 
@@ -109,7 +110,7 @@ const ThemePicker = props => {
           activeOpacity={0.95}
           style={styles.touchZone}>
           <Image
-            source={{uri: REACT_APP_URL + theme?.image?.url}}
+            source={{uri: apiUrl + theme?.image?.url}}
             style={styles.image}
           />
         </TouchableOpacity>

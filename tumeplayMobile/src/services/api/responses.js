@@ -1,4 +1,4 @@
-const REACT_APP_URL = process.env.REACT_APP_URL;
+import {REACT_APP_URL} from '@env';
 
 const ResponsesAPI = {
   saveResponseMobile: async (response, question, utilisateurs_mobile) => {

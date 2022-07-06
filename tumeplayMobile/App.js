@@ -16,7 +16,6 @@ import QuizzModule from './src/components/Quizz/QuizzModule';
 import BoxOrder from './src/views/BoxOrder';
 import Box from './src/views/Box';
 import QuizzFinishScreen from './src/components/Quizz/QuizzFinishScreen';
-import Journey from './src/views/Journey';
 import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
@@ -37,11 +36,12 @@ Sentry.init({
   enableNative: false,
 });
 
-const App = () => {
+const App = props => {
   const [user, setUser] = useState({});
   const [doneModules_ids, setDoneModules_ids] = useState([]);
   const [thematiques, setThematiques] = useState([]);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
+  const apiUrl = props.apiUrl || REACT_APP_URL;
 
   const {data: data1, loading: loading1} = useQuery(GET_THEMES);
 
@@ -65,7 +65,7 @@ const App = () => {
 
   const getMobileUser = async user_id => {
     const response = await fetch(
-      REACT_APP_URL + '/utilisateurs-mobiles/' + user_id + '?version=3',
+      apiUrl + '/utilisateurs-mobiles/' + user_id + '?version=3',
     );
     const tmpUser = await response.json();
     if (tmpUser?.status === 404) {
@@ -132,7 +132,7 @@ const App = () => {
     // clearStorage();
     checkUserIdInStorage();
     Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
-    checkUpdateNeeded();
+    // checkUpdateNeeded();
   }, []);
 
   const contextValues = {
@@ -144,6 +144,7 @@ const App = () => {
     thematiques,
     doneModules_ids,
     setDoneModules_ids,
+    apiUrl,
   };
 
   return (

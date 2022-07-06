@@ -1,8 +1,6 @@
-import {REACT_APP_URL} from '@env';
-
 const OrdersAPI = {
-  orderBoxes: async order => {
-    const res = await fetch(REACT_APP_URL + '/commandes', {
+  orderBoxes: async (apiUrl, order) => {
+    const res = await fetch(apiUrl + '/commandes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
