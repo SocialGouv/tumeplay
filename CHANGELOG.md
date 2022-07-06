@@ -1,3 +1,10 @@
+# [1.119.0](https://github.com/SocialGouv/Tumeplay/compare/v1.118.0...v1.119.0) (2022-07-06)
+
+
+### Features
+
+* balance requests url in terms of version number ([#411](https://github.com/SocialGouv/Tumeplay/issues/411)) ([69bdd8d](https://github.com/SocialGouv/Tumeplay/commit/69bdd8dc40350ae1a41b17341641b87b9e1cc600))
+
 # [1.118.0](https://github.com/SocialGouv/Tumeplay/compare/v1.117.2...v1.118.0) (2022-07-06)
 
 
