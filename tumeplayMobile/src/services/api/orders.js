@@ -1,6 +1,6 @@
 const OrdersAPI = {
   orderBoxes: async (apiUrl, order) => {
-    return await fetch(apiUrl + '/commandes', {
+    return fetch(apiUrl + '/commandes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
