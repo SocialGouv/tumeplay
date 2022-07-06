@@ -7,7 +7,8 @@ import SponsorCard from '../components/Menu/SponsorCard';
 import config from '../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Menu = () => {
+const Menu = ({route}) => {
+  // const user = route.params.user;
   const navigation = useNavigation();
   return (
     <Container style={styles.container}>
@@ -17,7 +18,7 @@ const Menu = () => {
         <Icon name="close" size={25} />
         <Text>Femer</Text>
       </TouchableOpacity>
-      <SponsorCard />
+      <SponsorCard navigation={navigation} />
     </Container>
   );
 };

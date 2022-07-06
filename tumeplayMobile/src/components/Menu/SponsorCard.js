@@ -4,7 +4,7 @@ import React from 'react';
 import config from '../../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const SponsorCard = () => {
+const SponsorCard = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Icon name="redeem" size={40} color="#000" style={styles.icon} />
@@ -14,7 +14,7 @@ const SponsorCard = () => {
           Parraine au moins 3 de tes amis pour gagner 1 kit !
         </Text>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Sponsorship')}>
         <Icon name="chevron-right" size={40} color="#000" />
       </TouchableOpacity>
     </View>
@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: 'column',
     width: '70%',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    paddingBottom: 5,
   },
   icon: {
     alignSelf: 'flex-start',
