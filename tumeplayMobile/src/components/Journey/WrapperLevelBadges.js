@@ -1,13 +1,11 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
-import Text from '../../components/Text';
+import {View, StyleSheet} from 'react-native';
 import AppContext from '../../../AppContext';
 import BadgesSkeleton from '../global/SkeletonDesign/BadgesSkeleton';
 import Badge from './Badge';
 import JourneyTopInformation from './JourneyTopInformation';
-import config from '../../../config';
 const WrapperLevelBadges = ({level, associatedModules, loading}) => {
-  const {doneModules_ids, apiUrl} = useContext(AppContext);
+  const {doneModules_ids} = useContext(AppContext);
 
   const modulesToDisplay = associatedModules?.map((module, index) => {
     if (module.module_index < doneModules_ids.length) {
@@ -31,15 +29,6 @@ const WrapperLevelBadges = ({level, associatedModules, loading}) => {
           module_index={module.module_index}
           status={module.status}
         />
-        {/* <View style={styles.textContainer}>
-          <Image
-            source={{uri: apiUrl + module?.thematique?.image?.url}}
-            style={{width: 20, height: 20, marginLeft: 15}}
-          />
-          <Text style={styles.textDescription}>
-            {module.niveau.value + '.' + (index + 1) + ' ' + module?.title}
-          </Text>
-        </View> */}
       </View>
     );
   });
