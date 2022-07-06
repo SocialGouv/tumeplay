@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/referent-surveys",
+      "handler": "referent-survey.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/referent-surveys/count",
+      "handler": "referent-survey.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/referent-surveys/:id",
+      "handler": "referent-survey.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/referent-surveys",
+      "handler": "referent-survey.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/referent-surveys/:id",
+      "handler": "referent-survey.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/referent-surveys/:id",
+      "handler": "referent-survey.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
