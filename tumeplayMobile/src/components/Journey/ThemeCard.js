@@ -1,18 +1,19 @@
 import {View, StyleSheet, Image} from 'react-native';
 import TextBase from '../Text';
-import React from 'react';
+import React, {useContext} from 'react';
 import config from '../../../config';
-import {REACT_APP_URL} from '@env';
+import AppContext from '../../../AppContext';
 
 const ThemeCard = props => {
   const {style, selectedTheme, moduleCount} = props;
+  const {apiUrl} = useContext(AppContext);
 
   return (
     <View style={[style, styles.box]}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
-            source={{uri: REACT_APP_URL + selectedTheme?.image?.url}}
+            source={{uri: apiUrl + selectedTheme?.image?.url}}
             style={styles.image}
           />
         </View>

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {TouchableOpacity, StyleSheet, View, Image} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
-import {REACT_APP_URL} from '@env';
 import lock from '../../assets/Cadenas.png';
 import _ from 'lodash';
 import ReadIndicator from './ReadIndicator';
+import AppContext from '../../../AppContext';
 
 const ContentCard = props => {
   const {
@@ -17,7 +17,8 @@ const ContentCard = props => {
     theme_id,
     readContentIDs,
   } = props;
-  const imageUrl = {uri: REACT_APP_URL + item?.image?.url};
+  const {apiUrl} = useContext(AppContext);
+  const imageUrl = {uri: apiUrl + item?.image?.url};
   const [displayReadIndicator, setDisplayReadIndicator] = useState();
 
   useEffect(() => {

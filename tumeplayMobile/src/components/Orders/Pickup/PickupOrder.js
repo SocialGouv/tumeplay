@@ -8,7 +8,13 @@ import {
   ImageBackground,
   Vibration,
 } from 'react-native';
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import POIAPI from '../../../services/api/poi';
@@ -24,6 +30,7 @@ import _ from 'lodash';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Button from '../../Button';
 import {request, PERMISSIONS} from 'react-native-permissions';
+import AppContext from '../../../../AppContext';
 
 const PickupOrder = props => {
   const {setSelectedPOI} = props;
@@ -52,6 +59,7 @@ const PickupOrder = props => {
   const [geogouvData, setGeogouvData] = useState([]);
   const [hideResults, setHideResults] = useState(true);
   const [chosenAddress, setChosenAddress] = useState('');
+  const {apiUrl} = useContext(AppContext);
 
   const validateZipCode = zipcode => {
     const authorizedZipCode = [
@@ -80,7 +88,7 @@ const PickupOrder = props => {
   };
 
   const fetchPOI = async () => {
-    let response = await POIAPI.fetchMondialRelaisPOI({
+    let response = await POIAPI.fetchMondialRelaisPOI(apiUrl, {
       latitude: coordinates.latitude.toFixed(7),
       longitude: coordinates.longitude.toFixed(7),
     });
