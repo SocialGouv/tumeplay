@@ -132,7 +132,7 @@ const App = props => {
     // clearStorage();
     checkUserIdInStorage();
     Matomo.initTracker(MATOMO_SITE_URL + 'matomo.php', parseInt(MATOMO_ID));
-    // checkUpdateNeeded();
+    checkUpdateNeeded();
   }, []);
 
   const contextValues = {
