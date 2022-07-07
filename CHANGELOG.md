@@ -1,3 +1,10 @@
+# [1.120.0](https://github.com/SocialGouv/Tumeplay/compare/v1.119.0...v1.120.0) (2022-07-07)
+
+
+### Features
+
+* tracking version update after release ([8bfa7d1](https://github.com/SocialGouv/Tumeplay/commit/8bfa7d1edee029e7f124c3e45883ea2565e087d2))
+
 # [1.119.0](https://github.com/SocialGouv/Tumeplay/compare/v1.118.0...v1.119.0) (2022-07-06)
 
 
