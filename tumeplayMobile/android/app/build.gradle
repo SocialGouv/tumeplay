@@ -135,7 +135,7 @@ android {
         applicationId "com.tumeplaymobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 53
+        versionCode 57
         versionName "1.42"
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
