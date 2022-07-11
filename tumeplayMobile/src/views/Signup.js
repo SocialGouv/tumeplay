@@ -10,11 +10,13 @@ import {POST_MOBILE_USER} from '../services/api/mobile_users';
 import bg from '../assets/BG_PROFIL.png';
 import Container from '../components/global/Container';
 import AppContext from '../../AppContext';
+import axios from 'axios';
 
 const Signup = ({user, setUser}) => {
   let tmpUser = {...user};
-  const {reloadUser} = useContext(AppContext);
+  const {reloadUser, apiUrl} = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const generateID = () => {
     const user_id =
@@ -60,20 +62,58 @@ const Signup = ({user, setUser}) => {
     setUser({...tmpUser});
   };
 
+  const handleChangeCode = e => {
+    setError(false);
+    tmpUser.sponsor_code = e;
+    setUser({...tmpUser});
+  };
+
   const handleValidation = async () => {
     setIsLoading(true);
-    await signUpUser({
-      variables: {
-        first_name: tmpUser.first_name,
-        isOnboarded: tmpUser.isOnboarded,
-        isSignedUp: true,
-        isUnder25: tmpUser.isUnder25,
-        ageRange: tmpUser.ageRange,
-        region: tmpUser.region,
-        has_followed_tutorial: false,
-        user_id: tmpUser.user_id,
-      },
-    });
+    if (tmpUser.sponsor_code) {
+      const validated_sponsor_code = await handleSponsorCodeValidation(
+        tmpUser.sponsor_code,
+      );
+      if (validated_sponsor_code) {
+        await signUpUser({
+          variables: {
+            first_name: tmpUser.first_name,
+            isOnboarded: tmpUser.isOnboarded,
+            isSignedUp: true,
+            isUnder25: tmpUser.isUnder25,
+            ageRange: tmpUser.ageRange,
+            region: tmpUser.region,
+            has_followed_tutorial: false,
+            user_id: tmpUser.user_id,
+            sponsor_code: tmpUser.sponsor_code,
+          },
+        });
+      } else {
+        setError(true);
+        setIsLoading(false);
+      }
+    } else {
+      await signUpUser({
+        variables: {
+          first_name: tmpUser.first_name,
+          isOnboarded: tmpUser.isOnboarded,
+          isSignedUp: true,
+          isUnder25: tmpUser.isUnder25,
+          ageRange: tmpUser.ageRange,
+          region: tmpUser.region,
+          has_followed_tutorial: false,
+          user_id: tmpUser.user_id,
+        },
+      });
+    }
+  };
+
+  const handleSponsorCodeValidation = async value => {
+    const code = value.substring(10, value.length);
+    const res = await axios.get(
+      `${apiUrl}/utilisateurs-mobiles/count?id=${code}`,
+    );
+    return res.data === 1 ? true : false;
   };
 
   const radio_props_age = [
@@ -131,6 +171,18 @@ const Signup = ({user, setUser}) => {
           name="region"
           items={radio_props_location}
         />
+        <TextInput
+          style={styles.textInput}
+          name="sponsor_code"
+          placeholder="Code de Parrainage ?"
+          placeholderTextColor={Colors.darkgrey}
+          onChangeText={e => handleChangeCode(e)}
+        />
+        {error && (
+          <Text style={styles.error}>
+            Ce code de parrainage n'existe pas ou n'est pas valide
+          </Text>
+        )}
       </View>
       <View style={styles.buttonContainer}>
         {isLoading ? (
@@ -178,11 +230,19 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
+    height: 50,
+    marginTop: 10,
     fontSize: 18,
     color: 'black',
-    paddingBottom: 20,
+    paddingBottom: 5,
+    textAlignVertical: 'center',
   },
-
+  error: {
+    color: '#DC3545',
+    fontSize: 14,
+    lineHeight: 18,
+    fontWeight: '500',
+  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',

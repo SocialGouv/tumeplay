@@ -1,4 +1,4 @@
-import {TouchableOpacity, StyleSheet, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, Share} from 'react-native';
 import Text from '../Text';
 import React, {useContext} from 'react';
 import Container from '../global/Container';
@@ -11,15 +11,24 @@ import SponsorshipInfoCard from './SponsorshipInfoCard';
 import Button from '../Button';
 import AppContext from '../../../AppContext';
 
-const Sponsorship = () => {
+const Sponsorship = ({route}) => {
+  const path = route?.params?.path;
   const {user} = useContext(AppContext);
   const navigation = useNavigation();
   const handleNavigation = () => {
-    //Manage return according to route parameter (from order or from menu)
-    navigation.navigate('Menu');
+    if (path === 'Order') {
+      navigation.navigate('OrderFinalStep');
+    } else {
+      navigation.navigate('Menu');
+    }
   };
 
-  console.log(user);
+  const handleShare = async () => {
+    await Share.share({
+      message: `Rejoins moi sur Tumeplay avec mon code parainage : TUNOUSPLAY${user.id}`,
+      title: 'Tumeplay Mobile',
+    });
+  };
 
   return (
     <Container style={styles.container}>
@@ -31,10 +40,14 @@ const Sponsorship = () => {
       </TouchableOpacity>
       <Divider style={styles.divider} />
       <SponsorshipTextInfos />
-      <SponsorshipInfoCard />
+      <SponsorshipInfoCard sponsor_code={`TUNOUSPLAY${user.id}`} />
       <View style={styles.bottomContainer}>
         <Text style={styles.code}>TUNOUSPLAY{user.id}</Text>
-        <Button size="intermediate" text="Je partage mon code" />
+        <Button
+          size="intermediate"
+          text="Je partage mon code"
+          onPress={handleShare}
+        />
       </View>
     </Container>
   );

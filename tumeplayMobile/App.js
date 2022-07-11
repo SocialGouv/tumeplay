@@ -21,7 +21,7 @@ import Award from './src/views/Award';
 const NavigationStack = createNativeStackNavigator();
 import {Colors} from './src/styles/Style';
 import {REACT_APP_URL, MATOMO_SITE_URL, MATOMO_ID, SENTRI_URL} from '@env';
-import Matomo from 'react-native-matomo';
+import Matomo from 'react-native-matomo-fork';
 import Loader from './src/components/global/Loader';
 import {TourGuideProvider} from 'rn-tourguide';
 import VersionCheck from 'react-native-version-check';
@@ -33,6 +33,7 @@ import Journey2 from './src/views/Journey2';
 import ModuleList from './src/components/Journey/Journey_modules/ModuleList';
 import Menu from './src/views/Menu';
 import Sponsorship from './src/components/Sponsorship/Sponsorship';
+import OrderFinalStep from './src/components/Orders/OrderFinalStep';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -201,6 +202,10 @@ const App = () => {
               <NavigationStack.Screen
                 name="Sponsorship"
                 component={Sponsorship}
+              />
+              <NavigationStack.Screen
+                name="OrderFinalStep"
+                component={OrderFinalStep}
               />
               <NavigationStack.Screen name="Award" component={Award} />
             </NavigationStack.Navigator>

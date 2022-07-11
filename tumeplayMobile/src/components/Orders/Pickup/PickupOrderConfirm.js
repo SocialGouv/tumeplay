@@ -68,7 +68,7 @@ const PickupOrderConfirm = props => {
     }
     reloadUser();
     setIsLoading(false);
-    setIsVisible(true);
+    navigation.navigate('OrderFinalStep');
   };
 
   const retrievePOILocationInformations = async () => {

@@ -18,7 +18,7 @@ import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
 import {Colors} from '../../styles/Style';
-import OrderConfirmModal from './OrderConfirmModal';
+// import OrderConfirmModal from './OrderConfirmModal';
 import Event from '../../services/api/matomo';
 
 const OrderConfirm = props => {
@@ -32,7 +32,7 @@ const OrderConfirm = props => {
 
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
 
   const {strapi_user_id, reloadUser} = useContext(AppContext);
 
@@ -80,16 +80,16 @@ const OrderConfirm = props => {
     reloadUser();
     setIsLoading(false);
     Event.orderConfirmEvent('homedeliveryOrderconfirmedButton');
-    setIsVisible(true);
+    navigation.navigate('OrderFinalStep');
   };
 
-  const handleClosingModal = () => {
-    if (!isLoading) {
-      Event.boxOrdered();
-      navigation.navigate('Home', {screen: 'Accueil'});
-      setIsVisible(false);
-    }
-  };
+  // const handleClosingModal = () => {
+  //   if (!isLoading) {
+  //     Event.boxOrdered();
+  //     navigation.navigate('Home', {screen: 'Accueil'});
+  //     setIsVisible(false);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -154,9 +154,9 @@ const OrderConfirm = props => {
           onPress={() => sendOrder()}
         />
       )}
-      {isVisible && (
+      {/* {isVisible && (
         <OrderConfirmModal isVisible={isVisible} onPress={handleClosingModal} />
-      )}
+      )} */}
     </View>
   );
 };

@@ -1,13 +1,29 @@
 import {View, StyleSheet} from 'react-native';
 import Text from '../Text';
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import axios from 'axios';
+import AppContext from '../../../AppContext';
 
-const SponsorshipInfoCard = () => {
+const SponsorshipInfoCard = ({sponsor_code}) => {
+  const [numberOfSponsors, setNumberOfSponsors] = useState(0);
+  const {apiUrl} = useContext(AppContext);
+
+  const handleNumberOfSponsors = async () => {
+    let res = await axios.get(
+      `${apiUrl}/utilisateurs-mobiles/count?sponsor_code=${sponsor_code}`,
+    );
+    setNumberOfSponsors(res.data);
+  };
+
+  useEffect(() => {
+    handleNumberOfSponsors();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.greyText}>Tu as parrainé</Text>
-        <Text style={styles.blackText}>{0} / 3</Text>
+        <Text style={styles.blackText}>{numberOfSponsors} / 3</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.greyText}>1 kit à gagner</Text>

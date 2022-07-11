@@ -1,4 +1,4 @@
-import Matomo from 'react-native-matomo';
+import Matomo from 'react-native-matomo-fork';
 
 const Event = {
   playEvent: label => {
