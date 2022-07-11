@@ -1,3 +1,10 @@
+# [1.121.0](https://github.com/SocialGouv/Tumeplay/compare/v1.120.0...v1.121.0) (2022-07-11)
+
+
+### Features
+
+* display quantity-product on export when box sur mesure ([#413](https://github.com/SocialGouv/Tumeplay/issues/413)) ([2481b18](https://github.com/SocialGouv/Tumeplay/commit/2481b1832640aebc7c3afd692f07faa0e1a47f15))
+
 # [1.120.0](https://github.com/SocialGouv/Tumeplay/compare/v1.119.0...v1.120.0) (2022-07-07)
 
 
