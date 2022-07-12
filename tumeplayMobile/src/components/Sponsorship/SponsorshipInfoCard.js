@@ -6,13 +6,14 @@ import AppContext from '../../../AppContext';
 
 const SponsorshipInfoCard = ({sponsor_code}) => {
   const [numberOfSponsors, setNumberOfSponsors] = useState(0);
-  const {apiUrl} = useContext(AppContext);
+  const {apiUrl, reloadUser} = useContext(AppContext);
 
   const handleNumberOfSponsors = async () => {
     let res = await axios.get(
       `${apiUrl}/utilisateurs-mobiles/count?sponsor_code=${sponsor_code}`,
     );
     setNumberOfSponsors(res.data);
+    reloadUser();
   };
 
   useEffect(() => {
