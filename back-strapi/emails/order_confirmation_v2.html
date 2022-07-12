@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://use.fontawesome.com/your-embed-code.js"></script>
+    <!-- TODO: Place your Font Awesome embed code  -->
+
+    <style>
+      @font-face {
+        font-family: "San Francisco";
+        src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+      }
+    </style>
+  </head>
+  <body
+    style="
+      min-height: 100vh;
+      background: linear-gradient(180deg, #c6c6fe 0%, #fae7e2 100%);
+      padding: 40px 40px;
+    "
+  >
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        justify-items: center;
+        align-items: center;
+      "
+    >
+      <section
+        style="
+          width: 90%;
+          justify-content: center;
+          text-align: center;
+          background-color: #fff;
+        "
+      >
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <img
+            src="https://metropole-tumeplay.fabrique.social.gouv.fr/assets/img/logo.svg"
+            alt="Tumeplay_logo"
+            style="width: 15vw; height: 10vh; margin-top: 2rem"
+          />
+          <p
+            style="
+              font-family: San Francisco;
+              font-weight: 700;
+              font-size: 3vw;
+              line-height: 24px;
+            "
+          >
+            Merci pour ta commande ! 🎉
+          </p>
+          <p
+            style="
+              font-family: San Francisco;
+              font-style: 'normal';
+              font-weight: 400;
+              font-size: 2vw;
+            "
+          >
+            Ta commande de kit a bien été prise en compte
+            <br />
+            Voici le récapitulatif :
+          </p>
+          <div
+            style="
+              width: 100%;
+              margin: auto;
+              justify-content: center;
+              align-items: center;
+              display: flex;
+              flex-direction: column;
+              margin: 0 0 4vw 0;
+            "
+          >
+            <div
+              style="
+                border: 1px solid #000;
+                border-radius: 8px;
+                width: 40%;
+                min-height: 12vmin;
+                padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+              "
+            >
+              <p
+                style="
+                  font-family: San Francisco;
+                  font-weight: 700;
+                  font-size: 1.5vw;
+                  text-align: left;
+                  color: #d42201;
+                  margin: 0;
+                "
+              >
+                Kit <%= order.box.number %>
+              </p>
+              <p
+                style="
+                  font-family: San Francisco;
+                  font-weight: 700;
+                  font-size: 1.5vw;
+                  text-align: left;
+                  margin: 0;
+                "
+              >
+                <%= order.box.title %>
+              </p>
+              <br />
+              <div>
+                <p
+                  style="
+                    font-family: San Francisco;
+                    font-weight: 400;
+                    font-size: 1.5vw;
+                    text-align: left;
+                    margin: 0;
+                  "
+                >
+                  <%= order.name %>
+                </p>
+                <!-- <p
+                  style="
+                    font-family: San Francisco;
+                    font-weight: 400;
+                    font-size: 1.5vw;
+                    text-align: left;
+                    margin: 0;
+                  "
+                >
+                  User.first_name
+                </p> -->
+              </div>
+              <p
+                style="
+                  font-family: San Francisco;
+                  font-weight: 400;
+                  font-size: 1.5vw;
+                  text-align: left;
+                  margin: 0;
+                "
+              >
+                <=% order.address %> - <=% order.address_zipcode %> <=%
+                order.address_city %>
+              </p>
+              <p
+                style="
+                  font-family: San Francisco;
+                  font-weight: 700;
+                  font-size: 1.5vw;
+                  text-align: left;
+                  margin: 0;
+                "
+              >
+                Service de livraison: <%= order.delivery_name %>
+              </p>
+            </div>
+            <p
+              style="
+                font-family: San Francisco;
+                font-weight: 400;
+                font-size: 1vw;
+                text-align: left;
+                width: 40%;
+              "
+            >
+              * Délai de livraison 1 à 2 semaines.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        style="
+          width: 90%;
+          justify-content: center;
+          text-align: center;
+          background-color: #fbf7f2;
+        "
+      >
+        <p
+          style="
+            font-family: San Francisco;
+            font-weight: 700;
+            font-size: 3vw;
+            line-height: 24px;
+            margin-top: 3rem;
+          "
+        >
+          Aide-nous à améliorer l'application !
+        </p>
+        <p
+          style="
+            font-family: San Francisco;
+            font-style: 'normal';
+            font-weight: 400;
+            font-size: 2vw;
+            line-height: 30px;
+            margin: 0;
+          "
+        >
+          Tu apprécies l'application ? Aide-nous en répondant à des questions.
+        </p>
+        <p
+          style="
+            font-family: San Francisco;
+            font-style: 'normal';
+            font-weight: 400;
+            font-size: 2vw;
+            line-height: 30px;
+            margin-top: 0;
+            margin-bottom: 3vmax;
+          "
+        >
+          Promis, cela ne prendra que <b>quelques minutes</b>
+        </p>
+        <a
+          href="https://platform.evoltapp.com/survey/624abdf414811e001b5e20b6/voting"
+          target="_blank"
+          style="
+            min-width: 40vw;
+            height: 10%;
+            background-color: #000;
+            border-radius: 16px;
+            color: #fff;
+            font-family: San Francisco;
+            font-size: 1.5vw;
+            padding: 15px 15px;
+            cursor: pointer;
+            text-decoration: inherit;
+          "
+        >
+          Je donne mon avis
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <div
+          style="
+            border: 1px solid #000;
+            opacity: 0.4;
+            width: 70%;
+            margin: 30px auto;
+          "
+        ></div>
+        <p
+          style="
+            font-family: San Francisco;
+            font-weight: bolder;
+            font-size: 3vw;
+            line-height: 24px;
+          "
+        >
+          Retrouve nous sur Instagram et TikTok !
+        </p>
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            height: 3vh;
+            margin-bottom: 1rem;
+          "
+        >
+          <a
+            href="https://www.instagram.com/tumeplay/"
+            target="_blank"
+            style="
+              width: 3vmax;
+              border-radius: 50rem;
+              background-color: #fff;
+              margin-right: 1rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            "
+          >
+            <img
+              alt="insta_logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png"
+              style="width: 2vmax"
+            />
+          </a>
+          <a
+            href="https://www.tiktok.com/@tu.me.play"
+            target="_blank"
+            style="
+              width: 3vmax;
+              border-radius: 50%;
+              background-color: #fff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            "
+          >
+            <img
+              alt="tiktok_logo"
+              src="https://cdn.pixabay.com/photo/2021/06/15/12/28/tiktok-6338432_960_720.png"
+              style="width: 2vmax"
+            />
+          </a>
+        </div>
+        <div
+          style="border: 1px solid #000; opacity: 0.4; width: 70%; margin: auto"
+        ></div>
+        <div style="margin-bottom: 30px">
+          <h3
+            style="
+              font-family: San Francisco;
+              font-weight: 700;
+              font-size: 3vw;
+              line-height: 24px;
+            "
+          >
+            Une question ? Besoin d'aide ?
+          </h3>
+          <p
+            style="font-family: San Francisco; font-size: 2vw; font-weight: 400"
+          >
+            L'équipe Tumeplay répond à tes questions par mail
+          </p>
+          <a
+            href="mailto:contact.tumeplay@fabrique.social.gouv.fr"
+            style="
+              color: #d42201;
+              font-family: San Francisco;
+              font-size: 2vw;
+              font-weight: 400;
+            "
+            >contact.tumeplay@fabrique.social.gouv.fr</a
+          >
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
