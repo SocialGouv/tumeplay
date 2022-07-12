@@ -113,7 +113,7 @@ const Signup = ({user, setUser}) => {
     const res = await axios.get(
       `${apiUrl}/utilisateurs-mobiles/count?id=${code}`,
     );
-    return res.data === 1 ? true : false;
+    return res.data === 1;
   };
 
   const radio_props_age = [
