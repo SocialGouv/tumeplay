@@ -65,9 +65,6 @@
     "referents": {
       "collection": "referent",
       "via": "users"
-    },
-    "sponsor_code": {
-      "type": "string"
     }
   }
 }
