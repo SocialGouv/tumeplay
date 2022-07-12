@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import {Divider} from 'react-native-paper';
 import config from '../../../config';
-import SponsorshipTextInfos from './SponsorshipTextInfo';
+import SponsorshipTextInfos from './SponsorshipTextInfos';
 import SponsorshipInfoCard from './SponsorshipInfoCard';
 import Button from '../Button';
 import AppContext from '../../../AppContext';

@@ -31,7 +31,6 @@ const OrderConfirm = props => {
 
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isVisible, setIsVisible] = useState(false);
 
   const {strapi_user_id, reloadUser, apiUrl} = useContext(AppContext);
 

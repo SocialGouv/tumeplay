@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomePage from '../views/HomePage';
 import Thematiques from '../views/Thematiques';
-import Journey from '../views/Journey';
 import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';

@@ -7,7 +7,7 @@ import config from '../../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Title from '../Title';
 import congrats from '../../assets/custom_images/congrats.png';
-import SponsorshipTextInfos from '../Sponsorship/SponsorshipTextInfo';
+import SponsorshipTextInfos from '../Sponsorship/SponsorshipTextInfos';
 import Button from '../Button';
 
 const OrderFinalStep = () => {
