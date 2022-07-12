@@ -18,7 +18,6 @@ import CheckBox from '@react-native-community/checkbox';
 import TextBase from '../../components/Text';
 import ContactsAPI from '../../services/api/contact';
 import {Colors} from '../../styles/Style';
-// import OrderConfirmModal from './OrderConfirmModal';
 import Event from '../../services/api/matomo';
 
 const OrderConfirm = props => {
@@ -83,14 +82,6 @@ const OrderConfirm = props => {
     navigation.navigate('OrderFinalStep');
   };
 
-  // const handleClosingModal = () => {
-  //   if (!isLoading) {
-  //     Event.boxOrdered();
-  //     navigation.navigate('Home', {screen: 'Accueil'});
-  //     setIsVisible(false);
-  //   }
-  // };
-
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -154,9 +145,6 @@ const OrderConfirm = props => {
           onPress={() => sendOrder()}
         />
       )}
-      {/* {isVisible && (
-        <OrderConfirmModal isVisible={isVisible} onPress={handleClosingModal} />
-      )} */}
     </View>
   );
 };

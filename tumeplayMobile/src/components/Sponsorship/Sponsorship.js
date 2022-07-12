@@ -25,8 +25,9 @@ const Sponsorship = ({route}) => {
 
   const handleShare = async () => {
     await Share.share({
-      message: `Rejoins moi sur Tumeplay avec mon code parainage : TUNOUSPLAY${user.id}`,
-      title: 'Tumeplay Mobile',
+      message: `Rejoins moi sur Tumeplay avec mon code parrainage : TUNOUSPLAY${user.id},
+      https://metropole-tumeplay.fabrique.social.gouv.fr/landing.html`,
+      title: `Rejoins moi sur Tumeplay avec mon code parainage : TUNOUSPLAY${user.id}`,
     });
   };
 

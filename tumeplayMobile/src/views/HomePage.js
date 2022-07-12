@@ -21,6 +21,7 @@ import config from '../../config';
 import {WebView} from 'react-native-webview';
 import Event from '../services/api/matomo';
 import handleRedirection from '../services/handleRedirection';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const HomePage = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -137,6 +138,7 @@ const HomePage = ({navigation}) => {
               user: user,
             })
           }>
+          <Icon name="more-horiz" size={30} />
           <Text>Menu</Text>
         </TouchableOpacity>
         <LevelPointsIndicator
@@ -234,7 +236,7 @@ const styles = StyleSheet.create({
   },
   menuButton: {
     position: 'absolute',
-    top: config.deviceHeight * 0.1,
+    top: config.deviceHeight * 0.06,
     right: 20,
   },
 });

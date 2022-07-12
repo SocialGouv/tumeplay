@@ -7,8 +7,7 @@ import SponsorCard from '../components/Menu/SponsorCard';
 import config from '../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Menu = ({route}) => {
-  // const user = route.params.user;
+const Menu = () => {
   const navigation = useNavigation();
   return (
     <Container style={styles.container}>

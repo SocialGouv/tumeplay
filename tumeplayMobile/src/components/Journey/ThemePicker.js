@@ -1,6 +1,7 @@
 import {TouchableOpacity, StyleSheet, Image, Animated} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {REACT_APP_URL} from '@env';
+import config from '../../../config';
 
 const ThemePicker = props => {
   const {theme, index, selectedIndex, length, circleSize, onPress} = props;
@@ -92,8 +93,8 @@ const ThemePicker = props => {
                   outputRange: ['0deg', '360deg'],
                 }),
               },
-              {translateX: circleSize / 2 - 68},
-              {translateY: circleSize / 2 - 68},
+              {translateX: circleSize / 2 - config.deviceWidth * 0.1},
+              {translateY: circleSize / 2 - config.deviceWidth * 0.2},
               {
                 rotate: animation2.interpolate({
                   inputRange: [-360, 360],
