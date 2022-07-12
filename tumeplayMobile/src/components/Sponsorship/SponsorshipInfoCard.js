@@ -27,7 +27,7 @@ const SponsorshipInfoCard = ({sponsor_code}) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.greyText}>1 kit à gagner</Text>
-        <Text style={styles.blackText}>{0}</Text>
+        <Text style={styles.blackText}>{numberOfSponsors >= 3 ? 1 : 0}</Text>
       </View>
     </View>
   );
