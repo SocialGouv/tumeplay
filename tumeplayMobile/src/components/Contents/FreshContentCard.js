@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Text from '../../components/Text';
 import {Fonts} from '../../styles/Style';
-import {REACT_APP_URL} from '@env';
 import config from '../../../config';
 import FreshContentSkeleton from '../global/SkeletonDesign/FreshContentSkeleton';
+import AppContext from '../../../AppContext';
 
 const FreshContentCard = ({content, navigation, freshContentsIds}) => {
-  const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
+  const {apiUrl} = useContext(AppContext);
+  const imageUrl = {uri: apiUrl + content?.image?.url};
 
   return content ? (
     <TouchableOpacity

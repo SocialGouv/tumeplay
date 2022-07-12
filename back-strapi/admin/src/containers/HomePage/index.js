@@ -565,8 +565,6 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
       );
     }
 
-    console.log(data);
-
     return data;
   };
 
@@ -622,8 +620,6 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
     }
 
     const data = await repeatRequest([], route, exportParams);
-
-    console.log(data.length);
 
     data.forEach((item) => {
       switch (type) {
@@ -703,7 +699,18 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
             item.content &&
             item.content[0].__component === "commandes.box-sur-mesure"
           ) {
-            boxName = "Box sur mesure";
+            if (
+              item.content[0].produits &&
+              item.content[0].produits.length > 0
+            ) {
+              boxName = item.content[0].produits
+                .map((p) => {
+                  return p.quantity + "#" + p.produit.title;
+                })
+                .join("/");
+            } else {
+              boxName = "Box sur mesure";
+            }
           } else if (
             item.content &&
             item.content[0].__component === "commandes.box"

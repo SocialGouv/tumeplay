@@ -9,7 +9,6 @@ import {
   Image,
 } from 'react-native';
 import Text from '../../components/Text';
-import {REACT_APP_URL} from '@env';
 import {Colors, Fonts} from '../../styles/Style';
 import bg from '../../assets/test.png';
 import Button from '../../components/Button';
@@ -28,7 +27,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import handleRedirection from '../../services/handleRedirection';
 
 const ContentPage = ({navigation, route}) => {
-  const {user} = useContext(AppContext);
+  const {user, apiUrl} = useContext(AppContext);
   const [content, setContent] = useState();
   const [theme, setTheme] = useState();
   const [count, setCount] = useState(0);
@@ -139,7 +138,7 @@ const ContentPage = ({navigation, route}) => {
     }
   };
 
-  const imageUrl = {uri: REACT_APP_URL + content?.image?.url};
+  const imageUrl = {uri: apiUrl + content?.image?.url};
 
   return (
     <GestureRecognizer
@@ -154,7 +153,7 @@ const ContentPage = ({navigation, route}) => {
         </TouchableOpacity>
         <View style={styles.topInfoContainer}>
           <Image
-            source={{uri: REACT_APP_URL + theme?.image?.url}}
+            source={{uri: apiUrl + theme?.image?.url}}
             style={styles.themeImage}
           />
           <Text style={styles.topRightInfo}>{theme?.title}</Text>

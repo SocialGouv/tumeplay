@@ -1,8 +1,6 @@
-import {REACT_APP_URL} from '@env';
-
 const ContactsAPI = {
-  postContact: async userAdress => {
-    await fetch(REACT_APP_URL + '/contacts', {
+  postContact: async (apiUrl, userAdress) => {
+    await fetch(apiUrl + '/contacts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

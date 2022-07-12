@@ -1,9 +1,7 @@
-import {REACT_APP_URL} from '@env';
-
 const POIAPI = {
-  fetchMondialRelaisPOI: async coordinates => {
+  fetchMondialRelaisPOI: async (apiUrl, coordinates) => {
     let response = await fetch(
-      REACT_APP_URL +
+      apiUrl +
         '/mondial-relay/' +
         coordinates.latitude +
         '/' +

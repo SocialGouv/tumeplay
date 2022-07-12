@@ -1,8 +1,11 @@
-const REACT_APP_URL = process.env.REACT_APP_URL;
-
 const ResponsesAPI = {
-  saveResponseMobile: async (response, question, utilisateurs_mobile) => {
-    const res = await fetch(REACT_APP_URL + '/responses-mobiles', {
+  saveResponseMobile: async (
+    apiUrl,
+    response,
+    question,
+    utilisateurs_mobile,
+  ) => {
+    const res = await fetch(apiUrl + '/responses-mobiles', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

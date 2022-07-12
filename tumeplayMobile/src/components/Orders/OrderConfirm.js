@@ -33,7 +33,7 @@ const OrderConfirm = props => {
   const [isLoading, setIsLoading] = useState(false);
   // const [isVisible, setIsVisible] = useState(false);
 
-  const {strapi_user_id, reloadUser} = useContext(AppContext);
+  const {strapi_user_id, reloadUser, apiUrl} = useContext(AppContext);
 
   const navigation = useNavigation();
 
@@ -64,7 +64,7 @@ const OrderConfirm = props => {
         },
       ],
     };
-    await OrdersAPI.orderBoxes(requestBody);
+    await OrdersAPI.orderBoxes(apiUrl, requestBody);
     if (checked) {
       let userAddress = {
         first_name: userInfos.first_name,
@@ -73,7 +73,7 @@ const OrderConfirm = props => {
         box_id: box.id,
         type: 'enrollé',
       };
-      await ContactsAPI.postContact(userAddress);
+      await ContactsAPI.postContact(apiUrl, userAddress);
     }
 
     reloadUser();

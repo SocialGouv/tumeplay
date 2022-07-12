@@ -53,7 +53,7 @@ const QuizzModule = ({navigation, route}) => {
   const progress =
     (correctAnswers.length + wrongAnswers.length) / fullQuizzLength.current;
 
-  const {user, reloadUser} = useContext(AppContext);
+  const {user, reloadUser, apiUrl} = useContext(AppContext);
 
   const formatAnswers = () => {
     let tmpResponses = [];
@@ -78,6 +78,7 @@ const QuizzModule = ({navigation, route}) => {
 
     if (question.save_response) {
       response_api.saveResponseMobile(
+        apiUrl,
         question.responses['response_' + answerKey],
         question.id,
         user.id,
