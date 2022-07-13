@@ -1,3 +1,10 @@
+# [1.123.0](https://github.com/SocialGouv/Tumeplay/compare/v1.122.0...v1.123.0) (2022-07-13)
+
+
+### Features
+
+* responsive text and button for order page  + better referent page for Android ([#415](https://github.com/SocialGouv/Tumeplay/issues/415)) ([58d1f67](https://github.com/SocialGouv/Tumeplay/commit/58d1f67c51e0da6400e7fd3a89d324156144a02d))
+
 # [1.122.0](https://github.com/SocialGouv/Tumeplay/compare/v1.121.1...v1.122.0) (2022-07-13)
 
 
