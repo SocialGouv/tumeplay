@@ -1,3 +1,10 @@
+# [1.122.0](https://github.com/SocialGouv/Tumeplay/compare/v1.121.1...v1.122.0) (2022-07-13)
+
+
+### Features
+
+* init parrainage feature and menu integration in homepage ([#410](https://github.com/SocialGouv/Tumeplay/issues/410)) ([7e3ea82](https://github.com/SocialGouv/Tumeplay/commit/7e3ea82cff853a774f902cb91760cf0dd1c6ad58))
+
 ## [1.121.1](https://github.com/SocialGouv/Tumeplay/compare/v1.121.0...v1.121.1) (2022-07-13)
 
 
