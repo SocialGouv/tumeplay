@@ -57,6 +57,7 @@ export const POST_MOBILE_USER = gql`
     $ageRange: String!
     $region: String!
     $user_id: String!
+    $sponsor_code: String
   ) {
     createUtilisateursMobile(
       input: {
@@ -69,6 +70,7 @@ export const POST_MOBILE_USER = gql`
           region: $region
           has_followed_tutorial: $has_followed_tutorial
           user_id: $user_id
+          sponsor_code: $sponsor_code
         }
       }
     ) {

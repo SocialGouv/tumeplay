@@ -147,7 +147,7 @@ const Journey2 = () => {
       </View>
       <SvgXml
         xml={backgroundSvg}
-        width="50%"
+        width="55%"
         height={config.deviceWidth * 0.78}
         style={styles.image}
       />
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: config.deviceHeight / 3.75,
     zIndex: -1,
-    right: -10,
+    right: -20,
   },
   wheel: {
     zIndex: 1,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   condom: {
     position: 'relative',
     top: config.deviceHeight / 5.5,
-    right: -25,
+    right: -30,
     zIndex: -1,
   },
   theme_card: {

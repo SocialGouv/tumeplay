@@ -1,5 +1,11 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Text from '../components/Text';
 import LevelPointsIndicator from '../components/LevelPointsIndicator';
 import Title from '../components/Title';
@@ -15,6 +21,7 @@ import config from '../../config';
 import {WebView} from 'react-native-webview';
 import Event from '../services/api/matomo';
 import handleRedirection from '../services/handleRedirection';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const HomePage = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -124,6 +131,16 @@ const HomePage = ({navigation}) => {
     <ScrollView>
       <Container background={null} style={styles.container}>
         <Title />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() =>
+            navigation.navigate('Menu', {
+              user: user,
+            })
+          }>
+          <Icon name="more-horiz" size={30} />
+          <Text>Menu</Text>
+        </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}
           onPress={() => navigation.navigate('Parcours')}
@@ -216,6 +233,11 @@ const styles = StyleSheet.create({
     height: 440,
     width: 520,
     backgroundColor: '#FBF7F2',
+  },
+  menuButton: {
+    position: 'absolute',
+    top: config.deviceHeight * 0.06,
+    right: 20,
   },
 });
 

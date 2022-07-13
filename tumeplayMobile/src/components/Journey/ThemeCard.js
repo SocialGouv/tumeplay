@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    width: 20,
     marginLeft: 5,
   },
   text: {
@@ -63,11 +64,14 @@ const styles = StyleSheet.create({
     fontSize:
       config.deviceHeight >= 667
         ? config.deviceHeight * 0.012
-        : config.deviceHeight * 0.015,
+        : config.deviceHeight * 0.016,
     fontWeight: 'bold',
     paddingVertical: 1,
     textAlign: 'left',
-    width: config.deviceWidth * 0.3,
+    width:
+      config.deviceHeight > 667
+        ? config.deviceWidth * 0.3
+        : config.deviceWidth * 0.2,
   },
   imageContainer: {
     width: 30,
