@@ -1,3 +1,10 @@
+## [1.121.1](https://github.com/SocialGouv/Tumeplay/compare/v1.121.0...v1.121.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* defensive export code ([c9f9909](https://github.com/SocialGouv/Tumeplay/commit/c9f9909bdcbe1c1f6e7b9212e6d5100c0050066b))
+
 # [1.121.0](https://github.com/SocialGouv/Tumeplay/compare/v1.120.0...v1.121.0) (2022-07-11)
 
 
