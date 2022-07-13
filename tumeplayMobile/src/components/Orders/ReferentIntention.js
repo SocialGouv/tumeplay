@@ -1,4 +1,5 @@
-import {View, Image, Text, StyleSheet, Alert} from 'react-native';
+import {View, Image, StyleSheet, Alert} from 'react-native';
+import Text from '../../components/Text';
 import React, {useState, useEffect} from 'react';
 import warning from '../../assets/Exclamation.png';
 import RenderHTML from 'react-native-render-html';
@@ -50,7 +51,6 @@ const ReferentIntention = props => {
 
   useEffect(() => {
     if (get_user_intention) {
-      console.log('get_user_intention', get_user_intention.data);
       setIsDone(get_user_intention.data?.referentSurveys.length !== 0);
     }
   }, [get_user_intention]);
@@ -150,7 +150,7 @@ const ReferentIntention = props => {
           la sexualité :
         </Text>
       </View>
-      <View style={{paddingLeft: 10, width: '90%', marginBottom: 30}}>
+      <View style={{paddingLeft: 10, width: '90%', marginBottom: 10}}>
         <RenderHTML
           source={htmlText}
           contentWidth={config.deviceWidth * 0.8}
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginTop: 20,
+    marginTop: 10,
     padding: 20,
   },
   image: {
@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: config.deviceWidth * 0.04,
+    color: Colors.black,
     width: '100%',
   },
   middleContainer: {
@@ -262,10 +263,11 @@ const pickerSelectStyle = StyleSheet.create({
     paddingHorizontal: 0,
   },
   inputAndroid: {
-    width: '100%',
+    minWidth: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
     fontSize: config.deviceWidth * 0.04,
+    paddingRight: 30, // to ensure the text is never behind the icon
     paddingVertical: 20,
     color: 'black',
   },
