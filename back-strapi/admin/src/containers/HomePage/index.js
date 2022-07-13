@@ -705,7 +705,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
             ) {
               boxName = item.content[0].produits
                 .map((p) => {
-                  return p.quantity + "#" + p.produit.title;
+                  return p.quantity + "#" + p.produit?.title;
                 })
                 .join("/");
             } else {
