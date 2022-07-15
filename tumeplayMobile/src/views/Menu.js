@@ -15,7 +15,7 @@ const Menu = () => {
         style={styles.button}
         onPress={() => navigation.goBack()}>
         <Icon name="close" size={25} />
-        <Text>Femer</Text>
+        <Text>Fermer</Text>
       </TouchableOpacity>
       <SponsorCard navigation={navigation} />
     </Container>
