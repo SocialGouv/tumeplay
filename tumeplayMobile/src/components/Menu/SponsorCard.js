@@ -6,7 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const SponsorCard = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Sponsorship')}
+      style={styles.container}>
       <Icon name="redeem" size={40} color="#000" style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Parraine tes amis</Text>
@@ -17,7 +19,7 @@ const SponsorCard = ({navigation}) => {
       <TouchableOpacity onPress={() => navigation.navigate('Sponsorship')}>
         <Icon name="chevron-right" size={40} color="#000" />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
