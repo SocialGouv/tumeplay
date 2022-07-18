@@ -1,3 +1,10 @@
+## [1.124.2](https://github.com/SocialGouv/Tumeplay/compare/v1.124.1...v1.124.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* decrement box stock after order creation ([#412](https://github.com/SocialGouv/Tumeplay/issues/412)) ([d26510d](https://github.com/SocialGouv/Tumeplay/commit/d26510d4e95b0e26f4d7925f397d04ec26481a9d))
+
 ## [1.124.1](https://github.com/SocialGouv/Tumeplay/compare/v1.124.0...v1.124.1) (2022-07-15)
 
 
