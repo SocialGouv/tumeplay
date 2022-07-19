@@ -1,3 +1,10 @@
+# [1.125.0](https://github.com/SocialGouv/Tumeplay/compare/v1.124.4...v1.125.0) (2022-07-19)
+
+
+### Features
+
+* new email order template ([#414](https://github.com/SocialGouv/Tumeplay/issues/414)) ([d234b0b](https://github.com/SocialGouv/Tumeplay/commit/d234b0b092524e1aa7b34b5dd81ef0291d2ecb61))
+
 ## [1.124.4](https://github.com/SocialGouv/Tumeplay/compare/v1.124.3...v1.124.4) (2022-07-19)
 
 
