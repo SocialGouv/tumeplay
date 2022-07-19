@@ -314,7 +314,7 @@ module.exports = {
         "utf8"
       );
       const order_email_html = await fs.promises.readFile(
-        "emails/order_confirmation_V2.html",
+        "emails/order_confirmation_v2.html",
         "utf8"
       );
 
