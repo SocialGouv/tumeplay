@@ -1,3 +1,10 @@
+## [1.124.3](https://github.com/SocialGouv/Tumeplay/compare/v1.124.2...v1.124.3) (2022-07-19)
+
+
+### Bug Fixes
+
+* integrate PO and UX reviews ([#417](https://github.com/SocialGouv/Tumeplay/issues/417)) ([a8f8455](https://github.com/SocialGouv/Tumeplay/commit/a8f8455daf169e6d04290bd00d8fa1d309a4f765))
+
 ## [1.124.2](https://github.com/SocialGouv/Tumeplay/compare/v1.124.1...v1.124.2) (2022-07-18)
 
 
