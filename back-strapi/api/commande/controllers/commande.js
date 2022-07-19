@@ -269,7 +269,7 @@ module.exports = {
     entity = await strapi.services.commande.create(tmp_order);
 
     if (ctx.request.body.content[0].__component === "commandes.box") {
-      strapi.services["box"].decrement(box_id, 1);
+      strapi.services["box"].decrement(ctx.request.body.content[0].box, 1);
     }
 
     //SAVE LABEL IF MONDIAL RELAY
