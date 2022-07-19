@@ -61,18 +61,18 @@ const ReferentIntention = props => {
 
   const yes_picker_props = [
     {
-      label: 'C’est l’occasion de poser des questions',
-      value: 'C’est l’occasion de poser des questions',
+      label: 'Oui, pour poser des questions',
+      value: 'Oui, pour poser des questions',
       key: 1,
     },
     {
-      label: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
-      value: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
+      label: 'Oui c’est plus discret vis-à-vis de mes parents',
+      value: 'Oui c’est plus discret vis-à-vis de mes parents',
       key: 2,
     },
     {
-      label: 'Il n’y a pas de point relais près de chez moi ',
-      value: 'Il n’y a pas de point relais près de chez moi ',
+      label: 'Pas de point relais près de chez moi',
+      value: 'Pas de point relais près de chez moi',
       key: 3,
     },
     {
@@ -81,26 +81,26 @@ const ReferentIntention = props => {
       key: 4,
     },
     {
-      label: 'Autre (Précise la raison en quelques mots)',
-      value: 'Autre (Précise la raison en quelques mots)',
+      label: 'Autre (Précise la raison)',
+      value: 'Autre (Précise la raison)',
       key: 5,
     },
   ];
 
   const no_picker_props = [
     {
-      label: 'Je ne veux pas parler de sexualité avec un référent.e',
-      value: 'Je ne veux pas parler de sexualité avec un référent.e',
+      label: 'Pas envie de parler de sexualité avec un.e référent.e',
+      value: 'Pas envie de parler de sexualité avec un.e référent.e',
       key: 1,
     },
     {
-      label: 'Je n’ai pas besoin de parler à un référent.e',
-      value: 'Je n’ai pas besoin de parler à un référent.e',
+      label: 'Pas besoin de parler à un.e référent.e',
+      value: 'Pas besoin de parler à un.e référent.e',
       key: 2,
     },
     {
-      label: 'C’est contraignant pour récupérer le kit (rdv etc.)',
-      value: 'C’est contraignant pour récupérer le kit (rdv etc.)',
+      label: 'C’est compliqué pour récupérer le kit (rdv …)',
+      value: 'C’est compliqué pour récupérer le kit (rdv …)',
       key: 3,
     },
     {
@@ -181,6 +181,8 @@ const ReferentIntention = props => {
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
+          pickerProps={{numberOfLines: 10}}
+          textInputProps={{multiline: true}}
           Icon={() => (
             <Icon
               name="chevron-down"
