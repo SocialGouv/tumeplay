@@ -6,6 +6,7 @@ const fs = require("fs");
 const soap = require("soap");
 const path = require("path");
 const md5 = require("md5");
+
 const mondialRelayUrl = "https://api.mondialrelay.com/Web_Services.asmx?WSDL";
 const mondialRelayBaseUrl = "https://www.mondialrelay.com";
 const PDFMerger = require("pdf-merger-js");
@@ -220,6 +221,7 @@ module.exports = {
       const box_id = ctx.request.body.content[0].box;
       const available = await strapi.services.box.checkBoxAvailability(box_id);
 
+
       if (!available) {
         return ctx.conflict(null, "Box " + box_id + " unavailable");
       }
@@ -244,6 +246,7 @@ module.exports = {
 
           if (mrResult.STAT === "0") {
             mondial_relay_pdf_url =
+
               mondialRelayBaseUrl +
               mrResult.URL_Etiquette.replace("format=A4", "format=10x15");
           } else {
@@ -317,7 +320,7 @@ module.exports = {
         "utf8"
       );
       const order_email_html = await fs.promises.readFile(
-        "emails/order_confirmation.html",
+        "emails/order_confirmation_v2.html",
         "utf8"
       );
 
