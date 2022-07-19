@@ -1,3 +1,10 @@
+## [1.124.4](https://github.com/SocialGouv/Tumeplay/compare/v1.124.3...v1.124.4) (2022-07-19)
+
+
+### Bug Fixes
+
+* decrement order ([59a013f](https://github.com/SocialGouv/Tumeplay/commit/59a013fa44857482a1b84f60d1c7a804448d1af4))
+
 ## [1.124.3](https://github.com/SocialGouv/Tumeplay/compare/v1.124.2...v1.124.3) (2022-07-19)
 
 
