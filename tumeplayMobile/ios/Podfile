@@ -18,7 +18,6 @@ target 'tumeplayMobile' do
     :hermes_enabled => false
   )
 
-  pod 'BNFMatomo', :podspec => '../node_modules/react-native-matomo/BNFMatomo.podspec'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'

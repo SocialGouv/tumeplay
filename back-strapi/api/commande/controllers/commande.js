@@ -6,7 +6,9 @@ const fs = require("fs");
 const soap = require("soap");
 const path = require("path");
 const md5 = require("md5");
-const mondialRelayUrl = "http://api.mondialrelay.com/Web_Services.asmx?WSDL";
+
+const mondialRelayUrl = "https://api.mondialrelay.com/Web_Services.asmx?WSDL";
+const mondialRelayBaseUrl = "https://www.mondialrelay.com";
 const PDFMerger = require("pdf-merger-js");
 const axios = require("axios");
 const html_to_pdf = require("html-pdf-node");
@@ -219,9 +221,8 @@ module.exports = {
       const box_id = ctx.request.body.content[0].box;
       const available = await strapi.services.box.checkBoxAvailability(box_id);
 
-      if (available) {
-        strapi.services["box"].decrement(box_id, 1);
-      } else {
+
+      if (!available) {
         return ctx.conflict(null, "Box " + box_id + " unavailable");
       }
       const box = await strapi.services.box.findOne({ id: box_id });
@@ -245,7 +246,8 @@ module.exports = {
 
           if (mrResult.STAT === "0") {
             mondial_relay_pdf_url =
-              "http://www.mondialrelay.com" +
+
+              mondialRelayBaseUrl +
               mrResult.URL_Etiquette.replace("format=A4", "format=10x15");
           } else {
             return ctx.methodNotAllowed(
@@ -268,6 +270,10 @@ module.exports = {
 
     //SAVE ORDER
     entity = await strapi.services.commande.create(tmp_order);
+
+    if (ctx.request.body.content[0].__component === "commandes.box") {
+      strapi.services["box"].decrement(ctx.request.body.content[0].box, 1);
+    }
 
     //SAVE LABEL IF MONDIAL RELAY
     if (mondial_relay_pdf_url) {

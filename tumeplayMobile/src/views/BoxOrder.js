@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 50,
     minHeight: 38,
-    width: 125,
+    width: config.deviceWidth * 0.3,
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
@@ -244,9 +244,13 @@ const styles = StyleSheet.create({
   },
   whiteText: {
     color: '#FFF',
+    fontSize: config.deviceWidth * 0.03,
+    paddingHorizontal: 1,
   },
   blackText: {
     color: '#000',
+    fontSize: config.deviceWidth * 0.03,
+    paddingHorizontal: 1,
   },
   activeButton: {
     backgroundColor: '#000',

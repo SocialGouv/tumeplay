@@ -1,5 +1,5 @@
 PODS:
-  - BNFMatomo (0.2.1):
+  - BNFMatomo (0.2.2):
     - React
   - boost (1.76.0)
   - BVLinearGradient (2.5.6):
@@ -373,6 +373,8 @@ PODS:
   - RNSentry (3.4.0):
     - React-Core
     - Sentry (= 7.11.0)
+  - RNShare (7.6.4):
+    - React-Core
   - RNSVG (12.1.1):
     - React
   - RNVectorIcons (9.0.0):
@@ -385,7 +387,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - BNFMatomo (from `../node_modules/react-native-matomo/BNFMatomo.podspec`)
+  - BNFMatomo (from `../node_modules/react-native-matomo-fork`)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -455,6 +457,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
+  - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -479,7 +482,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   BNFMatomo:
-    :podspec: "../node_modules/react-native-matomo/BNFMatomo.podspec"
+    :path: "../node_modules/react-native-matomo-fork"
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   BVLinearGradient:
@@ -570,6 +573,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSentry:
     :path: "../node_modules/@sentry/react-native"
+  RNShare:
+    :path: "../node_modules/react-native-share"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -577,13 +582,8 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
-CHECKOUT OPTIONS:
-  BNFMatomo:
-    :commit: d649a7ea909857fff0ebd15509f4dc8363edb84e
-    :git: https://github.com/vivantehealth/react-native-matomo.git
-
 SPEC CHECKSUMS:
-  BNFMatomo: 9953e25e6c5fc70e5a9c465a9bc315cfc43495b5
+  BNFMatomo: 6b4c43b81c35bce0deef881599a83c28ccbd36f1
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -642,12 +642,13 @@ SPEC CHECKSUMS:
   RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
   RNSentry: ec3c033c13bcb65c79f19d54ca54c514d1832bb5
+  RNShare: 4406f61af043027b695c3a0b8f39e2c2bdacde12
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
   Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 0868c6581e26099da162c244afefebde9862abe6
+PODFILE CHECKSUM: 6b5a61fc42e3bbfcd822b08ca93ef623ed3df797
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

@@ -1,4 +1,5 @@
-import {View, Image, Text, StyleSheet, Alert} from 'react-native';
+import {View, Image, StyleSheet, Alert} from 'react-native';
+import Text from '../../components/Text';
 import React, {useState, useEffect} from 'react';
 import warning from '../../assets/Exclamation.png';
 import RenderHTML from 'react-native-render-html';
@@ -50,7 +51,6 @@ const ReferentIntention = props => {
 
   useEffect(() => {
     if (get_user_intention) {
-      console.log('get_user_intention', get_user_intention.data);
       setIsDone(get_user_intention.data?.referentSurveys.length !== 0);
     }
   }, [get_user_intention]);
@@ -61,18 +61,18 @@ const ReferentIntention = props => {
 
   const yes_picker_props = [
     {
-      label: 'C’est l’occasion de poser des questions',
-      value: 'C’est l’occasion de poser des questions',
+      label: 'Oui, pour poser des questions',
+      value: 'Oui, pour poser des questions',
       key: 1,
     },
     {
-      label: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
-      value: 'Je préfère, c’est plus discret vis-à-vis de mes parents',
+      label: 'Oui c’est plus discret vis-à-vis de mes parents',
+      value: 'Oui c’est plus discret vis-à-vis de mes parents',
       key: 2,
     },
     {
-      label: 'Il n’y a pas de point relais près de chez moi ',
-      value: 'Il n’y a pas de point relais près de chez moi ',
+      label: 'Pas de point relais près de chez moi',
+      value: 'Pas de point relais près de chez moi',
       key: 3,
     },
     {
@@ -81,26 +81,26 @@ const ReferentIntention = props => {
       key: 4,
     },
     {
-      label: 'Autre (Précise la raison en quelques mots)',
-      value: 'Autre (Précise la raison en quelques mots)',
+      label: 'Autre (Précise la raison)',
+      value: 'Autre (Précise la raison)',
       key: 5,
     },
   ];
 
   const no_picker_props = [
     {
-      label: 'Je ne veux pas parler de sexualité avec un référent.e',
-      value: 'Je ne veux pas parler de sexualité avec un référent.e',
+      label: 'Pas envie de parler de sexualité avec un.e référent.e',
+      value: 'Pas envie de parler de sexualité avec un.e référent.e',
       key: 1,
     },
     {
-      label: 'Je n’ai pas besoin de parler à un référent.e',
-      value: 'Je n’ai pas besoin de parler à un référent.e',
+      label: 'Pas besoin de parler à un.e référent.e',
+      value: 'Pas besoin de parler à un.e référent.e',
       key: 2,
     },
     {
-      label: 'C’est contraignant pour récupérer le kit (rdv etc.)',
-      value: 'C’est contraignant pour récupérer le kit (rdv etc.)',
+      label: 'C’est compliqué pour récupérer le kit (rdv …)',
+      value: 'C’est compliqué pour récupérer le kit (rdv …)',
       key: 3,
     },
     {
@@ -150,7 +150,7 @@ const ReferentIntention = props => {
           la sexualité :
         </Text>
       </View>
-      <View style={{paddingLeft: 10, width: '90%', marginBottom: 30}}>
+      <View style={{paddingLeft: 10, width: '90%', marginBottom: 10}}>
         <RenderHTML
           source={htmlText}
           contentWidth={config.deviceWidth * 0.8}
@@ -181,6 +181,8 @@ const ReferentIntention = props => {
           onValueChange={e => handlePickerAnswerSelection(e)}
           style={{...pickerSelectStyle}}
           useNativeAndroidPickerStyle={false}
+          pickerProps={{numberOfLines: 10}}
+          textInputProps={{multiline: true}}
           Icon={() => (
             <Icon
               name="chevron-down"
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginTop: 20,
+    marginTop: 10,
     padding: 20,
   },
   image: {
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: config.deviceWidth * 0.04,
+    color: Colors.black,
     width: '100%',
   },
   middleContainer: {
@@ -262,10 +265,11 @@ const pickerSelectStyle = StyleSheet.create({
     paddingHorizontal: 0,
   },
   inputAndroid: {
-    width: '100%',
+    minWidth: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey,
     fontSize: config.deviceWidth * 0.04,
+    paddingRight: 30, // to ensure the text is never behind the icon
     paddingVertical: 20,
     color: 'black',
   },

@@ -240,12 +240,25 @@ module.exports = {
     );
 
     let credits = 0;
-    if (user.level > 5) {
-      credits = 3;
-    } else if (user.level > 3) {
-      credits = 2;
-    } else if (user.level > 1) {
-      credits = 1;
+
+    if (version === "3") {
+      credits = user.level - 1;
+    } else {
+      if (user.level > 5) {
+        credits = 3;
+      } else if (user.level > 3) {
+        credits = 2;
+      } else if (user.level > 1) {
+        credits = 1;
+      }
+    }
+
+    const nb_parrainage = await strapi.services["utilisateurs-mobile"].count({
+      sponsor_code: `TUNOUSPLAY${user.id}`,
+    });
+
+    if (nb_parrainage >= 3) {
+      credits += 1;
     }
 
     user.credits = credits - orders_count;

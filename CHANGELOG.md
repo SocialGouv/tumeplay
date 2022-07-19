@@ -1,3 +1,73 @@
+## [1.124.4](https://github.com/SocialGouv/Tumeplay/compare/v1.124.3...v1.124.4) (2022-07-19)
+
+
+### Bug Fixes
+
+* decrement order ([59a013f](https://github.com/SocialGouv/Tumeplay/commit/59a013fa44857482a1b84f60d1c7a804448d1af4))
+
+## [1.124.3](https://github.com/SocialGouv/Tumeplay/compare/v1.124.2...v1.124.3) (2022-07-19)
+
+
+### Bug Fixes
+
+* integrate PO and UX reviews ([#417](https://github.com/SocialGouv/Tumeplay/issues/417)) ([a8f8455](https://github.com/SocialGouv/Tumeplay/commit/a8f8455daf169e6d04290bd00d8fa1d309a4f765))
+
+## [1.124.2](https://github.com/SocialGouv/Tumeplay/compare/v1.124.1...v1.124.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* decrement box stock after order creation ([#412](https://github.com/SocialGouv/Tumeplay/issues/412)) ([d26510d](https://github.com/SocialGouv/Tumeplay/commit/d26510d4e95b0e26f4d7925f397d04ec26481a9d))
+
+## [1.124.1](https://github.com/SocialGouv/Tumeplay/compare/v1.124.0...v1.124.1) (2022-07-15)
+
+
+### Bug Fixes
+
+* UX/UI feedback integration ([#416](https://github.com/SocialGouv/Tumeplay/issues/416)) ([9a9a114](https://github.com/SocialGouv/Tumeplay/commit/9a9a114a35b8a565dace21d1747aea7d76cd497b))
+
+# [1.124.0](https://github.com/SocialGouv/Tumeplay/compare/v1.123.0...v1.124.0) (2022-07-15)
+
+
+### Features
+
+* new release version tracking ([cc917b3](https://github.com/SocialGouv/Tumeplay/commit/cc917b3a5ae623c1dc654a83b38994b0acd138af))
+
+# [1.123.0](https://github.com/SocialGouv/Tumeplay/compare/v1.122.0...v1.123.0) (2022-07-13)
+
+
+### Features
+
+* responsive text and button for order page  + better referent page for Android ([#415](https://github.com/SocialGouv/Tumeplay/issues/415)) ([58d1f67](https://github.com/SocialGouv/Tumeplay/commit/58d1f67c51e0da6400e7fd3a89d324156144a02d))
+
+# [1.122.0](https://github.com/SocialGouv/Tumeplay/compare/v1.121.1...v1.122.0) (2022-07-13)
+
+
+### Features
+
+* init parrainage feature and menu integration in homepage ([#410](https://github.com/SocialGouv/Tumeplay/issues/410)) ([7e3ea82](https://github.com/SocialGouv/Tumeplay/commit/7e3ea82cff853a774f902cb91760cf0dd1c6ad58))
+
+## [1.121.1](https://github.com/SocialGouv/Tumeplay/compare/v1.121.0...v1.121.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* defensive export code ([c9f9909](https://github.com/SocialGouv/Tumeplay/commit/c9f9909bdcbe1c1f6e7b9212e6d5100c0050066b))
+
+# [1.121.0](https://github.com/SocialGouv/Tumeplay/compare/v1.120.0...v1.121.0) (2022-07-11)
+
+
+### Features
+
+* display quantity-product on export when box sur mesure ([#413](https://github.com/SocialGouv/Tumeplay/issues/413)) ([2481b18](https://github.com/SocialGouv/Tumeplay/commit/2481b1832640aebc7c3afd692f07faa0e1a47f15))
+
+# [1.120.0](https://github.com/SocialGouv/Tumeplay/compare/v1.119.0...v1.120.0) (2022-07-07)
+
+
+### Features
+
+* tracking version update after release ([8bfa7d1](https://github.com/SocialGouv/Tumeplay/commit/8bfa7d1edee029e7f124c3e45883ea2565e087d2))
+
 # [1.119.0](https://github.com/SocialGouv/Tumeplay/compare/v1.118.0...v1.119.0) (2022-07-06)
 
 
