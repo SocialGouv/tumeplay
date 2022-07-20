@@ -1,3 +1,10 @@
+## [1.125.1](https://github.com/SocialGouv/Tumeplay/compare/v1.125.0...v1.125.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* button position on referent page ([d05f501](https://github.com/SocialGouv/Tumeplay/commit/d05f501f1fa3a7e57e485a11181afe4d65504fe6))
+
 # [1.125.0](https://github.com/SocialGouv/Tumeplay/compare/v1.124.4...v1.125.0) (2022-07-19)
 
 
