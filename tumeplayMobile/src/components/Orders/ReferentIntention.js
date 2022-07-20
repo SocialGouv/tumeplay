@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     alignSelf: 'center',
-    bottom: 30,
+    bottom: 20,
     marginVertical: '5%',
   },
   imageHand: {
