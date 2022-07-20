@@ -1,3 +1,10 @@
+# [1.126.0](https://github.com/SocialGouv/Tumeplay/compare/v1.125.1...v1.126.0) (2022-07-20)
+
+
+### Features
+
+* fourth response on questions ([#418](https://github.com/SocialGouv/Tumeplay/issues/418)) ([7bdf27d](https://github.com/SocialGouv/Tumeplay/commit/7bdf27d11896b2e52edc29b1a3628e30bb822d24))
+
 ## [1.125.1](https://github.com/SocialGouv/Tumeplay/compare/v1.125.0...v1.125.1) (2022-07-20)
 
 
