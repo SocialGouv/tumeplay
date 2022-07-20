@@ -39,6 +39,7 @@ export const GET_MODULES_BY_THEMATIQUES = gql`
           response_A: response_A_mobile
           response_B: response_B_mobile
           response_C: response_C_mobile
+          response_D: response_D_mobile
           right_answer
         }
       }
@@ -73,6 +74,7 @@ export const GET_MODULES = gql`
           response_A: response_A_mobile
           response_B: response_B_mobile
           response_C: response_C_mobile
+          response_D: response_D_mobile
           right_answer
         }
       }

@@ -27,6 +27,7 @@ const questionsModuleToArray = async (questions) => {
           response_A: question.responses.response_A_mobile,
           response_B: question.responses.response_B_mobile,
           response_C: question.responses.response_C_mobile,
+          response_D: question.responses.response_D_mobile,
         },
       });
     }

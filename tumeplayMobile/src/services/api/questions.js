@@ -12,6 +12,7 @@ export const GET_QUESTIONS = gql`
         response_A: response_A_mobile
         response_B: response_B_mobile
         response_C: response_C_mobile
+        response_D: response_D_mobile
         response_A_neutral
         response_B_neutral
         response_C_neutral

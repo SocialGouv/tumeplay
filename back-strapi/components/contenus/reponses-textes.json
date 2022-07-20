@@ -42,7 +42,8 @@
       "enum": [
         "A",
         "B",
-        "C"
+        "C",
+        "D"
       ],
       "required": true
     },
@@ -53,6 +54,9 @@
       "type": "string"
     },
     "response_C_mobile": {
+      "type": "string"
+    },
+    "response_D_mobile": {
       "type": "string"
     }
   }

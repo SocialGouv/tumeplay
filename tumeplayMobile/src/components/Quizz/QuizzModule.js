@@ -59,7 +59,7 @@ const QuizzModule = ({navigation, route}) => {
     let tmpResponses = [];
     for (let [key, value] of Object.entries(question?.responses)) {
       key = key.substring(9, 10);
-      tmpResponses?.push({key, value});
+      if (value) tmpResponses?.push({key, value});
     }
     tmpResponses?.shift();
     _.remove(tmpResponses, {key: 'w'});
@@ -399,7 +399,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     flex: 0.3,
     paddingHorizontal: 24,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 70,
   },
   responseContainer: {
     flexDirection: 'row',
