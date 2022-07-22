@@ -16,10 +16,13 @@
       "type": "boolean"
     },
     "detailed_informations": {
-      "type": "text"
+      "type": "string"
     },
     "utilisateurs_mobile": {
       "model": "utilisateurs-mobile"
+    },
+    "other_informations": {
+      "type": "text"
     }
   }
 }
