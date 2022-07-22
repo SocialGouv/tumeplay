@@ -1,3 +1,10 @@
+# [1.127.0](https://github.com/SocialGouv/Tumeplay/compare/v1.126.0...v1.127.0) (2022-07-22)
+
+
+### Features
+
+* adding precision field on other response selection in referent … ([#419](https://github.com/SocialGouv/Tumeplay/issues/419)) ([2b1f9bf](https://github.com/SocialGouv/Tumeplay/commit/2b1f9bfa687f6a88a91c77773bada6a2ad1b2a81))
+
 # [1.126.0](https://github.com/SocialGouv/Tumeplay/compare/v1.125.1...v1.126.0) (2022-07-20)
 
 
