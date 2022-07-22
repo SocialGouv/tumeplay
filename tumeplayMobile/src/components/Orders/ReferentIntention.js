@@ -1,4 +1,11 @@
-import {View, Image, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  Alert,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import Text from '../../components/Text';
 import React, {useState, useEffect} from 'react';
 import warning from '../../assets/Exclamation.png';
@@ -20,6 +27,7 @@ const ReferentIntention = props => {
   const {user} = props;
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [precisedAnswer, setPrecisedAnswer] = useState(null);
+  const [otherInformations, setOtherInformations] = useState(null);
   const [isDone, setIsDone] = useState(false);
   const [answers] = useState([
     {
@@ -36,7 +44,7 @@ const ReferentIntention = props => {
 
   const [create_referent_intention] = useMutation(CREATE_REFERENT_INTENTION, {
     onError(error) {
-      console.log('error on signup', error);
+      console.log('error on intention creation', error);
     },
     onCompleted() {
       setIsDone(true);
@@ -104,8 +112,8 @@ const ReferentIntention = props => {
       key: 3,
     },
     {
-      label: 'Autre (Précise la raison en quelques mots)',
-      value: 'Autre (Précise la raison en quelques mots)',
+      label: 'Autre (Précise la raison)',
+      value: 'Autre (Précise la raison)',
       key: 4,
     },
   ];
@@ -124,6 +132,7 @@ const ReferentIntention = props => {
         variables: {
           is_interested: selectedAnswer === 1 ? true : false,
           detailed_informations: precisedAnswer.toString(),
+          other_informations: otherInformations.toString(),
           utilisateurs_mobile: user.id,
         },
       });
@@ -133,7 +142,7 @@ const ReferentIntention = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image source={warning} style={styles.image} />
       <Text
         style={[
@@ -193,6 +202,13 @@ const ReferentIntention = props => {
           )}
         />
       )}
+      {!isDone && precisedAnswer === 'Autre (Précise la raison)' && (
+        <TextInput
+          style={styles.textInput}
+          placeholder="Précise la raison"
+          onChangeText={e => setOtherInformations(e)}
+        />
+      )}
       {!isDone && precisedAnswer !== null && (
         <Button
           style={styles.button}
@@ -207,17 +223,19 @@ const ReferentIntention = props => {
           Merci ! Ton retour a été envoyé !
         </Text>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    height: '100%',
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
     marginTop: 10,
     padding: 20,
+    position: 'relative',
   },
   image: {
     alignSelf: 'center',
@@ -246,15 +264,26 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   button: {
-    position: 'absolute',
+    // position: 'absolute',
     alignSelf: 'center',
-    bottom: 20,
-    marginVertical: '5%',
+    // bottom: 0,
+    marginTop: '10%',
   },
   imageHand: {
     width: 30,
     height: 30,
     left: -10,
+  },
+  textInput: {
+    width: '100%',
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.grey,
+    height: 50,
+    marginTop: 10,
+    fontSize: 18,
+    color: 'black',
+    paddingBottom: 5,
+    textAlignVertical: 'center',
   },
 });
 
