@@ -142,73 +142,81 @@ const ReferentIntention = props => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Image source={warning} style={styles.image} />
-      <Text
-        style={[
-          styles.title,
-          {alignSelf: 'center', textAlign: 'center', paddingHorizontal: 35},
-        ]}>
-        La livraison de kit chez un référent{' '}
-        <Text style={styles.bold}>n'est pas encore disponible.</Text>
-      </Text>
-      <View style={styles.middleContainer}>
-        <Image source={hand} style={styles.imageHand} />
-        <Text style={styles.description}>
-          Un.e référent.e t'accompagne pour répondre à tes questions autour de
-          la sexualité :
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <Image source={warning} style={styles.image} />
+        <Text
+          style={[
+            styles.title,
+            {alignSelf: 'center', textAlign: 'center', paddingHorizontal: 35},
+          ]}>
+          La livraison de kit chez un référent{' '}
+          <Text style={styles.bold}>n'est pas encore disponible.</Text>
         </Text>
-      </View>
-      <View style={{paddingLeft: 10, width: '90%', marginBottom: 10}}>
-        <RenderHTML
-          source={htmlText}
-          contentWidth={config.deviceWidth * 0.8}
-          baseStyle={styles.description}
-        />
-      </View>
-      {!isDone && (
-        <Text style={[styles.title, styles.bold]}>
-          Serais-tu intéressé.e pour récupérer ton kit auprès d'un référent.e ?
-        </Text>
-      )}
-      {!isDone &&
-        answers.map((answer, _i) => {
-          return (
-            <RadioButton
-              key={answer.id}
-              text={answer.text}
-              selected={answer.id === selectedAnswer}
-              onPress={() => handleAnswerSelection(answer)}
-            />
-          );
-        })}
-      {!isDone && selectedAnswer && (
-        <RNPickerSelect
-          placeholder={{label: 'Pour quelle raison ?', value: null}}
-          name={selectedAnswer === 1 ? 'yesAnswer' : 'noAnswer'}
-          items={selectedAnswer === 1 ? yes_picker_props : no_picker_props}
-          onValueChange={e => handlePickerAnswerSelection(e)}
-          style={{...pickerSelectStyle}}
-          useNativeAndroidPickerStyle={false}
-          pickerProps={{numberOfLines: 10}}
-          textInputProps={{multiline: true}}
-          Icon={() => (
-            <Icon
-              name="chevron-down"
-              size={20}
-              style={pickerSelectStyle.icon}
-              color={Colors.grey}
-            />
-          )}
-        />
-      )}
-      {!isDone && precisedAnswer === 'Autre (Précise la raison)' && (
-        <TextInput
-          style={styles.textInput}
-          placeholder="Précise la raison"
-          onChangeText={e => setOtherInformations(e)}
-        />
-      )}
+        <View style={styles.middleContainer}>
+          <Image source={hand} style={styles.imageHand} />
+          <Text style={styles.description}>
+            Un.e référent.e t'accompagne pour répondre à tes questions autour de
+            la sexualité :
+          </Text>
+        </View>
+        <View style={{paddingLeft: 10, width: '90%', marginBottom: 10}}>
+          <RenderHTML
+            source={htmlText}
+            contentWidth={config.deviceWidth * 0.8}
+            baseStyle={styles.description}
+          />
+        </View>
+        {!isDone && (
+          <Text style={[styles.title, styles.bold]}>
+            Serais-tu intéressé.e pour récupérer ton kit auprès d'un référent.e
+            ?
+          </Text>
+        )}
+        {!isDone &&
+          answers.map((answer, _i) => {
+            return (
+              <RadioButton
+                key={answer.id}
+                text={answer.text}
+                selected={answer.id === selectedAnswer}
+                onPress={() => handleAnswerSelection(answer)}
+              />
+            );
+          })}
+        {!isDone && selectedAnswer && (
+          <RNPickerSelect
+            placeholder={{label: 'Pour quelle raison ?', value: null}}
+            name={selectedAnswer === 1 ? 'yesAnswer' : 'noAnswer'}
+            items={selectedAnswer === 1 ? yes_picker_props : no_picker_props}
+            onValueChange={e => handlePickerAnswerSelection(e)}
+            style={{...pickerSelectStyle}}
+            useNativeAndroidPickerStyle={false}
+            pickerProps={{numberOfLines: 10}}
+            textInputProps={{multiline: true}}
+            Icon={() => (
+              <Icon
+                name="chevron-down"
+                size={20}
+                style={pickerSelectStyle.icon}
+                color={Colors.grey}
+              />
+            )}
+          />
+        )}
+        {!isDone && precisedAnswer === 'Autre (Précise la raison)' && (
+          <TextInput
+            style={styles.textInput}
+            placeholder="Précise la raison"
+            onChangeText={e => setOtherInformations(e)}
+          />
+        )}
+        {isDone && (
+          <Text style={[styles.title, styles.bold, {alignSelf: 'center'}]}>
+            Merci ! Ton retour a été envoyé !
+          </Text>
+        )}
+      </ScrollView>
       {!isDone && precisedAnswer !== null && (
         <Button
           style={styles.button}
@@ -218,24 +226,17 @@ const ReferentIntention = props => {
           icon={true}
         />
       )}
-      {isDone && (
-        <Text style={[styles.title, styles.bold, {alignSelf: 'center'}]}>
-          Merci ! Ton retour a été envoyé !
-        </Text>
-      )}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: '100%',
-    // justifyContent: 'flex-start',
-    // alignItems: 'flex-start',
     marginTop: 10,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
     position: 'relative',
+    marginBottom: 110,
   },
   image: {
     alignSelf: 'center',
@@ -264,10 +265,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   button: {
-    // position: 'absolute',
+    position: 'absolute',
     alignSelf: 'center',
-    // bottom: 0,
-    marginTop: '10%',
+    bottom: 30,
+    marginVertical: '5%',
   },
   imageHand: {
     width: 30,
