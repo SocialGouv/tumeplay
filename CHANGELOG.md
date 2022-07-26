@@ -1,3 +1,10 @@
+## [1.127.1](https://github.com/SocialGouv/Tumeplay/compare/v1.127.0...v1.127.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* use strapi user and strapi group instead of root ([#420](https://github.com/SocialGouv/Tumeplay/issues/420)) ([d24a29c](https://github.com/SocialGouv/Tumeplay/commit/d24a29ca8185cefc5f555142fe63cfcfbe58818b))
+
 # [1.127.0](https://github.com/SocialGouv/Tumeplay/compare/v1.126.0...v1.127.0) (2022-07-22)
 
 
