@@ -31,5 +31,8 @@ const Event = {
   boxOrdered: () => {
     Matomo.trackScreen('/order-confirmation', 'Kit commandé');
   },
+  wheelThematicsSeen: label => {
+    Matomo.trackEvent('Journey2', 'Thematique', label, 1);
+  },
 };
 export default Event;
