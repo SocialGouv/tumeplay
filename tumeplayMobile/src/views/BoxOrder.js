@@ -13,6 +13,7 @@ import PickupOrder from '../components/Orders/Pickup/PickupOrder';
 import PickupOrderUserInfos from '../components/Orders/Pickup/PickupOrderUserInfos';
 import AppContext from '../../AppContext';
 import ReferentIntention from '../components/Orders/ReferentIntention';
+import Event from '../services/api/matomo';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
@@ -29,6 +30,23 @@ const Box = ({navigation, route}) => {
   const [orderConfirm, setOrderConfirm] = useState(false);
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [selectedPOI, setSelectedPOI] = useState(null);
+
+  const handleDeliveryModeSelection = mode => {
+    setDeliveryMode(mode);
+    switch (mode) {
+      case 'home':
+        Event.deliveryModeEvent('home');
+        break;
+      case 'pickup':
+        Event.deliveryModeEvent('pickup');
+        break;
+      case 'referent':
+        Event.deliveryModeEvent('referent');
+        break;
+      default:
+        break;
+    }
+  };
 
   const displayCorrectScreen = () => {
     if (deliveryMode === 'home') {
@@ -100,7 +118,7 @@ const Box = ({navigation, route}) => {
             </Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
-                onPress={() => setDeliveryMode('home')}
+                onPress={() => handleDeliveryModeSelection('home')}
                 style={[
                   styles.buttons,
                   deliveryMode === 'home'
@@ -124,7 +142,7 @@ const Box = ({navigation, route}) => {
                 placement="bottom"
                 onClose={() => setToolTipVisible(false)}>
                 <TouchableOpacity
-                  onPress={() => setDeliveryMode('pickup')}
+                  onPress={() => handleDeliveryModeSelection('pickup')}
                   style={[
                     styles.buttons,
                     styles.buttonRight,
@@ -143,7 +161,7 @@ const Box = ({navigation, route}) => {
                 </TouchableOpacity>
               </Tooltip>
               <TouchableOpacity
-                onPress={() => setDeliveryMode('referent')}
+                onPress={() => handleDeliveryModeSelection('referent')}
                 style={[
                   styles.buttons,
                   styles.buttonRight,

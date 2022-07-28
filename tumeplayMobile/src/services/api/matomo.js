@@ -7,6 +7,9 @@ const Event = {
   orderPageEvent: label => {
     Matomo.trackEvent('Order', 'Page', label, 1);
   },
+  deliveryModeEvent: label => {
+    Matomo.trackEvent('Order', 'Mode de livraison', label, 1);
+  },
   boxChoiceEvent: label => {
     Matomo.trackEvent('Order', 'Choice', label, 1);
   },
