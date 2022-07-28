@@ -110,7 +110,17 @@ module.exports = {
     if (remaining_modules.length > 0) {
       let next_module = {};
       if (version === "3") {
-        next_module = _.sample(remaining_modules);
+        const required_module = modules.find((m) => {
+          return m.is_mandatory;
+        });
+        const history_required_module = user.history.find(
+          (h) => h.module_id === required_module.id
+        );
+        if (required_module && history_required_module.status === "success") {
+          next_module = _.sample(remaining_modules);
+        } else {
+          next_module = required_module;
+        }
       } else {
         if (
           modules_by_levels[user.level] &&

@@ -25,6 +25,10 @@
     },
     "title": {
       "type": "string"
+    },
+    "is_mandatory": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
