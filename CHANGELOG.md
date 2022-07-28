@@ -1,3 +1,10 @@
+# [1.129.0](https://github.com/SocialGouv/Tumeplay/compare/v1.128.0...v1.129.0) (2022-07-28)
+
+
+### Features
+
+* implementing mandatory module ([#423](https://github.com/SocialGouv/Tumeplay/issues/423)) ([7ff2d29](https://github.com/SocialGouv/Tumeplay/commit/7ff2d29ba2a04443b27d1420fb41ad0dab955b72))
+
 # [1.128.0](https://github.com/SocialGouv/Tumeplay/compare/v1.127.1...v1.128.0) (2022-07-28)
 
 
