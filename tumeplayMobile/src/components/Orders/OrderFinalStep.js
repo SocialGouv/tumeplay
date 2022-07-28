@@ -25,7 +25,7 @@ const OrderFinalStep = () => {
         style={styles.topButton}
         onPress={() => navigation.navigate('Home', {screen: 'Accueil'})}>
         <Icon name="close" size={25} />
-        <Text>Femer</Text>
+        <Text>Fermer</Text>
       </TouchableOpacity>
       <Title title="MERCI !" />
       <Image source={congrats} style={styles.image} />
