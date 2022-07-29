@@ -1,3 +1,10 @@
+## [1.130.1](https://github.com/SocialGouv/Tumeplay/compare/v1.130.0...v1.130.1) (2022-07-29)
+
+
+### Bug Fixes
+
+* save answers property on backend ([87c3e9e](https://github.com/SocialGouv/Tumeplay/commit/87c3e9e11b4deb09eb4f798e50264a7d620bff2f))
+
 # [1.130.0](https://github.com/SocialGouv/Tumeplay/compare/v1.129.0...v1.130.0) (2022-07-29)
 
 
