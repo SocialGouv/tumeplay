@@ -1,3 +1,10 @@
+# [1.130.0](https://github.com/SocialGouv/Tumeplay/compare/v1.129.0...v1.130.0) (2022-07-29)
+
+
+### Features
+
+* adjusting rule to fit EU requirements ([#424](https://github.com/SocialGouv/Tumeplay/issues/424)) ([cf11e2e](https://github.com/SocialGouv/Tumeplay/commit/cf11e2eb401fb6f651a3a6032e389281baddb364))
+
 # [1.129.0](https://github.com/SocialGouv/Tumeplay/compare/v1.128.0...v1.129.0) (2022-07-28)
 
 
