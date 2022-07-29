@@ -116,7 +116,12 @@ module.exports = {
         const history_required_module = user.history.find(
           (h) => h.module_id === required_module.id
         );
-        if (required_module && history_required_module.status === "success") {
+        if (
+          (required_module &&
+            history_required_module &&
+            history_required_module.status === "success") ||
+          user.history.length > 0
+        ) {
           next_module = _.sample(remaining_modules);
         } else {
           next_module = required_module;
