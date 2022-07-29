@@ -22,6 +22,7 @@ const questionsModuleToArray = async (questions) => {
         text_question: question.text_question_mobile,
         text_answer: question.text_answer,
         kind: question.kind,
+        save_response: question.save_response,
         responses: {
           right_answer: question.responses.right_answer,
           response_A: question.responses.response_A_mobile,
