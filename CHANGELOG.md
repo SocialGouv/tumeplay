@@ -1,3 +1,10 @@
+## [1.130.2](https://github.com/SocialGouv/Tumeplay/compare/v1.130.1...v1.130.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* **devops:** strapi rights on volume public/uploads ([a4b005f](https://github.com/SocialGouv/Tumeplay/commit/a4b005f4bf4aefa2252e7a7fc269dca2b137e97f))
+
 ## [1.130.1](https://github.com/SocialGouv/Tumeplay/compare/v1.130.0...v1.130.1) (2022-07-29)
 
 
