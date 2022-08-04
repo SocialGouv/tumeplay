@@ -20,7 +20,8 @@ RUN yarn build
 EXPOSE 1337
 
 RUN adduser --uid 1001 strapi && \
-    chown -R strapi:strapi /app
+    chown -R strapi:strapi /app && \
+		chown -R strapi:strapi /app/public
 USER 1001
 
 
