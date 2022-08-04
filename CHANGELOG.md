@@ -1,3 +1,10 @@
+## [1.131.1](https://github.com/SocialGouv/Tumeplay/compare/v1.131.0...v1.131.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* reset mondial relay api to http ([8cc3373](https://github.com/SocialGouv/Tumeplay/commit/8cc33733bb5a7d8166f7e1c7ab815785e271f667))
+
 # [1.131.0](https://github.com/SocialGouv/Tumeplay/compare/v1.130.3...v1.131.0) (2022-08-04)
 
 
