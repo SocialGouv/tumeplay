@@ -1,3 +1,10 @@
+## [1.131.4](https://github.com/SocialGouv/Tumeplay/compare/v1.131.3...v1.131.4) (2022-08-04)
+
+
+### Bug Fixes
+
+* additionnal products issue ([37d242b](https://github.com/SocialGouv/Tumeplay/commit/37d242bef60f56aaec20acf47af3925d082c9d78))
+
 ## [1.131.3](https://github.com/SocialGouv/Tumeplay/compare/v1.131.2...v1.131.3) (2022-08-04)
 
 
