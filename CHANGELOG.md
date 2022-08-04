@@ -1,3 +1,10 @@
+# [1.131.0](https://github.com/SocialGouv/Tumeplay/compare/v1.130.3...v1.131.0) (2022-08-04)
+
+
+### Features
+
+* add link to MR pdf onclick ([686c6a5](https://github.com/SocialGouv/Tumeplay/commit/686c6a5f9a1fdbba82b61ccefa7862aec627bc15))
+
 ## [1.130.3](https://github.com/SocialGouv/Tumeplay/compare/v1.130.2...v1.130.3) (2022-08-04)
 
 
