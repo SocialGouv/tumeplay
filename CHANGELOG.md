@@ -1,3 +1,10 @@
+## [1.130.3](https://github.com/SocialGouv/Tumeplay/compare/v1.130.2...v1.130.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* root user strapi ([665ae71](https://github.com/SocialGouv/Tumeplay/commit/665ae71a6635a1f6cc6fdacc15ffd22d0062074d))
+
 ## [1.130.2](https://github.com/SocialGouv/Tumeplay/compare/v1.130.1...v1.130.2) (2022-08-04)
 
 
