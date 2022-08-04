@@ -1,3 +1,17 @@
+## [1.131.2](https://github.com/SocialGouv/Tumeplay/compare/v1.131.1...v1.131.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* strapi user instead of root ([1c1e954](https://github.com/SocialGouv/Tumeplay/commit/1c1e9543a2e20c1e18cd53be71239e8432a2658e))
+
+## [1.131.1](https://github.com/SocialGouv/Tumeplay/compare/v1.131.0...v1.131.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* reset mondial relay api to http ([8cc3373](https://github.com/SocialGouv/Tumeplay/commit/8cc33733bb5a7d8166f7e1c7ab815785e271f667))
+
 # [1.131.0](https://github.com/SocialGouv/Tumeplay/compare/v1.130.3...v1.131.0) (2022-08-04)
 
 
