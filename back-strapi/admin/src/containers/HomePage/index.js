@@ -720,10 +720,10 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
           }
 
           if (
-            item.content[0].additionnal_products &&
-            item.content[0].additionnal_products.length > 0
+            item.additionnal_products &&
+            item.additionnal_products.length > 0
           ) {
-            additionnal_products += item.content[0].additionnal_products
+            additionnal_products += item.additionnal_products
               .map((p) => {
                 return p.quantity + "#" + p.produit?.title;
               })
