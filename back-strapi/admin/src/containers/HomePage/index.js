@@ -591,7 +591,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
         route = "commandes";
         if (userRole.includes("pilote-guyane")) {
           csvData.push(
-            '"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Jeune - Genre";"Jeune - Age";"Jeune - Quartier";"Jeune - Code postal";"Jeune - Ville";"Jeune - Scolarité";"Jeune - Commentaires";"Jeune - Ancienne box";"Jeune - Première box ?";"Délivrée";"Code postal";"Nom POI";"Envoyée"'
+            '"ID";"Date";"Box";"Type";"Zone";"Lieu de rencontre";"Jeune - Genre";"Jeune - Age";"Jeune - Quartier";"Jeune - Code postal";"Jeune - Ville";"Jeune - Scolarité";"Jeune - Commentaires";"Jeune - Ancienne box";"Jeune - Première box ?";"Délivrée";"Code postal";"Nom POI";"Envoyée";"Produits additionnels"'
           );
         } else {
           csvData.push(
@@ -694,6 +694,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
           break;
         case "commandes":
           let boxName = "";
+          let additionnal_products = "";
 
           if (
             item.content &&
@@ -716,6 +717,17 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
             item.content[0].__component === "commandes.box"
           ) {
             boxName = item.content[0].box.title;
+          }
+
+          if (
+            item.content[0].additionnal_products &&
+            item.content[0].additionnal_products.length > 0
+          ) {
+            additionnal_products += item.content[0].additionnal_products
+              .map((p) => {
+                return p.quantity + "#" + p.produit?.title;
+              })
+              .join("/");
           }
 
           if (userRole.includes("pilote-guyane")) {
@@ -784,6 +796,8 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
                 (item.poi_name ? item.poi_name : "") +
                 '";"' +
                 (item.sent ? "Oui" : "Non") +
+                '";"' +
+                additionnal_products +
                 '"'
             );
           } else {
