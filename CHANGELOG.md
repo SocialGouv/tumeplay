@@ -1,3 +1,10 @@
+## [1.131.3](https://github.com/SocialGouv/Tumeplay/compare/v1.131.2...v1.131.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* add additionnal products for pilote guyane order export ([c9ce8d1](https://github.com/SocialGouv/Tumeplay/commit/c9ce8d1d9e31ebe75da6b2147dabcdfcdc699498))
+
 ## [1.131.2](https://github.com/SocialGouv/Tumeplay/compare/v1.131.1...v1.131.2) (2022-08-04)
 
 
