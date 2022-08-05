@@ -79,7 +79,7 @@ const Home = ({
     <Box bg="lightPink" pb={16} minH="100vh">
       <Container maxW="6xl">
         <Header />
-        <InputGroup size="lg">
+        <InputGroup size="lg" mb={10} mt={4}>
           <InputLeftAddon>
             <SearchIcon />
           </InputLeftAddon>
@@ -88,7 +88,6 @@ const Home = ({
               setSearch(e.target.value)
             }
             placeholder="Contraception, clitoris, consentement..."
-            mb={10}
             value={search || ""}
           />
           {search && (

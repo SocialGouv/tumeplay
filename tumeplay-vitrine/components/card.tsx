@@ -27,7 +27,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <Text ml={1}>{post.thematique_mobile.title}</Text>
       </Box>
       <Box p={3}>
-        <Text fontSize="2xl" noOfLines={2} h={20}>
+        <Text fontSize="2xl" mb={1}>
           {post.title_mobile}
         </Text>
         <Text>{post.text}</Text>
