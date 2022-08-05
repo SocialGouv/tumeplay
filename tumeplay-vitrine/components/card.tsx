@@ -7,10 +7,14 @@ const PostCard = ({ post }: PostCardProps) => {
     <Box
       borderWidth={1}
       borderColor="gray.300"
-      borderRadius="md"
+      borderRadius="lg"
       _hover={{ position: "relative", bottom: "2px", boxShadow: "md" }}
     >
-      <Image src={post.etiquette?.image.url} alt={post.title} />
+      <Image
+        src={post.etiquette?.image.url}
+        alt={post.title}
+        borderTopRadius="lg"
+      />
       <Box
         display="flex"
         alignItems="center"
