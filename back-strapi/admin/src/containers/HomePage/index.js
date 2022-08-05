@@ -568,7 +568,7 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
     return data;
   };
 
-  const exportData = async (type) => {
+  const exportData = async (type, year) => {
     let route = "";
     let csvData = [];
 
@@ -603,8 +603,12 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
 
     let exportParams = {
       _limit: 1000,
-      created_at_gte: new Date("01/01/2022").getTime(),
     };
+
+    if (year) {
+      exportParams.created_at_gte = new Date(`01/01/${year}`).getTime();
+      exportParams.created_at_lte = new Date(`01/01/${year + 1}`).getTime();
+    }
 
     if (userRole.includes("pilote-guyane")) {
       switch (type) {
@@ -879,9 +883,15 @@ const HomePage = ({ global: { plugins }, history: { push } }) => {
               </button>
               <button
                 className="button button-primary ml-4"
-                onClick={() => exportData("commandes")}
+                onClick={() => exportData("commandes", 2022)}
               >
-                Exporter les commandes
+                Exporter les commandes 2022
+              </button>
+              <button
+                className="button button-primary ml-4"
+                onClick={() => exportData("commandes", 2021)}
+              >
+                Exporter les commandes 2021
               </button>
             </div>
           </div>
