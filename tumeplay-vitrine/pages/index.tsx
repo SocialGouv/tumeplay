@@ -76,7 +76,7 @@ const Home = ({
   }, [debouncedValue]);
 
   return (
-    <Box bg="lightPink" pb={16} minH="100vh">
+    <Box bg="lightPink" pb={16} minH="100vh" pt={10}>
       <Container maxW="6xl">
         <Header />
         <InputGroup size="lg" mb={10} mt={4}>
