@@ -102,13 +102,15 @@ const Home = ({
           themes={themes}
         />
         {isLoading ? (
-          <Spinner
-            size="xl"
-            color="primary"
-            mx="auto"
-            display="block"
-            mt={16}
-          />
+          <Box h="100vh">
+            <Spinner
+              size="xl"
+              color="primary"
+              mx="auto"
+              display="block"
+              mt={16}
+            />
+          </Box>
         ) : posts.length > 0 ? (
           <Box mt={4}>
             <ResponsiveMasonry
