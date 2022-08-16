@@ -132,7 +132,7 @@ const ReferentIntention = props => {
         variables: {
           is_interested: selectedAnswer === 1 ? true : false,
           detailed_informations: precisedAnswer.toString(),
-          other_informations: otherInformations.toString(),
+          other_informations: otherInformations && otherInformations.toString(),
           utilisateurs_mobile: user.id,
         },
       });

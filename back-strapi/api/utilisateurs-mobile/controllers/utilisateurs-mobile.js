@@ -163,7 +163,6 @@ module.exports = {
           theme_image: _.get(next_module, "thematique_mobile.image", ""),
         };
       }
-
       user.next_module_questions = await questionsModuleToArray(
         next_module?.questions
       );
