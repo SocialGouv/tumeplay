@@ -13,6 +13,7 @@ import TextBase from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_ALL_MODULES} from '../services/api/modules';
 import {useNavigation} from '@react-navigation/native';
+import Event from '../services/api/matomo';
 
 const Journey2 = () => {
   const navigation = useNavigation();
@@ -54,6 +55,7 @@ const Journey2 = () => {
   `;
 
   const handleNavigation = () => {
+    Event.wheelThematicsSeen(`journey_${selectedTheme.title}`);
     navigation.navigate('ModuleList', {
       theme: selectedTheme,
       count: moduleCount,
