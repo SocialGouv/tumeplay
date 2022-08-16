@@ -76,7 +76,7 @@ const QuizzModule = ({navigation, route}) => {
       Vibration.vibrate(200);
     }
 
-    if (question.save_response) {
+    if (question.save_response && firstTry) {
       response_api.saveResponseMobile(
         apiUrl,
         question.responses['response_' + answerKey],

@@ -118,10 +118,9 @@ module.exports = {
           (h) => h.module_id === required_module.id
         );
         if (
-          (required_module &&
-            history_required_module &&
-            history_required_module.status === "success") ||
-          user.history.length > 0
+          required_module &&
+          history_required_module &&
+          history_required_module.status === "success"
         ) {
           next_module = _.sample(remaining_modules);
         } else {
