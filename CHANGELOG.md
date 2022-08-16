@@ -1,3 +1,10 @@
+# [1.134.0](https://github.com/SocialGouv/Tumeplay/compare/v1.133.1...v1.134.0) (2022-08-16)
+
+
+### Features
+
+* adding firstTry params on save answer & removing failing condition on mandatory quizz ([#426](https://github.com/SocialGouv/Tumeplay/issues/426)) ([a2f9449](https://github.com/SocialGouv/Tumeplay/commit/a2f9449facd769f2ee9c0275d2459dd4498f18d5))
+
 ## [1.133.1](https://github.com/SocialGouv/Tumeplay/compare/v1.133.0...v1.133.1) (2022-08-16)
 
 
