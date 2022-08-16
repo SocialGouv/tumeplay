@@ -1,3 +1,10 @@
+# [1.133.0](https://github.com/SocialGouv/Tumeplay/compare/v1.132.0...v1.133.0) (2022-08-16)
+
+
+### Features
+
+* adding order tracker on order pickup page ([#421](https://github.com/SocialGouv/Tumeplay/issues/421)) ([14c7b4f](https://github.com/SocialGouv/Tumeplay/commit/14c7b4f7a47e08f1f48bde58f5df4ca9b5f45d50))
+
 # [1.132.0](https://github.com/SocialGouv/Tumeplay/compare/v1.131.4...v1.132.0) (2022-08-05)
 
 
