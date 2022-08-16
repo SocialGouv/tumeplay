@@ -55,7 +55,7 @@ const Journey2 = () => {
   `;
 
   const handleNavigation = () => {
-    Event.wheelThematicsSeen(selectedTheme.title);
+    Event.wheelThematicsSeen(`journey_${selectedTheme.title}`);
     navigation.navigate('ModuleList', {
       theme: selectedTheme,
       count: moduleCount,
