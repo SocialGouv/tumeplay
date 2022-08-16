@@ -1,3 +1,10 @@
+## [1.133.1](https://github.com/SocialGouv/Tumeplay/compare/v1.133.0...v1.133.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* fixing intention saving when no toher informations ([#425](https://github.com/SocialGouv/Tumeplay/issues/425)) ([3f04440](https://github.com/SocialGouv/Tumeplay/commit/3f0444067717bd4b58f905bffa3ea5f9271a11ff))
+
 # [1.133.0](https://github.com/SocialGouv/Tumeplay/compare/v1.132.0...v1.133.0) (2022-08-16)
 
 
