@@ -1,14 +1,5 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
-import Link from "next/link";
 import { PostCardProps } from "../../../components/interfaces";
 
 const ThemePage = ({ post }: PostCardProps) => {
@@ -27,7 +18,7 @@ const ThemePage = ({ post }: PostCardProps) => {
           bg="gray.50"
           px={5}
           py={3}
-          blur="2px"
+          backdropFilter="invert(100%)"
           borderRadius={8}
           shadow="2xl"
         >

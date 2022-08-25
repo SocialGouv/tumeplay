@@ -48,12 +48,21 @@ const Header = () => {
           pt={2}
         >
           <Link href="https://www.instagram.com/tumeplay/" target="_blank">
-            <Image src="/instagram.png" alt="Instgram Tumeplay" w={12} mr={2} />
+            <Image
+              src="/instagram.png"
+              alt="Instgram Tumeplay"
+              w={12}
+              mr={2}
+              opacity={1}
+              _hover={{ opacity: 0.8 }}
+            />
           </Link>
           <Link
             href="https://www.tiktok.com/@tu.me.play"
             target="_blank"
             w={12}
+            opacity={1}
+            _hover={{ opacity: 0.8 }}
           >
             <Image src="/Tiktok.png" alt="Instgram TikTok" />
           </Link>

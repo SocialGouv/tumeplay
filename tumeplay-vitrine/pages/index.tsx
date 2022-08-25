@@ -11,7 +11,6 @@ import {
   InputGroup,
   InputLeftAddon,
   InputRightElement,
-  Flex,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -141,11 +140,12 @@ const Home = ({
         px={3}
         display="flex"
         justifyContent="flex-end"
-        width="100vw"
         textAlign="right"
       >
         <Link href="/legal" target="_blank">
-          <Text mr={3}>Mentions légales</Text>
+          <Text cursor="pointer" mr={3}>
+            Mentions légales
+          </Text>
         </Link>
         <Link href="/cgu" target="_blank">
           Conditions générales d&apos;utilisation
