@@ -1,4 +1,4 @@
-import { Box, Image, Heading, Link } from "@chakra-ui/react";
+import { Box, Image, Heading, Link, Text } from "@chakra-ui/react";
 
 const Header = () => {
   return (
@@ -35,6 +35,29 @@ const Header = () => {
             _hover={{ opacity: 0.6 }}
           />
         </Link>
+      </Box>
+      <Box pt={5}>
+        <Text fontWeight="bold">
+          Retrouve nous sur les réseaux sociaux pour découvrir nos actualités
+        </Text>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          justifyItems="center"
+          pt={2}
+        >
+          <Link href="https://www.instagram.com/tumeplay/" target="_blank">
+            <Image src="/instagram.png" alt="Instgram Tumeplay" w={12} mr={2} />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@tu.me.play"
+            target="_blank"
+            w={12}
+          >
+            <Image src="/Tiktok.png" alt="Instgram TikTok" />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

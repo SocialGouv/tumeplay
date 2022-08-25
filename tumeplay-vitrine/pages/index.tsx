@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Post, Theme, ZPost } from "./api/posts/types";
+import Head from "next/head";
 import {
   Box,
   Container,
@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputLeftAddon,
   InputRightElement,
+  Flex,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -18,6 +19,7 @@ import Themes from "../components/themes";
 import PostCard from "../components/card";
 import { useDebounce } from "usehooks-ts";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Link from "next/link";
 
 const Home = ({
   initialPosts,
@@ -32,6 +34,63 @@ const Home = ({
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState<string | null>(null);
   const debouncedValue = useDebounce<string>(search as string, 500);
+  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+
+  const handleScroll = () => {
+    const windowH = window.innerHeight;
+    const documentH = document.documentElement.scrollTop;
+    const documentOffset = document.documentElement.offsetHeight;
+    if (documentH + windowH <= documentOffset - 3500) {
+      return;
+    }
+    setIsFetching(true);
+  };
+
+  const loadmoreContent = () => {
+    axios
+      .get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
+        params: {
+          _start: posts.length + 1,
+          _limit: 30,
+          title_mobile_null: false,
+          thematique_mobile_null: false,
+        },
+      })
+      .then((res) => {
+        const adjustedRes = (res.data || []).map((c: Post) => ({
+          ...c,
+          image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
+          thematique_mobile: {
+            ...c.thematique_mobile,
+            image: {
+              ...c.thematique_mobile?.image,
+              url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile?.image?.url,
+            },
+          },
+          etiquette: {
+            ...c.etiquette,
+            image: {
+              ...c.etiquette?.image,
+              url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
+            },
+          },
+        }));
+        const tmpPosts = [...posts, ...adjustedRes];
+        setPosts(tmpPosts);
+        setIsFetching(false);
+      });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isFetching) return;
+    loadmoreContent();
+  }, [isFetching]);
 
   const fetchPosts = (themeIds: number[]) => {
     setIsLoading(true);
@@ -76,10 +135,37 @@ const Home = ({
   }, [debouncedValue]);
 
   return (
-    <Box bg="lightPink" pb={16} minH="100vh" pt={10}>
-      <Container maxW="6xl">
+    <Box bg="lightPink" pb={16} minH="100vh">
+      <Box
+        my={0}
+        px={3}
+        display="flex"
+        justifyContent="flex-end"
+        width="100vw"
+        textAlign="right"
+      >
+        <Link href="/legal" target="_blank">
+          <Text mr={3}>Mentions légales</Text>
+        </Link>
+        <Link href="/cgu" target="_blank">
+          Conditions générales d&apos;utilisation
+        </Link>
+      </Box>
+      <Container maxW="6xl" pt={5}>
+        <Head>
+          <title>Tumeplay</title>
+          <meta property="og:title" content="Tumeplay" key="title" />
+          <meta
+            property="og:description"
+            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            key="description"
+          />
+          <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
+          <meta property="og:url" content="https://tumeplay.com" key="url" />
+          <link rel="icon" href="/logo-tumeplay.svg" />
+        </Head>
         <Header />
-        <InputGroup size="lg" mb={10} mt={4}>
+        <InputGroup size="lg" mb={10}>
           <InputLeftAddon>
             <SearchIcon />
           </InputLeftAddon>

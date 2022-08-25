@@ -1,8 +1,12 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Link, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { Post } from "../pages/api/posts/types";
 import { PostCardProps } from "./interfaces";
+import slugify from "@sindresorhus/slugify";
 
 const PostCard = ({ post }: PostCardProps) => {
+  const slug = slugify(post.title);
+
   return (
     <Box
       borderWidth={1}
@@ -31,9 +35,16 @@ const PostCard = ({ post }: PostCardProps) => {
         <Text ml={1}>{post.thematique_mobile.title}</Text>
       </Box>
       <Box p={3}>
-        <Text fontSize="2xl" mb={1}>
-          {post.title_mobile}
-        </Text>
+        <NextLink
+          href={{
+            pathname: `/posts/${post.id}/${slug}`,
+          }}
+          passHref
+        >
+          <Link fontSize="2xl" mb={1} cursor="pointer">
+            {post.title_mobile}
+          </Link>
+        </NextLink>
         <Text>{post.text}</Text>
       </Box>
     </Box>
