@@ -406,7 +406,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: config.deviceWidth,
     backgroundColor: '#FFF',
-    flex: 0.7,
+    flex: 0.9,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingHorizontal: 24,
