@@ -1,3 +1,10 @@
+# [1.136.0](https://github.com/SocialGouv/Tumeplay/compare/v1.135.0...v1.136.0) (2022-08-30)
+
+
+### Features
+
+* animated quizz screen ([#429](https://github.com/SocialGouv/Tumeplay/issues/429)) ([e42b5c9](https://github.com/SocialGouv/Tumeplay/commit/e42b5c90f4f5642e46330e71604cafa7706b7ff1))
+
 # [1.135.0](https://github.com/SocialGouv/Tumeplay/compare/v1.134.0...v1.135.0) (2022-08-30)
 
 
