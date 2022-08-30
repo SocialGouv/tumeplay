@@ -6,16 +6,17 @@ import {
   View,
 } from 'react-native';
 import Text from '../components/Text';
-import React, {useContext, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import Container from '../components/global/Container';
 import config from '../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Button from '../components/Button';
 import AppContext from '../../AppContext';
 import ContentCard from '../components/Contents/ContentCard';
 import {Colors} from '../styles/Style';
 import _ from 'lodash';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const Search = () => {
   const navigation = useNavigation();
@@ -23,11 +24,28 @@ const Search = () => {
   const [contents, setContents] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [noResults, setNoResults] = useState(false);
-  const {apiUrl, readContentIDs} = useContext(AppContext);
+  const {apiUrl} = useContext(AppContext);
+  const [readContentIDs, setReadContentIDs] = useState([]);
 
   const handleChangeText = text => {
     setSearchText(text);
   };
+
+  const retrieveReadContentIds = async () => {
+    let encryptedContentIds = await EncryptedStorage.getItem('readContentIDs');
+    if (encryptedContentIds) {
+      let tmpContentIDs = JSON.parse(encryptedContentIds);
+      setReadContentIDs([...tmpContentIDs.content_ids]);
+    } else {
+      setReadContentIDs([]);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      retrieveReadContentIds();
+    }, []),
+  );
 
   const handleSearch = () => {
     setContents([]);
