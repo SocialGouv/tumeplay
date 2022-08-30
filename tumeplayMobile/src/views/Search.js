@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     color: Colors.primary,
   },
   title: {
-    marginTop: 14,
+    marginVertical: 14,
     fontWeight: 'bold',
   },
 });
