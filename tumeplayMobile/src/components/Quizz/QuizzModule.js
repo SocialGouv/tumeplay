@@ -25,6 +25,7 @@ import response_api from '../../services/api/responses';
 import GestureRecognizer from '../../lib/swipe';
 import right from '../../assets/Right.png';
 import wrong from '../../assets/Wrong.png';
+import * as Animatable from 'react-native-animatable';
 
 const QuizzModule = ({navigation, route}) => {
   const questions = route?.params?.questions;
@@ -48,6 +49,8 @@ const QuizzModule = ({navigation, route}) => {
   const [showAnswer, setshowAnswer] = useState(false);
   const [answeredKey, setAnswerKey] = useState('');
   const [createHistory] = useMutation(CREATE_HISTORY);
+
+  const AnimatedView = Animatable.createAnimatableComponent(View);
 
   let fullQuizzLength = useRef(questions.length);
   const progress =
@@ -256,12 +259,18 @@ const QuizzModule = ({navigation, route}) => {
                 styles.answersContainer,
                 question.kind === 'Trou' ? styles.answersContainerTrou : '',
               ]}>
-              <ScrollView style={{width: '100%'}}>{displayAnswer}</ScrollView>
+              {!hasAnswered && (
+                <ScrollView style={{width: '100%'}}>{displayAnswer}</ScrollView>
+              )}
             </View>
           </View>
         </View>
         {hasAnswered ? (
-          <View style={styles.bottomContainer}>
+          <AnimatedView
+            animation="fadeInUp"
+            duration={500}
+            easing="ease-in-out"
+            style={[styles.bottomContainer]}>
             {answeredKey === question.responses.right_answer ? (
               <View style={styles.responseContainer}>
                 <Image style={styles.bottomImage} source={right} />
@@ -278,7 +287,7 @@ const QuizzModule = ({navigation, route}) => {
                 {!showAnswer && question?.text_answer}
               </Text>
             </ScrollView>
-          </View>
+          </AnimatedView>
         ) : null}
       </Container>
       {hasAnswered ? (
@@ -366,10 +375,10 @@ const styles = StyleSheet.create({
   textAnswer: {
     marginTop: 10,
     marginBottom: 20,
-    textAlign: 'left',
+    textAlign: 'justify',
     paddingLeft: 26,
     fontWeight: '500',
-    fontSize: config.deviceWidth * 0.035,
+    fontSize: config.deviceWidth * 0.041,
   },
   buttonContainer: {
     paddingHorizontal: 15,
@@ -397,7 +406,9 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: config.deviceWidth,
     backgroundColor: '#FFF',
-    flex: 0.3,
+    flex: 0.9,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
     paddingHorizontal: 24,
     paddingTop: 10,
     paddingBottom: 70,
