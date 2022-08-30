@@ -94,7 +94,10 @@ const Search = () => {
       {!isSearching && contents.length > 0 && (
         <FlatList
           keyExtractor={item => item.id}
-          data={_.sortBy(contents, ['niveau.value']) || []}
+          data={
+            _.sortBy(contents, ['niveau.value', 'thematique_mobile.title']) ||
+            []
+          }
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           style={styles.list}
