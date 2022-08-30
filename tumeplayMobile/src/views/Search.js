@@ -15,6 +15,7 @@ import Button from '../components/Button';
 import AppContext from '../../AppContext';
 import ContentCard from '../components/Contents/ContentCard';
 import {Colors} from '../styles/Style';
+import _ from 'lodash';
 
 const Search = () => {
   const navigation = useNavigation();
@@ -93,7 +94,7 @@ const Search = () => {
       {!isSearching && contents.length > 0 && (
         <FlatList
           keyExtractor={item => item.id}
-          data={contents || []}
+          data={_.sortBy(contents, ['niveau.value']) || []}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           style={styles.list}
