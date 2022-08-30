@@ -12,7 +12,6 @@ import AppContext from '../../AppContext';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
-import {GET_COLOR_THEME} from '../services/api/themes';
 import config from '../../config';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Snackbar from '../components/Contents/Snackbar';

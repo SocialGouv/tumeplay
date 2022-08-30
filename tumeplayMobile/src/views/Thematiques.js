@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import Text from '../components/Text';
 import {useQuery} from '@apollo/client';
 import {GET_THEMES} from '../services/api/themes';
@@ -11,6 +11,8 @@ import background from '../assets/Main_BG.png';
 import Container from '../components/global/Container';
 import TopLevelPointIndicator from '../components/Quizz/TopLevelPointIndicator';
 import AppContext from '../../AppContext';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import config from '../../config';
 
 export default function Thematiques(props) {
   const {navigation} = props;
@@ -43,6 +45,13 @@ export default function Thematiques(props) {
 
   return (
     <Container style={styles.container} source={background}>
+      <TouchableOpacity
+        style={styles.searchButton}
+        onPress={() => {
+          navigation.navigate('Search');
+        }}>
+        <Icon name="search" size={30} />
+      </TouchableOpacity>
       <TopLevelPointIndicator style={styles.pointsIndicator} />
       <Title title="Informe-toi" />
       <Text style={styles.subtitle}>Sélectionne un thème qui t'intéresse</Text>
@@ -99,5 +108,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  searchButton: {
+    position: 'absolute',
+    top: config.deviceHeight * 0.06,
+    left: 20,
   },
 });
