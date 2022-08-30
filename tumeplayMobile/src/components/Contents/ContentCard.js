@@ -8,22 +8,16 @@ import ReadIndicator from './ReadIndicator';
 import AppContext from '../../../AppContext';
 
 const ContentCard = props => {
-  const {
-    item,
-    backgroundColor,
-    navigation,
-    content_ids,
-    locked,
-    theme_id,
-    readContentIDs,
-  } = props;
+  const {item, navigation, content_ids, locked, search, readContentIDs} = props;
   const {apiUrl} = useContext(AppContext);
   const imageUrl = {uri: apiUrl + item?.image?.url};
   const [displayReadIndicator, setDisplayReadIndicator] = useState();
+  const theme_id = item?.thematique_mobile?.id;
+  const backgroundColor = item?.thematique_mobile?.color;
 
   useEffect(() => {
     setDisplayReadIndicator(_.includes(readContentIDs, item.id));
-  }, [readContentIDs]);
+  }, [readContentIDs, item.id]);
 
   return (
     <TouchableOpacity
@@ -33,7 +27,7 @@ const ContentCard = props => {
           content_ids: content_ids,
           theme_id: theme_id,
           level: item?.niveau?.value,
-          initial: true,
+          initial: !search,
           readContentIDs: readContentIDs,
           backgroundColor: backgroundColor,
         })
@@ -48,9 +42,11 @@ const ContentCard = props => {
             backgroundColor={backgroundColor}
           />
         )}
-        <View style={styles.titleContainer}>
+        <View style={!search ? styles.titleContainer : styles.searchContainer}>
           <Text style={styles.level}>NIVEAU {item?.niveau?.value}</Text>
-          <Text style={styles.title}>{item?.title}</Text>
+          <Text style={!search ? styles.title : styles.smallTitle}>
+            {item?.title}
+          </Text>
         </View>
         <View style={styles.imageContainer}>
           <Image source={imageUrl} style={styles.image} />
@@ -74,7 +70,7 @@ const ContentCard = props => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: 'auto',
     height: 130,
     marginVertical: 2,
   },
@@ -106,10 +102,19 @@ const styles = StyleSheet.create({
     width: '50%',
     paddingLeft: 20,
   },
+  searchContainer: {
+    width: '70%',
+    paddingLeft: 20,
+  },
   title: {
     fontFamily: Fonts.subtitle,
     fontSize: 18,
     lineHeight: 24,
+  },
+  smallTitle: {
+    fontFamily: Fonts.subtitle,
+    fontSize: 14,
+    lineHeight: 16,
   },
   imageContainer: {
     width: '50%',

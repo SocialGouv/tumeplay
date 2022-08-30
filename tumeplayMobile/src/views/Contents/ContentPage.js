@@ -1,4 +1,10 @@
-import React, {useState, useEffect, useContext, useRef} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -9,7 +15,7 @@ import {
   Image,
 } from 'react-native';
 import Text from '../../components/Text';
-import {Colors, Fonts} from '../../styles/Style';
+import {Colors} from '../../styles/Style';
 import bg from '../../assets/test.png';
 import Button from '../../components/Button';
 import {useQuery} from '@apollo/client';
@@ -23,8 +29,8 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import _ from 'lodash';
 import ReadIndicator from '../../components/Contents/ReadIndicator';
-import {useFocusEffect} from '@react-navigation/native';
 import handleRedirection from '../../services/handleRedirection';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ContentPage = ({navigation, route}) => {
   const {user, apiUrl} = useContext(AppContext);
@@ -43,8 +49,8 @@ const ContentPage = ({navigation, route}) => {
 
   const {data, loading} = useQuery(GET_SINGLE_CONTENT, {
     variables: {
-      content_id: route?.params?.content_id,
-      theme_id: theme_id,
+      content_id: current_content_id.toString(),
+      theme_id: theme_id.toString(),
     },
   });
 
@@ -63,7 +69,7 @@ const ContentPage = ({navigation, route}) => {
     Event.contentRead(current_content_id);
   };
 
-  const retrieveReadContentIds = async () => {
+  const retrieveReadContentIds = useCallback(async () => {
     let encryptedContentIds = await EncryptedStorage.getItem('readContentIDs');
     if (encryptedContentIds) {
       let tmpContentIDs = JSON.parse(encryptedContentIds);
@@ -72,7 +78,7 @@ const ContentPage = ({navigation, route}) => {
       setReadContentIDs([]);
     }
     setDisplayReadIndicator(_.includes(readContentIDs, current_content_id));
-  };
+  }, [current_content_id, readContentIDs]);
 
   useEffect(() => {
     retrieveReadContentIds();
@@ -83,9 +89,11 @@ const ContentPage = ({navigation, route}) => {
     };
   }, [current_content_id]);
 
-  useFocusEffect(() => {
-    retrieveReadContentIds();
-  });
+  useFocusEffect(
+    useCallback(() => {
+      retrieveReadContentIds();
+    }, [retrieveReadContentIds]),
+  );
 
   useEffect(() => {
     if (data && !loading) {
@@ -173,7 +181,7 @@ const ContentPage = ({navigation, route}) => {
             <Text
               style={[
                 styles.title,
-                content?.title.length > 50
+                content?.title?.length > 50
                   ? styles.bigTitle
                   : styles.smallTitle,
               ]}

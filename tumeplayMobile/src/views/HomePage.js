@@ -130,6 +130,13 @@ const HomePage = ({navigation}) => {
   return (
     <ScrollView>
       <Container background={null} style={styles.container}>
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => {
+            navigation.navigate('Search');
+          }}>
+          <Icon name="search" size={30} />
+        </TouchableOpacity>
         <Title />
         <TouchableOpacity
           style={styles.menuButton}
@@ -238,6 +245,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: config.deviceHeight * 0.06,
     right: 20,
+  },
+  searchButton: {
+    position: 'absolute',
+    top: config.deviceHeight * 0.06,
+    left: 20,
   },
 });
 

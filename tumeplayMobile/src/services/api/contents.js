@@ -24,6 +24,14 @@ export const GET_CONTENTS = gql`
         url
       }
       external_link
+      thematique_mobile {
+        id
+        color
+        image {
+          url
+        }
+        title
+      }
     }
   }
 `;
