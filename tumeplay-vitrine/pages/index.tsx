@@ -15,7 +15,7 @@ import {
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
 import Themes from "../components/themes";
-import PostCard from "../components/card";
+import PostCard from "../components/PostCard";
 import { useDebounce } from "usehooks-ts";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Link from "next/link";
