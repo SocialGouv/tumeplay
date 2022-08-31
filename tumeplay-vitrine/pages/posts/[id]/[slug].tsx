@@ -7,8 +7,12 @@ const ThemePage = ({ post }: PostCardProps) => {
   return (
     <Box bg={post.thematique_mobile.color} pt={4} pl={3}>
       <Head>
-        <title>{post.title}</title>
-        <meta property="og:title" content={post.title} key="title" />
+        <title>{"Tumeplay : " + post.title}</title>
+        <meta
+          property="og:title"
+          content={"Tumeplay : " + post.title}
+          key="title"
+        />
         <meta
           property="og:description"
           content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
