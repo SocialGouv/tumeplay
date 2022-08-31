@@ -1,6 +1,5 @@
 import { Box, Image, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { Post } from "../pages/api/posts/types";
 import { PostCardProps } from "./interfaces";
 import slugify from "@sindresorhus/slugify";
 

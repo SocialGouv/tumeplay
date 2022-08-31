@@ -154,7 +154,11 @@ const Home = ({
       <Container maxW="6xl" pt={5}>
         <Head>
           <title>Tumeplay</title>
-          <meta property="og:title" content="Tumeplay" key="title" />
+          <meta
+            property="og:title"
+            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            key="title"
+          />
           <meta
             property="og:description"
             content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
@@ -163,6 +167,7 @@ const Home = ({
           <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
           <meta property="og:url" content="https://tumeplay.com" key="url" />
           <link rel="icon" href="/logo-tumeplay.svg" />
+          <meta name="robots" content="all" />
         </Head>
         <Header />
         <InputGroup size="lg" mb={10}>

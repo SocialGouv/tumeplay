@@ -1,10 +1,23 @@
 import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { PostCardProps } from "../../../components/interfaces";
+import Head from "next/head";
 
 const ThemePage = ({ post }: PostCardProps) => {
   return (
     <Box bg={post.thematique_mobile.color} pt={4} pl={3}>
+      <Head>
+        <title>{post.title}</title>
+        <meta property="og:title" content={post.title} key="title" />
+        <meta
+          property="og:description"
+          content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+          key="description"
+        />
+        <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
+        <meta property="og:url" content="https://tumeplay.com" key="url" />
+        <link rel="icon" href="/logo-tumeplay.svg" />
+      </Head>
       <Container
         maxW="3xl"
         h="100vh"
@@ -22,7 +35,9 @@ const ThemePage = ({ post }: PostCardProps) => {
           borderRadius={8}
           shadow="2xl"
         >
-          <Heading my={3}>{post.title}</Heading>
+          <Heading as={"h1"} my={3}>
+            {post.title}
+          </Heading>
           <Flex>
             <Image
               src={post.etiquette?.image.url}
