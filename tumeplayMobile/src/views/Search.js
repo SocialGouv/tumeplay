@@ -53,7 +53,6 @@ const Search = () => {
     fetch(`${apiUrl}/contents?_q=${searchText}`)
       .then(res =>
         res.json().then(data => {
-          console.log(data);
           data.length > 0 ? setContents(data) : setNoResults(true);
         }),
       )
