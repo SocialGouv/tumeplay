@@ -80,7 +80,7 @@ const ContentsPage = props => {
         key={item.id}
         item={item}
         image={image}
-        locked={user.level < selectedLevel}
+        locked={false}
         content_ids={content_ids}
         navigation={navigation}
         readContentIDs={readContentIDs}
@@ -176,13 +176,13 @@ const ContentsPage = props => {
           keyExtractor={item => item.id}
         />
         {/* </View> */}
-        {user.level < selectedLevel && (
+        {/* {user.level < selectedLevel && (
           <Snackbar
             onPress={() => handleSnackBarQuizzLaunch()}
             text="Plus que quelques quiz à répondre pour débloquer ce niveau, vas-y fonce
         ! 🙂"
           />
-        )}
+        )} */}
       </GestureRecognizer>
     </Container>
   );
