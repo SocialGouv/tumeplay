@@ -33,6 +33,7 @@ import ModuleList from './src/components/Journey/Journey_modules/ModuleList';
 import Menu from './src/views/Menu';
 import Sponsorship from './src/components/Sponsorship/Sponsorship';
 import OrderFinalStep from './src/components/Orders/OrderFinalStep';
+import Search from './src/views/Search';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -200,6 +201,7 @@ const App = props => {
                 component={ModuleList}
               />
               <NavigationStack.Screen name="Menu" component={Menu} />
+              <NavigationStack.Screen name="Search" component={Search} />
               <NavigationStack.Screen
                 name="Sponsorship"
                 component={Sponsorship}

@@ -1,5 +1,5 @@
 import {useQuery} from '@apollo/client';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
 import Text from '../components/Text';
 import ContentCard from '../components/Contents/ContentCard';
@@ -12,7 +12,6 @@ import AppContext from '../../AppContext';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
-import {GET_COLOR_THEME} from '../services/api/themes';
 import config from '../../config';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import Snackbar from '../components/Contents/Snackbar';
@@ -28,9 +27,7 @@ const ContentsPage = props => {
   const [levels, setLevels] = useState([]);
   const thematiques = route?.params?.thematiques;
   const image = route?.params?.image;
-  const [backgroundColor, setBackgroundColor] = useState(
-    route.params.backgroundColor,
-  );
+
   const [contents, setContents] = useState([]);
   const content_ids = contents.map(content => content.id);
   const currentThematique = thematiques.find(theme => theme.id === theme_id);
@@ -39,10 +36,6 @@ const ContentsPage = props => {
   });
 
   const {data: data2, loading: loading2} = useQuery(GET_LEVELS);
-
-  const {data: data3, loading: loading3} = useQuery(GET_COLOR_THEME, {
-    variables: {theme_id: theme_id},
-  });
 
   const [readContentIDs, setReadContentIDs] = useState([]);
 
@@ -56,9 +49,11 @@ const ContentsPage = props => {
     }
   };
 
-  useFocusEffect(() => {
-    retrieveReadContentIds();
-  });
+  useFocusEffect(
+    useCallback(() => {
+      retrieveReadContentIds();
+    }, []),
+  );
 
   useEffect(() => {
     if (data && !loading) {
@@ -77,10 +72,7 @@ const ContentsPage = props => {
     if (data2 && !loading2) {
       setLevels(data2.niveaus);
     }
-    if (data3 && !loading3) {
-      setBackgroundColor(data3.thematiqueMobiles[0].color);
-    }
-  }, [data, loading, data2, loading2, data3, loading3]);
+  }, [data, loading, data2, loading2]);
 
   const renderItem = ({item}) => {
     return (
@@ -88,10 +80,8 @@ const ContentsPage = props => {
         key={item.id}
         item={item}
         image={image}
-        theme_id={theme_id}
-        locked={user.level < selectedLevel}
+        locked={false}
         content_ids={content_ids}
-        backgroundColor={backgroundColor}
         navigation={navigation}
         readContentIDs={readContentIDs}
       />
@@ -186,13 +176,13 @@ const ContentsPage = props => {
           keyExtractor={item => item.id}
         />
         {/* </View> */}
-        {user.level < selectedLevel && (
+        {/* {user.level < selectedLevel && (
           <Snackbar
             onPress={() => handleSnackBarQuizzLaunch()}
             text="Plus que quelques quiz à répondre pour débloquer ce niveau, vas-y fonce
         ! 🙂"
           />
-        )}
+        )} */}
       </GestureRecognizer>
     </Container>
   );
