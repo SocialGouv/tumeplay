@@ -1,3 +1,10 @@
+# [1.137.0](https://github.com/SocialGouv/Tumeplay/compare/v1.136.0...v1.137.0) (2022-09-05)
+
+
+### Features
+
+* homepage searchicon + update api + searchbar screens and logic ([#430](https://github.com/SocialGouv/Tumeplay/issues/430)) ([bcea305](https://github.com/SocialGouv/Tumeplay/commit/bcea3051ee6ab577e0981c257273323bf25e2211))
+
 # [1.136.0](https://github.com/SocialGouv/Tumeplay/compare/v1.135.0...v1.136.0) (2022-08-30)
 
 
