@@ -1,3 +1,11 @@
+# [1.138.0](https://github.com/SocialGouv/Tumeplay/compare/v1.137.0...v1.138.0) (2022-09-06)
+
+
+### Features
+
+* improve tooltip ui and darkmode management for copilot component ([#433](https://github.com/SocialGouv/Tumeplay/issues/433)) ([5909b9a](https://github.com/SocialGouv/Tumeplay/commit/5909b9a2109778971b16be6951781a1e48b6ad13))
+* tracking last test release ([#432](https://github.com/SocialGouv/Tumeplay/issues/432)) ([a79b344](https://github.com/SocialGouv/Tumeplay/commit/a79b3445bfe1dedb74858c359b6274c529227bdf))
+
 # [1.137.0](https://github.com/SocialGouv/Tumeplay/compare/v1.136.0...v1.137.0) (2022-09-05)
 
 
