@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
+    backgroundColor: '#FBF7F2',
   },
   levelIndicator: {
     marginVertical: 20,

@@ -1,4 +1,5 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import Text from '../Text';
 import React from 'react';
 import Button from '../Button';
 import config from '../../../config';
@@ -7,7 +8,7 @@ const CustomToolTip = props => {
   const {isLastStep, handleNext, handleStop, currentStep} = props;
   return (
     <View style={styles.tooltipContainer}>
-      <View style={{width: '70%', position: 'absolute', top: 16, left: 16}}>
+      <View style={{width: '70%'}}>
         <Text style={styles.toolTipText}>
           {currentStep && currentStep.text}
         </Text>
@@ -26,17 +27,16 @@ const CustomToolTip = props => {
 const styles = StyleSheet.create({
   tooltipContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    color: 'black',
     borderRadius: 5,
-    paddingHorizontal: 24,
-
+    padding: 16,
     width: '80%',
-    height: config.deviceHeight * 0.13,
+    height: config.deviceHeight * 0.12,
     backgroundColor: '#ffffff',
   },
   button: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
     borderRadius: 8,
   },
   toolTipText: {
