@@ -42,7 +42,7 @@ const Navbar = ({navigation}) => {
         navigation={navigation}
       />
       <Tab.Screen
-        name="Posts"
+        name="Contenus"
         component={Thematiques}
         options={{
           tabBarIcon: ({size, color}) => (

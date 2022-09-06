@@ -251,6 +251,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: config.deviceHeight * 0.06,
     left: 20,
+    width: 50,
+    height: 50,
   },
 });
 

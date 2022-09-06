@@ -93,6 +93,7 @@ const Search = () => {
           size="small"
           text="Ok"
           style={styles.searchButton}
+          disabled={searchText.length === 0}
           onPress={() => handleSearch()}
         />
       </View>
@@ -144,11 +145,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     marginBottom: 12,
   },
   input: {
-    borderWidth: 1.4,
+    borderWidth: 1.5,
     height: 35,
     width: '70%',
     borderColor: '#000',
@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginHorizontal: 10,
   },
   redText: {
     marginTop: 10,
