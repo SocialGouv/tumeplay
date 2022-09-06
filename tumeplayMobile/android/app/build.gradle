@@ -135,8 +135,8 @@ android {
         applicationId "com.tumeplaymobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 61
-        versionName "1.46"
+        versionCode 62
+        versionName "1.47"
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         manifestPlaceholders = [GOOGLE_MAP_API: "${properties.getProperty('GOOGLE_MAPS_API_KEY')}"]
