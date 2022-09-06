@@ -38,11 +38,7 @@ export const GET_CONTENTS = gql`
 
 export const GET_FRESH_CONTENTS = gql`
   query GetFreshContents($level: Int!) {
-    contents(
-      limit: 10
-      sort: "created_at:desc"
-      where: {thematique_mobile_null: false, niveau: {value_lte: $level}}
-    ) {
+    contents(limit: 10, where: {niveau: {value_lte: $level}}) {
       id
       title: title_mobile
       text

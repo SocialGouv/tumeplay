@@ -34,9 +34,10 @@ const HomePage = ({navigation}) => {
   ];
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
+  const [randomLevel, setRandomLevel] = useState();
   const {data, loading} = useQuery(GET_FRESH_CONTENTS, {
     variables: {
-      level: user.level,
+      level: randomLevel,
     },
   });
 
@@ -54,7 +55,7 @@ const HomePage = ({navigation}) => {
         }),
       );
     }
-  }, [data, loading]);
+  }, [data, loading, randomLevel]);
 
   const renderItem = ({item}) => {
     return (
@@ -94,6 +95,7 @@ const HomePage = ({navigation}) => {
     );
   };
   useEffect(() => {
+    setRandomLevel(Math.floor(Math.random() * (5 - 1 + 1)) + 1);
     fetchData();
   }, []);
 
