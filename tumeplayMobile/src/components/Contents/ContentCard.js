@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   searchContainer: {
-    width: '70%',
+    width: '50%',
+    marginRight: 10,
     paddingLeft: 20,
   },
   title: {
