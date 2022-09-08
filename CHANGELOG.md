@@ -1,3 +1,11 @@
+# [1.139.0](https://github.com/SocialGouv/Tumeplay/compare/v1.138.0...v1.139.0) (2022-09-08)
+
+
+### Features
+
+* random content on homepage ([#434](https://github.com/SocialGouv/Tumeplay/issues/434)) ([632a343](https://github.com/SocialGouv/Tumeplay/commit/632a343760bad97007c03e5253a231dbec90e22f))
+* ui improvements on search feature ([#435](https://github.com/SocialGouv/Tumeplay/issues/435)) ([d519ad5](https://github.com/SocialGouv/Tumeplay/commit/d519ad56a475d309bd216a1c882ccd660630fe50))
+
 # [1.138.0](https://github.com/SocialGouv/Tumeplay/compare/v1.137.0...v1.138.0) (2022-09-06)
 
 
