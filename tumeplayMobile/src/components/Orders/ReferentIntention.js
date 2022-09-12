@@ -22,6 +22,7 @@ import {
 } from '../../services/api/referents';
 import hand from '../../assets/hand.png';
 import Icon from 'react-native-vector-icons/Entypo';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const ReferentIntention = props => {
   const {user} = props;
@@ -142,7 +143,7 @@ const ReferentIntention = props => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <KeyboardAwareScrollView style={{flex: 1}}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image source={warning} style={styles.image} />
         <Text
@@ -226,7 +227,7 @@ const ReferentIntention = props => {
           icon={true}
         />
       )}
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 

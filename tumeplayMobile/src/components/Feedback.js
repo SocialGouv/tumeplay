@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.strongText,
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'justify',
+    textAlign: 'left',
+    width: '100%',
   },
   buttonContainer: {
     display: 'flex',
