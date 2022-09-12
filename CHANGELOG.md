@@ -1,3 +1,11 @@
+# [1.140.0](https://github.com/SocialGouv/Tumeplay/compare/v1.139.0...v1.140.0) (2022-09-12)
+
+
+### Features
+
+* tracking last test release ([#437](https://github.com/SocialGouv/Tumeplay/issues/437)) ([32c13b8](https://github.com/SocialGouv/Tumeplay/commit/32c13b840c9a21a44544ca2ff89abb7263a5bbcc))
+* ux ui improvements ([#436](https://github.com/SocialGouv/Tumeplay/issues/436)) ([c41d4dc](https://github.com/SocialGouv/Tumeplay/commit/c41d4dc1360c9619853c3410a4992e3e4666d852))
+
 # [1.139.0](https://github.com/SocialGouv/Tumeplay/compare/v1.138.0...v1.139.0) (2022-09-08)
 
 
