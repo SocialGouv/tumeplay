@@ -1,3 +1,10 @@
+# [1.141.0](https://github.com/SocialGouv/Tumeplay/compare/v1.140.0...v1.141.0) (2022-09-19)
+
+
+### Features
+
+* font review in content page ([cd3ff31](https://github.com/SocialGouv/Tumeplay/commit/cd3ff3133c1d00d7dd6bd1cddc296993f87a7a00))
+
 # [1.140.0](https://github.com/SocialGouv/Tumeplay/compare/v1.139.0...v1.140.0) (2022-09-12)
 
 
