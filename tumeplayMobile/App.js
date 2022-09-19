@@ -34,6 +34,7 @@ import Menu from './src/views/Menu';
 import Sponsorship from './src/components/Sponsorship/Sponsorship';
 import OrderFinalStep from './src/components/Orders/OrderFinalStep';
 import Search from './src/views/Search';
+import Sextus from './src/views/Sextus';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -189,6 +190,7 @@ const App = props => {
                 name="QuizzModule"
                 component={QuizzModule}
               />
+              <NavigationStack.Screen name="Sextus" component={Sextus} />
               <NavigationStack.Screen
                 name="QuizzFinishScreen"
                 component={QuizzFinishScreen}

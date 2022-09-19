@@ -169,6 +169,14 @@ const HomePage = ({navigation}) => {
             }}
             icon
           />
+          <Button
+            text="Sextus"
+            size="medium"
+            right
+            onPress={() => {
+              navigation.navigate('Sextus');
+            }}
+          />
         </View>
         <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
         <View style={styles.carouselContainer}>
