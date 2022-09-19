@@ -34,9 +34,7 @@ const Feedback = ({content}) => {
 
   return (
     <>
-      <Text style={[styles.text, {fontWeight: '600'}]}>
-        As-tu trouvé ce contenu intéressant ?
-      </Text>
+      <Text style={[styles.text]}>As-tu trouvé ce contenu intéressant ?</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[
@@ -67,8 +65,8 @@ const Feedback = ({content}) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: Fonts.strongText,
     fontSize: 16,
+    fontWeight: '400',
     lineHeight: 24,
     textAlign: 'left',
     width: '100%',
