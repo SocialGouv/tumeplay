@@ -1,3 +1,10 @@
+# [1.142.0](https://github.com/SocialGouv/Tumeplay/compare/v1.141.0...v1.142.0) (2022-09-20)
+
+
+### Features
+
+* tracking android release test ([bf4e5e1](https://github.com/SocialGouv/Tumeplay/commit/bf4e5e1809bd3bcef739f23a7d15c20bbcb71a76))
+
 # [1.141.0](https://github.com/SocialGouv/Tumeplay/compare/v1.140.0...v1.141.0) (2022-09-19)
 
 
