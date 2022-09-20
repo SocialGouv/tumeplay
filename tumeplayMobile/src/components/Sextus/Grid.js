@@ -81,13 +81,29 @@ const Grid = props => {
     return style;
   };
 
+  const finishStyle = {
+    width: '97%',
+    height: '97%',
+    textAlign: 'center',
+    paddingVertical: 10,
+    overflow: 'hidden',
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: '#E85439',
+  };
+
   const renderGrid = () => {
     const tmpGrid = [];
     for (let i = 0; i < gridSpecs.columns; i++) {
       const row = [];
       for (let j = 0; j < gridSpecs.rows; j++) {
         row.push(
-          <View key={j} style={styles.cell}>
+          <View
+            key={j}
+            style={[
+              styles.cell,
+              {width: (config.deviceWidth - 40) / wordToGuess.length},
+            ]}>
             {j < currentRow &&
               userGuessesStatus[j] &&
               userGuessesStatus[j][i] && (
@@ -96,7 +112,11 @@ const Grid = props => {
                 </Text>
               )}
             {currentRow === j && (
-              <Text>
+              <Text
+                style={
+                  globalRedLetterIndexes.length === wordToGuess.length &&
+                  finishStyle
+                }>
                 {globalRedLetterIndexes.length > 0
                   ? globalRedLetterIndexes.map(index => {
                       return index === i ? wordToGuess.charAt(i) : '';
@@ -124,7 +144,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cell: {
-    width: (config.deviceWidth - 40) / 9,
     height: 40,
     border: 'solid',
     borderWidth: 0.5,

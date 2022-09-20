@@ -5,7 +5,7 @@ import config from '../../../config';
 import Button from '../Button';
 
 const Validation = props => {
-  const {wordToGuess, isSuccess, definition} = props;
+  const {wordToGuess, isSuccess, definition, relaunchGame} = props;
 
   const AnimatedView = Animatable.createAnimatableComponent(View);
 
@@ -22,7 +22,13 @@ const Validation = props => {
       )}
       <Text style={styles.subtitle}>{wordToGuess}</Text>
       <Text>{definition}</Text>
-      <Button size="medium" text="Rejouer" icon={true} style={styles.button} />
+      <Button
+        size="medium"
+        text="Rejouer"
+        icon={true}
+        style={styles.button}
+        onPress={() => relaunchGame()}
+      />
     </AnimatedView>
   );
 };

@@ -6,13 +6,13 @@ import Grid from '../components/Sextus/Grid';
 import Keyboard from '../components/Sextus/Keyboard';
 import {Colors} from '../styles/Style';
 import Validation from '../components/Sextus/Validation';
+import {useQuery} from '@apollo/client';
+import {GET_SEXTUS_WORDS} from '../services/api/sextus';
 const Sextus = ({navigation}) => {
-  const wordToGuess = 'CHLAMYDIA';
-  const [inputWord, setInputWord] = useState(
-    wordToGuess.charAt(0).toUpperCase(),
-  );
-  const definition =
-    'Une maladie sexuellement transmissible qui gratte un peu le vagin';
+  const [fullWords, setFullWords] = useState([]);
+  const [inputWord, setInputWord] = useState('');
+  const [wordToGuess, setWordToGuess] = useState('');
+  const [definition, setDefinition] = useState('');
   const [userGuesses, setUserGuesses] = useState([]);
   const [currentRow, setCurrentRow] = useState(0);
   const [globalRedLetterIndexes, setGlobalRedLetterIndexes] = useState([]);
@@ -23,6 +23,41 @@ const Sextus = ({navigation}) => {
     rows: 6,
     columns: wordToGuess.length,
   };
+
+  const {data, loading} = useQuery(GET_SEXTUS_WORDS);
+
+  const relaunchGame = useCallback(() => {
+    setIsSuccess(false);
+    setUserGuesses([]);
+    setCurrentRow(0);
+    setGlobalRedLetterIndexes([]);
+    setInputWord('');
+    handleWordAndDefinition();
+    setIsAllowedToPlay(true);
+  }, [wordToGuess]);
+
+  const handleWordAndDefinition = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * fullWords.length);
+
+    if (fullWords.length > 1) {
+      setWordToGuess(fullWords[randomIndex].word.toUpperCase());
+      setDefinition(fullWords[randomIndex].definition);
+    }
+  }, [fullWords]);
+
+  useEffect(() => {
+    handleWordAndDefinition();
+  }, [handleWordAndDefinition]);
+
+  useEffect(() => {
+    setInputWord(wordToGuess.charAt(0).toUpperCase());
+  }, [wordToGuess]);
+
+  useEffect(() => {
+    if (data && !loading) {
+      setFullWords(data.sextusWords);
+    }
+  }, [data, loading]);
 
   useEffect(() => {
     const infos = userGuesses
@@ -44,6 +79,9 @@ const Sextus = ({navigation}) => {
 
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
+      setGlobalRedLetterIndexes([
+        ...wordToGuess.split('').map((_, index) => index),
+      ]);
       setIsSuccess(true);
       setIsAllowedToPlay(false);
     } else {
@@ -107,6 +145,7 @@ const Sextus = ({navigation}) => {
             wordToGuess={wordToGuess}
             isSuccess={isSuccess}
             definition={definition}
+            relaunchGame={relaunchGame}
           />
         )}
       </View>
