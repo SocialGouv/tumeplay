@@ -5,15 +5,19 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Grid from '../components/Sextus/Grid';
 import Keyboard from '../components/Sextus/Keyboard';
 import {Colors} from '../styles/Style';
-
+import Validation from '../components/Sextus/Validation';
 const Sextus = ({navigation}) => {
   const wordToGuess = 'CHLAMYDIA';
   const [inputWord, setInputWord] = useState(
     wordToGuess.charAt(0).toUpperCase(),
   );
+  const definition =
+    'Une maladie sexuellement transmissible qui gratte un peu le vagin';
   const [userGuesses, setUserGuesses] = useState([]);
   const [currentRow, setCurrentRow] = useState(0);
   const [globalRedLetterIndexes, setGlobalRedLetterIndexes] = useState([]);
+  const [isAllowedToPlay, setIsAllowedToPlay] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const gridSpecs = {
     rows: 6,
@@ -22,45 +26,49 @@ const Sextus = ({navigation}) => {
 
   useEffect(() => {
     const infos = userGuesses
-      .map((word, index) => {
+      .map((word, _index) => {
         return word
           .split('')
           .map((letter, index) => {
             return {
               index: index,
+              isRed: letter === wordToGuess.charAt(index),
             };
           })
           .filter(letter => letter.isRed);
       })
       .flat()
       .filter((value, index, self) => self.indexOf(value) === index);
-    setGlobalRedLetterIndexes(infos);
+    setGlobalRedLetterIndexes([...new Set(infos.map(item => item.index))]);
   }, [userGuesses]);
 
   const evaluateUserGuess = guess => {
-    if (currentRow + 1 <= gridSpecs.rows) {
-      setUserGuesses([...userGuesses, guess]);
-      setCurrentRow(currentRow + 1);
-      setInputWord(wordToGuess.charAt(0).toUpperCase());
+    if (guess === wordToGuess) {
+      setIsSuccess(true);
+      setIsAllowedToPlay(false);
+    } else {
+      if (currentRow + 1 < gridSpecs.rows) {
+        setUserGuesses([...userGuesses, guess]);
+        setCurrentRow(currentRow + 1);
+        setInputWord(wordToGuess.charAt(0).toUpperCase());
+      } else {
+        setIsSuccess(false);
+        setIsAllowedToPlay(false);
+      }
     }
   };
 
   const onKeyPress = useCallback(
     key => {
+      setGlobalRedLetterIndexes([]);
       if (key?.props?.name === 'backspace') {
-        //Case return
         if (inputWord.length === 1) {
           setInputWord(wordToGuess.charAt(0).toUpperCase());
         } else {
           setInputWord(inputWord.slice(0, -1));
         }
       } else if (key?.props?.name === 'sign-in-alt') {
-        //Case validate proposal and handle win/lose
-        if (userGuesses.length === gridSpecs.rows) {
-          //End of game logic
-        } else {
-          evaluateUserGuess(inputWord);
-        }
+        evaluateUserGuess(inputWord);
       } else {
         inputWord.length + 1 <= wordToGuess.length &&
           setInputWord(inputWord + key);
@@ -90,8 +98,17 @@ const Sextus = ({navigation}) => {
           gridSpecs={gridSpecs}
           wordToGuess={wordToGuess}
           inputWord={inputWord}
+          globalRedLetterIndexes={globalRedLetterIndexes}
         />
-        <Keyboard onKeyPress={onKeyPress} />
+        {isAllowedToPlay ? (
+          <Keyboard onKeyPress={onKeyPress} />
+        ) : (
+          <Validation
+            wordToGuess={wordToGuess}
+            isSuccess={isSuccess}
+            definition={definition}
+          />
+        )}
       </View>
     </Container>
   );
@@ -115,9 +132,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   middleContainer: {
-    justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 0.9,
+    justifyContent: 'space-between',
+    flex: 1,
   },
   keyboardContainer: {
     justifyContent: 'center',

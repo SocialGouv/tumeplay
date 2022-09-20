@@ -78,9 +78,11 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
   },
   text: {
+    fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,
   },
   whiteText: {
+    fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,
     color: '#FFF',
   },

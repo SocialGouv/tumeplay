@@ -1,13 +1,21 @@
 import {View, StyleSheet, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import config from '../../../config';
+import {Colors} from '../../styles/Style';
 
 const Grid = props => {
-  const {gridSpecs, wordToGuess, inputWord, currentRow, userGuesses} = props;
+  const {
+    gridSpecs,
+    wordToGuess,
+    inputWord,
+    currentRow,
+    userGuesses,
+    globalRedLetterIndexes,
+  } = props;
 
   const [userGuessesStatus, setUserGuessesStatus] = useState([]);
 
-  const checkWords = () => {
+  const checkWords = useCallback(() => {
     const infos = userGuesses.map((word, index) => {
       const redLetters = word
         .split('')
@@ -19,11 +27,11 @@ const Grid = props => {
           };
         })
         .filter(letter => letter.isRed);
-      return word.split('').map((letter, index) => {
+      return word.split('').map((letter, _index) => {
         if (
           !!redLetters.find(
             redLetter =>
-              redLetter.index === index && redLetter.letter === letter,
+              redLetter.index === _index && redLetter.letter === letter,
           )
         ) {
           return {
@@ -40,43 +48,41 @@ const Grid = props => {
         }
         return {
           letter: letter,
-          status: 'white',
+          status: Colors.background,
         };
       });
     });
-    console.log(infos);
     setUserGuessesStatus(infos);
-  };
+  }, [userGuesses, wordToGuess]);
 
   useEffect(() => {
-    console.log('USEEFFECT');
     checkWords();
-  }, [userGuesses]);
+  }, [userGuesses, checkWords]);
 
-  // const evalLetterStatus = (letter, index) => {
-  //   console.log('Word to guess', wordToGuess);
-  //   console.log(wordToGuess.charAt(index) === letter);
-  //   if (wordToGuess.charAt(index) === letter) {
-
-  //     return <Text style={{backgroundColor: 'red'}}>{letter}</Text>;
-  //   } else if (wordToGuess) {
-  //     return <Text style={{backgroundColor: 'yellow'}}>{letter}</Text>;
-  //   }
-  // };
-
-  // const displayLetter = (i, j) => {
-  //   if (j === currentRow) {
-  //     return inputWord[i];
-  //   } else if (j < currentRow) {
-  //     return evalLetterStatus(userGuesses[j].charAt(i), i);
-  //   } else {
-  //     return '';
-  //   }
-  // };
+  const adjustCellStyle = el => {
+    let style = {
+      width: '97%',
+      height: '97%',
+      textAlign: 'center',
+      paddingVertical: 10,
+      overflow: 'hidden',
+      fontWeight: 'bold',
+    };
+    if (el.status === 'red') {
+      style = {...style, backgroundColor: '#E85439', color: 'white'};
+    } else if (el.status === 'yellow') {
+      style = {
+        ...style,
+        backgroundColor: '#F1B931',
+        color: 'black',
+        borderRadius: 20,
+      };
+    }
+    return style;
+  };
 
   const renderGrid = () => {
     const tmpGrid = [];
-    console.log('inrender', userGuessesStatus);
     for (let i = 0; i < gridSpecs.columns; i++) {
       const row = [];
       for (let j = 0; j < gridSpecs.rows; j++) {
@@ -85,11 +91,19 @@ const Grid = props => {
             {j < currentRow &&
               userGuessesStatus[j] &&
               userGuessesStatus[j][i] && (
-                <Text style={{backgroundColor: userGuessesStatus[j][i].status}}>
+                <Text style={adjustCellStyle(userGuessesStatus[j][i])}>
                   {userGuessesStatus[j][i].letter}
                 </Text>
               )}
-            {currentRow === j && <Text>{inputWord[i]}</Text>}
+            {currentRow === j && (
+              <Text>
+                {globalRedLetterIndexes.length > 0
+                  ? globalRedLetterIndexes.map(index => {
+                      return index === i ? wordToGuess.charAt(i) : '';
+                    })
+                  : inputWord[i]}
+              </Text>
+            )}
           </View>,
         );
       }
