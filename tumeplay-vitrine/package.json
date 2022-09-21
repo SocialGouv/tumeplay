@@ -14,6 +14,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@sindresorhus/slugify": "^2.1.0",
+    "@socialgouv/matomo-next": "^1.4.0",
     "axios": "^0.27.2",
     "framer-motion": "^7.0.0",
     "next": "12.2.4",
