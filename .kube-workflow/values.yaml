@@ -46,7 +46,6 @@ app-backend:
 app-frontend-metropole:
   enabled: true
   imagePackage: frontend-metropole
-  containerPort: 8080
   host: "{{ $.Values.global.host }}"
   probesPath: /
 
