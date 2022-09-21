@@ -35,6 +35,7 @@ import Sponsorship from './src/components/Sponsorship/Sponsorship';
 import OrderFinalStep from './src/components/Orders/OrderFinalStep';
 import Search from './src/views/Search';
 import Sextus from './src/views/Sextus';
+import GameChoice from './src/views/GameChoice';
 
 Sentry.init({
   dsn: SENTRI_URL,
@@ -182,6 +183,10 @@ const App = props => {
                 component={ContentsPage}
               />
               <NavigationStack.Screen name="Content" component={ContentPage} />
+              <NavigationStack.Screen
+                name="GameChoice"
+                component={GameChoice}
+              />
               <NavigationStack.Screen
                 name="QuizzStartPage"
                 component={QuizzStartPage}

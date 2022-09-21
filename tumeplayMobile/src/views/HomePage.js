@@ -164,18 +164,9 @@ const HomePage = ({navigation}) => {
             special
             left
             onPress={() => {
-              Event.playEvent('home');
-              navigation.navigate('Jouer', handleRedirection(user));
+              navigation.navigate('GameChoice');
             }}
             icon
-          />
-          <Button
-            text="Sextus"
-            size="medium"
-            right
-            onPress={() => {
-              navigation.navigate('Sextus');
-            }}
           />
         </View>
         <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
