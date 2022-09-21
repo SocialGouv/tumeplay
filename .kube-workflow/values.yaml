@@ -47,7 +47,6 @@ app-frontend-metropole:
   enabled: true
   imagePackage: frontend-metropole
   containerPort: 8080
-  host: "metropole-{{ $.Values.global.host }}"
 
 app-frontend-guyane:
   enabled: true

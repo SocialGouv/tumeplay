@@ -14,6 +14,11 @@ app-backend:
     - configMapRef:
         name: backend-configmap
 
+app-frontend-metropole:
+  env:
+    - name: NEXT_STRAPI_URL
+      value: https://backend-{{ $.Values.global.host }}.dev.fabrique.social.gouv.fr
+
 jobs:
   runs:
     - name: db
