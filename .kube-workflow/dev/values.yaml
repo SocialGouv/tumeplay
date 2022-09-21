@@ -17,7 +17,7 @@ app-backend:
 app-frontend-metropole:
   env:
     - name: NEXT_STRAPI_URL
-      value: https://backend-{{ $.Values.global.host }}.dev.fabrique.social.gouv.fr
+      value: https://backend-{{ $.Values.global.host }}
 
 jobs:
   runs:
