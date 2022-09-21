@@ -1,3 +1,10 @@
+## [1.144.2](https://github.com/SocialGouv/Tumeplay/compare/v1.144.1...v1.144.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* preprod and prod workflows ([aa2b64a](https://github.com/SocialGouv/Tumeplay/commit/aa2b64ab178844b7fed1570b1f3fe28f10ab10e3))
+
 ## [1.144.1](https://github.com/SocialGouv/Tumeplay/compare/v1.144.0...v1.144.1) (2022-09-21)
 
 
