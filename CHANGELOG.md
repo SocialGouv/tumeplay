@@ -1,3 +1,10 @@
+# [1.143.0](https://github.com/SocialGouv/Tumeplay/compare/v1.142.0...v1.143.0) (2022-09-21)
+
+
+### Features
+
+* tumeplay vitrine ([#428](https://github.com/SocialGouv/Tumeplay/issues/428)) ([b713c2f](https://github.com/SocialGouv/Tumeplay/commit/b713c2fc4d4ecd2ef94f2b181fefe626cb1a99cb))
+
 # [1.142.0](https://github.com/SocialGouv/Tumeplay/compare/v1.141.0...v1.142.0) (2022-09-20)
 
 
