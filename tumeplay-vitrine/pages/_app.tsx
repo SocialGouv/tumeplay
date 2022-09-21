@@ -14,7 +14,8 @@ const theme = extendTheme(extendedTheme);
 
 function _App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID });
+    if (MATOMO_URL && MATOMO_SITE_ID)
+      init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID });
   }, []);
 
   return (

@@ -3,10 +3,15 @@ app-backend:
   certSecretName: backend-crt
 
 app-frontend-metropole:
-  host: metropole-tumeplay.fabrique.social.gouv.fr
+  host: tumeplay.fabrique.social.gouv.fr
   certSecretName: metropole-crt
   redirectFrom:
-    - tumeplay.fabrique.social.gouv.fr
+    - metropole-tumeplay.fabrique.social.gouv.fr
+  env:
+    - name: MATOMO_URL
+      value: https://matomo.fabrique.social.gouv.fr/
+    - name: MATOMO_SITE_ID
+      value: "77"
 
 app-frontend-guyane:
   host: guyane-tumeplay.fabrique.social.gouv.fr

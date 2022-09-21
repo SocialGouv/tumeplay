@@ -46,8 +46,11 @@ app-backend:
 app-frontend-metropole:
   enabled: true
   imagePackage: frontend-metropole
-  containerPort: 8080
-  host: "metropole-{{ $.Values.global.host }}"
+  host: "{{ $.Values.global.host }}"
+  probesPath: /
+  env:
+    - name: NEXT_STRAPI_URL
+      value: https://backend-{{ $.Values.global.host }}
 
 app-frontend-guyane:
   enabled: true
