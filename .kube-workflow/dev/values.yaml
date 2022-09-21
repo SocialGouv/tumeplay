@@ -14,15 +14,6 @@ app-backend:
     - configMapRef:
         name: backend-configmap
 
-app-frontend-metropole:
-  env:
-    - name: NEXT_STRAPI_URL
-      value: https://backend-{{ $.Values.global.host }}
-    - name: MATOMO_URL
-      value: https://matomo.fabrique.social.gouv.fr/
-    - name: MATOMO_SITE_ID
-      value: "0"
-
 jobs:
   runs:
     - name: db
