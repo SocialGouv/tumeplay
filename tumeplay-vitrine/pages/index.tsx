@@ -145,8 +145,13 @@ const Home = ({
   }, [debouncedValue]);
 
   if (country === "French Guiana") {
-    return (window.location.href =
-      "https://guyane-tumeplay.fabrique.social.gouv.fr/?zone_choice=true");
+    window.location.href =
+      "https://guyane-tumeplay.fabrique.social.gouv.fr/?zone_choice=true";
+    return (
+      <Box>
+        <Text>Redirection en cours...</Text>
+      </Box>
+    );
   }
 
   return (

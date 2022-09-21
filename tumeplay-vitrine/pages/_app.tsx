@@ -12,7 +12,7 @@ const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL as string;
 const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID as string;
 const theme = extendTheme(extendedTheme);
 
-function MyApp({ Component, pageProps }: AppProps) {
+function _App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID });
   }, []);
@@ -24,4 +24,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default _App;
