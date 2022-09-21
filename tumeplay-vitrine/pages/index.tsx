@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputLeftAddon,
   InputRightElement,
+  Divider,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -35,6 +36,7 @@ const Home = ({
   const debouncedValue = useDebounce<string>(search as string, 500);
   const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("");
 
   const handleScroll = () => {
     const windowH = window.innerHeight;
@@ -81,7 +83,16 @@ const Home = ({
       });
   };
 
+  const getCountryLocation = () => {
+    fetch("https://ipapi.co/json/").then((res) => {
+      res.json().then((data) => {
+        setCountry(data.country_name);
+      });
+    });
+  };
+
   useEffect(() => {
+    getCountryLocation();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -133,23 +144,49 @@ const Home = ({
     }
   }, [debouncedValue]);
 
+  if (country === "French Guiana") {
+    return (window.location.href =
+      "https://guyane-tumeplay.fabrique.social.gouv.fr/?zone_choice=true");
+  }
+
   return (
     <Box bg="lightPink" pb={16} minH="100vh">
       <Box
-        my={0}
+        py={2}
         px={3}
         display="flex"
-        justifyContent="flex-end"
-        textAlign="right"
+        justifyContent="space-between"
+        alignContent="center"
       >
-        <Link href="/legal" target="_blank">
-          <Text cursor="pointer" mr={3}>
-            Mentions légales
-          </Text>
+        <Link
+          href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
+          target="_blank"
+        >
+          <Text cursor="pointer">Guyane</Text>
         </Link>
-        <Link href="/cgu" target="_blank">
-          Conditions générales d&apos;utilisation
-        </Link>
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="center"
+          textAlign="right"
+        >
+          <Link href="/legal" target="_blank">
+            <Text flexShrink={0.1} cursor="pointer" mr={3}>
+              Mentions légales
+            </Text>
+          </Link>
+          <Divider
+            h={4}
+            mr={3}
+            colorScheme="blackAlpha.900"
+            orientation="vertical"
+          />
+          <Link href="/cgu" target="_blank">
+            <Text flexShrink={0.1} cursor="pointer">
+              Conditions générales d&apos;utilisation
+            </Text>
+          </Link>
+        </Box>
       </Box>
       <Container maxW="6xl" pt={5}>
         <Head>
