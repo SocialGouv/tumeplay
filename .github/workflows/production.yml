@@ -40,7 +40,7 @@ jobs:
             REACT_APP_MATOMO_ID=45
             REACT_APP_ZONE=guyane
             REACT_APP_API_URL=https://backend-tumeplay.fabrique.social.gouv.fr
-            REACT_APP_OTHER_ZONE_URL=https://metropole-tumeplay.fabrique.social.gouv.fr
+            REACT_APP_OTHER_ZONE_URL=https://tumeplay.fabrique.social.gouv.fr
 
   register-frontend-metropole:
     name: Register frontend Metropole
@@ -51,15 +51,9 @@ jobs:
         with:
           environment: prod
           imagePackage: frontend-metropole
-          dockercontext: ./tumeplay-app
-          dockerfile: ./tumeplay-app/Dockerfile
+          dockercontext: ./tumeplay-vitrine
+          dockerfile: ./tumeplay-vitrine/Dockerfile
           token: ${{ secrets.GITHUB_TOKEN }}
-          dockerbuildargs: |
-            buildenv=preprod.metropole
-            REACT_APP_MATOMO_ID=21
-            REACT_APP_ZONE=metropole
-            REACT_APP_API_URL=https://backend-tumeplay.fabrique.social.gouv.fr
-            REACT_APP_OTHER_ZONE_URL=https://guyane-tumeplay.fabrique.social.gouv.fr
 
   register-dashboard:
     name: Register dashboard
