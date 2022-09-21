@@ -34,7 +34,7 @@ const GameChoice = ({navigation}) => {
           source={diceIcon}
         />
         <Button
-          text="Jouer"
+          text="Mode Classique"
           size="medium"
           special
           left
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
   },
+  button: {},
 });
 
 export default GameChoice;
