@@ -21,7 +21,7 @@ app-frontend-metropole:
     - name: MATOMO_URL
       value: https://matomo.fabrique.social.gouv.fr/
     - name: MATOMO_SITE_ID
-      value: 0
+      value: "0"
 
 jobs:
   runs:
