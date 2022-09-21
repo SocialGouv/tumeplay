@@ -10,7 +10,7 @@ const Grid = props => {
     inputWord,
     currentRow,
     userGuesses,
-    globalRedLetterIndexes,
+    isSuccess,
   } = props;
 
   const [userGuessesStatus, setUserGuessesStatus] = useState([]);
@@ -102,7 +102,7 @@ const Grid = props => {
             key={j}
             style={[
               styles.cell,
-              {width: (config.deviceWidth - 40) / wordToGuess.length},
+              {width: (config.deviceWidth - 40) / wordToGuess.length + 1},
             ]}>
             {j < currentRow &&
               userGuessesStatus[j] &&
@@ -112,17 +112,7 @@ const Grid = props => {
                 </Text>
               )}
             {currentRow === j && (
-              <Text
-                style={
-                  globalRedLetterIndexes.length === wordToGuess.length &&
-                  finishStyle
-                }>
-                {globalRedLetterIndexes.length > 0
-                  ? globalRedLetterIndexes.map(index => {
-                      return index === i ? wordToGuess.charAt(i) : '';
-                    })
-                  : inputWord[i]}
-              </Text>
+              <Text style={isSuccess && finishStyle}>{inputWord[i]}</Text>
             )}
           </View>,
         );

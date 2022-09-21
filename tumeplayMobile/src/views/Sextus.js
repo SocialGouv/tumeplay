@@ -15,7 +15,6 @@ const Sextus = ({navigation}) => {
   const [definition, setDefinition] = useState('');
   const [userGuesses, setUserGuesses] = useState([]);
   const [currentRow, setCurrentRow] = useState(0);
-  const [globalRedLetterIndexes, setGlobalRedLetterIndexes] = useState([]);
   const [isAllowedToPlay, setIsAllowedToPlay] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -30,11 +29,10 @@ const Sextus = ({navigation}) => {
     setIsSuccess(false);
     setUserGuesses([]);
     setCurrentRow(0);
-    setGlobalRedLetterIndexes([]);
     setInputWord('');
     handleWordAndDefinition();
     setIsAllowedToPlay(true);
-  }, [wordToGuess]);
+  }, [wordToGuess, definition]);
 
   const handleWordAndDefinition = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * fullWords.length);
@@ -59,32 +57,12 @@ const Sextus = ({navigation}) => {
     }
   }, [data, loading]);
 
-  useEffect(() => {
-    const infos = userGuesses
-      .map((word, _index) => {
-        return word
-          .split('')
-          .map((letter, index) => {
-            return {
-              index: index,
-              isRed: letter === wordToGuess.charAt(index),
-            };
-          })
-          .filter(letter => letter.isRed);
-      })
-      .flat()
-      .filter((value, index, self) => self.indexOf(value) === index);
-    setGlobalRedLetterIndexes([...new Set(infos.map(item => item.index))]);
-  }, [userGuesses]);
-
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
-      setGlobalRedLetterIndexes([
-        ...wordToGuess.split('').map((_, index) => index),
-      ]);
       setIsSuccess(true);
       setIsAllowedToPlay(false);
     } else {
+      console.log('PASSE ICI ?');
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
         setCurrentRow(currentRow + 1);
@@ -98,7 +76,6 @@ const Sextus = ({navigation}) => {
 
   const onKeyPress = useCallback(
     key => {
-      setGlobalRedLetterIndexes([]);
       if (key?.props?.name === 'backspace') {
         if (inputWord.length === 1) {
           setInputWord(wordToGuess.charAt(0).toUpperCase());
@@ -136,7 +113,7 @@ const Sextus = ({navigation}) => {
           gridSpecs={gridSpecs}
           wordToGuess={wordToGuess}
           inputWord={inputWord}
-          globalRedLetterIndexes={globalRedLetterIndexes}
+          isSuccess={isSuccess}
         />
         {isAllowedToPlay ? (
           <Keyboard onKeyPress={onKeyPress} />
