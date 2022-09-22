@@ -48,9 +48,6 @@ app-frontend-metropole:
   imagePackage: frontend-metropole
   host: "{{ $.Values.global.host }}"
   probesPath: /
-  env:
-    - name: NEXT_PUBLIC_STRAPI_URL
-      value: https://backend-{{ $.Values.global.host }}
 
 app-frontend-guyane:
   enabled: true

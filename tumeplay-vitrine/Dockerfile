@@ -7,6 +7,8 @@ RUN yarn install --frozen-lockfile
 FROM node:lts as builder
 WORKDIR /app
 ARG PRODUCTION
+ARG NEXT_PUBLIC_STRAPI_URL
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN yarn build
@@ -15,6 +17,9 @@ FROM node:lts as runner
 WORKDIR /app
 ARG PRODUCTION
 ENV NODE_ENV production
+
+ARG NEXT_PUBLIC_STRAPI_URL
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
 
 COPY package.json yarn.lock ./
 # Remove dev dependencies

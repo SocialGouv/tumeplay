@@ -53,6 +53,8 @@ jobs:
           dockercontext: ./tumeplay-vitrine
           dockerfile: ./tumeplay-vitrine/Dockerfile
           token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            NEXT_PUBLIC_STRAPI_URL=https://backend-${{ env.host }}.dev.fabrique.social.gouv.fr
 
   register-dashboard:
     name: Register dashboard
