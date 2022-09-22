@@ -1,3 +1,10 @@
+## [1.144.7](https://github.com/SocialGouv/Tumeplay/compare/v1.144.6...v1.144.7) (2022-09-22)
+
+
+### Bug Fixes
+
+* vitrine env var as build args instead of kube value ([#444](https://github.com/SocialGouv/Tumeplay/issues/444)) ([32e9479](https://github.com/SocialGouv/Tumeplay/commit/32e94790537b08ae66adfada9268377dd9a6942f))
+
 ## [1.144.6](https://github.com/SocialGouv/Tumeplay/compare/v1.144.5...v1.144.6) (2022-09-22)
 
 
