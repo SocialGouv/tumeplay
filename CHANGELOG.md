@@ -1,3 +1,10 @@
+## [1.144.6](https://github.com/SocialGouv/Tumeplay/compare/v1.144.5...v1.144.6) (2022-09-22)
+
+
+### Bug Fixes
+
+* prod env ([#443](https://github.com/SocialGouv/Tumeplay/issues/443)) ([01b98c1](https://github.com/SocialGouv/Tumeplay/commit/01b98c1f90a746f403e14e0560d9ca0ed1c2faf4))
+
 ## [1.144.5](https://github.com/SocialGouv/Tumeplay/compare/v1.144.4...v1.144.5) (2022-09-22)
 
 
