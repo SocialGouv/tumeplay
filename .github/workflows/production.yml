@@ -54,6 +54,8 @@ jobs:
           dockercontext: ./tumeplay-vitrine
           dockerfile: ./tumeplay-vitrine/Dockerfile
           token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            PRODUCTION=true
 
   register-dashboard:
     name: Register dashboard
