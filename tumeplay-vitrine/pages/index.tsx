@@ -206,9 +206,16 @@ const Home = ({
             content="Tumeplay, Tu crois tout savoir sur le SEXE ? Informe toi de manière ludique et gagne des cadeaux tout au long de ton parcours d'apprentissage."
             key="description"
           />
-          <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
-          <meta property="og:url" content="https://tumeplay.com" key="url" />
-          <link rel="icon" href="/logo-tumeplay.svg" />
+          <meta
+            property="og:image"
+            content="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+            key="image"
+          />
+          <meta property="og:url" content="https://tumeplay.fr" key="url" />
+          <link
+            rel="icon"
+            href="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+          />
           <meta name="robots" content="all" />
         </Head>
         <Header />
