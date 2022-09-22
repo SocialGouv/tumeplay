@@ -8,6 +8,8 @@ app-frontend-metropole:
   redirectFrom:
     - metropole-tumeplay.fabrique.social.gouv.fr
   env:
+    - name: NEXT_PUBLIC_STRAPI_URL
+      value: https://backend-{{ $.Values.global.host }}
     - name: MATOMO_URL
       value: https://matomo.fabrique.social.gouv.fr/
     - name: MATOMO_SITE_ID
