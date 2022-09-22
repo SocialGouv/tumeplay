@@ -1,3 +1,10 @@
+# [1.145.0](https://github.com/SocialGouv/Tumeplay/compare/v1.144.12...v1.145.0) (2022-09-22)
+
+
+### Features
+
+* add stats page metabase iframe ([9bfafae](https://github.com/SocialGouv/Tumeplay/commit/9bfafaefb7444ef0abc180ea870a5e472c4ae914))
+
 ## [1.144.12](https://github.com/SocialGouv/Tumeplay/compare/v1.144.11...v1.144.12) (2022-09-22)
 
 
