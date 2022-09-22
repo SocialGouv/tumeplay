@@ -186,7 +186,30 @@ const Home = ({
           textAlign="right"
           fontSize={["sm", "sm", "auto"]}
           w="full"
+          px={2}
         >
+          <ChakraLink
+            href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
+            target="_blank"
+            mr={[0, 0, 3]}
+            display={["block", "block", "none"]}
+          >
+            <Text
+              cursor="pointer"
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              Guyane
+            </Text>
+          </ChakraLink>
+          <Divider
+            h={[3, 3, 4]}
+            display={["block", "block", "none"]}
+            mr={[0, 0, 3]}
+            borderColor="black"
+            orientation="vertical"
+          />
           <Link href="/stats">
             <Text
               flexShrink={0.1}
@@ -200,7 +223,7 @@ const Home = ({
             </Text>
           </Link>
           <Divider
-            h={4}
+            h={[3, 3, 4]}
             mr={[0, 0, 3]}
             borderColor="black"
             orientation="vertical"
@@ -218,7 +241,7 @@ const Home = ({
             </Text>
           </Link>
           <Divider
-            h={4}
+            h={[3, 3, 4]}
             mr={[0, 0, 3]}
             borderColor="black"
             orientation="vertical"
@@ -231,7 +254,7 @@ const Home = ({
                 textDecoration: "underline",
               }}
             >
-              Conditions générales d&apos;utilisation
+              CGU
             </Text>
           </Link>
         </Box>
