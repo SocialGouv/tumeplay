@@ -1,3 +1,10 @@
+## [1.144.5](https://github.com/SocialGouv/Tumeplay/compare/v1.144.4...v1.144.5) (2022-09-22)
+
+
+### Bug Fixes
+
+* robots.txt and Dockerfile improvements ([#442](https://github.com/SocialGouv/Tumeplay/issues/442)) ([071179e](https://github.com/SocialGouv/Tumeplay/commit/071179efc408a756603a4082a544374c955f2443))
+
 ## [1.144.4](https://github.com/SocialGouv/Tumeplay/compare/v1.144.3...v1.144.4) (2022-09-22)
 
 
