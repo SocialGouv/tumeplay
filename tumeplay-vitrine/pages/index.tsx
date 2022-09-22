@@ -198,12 +198,12 @@ const Home = ({
           <title>Tumeplay</title>
           <meta
             property="og:title"
-            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            content="Tumeplay, l'application mobile d'apprentissage en santé sexuelle."
             key="title"
           />
           <meta
             property="og:description"
-            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            content="Tumeplay, Tu crois tout savoir sur le SEXE ? Informe toi de manière ludique et gagne des cadeaux tout au long de ton parcours d'apprentissage."
             key="description"
           />
           <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
