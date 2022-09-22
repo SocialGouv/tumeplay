@@ -85,27 +85,27 @@ const ThemePage = ({ post }: PostCardProps) => {
 };
 
 export async function getServerSideProps(context: { query: { id: string } }) {
-  const NEXT_STRAPI_URL = process.env.NEXT_STRAPI_URL as string;
+  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
   const { id } = context.query;
-  const response = await axios.get(`${NEXT_STRAPI_URL}/contents/${id}`);
+  const response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents/${id}`);
   const post = {
     ...response.data,
     image: {
       ...response.data.image,
-      url: NEXT_STRAPI_URL + response.data.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + response.data.image.url,
     },
     etiquette: {
       ...response.data.etiquette,
       image: {
         ...response.data.etiquette.image,
-        url: NEXT_STRAPI_URL + response.data.etiquette.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + response.data.etiquette.image.url,
       },
     },
     thematique_mobile: {
       ...response.data.thematique_mobile,
       image: {
         ...response.data.thematique_mobile.image,
-        url: NEXT_STRAPI_URL + response.data.thematique_mobile.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + response.data.thematique_mobile.image.url,
       },
     },
   };

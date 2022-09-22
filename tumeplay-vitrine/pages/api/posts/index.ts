@@ -5,7 +5,8 @@ import type { AxiosError } from "axios";
 import { Error } from "../types";
 import { Post, ZPost } from "./types";
 
-const NEXT_STRAPI_URL: string = process.env.NEXT_STRAPI_URL as string;
+const NEXT_PUBLIC_STRAPI_URL: string = process.env
+  .NEXT_PUBLIC_STRAPI_URL as string;
 
 export default function handler(
   req: NextApiRequest,
@@ -31,7 +32,7 @@ export default function handler(
   }
 
   axios
-    .get(`${NEXT_STRAPI_URL}/contents`, {
+    .get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
       params,
     })
     .then((response) => {
@@ -39,19 +40,19 @@ export default function handler(
         response.data.map((c: any) =>
           ZPost.parse({
             ...c,
-            image: { ...c.image, url: NEXT_STRAPI_URL + c.image?.url },
+            image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
             thematique_mobile: {
               ...c.thematique_mobile,
               image: {
                 ...c.thematique_mobile.image,
-                url: NEXT_STRAPI_URL + c.thematique_mobile.image?.url,
+                url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile.image?.url,
               },
             },
             etiquette: {
               ...c.etiquette,
               image: {
                 ...c.etiquette?.image,
-                url: NEXT_STRAPI_URL + c.etiquette?.image?.url,
+                url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image?.url,
               },
             },
           })

@@ -98,6 +98,7 @@ const Home = ({
   }, []);
 
   useEffect(() => {
+    console.log(isFetching);
     if (!isFetching) return;
     loadmoreContent();
   }, [isFetching]);
@@ -280,8 +281,8 @@ const Home = ({
 };
 
 export async function getServerSideProps() {
-  const NEXT_STRAPI_URL = process.env.NEXT_STRAPI_URL as string;
-  let response = await axios.get(`${NEXT_STRAPI_URL}/contents`, {
+  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
+  let response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
     params: {
       _start: 0,
       _limit: 36,
@@ -291,24 +292,24 @@ export async function getServerSideProps() {
   });
   const posts = (response.data || []).map((c: Post) => ({
     ...c,
-    image: { ...c.image, url: NEXT_STRAPI_URL + c.image?.url },
+    image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
     thematique_mobile: {
       ...c.thematique_mobile,
       image: {
         ...c.thematique_mobile.image,
-        url: NEXT_STRAPI_URL + c.thematique_mobile.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile.image.url,
       },
     },
     etiquette: {
       ...c.etiquette,
       image: {
         ...c.etiquette?.image,
-        url: NEXT_STRAPI_URL + c.etiquette?.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
       },
     },
   }));
 
-  response = await axios.get(`${NEXT_STRAPI_URL}/thematique-mobiles`, {
+  response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/thematique-mobiles`, {
     params: {
       _start: 0,
       _limit: 100,
@@ -318,7 +319,7 @@ export async function getServerSideProps() {
     ...t,
     image: {
       ...t.image,
-      url: NEXT_STRAPI_URL + t.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + t.image.url,
     },
   }));
 
