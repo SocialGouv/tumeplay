@@ -2,6 +2,7 @@ import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { PostCardProps } from "../../../components/interfaces";
 import Head from "next/head";
+import BackButton from "../../../components/BackButton";
 
 const ThemePage = ({ post }: PostCardProps) => {
   return (
@@ -15,7 +16,11 @@ const ThemePage = ({ post }: PostCardProps) => {
         />
         <meta
           property="og:description"
-          content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+          content={
+            post.text.length >= 60
+              ? post.text.substring(0, 60) + "..."
+              : post.text
+          }
           key="description"
         />
         <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
@@ -26,9 +31,13 @@ const ThemePage = ({ post }: PostCardProps) => {
         maxW="3xl"
         h="100vh"
         display="flex"
+        flexDirection="column"
         justifyContent="center"
-        alignItems="center"
+        alignItems="start"
       >
+        <Box mb={4}>
+          <BackButton />
+        </Box>
         <Box
           justifyContent="center"
           alignContent="center"

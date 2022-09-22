@@ -20,6 +20,7 @@ import PostCard from "../components/PostCard";
 import { useDebounce } from "usehooks-ts";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Link from "next/link";
+import { Link as ChakraLink } from "@chakra-ui/react";
 
 const Home = ({
   initialPosts,
@@ -42,7 +43,7 @@ const Home = ({
     const windowH = window.innerHeight;
     const documentH = document.documentElement.scrollTop;
     const documentOffset = document.documentElement.offsetHeight;
-    if (documentH + windowH <= documentOffset - 3500) {
+    if (documentH + windowH <= documentOffset - 2500) {
       return;
     }
     setIsFetching(true);
@@ -53,7 +54,7 @@ const Home = ({
       .get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
         params: {
           _start: posts.length + 1,
-          _limit: 30,
+          _limit: 15,
           title_mobile_null: false,
           thematique_mobile_null: false,
         },
@@ -164,20 +165,34 @@ const Home = ({
         justifyContent="space-between"
         alignContent="center"
       >
-        <Link
+        <ChakraLink
           href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
           target="_blank"
         >
-          <Text cursor="pointer">Guyane</Text>
-        </Link>
+          <Text
+            cursor="pointer"
+            _hover={{
+              textDecoration: "underline",
+            }}
+          >
+            Guyane
+          </Text>
+        </ChakraLink>
         <Box
           display="flex"
           justifyContent="flex-end"
           alignItems="center"
           textAlign="right"
         >
-          <Link href="/legal" target="_blank">
-            <Text flexShrink={0.1} cursor="pointer" mr={3}>
+          <Link href="/legal">
+            <Text
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={3}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
               Mentions légales
             </Text>
           </Link>
@@ -187,8 +202,14 @@ const Home = ({
             colorScheme="blackAlpha.900"
             orientation="vertical"
           />
-          <Link href="/cgu" target="_blank">
-            <Text flexShrink={0.1} cursor="pointer">
+          <Link href="/cgu">
+            <Text
+              flexShrink={0.1}
+              cursor="pointer"
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
               Conditions générales d&apos;utilisation
             </Text>
           </Link>
@@ -285,7 +306,7 @@ export async function getServerSideProps() {
   let response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
     params: {
       _start: 0,
-      _limit: 36,
+      _limit: 15,
       title_mobile_null: false,
       thematique_mobile_null: false,
     },
