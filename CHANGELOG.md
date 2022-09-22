@@ -1,3 +1,10 @@
+## [1.144.9](https://github.com/SocialGouv/Tumeplay/compare/v1.144.8...v1.144.9) (2022-09-22)
+
+
+### Bug Fixes
+
+* matomo env vars in dockerfile ([9b55e7c](https://github.com/SocialGouv/Tumeplay/commit/9b55e7c48a09f5a899a925bdc1f692a412426c55))
+
 ## [1.144.8](https://github.com/SocialGouv/Tumeplay/compare/v1.144.7...v1.144.8) (2022-09-22)
 
 
