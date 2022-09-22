@@ -184,8 +184,27 @@ const Home = ({
           justifyContent={["space-between", "space-between", "flex-end"]}
           alignItems="center"
           textAlign="right"
+          fontSize={["sm", "sm", "auto"]}
           w="full"
         >
+          <Link href="/stats">
+            <Text
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={[0, 0, 3]}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              Stats
+            </Text>
+          </Link>
+          <Divider
+            h={4}
+            mr={[0, 0, 3]}
+            borderColor="black"
+            orientation="vertical"
+          />
           <Link href="/legal">
             <Text
               flexShrink={0.1}
