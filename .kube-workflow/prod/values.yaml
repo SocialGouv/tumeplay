@@ -4,7 +4,6 @@ app-backend:
 
 app-frontend-metropole:
   host: tumeplay.fabrique.social.gouv.fr
-  certSecretName: metropole-crt
   redirectFrom:
     - metropole-tumeplay.fabrique.social.gouv.fr
   env:
