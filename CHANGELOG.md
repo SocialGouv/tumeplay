@@ -1,3 +1,10 @@
+## [1.145.2](https://github.com/SocialGouv/Tumeplay/compare/v1.145.1...v1.145.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* display guyane link for mobile ([17a560b](https://github.com/SocialGouv/Tumeplay/commit/17a560ba10295dcead85cbce2edeb05f19d15e8b))
+
 ## [1.145.1](https://github.com/SocialGouv/Tumeplay/compare/v1.145.0...v1.145.1) (2022-09-22)
 
 
