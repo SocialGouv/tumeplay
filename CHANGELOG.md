@@ -1,3 +1,10 @@
+## [1.144.12](https://github.com/SocialGouv/Tumeplay/compare/v1.144.11...v1.144.12) (2022-09-22)
+
+
+### Bug Fixes
+
+* design feedbacks ([3a76b2b](https://github.com/SocialGouv/Tumeplay/commit/3a76b2bdf1220bf90bf4c618ee837aa5674b3be2))
+
 ## [1.144.11](https://github.com/SocialGouv/Tumeplay/compare/v1.144.10...v1.144.11) (2022-09-22)
 
 
