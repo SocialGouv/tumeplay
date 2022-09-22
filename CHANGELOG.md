@@ -1,3 +1,10 @@
+## [1.144.10](https://github.com/SocialGouv/Tumeplay/compare/v1.144.9...v1.144.10) (2022-09-22)
+
+
+### Bug Fixes
+
+* responsvie display ([b72a0e1](https://github.com/SocialGouv/Tumeplay/commit/b72a0e1ec501a090e2b721de2eee3b7d648afa9e))
+
 ## [1.144.9](https://github.com/SocialGouv/Tumeplay/compare/v1.144.8...v1.144.9) (2022-09-22)
 
 
