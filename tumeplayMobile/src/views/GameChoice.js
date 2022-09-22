@@ -59,6 +59,7 @@ const GameChoice = ({navigation}) => {
           icon
           special
           onPress={() => {
+            Event.playSextusEvent('StartGame');
             navigation.navigate('Sextus');
           }}
           style={styles.button}

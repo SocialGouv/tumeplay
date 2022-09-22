@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -8,7 +8,12 @@ import {Colors} from '../styles/Style';
 import Validation from '../components/Sextus/Validation';
 import {useQuery} from '@apollo/client';
 import {GET_SEXTUS_WORDS} from '../services/api/sextus';
+import Event from '../services/api/matomo';
+import AppContext from '../../AppContext';
+
 const Sextus = ({navigation}) => {
+  const {user} = useContext(AppContext);
+
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
   const [wordToGuess, setWordToGuess] = useState('');
@@ -32,10 +37,22 @@ const Sextus = ({navigation}) => {
     setInputWord('');
     handleWordAndDefinition();
     setIsAllowedToPlay(true);
-  }, [wordToGuess, definition]);
+  }, [wordToGuess]);
+
+  function getRandomInt(min, max) {
+    // Create byte array and fill with 1 random number
+    var byteArray = new Uint8Array(1);
+    window.crypto.getRandomValues(byteArray);
+
+    var range = max - min + 1;
+    var max_range = 256;
+    if (byteArray[0] >= Math.floor(max_range / range) * range)
+      return getRandomInt(min, max);
+    return min + (byteArray[0] % range);
+  }
 
   const handleWordAndDefinition = useCallback(() => {
-    const randomIndex = Math.floor(Math.random() * fullWords.length);
+    const randomIndex = getRandomInt(0, fullWords.length - 1);
 
     if (fullWords.length > 1) {
       setWordToGuess(fullWords[randomIndex].word.toUpperCase());
@@ -62,12 +79,12 @@ const Sextus = ({navigation}) => {
       setIsSuccess(true);
       setIsAllowedToPlay(false);
     } else {
-      console.log('PASSE ICI ?');
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
         setCurrentRow(currentRow + 1);
         setInputWord(wordToGuess.charAt(0).toUpperCase());
       } else {
+        Event.failSextusEvent('echec');
         setIsSuccess(false);
         setIsAllowedToPlay(false);
       }
