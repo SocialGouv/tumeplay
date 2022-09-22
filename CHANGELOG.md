@@ -1,3 +1,10 @@
+## [1.144.8](https://github.com/SocialGouv/Tumeplay/compare/v1.144.7...v1.144.8) (2022-09-22)
+
+
+### Bug Fixes
+
+* preprod hardcoded env var for vitrine ([7a832c4](https://github.com/SocialGouv/Tumeplay/commit/7a832c431f1ce685a487fe17079c5b14e1be25a0))
+
 ## [1.144.7](https://github.com/SocialGouv/Tumeplay/compare/v1.144.6...v1.144.7) (2022-09-22)
 
 
