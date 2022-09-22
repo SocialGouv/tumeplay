@@ -1,10 +1,14 @@
 import { Box, Container, Heading, Stack, Text, Image } from "@chakra-ui/react";
+import BackButton from "../../components/BackButton";
 
 const Legal = () => {
   return (
     <Box bg="lightPink" pt={4} pl={3} h="100vh">
       <Container maxW="4xl">
         <Image src="/logo-tumeplay.svg" alt="Tumeplay logo" mx="auto" my={6} />
+        <Box mb={4}>
+          <BackButton />
+        </Box>
         <Heading fontFamily="heading" pb={6}>
           Mentions légales
         </Heading>

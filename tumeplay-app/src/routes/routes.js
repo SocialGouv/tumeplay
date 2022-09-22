@@ -21,15 +21,11 @@ import ContactUsScreen from '../screens/ContactUsScreen';
 import StayInTouchScreen from '../screens/StayInTouchScreen';
 import StayInTouchConfirmScreen from '../screens/StayInTouchConfirmScreen';
 import GlobalStatisticsScreen from '../screens/GlobalStatisticsScreen';
-import LandingPage from '../screens/LandingPage';
 
 const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 const AppStack = createStackNavigator(
   {
-    LandingPage: {
-      screen: LandingPage,
-    },
     LandingScreen: {
       screen: LandingScreen,
     },
@@ -122,11 +118,7 @@ const AppStack = createStackNavigator(
     },
   },
   {
-    initialRouteName:
-      window.location.search === '?zone_choice=true' &&
-      REACT_APP_ZONE === 'guyane'
-        ? 'LandingScreen'
-        : 'LandingPage',
+    initialRouteName: 'LandingScreen',
     headerLayoutPreset: 'center',
     defaultNavigationOptions: ({navigation}) => ({
       header: <CustomHeader navigation={navigation} />,

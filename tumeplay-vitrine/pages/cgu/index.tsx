@@ -8,12 +8,16 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import BackButton from "../../components/BackButton";
 
 const CGU = () => {
   return (
     <Box bg="lightPink" py={6} pl={3} h="full">
       <Container maxW="4xl">
         <Image src="/logo-tumeplay.svg" alt="Tumeplay logo" mx="auto" my={6} />
+        <Box mb={4}>
+          <BackButton />
+        </Box>
         <Heading fontFamily="heading">
           Conditions d&apos;utilisation de l&apos;application
         </Heading>
