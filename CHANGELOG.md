@@ -1,3 +1,10 @@
+## [1.144.11](https://github.com/SocialGouv/Tumeplay/compare/v1.144.10...v1.144.11) (2022-09-22)
+
+
+### Bug Fixes
+
+* remove quotes from url arg ([bd56625](https://github.com/SocialGouv/Tumeplay/commit/bd56625d0b1ac7bff94929df4a5835df96e8cb10))
+
 ## [1.144.10](https://github.com/SocialGouv/Tumeplay/compare/v1.144.9...v1.144.10) (2022-09-22)
 
 
