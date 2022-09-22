@@ -4,19 +4,24 @@ const Header = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column" py={10}>
       <Image src="/logo-tumeplay.svg" alt="Tumeplay logo" />
-      <Heading mt={10} mb={6}>
+      <Heading mt={10} mb={[2, 2, 6]}>
         TU CROIS TOUT SAVOIR SUR LE{" "}
         <Box as="span" color="primary" fontSize="5xl">
           SEXE ?
         </Box>
       </Heading>
-      <Box display="flex" alignItems="center">
+      <Box
+        display="flex"
+        alignItems="center"
+        flexDirection={["column", "column", "row"]}
+      >
         <Link
           href="https://apps.apple.com/fr/app/tumeplay/id1559879813"
           target="_blank"
         >
           <Image
             mr={4}
+            w="full"
             src="/button-ios.svg"
             alt="Télécharge tumeplay sur iOS"
             opacity={0.8}
@@ -28,7 +33,9 @@ const Header = () => {
           target="_blank"
         >
           <Image
-            ml={4}
+            ml={[0, 0, 4]}
+            mt={[4, 4, 0]}
+            w="full"
             src="/button-android.svg"
             alt="Télécharge tumeplay sur Android"
             opacity={0.8}

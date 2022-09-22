@@ -6,7 +6,7 @@ import BackButton from "../../../components/BackButton";
 
 const ThemePage = ({ post }: PostCardProps) => {
   return (
-    <Box bg={post.thematique_mobile.color} pt={4} pl={3}>
+    <Box bg={post.thematique_mobile.color}>
       <Head>
         <title>{"Tumeplay : " + post.title}</title>
         <meta
@@ -28,12 +28,13 @@ const ThemePage = ({ post }: PostCardProps) => {
         <link rel="icon" href="/logo-tumeplay.svg" />
       </Head>
       <Container
-        maxW="3xl"
-        h="100vh"
+        maxW={["auto", "auto", "3xl"]}
+        h={["auto", "auto", "100vh"]}
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="start"
+        pt={[4, 4, 0]}
       >
         <Box mb={4}>
           <BackButton />
@@ -47,24 +48,26 @@ const ThemePage = ({ post }: PostCardProps) => {
           backdropFilter="invert(100%)"
           borderRadius={8}
           shadow="2xl"
+          mb={[8, 8, 0]}
         >
           <Heading as={"h1"} my={3}>
             {post.title}
           </Heading>
-          <Flex>
+          <Flex flexDirection={["column", "column", "row"]}>
             <Image
               src={post.etiquette?.image.url}
               alt={post.title}
-              borderRadius="lg"
-              w="50%"
-              h="50%"
+              borderTopRadius="md"
+              borderBottomRadius={["none", "none", "md"]}
+              w={["auto", "auto", "50%"]}
+              h={["auto", "auto", "50%"]}
             />
-            <Box ml={5}>
+            <Box ml={[0, 0, 5]}>
               <Flex
-                h="fit-content"
                 alignItems="center"
                 justifyContent="center"
-                borderRadius="md"
+                borderBottomRadius="md"
+                borderTopRadius={["none", "none", "md"]}
                 bg={post.thematique_mobile.color}
                 py={2}
                 mb={2}
@@ -80,7 +83,7 @@ const ThemePage = ({ post }: PostCardProps) => {
                   {post.thematique_mobile.title}
                 </Text>
               </Flex>
-              <Box borderRadius="md" h="auto" p={2}>
+              <Box borderRadius="md" h="auto">
                 <Text justifyContent="center" fontSize="md" textAlign="start">
                   {post.text}
                 </Text>

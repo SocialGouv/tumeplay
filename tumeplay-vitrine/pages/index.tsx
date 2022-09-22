@@ -168,6 +168,7 @@ const Home = ({
         <ChakraLink
           href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
           target="_blank"
+          display={["none", "none", "block"]}
         >
           <Text
             cursor="pointer"
@@ -180,15 +181,16 @@ const Home = ({
         </ChakraLink>
         <Box
           display="flex"
-          justifyContent="flex-end"
+          justifyContent={["space-between", "space-between", "flex-end"]}
           alignItems="center"
           textAlign="right"
+          w="full"
         >
           <Link href="/legal">
             <Text
               flexShrink={0.1}
               cursor="pointer"
-              mr={3}
+              mr={[0, 0, 3]}
               _hover={{
                 textDecoration: "underline",
               }}
@@ -198,7 +200,7 @@ const Home = ({
           </Link>
           <Divider
             h={4}
-            mr={3}
+            mr={[0, 0, 3]}
             colorScheme="blackAlpha.900"
             orientation="vertical"
           />
