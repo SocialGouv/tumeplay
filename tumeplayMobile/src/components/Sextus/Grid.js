@@ -16,7 +16,7 @@ const Grid = props => {
   const [userGuessesStatus, setUserGuessesStatus] = useState([]);
 
   const checkWords = useCallback(() => {
-    const infos = userGuesses.map((word, index) => {
+    const infos = userGuesses.map(word => {
       const redLetters = word
         .split('')
         .map((letter, index) => {

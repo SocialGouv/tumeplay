@@ -19,8 +19,6 @@ import Container from '../components/global/Container';
 import Carousel from 'react-native-snap-carousel';
 import config from '../../config';
 import {WebView} from 'react-native-webview';
-import Event from '../services/api/matomo';
-import handleRedirection from '../services/handleRedirection';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const HomePage = ({navigation}) => {
