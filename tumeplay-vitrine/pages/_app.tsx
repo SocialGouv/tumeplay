@@ -7,6 +7,7 @@ import { extendedTheme } from "../utils/chakra-theme";
 
 import { init } from "@socialgouv/matomo-next";
 import { useEffect } from "react";
+import NextNProgress from "nextjs-progressbar";
 
 const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL as string;
 const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID as string;
@@ -20,6 +21,11 @@ function _App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
+      <NextNProgress
+        color="#E85439"
+        height={1}
+        options={{ showSpinner: false }}
+      />
       <Component {...pageProps} />
     </ChakraProvider>
   );

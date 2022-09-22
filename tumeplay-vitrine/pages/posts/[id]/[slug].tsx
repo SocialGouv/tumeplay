@@ -2,6 +2,7 @@ import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { PostCardProps } from "../../../components/interfaces";
 import Head from "next/head";
+import BackButton from "../../../components/BackButton";
 
 const ThemePage = ({ post }: PostCardProps) => {
   return (
@@ -15,7 +16,11 @@ const ThemePage = ({ post }: PostCardProps) => {
         />
         <meta
           property="og:description"
-          content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+          content={
+            post.text.length >= 60
+              ? post.text.substring(0, 60) + "..."
+              : post.text
+          }
           key="description"
         />
         <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
@@ -26,9 +31,13 @@ const ThemePage = ({ post }: PostCardProps) => {
         maxW="3xl"
         h="100vh"
         display="flex"
+        flexDirection="column"
         justifyContent="center"
-        alignItems="center"
+        alignItems="start"
       >
+        <Box mb={4}>
+          <BackButton />
+        </Box>
         <Box
           justifyContent="center"
           alignContent="center"
@@ -85,27 +94,27 @@ const ThemePage = ({ post }: PostCardProps) => {
 };
 
 export async function getServerSideProps(context: { query: { id: string } }) {
-  const NEXT_STRAPI_URL = process.env.NEXT_STRAPI_URL as string;
+  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
   const { id } = context.query;
-  const response = await axios.get(`${NEXT_STRAPI_URL}/contents/${id}`);
+  const response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents/${id}`);
   const post = {
     ...response.data,
     image: {
       ...response.data.image,
-      url: NEXT_STRAPI_URL + response.data.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + response.data.image.url,
     },
     etiquette: {
       ...response.data.etiquette,
       image: {
         ...response.data.etiquette.image,
-        url: NEXT_STRAPI_URL + response.data.etiquette.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + response.data.etiquette.image.url,
       },
     },
     thematique_mobile: {
       ...response.data.thematique_mobile,
       image: {
         ...response.data.thematique_mobile.image,
-        url: NEXT_STRAPI_URL + response.data.thematique_mobile.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + response.data.thematique_mobile.image.url,
       },
     },
   };

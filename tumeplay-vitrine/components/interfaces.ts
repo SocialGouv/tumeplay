@@ -9,3 +9,7 @@ export interface ThemeProps {
 export interface PostCardProps {
   post: Post;
 }
+
+export interface BackButtonProps {
+  text?: string;
+}

@@ -1,3 +1,10 @@
+## [1.144.3](https://github.com/SocialGouv/Tumeplay/compare/v1.144.2...v1.144.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* vitrine ([#441](https://github.com/SocialGouv/Tumeplay/issues/441)) ([8539437](https://github.com/SocialGouv/Tumeplay/commit/85394373ac7ee1cd8247e5c32f649bdbf63851e2))
+
 ## [1.144.2](https://github.com/SocialGouv/Tumeplay/compare/v1.144.1...v1.144.2) (2022-09-21)
 
 

@@ -12,6 +12,7 @@ import {
   InputLeftAddon,
   InputRightElement,
   Divider,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -42,7 +43,7 @@ const Home = ({
     const windowH = window.innerHeight;
     const documentH = document.documentElement.scrollTop;
     const documentOffset = document.documentElement.offsetHeight;
-    if (documentH + windowH <= documentOffset - 3500) {
+    if (documentH + windowH <= documentOffset - 2500) {
       return;
     }
     setIsFetching(true);
@@ -53,7 +54,7 @@ const Home = ({
       .get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
         params: {
           _start: posts.length + 1,
-          _limit: 30,
+          _limit: 15,
           title_mobile_null: false,
           thematique_mobile_null: false,
         },
@@ -98,6 +99,7 @@ const Home = ({
   }, []);
 
   useEffect(() => {
+    console.log(isFetching);
     if (!isFetching) return;
     loadmoreContent();
   }, [isFetching]);
@@ -163,20 +165,34 @@ const Home = ({
         justifyContent="space-between"
         alignContent="center"
       >
-        <Link
+        <ChakraLink
           href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
           target="_blank"
         >
-          <Text cursor="pointer">Guyane</Text>
-        </Link>
+          <Text
+            cursor="pointer"
+            _hover={{
+              textDecoration: "underline",
+            }}
+          >
+            Guyane
+          </Text>
+        </ChakraLink>
         <Box
           display="flex"
           justifyContent="flex-end"
           alignItems="center"
           textAlign="right"
         >
-          <Link href="/legal" target="_blank">
-            <Text flexShrink={0.1} cursor="pointer" mr={3}>
+          <Link href="/legal">
+            <Text
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={3}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
               Mentions légales
             </Text>
           </Link>
@@ -186,8 +202,14 @@ const Home = ({
             colorScheme="blackAlpha.900"
             orientation="vertical"
           />
-          <Link href="/cgu" target="_blank">
-            <Text flexShrink={0.1} cursor="pointer">
+          <Link href="/cgu">
+            <Text
+              flexShrink={0.1}
+              cursor="pointer"
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
               Conditions générales d&apos;utilisation
             </Text>
           </Link>
@@ -198,17 +220,24 @@ const Home = ({
           <title>Tumeplay</title>
           <meta
             property="og:title"
-            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            content="Tumeplay, l'application mobile d'apprentissage en santé sexuelle."
             key="title"
           />
           <meta
             property="og:description"
-            content="Tumeplay, Tu crois tout savoir sur le SEXE ?"
+            content="Tumeplay, Tu crois tout savoir sur le SEXE ? Informe toi de manière ludique et gagne des cadeaux tout au long de ton parcours d'apprentissage."
             key="description"
           />
-          <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
-          <meta property="og:url" content="https://tumeplay.com" key="url" />
-          <link rel="icon" href="/logo-tumeplay.svg" />
+          <meta
+            property="og:image"
+            content="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+            key="image"
+          />
+          <meta property="og:url" content="https://tumeplay.fr" key="url" />
+          <link
+            rel="icon"
+            href="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+          />
           <meta name="robots" content="all" />
         </Head>
         <Header />
@@ -273,35 +302,35 @@ const Home = ({
 };
 
 export async function getServerSideProps() {
-  const NEXT_STRAPI_URL = process.env.NEXT_STRAPI_URL as string;
-  let response = await axios.get(`${NEXT_STRAPI_URL}/contents`, {
+  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
+  let response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
     params: {
       _start: 0,
-      _limit: 36,
+      _limit: 15,
       title_mobile_null: false,
       thematique_mobile_null: false,
     },
   });
   const posts = (response.data || []).map((c: Post) => ({
     ...c,
-    image: { ...c.image, url: NEXT_STRAPI_URL + c.image?.url },
+    image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
     thematique_mobile: {
       ...c.thematique_mobile,
       image: {
         ...c.thematique_mobile.image,
-        url: NEXT_STRAPI_URL + c.thematique_mobile.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile.image.url,
       },
     },
     etiquette: {
       ...c.etiquette,
       image: {
         ...c.etiquette?.image,
-        url: NEXT_STRAPI_URL + c.etiquette?.image.url,
+        url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
       },
     },
   }));
 
-  response = await axios.get(`${NEXT_STRAPI_URL}/thematique-mobiles`, {
+  response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/thematique-mobiles`, {
     params: {
       _start: 0,
       _limit: 100,
@@ -311,7 +340,7 @@ export async function getServerSideProps() {
     ...t,
     image: {
       ...t.image,
-      url: NEXT_STRAPI_URL + t.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + t.image.url,
     },
   }));
 
