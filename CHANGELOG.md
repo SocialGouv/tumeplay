@@ -1,3 +1,10 @@
+## [1.144.4](https://github.com/SocialGouv/Tumeplay/compare/v1.144.3...v1.144.4) (2022-09-22)
+
+
+### Bug Fixes
+
+* push forgotten component ([a39b7e0](https://github.com/SocialGouv/Tumeplay/commit/a39b7e0a022ffd233dfb4eeec4c66046ad323fa2))
+
 ## [1.144.3](https://github.com/SocialGouv/Tumeplay/compare/v1.144.2...v1.144.3) (2022-09-22)
 
 
