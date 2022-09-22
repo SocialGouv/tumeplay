@@ -12,6 +12,7 @@ import {
   InputLeftAddon,
   InputRightElement,
   Divider,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -20,7 +21,6 @@ import PostCard from "../components/PostCard";
 import { useDebounce } from "usehooks-ts";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Link from "next/link";
-import { Link as ChakraLink } from "@chakra-ui/react";
 
 const Home = ({
   initialPosts,
