@@ -57,7 +57,7 @@ jobs:
           dockerbuildargs: |
             PRODUCTION=true
             NEXT_PUBLIC_STRAPI_URL=https://backend-tumeplay.fabrique.social.gouv.fr
-            NEXT_PUBLIC_MATOMO_URL="https://matomo.fabrique.social.gouv.fr"
+            NEXT_PUBLIC_MATOMO_URL=https://matomo.fabrique.social.gouv.fr
             NEXT_PUBLIC_MATOMO_SITE_ID=77
 
   register-dashboard:
