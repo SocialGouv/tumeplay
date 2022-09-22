@@ -21,7 +21,7 @@ const BackButton = ({ text }: BackButtonProps) => {
   return (
     <Button
       onClick={() => {
-        router.back();
+        router.push("/");
       }}
       rounded="xl"
       borderColor="#dadada"
