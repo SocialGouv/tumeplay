@@ -3,10 +3,19 @@ import { Box, Image, Heading, Link, Text } from "@chakra-ui/react";
 const Header = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column" py={10}>
-      <Image src="/logo-tumeplay.svg" alt="Tumeplay logo" />
-      <Heading mt={10} mb={[2, 2, 6]}>
+      <Image
+        src="/logo-tumeplay.svg"
+        alt="Tumeplay logo"
+        w={[48, 48, "auto"]}
+      />
+      <Heading
+        mt={[6, 6, 10]}
+        mb={[4, 4, 6]}
+        fontSize={["2xl", "2xl", "auto"]}
+        textAlign={["center", "center", "left"]}
+      >
         TU CROIS TOUT SAVOIR SUR LE{" "}
-        <Box as="span" color="primary" fontSize="5xl">
+        <Box as="span" color="primary" fontSize={["3xl", "3xl", "5xl"]}>
           SEXE ?
         </Box>
       </Heading>
@@ -44,8 +53,8 @@ const Header = () => {
         </Link>
       </Box>
       <Box pt={5}>
-        <Text fontWeight="bold">
-          Retrouve nous sur les réseaux sociaux pour découvrir nos actualités
+        <Text fontWeight="bold" textAlign={["center", "center", "left"]}>
+          Retrouve-nous sur les réseaux sociaux pour découvrir nos actualités
         </Text>
         <Box
           display="flex"

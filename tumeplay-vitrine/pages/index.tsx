@@ -201,7 +201,7 @@ const Home = ({
           <Divider
             h={4}
             mr={[0, 0, 3]}
-            colorScheme="blackAlpha.900"
+            borderColor="black"
             orientation="vertical"
           />
           <Link href="/cgu">
@@ -251,7 +251,7 @@ const Home = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setSearch(e.target.value)
             }
-            placeholder="Contraception, clitoris, consentement..."
+            placeholder="Tape un mot clé : contraception, clitoris, consentement..."
             value={search || ""}
           />
           {search && (
