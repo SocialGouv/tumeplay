@@ -1,3 +1,10 @@
+## [1.145.1](https://github.com/SocialGouv/Tumeplay/compare/v1.145.0...v1.145.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* back button goes to root url ([0509c97](https://github.com/SocialGouv/Tumeplay/commit/0509c9711183cff9c9a2019b759e9fedb59c7270))
+
 # [1.145.0](https://github.com/SocialGouv/Tumeplay/compare/v1.144.12...v1.145.0) (2022-09-22)
 
 
