@@ -56,6 +56,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerbuildargs: |
             PRODUCTION=true
+            NEXT_PUBLIC_STRAPI_URL=https://backend-tumeplay.fabrique.social.gouv.fr
 
   register-dashboard:
     name: Register dashboard

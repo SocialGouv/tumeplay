@@ -13,8 +13,10 @@ RUN yarn build
 
 FROM node:lts as runner
 WORKDIR /app
-ARG PRODUCTION
+ARG production
 ENV NODE_ENV production
+ARG NEXT_PUBLIC_STRAPI_URL
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
 
 COPY package.json yarn.lock ./
 # Remove dev dependencies
