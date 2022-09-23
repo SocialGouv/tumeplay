@@ -262,6 +262,11 @@ const Home = ({
       <Container maxW="6xl" pt={5}>
         <Head>
           <title>Tumeplay</title>
+          <meta charset="utf-8" />
+          <meta
+            name="description"
+            content="Avec TUMEPLAY découvre et explore ta sexualité en t’amusant. L’appli pour tester tes connaissances en matière de sexualité, pensée et construite avec des jeunes de ton âge. Elle a été conçue pour que tout le monde ait la même chance et le même niveau d’information sur la sexualité."
+          />
           <meta
             property="og:title"
             content="Tumeplay, l'application mobile d'apprentissage en santé sexuelle."
@@ -269,7 +274,7 @@ const Home = ({
           />
           <meta
             property="og:description"
-            content="Tumeplay, Tu crois tout savoir sur le SEXE ? Informe toi de manière ludique et gagne des cadeaux tout au long de ton parcours d'apprentissage."
+            content="Avec TUMEPLAY découvre et explore ta sexualité en t’amusant. L’appli pour tester tes connaissances en matière de sexualité, pensée et construite avec des jeunes de ton âge. Elle a été conçue pour que tout le monde ait la même chance et le même niveau d’information sur la sexualité."
             key="description"
           />
           <meta
