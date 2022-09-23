@@ -1,3 +1,11 @@
+## [1.145.3](https://github.com/SocialGouv/Tumeplay/compare/v1.145.2...v1.145.3) (2022-09-23)
+
+
+### Bug Fixes
+
+* google meta ([f31084b](https://github.com/SocialGouv/Tumeplay/commit/f31084b9295bc4deb88240a2f0d79fd34d026f6c))
+* remove charset meta ([35326c5](https://github.com/SocialGouv/Tumeplay/commit/35326c5f632b1c3032cc624d0f13609d058705bb))
+
 ## [1.145.2](https://github.com/SocialGouv/Tumeplay/compare/v1.145.1...v1.145.2) (2022-09-22)
 
 
