@@ -10,6 +10,7 @@ import {useQuery} from '@apollo/client';
 import {GET_SEXTUS_WORDS} from '../services/api/sextus';
 import Event from '../services/api/matomo';
 import AppContext from '../../AppContext';
+import axios from 'axios';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -22,6 +23,7 @@ const Sextus = ({navigation}) => {
   const [currentRow, setCurrentRow] = useState(0);
   const [isAllowedToPlay, setIsAllowedToPlay] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isWordValid, setIsWordValid] = useState(true);
 
   const gridSpecs = {
     rows: 6,
@@ -99,7 +101,27 @@ const Sextus = ({navigation}) => {
           setInputWord(inputWord.slice(0, -1));
         }
       } else if (key?.props?.name === 'sign-in-alt') {
-        evaluateUserGuess(inputWord);
+        const body = new FormData();
+        body.append('motWiki', inputWord.toLowerCase());
+        axios
+          .post('https://api-definition.fgainza.fr/app/api_wiki.php', body, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
+          .then(_data => {
+            if (_data.data.error.length > 0) {
+              setIsWordValid(false);
+              setInputWord(wordToGuess.charAt(0).toUpperCase());
+            } else {
+              setIsWordValid(true);
+              evaluateUserGuess(inputWord);
+            }
+          })
+          .catch(error => {
+            console.log('ERROR', error);
+            setInputWord(wordToGuess.charAt(0).toUpperCase());
+          });
       } else {
         inputWord.length + 1 <= wordToGuess.length &&
           setInputWord(inputWord + key);
@@ -123,6 +145,9 @@ const Sextus = ({navigation}) => {
           Trouve ce mot de{' '}
           <Text style={styles.redBoldText}>{wordToGuess.length}</Text> lettres
         </Text>
+        {!isWordValid && (
+          <Text style={styles.redBoldText}>Ce mot n'existe pas</Text>
+        )}
         <Grid
           userGuesses={userGuesses}
           currentRow={currentRow}

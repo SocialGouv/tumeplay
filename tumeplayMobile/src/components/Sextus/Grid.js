@@ -137,9 +137,12 @@ const styles = StyleSheet.create({
     height: 40,
     border: 'solid',
     borderWidth: 0.5,
-    borderColor: 'black',
+    borderRadius: 5,
+    borderColor: Colors.darkgrey,
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 1,
+    marginBottom: 5,
   },
 });
 
