@@ -17,8 +17,8 @@ const ThemePage = ({ post }: PostCardProps) => {
         <meta
           property="og:description"
           content={
-            post.text.length >= 60
-              ? post.text.substring(0, 60) + "..."
+            post.text.length >= 170
+              ? post.text.substring(0, 170) + "..."
               : post.text
           }
           key="description"
