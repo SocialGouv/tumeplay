@@ -1,3 +1,10 @@
+## [1.145.7](https://github.com/SocialGouv/Tumeplay/compare/v1.145.6...v1.145.7) (2022-09-26)
+
+
+### Bug Fixes
+
+* description meta on content pages ([c77579b](https://github.com/SocialGouv/Tumeplay/commit/c77579bf3e54a5334d862fc8f43175f715ef9a4a))
+
 ## [1.145.6](https://github.com/SocialGouv/Tumeplay/compare/v1.145.5...v1.145.6) (2022-09-26)
 
 
