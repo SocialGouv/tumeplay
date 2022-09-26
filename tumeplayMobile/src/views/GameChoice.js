@@ -1,15 +1,14 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import Container from '../components/global/Container';
 import handleRedirection from '../services/handleRedirection';
-import Button from '../components/Button';
 import AppContext from '../../AppContext';
 import Event from '../services/api/matomo';
 import {Divider} from 'react-native-paper';
 import config from '../../config';
 import {Colors} from '../styles/Style';
 import Icon from 'react-native-vector-icons/Entypo';
-import diceIcon from '../assets/diceIcon.png';
+import GameCard from '../components/GameChoice/GameCard';
 
 const GameChoice = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -23,47 +22,27 @@ const GameChoice = ({navigation}) => {
           <Text>Retour</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.box}>
-        <Text style={styles.title}>Tumeplay Classique</Text>
-        <Image
-          style={{
-            alignSelf: 'center',
-            width: 90,
-            height: 90,
-          }}
-          source={diceIcon}
-        />
-        <Button
-          text="Mode Classique"
-          size="medium"
-          special
-          left
-          onPress={() => {
-            Event.playEvent('home');
-            navigation.navigate('Jouer', handleRedirection(user));
-          }}
-          icon
-          style={styles.button}
-        />
-      </View>
       <Divider style={styles.divider} />
-      <View style={styles.box}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Découvre Sextus</Text>
-          <Text style={styles.subtitle}>Une nouvelle façon de jouer</Text>
+      <View>
+        <Text style={styles.title}>Selectionne ton jeu</Text>
+        <View>
+          <GameCard
+            title="Tumeplay Classique"
+            text="Challenge-toi en répondant à notre quiz par thématique"
+            onPress={() => {
+              Event.playEvent('home');
+              navigation.navigate('QuizzModule', handleRedirection(user));
+            }}
+          />
+          <GameCard
+            title="Sextus"
+            text="Sauras-tu trouver notre mot caché en 6 essais"
+            onPress={() => {
+              Event.playSextusEvent('StartGame');
+              navigation.navigate('Sextus');
+            }}
+          />
         </View>
-        <Button
-          text="Sextus"
-          size="medium"
-          left
-          icon
-          special
-          onPress={() => {
-            Event.playSextusEvent('StartGame');
-            navigation.navigate('Sextus');
-          }}
-          style={styles.button}
-        />
       </View>
     </Container>
   );
@@ -72,17 +51,16 @@ const GameChoice = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    padding: 20,
     flex: 1,
   },
   backLevel: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop: 10,
-    paddingRight: 20,
+    paddingLeft: 10,
     width: '100%',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 5,
   },
   chevron: {
     flexDirection: 'row',
@@ -90,29 +68,14 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: '100%',
-  },
-  header: {
-    alignItems: 'center',
     marginBottom: 20,
   },
   title: {
     fontSize: config.deviceWidth * 0.05,
-    color: Colors.primary,
-    textAlign: 'center',
+    color: Colors.black,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  subtitle: {
-    fontSize: config.deviceWidth * 0.04,
-    fontStyle: 'italic',
-  },
-  box: {
-    flex: 0.5,
-    width: '100%',
-    justifyContent: 'space-between',
-    padding: 20,
-  },
-  button: {},
 });
 
 export default GameChoice;

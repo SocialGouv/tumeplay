@@ -11,6 +11,7 @@ import {GET_SEXTUS_WORDS} from '../services/api/sextus';
 import Event from '../services/api/matomo';
 import AppContext from '../../AppContext';
 import axios from 'axios';
+import {TEXT_GEAR_API} from '@env';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -92,6 +93,16 @@ const Sextus = ({navigation}) => {
     }
   };
 
+  const validateWordWithSpellCheck = () => {
+    axios
+      .get(
+        `https://api.textgears.com/grammar?key=${TEXT_GEAR_API}&text=${inputWord}!&language=fr-FR`,
+      )
+      .then(response => {
+        console.log(response);
+      });
+  };
+
   const onKeyPress = useCallback(
     key => {
       if (key?.props?.name === 'backspace') {
@@ -101,27 +112,29 @@ const Sextus = ({navigation}) => {
           setInputWord(inputWord.slice(0, -1));
         }
       } else if (key?.props?.name === 'sign-in-alt') {
-        const body = new FormData();
-        body.append('motWiki', inputWord.toLowerCase());
-        axios
-          .post('https://api-definition.fgainza.fr/app/api_wiki.php', body, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-          .then(_data => {
-            if (_data.data.error.length > 0) {
-              setIsWordValid(false);
-              setInputWord(wordToGuess.charAt(0).toUpperCase());
-            } else {
-              setIsWordValid(true);
-              evaluateUserGuess(inputWord);
-            }
-          })
-          .catch(error => {
-            console.log('ERROR', error);
-            setInputWord(wordToGuess.charAt(0).toUpperCase());
-          });
+        // const body = new FormData();
+        // body.append('motWiki', inputWord);
+        // axios
+        //   .post('https://api-definition.fgainza.fr/app/api_wiki.php', body, {
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data',
+        //     },
+        //   })
+        //   .then(_data => {
+        //     if (_data.data.error.length > 0) {
+        //       // validateWordWithSpellCheck(inputWord);
+        //       setIsWordValid(false);
+        //       setInputWord(wordToGuess.charAt(0).toUpperCase());
+        //     } else {
+
+        //     }
+        //   })
+        //   .catch(error => {
+        //     console.log('ERROR', error);
+        //     setInputWord(wordToGuess.charAt(0).toUpperCase());
+        //   });
+        // setIsWordValid(true);
+        evaluateUserGuess(inputWord);
       } else {
         inputWord.length + 1 <= wordToGuess.length &&
           setInputWord(inputWord + key);
