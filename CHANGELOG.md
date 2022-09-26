@@ -1,3 +1,10 @@
+## [1.145.4](https://github.com/SocialGouv/Tumeplay/compare/v1.145.3...v1.145.4) (2022-09-26)
+
+
+### Bug Fixes
+
+* images for home & contents ([#446](https://github.com/SocialGouv/Tumeplay/issues/446)) ([1b5a474](https://github.com/SocialGouv/Tumeplay/commit/1b5a474309b60bfec46cf02a38c9136ca7da19a1))
+
 ## [1.145.3](https://github.com/SocialGouv/Tumeplay/compare/v1.145.2...v1.145.3) (2022-09-23)
 
 
