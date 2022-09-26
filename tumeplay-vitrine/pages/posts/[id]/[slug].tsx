@@ -29,6 +29,7 @@ const ThemePage = ({ post }: PostCardProps) => {
           key="image"
         />
         <meta property="og:url" content="https://tumeplay.fr" key="url" />
+        <meta property="og:type" content="siteweb" />
         <link
           rel="icon"
           href="https://tumeplay.fabrique.social.gouv.fr/favicon.ico"

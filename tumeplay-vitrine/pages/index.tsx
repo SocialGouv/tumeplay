@@ -286,6 +286,7 @@ const Home = ({
             rel="icon"
             href="https://tumeplay.fabrique.social.gouv.fr/favicon.ico"
           />
+          <meta property="og:type" content="siteweb" />
           <meta name="robots" content="all" />
         </Head>
         <Header />
