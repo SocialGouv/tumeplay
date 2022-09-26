@@ -1,3 +1,10 @@
+## [1.145.6](https://github.com/SocialGouv/Tumeplay/compare/v1.145.5...v1.145.6) (2022-09-26)
+
+
+### Bug Fixes
+
+* meta og:type + landing.html redirection ([16508d2](https://github.com/SocialGouv/Tumeplay/commit/16508d205fcbaa42054b912f6b7954cde8871bb4))
+
 ## [1.145.5](https://github.com/SocialGouv/Tumeplay/compare/v1.145.4...v1.145.5) (2022-09-26)
 
 
