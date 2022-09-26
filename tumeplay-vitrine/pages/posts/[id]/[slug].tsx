@@ -31,7 +31,7 @@ const ThemePage = ({ post }: PostCardProps) => {
         <meta property="og:url" content="https://tumeplay.fr" key="url" />
         <link
           rel="icon"
-          href={post.etiquette?.image.url || "/logo-tumeplay-share.png"}
+          href="https://tumeplay.fabrique.social.gouv.fr/favicon.ico"
         />
       </Head>
       <Container

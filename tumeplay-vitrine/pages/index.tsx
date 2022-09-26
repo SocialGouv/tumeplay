@@ -284,7 +284,7 @@ const Home = ({
           <meta property="og:url" content="https://tumeplay.fr" key="url" />
           <link
             rel="icon"
-            href="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay-share.png"
+            href="https://tumeplay.fabrique.social.gouv.fr/favicon.ico"
           />
           <meta name="robots" content="all" />
         </Head>
