@@ -6,12 +6,14 @@ import Grid from '../components/Sextus/Grid';
 import Keyboard from '../components/Sextus/Keyboard';
 import {Colors} from '../styles/Style';
 import Validation from '../components/Sextus/Validation';
-import {useQuery} from '@apollo/client';
-import {GET_SEXTUS_WORDS} from '../services/api/sextus';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  CREATE_SEXTUS_HISTORY,
+  GET_SEXTUS_WORDS,
+  UPDATE_SEXTUS_HISTORY,
+} from '../services/api/sextus';
 import Event from '../services/api/matomo';
 import AppContext from '../../AppContext';
-import axios from 'axios';
-import {TEXT_GEAR_API} from '@env';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -26,13 +28,63 @@ const Sextus = ({navigation}) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isWordValid, setIsWordValid] = useState(true);
   const [globalRedLetters, setGlobalRedLetters] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [currentHistoryId, setCurrentHistoryId] = useState(null);
+
+  const {data, loading} = useQuery(GET_SEXTUS_WORDS);
+  const [createHistory, {data: data1}] = useMutation(CREATE_SEXTUS_HISTORY, {
+    onError(error) {
+      console.log('error on creation', error);
+    },
+    onCompleted() {
+      setCurrentHistoryId(data1?.createSextusHistory?.sextusHistory?.id);
+      console.log('history created');
+    },
+  });
+
+  const [updateHistory] = useMutation(UPDATE_SEXTUS_HISTORY, {
+    onError(error) {
+      console.log('error on update', error);
+    },
+    onCompleted() {
+      setIsSuccess(true);
+      setIsAllowedToPlay(false);
+      console.log('history updated');
+    },
+  });
+
+  const createUserHistory = async () => {
+    if (wordToGuess !== '') {
+      setStartDate(new Date().getTime());
+      await createHistory({
+        variables: {
+          utilisateurs_mobile: user.id,
+          word_to_guess: wordToGuess,
+          nb_try: 0,
+          duration: 0,
+          status: 'fail',
+        },
+      });
+    }
+  };
+
+  const updateUserHistory = async () => {
+    const endDate = new Date().getTime();
+    const duration = (endDate - startDate) / 1000;
+    await updateHistory({
+      variables: {
+        history_id: currentHistoryId,
+        nb_try: currentRow + 1,
+        duration: duration,
+        status: 'success',
+      },
+    });
+  };
 
   const gridSpecs = {
     rows: 6,
     columns: wordToGuess.length,
   };
-
-  const {data, loading} = useQuery(GET_SEXTUS_WORDS);
 
   const relaunchGame = useCallback(() => {
     setIsSuccess(false);
@@ -68,6 +120,7 @@ const Sextus = ({navigation}) => {
   }, [handleWordAndDefinition]);
 
   useEffect(() => {
+    createUserHistory();
     setInputWord(wordToGuess.charAt(0).toUpperCase());
   }, [wordToGuess]);
 
@@ -79,8 +132,7 @@ const Sextus = ({navigation}) => {
 
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
-      setIsSuccess(true);
-      setIsAllowedToPlay(false);
+      updateUserHistory();
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
