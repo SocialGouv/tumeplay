@@ -1,3 +1,10 @@
+## [1.145.5](https://github.com/SocialGouv/Tumeplay/compare/v1.145.4...v1.145.5) (2022-09-26)
+
+
+### Bug Fixes
+
+* vitrine favicon ([a23b9d3](https://github.com/SocialGouv/Tumeplay/commit/a23b9d3008e119e25b3110f022db509841024757))
+
 ## [1.145.4](https://github.com/SocialGouv/Tumeplay/compare/v1.145.3...v1.145.4) (2022-09-26)
 
 
