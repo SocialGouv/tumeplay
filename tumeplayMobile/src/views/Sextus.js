@@ -25,6 +25,7 @@ const Sextus = ({navigation}) => {
   const [isAllowedToPlay, setIsAllowedToPlay] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isWordValid, setIsWordValid] = useState(true);
+  const [globalRedLetters, setGlobalRedLetters] = useState([]);
 
   const gridSpecs = {
     rows: 6,
@@ -93,15 +94,24 @@ const Sextus = ({navigation}) => {
     }
   };
 
-  const validateWordWithSpellCheck = () => {
-    axios
-      .get(
-        `https://api.textgears.com/grammar?key=${TEXT_GEAR_API}&text=${inputWord}!&language=fr-FR`,
-      )
-      .then(response => {
-        console.log(response);
-      });
-  };
+  useEffect(() => {
+    const infos = userGuesses
+      .map((word, _index) => {
+        return word
+          .split('')
+          .map((letter, index) => {
+            return {
+              letter: letter,
+              index: index,
+              isRed: letter === wordToGuess.charAt(index),
+            };
+          })
+          .filter(letter => letter.isRed);
+      })
+      .flat()
+      .filter((value, index, self) => self.indexOf(value) === index);
+    setGlobalRedLetters([...new Set(infos.map(item => item.index))]);
+  }, [userGuesses]);
 
   const onKeyPress = useCallback(
     key => {
@@ -133,9 +143,10 @@ const Sextus = ({navigation}) => {
         //     console.log('ERROR', error);
         //     setInputWord(wordToGuess.charAt(0).toUpperCase());
         //   });
-        // setIsWordValid(true);
+        setIsWordValid(true);
         evaluateUserGuess(inputWord);
       } else {
+        setGlobalRedLetters([]);
         inputWord.length + 1 <= wordToGuess.length &&
           setInputWord(inputWord + key);
       }
@@ -168,6 +179,7 @@ const Sextus = ({navigation}) => {
           wordToGuess={wordToGuess}
           inputWord={inputWord}
           isSuccess={isSuccess}
+          globalRedLetters={globalRedLetters}
         />
         {isAllowedToPlay ? (
           <Keyboard onKeyPress={onKeyPress} />
