@@ -278,13 +278,13 @@ const Home = ({
           />
           <meta
             property="og:image"
-            content="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+            content="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay-share.png"
             key="image"
           />
           <meta property="og:url" content="https://tumeplay.fr" key="url" />
           <link
             rel="icon"
-            href="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay.svg"
+            href="https://tumeplay.fabrique.social.gouv.fr/logo-tumeplay-share.png"
           />
           <meta name="robots" content="all" />
         </Head>

@@ -23,9 +23,16 @@ const ThemePage = ({ post }: PostCardProps) => {
           }
           key="description"
         />
-        <meta property="og:image" content="/logo-tumeplay.svg" key="image" />
-        <meta property="og:url" content="https://tumeplay.com" key="url" />
-        <link rel="icon" href="/logo-tumeplay.svg" />
+        <meta
+          property="og:image"
+          content={post.etiquette?.image.url || "/logo-tumeplay-share.png"}
+          key="image"
+        />
+        <meta property="og:url" content="https://tumeplay.fr" key="url" />
+        <link
+          rel="icon"
+          href={post.etiquette?.image.url || "/logo-tumeplay-share.png"}
+        />
       </Head>
       <Container
         maxW={["auto", "auto", "3xl"]}
