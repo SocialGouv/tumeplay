@@ -14,6 +14,7 @@ import {
 } from '../services/api/sextus';
 import Event from '../services/api/matomo';
 import AppContext from '../../AppContext';
+import {REACT_APP_URL} from '@env';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -38,7 +39,6 @@ const Sextus = ({navigation}) => {
     },
     onCompleted() {
       setCurrentHistoryId(data1?.createSextusHistory?.sextusHistory?.id);
-      console.log('history created');
     },
   });
 
@@ -49,7 +49,6 @@ const Sextus = ({navigation}) => {
     onCompleted() {
       setIsSuccess(true);
       setIsAllowedToPlay(false);
-      console.log('history updated');
     },
   });
 
@@ -174,29 +173,19 @@ const Sextus = ({navigation}) => {
           setInputWord(inputWord.slice(0, -1));
         }
       } else if (key?.props?.name === 'sign-in-alt') {
-        // const body = new FormData();
-        // body.append('motWiki', inputWord);
-        // axios
-        //   .post('https://api-definition.fgainza.fr/app/api_wiki.php', body, {
-        //     headers: {
-        //       'Content-Type': 'multipart/form-data',
-        //     },
-        //   })
-        //   .then(_data => {
-        //     if (_data.data.error.length > 0) {
-        //       // validateWordWithSpellCheck(inputWord);
-        //       setIsWordValid(false);
-        //       setInputWord(wordToGuess.charAt(0).toUpperCase());
-        //     } else {
-
-        //     }
-        //   })
-        //   .catch(error => {
-        //     console.log('ERROR', error);
-        //     setInputWord(wordToGuess.charAt(0).toUpperCase());
-        //   });
-        setIsWordValid(true);
-        evaluateUserGuess(inputWord);
+        fetch(
+          `${REACT_APP_URL}/mots/count?value=${inputWord.toLowerCase()}`,
+        ).then(response => {
+          response.json().then(_data => {
+            if (_data === 0) {
+              setIsWordValid(false);
+              setInputWord(wordToGuess.charAt(0).toUpperCase());
+            } else {
+              setIsWordValid(true);
+              evaluateUserGuess(inputWord);
+            }
+          });
+        });
       } else {
         setGlobalRedLetters([]);
         inputWord.length + 1 <= wordToGuess.length &&
