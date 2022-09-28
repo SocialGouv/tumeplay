@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sextus-words",
+      "handler": "sextus-words.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sextus-words/count",
+      "handler": "sextus-words.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sextus-words/:id",
+      "handler": "sextus-words.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sextus-words",
+      "handler": "sextus-words.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sextus-words/:id",
+      "handler": "sextus-words.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/sextus-words/:id",
+      "handler": "sextus-words.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

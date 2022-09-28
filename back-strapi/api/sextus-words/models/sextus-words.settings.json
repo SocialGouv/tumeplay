@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sextus_words",
+  "info": {
+    "name": "SextusWords"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "word": {
+      "type": "string"
+    },
+    "definition": {
+      "type": "text"
+    }
+  }
+}

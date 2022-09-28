@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sextus_histories",
+  "info": {
+    "name": "SextusHistory"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile",
+      "via": "sextus_histories"
+    },
+    "word_to_guess": {
+      "type": "string"
+    },
+    "nb_try": {
+      "type": "integer"
+    },
+    "duration": {
+      "type": "biginteger"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "success",
+        "fail"
+      ]
+    }
+  }
+}

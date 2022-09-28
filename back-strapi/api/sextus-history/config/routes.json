@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sextus-histories",
+      "handler": "sextus-history.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sextus-histories/count",
+      "handler": "sextus-history.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sextus-histories/:id",
+      "handler": "sextus-history.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sextus-histories",
+      "handler": "sextus-history.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sextus-histories/:id",
+      "handler": "sextus-history.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/sextus-histories/:id",
+      "handler": "sextus-history.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
