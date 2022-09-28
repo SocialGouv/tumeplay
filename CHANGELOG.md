@@ -1,3 +1,10 @@
+# [1.147.0](https://github.com/SocialGouv/Tumeplay/compare/v1.146.0...v1.147.0) (2022-09-28)
+
+
+### Features
+
+* add sitemap vitrine ([7ffd1ca](https://github.com/SocialGouv/Tumeplay/commit/7ffd1ca93ee3c44a167edf0861c57161740388d3))
+
 # [1.146.0](https://github.com/SocialGouv/Tumeplay/compare/v1.145.7...v1.146.0) (2022-09-28)
 
 
