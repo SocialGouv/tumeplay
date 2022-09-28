@@ -1,3 +1,10 @@
+## [1.147.1](https://github.com/SocialGouv/Tumeplay/compare/v1.147.0...v1.147.1) (2022-09-28)
+
+
+### Bug Fixes
+
+* upgrade nginx ([#397](https://github.com/SocialGouv/Tumeplay/issues/397)) ([90cb59b](https://github.com/SocialGouv/Tumeplay/commit/90cb59b945dd740f67cef77bb10b1eec7c3a4f1e))
+
 # [1.147.0](https://github.com/SocialGouv/Tumeplay/compare/v1.146.0...v1.147.0) (2022-09-28)
 
 
