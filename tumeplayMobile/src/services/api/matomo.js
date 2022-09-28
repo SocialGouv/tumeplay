@@ -4,6 +4,12 @@ const Event = {
   playEvent: label => {
     Matomo.trackEvent('Quizz', 'Jouer', label, 1);
   },
+  playSextusEvent: label => {
+    Matomo.trackEvent('Sextus', 'Jouer', label, 1);
+  },
+  failSextusEvent: label => {
+    Matomo.trackEvent('Sextus', 'Fail', label, 1);
+  },
   orderPageEvent: label => {
     Matomo.trackEvent('Order', 'Page', label, 1);
   },

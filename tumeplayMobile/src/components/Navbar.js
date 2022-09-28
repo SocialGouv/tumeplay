@@ -6,11 +6,11 @@ import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AppContext from '../../AppContext';
-import QuizzLoader from './global/QuizzLoader';
 import diceIcon from '../assets/diceIcon.png';
 import {Image, Alert} from 'react-native';
 import Event from '../services/api/matomo';
 import Journey2 from '../views/Journey2';
+import GameChoice from '../views/GameChoice';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,7 +52,7 @@ const Navbar = ({navigation}) => {
       />
       <Tab.Screen
         name="Jouer"
-        component={QuizzLoader}
+        component={GameChoice}
         options={{
           tabBarIcon: ({color}) => (
             <Image

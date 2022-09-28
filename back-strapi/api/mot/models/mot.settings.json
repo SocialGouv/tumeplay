@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mots",
+  "info": {
+    "name": "Mot"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "string"
+    }
+  }
+}

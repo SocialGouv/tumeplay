@@ -59,6 +59,10 @@
     },
     "sponsor_code": {
       "type": "string"
+    },
+    "sextus_histories": {
+      "via": "utilisateurs_mobile",
+      "collection": "sextus-history"
     }
   }
 }
