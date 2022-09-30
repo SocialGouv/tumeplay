@@ -1,4 +1,5 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import Text from '../components/Text';
 import React, {useContext} from 'react';
 import Container from '../components/global/Container';
 import handleRedirection from '../services/handleRedirection';

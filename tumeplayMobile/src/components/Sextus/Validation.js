@@ -1,8 +1,10 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
+import Text from '../Text';
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 import config from '../../../config';
 import Button from '../Button';
+import {View} from 'react-native';
 
 const Validation = props => {
   const {wordToGuess, isSuccess, definition, relaunchGame} = props;
@@ -15,13 +17,17 @@ const Validation = props => {
       duration={550}
       easing="ease-in-out"
       style={[styles.bottomContainer]}>
-      {isSuccess ? (
-        <Text style={styles.title}>🎉 Bien joué !</Text>
-      ) : (
-        <Text style={styles.title}>😞 Perdu !</Text>
-      )}
-      <Text style={styles.subtitle}>{wordToGuess}</Text>
-      <Text>{definition}</Text>
+      <ScrollView>
+        <View style={styles.textContainer}>
+          {isSuccess ? (
+            <Text style={styles.title}>Bien joué ! 🎉</Text>
+          ) : (
+            <Text style={styles.title}>Perdu ! 😞</Text>
+          )}
+          <Text style={styles.subtitle}>{wordToGuess}</Text>
+          <Text>{definition[0].toUpperCase() + definition.substring(1)}</Text>
+        </View>
+      </ScrollView>
       <Button
         size="medium"
         text="Rejouer"
@@ -37,13 +43,18 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: config.deviceWidth,
     backgroundColor: '#FFF',
-    flex: 0.7,
+    flex: 1,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingHorizontal: 24,
     paddingTop: 20,
-    alignItems: 'center',
+    // alignItems: 'center',
     // paddingBottom: 70,
+  },
+  textContainer: {
+    flex: 1,
+    marginBottom: 20,
+    alignItems: 'center',
   },
   title: {
     fontSize: config.deviceWidth * 0.05,
@@ -57,8 +68,8 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   button: {
-    position: 'absolute',
-    bottom: 40,
+    // position: 'absolute',
+    bottom: 20,
   },
 });
 
