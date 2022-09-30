@@ -98,17 +98,6 @@ const Sextus = ({navigation}) => {
     setIsAllowedToPlay(true);
   }, [wordToGuess]);
 
-  // function getRandomInt(min, max) {
-  //   const byteArray = new Uint8Array(1);
-  //   window.crypto.getRandomValues(byteArray);
-
-  //   const range = max - min + 1;
-  //   const max_range = 256;
-  //   if (byteArray[0] >= Math.floor(max_range / range) * range)
-  //     return getRandomInt(min, max);
-  //   return min + (byteArray[0] % range);
-  // }
-
   const handleWordAndDefinition = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * fullWords.length);
 

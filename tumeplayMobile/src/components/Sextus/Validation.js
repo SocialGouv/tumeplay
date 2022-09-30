@@ -1,10 +1,9 @@
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet} from 'react-native';
 import Text from '../Text';
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 import config from '../../../config';
 import Button from '../Button';
-import {View} from 'react-native';
 
 const Validation = props => {
   const {wordToGuess, isSuccess, definition, relaunchGame} = props;
