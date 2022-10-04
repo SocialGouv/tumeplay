@@ -167,7 +167,7 @@ const Grid = props => {
 
 const styles = StyleSheet.create({
   gridContainer: {
-    marginTop: config.deviceWidth > 375 ? 90 : 50,
+    marginTop: config.deviceWidth > 375 ? 50 : 50,
     marginBottom: config.deviceWidth > 375 ? 50 : 10,
     alignItems: 'center',
     marginHorizontal: 10,
