@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Text from '../Text';
 import React, {useCallback, useEffect, useState} from 'react';
 import config from '../../../config';
@@ -65,8 +65,8 @@ const Grid = props => {
 
   const adjustCellStyle = el => {
     let style = {
-      width: '97%',
-      height: '97%',
+      width: '100%',
+      height: '100%',
       textAlign: 'center',
       paddingVertical: 10,
       overflow: 'hidden',
@@ -80,6 +80,7 @@ const Grid = props => {
         backgroundColor: '#F1B931',
         color: 'black',
         borderRadius: 20,
+        zIndex: 1,
       };
     }
     return style;
@@ -106,8 +107,8 @@ const Grid = props => {
     fontWeight: 'bold',
     color: 'white',
     borderRadius: 2,
-    backgroundColor: '#E85439',
-    opacity: 0.5,
+    backgroundColor: '#000',
+    // opacity: 0.9,
   };
 
   const renderGrid = () => {

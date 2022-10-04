@@ -35,12 +35,26 @@ const Keyboard = props => {
                   value={letter}
                   style={({pressed}) => [
                     pressed
-                      ? {...styles.cell, ...styles.cellPressed}
+                      ? {
+                          ...styles.cell,
+                          ...(letter?.props?.name === 'sign-in-alt'
+                            ? styles.customCellPressed
+                            : styles.cellPressed),
+                        }
+                      : letter?.props?.name === 'sign-in-alt'
+                      ? styles.customButton
                       : styles.cell,
                   ]}
                   onPress={() => onKeyPress(letter)}>
                   {({pressed}) => (
-                    <Text style={pressed ? styles.whiteText : styles.text}>
+                    <Text
+                      style={
+                        pressed
+                          ? styles.whiteText
+                          : letter.props?.name === 'sign-in-alt'
+                          ? styles.whiteText
+                          : styles.text
+                      }>
                       {letter}
                     </Text>
                   )}
@@ -72,8 +86,23 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     alignItems: 'center',
   },
+  customButton: {
+    width: config.deviceWidth / 6,
+    paddingVertical: 9,
+    margin: 4,
+    borderRadius: 5,
+    borderWidth: 1,
+    color: 'white',
+    borderColor: Colors.black,
+    backgroundColor: Colors.black,
+    alignItems: 'center',
+  },
   cellPressed: {
     backgroundColor: Colors.primary,
+  },
+  customCellPressed: {
+    backgroundColor: Colors.primary,
+    width: config.deviceWidth / 6,
   },
   cellDisabled: {
     borderColor: 'grey',
@@ -82,6 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,
   },
+
   whiteText: {
     fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,
