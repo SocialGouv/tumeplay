@@ -1,3 +1,10 @@
+## [1.147.2](https://github.com/SocialGouv/Tumeplay/compare/v1.147.1...v1.147.2) (2022-10-05)
+
+
+### Bug Fixes
+
+* UI/UX return integration ([#447](https://github.com/SocialGouv/Tumeplay/issues/447)) ([0fa451f](https://github.com/SocialGouv/Tumeplay/commit/0fa451fc67812f0f0c8e6c1ee6e3c0ee1288991c))
+
 ## [1.147.1](https://github.com/SocialGouv/Tumeplay/compare/v1.147.0...v1.147.1) (2022-09-28)
 
 
