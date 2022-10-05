@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "sextus_histories",
   "info": {
-    "name": "SextusHistory"
+    "name": "SextusHistory",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "utilisateurs_mobile": {
-      "model": "utilisateurs-mobile",
-      "via": "sextus_histories"
-    },
     "word_to_guess": {
       "type": "string"
     },
@@ -30,6 +27,9 @@
         "success",
         "fail"
       ]
+    },
+    "utilisateurs_mobile": {
+      "model": "utilisateurs-mobile"
     }
   }
 }

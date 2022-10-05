@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/leaderboard",
+      "handler": "utilisateurs-mobile.getLeaderBoard",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/utilisateurs-mobiles",
       "handler": "utilisateurs-mobile.create",
