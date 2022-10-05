@@ -20,7 +20,10 @@ import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
 
 const Sextus = ({navigation}) => {
-  const {user} = useContext(AppContext);
+  const {user, reloadUser} = useContext(AppContext);
+
+  console.log(user.sextus_histories.filter(h => h.status === 'success'));
+  console.log(user.sextus_histories);
 
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
@@ -137,6 +140,7 @@ const Sextus = ({navigation}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
+      reloadUser();
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
