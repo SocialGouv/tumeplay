@@ -234,7 +234,7 @@ const Sextus = ({navigation}) => {
           currentLetterIndex={currentLetterIndex}
         />
         {isAllowedToPlay ? (
-          <Keyboard onKeyPress={onKeyPress} />
+          <Keyboard style={styles.keyboard} onKeyPress={onKeyPress} />
         ) : (
           <Validation
             wordToGuess={wordToGuess}
@@ -281,6 +281,10 @@ const styles = StyleSheet.create({
   redBoldText: {
     color: Colors.primary,
     fontWeight: 'bold',
+  },
+  keyboard: {
+    position: 'absolute',
+    bottom: 30,
   },
 });
 

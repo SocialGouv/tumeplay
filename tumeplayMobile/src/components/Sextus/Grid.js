@@ -1,4 +1,4 @@
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Text from '../Text';
 import React, {useCallback, useEffect, useState} from 'react';
 import config from '../../../config';

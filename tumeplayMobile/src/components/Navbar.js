@@ -67,11 +67,6 @@ const Navbar = ({navigation}) => {
             />
           ),
         }}
-        // listeners={{
-        //   tabPress: e => {
-        //     Event.playEvent('navbar');
-        //   },
-        // }}
         initialParams={{from: 'navbar'}}
       />
       <Tab.Screen

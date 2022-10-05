@@ -41,8 +41,8 @@ const Validation = props => {
 const styles = StyleSheet.create({
   bottomContainer: {
     width: config.deviceWidth,
-    backgroundColor: '#FFF',
     flex: 1,
+    backgroundColor: '#FFF',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingHorizontal: 24,

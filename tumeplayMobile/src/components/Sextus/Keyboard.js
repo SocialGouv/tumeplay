@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import config from '../../../config';
 
 const Keyboard = props => {
-  const {onKeyPress} = props;
+  const {onKeyPress, style} = props;
 
   const keyboardLetters = [
     ['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -24,7 +24,7 @@ const Keyboard = props => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       {keyboardLetters.map((row, i) => {
         return (
           <View style={styles.row} key={'key-row' + i}>
