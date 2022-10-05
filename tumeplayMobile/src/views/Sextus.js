@@ -17,6 +17,7 @@ import Event from '../services/api/matomo';
 import AppContext from '../../AppContext';
 import {REACT_APP_URL} from '@env';
 import {removeAccentsWords} from '../services/utils';
+import config from '../../config';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
@@ -284,7 +285,7 @@ const styles = StyleSheet.create({
   },
   keyboard: {
     position: 'absolute',
-    bottom: 30,
+    bottom: config.deviceWidth <= 375 ? 0 : 40,
   },
 });
 
