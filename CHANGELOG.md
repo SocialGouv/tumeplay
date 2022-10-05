@@ -1,3 +1,31 @@
+## [1.148.1](https://github.com/SocialGouv/Tumeplay/compare/v1.148.0...v1.148.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* removing forgotten logs ([a423e8f](https://github.com/SocialGouv/Tumeplay/commit/a423e8f14d4362c84d26e1dc454e8172111f3d91))
+
+# [1.148.0](https://github.com/SocialGouv/Tumeplay/compare/v1.147.3...v1.148.0) (2022-10-05)
+
+
+### Features
+
+* reload user after history update and tracking version ([#449](https://github.com/SocialGouv/Tumeplay/issues/449)) ([68b4510](https://github.com/SocialGouv/Tumeplay/commit/68b45104d467e6c740334c060ed1ee5eee6d4cab))
+
+## [1.147.3](https://github.com/SocialGouv/Tumeplay/compare/v1.147.2...v1.147.3) (2022-10-05)
+
+
+### Bug Fixes
+
+* ios small device keyboard position ([85eba3a](https://github.com/SocialGouv/Tumeplay/commit/85eba3ae6457da48ef94fa30cb9d8721d6b95f31))
+
+## [1.147.2](https://github.com/SocialGouv/Tumeplay/compare/v1.147.1...v1.147.2) (2022-10-05)
+
+
+### Bug Fixes
+
+* UI/UX return integration ([#447](https://github.com/SocialGouv/Tumeplay/issues/447)) ([0fa451f](https://github.com/SocialGouv/Tumeplay/commit/0fa451fc67812f0f0c8e6c1ee6e3c0ee1288991c))
+
 ## [1.147.1](https://github.com/SocialGouv/Tumeplay/compare/v1.147.0...v1.147.1) (2022-09-28)
 
 
