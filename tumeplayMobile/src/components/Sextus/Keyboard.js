@@ -1,11 +1,12 @@
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable, StyleSheet} from 'react-native';
+import Text from '../Text';
 import React from 'react';
 import {Colors} from '../../styles/Style';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import config from '../../../config';
 
 const Keyboard = props => {
-  const {onKeyPress} = props;
+  const {onKeyPress, style} = props;
 
   const keyboardLetters = [
     ['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -23,7 +24,7 @@ const Keyboard = props => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       {keyboardLetters.map((row, i) => {
         return (
           <View style={styles.row} key={'key-row' + i}>
@@ -34,12 +35,26 @@ const Keyboard = props => {
                   value={letter}
                   style={({pressed}) => [
                     pressed
-                      ? {...styles.cell, ...styles.cellPressed}
+                      ? {
+                          ...styles.cell,
+                          ...(letter?.props?.name === 'sign-in-alt'
+                            ? styles.customCellPressed
+                            : styles.cellPressed),
+                        }
+                      : letter?.props?.name === 'sign-in-alt'
+                      ? styles.customButton
                       : styles.cell,
                   ]}
                   onPress={() => onKeyPress(letter)}>
                   {({pressed}) => (
-                    <Text style={pressed ? styles.whiteText : styles.text}>
+                    <Text
+                      style={
+                        pressed
+                          ? styles.whiteText
+                          : letter.props?.name === 'sign-in-alt'
+                          ? styles.whiteText
+                          : styles.text
+                      }>
                       {letter}
                     </Text>
                   )}
@@ -71,8 +86,23 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     alignItems: 'center',
   },
+  customButton: {
+    width: config.deviceWidth / 6,
+    paddingVertical: 9,
+    margin: 4,
+    borderRadius: 5,
+    borderWidth: 1,
+    color: 'white',
+    borderColor: Colors.black,
+    backgroundColor: Colors.black,
+    alignItems: 'center',
+  },
   cellPressed: {
     backgroundColor: Colors.primary,
+  },
+  customCellPressed: {
+    backgroundColor: Colors.primary,
+    width: config.deviceWidth / 6,
   },
   cellDisabled: {
     borderColor: 'grey',
@@ -81,6 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,
   },
+
   whiteText: {
     fontWeight: 'bold',
     fontSize: config.deviceWidth * 0.03,

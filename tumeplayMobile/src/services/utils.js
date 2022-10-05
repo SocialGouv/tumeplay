@@ -48,3 +48,7 @@ export const versionCompare = (v1, v2, options) => {
 
   return 0;
 };
+
+export const removeAccentsWords = str => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};

@@ -1,4 +1,5 @@
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import Text from '../Text';
 import React, {useCallback, useEffect, useState} from 'react';
 import config from '../../../config';
 import {Colors} from '../../styles/Style';
@@ -12,6 +13,8 @@ const Grid = props => {
     userGuesses,
     isSuccess,
     globalRedLetters,
+    currentLetterIndex,
+    isWordValid,
   } = props;
 
   const [userGuessesStatus, setUserGuessesStatus] = useState([]);
@@ -62,8 +65,8 @@ const Grid = props => {
 
   const adjustCellStyle = el => {
     let style = {
-      width: '97%',
-      height: '97%',
+      width: '100%',
+      height: '100%',
       textAlign: 'center',
       paddingVertical: 10,
       overflow: 'hidden',
@@ -77,20 +80,35 @@ const Grid = props => {
         backgroundColor: '#F1B931',
         color: 'black',
         borderRadius: 20,
+        zIndex: 1,
       };
     }
     return style;
   };
 
   const finishStyle = {
-    width: '97%',
-    height: '97%',
+    width: '100%',
+    height: '100%',
     textAlign: 'center',
     paddingVertical: 10,
     overflow: 'hidden',
     fontWeight: 'bold',
     color: 'white',
+    borderRadius: 2,
     backgroundColor: '#E85439',
+  };
+
+  const currentLetterStyle = {
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    paddingVertical: 10,
+    overflow: 'hidden',
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 2,
+    backgroundColor: '#000',
+    // opacity: 0.9,
   };
 
   const renderGrid = () => {
@@ -113,7 +131,11 @@ const Grid = props => {
                 </Text>
               )}
             {currentRow === j && (
-              <Text style={isSuccess && finishStyle}>
+              <Text
+                style={[
+                  isSuccess && finishStyle,
+                  !isSuccess && i <= currentLetterIndex && currentLetterStyle,
+                ]}>
                 {globalRedLetters.length > 0
                   ? globalRedLetters.map(index => {
                       return index === i ? wordToGuess.charAt(i) : '';
@@ -133,10 +155,23 @@ const Grid = props => {
     return tmpGrid;
   };
 
-  return <View style={styles.grid}>{renderGrid()}</View>;
+  return (
+    <View style={styles.gridContainer}>
+      {!isWordValid && (
+        <Text style={styles.redSubtitle}>Ce mot n'existe pas</Text>
+      )}
+      <View style={styles.grid}>{renderGrid()}</View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
+  gridContainer: {
+    marginTop: 50,
+    marginBottom: config.deviceWidth > 375 ? 50 : 10,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
   grid: {
     flexDirection: 'row',
   },
@@ -150,6 +185,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 1,
     marginBottom: 5,
+  },
+  redSubtitle: {
+    color: Colors.primary,
+    fontWeight: 'bold',
+    position: 'absolute',
+    top: -40,
   },
 });
 

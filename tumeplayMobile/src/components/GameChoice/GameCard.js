@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     height: 110,
-    marginVertical: 30,
+    marginVertical: 20,
     marginHorizontal: 10,
   },
   title: {
