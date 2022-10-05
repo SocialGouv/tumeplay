@@ -1,3 +1,10 @@
+## [1.147.3](https://github.com/SocialGouv/Tumeplay/compare/v1.147.2...v1.147.3) (2022-10-05)
+
+
+### Bug Fixes
+
+* ios small device keyboard position ([85eba3a](https://github.com/SocialGouv/Tumeplay/commit/85eba3ae6457da48ef94fa30cb9d8721d6b95f31))
+
 ## [1.147.2](https://github.com/SocialGouv/Tumeplay/compare/v1.147.1...v1.147.2) (2022-10-05)
 
 
