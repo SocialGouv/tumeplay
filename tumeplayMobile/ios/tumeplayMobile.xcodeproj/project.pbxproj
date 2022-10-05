@@ -22,22 +22,6 @@
 		D4D6DBF5277231D6000D59E7 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A648F3C04A2D45FDA2FBB924 /* Montserrat-Medium.ttf */; };
 		D4D6DC1927736328000D59E7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D6DC1827736328000D59E7 /* Launch Screen.storyboard */; };
 		EA79DFD78671415EA5CBC473 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B45F0CBDD49940198D57CA71 /* Montserrat-ExtraBold.ttf */; };
-		EDC8231A28CF28100084A943 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7649F10EDFD64E9A80AEA6C3 /* AntDesign.ttf */; };
-		EDC8231B28CF28100084A943 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8717A1252A47BBB6F09200 /* Entypo.ttf */; };
-		EDC8231C28CF28100084A943 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DD7070522D4403B9B46D91 /* EvilIcons.ttf */; };
-		EDC8231D28CF28100084A943 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F933900D04E85861B63D4 /* Feather.ttf */; };
-		EDC8231E28CF28100084A943 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A352F64258C4E4CA78C8756 /* FontAwesome.ttf */; };
-		EDC8231F28CF28100084A943 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F033A891B877452A94D37BAE /* FontAwesome5_Brands.ttf */; };
-		EDC8232028CF28100084A943 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D75D67687F343DA9D23D681 /* FontAwesome5_Regular.ttf */; };
-		EDC8232128CF28100084A943 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 419A9E7755D845BBBB52FDDD /* FontAwesome5_Solid.ttf */; };
-		EDC8232228CF28100084A943 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84E6925AE21C4D14813CC922 /* Fontisto.ttf */; };
-		EDC8232328CF28100084A943 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6A8CD454E1B412FB56FE0D9 /* Foundation.ttf */; };
-		EDC8232428CF28100084A943 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9677FF54ACB9419CA31773FB /* Ionicons.ttf */; };
-		EDC8232528CF28100084A943 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38ADA9E4C64D4D289E2B233C /* MaterialCommunityIcons.ttf */; };
-		EDC8232628CF28100084A943 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED8785EE35254126AADF5065 /* MaterialIcons.ttf */; };
-		EDC8232728CF28100084A943 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F3B2C89445741F6B9D73866 /* Octicons.ttf */; };
-		EDC8232828CF28100084A943 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F1FA9A2C85C4E51823CD923 /* SimpleLineIcons.ttf */; };
-		EDC8232928CF28100084A943 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A03D74766B4A4270A0019973 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,22 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDC8231A28CF28100084A943 /* AntDesign.ttf in Resources */,
-				EDC8231B28CF28100084A943 /* Entypo.ttf in Resources */,
-				EDC8231C28CF28100084A943 /* EvilIcons.ttf in Resources */,
-				EDC8231D28CF28100084A943 /* Feather.ttf in Resources */,
-				EDC8231E28CF28100084A943 /* FontAwesome.ttf in Resources */,
-				EDC8231F28CF28100084A943 /* FontAwesome5_Brands.ttf in Resources */,
-				EDC8232028CF28100084A943 /* FontAwesome5_Regular.ttf in Resources */,
-				EDC8232128CF28100084A943 /* FontAwesome5_Solid.ttf in Resources */,
-				EDC8232228CF28100084A943 /* Fontisto.ttf in Resources */,
-				EDC8232328CF28100084A943 /* Foundation.ttf in Resources */,
-				EDC8232428CF28100084A943 /* Ionicons.ttf in Resources */,
-				EDC8232528CF28100084A943 /* MaterialCommunityIcons.ttf in Resources */,
-				EDC8232628CF28100084A943 /* MaterialIcons.ttf in Resources */,
-				EDC8232728CF28100084A943 /* Octicons.ttf in Resources */,
-				EDC8232828CF28100084A943 /* SimpleLineIcons.ttf in Resources */,
-				EDC8232928CF28100084A943 /* Zocial.ttf in Resources */,
 				D4D6DC1927736328000D59E7 /* Launch Screen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				882B38D593C5408D9DFE419E /* Montserrat-Bold.ttf in Resources */,
@@ -657,7 +625,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.02;
+				CURRENT_PROJECT_VERSION = 1.55;
 				DEVELOPMENT_TEAM = 76GBKHVK25;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = tumeplayMobile/Info.plist;
@@ -666,7 +634,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.24;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -689,7 +657,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.02;
+				CURRENT_PROJECT_VERSION = 1.55;
 				DEVELOPMENT_TEAM = 76GBKHVK25;
 				INFOPLIST_FILE = tumeplayMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -697,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.24;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
