@@ -1,3 +1,10 @@
+# [1.148.0](https://github.com/SocialGouv/Tumeplay/compare/v1.147.3...v1.148.0) (2022-10-05)
+
+
+### Features
+
+* reload user after history update and tracking version ([#449](https://github.com/SocialGouv/Tumeplay/issues/449)) ([68b4510](https://github.com/SocialGouv/Tumeplay/commit/68b45104d467e6c740334c060ed1ee5eee6d4cab))
+
 ## [1.147.3](https://github.com/SocialGouv/Tumeplay/compare/v1.147.2...v1.147.3) (2022-10-05)
 
 
