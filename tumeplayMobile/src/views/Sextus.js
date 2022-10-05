@@ -22,9 +22,6 @@ import config from '../../config';
 const Sextus = ({navigation}) => {
   const {user, reloadUser} = useContext(AppContext);
 
-  console.log(user.sextus_histories.filter(h => h.status === 'success'));
-  console.log(user.sextus_histories);
-
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
   const [wordToGuess, setWordToGuess] = useState('');
