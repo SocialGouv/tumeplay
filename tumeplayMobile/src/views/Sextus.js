@@ -21,8 +21,8 @@ import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
 
-const Sextus = ({navigation, route}) => {
-  const {user} = useContext(AppContext);
+const Sextus = ({navigation}) => {
+  const {user, reloadUser} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
 
   const [fullWords, setFullWords] = useState([]);
@@ -39,13 +39,6 @@ const Sextus = ({navigation, route}) => {
   const [currentHistoryId, setCurrentHistoryId] = useState(null);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [showLeaderBoard, setShowLeaderBoard] = useState(false);
-  const [firstLoad, setFirstLoad] = useState(true);
-
-  useEffect(() => {
-    if (firstLoad) {
-      setFirstLoad(false);
-    }
-  }, [showLeaderBoard]);
 
   const {data, loading} = useQuery(GET_SEXTUS_WORDS);
   const [createHistory, {data: data1}] = useMutation(CREATE_SEXTUS_HISTORY, {
@@ -135,8 +128,8 @@ const Sextus = ({navigation, route}) => {
   }, [handleWordAndDefinition]);
 
   useEffect(() => {
-    createUserHistory();
     setInputWord(wordToGuess.charAt(0).toUpperCase());
+    createUserHistory();
   }, [wordToGuess]);
 
   useEffect(() => {
@@ -148,6 +141,7 @@ const Sextus = ({navigation, route}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
+      reloadUser();
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
@@ -239,11 +233,7 @@ const Sextus = ({navigation, route}) => {
       {showLeaderBoard ? (
         <LeaderBoard showLeaderBoard={showLeaderBoard} />
       ) : (
-        <AnimatedView
-          animation={firstLoad ? 'fadeInLeftBig' : 'fadeInUpBig'}
-          duration={350}
-          easing="ease-in-out"
-          style={styles.middleContainer}>
+        <View style={styles.middleContainer}>
           <Text style={styles.title}>
             Trouve ce mot de{' '}
             <Text style={styles.redBoldText}>{wordToGuess.length}</Text> lettres
@@ -269,7 +259,7 @@ const Sextus = ({navigation, route}) => {
               relaunchGame={relaunchGame}
             />
           )}
-        </AnimatedView>
+        </View>
       )}
     </Container>
   );

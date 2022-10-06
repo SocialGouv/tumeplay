@@ -305,5 +305,6 @@ module.exports = {
     });
 
     return users_scores;
+    q;
   },
 };

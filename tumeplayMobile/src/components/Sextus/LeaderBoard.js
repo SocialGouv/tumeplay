@@ -5,9 +5,9 @@ import * as Animatable from 'react-native-animatable';
 import {REACT_APP_URL} from '@env';
 import AppContext from '../../../AppContext';
 import {Colors} from '../../styles/Style';
+import config from '../../../config';
 
 const LeaderBoard = props => {
-  const {showLeaderBoard} = props;
   const {user} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
   const [userList, setUserList] = useState([]);
@@ -37,12 +37,20 @@ const LeaderBoard = props => {
             styles.text,
             user.first_name === _user.first_name && styles.specialText,
           ]}>
+          {index + 1}
+        </Text>
+        <Text
+          style={[
+            styles.text,
+            user.first_name === _user.first_name && styles.specialText,
+          ]}>
           {_user.first_name}
         </Text>
         <Text
           style={[
             styles.text,
             user.first_name === _user.first_name && styles.specialText,
+            {fontWeight: 'bold'},
           ]}>
           {_user.points}
         </Text>
@@ -53,10 +61,10 @@ const LeaderBoard = props => {
   return (
     <AnimatedView
       style={styles.container}
-      animation={showLeaderBoard ? 'fadeInDownBig' : 'fadeInUpBig'}
-      duration={450}
+      animation={'fadeInDownBig'}
+      duration={500}
       easing="ease-in-out">
-      <Text style={styles.title}>Sextus Top Players !</Text>
+      <Text style={styles.title}>Sextus Top 10 Players !</Text>
       {displayLeaderBoard}
       {!userList.find(_user => _user.first_name === user.first_name) && (
         <View style={[styles.row, styles.specialRow]}>
@@ -77,7 +85,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 40,
     color: Colors.primary,
   },
   row: {
@@ -98,11 +107,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.black,
-    fontSize: 16,
+    fontSize: config.deviceWidth * 0.04,
   },
   specialText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: config.deviceWidth * 0.05,
     fontWeight: 'bold',
   },
 });
