@@ -1,3 +1,10 @@
+# [1.149.0](https://github.com/SocialGouv/Tumeplay/compare/v1.148.1...v1.149.0) (2022-10-07)
+
+
+### Features
+
+* init leaderboard feature ([#450](https://github.com/SocialGouv/Tumeplay/issues/450)) ([c38e251](https://github.com/SocialGouv/Tumeplay/commit/c38e2519e54541cd42985311487cd3fdd031f38e))
+
 ## [1.148.1](https://github.com/SocialGouv/Tumeplay/compare/v1.148.0...v1.148.1) (2022-10-05)
 
 
