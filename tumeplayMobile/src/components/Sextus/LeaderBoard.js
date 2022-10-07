@@ -7,7 +7,7 @@ import AppContext from '../../../AppContext';
 import {Colors} from '../../styles/Style';
 import config from '../../../config';
 
-const LeaderBoard = props => {
+const LeaderBoard = _props => {
   const {user} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
   const [userList, setUserList] = useState([]);
@@ -65,6 +65,11 @@ const LeaderBoard = props => {
       duration={500}
       easing="ease-in-out">
       <Text style={styles.title}>Sextus Top 10 Players !</Text>
+      <View style={[styles.row, {paddingHorizontal: 0}]}>
+        <Text style={styles.text}>Rang</Text>
+        <Text style={styles.text}>Joueur</Text>
+        <Text style={styles.text}>Points</Text>
+      </View>
       {displayLeaderBoard}
       {!userList.find(_user => _user.first_name === user.first_name) && (
         <View style={[styles.row, styles.specialRow]}>

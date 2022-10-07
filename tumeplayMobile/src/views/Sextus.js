@@ -8,7 +8,6 @@ import Keyboard from '../components/Sextus/Keyboard';
 import {Colors} from '../styles/Style';
 import Validation from '../components/Sextus/Validation';
 import {useMutation, useQuery} from '@apollo/client';
-import * as Animatable from 'react-native-animatable';
 import {
   CREATE_SEXTUS_HISTORY,
   GET_SEXTUS_WORDS,
@@ -23,7 +22,6 @@ import LeaderBoard from '../components/Sextus/LeaderBoard';
 
 const Sextus = ({navigation}) => {
   const {user} = useContext(AppContext);
-  const AnimatedView = Animatable.createAnimatableComponent(View);
 
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');

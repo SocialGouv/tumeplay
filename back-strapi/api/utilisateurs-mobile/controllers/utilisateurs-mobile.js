@@ -294,7 +294,7 @@ module.exports = {
 
     return user;
   },
-  async getLeaderBoard(ctx) {
+  async getLeaderBoard() {
     const users = await strapi.services["utilisateurs-mobile"].find({
       _sort: "points:desc",
       _limit: 10,
