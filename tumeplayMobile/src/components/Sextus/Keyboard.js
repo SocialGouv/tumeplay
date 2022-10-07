@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import config from '../../../config';
 
 const Keyboard = props => {
-  const {onKeyPress, style} = props;
+  const {onKeyPress, globalRedLetters, globalYellowLetters, style} = props;
 
   const keyboardLetters = [
     ['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -23,6 +23,36 @@ const Keyboard = props => {
     ],
   ];
 
+  const displayCorrectCellStyle = (pressed, letter) => {
+    if (globalRedLetters.includes(letter)) {
+      return [{...styles.cell}, {backgroundColor: '#E85439'}];
+    } else if (globalYellowLetters.includes(letter)) {
+      return [
+        {...styles.cell},
+        {backgroundColor: '#F5A623', borderColor: '#F5A623'},
+      ];
+    } else if (letter.props?.name === 'sign-in-alt') {
+      return pressed
+        ? [{...styles.cell, ...styles.customCellPressed}]
+        : [{...styles.customButton}];
+    } else {
+      return pressed ? [{...styles.cell, ...styles.cellPressed}] : styles.cell;
+    }
+  };
+
+  const displayCorrectTextStyle = (pressed, letter) => {
+    if (letter.props?.name === 'sign-in-alt') {
+      return styles.whiteText;
+    }
+    if (
+      globalRedLetters.includes(letter) ||
+      globalYellowLetters.includes(letter)
+    ) {
+      return styles.whiteText;
+    }
+    return pressed ? styles.whiteText : styles.text;
+  };
+
   return (
     <View style={[style, styles.container]}>
       {keyboardLetters.map((row, i) => {
@@ -33,28 +63,12 @@ const Keyboard = props => {
                 <Pressable
                   key={'Press' + i + j}
                   value={letter}
-                  style={({pressed}) => [
-                    pressed
-                      ? {
-                          ...styles.cell,
-                          ...(letter?.props?.name === 'sign-in-alt'
-                            ? styles.customCellPressed
-                            : styles.cellPressed),
-                        }
-                      : letter?.props?.name === 'sign-in-alt'
-                      ? styles.customButton
-                      : styles.cell,
-                  ]}
+                  style={({pressed}) =>
+                    displayCorrectCellStyle(pressed, letter)
+                  }
                   onPress={() => onKeyPress(letter)}>
                   {({pressed}) => (
-                    <Text
-                      style={
-                        pressed
-                          ? styles.whiteText
-                          : letter.props?.name === 'sign-in-alt'
-                          ? styles.whiteText
-                          : styles.text
-                      }>
+                    <Text style={displayCorrectTextStyle(pressed, letter)}>
                       {letter}
                     </Text>
                   )}

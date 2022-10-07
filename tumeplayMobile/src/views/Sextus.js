@@ -18,9 +18,10 @@ import AppContext from '../../AppContext';
 import {REACT_APP_URL} from '@env';
 import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
+import LeaderBoard from '../components/Sextus/LeaderBoard';
 
 const Sextus = ({navigation}) => {
-  const {user, reloadUser} = useContext(AppContext);
+  const {user} = useContext(AppContext);
 
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
@@ -32,9 +33,12 @@ const Sextus = ({navigation}) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isWordValid, setIsWordValid] = useState(true);
   const [globalRedLetters, setGlobalRedLetters] = useState([]);
+  const [globalRedLettersIndexes, setGlobalRedLettersIndexes] = useState([]);
+  const [globalYellowLetters, setGlobalYellowLetters] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [currentHistoryId, setCurrentHistoryId] = useState(null);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
+  const [showLeaderBoard, setShowLeaderBoard] = useState(false);
 
   const {data, loading} = useQuery(GET_SEXTUS_WORDS);
   const [createHistory, {data: data1}] = useMutation(CREATE_SEXTUS_HISTORY, {
@@ -124,8 +128,8 @@ const Sextus = ({navigation}) => {
   }, [handleWordAndDefinition]);
 
   useEffect(() => {
-    createUserHistory();
     setInputWord(wordToGuess.charAt(0).toUpperCase());
+    createUserHistory();
   }, [wordToGuess]);
 
   useEffect(() => {
@@ -137,7 +141,6 @@ const Sextus = ({navigation}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
-      reloadUser();
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
@@ -167,7 +170,8 @@ const Sextus = ({navigation}) => {
       })
       .flat()
       .filter((value, index, self) => self.indexOf(value) === index);
-    setGlobalRedLetters([...new Set(infos.map(item => item.index))]);
+    setGlobalRedLetters([...new Set(infos.map(item => item.letter))]);
+    setGlobalRedLettersIndexes([...new Set(infos.map(item => item.index))]);
   }, [userGuesses]);
 
   const onKeyPress = useCallback(
@@ -199,7 +203,7 @@ const Sextus = ({navigation}) => {
           setCurrentLetterIndex(0);
         }
       } else {
-        setGlobalRedLetters([]);
+        setGlobalRedLettersIndexes([]);
         if (inputWord.length + 1 <= wordToGuess.length) {
           setInputWord(inputWord + key);
           setCurrentLetterIndex(currentLetterIndex + 1);
@@ -218,34 +222,51 @@ const Sextus = ({navigation}) => {
           <Icon name="chevron-small-left" size={25} color="#000" />
           <Text>Retour</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.middleContainer}>
-        <Text style={styles.title}>
-          Trouve ce mot de{' '}
-          <Text style={styles.redBoldText}>{wordToGuess.length}</Text> lettres
-        </Text>
-        <Grid
-          userGuesses={userGuesses}
-          currentRow={currentRow}
-          gridSpecs={gridSpecs}
-          wordToGuess={wordToGuess}
-          inputWord={inputWord}
-          isSuccess={isSuccess}
-          isWordValid={isWordValid}
-          globalRedLetters={globalRedLetters}
-          currentLetterIndex={currentLetterIndex}
-        />
-        {isAllowedToPlay ? (
-          <Keyboard style={styles.keyboard} onKeyPress={onKeyPress} />
-        ) : (
-          <Validation
-            wordToGuess={wordToGuess}
-            isSuccess={isSuccess}
-            definition={definition}
-            relaunchGame={relaunchGame}
+        <TouchableOpacity onPress={() => setShowLeaderBoard(!showLeaderBoard)}>
+          <Icon
+            name={showLeaderBoard ? 'cross' : 'bar-graph'}
+            size={showLeaderBoard ? 25 : 20}
+            color="#000"
           />
-        )}
+        </TouchableOpacity>
       </View>
+      {showLeaderBoard ? (
+        <LeaderBoard showLeaderBoard={showLeaderBoard} />
+      ) : (
+        <View style={styles.middleContainer}>
+          <Text style={styles.title}>
+            Trouve ce mot de{' '}
+            <Text style={styles.redBoldText}>{wordToGuess.length}</Text> lettres
+          </Text>
+          <Grid
+            userGuesses={userGuesses}
+            currentRow={currentRow}
+            gridSpecs={gridSpecs}
+            wordToGuess={wordToGuess}
+            inputWord={inputWord}
+            isSuccess={isSuccess}
+            isWordValid={isWordValid}
+            globalRedLettersIndexes={globalRedLettersIndexes}
+            currentLetterIndex={currentLetterIndex}
+            setGlobalYellowLetters={item => setGlobalYellowLetters(item)}
+          />
+          {isAllowedToPlay ? (
+            <Keyboard
+              style={styles.keyboard}
+              onKeyPress={onKeyPress}
+              globalRedLetters={globalRedLetters}
+              globalYellowLetters={globalYellowLetters}
+            />
+          ) : (
+            <Validation
+              wordToGuess={wordToGuess}
+              isSuccess={isSuccess}
+              definition={definition}
+              relaunchGame={relaunchGame}
+            />
+          )}
+        </View>
+      )}
     </Container>
   );
 };

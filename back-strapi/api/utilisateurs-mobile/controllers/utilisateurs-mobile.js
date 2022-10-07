@@ -278,6 +278,32 @@ module.exports = {
 
     user.credits = credits - orders_count;
 
+    const successSextusHistoryCount = await strapi.services[
+      "sextus-history"
+    ].count({
+      utilisateurs_mobile: user.id,
+      status: "success",
+    });
+
+    await strapi.services["utilisateurs-mobile"].update(
+      { id: user.id },
+      {
+        points: successSextusHistoryCount,
+      }
+    );
+
     return user;
+  },
+  async getLeaderBoard() {
+    const users = await strapi.services["utilisateurs-mobile"].find({
+      _sort: "points:desc",
+      _limit: 10,
+    });
+
+    let users_scores = users.map((user) => {
+      return { first_name: user.first_name, points: user.points };
+    });
+
+    return users_scores;
   },
 };
