@@ -22,7 +22,7 @@ import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
 
 const Sextus = ({navigation}) => {
-  const {user, reloadUser} = useContext(AppContext);
+  const {user} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
 
   const [fullWords, setFullWords] = useState([]);
@@ -141,7 +141,6 @@ const Sextus = ({navigation}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
-      reloadUser();
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
