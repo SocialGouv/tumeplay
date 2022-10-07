@@ -33,6 +33,8 @@ const Sextus = ({navigation}) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isWordValid, setIsWordValid] = useState(true);
   const [globalRedLetters, setGlobalRedLetters] = useState([]);
+  const [globalRedLettersIndexes, setGlobalRedLettersIndexes] = useState([]);
+  const [globalYellowLetters, setGlobalYellowLetters] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [currentHistoryId, setCurrentHistoryId] = useState(null);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
@@ -168,7 +170,8 @@ const Sextus = ({navigation}) => {
       })
       .flat()
       .filter((value, index, self) => self.indexOf(value) === index);
-    setGlobalRedLetters([...new Set(infos.map(item => item.index))]);
+    setGlobalRedLetters([...new Set(infos.map(item => item.letter))]);
+    setGlobalRedLettersIndexes([...new Set(infos.map(item => item.index))]);
   }, [userGuesses]);
 
   const onKeyPress = useCallback(
@@ -200,7 +203,7 @@ const Sextus = ({navigation}) => {
           setCurrentLetterIndex(0);
         }
       } else {
-        setGlobalRedLetters([]);
+        setGlobalRedLettersIndexes([]);
         if (inputWord.length + 1 <= wordToGuess.length) {
           setInputWord(inputWord + key);
           setCurrentLetterIndex(currentLetterIndex + 1);
@@ -243,11 +246,17 @@ const Sextus = ({navigation}) => {
             inputWord={inputWord}
             isSuccess={isSuccess}
             isWordValid={isWordValid}
-            globalRedLetters={globalRedLetters}
+            globalRedLettersIndexes={globalRedLettersIndexes}
             currentLetterIndex={currentLetterIndex}
+            setGlobalYellowLetters={item => setGlobalYellowLetters(item)}
           />
           {isAllowedToPlay ? (
-            <Keyboard style={styles.keyboard} onKeyPress={onKeyPress} />
+            <Keyboard
+              style={styles.keyboard}
+              onKeyPress={onKeyPress}
+              globalRedLetters={globalRedLetters}
+              globalYellowLetters={globalYellowLetters}
+            />
           ) : (
             <Validation
               wordToGuess={wordToGuess}

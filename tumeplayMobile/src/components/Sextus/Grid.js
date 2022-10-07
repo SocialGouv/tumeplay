@@ -12,9 +12,10 @@ const Grid = props => {
     currentRow,
     userGuesses,
     isSuccess,
-    globalRedLetters,
+    globalRedLettersIndexes,
     currentLetterIndex,
     isWordValid,
+    setGlobalYellowLetters,
   } = props;
 
   const [userGuessesStatus, setUserGuessesStatus] = useState([]);
@@ -57,6 +58,13 @@ const Grid = props => {
       });
     });
     setUserGuessesStatus(infos);
+    setGlobalYellowLetters([
+      ...new Set(
+        infos.flat().map(item => {
+          return item.status === 'yellow' ? item.letter : null;
+        }),
+      ),
+    ]);
   }, [userGuesses, wordToGuess]);
 
   useEffect(() => {
@@ -136,8 +144,8 @@ const Grid = props => {
                   isSuccess && finishStyle,
                   !isSuccess && i <= currentLetterIndex && currentLetterStyle,
                 ]}>
-                {globalRedLetters.length > 0
-                  ? globalRedLetters.map(index => {
+                {globalRedLettersIndexes.length > 0
+                  ? globalRedLettersIndexes.map(index => {
                       return index === i ? wordToGuess.charAt(i) : '';
                     })
                   : inputWord[i]}
