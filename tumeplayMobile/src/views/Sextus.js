@@ -222,16 +222,24 @@ const Sextus = ({navigation}) => {
           <Icon name="chevron-small-left" size={25} color="#000" />
           <Text>Retour</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setShowLeaderBoard(!showLeaderBoard)}>
-          <Icon
-            name={showLeaderBoard ? 'cross' : 'bar-graph'}
-            size={showLeaderBoard ? 25 : 20}
-            color="#000"
-          />
+        <TouchableOpacity
+          style={
+            showLeaderBoard
+              ? {backgroundColor: Colors.background}
+              : styles.pointContainer
+          }
+          onPress={() => setShowLeaderBoard(!showLeaderBoard)}>
+          {showLeaderBoard ? (
+            <Icon name="cross" size={25} color="#000" />
+          ) : (
+            <Text>{'🏆 ' + user.points + ' pts'}</Text>
+          )}
         </TouchableOpacity>
       </View>
       {showLeaderBoard ? (
-        <LeaderBoard showLeaderBoard={showLeaderBoard} />
+        <LeaderBoard
+          setShowLeaderBoard={status => setShowLeaderBoard(status)}
+        />
       ) : (
         <View style={styles.middleContainer}>
           <Text style={styles.title}>
@@ -287,6 +295,14 @@ const styles = StyleSheet.create({
   chevron: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  pointContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   middleContainer: {
     alignItems: 'center',

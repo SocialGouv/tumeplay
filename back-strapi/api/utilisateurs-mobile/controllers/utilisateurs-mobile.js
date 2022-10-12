@@ -297,7 +297,7 @@ module.exports = {
   async getLeaderBoard() {
     const users = await strapi.services["utilisateurs-mobile"].find({
       _sort: "points:desc",
-      _limit: 10,
+      _limit: 5,
     });
 
     let users_scores = users.map((user) => {

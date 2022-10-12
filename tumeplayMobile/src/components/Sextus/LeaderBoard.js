@@ -6,8 +6,11 @@ import {REACT_APP_URL} from '@env';
 import AppContext from '../../../AppContext';
 import {Colors} from '../../styles/Style';
 import config from '../../../config';
+import {Divider} from 'react-native-paper';
+import Button from '../Button';
 
 const LeaderBoard = _props => {
+  const {setShowLeaderBoard} = _props;
   const {user} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
   const [userList, setUserList] = useState([]);
@@ -24,36 +27,31 @@ const LeaderBoard = _props => {
     retrieveLeaderBoard();
   }, []);
 
+  const displayScoresIndex = index => {
+    if (index === 0) {
+      return <Text style={styles.icon}>🥇</Text>;
+    }
+    if (index === 1) {
+      return <Text style={styles.icon}>🥈</Text>;
+    }
+    if (index === 2) {
+      return <Text style={styles.icon}>🥉</Text>;
+    }
+    if (index > 2) {
+      return <Text style={styles.index}>{index + 1 + '.'}</Text>;
+    }
+  };
+
   const displayLeaderBoard = userList.map((_user, index) => {
     return (
-      <View
-        style={[
-          styles.row,
-          user.first_name === _user.first_name && styles.specialRow,
-        ]}
-        key={index}>
-        <Text
-          style={[
-            styles.text,
-            user.first_name === _user.first_name && styles.specialText,
-          ]}>
-          {index + 1}
-        </Text>
-        <Text
-          style={[
-            styles.text,
-            user.first_name === _user.first_name && styles.specialText,
-          ]}>
-          {_user.first_name}
-        </Text>
-        <Text
-          style={[
-            styles.text,
-            user.first_name === _user.first_name && styles.specialText,
-            {fontWeight: 'bold'},
-          ]}>
-          {_user.points}
-        </Text>
+      <View style={styles.row} key={index}>
+        <View style={styles.leftRowPart}>
+          {displayScoresIndex(index)}
+          <Text style={[styles.text, {fontWeight: 'bold', paddingLeft: 30}]}>
+            {_user.first_name}
+          </Text>
+        </View>
+        <Text style={[styles.text]}>{_user.points + ' points'}</Text>
       </View>
     );
   });
@@ -64,19 +62,21 @@ const LeaderBoard = _props => {
       animation={'fadeInDownBig'}
       duration={500}
       easing="ease-in-out">
-      <Text style={styles.title}>Sextus Top 10 Players !</Text>
-      <View style={[styles.row, {paddingHorizontal: 0}]}>
-        <Text style={styles.text}>Rang</Text>
-        <Text style={styles.text}>Joueur</Text>
-        <Text style={styles.text}>Points</Text>
+      <Text style={styles.title}>Sextus Top 5 players</Text>
+      <View style={styles.playerContainer}>
+        <Text style={styles.playerContainerBoldText}>{user.first_name}</Text>
+        <Text>{user.points} points</Text>
       </View>
+      <Button
+        text="Je continue"
+        size="large"
+        icon
+        style={styles.button}
+        onPress={() => setShowLeaderBoard(false)}
+      />
+      <Divider style={styles.divider} />
       {displayLeaderBoard}
-      {!userList.find(_user => _user.first_name === user.first_name) && (
-        <View style={[styles.row, styles.specialRow]}>
-          <Text style={[styles.specialText]}>{user.first_name}</Text>
-          <Text style={[styles.specialText]}>{user.points}</Text>
-        </View>
-      )}
+      <Divider style={styles.divider} />
     </AnimatedView>
   );
 };
@@ -94,6 +94,22 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     color: Colors.primary,
   },
+  playerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    height: config.deviceHeight * 0.08,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: Colors.secondary,
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+  },
+  playerContainerBoldText: {
+    fontWeight: 'bold',
+  },
   row: {
     flexDirection: 'row',
     width: '100%',
@@ -101,23 +117,26 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
   },
-  specialRow: {
-    backgroundColor: Colors.primary,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    borderBottomWidth: 0,
+  leftRowPart: {
+    flexDirection: 'row',
   },
-  text: {
-    color: Colors.black,
+  icon: {
+    fontSize: config.deviceWidth * 0.06,
+    padding: 0,
+  },
+  index: {
     fontSize: config.deviceWidth * 0.04,
+    color: Colors.primary,
+    paddingLeft: 10,
   },
-  specialText: {
-    color: 'white',
-    fontSize: config.deviceWidth * 0.05,
-    fontWeight: 'bold',
+  divider: {
+    width: '100%',
+    borderColor: '#EAE2D7',
+    borderWidth: 1,
+  },
+  button: {
+    marginBottom: 20,
   },
 });
 
