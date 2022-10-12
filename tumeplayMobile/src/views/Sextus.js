@@ -223,13 +223,23 @@ const Sextus = ({navigation}) => {
           <Text>Retour</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.pointContainer}
+          style={
+            showLeaderBoard
+              ? {backgroundColor: Colors.background}
+              : styles.pointContainer
+          }
           onPress={() => setShowLeaderBoard(!showLeaderBoard)}>
-          <Text>{'🏆 ' + user.points + ' pts'}</Text>
+          {showLeaderBoard ? (
+            <Icon name="cross" size={25} color="#000" />
+          ) : (
+            <Text>{'🏆 ' + user.points + ' pts'}</Text>
+          )}
         </TouchableOpacity>
       </View>
       {showLeaderBoard ? (
-        <LeaderBoard showLeaderBoard={showLeaderBoard} />
+        <LeaderBoard
+          setShowLeaderBoard={status => setShowLeaderBoard(status)}
+        />
       ) : (
         <View style={styles.middleContainer}>
           <Text style={styles.title}>

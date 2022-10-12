@@ -7,8 +7,10 @@ import AppContext from '../../../AppContext';
 import {Colors} from '../../styles/Style';
 import config from '../../../config';
 import {Divider} from 'react-native-paper';
+import Button from '../Button';
 
 const LeaderBoard = _props => {
+  const {setShowLeaderBoard} = _props;
   const {user} = useContext(AppContext);
   const AnimatedView = Animatable.createAnimatableComponent(View);
   const [userList, setUserList] = useState([]);
@@ -44,7 +46,7 @@ const LeaderBoard = _props => {
     return (
       <View style={styles.row} key={index}>
         <View style={styles.leftRowPart}>
-          <Text style={styles.text}>{displayScoresIndex(index)}</Text>
+          {displayScoresIndex(index)}
           <Text style={[styles.text, {fontWeight: 'bold', paddingLeft: 30}]}>
             {_user.first_name}
           </Text>
@@ -65,6 +67,12 @@ const LeaderBoard = _props => {
         <Text style={styles.playerContainerBoldText}>{user.first_name}</Text>
         <Text>{user.points} points</Text>
       </View>
+      <Button
+        text="Je continue"
+        size="large"
+        icon
+        onPress={() => setShowLeaderBoard(false)}
+      />
       <Divider style={styles.divider} />
       {displayLeaderBoard}
       <Divider style={styles.divider} />
@@ -111,20 +119,16 @@ const styles = StyleSheet.create({
   },
   leftRowPart: {
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-  text: {
-    color: Colors.black,
-    fontSize: config.deviceWidth * 0.04,
+    // alignItems: 'center',
   },
   icon: {
     fontSize: config.deviceWidth * 0.06,
-    marginRight: 100,
+    padding: 0,
   },
   index: {
     fontSize: config.deviceWidth * 0.04,
     color: Colors.primary,
-    paddingRight: 100,
+    paddingLeft: 10,
   },
   divider: {
     width: '100%',
