@@ -1,3 +1,10 @@
+# [1.150.0](https://github.com/SocialGouv/Tumeplay/compare/v1.149.0...v1.150.0) (2022-10-12)
+
+
+### Features
+
+* revamping leaderboard screen according to UI ([#451](https://github.com/SocialGouv/Tumeplay/issues/451)) ([aeb021b](https://github.com/SocialGouv/Tumeplay/commit/aeb021b6fa09ae618a064770025b25d7d6083ac0))
+
 # [1.149.0](https://github.com/SocialGouv/Tumeplay/compare/v1.148.1...v1.149.0) (2022-10-07)
 
 
