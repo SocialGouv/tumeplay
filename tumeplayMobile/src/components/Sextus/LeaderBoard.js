@@ -71,6 +71,7 @@ const LeaderBoard = _props => {
         text="Je continue"
         size="large"
         icon
+        style={styles.button}
         onPress={() => setShowLeaderBoard(false)}
       />
       <Divider style={styles.divider} />
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
   },
   leftRowPart: {
     flexDirection: 'row',
-    // alignItems: 'center',
   },
   icon: {
     fontSize: config.deviceWidth * 0.06,
@@ -134,6 +134,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#EAE2D7',
     borderWidth: 1,
+  },
+  button: {
+    marginBottom: 20,
   },
 });
 
