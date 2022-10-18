@@ -89,8 +89,8 @@ const PickupOrder = props => {
 
   const fetchPOI = async () => {
     let response = await POIAPI.fetchMondialRelaisPOI(apiUrl, {
-      latitude: coordinates.latitude.toFixed(7),
-      longitude: coordinates.longitude.toFixed(7),
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
     });
     if (response.statusCode === 400) {
       setMrPoi([]);
@@ -226,7 +226,6 @@ const PickupOrder = props => {
       const res = await axios.get(
         `https://api-adresse.data.gouv.fr/search/?q=${chosenAddress}&autocomplete=1`,
       );
-
       let tmpRes = res?.data?.features;
       tmpRes = tmpRes.map(item => {
         item.properties.coordinates = item.geometry.coordinates;
