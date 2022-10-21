@@ -216,16 +216,23 @@ const Sextus = ({navigation}) => {
   return (
     <Container style={styles.container}>
       <View style={styles.backLevel}>
-        <TouchableOpacity
-          style={styles.chevron}
-          onPress={() => navigation.goBack()}>
-          <Icon name="chevron-small-left" size={25} color="#000" />
-          <Text>Retour</Text>
-        </TouchableOpacity>
+        {!showLeaderBoard && (
+          <TouchableOpacity
+            style={styles.chevron}
+            onPress={() => navigation.goBack()}>
+            <Icon name="chevron-small-left" size={25} color="#000" />
+            <Text>Retour</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={
             showLeaderBoard
-              ? {backgroundColor: Colors.background}
+              ? {
+                  backgroundColor: Colors.background,
+                  position: 'absolute',
+                  top: 10,
+                  right: 40,
+                }
               : styles.pointContainer
           }
           onPress={() => setShowLeaderBoard(!showLeaderBoard)}>
@@ -299,7 +306,7 @@ const styles = StyleSheet.create({
   pointContainer: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingVertical: 10,
     paddingHorizontal: 20,

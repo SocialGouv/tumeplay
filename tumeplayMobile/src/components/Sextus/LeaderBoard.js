@@ -62,7 +62,7 @@ const LeaderBoard = _props => {
       animation={'fadeInDownBig'}
       duration={500}
       easing="ease-in-out">
-      <Text style={styles.title}>Sextus Top 5 players</Text>
+      <Text style={styles.title}>Sextus Top 5 joueurs</Text>
       <View style={styles.playerContainer}>
         <Text style={styles.playerContainerBoldText}>{user.first_name}</Text>
         <Text>{user.points} points</Text>
@@ -110,6 +110,10 @@ const styles = StyleSheet.create({
   playerContainerBoldText: {
     fontWeight: 'bold',
   },
+  text: {
+    fontSize: 16,
+    alignSelf: 'center',
+  },
   row: {
     flexDirection: 'row',
     width: '100%',
@@ -122,11 +126,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
-    fontSize: config.deviceWidth * 0.06,
+    fontSize: config.deviceWidth * 0.065,
     padding: 0,
   },
   index: {
-    fontSize: config.deviceWidth * 0.04,
+    fontSize: config.deviceWidth * 0.045,
     color: Colors.primary,
     paddingLeft: 10,
   },
@@ -136,7 +140,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    marginBottom: 20,
+    marginTop: 30,
+    marginBottom: 50,
   },
 });
 
