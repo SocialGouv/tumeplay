@@ -1,3 +1,10 @@
+## [1.152.1](https://github.com/SocialGouv/Tumeplay/compare/v1.152.0...v1.152.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* fixing order issue on android using back button ([3ac5894](https://github.com/SocialGouv/Tumeplay/commit/3ac589476dc369d008e7e72d7484ebe3a504f8cf))
+
 # [1.152.0](https://github.com/SocialGouv/Tumeplay/compare/v1.151.0...v1.152.0) (2022-10-24)
 
 
