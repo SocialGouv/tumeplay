@@ -1,8 +1,14 @@
-import {StyleSheet, TouchableOpacity, Image, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  View,
+  BackHandler,
+} from 'react-native';
 import Text from '../Text';
 import Container from '../../components/global/Container';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import config from '../../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Title from '../Title';
@@ -18,6 +24,20 @@ const OrderFinalStep = () => {
       path: 'Order',
     });
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate('Accueil');
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [navigation]),
+  );
 
   return (
     <Container style={styles.container}>

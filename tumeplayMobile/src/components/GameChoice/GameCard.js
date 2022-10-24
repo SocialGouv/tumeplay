@@ -1,4 +1,5 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable} from 'react-native';
+import Text from '../Text';
 import React from 'react';
 import config from '../../../config';
 import {Colors} from '../../styles/Style';
