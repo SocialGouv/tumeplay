@@ -1,3 +1,16 @@
+# [1.151.0](https://github.com/SocialGouv/Tumeplay/compare/v1.150.0...v1.151.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* api call modification ([#452](https://github.com/SocialGouv/Tumeplay/issues/452)) ([b2cd2c8](https://github.com/SocialGouv/Tumeplay/commit/b2cd2c878cda0de96cfae8d33cda3de98b31c03e))
+
+
+### Features
+
+* design improvement ([#453](https://github.com/SocialGouv/Tumeplay/issues/453)) ([943b1ec](https://github.com/SocialGouv/Tumeplay/commit/943b1ec0d71e68c25bc14d28697828b2c2b2fca6))
+* tracking last sextus release ([#448](https://github.com/SocialGouv/Tumeplay/issues/448)) ([48e5d15](https://github.com/SocialGouv/Tumeplay/commit/48e5d15fa74d011bc1805044f4afb5e3fcdb1a3b))
+
 # [1.150.0](https://github.com/SocialGouv/Tumeplay/compare/v1.149.0...v1.150.0) (2022-10-12)
 
 
