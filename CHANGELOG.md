@@ -1,3 +1,10 @@
+# [1.152.0](https://github.com/SocialGouv/Tumeplay/compare/v1.151.0...v1.152.0) (2022-10-24)
+
+
+### Features
+
+* sextus leaderboard improvement ([#454](https://github.com/SocialGouv/Tumeplay/issues/454)) ([0d3a150](https://github.com/SocialGouv/Tumeplay/commit/0d3a150257c0aaa4836f9ba548870b6d7f077544))
+
 # [1.151.0](https://github.com/SocialGouv/Tumeplay/compare/v1.150.0...v1.151.0) (2022-10-24)
 
 
