@@ -277,21 +277,6 @@ module.exports = {
     }
 
     user.credits = credits - orders_count;
-
-    const successSextusHistoryCount = await strapi.services[
-      "sextus-history"
-    ].count({
-      utilisateurs_mobile: user.id,
-      status: "success",
-    });
-
-    await strapi.services["utilisateurs-mobile"].update(
-      { id: user.id },
-      {
-        points: successSextusHistoryCount,
-      }
-    );
-
     return user;
   },
   async getLeaderBoard() {
