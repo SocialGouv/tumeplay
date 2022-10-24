@@ -21,7 +21,7 @@ import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
 
 const Sextus = ({navigation}) => {
-  const {user} = useContext(AppContext);
+  const {user, reloadUser} = useContext(AppContext);
 
   const [fullWords, setFullWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
@@ -84,6 +84,7 @@ const Sextus = ({navigation}) => {
         nb_try: currentRow + 1,
         duration: duration,
         status: 'success',
+        utilisateurs_mobile: user.id,
       },
     });
   };
@@ -100,6 +101,7 @@ const Sextus = ({navigation}) => {
     setCurrentLetterIndex(0);
     setInputWord('');
     handleWordAndDefinition();
+    reloadUser();
     setIsAllowedToPlay(true);
   }, [wordToGuess]);
 
