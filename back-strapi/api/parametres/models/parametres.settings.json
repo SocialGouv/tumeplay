@@ -32,6 +32,10 @@
     },
     "prod_version_number_ios": {
       "type": "string"
+    },
+    "activate_mondial_relais": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
