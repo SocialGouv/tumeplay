@@ -25,10 +25,10 @@ const HomePage = ({navigation}) => {
   const {user} = useContext(AppContext);
   const [tiktokHtmls, setTiktokHtmls] = useState([]);
   const tiktokIds = [
-    '7058603040588188933',
-    '7062743680125291781',
-    '7063474262190886150',
-    '7061175159851371782',
+    '7157798813523021061',
+    '7157243236577217798',
+    '7155969762344832262',
+    '7154673132161289478',
   ];
   const [freshContents, setFreshContents] = useState([]);
   const freshContentsIds = freshContents?.map(content => content.id);
