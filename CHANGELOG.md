@@ -1,3 +1,10 @@
+# [1.153.0](https://github.com/SocialGouv/Tumeplay/compare/v1.152.1...v1.153.0) (2022-10-26)
+
+
+### Features
+
+* adding MR availability on demand in Strapi ([#455](https://github.com/SocialGouv/Tumeplay/issues/455)) ([73cf3bd](https://github.com/SocialGouv/Tumeplay/commit/73cf3bd4163781473a9e1979079722f55f348d31))
+
 ## [1.152.1](https://github.com/SocialGouv/Tumeplay/compare/v1.152.0...v1.152.1) (2022-10-24)
 
 
