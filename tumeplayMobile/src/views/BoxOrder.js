@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect, useCallback} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
@@ -17,7 +17,7 @@ import Event from '../services/api/matomo';
 
 const Box = ({navigation, route}) => {
   const {box} = route.params;
-  const {user} = useContext(AppContext);
+  const {user, apiUrl} = useContext(AppContext);
   const [deliveryMode, setDeliveryMode] = useState('home');
   const [userInfos, setUserInfos] = useState({
     first_name: '',
@@ -30,6 +30,20 @@ const Box = ({navigation, route}) => {
   const [orderConfirm, setOrderConfirm] = useState(false);
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [selectedPOI, setSelectedPOI] = useState(null);
+  const [isMrAvailable, setIsMrAvailable] = useState(true);
+
+  const verifyMRavailability = useCallback(() => {
+    fetch(`${apiUrl}/parametres`)
+      .then(res => res.json())
+      .then(_res => {
+        setIsMrAvailable(_res.activate_mondial_relais);
+        setToolTipVisible(!_res.activate_mondial_relais);
+      });
+  }, [apiUrl]);
+
+  useEffect(() => {
+    verifyMRavailability();
+  }, [verifyMRavailability]);
 
   const handleDeliveryModeSelection = mode => {
     setDeliveryMode(mode);
@@ -137,11 +151,18 @@ const Box = ({navigation, route}) => {
               <Tooltip
                 isVisible={toolTipVisible}
                 content={
-                  <Text style={styles.tooltipText}>Bientôt disponible</Text>
+                  <View style={{position: 'relative'}}>
+                    <Icon
+                      name="cross"
+                      style={{position: 'absolute', right: 5}}
+                    />
+                    <Text style={styles.tooltipText}>Bientôt de retour</Text>
+                  </View>
                 }
                 placement="bottom"
                 onClose={() => setToolTipVisible(false)}>
                 <TouchableOpacity
+                  disabled={!isMrAvailable}
                   onPress={() => handleDeliveryModeSelection('pickup')}
                   style={[
                     styles.buttons,
@@ -256,7 +277,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tooltipText: {
-    padding: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 15,
     fontSize: 14,
     color: Colors.primary,
   },

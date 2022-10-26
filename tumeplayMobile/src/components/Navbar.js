@@ -85,7 +85,7 @@ const Navbar = ({navigation}) => {
         component={Box}
         listeners={{
           tabPress: e => {
-            if (user.credits <= 0 || !user.isUnder25) {
+            if (user.credits !== 0 || !user.isUnder25) {
               if (!user.isUnder25) {
                 Alert.alert(
                   "La commande de kit n'est pas disponible",
