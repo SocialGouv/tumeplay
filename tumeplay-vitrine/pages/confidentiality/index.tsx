@@ -18,6 +18,19 @@ import Link from "next/link";
 import BackButton from "../../components/BackButton";
 
 const Confidentiatily = () => {
+  const tableLine = (
+    <Tr>
+      <Td>Pour la création de comptes</Td>
+      <Td>
+        <Text fontWeight={"bold"}>Jusqu’à la suppression du profil.</Text>
+        <Text>Ou</Text>
+        <Text fontWeight={"bold"}>
+          Dans un délai d’1 an à compter de la dernière action du profil
+        </Text>
+      </Td>
+    </Tr>
+  );
+
   return (
     <Box bg="lightPink" pt={4} pl={3} h="100%" pb={10}>
       <Container maxW="4xl">
@@ -114,42 +127,9 @@ const Confidentiatily = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Pour la création de comptes</Td>
-              <Td>
-                <Text fontWeight={"bold"}>
-                  Jusqu’à la suppression du profil.
-                </Text>
-                <Text>Ou</Text>
-                <Text fontWeight={"bold"}>
-                  Dans un délai d’1 an à compter de la dernière action du profil
-                </Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Pour la création de comptes</Td>
-              <Td>
-                <Text fontWeight={"bold"}>
-                  Jusqu’à la suppression du profil.
-                </Text>
-                <Text>Ou</Text>
-                <Text fontWeight={"bold"}>
-                  Dans un délai d’1 an à compter de la dernière action du profil
-                </Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Pour la création de comptes</Td>
-              <Td>
-                <Text fontWeight={"bold"}>
-                  Jusqu’à la suppression du profil.
-                </Text>
-                <Text>Ou</Text>
-                <Text fontWeight={"bold"}>
-                  Dans un délai d’1 an à compter de la dernière action du profil
-                </Text>
-              </Td>
-            </Tr>
+            {tableLine}
+            {tableLine}
+            {tableLine}
           </Tbody>
         </Table>
         <Text
