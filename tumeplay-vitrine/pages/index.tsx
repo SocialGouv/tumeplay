@@ -228,7 +228,7 @@ const Home = ({
             borderColor="black"
             orientation="vertical"
           />
-          <Link href="/legal">
+          <Link href="/legal/web">
             <Text
               flexShrink={0.1}
               cursor="pointer"
@@ -238,23 +238,6 @@ const Home = ({
               }}
             >
               Mentions légales
-            </Text>
-          </Link>
-          <Divider
-            h={[3, 3, 4]}
-            mr={[0, 0, 3]}
-            borderColor="black"
-            orientation="vertical"
-          />
-          <Link href="/cgu">
-            <Text
-              flexShrink={0.1}
-              cursor="pointer"
-              _hover={{
-                textDecoration: "underline",
-              }}
-            >
-              CGU
             </Text>
           </Link>
         </Box>
