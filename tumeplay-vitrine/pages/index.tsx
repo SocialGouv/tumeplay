@@ -210,8 +210,8 @@ const Home = ({
             borderColor="black"
             orientation="vertical"
           />
-          <Link href="/stats">
-            <Text
+          <Link href="/stats" passHref>
+            <ChakraLink
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
@@ -220,7 +220,7 @@ const Home = ({
               }}
             >
               Stats
-            </Text>
+            </ChakraLink>
           </Link>
           <Divider
             h={[3, 3, 4]}
@@ -228,8 +228,8 @@ const Home = ({
             borderColor="black"
             orientation="vertical"
           />
-          <Link href="/legal/web">
-            <Text
+          <Link href="/legal/web" passHref>
+            <ChakraLink
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
@@ -238,7 +238,25 @@ const Home = ({
               }}
             >
               Mentions légales
-            </Text>
+            </ChakraLink>
+          </Link>
+          <Divider
+            h={[3, 3, 4]}
+            mr={[0, 0, 3]}
+            borderColor="black"
+            orientation="vertical"
+          />
+          <Link href="/confidentiality" passHref>
+            <ChakraLink
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={[0, 0, 3]}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              Données personnelles
+            </ChakraLink>
           </Link>
         </Box>
       </Box>
