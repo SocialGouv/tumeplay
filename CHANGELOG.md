@@ -1,3 +1,10 @@
+# [1.154.0](https://github.com/SocialGouv/Tumeplay/compare/v1.153.0...v1.154.0) (2022-11-02)
+
+
+### Features
+
+* creating confidentiality policy page + reorganizing folder stru… ([#456](https://github.com/SocialGouv/Tumeplay/issues/456)) ([3d61a58](https://github.com/SocialGouv/Tumeplay/commit/3d61a585f5def0caabb7bc6b752a816935a67e73))
+
 # [1.153.0](https://github.com/SocialGouv/Tumeplay/compare/v1.152.1...v1.153.0) (2022-10-26)
 
 
