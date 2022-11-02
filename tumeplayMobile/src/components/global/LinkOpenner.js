@@ -1,7 +1,7 @@
-import {TouchableOpacity, Text, Linking, View} from 'react-native';
+import {TouchableOpacity, Linking, View} from 'react-native';
 import React from 'react';
 
-const LinkOpenner = ({children, url, style}) => {
+const LinkOpenner = ({children, url}) => {
   const onPress = () => {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
