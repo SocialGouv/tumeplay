@@ -1,3 +1,10 @@
+# [1.156.0](https://github.com/SocialGouv/Tumeplay/compare/v1.155.2...v1.156.0) (2022-11-02)
+
+
+### Features
+
+* rgpd compliance for dashlord ([#460](https://github.com/SocialGouv/Tumeplay/issues/460)) ([69ccc27](https://github.com/SocialGouv/Tumeplay/commit/69ccc27aee46e6a4d7a15c9dea76e3b3915f192d))
+
 ## [1.155.2](https://github.com/SocialGouv/Tumeplay/compare/v1.155.1...v1.155.2) (2022-11-02)
 
 
