@@ -1,3 +1,10 @@
+## [1.155.1](https://github.com/SocialGouv/Tumeplay/compare/v1.155.0...v1.155.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* page size on mobile ([#458](https://github.com/SocialGouv/Tumeplay/issues/458)) ([dbdf0f8](https://github.com/SocialGouv/Tumeplay/commit/dbdf0f8d63d34342d6b50c198eb86a6097dc524b))
+
 # [1.155.0](https://github.com/SocialGouv/Tumeplay/compare/v1.154.0...v1.155.0) (2022-11-02)
 
 
