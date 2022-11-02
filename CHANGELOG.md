@@ -1,3 +1,10 @@
+## [1.155.2](https://github.com/SocialGouv/Tumeplay/compare/v1.155.1...v1.155.2) (2022-11-02)
+
+
+### Bug Fixes
+
+* page size in confidentiality ([6c3357b](https://github.com/SocialGouv/Tumeplay/commit/6c3357b15f250b4f98e3b3d459efac89c71bd58c))
+
 ## [1.155.1](https://github.com/SocialGouv/Tumeplay/compare/v1.155.0...v1.155.1) (2022-11-02)
 
 
