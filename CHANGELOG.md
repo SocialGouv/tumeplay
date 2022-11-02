@@ -1,3 +1,10 @@
+# [1.155.0](https://github.com/SocialGouv/Tumeplay/compare/v1.154.0...v1.155.0) (2022-11-02)
+
+
+### Features
+
+* adding links to open mandatory websites ([#457](https://github.com/SocialGouv/Tumeplay/issues/457)) ([a9ca88e](https://github.com/SocialGouv/Tumeplay/commit/a9ca88e6ebf99477cd2fa14a094813170aa7e769))
+
 # [1.154.0](https://github.com/SocialGouv/Tumeplay/compare/v1.153.0...v1.154.0) (2022-11-02)
 
 
