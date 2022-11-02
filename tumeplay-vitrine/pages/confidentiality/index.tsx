@@ -32,7 +32,7 @@ const Confidentiatily = () => {
   );
 
   return (
-    <Box bg="lightPink" pt={4} pl={3} h="100%" pb={10}>
+    <Box bg="lightPink" pt={4} pl={3} h="100%" pb={10} w="100%">
       <Container maxW="4xl">
         <Image src="/logo-tumeplay.svg" alt="Tumeplay logo" mx="auto" my={6} />
         <Box mb={4}>
