@@ -1,7 +1,7 @@
 import { Box, Container, Heading, Stack, Text, Image } from "@chakra-ui/react";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../../components/BackButton";
 
-const Legal = () => {
+const MobileLegal = () => {
   return (
     <Box bg="lightPink" pt={4} pl={3} h="100vh">
       <Container maxW="4xl">
@@ -71,4 +71,4 @@ const Legal = () => {
   );
 };
 
-export default Legal;
+export default MobileLegal;
