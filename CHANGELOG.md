@@ -1,3 +1,10 @@
+## [1.157.4](https://github.com/SocialGouv/Tumeplay/compare/v1.157.3...v1.157.4) (2022-11-04)
+
+
+### Bug Fixes
+
+* remove document nextjs ([bb718ee](https://github.com/SocialGouv/Tumeplay/commit/bb718ee99b4a22e471ea5a333dba4b36f4c046d4))
+
 ## [1.157.3](https://github.com/SocialGouv/Tumeplay/compare/v1.157.2...v1.157.3) (2022-11-04)
 
 
