@@ -18,19 +18,6 @@ import Link from "next/link";
 import BackButton from "../../components/BackButton";
 
 const Confidentiatily = () => {
-  const tableLine = (
-    <Tr>
-      <Td>Pour la création de comptes</Td>
-      <Td>
-        <Text fontWeight={"bold"}>Jusqu’à la suppression du profil.</Text>
-        <Text>Ou</Text>
-        <Text fontWeight={"bold"}>
-          Dans un délai d’1 an à compter de la dernière action du profil
-        </Text>
-      </Td>
-    </Tr>
-  );
-
   return (
     <Box bg="lightPink" pt={4} pl={3} h="100%" pb={10} minW="fit-content">
       <Container maxW="4xl">
@@ -123,13 +110,54 @@ const Confidentiatily = () => {
           <Thead>
             <Tr>
               <Th>Type de données</Th>
-              <Th>Durée de conversation</Th>
+              <Th>Durée de conservation</Th>
+              <Th>Finalité</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {tableLine}
-            {tableLine}
-            {tableLine}
+            <Tr>
+              <Td>Pour la création de comptes</Td>
+              <Td>
+                <Text fontWeight={"bold"}>
+                  Jusqu’à la suppression du profil.
+                </Text>
+                <Text>Ou</Text>
+                <Text fontWeight={"bold"}>
+                  Dans un délai d’1 an à compter de la dernière action du profil
+                </Text>
+              </Td>
+
+              <Td>Connexion</Td>
+            </Tr>
+            <Tr>
+              <Td>Pour la réception des différentes box</Td>
+              <Td>
+                <Text fontWeight={"bold"}>
+                  Jusqu’à la suppression du profil.
+                </Text>
+                <Text>Ou</Text>
+                <Text fontWeight={"bold"}>
+                  Dans un délai d’1 an à compter de la dernière action du profil
+                </Text>
+              </Td>
+              <Td>Envoi de boxs</Td>
+            </Tr>
+            <Tr>
+              <Td>
+                Pour la découverte et l’amélioration des connaissances en santé
+                sexuelle
+              </Td>
+              <Td>
+                <Text fontWeight={"bold"}>
+                  Jusqu’à la suppression du profil.
+                </Text>
+                <Text>Ou</Text>
+                <Text fontWeight={"bold"}>
+                  Dans un délai d’1 an à compter de la dernière action du profil
+                </Text>
+              </Td>
+              <Td>Parcours de jeu</Td>
+            </Tr>
           </Tbody>
         </Table>
         <Text

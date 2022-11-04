@@ -188,6 +188,7 @@ const Home = ({
             rel="noreferrer"
             target="_blank"
             mr={[0, 0, 3]}
+            mb={2}
           >
             <Text
               cursor="pointer"
@@ -201,6 +202,7 @@ const Home = ({
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -209,16 +211,18 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
             >
-              Stats
+              Statistiques
             </ChakraLink>
           </Link>
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -227,6 +231,7 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
@@ -237,6 +242,7 @@ const Home = ({
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -245,6 +251,7 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
@@ -255,6 +262,7 @@ const Home = ({
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -263,6 +271,7 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
