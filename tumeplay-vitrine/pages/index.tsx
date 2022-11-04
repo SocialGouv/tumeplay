@@ -276,6 +276,10 @@ const Home = ({
         <Head>
           <title>Tumeplay</title>
           <meta
+            httpEquiv="Content-Security-Policy"
+            content=" default-src 'none'; connect-src https://backend-tumeplay.fabrique.social.gouv.fr/contents https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://ipapi.co/json/ https://matomo.fabrique.social.gouv.fr/matomo.php; font-src 'self'; img-src 'self' data: https://backend-tumeplay.fabrique.social.gouv.fr https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://backend-tumeplay.fabrique.social.gouv.frundefined https://backend-tumeplay-preprod.dev.fabrique.social.gouv.frundefined; script-src 'self' https://matomo.fabrique.social.gouv.fr/matomo.js; style-src 'self' 'unsafe-inline'"
+          />
+          <meta
             name="description"
             content="Avec TUMEPLAY découvre et explore ta sexualité en t’amusant. L’appli pour tester tes connaissances en matière de sexualité, pensée et construite avec des jeunes de ton âge. Elle a été conçue pour que tout le monde ait la même chance et le même niveau d’information sur la sexualité."
           />
