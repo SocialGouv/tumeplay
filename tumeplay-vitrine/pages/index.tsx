@@ -195,6 +195,7 @@ const Home = ({
         >
           <ChakraLink
             href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
+            rel="noreferrer"
             target="_blank"
             mr={[0, 0, 3]}
             display={["block", "block", "none"]}
