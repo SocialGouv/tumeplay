@@ -1,3 +1,10 @@
+# [1.157.0](https://github.com/SocialGouv/Tumeplay/compare/v1.156.2...v1.157.0) (2022-11-04)
+
+
+### Features
+
+* add a11y page ([25e7994](https://github.com/SocialGouv/Tumeplay/commit/25e7994c7de74b74cedce8646f2ac0258e2d74b2))
+
 ## [1.156.2](https://github.com/SocialGouv/Tumeplay/compare/v1.156.1...v1.156.2) (2022-11-04)
 
 
