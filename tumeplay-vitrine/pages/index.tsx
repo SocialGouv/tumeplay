@@ -271,7 +271,6 @@ const Home = ({
             </ChakraLink>
           </Link>
         </Box>
-        https://tumeplay-preprod.dev.fabrique.social.gouv.fr/favicon
       </Box>
       <Container maxW="6xl" pt={5} role="main" aria-label="Content-Display">
         <Head>
