@@ -18,7 +18,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <Image
           loader={() => post.etiquette?.image.url as string}
           src={post.etiquette?.image.url as string}
-          alt={post.title}
+          alt={``}
           width={300}
           height={300}
           layout="responsive"
@@ -36,7 +36,7 @@ const PostCard = ({ post }: PostCardProps) => {
           <Image
             loader={() => post.thematique_mobile.image.url}
             src={post.thematique_mobile.image.url}
-            alt={post.thematique_mobile.title}
+            alt={``}
             width={24}
             height={24}
             layout="responsive"

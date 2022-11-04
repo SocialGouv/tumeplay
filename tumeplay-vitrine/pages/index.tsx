@@ -13,6 +13,8 @@ import {
   InputRightElement,
   Divider,
   Link as ChakraLink,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -168,24 +170,12 @@ const Home = ({
         display="flex"
         justifyContent="space-between"
         alignContent="center"
+        role="banner"
+        aria-label="presentation"
       >
-        <ChakraLink
-          href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
-          target="_blank"
-          display={["none", "none", "block"]}
-          rel="noreferrer"
-        >
-          <Text
-            cursor="pointer"
-            _hover={{
-              textDecoration: "underline",
-            }}
-          >
-            Guyane
-          </Text>
-        </ChakraLink>
         <Box
           display="flex"
+          flexWrap="wrap"
           justifyContent={["space-between", "space-between", "flex-end"]}
           alignItems="center"
           textAlign="right"
@@ -198,7 +188,6 @@ const Home = ({
             rel="noreferrer"
             target="_blank"
             mr={[0, 0, 3]}
-            display={["block", "block", "none"]}
           >
             <Text
               cursor="pointer"
@@ -211,7 +200,6 @@ const Home = ({
           </ChakraLink>
           <Divider
             h={[3, 3, 4]}
-            display={["block", "block", "none"]}
             mr={[0, 0, 3]}
             borderColor="black"
             orientation="vertical"
@@ -264,9 +252,27 @@ const Home = ({
               Données personnelles
             </ChakraLink>
           </Link>
+          <Divider
+            h={[3, 3, 4]}
+            mr={[0, 0, 3]}
+            borderColor="black"
+            orientation="vertical"
+          />
+          <Link href="/a11y" passHref>
+            <ChakraLink
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={[0, 0, 3]}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              Accessibilité : non conforme
+            </ChakraLink>
+          </Link>
         </Box>
       </Box>
-      <Container maxW="6xl" pt={5}>
+      <Container maxW="6xl" pt={5} role="main" aria-label="Content-Display">
         <Head>
           <title>Tumeplay</title>
           <meta
@@ -297,23 +303,29 @@ const Home = ({
           <meta name="robots" content="all" />
         </Head>
         <Header />
-        <InputGroup size="lg" mb={10}>
-          <InputLeftAddon>
-            <SearchIcon />
-          </InputLeftAddon>
-          <Input
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearch(e.target.value)
-            }
-            placeholder="Tape un mot clé : contraception, clitoris, consentement..."
-            value={search || ""}
-          />
-          {search && (
-            <InputRightElement cursor="pointer" onClick={() => setSearch("")}>
-              <CloseIcon />
-            </InputRightElement>
-          )}
-        </InputGroup>
+        <FormControl>
+          <FormLabel htmlFor="input-search" fontWeight="bold">
+            Rechercher un contenu :
+          </FormLabel>
+          <InputGroup size="lg" mb={10}>
+            <InputLeftAddon>
+              <SearchIcon />
+            </InputLeftAddon>
+            <Input
+              id="input-search"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearch(e.target.value)
+              }
+              placeholder="Tape un mot clé : contraception, clitoris, consentement..."
+              value={search || ""}
+            />
+            {search && (
+              <InputRightElement cursor="pointer" onClick={() => setSearch("")}>
+                <CloseIcon />
+              </InputRightElement>
+            )}
+          </InputGroup>
+        </FormControl>
         <Themes
           onClick={handleThemeClick}
           selectedThemesIds={selectedThemesIds}

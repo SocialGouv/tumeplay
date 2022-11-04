@@ -7,13 +7,14 @@ const Header = () => {
       <Box w={[48, 48, "300px"]}>
         <Image
           src="/logo-tumeplay.svg"
-          alt="Tumeplay logo"
+          alt={``}
           width={300}
           height={150}
           layout="responsive"
         />
       </Box>
       <Heading
+        as="h1"
         mt={[6, 6, 10]}
         mb={[4, 4, 6]}
         fontSize={["2xl", "2xl", "auto"]}
@@ -33,6 +34,7 @@ const Header = () => {
           href="https://apps.apple.com/fr/app/tumeplay/id1559879813"
           target="_blank"
           rel="noreferrer"
+          title="Télécharger l'application sur apple iOS"
         >
           <Box mr={4} opacity={0.8} _hover={{ opacity: 0.6 }} w={52}>
             <Image
@@ -40,7 +42,7 @@ const Header = () => {
               height={80}
               layout="responsive"
               src="/button-ios.svg"
-              alt="Télécharge tumeplay sur iOS"
+              alt={`Bouton pour télécharger l'application sur iOS`}
             />
           </Box>
         </Link>
@@ -48,6 +50,7 @@ const Header = () => {
           href="https://play.google.com/store/apps/details?id=com.tumeplaymobile"
           target="_blank"
           rel="noreferrer"
+          title="Télécharger l'application sur Android"
         >
           <Box
             ml={[0, 0, 4]}
@@ -61,7 +64,7 @@ const Header = () => {
               height={80}
               layout="responsive"
               src="/button-android.svg"
-              alt="Télécharge tumeplay sur Android"
+              alt={`Bouton pour télécharger l'application sur Android`}
             />
           </Box>
         </Link>
@@ -81,14 +84,15 @@ const Header = () => {
             href="https://www.instagram.com/tumeplay/"
             rel="noreferrer"
             target="_blank"
+            title="Accéder au compte Instagram de tumeplay"
           >
             <Box mr={2} opacity={1} _hover={{ opacity: 0.8 }} w={12}>
               <Image
                 src="/instagram.png"
-                alt="Instgram Tumeplay"
                 width={50}
                 height={50}
                 layout="responsive"
+                alt={`Bouton pour accéder au réseau social Instagram`}
               />
             </Box>
           </Link>
@@ -99,13 +103,14 @@ const Header = () => {
             w={12}
             opacity={1}
             _hover={{ opacity: 0.8 }}
+            title="Accéder au compte Tiktok de tumeplay"
           >
             <Image
               src="/Tiktok.png"
-              alt="Instgram TikTok"
               width={50}
               height={50}
               layout="responsive"
+              alt={`Bouton pour accéder au réseau social Tiktok`}
             />
           </Link>
         </Box>

@@ -28,7 +28,7 @@ const Themes = ({ onClick, selectedThemesIds, themes }: ThemeProps) => {
               <Image
                 loader={() => theme.image.url}
                 src={theme.image.url}
-                alt={theme.title}
+                alt={``}
                 width={6}
                 height={6}
                 layout="responsive"
