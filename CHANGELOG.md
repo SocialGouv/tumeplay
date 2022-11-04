@@ -1,3 +1,10 @@
+## [1.157.3](https://github.com/SocialGouv/Tumeplay/compare/v1.157.2...v1.157.3) (2022-11-04)
+
+
+### Bug Fixes
+
+* httpEquiv content all ([65a45ec](https://github.com/SocialGouv/Tumeplay/commit/65a45ec193ce9e4be499a745bf9f79790db51619))
+
 ## [1.157.2](https://github.com/SocialGouv/Tumeplay/compare/v1.157.1...v1.157.2) (2022-11-04)
 
 
