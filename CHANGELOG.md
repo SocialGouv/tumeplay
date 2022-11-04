@@ -1,3 +1,11 @@
+## [1.156.2](https://github.com/SocialGouv/Tumeplay/compare/v1.156.1...v1.156.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* add lang to html tag ([ffb6434](https://github.com/SocialGouv/Tumeplay/commit/ffb64343278f97b0bcc81bbf5c47a8c39a21ecce))
+* external link rel noreferrer ([532be09](https://github.com/SocialGouv/Tumeplay/commit/532be09e73df3dfe129c3795631b1451738f73b9))
+
 ## [1.156.1](https://github.com/SocialGouv/Tumeplay/compare/v1.156.0...v1.156.1) (2022-11-04)
 
 
