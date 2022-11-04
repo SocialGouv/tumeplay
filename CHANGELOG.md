@@ -1,3 +1,10 @@
+## [1.157.7](https://github.com/SocialGouv/Tumeplay/compare/v1.157.6...v1.157.7) (2022-11-04)
+
+
+### Bug Fixes
+
+* next config remove i18n ([42e7985](https://github.com/SocialGouv/Tumeplay/commit/42e7985addb9eb594190b2329d11475266c5b625))
+
 ## [1.157.6](https://github.com/SocialGouv/Tumeplay/compare/v1.157.5...v1.157.6) (2022-11-04)
 
 
