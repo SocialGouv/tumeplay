@@ -271,13 +271,14 @@ const Home = ({
             </ChakraLink>
           </Link>
         </Box>
+        https://tumeplay-preprod.dev.fabrique.social.gouv.fr/favicon
       </Box>
       <Container maxW="6xl" pt={5} role="main" aria-label="Content-Display">
         <Head>
           <title>Tumeplay</title>
           <meta
             httpEquiv="Content-Security-Policy"
-            content=" default-src 'none'; connect-src https://backend-tumeplay.fabrique.social.gouv.fr/contents https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://ipapi.co/json/ https://matomo.fabrique.social.gouv.fr/matomo.php; font-src 'self'; img-src 'self' data: https://backend-tumeplay.fabrique.social.gouv.fr https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://backend-tumeplay.fabrique.social.gouv.frundefined https://backend-tumeplay-preprod.dev.fabrique.social.gouv.frundefined; script-src 'self' https://matomo.fabrique.social.gouv.fr/matomo.js; style-src 'self' 'unsafe-inline'"
+            content=" default-src https://tumeplay.fabrique.social.gouv.fr https://tumeplay-preprod.dev.fabrique.social.gouv.fr 'self'; connect-src https://backend-tumeplay.fabrique.social.gouv.fr/contents https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://ipapi.co/json/ https://matomo.fabrique.social.gouv.fr/matomo.php; font-src 'self'; img-src 'self' data: https://backend-tumeplay.fabrique.social.gouv.fr https://backend-tumeplay-preprod.dev.fabrique.social.gouv.fr https://backend-tumeplay.fabrique.social.gouv.frundefined https://backend-tumeplay-preprod.dev.fabrique.social.gouv.frundefined; script-src 'self' https://matomo.fabrique.social.gouv.fr/matomo.js; style-src 'self' 'unsafe-inline'"
           />
           <meta
             name="description"
