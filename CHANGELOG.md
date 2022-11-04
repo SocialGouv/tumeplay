@@ -1,3 +1,10 @@
+## [1.157.1](https://github.com/SocialGouv/Tumeplay/compare/v1.157.0...v1.157.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* meta httpEquiv & add sharp ([e774a0b](https://github.com/SocialGouv/Tumeplay/commit/e774a0ba8e043525e5dfa9a34d8a4738817aa837))
+
 # [1.157.0](https://github.com/SocialGouv/Tumeplay/compare/v1.156.2...v1.157.0) (2022-11-04)
 
 
