@@ -62,7 +62,10 @@ const Home = ({
       .then((res) => {
         const adjustedRes = (res.data || []).map((c: Post) => ({
           ...c,
-          image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
+          image: {
+            ...c.image,
+            url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
+          },
           thematique_mobile: {
             ...c.thematique_mobile,
             image: {
@@ -74,7 +77,9 @@ const Home = ({
             ...c.etiquette,
             image: {
               ...c.etiquette?.image,
-              url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
+              url:
+                NEXT_PUBLIC_STRAPI_URL +
+                c.etiquette?.image.formats?.thumbnail?.url,
             },
           },
         }));
@@ -99,7 +104,6 @@ const Home = ({
   }, []);
 
   useEffect(() => {
-    console.log(isFetching);
     if (!isFetching) return;
     loadmoreContent();
   }, [isFetching]);
@@ -169,6 +173,7 @@ const Home = ({
           href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
           target="_blank"
           display={["none", "none", "block"]}
+          rel="noreferrer"
         >
           <Text
             cursor="pointer"
@@ -363,7 +368,10 @@ export async function getServerSideProps() {
   });
   const posts = (response.data || []).map((c: Post) => ({
     ...c,
-    image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
+    image: {
+      ...c.image,
+      url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
+    },
     thematique_mobile: {
       ...c.thematique_mobile,
       image: {
@@ -375,7 +383,8 @@ export async function getServerSideProps() {
       ...c.etiquette,
       image: {
         ...c.etiquette?.image,
-        url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
+        url:
+          NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.formats?.thumbnail?.url,
       },
     },
   }));
@@ -390,7 +399,7 @@ export async function getServerSideProps() {
     ...t,
     image: {
       ...t.image,
-      url: NEXT_PUBLIC_STRAPI_URL + t.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + t.image?.url,
     },
   }));
 

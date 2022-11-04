@@ -1,7 +1,8 @@
-import { Box, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { PostCardProps } from "./interfaces";
 import slugify from "@sindresorhus/slugify";
+import Image from "next/image";
 
 const PostCard = ({ post }: PostCardProps) => {
   const slug = slugify(post.title);
@@ -13,11 +14,16 @@ const PostCard = ({ post }: PostCardProps) => {
       borderRadius="lg"
       _hover={{ position: "relative", bottom: "2px", boxShadow: "md" }}
     >
-      <Image
-        src={post.etiquette?.image.url}
-        alt={post.title}
-        borderTopRadius="lg"
-      />
+      <Box borderTopRadius="lg" overflow="hidden">
+        <Image
+          loader={() => post.etiquette?.image.url as string}
+          src={post.etiquette?.image.url as string}
+          alt={post.title}
+          width={300}
+          height={300}
+          layout="responsive"
+        />
+      </Box>
       <Box
         display="flex"
         alignItems="center"
@@ -26,11 +32,16 @@ const PostCard = ({ post }: PostCardProps) => {
         bg={post.thematique_mobile.color}
         py={2}
       >
-        <Image
-          src={post.thematique_mobile.image.url}
-          alt={post.thematique_mobile.title}
-          w={6}
-        />
+        <Box w={6}>
+          <Image
+            loader={() => post.thematique_mobile.image.url}
+            src={post.thematique_mobile.image.url}
+            alt={post.thematique_mobile.title}
+            width={24}
+            height={24}
+            layout="responsive"
+          />
+        </Box>
         <Text ml={1}>{post.thematique_mobile.title}</Text>
       </Box>
       <Box p={3}>

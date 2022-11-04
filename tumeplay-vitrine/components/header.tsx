@@ -1,13 +1,18 @@
-import { Box, Image, Heading, Link, Text } from "@chakra-ui/react";
+import { Box, Heading, Link, Text } from "@chakra-ui/react";
+import Image from "next/image";
 
 const Header = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column" py={10}>
-      <Image
-        src="/logo-tumeplay.svg"
-        alt="Tumeplay logo"
-        w={[48, 48, "auto"]}
-      />
+      <Box w={[48, 48, "300px"]}>
+        <Image
+          src="/logo-tumeplay.svg"
+          alt="Tumeplay logo"
+          width={300}
+          height={150}
+          layout="responsive"
+        />
+      </Box>
       <Heading
         mt={[6, 6, 10]}
         mb={[4, 4, 6]}
@@ -27,29 +32,38 @@ const Header = () => {
         <Link
           href="https://apps.apple.com/fr/app/tumeplay/id1559879813"
           target="_blank"
+          rel="noreferrer"
         >
-          <Image
-            mr={4}
-            w="full"
-            src="/button-ios.svg"
-            alt="Télécharge tumeplay sur iOS"
-            opacity={0.8}
-            _hover={{ opacity: 0.6 }}
-          />
+          <Box mr={4} opacity={0.8} _hover={{ opacity: 0.6 }} w={52}>
+            <Image
+              width={200}
+              height={80}
+              layout="responsive"
+              src="/button-ios.svg"
+              alt="Télécharge tumeplay sur iOS"
+            />
+          </Box>
         </Link>
         <Link
           href="https://play.google.com/store/apps/details?id=com.tumeplaymobile"
           target="_blank"
+          rel="noreferrer"
         >
-          <Image
+          <Box
             ml={[0, 0, 4]}
             mt={[4, 4, 0]}
-            w="full"
-            src="/button-android.svg"
-            alt="Télécharge tumeplay sur Android"
             opacity={0.8}
             _hover={{ opacity: 0.6 }}
-          />
+            w={52}
+          >
+            <Image
+              width={200}
+              height={80}
+              layout="responsive"
+              src="/button-android.svg"
+              alt="Télécharge tumeplay sur Android"
+            />
+          </Box>
         </Link>
       </Box>
       <Box pt={5}>
@@ -63,24 +77,36 @@ const Header = () => {
           justifyItems="center"
           pt={2}
         >
-          <Link href="https://www.instagram.com/tumeplay/" target="_blank">
-            <Image
-              src="/instagram.png"
-              alt="Instgram Tumeplay"
-              w={12}
-              mr={2}
-              opacity={1}
-              _hover={{ opacity: 0.8 }}
-            />
+          <Link
+            href="https://www.instagram.com/tumeplay/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <Box mr={2} opacity={1} _hover={{ opacity: 0.8 }} w={12}>
+              <Image
+                src="/instagram.png"
+                alt="Instgram Tumeplay"
+                width={50}
+                height={50}
+                layout="responsive"
+              />
+            </Box>
           </Link>
           <Link
             href="https://www.tiktok.com/@tu.me.play"
             target="_blank"
+            rel="noreferrer"
             w={12}
             opacity={1}
             _hover={{ opacity: 0.8 }}
           >
-            <Image src="/Tiktok.png" alt="Instgram TikTok" />
+            <Image
+              src="/Tiktok.png"
+              alt="Instgram TikTok"
+              width={50}
+              height={50}
+              layout="responsive"
+            />
           </Link>
         </Box>
       </Box>
