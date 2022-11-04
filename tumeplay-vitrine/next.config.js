@@ -7,7 +7,10 @@ const nextConfig = {
     defaultLocale: "fr",
   },
   images: {
-    domains: ["backend-tumeplay.fabrique.social."],
+    domains: [
+      "backend-tumeplay.fabrique.social.",
+      "backend-tumeplay-preprod.dev.fabrique.social.",
+    ],
   },
 };
 
