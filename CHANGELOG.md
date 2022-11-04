@@ -1,3 +1,10 @@
+## [1.157.5](https://github.com/SocialGouv/Tumeplay/compare/v1.157.4...v1.157.5) (2022-11-04)
+
+
+### Bug Fixes
+
+* _document page ([ba3fe0d](https://github.com/SocialGouv/Tumeplay/commit/ba3fe0dbc1b6dafc5ed0f8221a5e489cc6ca913f))
+
 ## [1.157.4](https://github.com/SocialGouv/Tumeplay/compare/v1.157.3...v1.157.4) (2022-11-04)
 
 
