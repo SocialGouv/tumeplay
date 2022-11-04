@@ -1,3 +1,10 @@
+## [1.156.1](https://github.com/SocialGouv/Tumeplay/compare/v1.156.0...v1.156.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* performance/accessibility/bestpractices optimizations for lighthouse audit ([6c02c5a](https://github.com/SocialGouv/Tumeplay/commit/6c02c5ae5d6e10fa0a7916e1a84bfb022c208a48))
+
 # [1.156.0](https://github.com/SocialGouv/Tumeplay/compare/v1.155.2...v1.156.0) (2022-11-02)
 
 
