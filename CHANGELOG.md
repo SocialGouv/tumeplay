@@ -1,3 +1,10 @@
+## [1.157.6](https://github.com/SocialGouv/Tumeplay/compare/v1.157.5...v1.157.6) (2022-11-04)
+
+
+### Bug Fixes
+
+* next config authorize preprod ([03c3013](https://github.com/SocialGouv/Tumeplay/commit/03c3013e8f5463be95d7dd41fbd1ec63c0b827a4))
+
 ## [1.157.5](https://github.com/SocialGouv/Tumeplay/compare/v1.157.4...v1.157.5) (2022-11-04)
 
 
