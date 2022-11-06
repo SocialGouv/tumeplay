@@ -19,6 +19,7 @@ import {REACT_APP_URL} from '@env';
 import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
+import * as Animatable from 'react-native-animatable';
 
 const Sextus = ({navigation}) => {
   const {user, reloadUser} = useContext(AppContext);
@@ -39,6 +40,16 @@ const Sextus = ({navigation}) => {
   const [currentHistoryId, setCurrentHistoryId] = useState(null);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [showLeaderBoard, setShowLeaderBoard] = useState(false);
+  const [clue, setClue] = useState('');
+  const [displayClue, setDisplayClue] = useState();
+  const [displayClueButton, setDisplayClueButton] = useState();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayClueButton(true);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const {data, loading} = useQuery(GET_SEXTUS_WORDS);
   const [createHistory, {data: data1}] = useMutation(CREATE_SEXTUS_HISTORY, {
@@ -103,6 +114,8 @@ const Sextus = ({navigation}) => {
     handleWordAndDefinition();
     reloadUser();
     setIsAllowedToPlay(true);
+    setDisplayClue(false);
+    setDisplayClueButton(false);
   }, [wordToGuess]);
 
   function getRandomInt(min, max) {
@@ -117,10 +130,11 @@ const Sextus = ({navigation}) => {
 
   const handleWordAndDefinition = useCallback(() => {
     const randomIndex = getRandomInt(0, fullWords.length - 1);
-    if (fullWords.length > 1) {
+    if (fullWords.length >= 1) {
       setWordToGuess(
         removeAccentsWords(fullWords[randomIndex].word.toUpperCase()),
       );
+      setClue(fullWords[randomIndex].clue);
       setDefinition(fullWords[randomIndex].definition);
     }
   }, [fullWords]);
@@ -143,6 +157,8 @@ const Sextus = ({navigation}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
+      setDisplayClue(false);
+      setDisplayClueButton(false);
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
@@ -267,6 +283,22 @@ const Sextus = ({navigation}) => {
             currentLetterIndex={currentLetterIndex}
             setGlobalYellowLetters={item => setGlobalYellowLetters(item)}
           />
+          {displayClueButton && currentRow === 0 && (
+            <View style={styles.clueContainer}>
+              <TouchableOpacity
+                style={styles.smallPressable}
+                onPress={() => setDisplayClue(true)}>
+                <Icon name="light-bulb" size={20} style={styles.clueIcon} />
+              </TouchableOpacity>
+              {displayClue && (
+                <Animatable.View
+                  style={styles.clueBox}
+                  animation="slideInRight">
+                  <Text style={styles.redBoldText}>{clue}</Text>
+                </Animatable.View>
+              )}
+            </View>
+          )}
           {isAllowedToPlay ? (
             <Keyboard
               style={styles.keyboard}
@@ -333,6 +365,38 @@ const styles = StyleSheet.create({
   keyboard: {
     position: 'absolute',
     bottom: config.deviceWidth <= 375 ? 0 : 40,
+  },
+  clueBox: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 10,
+    width: '70%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  clueIcon: {
+    color: 'white',
+  },
+  smallPressable: {
+    width: 70,
+    height: 35,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    color: '#FFF',
+    marginBottom: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  clueContainer: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
 });
 
