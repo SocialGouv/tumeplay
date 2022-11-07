@@ -1,5 +1,6 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { ThemeProps } from "./interfaces";
+import Image from "next/image";
 
 const Themes = ({ onClick, selectedThemesIds, themes }: ThemeProps) => {
   return (
@@ -23,7 +24,16 @@ const Themes = ({ onClick, selectedThemesIds, themes }: ThemeProps) => {
             alignItems="center"
             onClick={() => onClick(theme.id)}
           >
-            <Image src={theme.image.url} alt={theme.title} w={6} mr={2} />
+            <Box mr={2} w={6}>
+              <Image
+                loader={() => theme.image.url}
+                src={theme.image.url}
+                alt={``}
+                width={6}
+                height={6}
+                layout="responsive"
+              />
+            </Box>
             {theme.title}
           </Box>
         );

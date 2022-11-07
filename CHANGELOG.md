@@ -1,3 +1,82 @@
+## [1.157.8](https://github.com/SocialGouv/Tumeplay/compare/v1.157.7...v1.157.8) (2022-11-04)
+
+
+### Bug Fixes
+
+* pc & stats ([b536694](https://github.com/SocialGouv/Tumeplay/commit/b5366942dc6fd52e3b9fe88a0d80afe135c3e2d8))
+
+## [1.157.7](https://github.com/SocialGouv/Tumeplay/compare/v1.157.6...v1.157.7) (2022-11-04)
+
+
+### Bug Fixes
+
+* next config remove i18n ([42e7985](https://github.com/SocialGouv/Tumeplay/commit/42e7985addb9eb594190b2329d11475266c5b625))
+
+## [1.157.6](https://github.com/SocialGouv/Tumeplay/compare/v1.157.5...v1.157.6) (2022-11-04)
+
+
+### Bug Fixes
+
+* next config authorize preprod ([03c3013](https://github.com/SocialGouv/Tumeplay/commit/03c3013e8f5463be95d7dd41fbd1ec63c0b827a4))
+
+## [1.157.5](https://github.com/SocialGouv/Tumeplay/compare/v1.157.4...v1.157.5) (2022-11-04)
+
+
+### Bug Fixes
+
+* _document page ([ba3fe0d](https://github.com/SocialGouv/Tumeplay/commit/ba3fe0dbc1b6dafc5ed0f8221a5e489cc6ca913f))
+
+## [1.157.4](https://github.com/SocialGouv/Tumeplay/compare/v1.157.3...v1.157.4) (2022-11-04)
+
+
+### Bug Fixes
+
+* remove document nextjs ([bb718ee](https://github.com/SocialGouv/Tumeplay/commit/bb718ee99b4a22e471ea5a333dba4b36f4c046d4))
+
+## [1.157.3](https://github.com/SocialGouv/Tumeplay/compare/v1.157.2...v1.157.3) (2022-11-04)
+
+
+### Bug Fixes
+
+* httpEquiv content all ([65a45ec](https://github.com/SocialGouv/Tumeplay/commit/65a45ec193ce9e4be499a745bf9f79790db51619))
+
+## [1.157.2](https://github.com/SocialGouv/Tumeplay/compare/v1.157.1...v1.157.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* content httpEquiv ([78c0b38](https://github.com/SocialGouv/Tumeplay/commit/78c0b38ea1aca52871a6a630a3b85a7d94885bfb))
+* remove mistake ([7331082](https://github.com/SocialGouv/Tumeplay/commit/73310826cc10955f08949ec72b9305cb05d3050b))
+
+## [1.157.1](https://github.com/SocialGouv/Tumeplay/compare/v1.157.0...v1.157.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* meta httpEquiv & add sharp ([e774a0b](https://github.com/SocialGouv/Tumeplay/commit/e774a0ba8e043525e5dfa9a34d8a4738817aa837))
+
+# [1.157.0](https://github.com/SocialGouv/Tumeplay/compare/v1.156.2...v1.157.0) (2022-11-04)
+
+
+### Features
+
+* add a11y page ([25e7994](https://github.com/SocialGouv/Tumeplay/commit/25e7994c7de74b74cedce8646f2ac0258e2d74b2))
+
+## [1.156.2](https://github.com/SocialGouv/Tumeplay/compare/v1.156.1...v1.156.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* add lang to html tag ([ffb6434](https://github.com/SocialGouv/Tumeplay/commit/ffb64343278f97b0bcc81bbf5c47a8c39a21ecce))
+* external link rel noreferrer ([532be09](https://github.com/SocialGouv/Tumeplay/commit/532be09e73df3dfe129c3795631b1451738f73b9))
+
+## [1.156.1](https://github.com/SocialGouv/Tumeplay/compare/v1.156.0...v1.156.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* performance/accessibility/bestpractices optimizations for lighthouse audit ([6c02c5a](https://github.com/SocialGouv/Tumeplay/commit/6c02c5ae5d6e10fa0a7916e1a84bfb022c208a48))
+
 # [1.156.0](https://github.com/SocialGouv/Tumeplay/compare/v1.155.2...v1.156.0) (2022-11-02)
 
 

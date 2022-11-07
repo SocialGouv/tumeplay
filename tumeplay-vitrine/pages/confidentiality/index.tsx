@@ -131,7 +131,8 @@ const Confidentiatily = () => {
           <Thead>
             <Tr>
               <Th>Type de données</Th>
-              <Th>Durée de conversation</Th>
+              <Th>Durée de conservation</Th>
+              <Th>Finalité</Th>
             </Tr>
           </Thead>
           <Tbody>{tableLine}</Tbody>

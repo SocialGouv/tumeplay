@@ -22,7 +22,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-responsive-masonry": "^2.1.5",
-    "usehooks-ts": "^2.6.0",
+    "sharp": "^0.31.2",
+    "usehooks-ts": "2.6.0",
     "zod": "^3.17.10"
   },
   "devDependencies": {

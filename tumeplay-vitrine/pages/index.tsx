@@ -13,6 +13,8 @@ import {
   InputRightElement,
   Divider,
   Link as ChakraLink,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
@@ -62,7 +64,10 @@ const Home = ({
       .then((res) => {
         const adjustedRes = (res.data || []).map((c: Post) => ({
           ...c,
-          image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
+          image: {
+            ...c.image,
+            url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
+          },
           thematique_mobile: {
             ...c.thematique_mobile,
             image: {
@@ -74,7 +79,9 @@ const Home = ({
             ...c.etiquette,
             image: {
               ...c.etiquette?.image,
-              url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
+              url:
+                NEXT_PUBLIC_STRAPI_URL +
+                c.etiquette?.image.formats?.thumbnail?.url,
             },
           },
         }));
@@ -99,7 +106,6 @@ const Home = ({
   }, []);
 
   useEffect(() => {
-    console.log(isFetching);
     if (!isFetching) return;
     loadmoreContent();
   }, [isFetching]);
@@ -164,23 +170,12 @@ const Home = ({
         display="flex"
         justifyContent="space-between"
         alignContent="center"
+        role="banner"
+        aria-label="presentation"
       >
-        <ChakraLink
-          href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
-          target="_blank"
-          display={["none", "none", "block"]}
-        >
-          <Text
-            cursor="pointer"
-            _hover={{
-              textDecoration: "underline",
-            }}
-          >
-            Guyane
-          </Text>
-        </ChakraLink>
         <Box
           display="flex"
+          flexWrap="wrap"
           justifyContent={["space-between", "space-between", "flex-end"]}
           alignItems="center"
           textAlign="right"
@@ -190,9 +185,10 @@ const Home = ({
         >
           <ChakraLink
             href="https://guyane-tumeplay.fabrique.social.gouv.fr/"
+            rel="noreferrer"
             target="_blank"
             mr={[0, 0, 3]}
-            display={["block", "block", "none"]}
+            mb={2}
           >
             <Text
               cursor="pointer"
@@ -205,8 +201,8 @@ const Home = ({
           </ChakraLink>
           <Divider
             h={[3, 3, 4]}
-            display={["block", "block", "none"]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -215,16 +211,18 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
             >
-              Stats
+              Statistiques
             </ChakraLink>
           </Link>
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -233,6 +231,7 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
@@ -243,6 +242,7 @@ const Home = ({
           <Divider
             h={[3, 3, 4]}
             mr={[0, 0, 3]}
+            mb={2}
             borderColor="black"
             orientation="vertical"
           />
@@ -251,6 +251,7 @@ const Home = ({
               flexShrink={0.1}
               cursor="pointer"
               mr={[0, 0, 3]}
+              mb={2}
               _hover={{
                 textDecoration: "underline",
               }}
@@ -258,11 +259,41 @@ const Home = ({
               Données personnelles
             </ChakraLink>
           </Link>
+          <Divider
+            h={[3, 3, 4]}
+            mr={[0, 0, 3]}
+            mb={2}
+            borderColor="black"
+            orientation="vertical"
+          />
+          <Link href="/a11y" passHref>
+            <ChakraLink
+              flexShrink={0.1}
+              cursor="pointer"
+              mr={[0, 0, 3]}
+              mb={2}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              Accessibilité : non conforme
+            </ChakraLink>
+          </Link>
         </Box>
       </Box>
-      <Container maxW="6xl" pt={5}>
+      <Container maxW="6xl" pt={5} role="main" aria-label="Content-Display">
         <Head>
           <title>Tumeplay</title>
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="default-src *  data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval'; 
+						script-src * data: blob: 'unsafe-inline' 'unsafe-eval'; 
+						connect-src * data: blob: 'unsafe-inline'; 
+						img-src * data: blob: 'unsafe-inline'; 
+						frame-src * data: blob: ; 
+						style-src * data: blob: 'unsafe-inline';
+						font-src * data: blob: 'unsafe-inline';"
+          />
           <meta
             name="description"
             content="Avec TUMEPLAY découvre et explore ta sexualité en t’amusant. L’appli pour tester tes connaissances en matière de sexualité, pensée et construite avec des jeunes de ton âge. Elle a été conçue pour que tout le monde ait la même chance et le même niveau d’information sur la sexualité."
@@ -291,23 +322,29 @@ const Home = ({
           <meta name="robots" content="all" />
         </Head>
         <Header />
-        <InputGroup size="lg" mb={10}>
-          <InputLeftAddon>
-            <SearchIcon />
-          </InputLeftAddon>
-          <Input
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearch(e.target.value)
-            }
-            placeholder="Tape un mot clé : contraception, clitoris, consentement..."
-            value={search || ""}
-          />
-          {search && (
-            <InputRightElement cursor="pointer" onClick={() => setSearch("")}>
-              <CloseIcon />
-            </InputRightElement>
-          )}
-        </InputGroup>
+        <FormControl>
+          <FormLabel htmlFor="input-search" fontWeight="bold">
+            Rechercher un contenu :
+          </FormLabel>
+          <InputGroup size="lg" mb={10}>
+            <InputLeftAddon>
+              <SearchIcon />
+            </InputLeftAddon>
+            <Input
+              id="input-search"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearch(e.target.value)
+              }
+              placeholder="Tape un mot clé : contraception, clitoris, consentement..."
+              value={search || ""}
+            />
+            {search && (
+              <InputRightElement cursor="pointer" onClick={() => setSearch("")}>
+                <CloseIcon />
+              </InputRightElement>
+            )}
+          </InputGroup>
+        </FormControl>
         <Themes
           onClick={handleThemeClick}
           selectedThemesIds={selectedThemesIds}
@@ -363,7 +400,10 @@ export async function getServerSideProps() {
   });
   const posts = (response.data || []).map((c: Post) => ({
     ...c,
-    image: { ...c.image, url: NEXT_PUBLIC_STRAPI_URL + c.image?.url },
+    image: {
+      ...c.image,
+      url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
+    },
     thematique_mobile: {
       ...c.thematique_mobile,
       image: {
@@ -375,7 +415,8 @@ export async function getServerSideProps() {
       ...c.etiquette,
       image: {
         ...c.etiquette?.image,
-        url: NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.url,
+        url:
+          NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.formats?.thumbnail?.url,
       },
     },
   }));
@@ -390,7 +431,7 @@ export async function getServerSideProps() {
     ...t,
     image: {
       ...t.image,
-      url: NEXT_PUBLIC_STRAPI_URL + t.image.url,
+      url: NEXT_PUBLIC_STRAPI_URL + t.image?.url,
     },
   }));
 
