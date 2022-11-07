@@ -18,18 +18,26 @@ import Link from "next/link";
 import BackButton from "../../components/BackButton";
 
 const Confidentiatily = () => {
-  const tableLine = (
-    <Tr>
-      <Td>Pour la création de comptes</Td>
-      <Td>
-        <Text fontWeight={"bold"}>Jusqu’à la suppression du profil.</Text>
-        <Text>Ou</Text>
-        <Text fontWeight={"bold"}>
-          Dans un délai d’1 an à compter de la dernière action du profil
-        </Text>
-      </Td>
-    </Tr>
-  );
+  let tmp = [
+    "Pour la création de comptes",
+    "Pour la réception des différentes box",
+    "Pour la découverte et l’amélioration des connaissances en santé sexuelle",
+  ];
+
+  const tableLine = tmp.map((item, index) => {
+    return (
+      <Tr key={index}>
+        <Td>{item}</Td>
+        <Td>
+          <Text fontWeight={"bold"}>Jusqu’à la suppression du profil.</Text>
+          <Text>Ou</Text>
+          <Text fontWeight={"bold"}>
+            Dans un délai d’1 an à compter de la dernière action du profil
+          </Text>
+        </Td>
+      </Tr>
+    );
+  });
 
   return (
     <Box bg="lightPink" pt={4} pl={3} h="100%" pb={10} minW="fit-content">
@@ -126,11 +134,7 @@ const Confidentiatily = () => {
               <Th>Durée de conversation</Th>
             </Tr>
           </Thead>
-          <Tbody>
-            {tableLine}
-            {tableLine}
-            {tableLine}
-          </Tbody>
+          <Tbody>{tableLine}</Tbody>
         </Table>
         <Text
           fontFamily="heading"
