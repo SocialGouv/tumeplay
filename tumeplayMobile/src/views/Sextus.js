@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -19,7 +19,10 @@ import {REACT_APP_URL} from '@env';
 import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
-import * as Animatable from 'react-native-animatable';
+import TextBase from '../components/Text';
+import sparkles from '../assets/MaterialButton.png';
+import Button from '../components/Button';
+import ClueContainer from '../components/Sextus/ClueContainer';
 
 const Sextus = ({navigation}) => {
   const {user, reloadUser} = useContext(AppContext);
@@ -47,7 +50,7 @@ const Sextus = ({navigation}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setDisplayClueButton(true);
-    }, 5000);
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -283,21 +286,19 @@ const Sextus = ({navigation}) => {
             currentLetterIndex={currentLetterIndex}
             setGlobalYellowLetters={item => setGlobalYellowLetters(item)}
           />
-          {displayClueButton && currentRow === 0 && (
+          {displayClueButton && currentRow === 0 && !displayClue && (
             <View style={styles.clueContainer}>
-              <TouchableOpacity
-                style={styles.smallPressable}
-                onPress={() => setDisplayClue(true)}>
-                <Icon name="light-bulb" size={20} style={styles.clueIcon} />
-              </TouchableOpacity>
-              {displayClue && (
-                <Animatable.View
-                  style={styles.clueBox}
-                  animation="slideInRight">
-                  <Text style={styles.redBoldText}>{clue}</Text>
-                </Animatable.View>
-              )}
+              <Image source={sparkles} style={styles.clueImage} />
+              <TextBase>Besoin d'un indice ?</TextBase>
+              <Button
+                size="small"
+                icon
+                text="Ok"
+                onPress={() => setDisplayClue(true)}></Button>
             </View>
+          )}
+          {displayClue && (
+            <ClueContainer clue={clue} setDisplayClue={setDisplayClue} />
           )}
           {isAllowedToPlay ? (
             <Keyboard
@@ -366,17 +367,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: config.deviceWidth <= 375 ? 0 : 40,
   },
-  clueBox: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 10,
-    width: '70%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  clueIcon: {
-    color: 'white',
+
+  clueImage: {
+    width: 30,
+    height: 30,
   },
   smallPressable: {
     width: 70,
@@ -394,9 +388,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   clueContainer: {
-    alignSelf: 'flex-start',
+    width: '100%',
+    alignSelf: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });
 
