@@ -1,3 +1,10 @@
+# [1.158.0](https://github.com/SocialGouv/Tumeplay/compare/v1.157.9...v1.158.0) (2022-11-10)
+
+
+### Features
+
+* adding clue to sextus ([#461](https://github.com/SocialGouv/Tumeplay/issues/461)) ([18371db](https://github.com/SocialGouv/Tumeplay/commit/18371db2acf0a51e9721662c3297db4cc2502667))
+
 ## [1.157.9](https://github.com/SocialGouv/Tumeplay/compare/v1.157.8...v1.157.9) (2022-11-10)
 
 
