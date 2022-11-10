@@ -2,14 +2,22 @@ import { z } from "zod";
 
 const ZImage = z.object({
   url: z.string(),
-  formats: z.object({
-    small: z.object({
-      url: z.string(),
-    }),
-    thumbnail: z.object({
-      url: z.string(),
-    }),
-  }),
+  formats: z.optional(
+    z
+      .object({
+        small: z.optional(
+          z.object({
+            url: z.string(),
+          })
+        ),
+        thumbnail: z.optional(
+          z.object({
+            url: z.string(),
+          })
+        ),
+      })
+      .nullable()
+  ),
 });
 
 const ZTheme = z.object({
