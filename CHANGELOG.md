@@ -1,3 +1,10 @@
+## [1.157.9](https://github.com/SocialGouv/Tumeplay/compare/v1.157.8...v1.157.9) (2022-11-10)
+
+
+### Bug Fixes
+
+* fix api call on zod model ([#463](https://github.com/SocialGouv/Tumeplay/issues/463)) ([75481e3](https://github.com/SocialGouv/Tumeplay/commit/75481e36d0e5afd7b026f98dba3ecf0cdb522cba))
+
 ## [1.157.8](https://github.com/SocialGouv/Tumeplay/compare/v1.157.7...v1.157.8) (2022-11-04)
 
 
