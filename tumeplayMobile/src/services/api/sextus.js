@@ -5,6 +5,7 @@ export const GET_SEXTUS_WORDS = gql`
     sextusWords {
       definition
       word
+      clue
     }
   }
 `;

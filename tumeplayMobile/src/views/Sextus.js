@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Text from '../components/Text';
 import Container from '../components/global/Container';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -19,6 +19,10 @@ import {REACT_APP_URL} from '@env';
 import {removeAccentsWords} from '../services/utils';
 import config from '../../config';
 import LeaderBoard from '../components/Sextus/LeaderBoard';
+import TextBase from '../components/Text';
+import sparkles from '../assets/MaterialButton.png';
+import Button from '../components/Button';
+import ClueContainer from '../components/Sextus/ClueContainer';
 
 const Sextus = ({navigation}) => {
   const {user, reloadUser} = useContext(AppContext);
@@ -39,6 +43,16 @@ const Sextus = ({navigation}) => {
   const [currentHistoryId, setCurrentHistoryId] = useState(null);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [showLeaderBoard, setShowLeaderBoard] = useState(false);
+  const [clue, setClue] = useState('');
+  const [displayClue, setDisplayClue] = useState();
+  const [displayClueButton, setDisplayClueButton] = useState();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDisplayClueButton(true);
+    }, 30000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const {data, loading} = useQuery(GET_SEXTUS_WORDS);
   const [createHistory, {data: data1}] = useMutation(CREATE_SEXTUS_HISTORY, {
@@ -103,6 +117,8 @@ const Sextus = ({navigation}) => {
     handleWordAndDefinition();
     reloadUser();
     setIsAllowedToPlay(true);
+    setDisplayClue(false);
+    setDisplayClueButton(false);
   }, [wordToGuess]);
 
   function getRandomInt(min, max) {
@@ -117,10 +133,11 @@ const Sextus = ({navigation}) => {
 
   const handleWordAndDefinition = useCallback(() => {
     const randomIndex = getRandomInt(0, fullWords.length - 1);
-    if (fullWords.length > 1) {
+    if (fullWords.length >= 1) {
       setWordToGuess(
         removeAccentsWords(fullWords[randomIndex].word.toUpperCase()),
       );
+      setClue(fullWords[randomIndex].clue);
       setDefinition(fullWords[randomIndex].definition);
     }
   }, [fullWords]);
@@ -143,6 +160,8 @@ const Sextus = ({navigation}) => {
   const evaluateUserGuess = guess => {
     if (guess === wordToGuess) {
       updateUserHistory();
+      setDisplayClue(false);
+      setDisplayClueButton(false);
     } else {
       if (currentRow + 1 < gridSpecs.rows) {
         setUserGuesses([...userGuesses, guess]);
@@ -267,6 +286,20 @@ const Sextus = ({navigation}) => {
             currentLetterIndex={currentLetterIndex}
             setGlobalYellowLetters={item => setGlobalYellowLetters(item)}
           />
+          {displayClueButton && currentRow === 0 && !displayClue && (
+            <View style={styles.clueContainer}>
+              <Image source={sparkles} style={styles.clueImage} />
+              <TextBase>Besoin d'un indice ?</TextBase>
+              <Button
+                size="small"
+                icon
+                text="Ok"
+                onPress={() => setDisplayClue(true)}></Button>
+            </View>
+          )}
+          {displayClue && (
+            <ClueContainer clue={clue} setDisplayClue={setDisplayClue} />
+          )}
           {isAllowedToPlay ? (
             <Keyboard
               style={styles.keyboard}
@@ -333,6 +366,34 @@ const styles = StyleSheet.create({
   keyboard: {
     position: 'absolute',
     bottom: config.deviceWidth <= 375 ? 0 : 40,
+  },
+
+  clueImage: {
+    width: 30,
+    height: 30,
+  },
+  smallPressable: {
+    width: 70,
+    height: 35,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    color: '#FFF',
+    marginBottom: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  clueContainer: {
+    width: '100%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });
 
