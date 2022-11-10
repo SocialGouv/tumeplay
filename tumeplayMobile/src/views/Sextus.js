@@ -48,10 +48,10 @@ const Sextus = ({navigation}) => {
   const [displayClueButton, setDisplayClueButton] = useState();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timeout = setTimeout(() => {
       setDisplayClueButton(true);
     }, 30000);
-    return () => clearInterval(interval);
+    return () => clearTimeout(timeout);
   }, []);
 
   const {data, loading} = useQuery(GET_SEXTUS_WORDS);
