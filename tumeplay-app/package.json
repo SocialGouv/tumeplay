@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "cp environnements/env.dev.metropole .env && react-app-rewired start",
     "start-guyane": "cp environnements/env.dev.guyane .env && react-app-rewired start",
+    "start-aime": "cp environnements/env.dev.aime .env && react-app-rewired start",
     "test": "jest",
     "nativeLint": "eslint .",
     "webStart": "EXTEND_ESLINT=true react-app-rewired start",

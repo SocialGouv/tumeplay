@@ -1,11 +1,13 @@
 import React from 'react';
-import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {Image, TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import PropTypes from 'prop-types';
 
 CustomHeaderLeft.propTypes = {
   navigation: PropTypes.object,
   withBack: PropTypes.bool,
 };
+
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 export default function CustomHeaderLeft(props) {
   function _goBackToContent() {
@@ -43,19 +45,42 @@ export default function CustomHeaderLeft(props) {
             alignContent: 'flex-start',
             alignItems: 'center',
           }}>
-          <Image source={_backPicture} style={_localStyle.back} />
-
-          <Image
-            source={_logoPicture}
-            style={[_localStyle.logo, {marginLeft: 5}]}
-          />
+          {REACT_APP_ZONE === 'aime' ? (
+            <Text
+              style={{
+                color: 'white',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}>
+              AIME ❤️
+            </Text>
+          ) : (
+            <>
+              <Image source={_backPicture} style={_localStyle.back} />
+              <Image
+                source={_logoPicture}
+                style={[_localStyle.logo, {marginLeft: 5}]}
+              />
+            </>
+          )}
         </TouchableOpacity>
       </View>
     );
   } else {
     return (
       <View style={_localStyle.container}>
-        <Image source={_logoPicture} style={_localStyle.logo} />
+        {REACT_APP_ZONE === 'aime' ? (
+          <Text
+            style={{
+              color: 'white',
+              fontSize: '24px',
+              fontWeight: 'bold',
+            }}>
+            AIME ❤️
+          </Text>
+        ) : (
+          <Image source={_logoPicture} style={_localStyle.logo} />
+        )}
       </View>
     );
   }

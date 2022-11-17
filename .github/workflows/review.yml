@@ -50,6 +50,31 @@ jobs:
             REACT_APP_API_URL=https://backend-${{ env.host }}.dev.fabrique.social.gouv.fr
             REACT_APP_OTHER_ZONE_URL=https://${{ env.host }}.dev.fabrique.social.gouv.fr
 
+  register-frontend-aime:
+    name: Register frontend Aime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get base hostname
+        run: |
+          REPOSITORY=${GITHUB_REPOSITORY#*/}
+          BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          HOST=$(npx kube-workflow slugify $REPOSITORY-$BRANCH)
+          echo "host=${HOST}" >> $GITHUB_ENV
+      - name: Use autodevops build and register
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          environment: dev
+          imagePackage: frontend-aime
+          dockercontext: ./tumeplay-app
+          dockerfile: ./tumeplay-app/Dockerfile
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerbuildargs: |
+            buildenv=dev.aime
+            REACT_APP_MATOMO_ID=78
+            REACT_APP_ZONE=aime
+            REACT_APP_API_URL=https://backend-${{ env.host }}.dev.fabrique.social.gouv.fr
+            REACT_APP_OTHER_ZONE_URL=https://${{ env.host }}.dev.fabrique.social.gouv.fr
+
   register-frontend-metropole:
     name: Register frontend Metropole
     runs-on: ubuntu-latest
@@ -100,6 +125,7 @@ jobs:
         register-backend,
         register-dashboard,
         register-frontend-guyane,
+        register-frontend-aime,
         register-frontend-metropole,
       ]
     steps:

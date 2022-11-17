@@ -216,7 +216,7 @@ export default function ExpandableText(props) {
           }}
           style={[cardStyle.text, {...props.textStyle}]}
         />
-        {props.sound && REACT_APP_ZONE === 'guyane' && (
+        {props.sound && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
           <CustomTouchableOpacity
             onPress={e => {
               togglePlay(e);
@@ -234,7 +234,7 @@ export default function ExpandableText(props) {
             />
           </CustomTouchableOpacity>
         )}
-        {props.sound && REACT_APP_ZONE === 'guyane' && (
+        {props.sound && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
           <ReactHowler
             src={REACT_APP_API_URL + props.sound}
             onEnd={onPlayStop}
