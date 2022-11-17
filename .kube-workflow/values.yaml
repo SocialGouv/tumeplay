@@ -55,6 +55,12 @@ app-frontend-guyane:
   containerPort: 8080
   host: "guyane-{{ $.Values.global.host }}"
 
+app-frontend-aime:
+  enabled: true
+  imagePackage: frontend-aime
+  containerPort: 8080
+  host: "aime-{{ $.Values.global.host }}"
+
 app-dashboard:
   enabled: true
   host: "dashboard-{{ $.Values.global.host }}"

@@ -32,16 +32,25 @@ jobs:
             docker.pkg.github.com/${{ env.IMAGE_REPOSITORY }}/tumeplay-strapi:${{ env.IMAGE_TAG }}
       - name: Build app react image guyane
         uses: docker/build-push-action@v2
-        with: 
+        with:
           context: ./tumeplay-app
           push: true
           build-args: buildenv=dev.guyane
           tags: |
             docker.pkg.github.com/${{ env.IMAGE_REPOSITORY }}/tumeplay-app-guyane:${{ github.sha }}
             docker.pkg.github.com/${{ env.IMAGE_REPOSITORY }}/tumeplay-app-guyane:${{ env.IMAGE_TAG }}
+      - name: Build app react image aime
+        uses: docker/build-push-action@v2
+        with:
+          context: ./tumeplay-app
+          push: true
+          build-args: buildenv=dev.aime
+          tags: |
+            docker.pkg.github.com/${{ env.IMAGE_REPOSITORY }}/tumeplay-app-aime:${{ github.sha }}
+            docker.pkg.github.com/${{ env.IMAGE_REPOSITORY }}/tumeplay-app-aime:${{ env.IMAGE_TAG }}
       - name: Build app react image metropole
         uses: docker/build-push-action@v2
-        with: 
+        with:
           context: ./tumeplay-app
           push: true
           build-args: buildenv=dev.metropole

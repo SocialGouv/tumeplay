@@ -13,6 +13,12 @@ app-frontend-guyane:
   redirectFrom:
     - guyane.tumeplay.fabrique.social.gouv.fr
 
+app-frontend-aime:
+  host: aime-tumeplay.fabrique.social.gouv.fr
+  certSecretName: aime-crt
+  redirectFrom:
+    - aime.tumeplay.fabrique.social.gouv.fr
+
 app-dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
   certSecretName: dashboard-crt

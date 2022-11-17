@@ -35,6 +35,8 @@ ContentScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
 export default function ContentScreen(props) {
   Modal.setAppElement('body'); // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 
@@ -293,12 +295,17 @@ export default function ContentScreen(props) {
       <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
         <ScrollView style={{flex: 0.8}}>
           {DisplayContentCards()}
-          <ContactButton />
-          <CustomFooter
-            style={{flex: 0.2}}
-            navigation={props.navigation}
-            containerStyle={{paddingLeft: 0, paddingRight: 0}}
-          />
+
+          {REACT_APP_ZONE !== 'aime' && (
+            <>
+              <ContactButton />
+              <CustomFooter
+                style={{flex: 0.2}}
+                navigation={props.navigation}
+                containerStyle={{paddingLeft: 0, paddingRight: 0}}
+              />
+            </>
+          )}
         </ScrollView>
       </View>
 

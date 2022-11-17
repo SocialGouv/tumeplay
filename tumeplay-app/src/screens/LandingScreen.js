@@ -78,11 +78,13 @@ export default function LandingScreen(props) {
   const ThemesCards = () => {
     const {data, loading} = useQuery(GET_THEMES);
     if (!loading) {
-      return data && data.thematiques && (
-        <LandingThemeGrid
-          onPress={_onSelectedTheme}
-          themes={data.thematiques}></LandingThemeGrid>
-      ) || <Text>Aucune thématique trouvée :/</Text>
+      return (
+        (data && data.thematiques && (
+          <LandingThemeGrid
+            onPress={_onSelectedTheme}
+            themes={data.thematiques}></LandingThemeGrid>
+        )) || <Text>Aucune thématique trouvée :/</Text>
+      );
     }
 
     return <View />;
@@ -102,6 +104,11 @@ export default function LandingScreen(props) {
               Explore nos thématiques, découvre les questions réponses associées
               et réponds aux quiz pour recevoir des box gratuitement !
             </TextWithSound>
+          ) : REACT_APP_ZONE === 'guyane' ? (
+            <Text style={Styles.landingScreenSubtitle}>
+              Explore nos thématiques, découvre les questions réponses associées
+              et réponds aux quizz !
+            </Text>
           ) : (
             <Text style={Styles.landingScreenSubtitle}>
               Explore nos thématiques, découvre les questions réponses associées
@@ -119,32 +126,36 @@ export default function LandingScreen(props) {
         </View>
 
         {/* Bottom part */}
-        <View style={{marginLeft: 15, marginRight: 15}}>
-          <CustomTouchableOpacity
-            style={[Styles.landingBottomWrapper]}
-            onPress={_onSelected_lieuxUtiles}>
-            <Text style={Styles.landingBottomText}>{item.bottomTitle1}</Text>
-            <View
-              style={{
-                flex: 0.2,
-                paddingRight: 10,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-              <Image
-                style={{
-                  marginLeft: 10,
-                  marginRight: 10,
-                  width: 10,
-                  height: 10,
-                  resizeMode: 'contain',
-                }}
-                source={item.arrow}
-              />
-              <Text style={Styles.landingBottomButtonNext}>Voir</Text>
-            </View>
-          </CustomTouchableOpacity>
-          {/*
+        {REACT_APP_ZONE !== 'aime' && (
+          <>
+            <View style={{marginLeft: 15, marginRight: 15}}>
+              <CustomTouchableOpacity
+                style={[Styles.landingBottomWrapper]}
+                onPress={_onSelected_lieuxUtiles}>
+                <Text style={Styles.landingBottomText}>
+                  {item.bottomTitle1}
+                </Text>
+                <View
+                  style={{
+                    flex: 0.2,
+                    paddingRight: 10,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    style={{
+                      marginLeft: 10,
+                      marginRight: 10,
+                      width: 10,
+                      height: 10,
+                      resizeMode: 'contain',
+                    }}
+                    source={item.arrow}
+                  />
+                  <Text style={Styles.landingBottomButtonNext}>Voir</Text>
+                </View>
+              </CustomTouchableOpacity>
+              {/*
           <CustomTouchableOpacity
             style={[Styles.landingBottomWrapper]}
             onPress={_onSelected_echangeProfessionnel}>
@@ -170,8 +181,10 @@ export default function LandingScreen(props) {
             </View>
           </CustomTouchableOpacity>
           */}
-        </View>
-        <CustomFooter navigation={props.navigation} />
+            </View>
+            <CustomFooter navigation={props.navigation} />
+          </>
+        )}
         <ForwardedErrorModal />
       </ScrollView>
     </SafeAreaView>

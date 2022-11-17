@@ -185,7 +185,7 @@ export default function QuizzScreen(props) {
             alignSelf: 'center',
             height: '20%',
           }}>
-          {REACT_APP_ZONE === 'guyane' ? (
+          {['guyane', 'aime'].includes(REACT_APP_ZONE) ? (
             <TextWithSound
               sound={
                 _currentQuestion.sound_question

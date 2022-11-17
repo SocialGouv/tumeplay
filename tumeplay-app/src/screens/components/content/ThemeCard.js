@@ -9,8 +9,8 @@ import LandingStyle from '../../../styles/components/LandingScreen';
 
 import ReactHowler from 'react-howler';
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-const REACT_APP_ZONE = process.env.REACT_APP_ZONE
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
 
 ThemeCard.propTypes = {
   item: PropTypes.any,
@@ -59,9 +59,7 @@ export default function ThemeCard(props) {
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Image
             source={
-              item.image[0]
-                ? REACT_APP_API_URL + item.image[0].url
-                : null
+              item.image[0] ? REACT_APP_API_URL + item.image[0].url : null
             }
             style={LandingStyle.gridItemPicture}
           />
@@ -69,7 +67,7 @@ export default function ThemeCard(props) {
 
         <View style={LandingStyle.gridItemTextContainer}>
           <Text style={LandingStyle.gridItemText}>{item.title}</Text>
-          {item.sound && REACT_APP_ZONE === 'guyane' && (
+          {item.sound && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
             <CustomTouchableOpacity
               onPress={e => {
                 togglePlay(e);
