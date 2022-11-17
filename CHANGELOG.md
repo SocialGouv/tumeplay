@@ -1,3 +1,10 @@
+# [1.159.0](https://github.com/SocialGouv/Tumeplay/compare/v1.158.0...v1.159.0) (2022-11-17)
+
+
+### Features
+
+* aime instance configuration ([#464](https://github.com/SocialGouv/Tumeplay/issues/464)) ([29e5da5](https://github.com/SocialGouv/Tumeplay/commit/29e5da58a33d8fc9066acbfe7057004d922ca9ac))
+
 # [1.158.0](https://github.com/SocialGouv/Tumeplay/compare/v1.157.9...v1.158.0) (2022-11-10)
 
 
