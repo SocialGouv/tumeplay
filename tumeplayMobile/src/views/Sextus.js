@@ -48,7 +48,7 @@ const Sextus = ({navigation}) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDisplayClueButton(true);
-    }, 3000);
+    }, 30000);
     return () => clearTimeout(timeout);
   }, []);
 
