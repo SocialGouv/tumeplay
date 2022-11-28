@@ -6,7 +6,7 @@ import img from '../assets/onboardingAime.png';
 
 const AimeOnboarding = ({onDone}) => {
   return (
-    <View style={{flex: 1, height: '100%'}}>
+    <View style={{flex: 1, height: '100%', paddingVertical: 20}}>
       <Text style={styles.title}>Bienvenue sur Aime,</Text>
       <Text style={styles.subtitle}>
         L'application sur la santé sexuelle qui te permetde mieux comprendre ton
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   image: {
     marginBottom: 30,
+    objectFit: 'contain',
   },
 });
 

@@ -126,7 +126,7 @@ export default function QuizzFinishScreen(props) {
                 Bravo !
               </UnderlineText>
             )}
-            {!hasEnoughTokens && (
+            {!hasEnoughTokens && REACT_APP_ZONE !== 'aime' && (
               <UnderlineText borderColor={'#F1732E'} borderMargin={-15}>
                 Presque !
               </UnderlineText>
@@ -135,7 +135,7 @@ export default function QuizzFinishScreen(props) {
         </View>
       </View>
       <View style={{flex: 0.15, paddingLeft: 15, paddingRight: 15}}>
-        {hasEnoughTokens && (
+        {hasEnoughTokens && REACT_APP_ZONE !== 'aime' && (
           <Text
             style={{
               textAlign: 'center',
@@ -146,7 +146,7 @@ export default function QuizzFinishScreen(props) {
             Tu as gagné assez de points pour recevoir ta box gratuitement !
           </Text>
         )}
-        {!hasEnoughTokens && (
+        {!hasEnoughTokens && REACT_APP_ZONE !== 'aime' && (
           <Text
             style={{
               textAlign: 'center',
@@ -158,25 +158,37 @@ export default function QuizzFinishScreen(props) {
             box gratuitement.
           </Text>
         )}
+        {REACT_APP_ZONE === 'aime' && (
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              color: Colors.mainButton,
+              fontFamily: Colors.titleCard,
+            }}>
+            Merci d'avoir répondu à notre quizz !
+          </Text>
+        )}
       </View>
-
-      <View style={{flex: 0.3, alignItems: 'center'}}>
-        <Image
-          style={Styles.PictureFinish}
-          source={require('../assets/pictures/header-right.png')}
-        />
-        <Text
-          style={[
-            headerStyle.text,
-            Styles.withShadow,
-            {height: 40, minHeight: 40},
-          ]}>
-          {availableTokens} points !
-        </Text>
-      </View>
-
-      <View style={{flex: 0.2}}></View>
-
+      {REACT_APP_ZONE !== 'aime' && (
+        <>
+          <View style={{flex: 0.3, alignItems: 'center'}}>
+            <Image
+              style={Styles.PictureFinish}
+              source={require('../assets/pictures/header-right.png')}
+            />
+            <Text
+              style={[
+                headerStyle.text,
+                Styles.withShadow,
+                {height: 40, minHeight: 40},
+              ]}>
+              {availableTokens} points !
+            </Text>
+          </View>
+          <View style={{flex: 0.2}}></View>)
+        </>
+      )}
       <View
         style={{position: 'absolute', width: '100%', bottom: 25, zIndex: 1}}>
         {hasEnoughTokens && REACT_APP_ZONE !== 'aime' && (

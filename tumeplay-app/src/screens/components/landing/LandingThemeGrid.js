@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 import ThemeCard from '../content/ThemeCard';
+import _ from 'lodash';
 
 LandingThemeGrid.propTypes = {
   themes: PropTypes.array,
@@ -14,7 +15,7 @@ export default function LandingThemeGrid(props) {
   return (
     <FlatList
       scrollEnabled={true}
-      data={props.themes}
+      data={_.orderBy(props.themes, ['title'], ['asc'])}
       style={{paddingLeft: 15, paddingRight: 15}}
       renderItem={({item}) => {
         return <ThemeCard item={item} onPress={props.onPress} />;
