@@ -6,8 +6,6 @@ import ExpandableText from '../global/ExpandableText';
 import CustomTouchableOpacity from '../global/CustomTouchableOpacity';
 import Tracking from '../../../services/Tracking';
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-
 ContentCard.propTypes = {
   item: PropTypes.object,
   activeOpacity: PropTypes.number,
@@ -90,7 +88,7 @@ export default function ContentCard(props) {
           readMoreLink={content.link}
           lessPicture={'minus-orange.png'}
           morePicture={'plus-orange.png'}
-          sound={content.sound !== null ? content.sound.url : ' '}
+          sound={content.sound !== null ? content.sound.url : null}
           onReadMore={() => {
             Tracking.knowMoreTriggered('contenu', content.id);
           }}

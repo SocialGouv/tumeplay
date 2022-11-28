@@ -1,5 +1,5 @@
-import React, {useState, useRef, useEffect, useMemo} from 'react';
-import {ScrollView, SafeAreaView, View} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {SafeAreaView, View} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 
 import Modal from 'react-native-modal';
@@ -132,7 +132,11 @@ export default function ContentScreen(props) {
         <ContentCards
           activeOpacity={activeOpacity}
           style={{flex: 0.8}}
-          localContents={_.shuffle(contents)}
+          localContents={
+            REACT_APP_ZONE === 'aime'
+              ? _.orderBy(contents, 'title', 'asc')
+              : _.shuffle(contents)
+          }
         />
       );
     }
@@ -293,20 +297,17 @@ export default function ContentScreen(props) {
   return (
     <SafeAreaView style={[Styles.safeAreaView]}>
       <View style={[Styles.safeAreaViewInner, {flex: 1, paddingTop: 40}]}>
-        <ScrollView style={{flex: 0.8}}>
-          {DisplayContentCards()}
-
-          {REACT_APP_ZONE !== 'aime' && (
-            <>
-              <ContactButton />
-              <CustomFooter
-                style={{flex: 0.2}}
-                navigation={props.navigation}
-                containerStyle={{paddingLeft: 0, paddingRight: 0}}
-              />
-            </>
-          )}
-        </ScrollView>
+        {DisplayContentCards()}
+        {REACT_APP_ZONE !== 'aime' && (
+          <>
+            <ContactButton />
+            <CustomFooter
+              style={{flex: 0.2}}
+              navigation={props.navigation}
+              containerStyle={{paddingLeft: 0, paddingRight: 0}}
+            />
+          </>
+        )}
       </View>
 
       <Modal

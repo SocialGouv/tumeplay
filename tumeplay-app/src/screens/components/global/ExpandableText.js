@@ -39,13 +39,8 @@ ExpandableText.propTypes = {
 };
 
 export default function ExpandableText(props) {
-  const [measured, setMeasured] = useState(false);
-  const [shouldShowReadMore, setShouldShowReadMore] = useState(false);
   const [showAllText, setShowAllText] = useState(props.isExpanded);
-  const isMounted = useIsMounted();
-  const _text = useRef();
   const [lines, setLines] = useState(0);
-  const [cardHeight, setCardHeight] = useState();
 
   const soundIconStyle = props.soundStyle || {
     position: 'absolute',
@@ -216,7 +211,7 @@ export default function ExpandableText(props) {
           }}
           style={[cardStyle.text, {...props.textStyle}]}
         />
-        {props.sound && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
+        {props.sound !== null && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
           <CustomTouchableOpacity
             onPress={e => {
               togglePlay(e);
@@ -234,14 +229,15 @@ export default function ExpandableText(props) {
             />
           </CustomTouchableOpacity>
         )}
-        {props.sound && ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
-          <ReactHowler
-            src={REACT_APP_API_URL + props.sound}
-            onEnd={onPlayStop}
-            onStop={onPlayStop}
-            playing={play}
-          />
-        )}
+        {props.sound !== null &&
+          ['guyane', 'aime'].includes(REACT_APP_ZONE) && (
+            <ReactHowler
+              src={REACT_APP_API_URL + props.sound}
+              onEnd={onPlayStop}
+              onStop={onPlayStop}
+              playing={play}
+            />
+          )}
         {_maybeRenderReadMore()}
       </View>
     </View>

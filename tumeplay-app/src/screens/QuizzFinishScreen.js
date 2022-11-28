@@ -19,6 +19,8 @@ QuizzFinishScreen.propTypes = {
 };
 
 export default function QuizzFinishScreen(props) {
+  const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
   const [availableTokens, setAvailableTokens] = useState(props.availableTokens);
 
   const [eventListener, setEventListener] = useState(false);
@@ -177,7 +179,7 @@ export default function QuizzFinishScreen(props) {
 
       <View
         style={{position: 'absolute', width: '100%', bottom: 25, zIndex: 1}}>
-        {hasEnoughTokens && (
+        {hasEnoughTokens && REACT_APP_ZONE !== 'aime' && (
           <TouchableOpacity
             style={[Styles.bottomButton, {borderRadius: 25}]}
             onPress={props.onOrder}>
