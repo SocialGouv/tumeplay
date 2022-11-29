@@ -1,3 +1,10 @@
+## [1.160.3](https://github.com/SocialGouv/Tumeplay/compare/v1.160.2...v1.160.3) (2022-11-29)
+
+
+### Bug Fixes
+
+* image onboarding aime ([d15481c](https://github.com/SocialGouv/Tumeplay/commit/d15481c72e6024054afe308cd479fb8aec7ad79f))
+
 ## [1.160.2](https://github.com/SocialGouv/Tumeplay/compare/v1.160.1...v1.160.2) (2022-11-29)
 
 
