@@ -104,7 +104,7 @@ export default function LandingScreen(props) {
               Explore nos thématiques, découvre les questions réponses associées
               et réponds aux quiz pour recevoir des box gratuitement !
             </TextWithSound>
-          ) : REACT_APP_ZONE === 'guyane' ? (
+          ) : REACT_APP_ZONE === 'aime' ? (
             <Text style={Styles.landingScreenSubtitle}>
               Explore nos thématiques, découvre les questions réponses associées
               et réponds aux quizz !
