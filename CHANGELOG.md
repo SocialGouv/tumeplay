@@ -1,3 +1,10 @@
+## [1.160.1](https://github.com/SocialGouv/Tumeplay/compare/v1.160.0...v1.160.1) (2022-11-29)
+
+
+### Bug Fixes
+
+* image display ([9ab4173](https://github.com/SocialGouv/Tumeplay/commit/9ab4173ae8d83fb810476e004b3275c7c0ee1d9b))
+
 # [1.160.0](https://github.com/SocialGouv/Tumeplay/compare/v1.159.0...v1.160.0) (2022-11-29)
 
 
