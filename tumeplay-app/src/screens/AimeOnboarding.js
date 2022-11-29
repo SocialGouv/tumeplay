@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     width: '70%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    height: 600,
   },
 });
 
