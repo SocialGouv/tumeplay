@@ -1,3 +1,10 @@
+# [1.160.0](https://github.com/SocialGouv/Tumeplay/compare/v1.159.0...v1.160.0) (2022-11-29)
+
+
+### Features
+
+* integrating aime specific code for demo purpose ([#466](https://github.com/SocialGouv/Tumeplay/issues/466)) ([3ac6576](https://github.com/SocialGouv/Tumeplay/commit/3ac657639d6742d121a9cf19963f9d24d26bae5a))
+
 # [1.159.0](https://github.com/SocialGouv/Tumeplay/compare/v1.158.0...v1.159.0) (2022-11-17)
 
 
