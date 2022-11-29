@@ -16,7 +16,6 @@ import Styles from './src/styles/Styles';
 const AppContainer = createAppContainer(AppStack);
 
 export default function App() {
-
   const [showRealApp, setShowRealApp] = useState(false);
 
   function _renderItem({item}) {
@@ -95,7 +94,7 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          
+
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
@@ -117,7 +116,7 @@ const App: () => React$Node = () => {
                 <DebugInstructions />
               </Text>
             </View>
-            
+
           </View>
         </ScrollView>
       </SafeAreaView>

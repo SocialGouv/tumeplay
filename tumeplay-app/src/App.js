@@ -10,12 +10,12 @@ import Tracking from './services/Tracking';
 import useIsMounted from './hooks/isMounted';
 
 import localBoarding from './models/defaults/Boarding';
+import AimeOnboarding from './screens/AimeOnboarding';
 
 const AppContainer = createAppContainer(AppStack);
 
 const App = () => {
   const [showRealApp, setShowRealApp] = useState(false);
-  const [slides, setSlides] = useState([]);
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -51,10 +51,16 @@ const App = () => {
     setShowRealApp(true);
   }
 
+  const REACT_APP_ZONE = process.env.REACT_APP_ZONE;
+
   if (showRealApp) {
     return <AppContainer style={{flex: 1, flexGrow: 1}} />;
   } else {
-    return <Onboarding onDone={_onDone} slides={localBoarding} />;
+    if (REACT_APP_ZONE === 'aime') {
+      return <AimeOnboarding onDone={_onDone} />;
+    } else {
+      return <Onboarding onDone={_onDone} slides={localBoarding} />;
+    }
   }
 };
 
