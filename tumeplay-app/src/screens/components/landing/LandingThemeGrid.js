@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import ThemeCard from '../content/ThemeCard';
 import _ from 'lodash';
@@ -10,7 +10,8 @@ LandingThemeGrid.propTypes = {
 };
 
 export default function LandingThemeGrid(props) {
-  const numColumns = 2;
+  const screenWidth = Math.round(Dimensions.get('window').width);
+  const numColumns = screenWidth <= 450 ? 1 : 2;
 
   return (
     <FlatList
