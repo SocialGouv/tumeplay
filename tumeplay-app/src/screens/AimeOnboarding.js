@@ -9,10 +9,10 @@ const AimeOnboarding = ({onDone}) => {
     <View style={{flex: 1, height: '100%', paddingVertical: 20}}>
       <Text style={styles.title}>Bienvenue sur Aime,</Text>
       <Text style={styles.subtitle}>
-        L'application sur la santé sexuelle qui te permetde mieux comprendre ton
-        corps et les relations amoureuses en France
+        L'application sur la santé sexuelle qui te permet de mieux comprendre
+        ton corps et les relations amoureuses en France
       </Text>
-      <Image source={img} style={styles.image} h={30} />
+      <Image source={img} style={styles.image} />
       <TouchableOpacity
         style={[Styles.tunnelButton, styles.button]}
         onPress={onDone}>
@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
   },
   image: {
     marginBottom: 30,
-    objectFit: 'contain',
+    width: '70%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });
 
