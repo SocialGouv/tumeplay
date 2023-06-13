@@ -11,6 +11,8 @@ import {Image, Alert} from 'react-native';
 import Event from '../services/api/matomo';
 import Journey2 from '../views/Journey2';
 import GameChoice from '../views/GameChoice';
+import Settings from '../views/Settings';
+import Menu from '../views/Menu';
 
 const Tab = createBottomTabNavigator();
 
@@ -79,37 +81,14 @@ const Navbar = ({navigation}) => {
           },
         }}
       />
-
       <Tab.Screen
-        name="Kit"
-        component={Box}
-        listeners={{
-          tabPress: e => {
-            if (user.credits <= 0 || !user.isUnder25) {
-              if (!user.isUnder25) {
-                Alert.alert(
-                  "La commande de kit n'est pas disponible",
-                  'Vous devez avoir moins de 25 ans pour commander un kit',
-                );
-              }
-              e.preventDefault();
-            } else {
-              Event.orderPageEvent('navbarOrderButton');
-            }
-          },
-        }}
+        name="Réglages"
+        component={Menu}
         options={{
-          tabBarIcon: ({size, color, focused}) => {
-            let tmpColor = focused ? color : Colors.grey;
-            return (
-              <MaterialIcons
-                name="card-giftcard"
-                color={tmpColor}
-                size={size}
-              />
-            );
+          tabBarIcon: options => {
+            const {size, color} = options;
+            return <MaterialIcons name="settings" color={color} size={size} />;
           },
-          tabBarBadge: user.credits > 0 ? user.credits : null,
         }}
       />
     </Tab.Navigator>
