@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import React from 'react';
 import Text from '../components/Text';

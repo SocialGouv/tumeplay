@@ -12,9 +12,6 @@ const SponsorCard = ({navigation}) => {
       <Icon name="redeem" size={40} color="#000" style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Parraine tes amis</Text>
-        <Text style={styles.description}>
-          Parraine au moins 3 de tes amis pour gagner 1 kit !
-        </Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('Sponsorship')}>
         <Icon name="chevron-right" size={40} color="#000" />
