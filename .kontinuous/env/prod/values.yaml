@@ -1,27 +1,23 @@
-app-backend:
+backend:
   host: backend-tumeplay.fabrique.social.gouv.fr
-  certSecretName: backend-crt
 
-app-frontend-metropole:
+frontend-metropole:
   host: tumeplay.fabrique.social.gouv.fr
   redirectFrom:
     - metropole-tumeplay.fabrique.social.gouv.fr
 
-app-frontend-guyane:
+frontend-guyane:
   host: guyane-tumeplay.fabrique.social.gouv.fr
-  certSecretName: guyane-crt
   redirectFrom:
     - guyane.tumeplay.fabrique.social.gouv.fr
 
-app-frontend-aime:
+frontend-aime:
   host: aime-tumeplay.fabrique.social.gouv.fr
-  certSecretName: aime-crt
   redirectFrom:
     - aime.tumeplay.fabrique.social.gouv.fr
 
-app-dashboard:
+dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
-  certSecretName: dashboard-crt
 
 metabase:
   enabled: true
@@ -32,3 +28,17 @@ metabase:
         name: metabase-pg-user
     - configMapRef:
         name: metabase-configmap
+
+jobs:
+  runs:
+    build-frontend-guyane:
+      with:
+        buildArgs:
+          buildenv: preprod.guyane
+          REACT_APP_MATOMO_ID: "45"
+          
+    build-frontend-aime:
+      with:
+        buildArgs:
+          buildenv: preprod.aime
+          
