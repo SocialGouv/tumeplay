@@ -46,7 +46,7 @@ backend:
 
 frontend-metropole:
   ~chart: app
-  ~needs: [build-frontend-metropole]
+  ~needs: [build-frontend-metropole,backend]
   imagePackage: frontend-metropole
   containerPort: 3000
   host: "{{ $.Values.global.host }}"
