@@ -50,7 +50,7 @@ frontend-metropole:
   imagePackage: frontend-metropole
   containerPort: 3000
   host: "{{ $.Values.global.host }}"
-  probesPath: /
+  probesPath: /api/health
 
 frontend-guyane:
   ~chart: app
