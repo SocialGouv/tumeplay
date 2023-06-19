@@ -15,28 +15,29 @@ ENV PATH $NODE_HOME/bin:$PATH
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
 RUN npm i -g yarn
 
-RUN apt-get update
-RUN apt-get install -y libnss3 ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 \
+RUN apt-get update && apt-get install -y libnss3 ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 \
   libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 \
   libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
-  libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
+  libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils && \
+  rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-
-COPY . .
-
-RUN yarn install --production --frozen-lockfile --prefer-offline
-RUN yarn cache clean
-
-ENV NODE_ENV production
-
-RUN yarn build
+RUN adduser --uid 1001 strapi
 
 EXPOSE 1337
 
-RUN adduser --uid 1001 strapi && \
-    chown -R strapi:strapi /app
 USER 1001
 
+WORKDIR /app
 
 CMD ["yarn", "start"]
+
+COPY --chown=1001:1001 package.json yarn.lock ./
+
+RUN yarn install --production --frozen-lockfile --prefer-offline && \
+  yarn cache clean
+
+ENV NODE_ENV production
+
+COPY --chown=1001:1001 . .
+
+RUN yarn build
