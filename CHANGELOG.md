@@ -1,3 +1,19 @@
+# [1.161.0](https://github.com/SocialGouv/Tumeplay/compare/v1.160.3...v1.161.0) (2023-06-19)
+
+
+### Bug Fixes
+
+* broken/unmaintained strapi image ([1160b8b](https://github.com/SocialGouv/Tumeplay/commit/1160b8b6ede6b6ad11578138f3ced42e5d7e53e7))
+* frontend probe ([142116d](https://github.com/SocialGouv/Tumeplay/commit/142116d8d84b2dc865764fb23d7c55527aa242ee))
+* needs frontend-metropole need backend strapi ([64c77b9](https://github.com/SocialGouv/Tumeplay/commit/64c77b99ed359589a660dfb7a1b095071ebc87a4))
+* optimize strapi dockerfile ([83cd690](https://github.com/SocialGouv/Tumeplay/commit/83cd690bc3ab765376fd1b0603027c1e8b9ab4e5))
+* optimize strapi dockerfile multistage ([5e0ed74](https://github.com/SocialGouv/Tumeplay/commit/5e0ed749c4dc0f474c362c97cd74608c92c285cb))
+
+
+### Features
+
+* ci on kontinuous ([dc31a3c](https://github.com/SocialGouv/Tumeplay/commit/dc31a3cb895d9ec68ed84f3b7a19f0e2742fcd53))
+
 ## [1.160.3](https://github.com/SocialGouv/Tumeplay/compare/v1.160.2...v1.160.3) (2022-11-29)
 
 
