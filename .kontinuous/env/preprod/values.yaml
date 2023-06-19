@@ -11,4 +11,4 @@ jobs:
     build-frontend-aime:
       with:
         buildArgs:
-          buildenv: preprod
+          buildenv: preprod.aime
