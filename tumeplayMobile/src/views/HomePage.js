@@ -81,8 +81,8 @@ const HomePage = ({navigation}) => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         scrollEnabledWithZoomedin={false}
-        allowsFullscreenVideo={false}
-        allowsInlineMediaPlayback={false}
+        // allowsFullscreenVideo={false}
+        allowsInlineMediaPlayback={true}
         androidHardwareAccelerationDisabled={false}
         mixedContentMode="always"
         source={{
@@ -138,16 +138,6 @@ const HomePage = ({navigation}) => {
           <Icon name="search" size={30} />
         </TouchableOpacity>
         <Title />
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() =>
-            navigation.navigate('Menu', {
-              user: user,
-            })
-          }>
-          <Icon name="more-horiz" size={30} />
-          <Text>Menu</Text>
-        </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}
           onPress={() => navigation.navigate('Parcours')}
@@ -184,7 +174,7 @@ const HomePage = ({navigation}) => {
         <View style={styles.carouselContainer}>
           <Carousel
             data={tiktokHtmls}
-            renderItem={video}
+            renderItem={item => video(item)}
             sliderWidth={config.deviceWidth}
             itemWidth={200}
             keyExtractor={item => item.title}
