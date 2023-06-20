@@ -72,16 +72,16 @@ const HomePage = ({navigation}) => {
         // container.style.display = 'block'`}
         style={styles.webview}
         javaScriptEnabled={true}
-        // scalesPageToFit={true}
+        scalesPageToFit={true}
         // viewportContent={`width=${
         //   Dimensions.get('window').width
         // }, user-scalable=yes`}
-        // onShouldStartLoadWithRequest={this.openExternalLink}
+        onShouldStartLoadWithRequest={this.openExternalLink}
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         scrollEnabledWithZoomedin={false}
-        // allowsFullscreenVideo={false}
+        allowsFullscreenVideo={false}
         allowsInlineMediaPlayback={true}
         androidHardwareAccelerationDisabled={false}
         mixedContentMode="always"
