@@ -1,3 +1,10 @@
+## [1.161.2](https://github.com/SocialGouv/Tumeplay/compare/v1.161.1...v1.161.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* auto open tiktok on page ([#470](https://github.com/SocialGouv/Tumeplay/issues/470)) ([c2c7adc](https://github.com/SocialGouv/Tumeplay/commit/c2c7adcfc30ca8784f4dc2e5a7bd9d4397e6f644))
+
 ## [1.161.1](https://github.com/SocialGouv/Tumeplay/compare/v1.161.0...v1.161.1) (2023-06-19)
 
 
