@@ -92,12 +92,12 @@ const Copilot = props => {
       text: 'Observe ta progression dans le jeu et quel niveau te permet de débloquer un kit',
     },
     {
-      name: 'Kits',
+      name: 'Centres',
       zone: 5,
       shape: 'circle',
-      component: <Text style={styles.text}>Kits</Text>,
-      icon: <MaterialIcons name="card-giftcard" size={25} color="black" />,
-      text: 'Et enfin, retrouve les kits que tu as débloqués et passe commande pour te faire livrer',
+      component: <Text style={styles.text}>Centres</Text>,
+      icon: <MaterialIcons name="map" size={25} color="black" />,
+      text: 'Et enfin, retrouve les centres de santé près de chez toi',
     },
   ];
 

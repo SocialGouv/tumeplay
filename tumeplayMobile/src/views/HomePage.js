@@ -145,8 +145,7 @@ const HomePage = ({navigation}) => {
               user: user,
             })
           }>
-          <Icon name="more-horiz" size={30} />
-          <Text>Menu</Text>
+          <Icon name="settings" size={30} />
         </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}
