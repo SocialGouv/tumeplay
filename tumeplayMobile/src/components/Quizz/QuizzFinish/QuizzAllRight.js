@@ -27,17 +27,23 @@ const QuizzAllRight = ({navigation, theme}) => {
       </Text>
       <View style={styles.bottomContainer}>
         {!user.pending_module ? (
-          <Button
-            icon={true}
-            text={'Je continue'}
-            size={'large'}
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate('ModuleList', {
-                theme: theme,
-              })
-            }
-          />
+          <>
+            {/* <TouchableOpacity
+              onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
+              <Text style={styles.text}>Non, pas tout de suite</Text>
+            </TouchableOpacity> */}
+            <Button
+              icon={true}
+              text={'Je continue'}
+              size={'large'}
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate('ModuleList', {
+                  theme: theme,
+                })
+              }
+            />
+          </>
         ) : (
           <ActivityIndicator size="large" color={Colors.primary} />
         )}
