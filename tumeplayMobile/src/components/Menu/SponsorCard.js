@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   icon: {
-    alignSelf: 'flex-start',
     marginRight: 10,
   },
 });
