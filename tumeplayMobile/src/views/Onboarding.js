@@ -31,7 +31,7 @@ export default function Onboarding({user, setUser}) {
     {
       title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
       img: '🎉',
-      html: "Grâce aux badges remportés, joue, accumule des récompenses, et <span style='color:red;'> commande gratuitement un kit</span> de ton choix ...",
+      html: 'Grâce aux badges remportés, joue, accumule des récompenses',
     },
   ]);
 
