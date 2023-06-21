@@ -3,17 +3,16 @@ import {Platform, StyleSheet} from 'react-native';
 import {WebView} from 'react-native-webview';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import config from '../../config';
 
 const HealthCenter = () => {
   const webViewRef = useRef(null);
   const mapStyle = () => {
     const script = `
-        const meta = document.createElement('meta');
-    meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
-    meta.setAttribute('name', 'viewport');
-    document.head.appendChild(meta);
+      const meta = document.createElement('meta');
+      meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
+      meta.setAttribute('name', 'viewport');
+      document.head.appendChild(meta);
       var elements = document.getElementsByClassName('descriptif-bas');
       if (elements.length > 0) {
         elements[0].style.display = 'none';
