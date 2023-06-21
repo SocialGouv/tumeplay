@@ -81,7 +81,7 @@ const Copilot = props => {
       shape: 'circle',
       component: <Text style={[styles.text, {paddingTop: 24}]}>Jouer</Text>,
       icon: <Image source={diceIcon} style={styles.diceIcon} />,
-      text: 'Accède directement au jeu, réponds aux question et débloque l’accès aux kits',
+      text: 'Accède directement au jeu et réponds aux questions',
     },
     {
       name: 'Parcours',
@@ -89,15 +89,15 @@ const Copilot = props => {
       shape: 'circle',
       component: <Text style={styles.text}>Parcours</Text>,
       icon: <MaterialIcons name="timeline" size={25} color="black" />,
-      text: 'Observe ta progression dans le jeu et quel niveau te permet de débloquer un kit',
+      text: 'Observe ta progression dans le jeu et relève les défis',
     },
     {
-      name: 'Kits',
+      name: 'Paramètres',
       zone: 5,
       shape: 'circle',
-      component: <Text style={styles.text}>Kits</Text>,
-      icon: <MaterialIcons name="card-giftcard" size={25} color="black" />,
-      text: 'Et enfin, retrouve les kits que tu as débloqués et passe commande pour te faire livrer',
+      component: <Text style={styles.text}>Paramètres</Text>,
+      icon: <MaterialIcons name="settings" size={25} color="black" />,
+      text: 'Et enfin, retrouve les réglages de ton profil',
     },
   ];
 
