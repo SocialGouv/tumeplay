@@ -1,3 +1,10 @@
+# [1.162.0](https://github.com/SocialGouv/Tumeplay/compare/v1.161.2...v1.162.0) (2023-06-21)
+
+
+### Features
+
+* remove kit redirections + add settings to navbar ([#468](https://github.com/SocialGouv/Tumeplay/issues/468)) ([8a972eb](https://github.com/SocialGouv/Tumeplay/commit/8a972eb54657af6a7d0d96b879b08590bb1540de))
+
 ## [1.161.2](https://github.com/SocialGouv/Tumeplay/compare/v1.161.1...v1.161.2) (2023-06-20)
 
 
