@@ -9,9 +9,6 @@ const SponsorshipTextInfos = () => {
       <Icon name="redeem" size={50} style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Parraine tes amis</Text>
-        <Text style={styles.description}>
-          Parraine au moins 3 de tes amis pour gagner 1 kit !
-        </Text>
       </View>
     </View>
   );

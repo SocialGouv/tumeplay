@@ -75,7 +75,6 @@ const Navbar = ({navigation}) => {
           },
         }}
       />
-
       <Tab.Screen
         name="Centres"
         component={HealthCenter}

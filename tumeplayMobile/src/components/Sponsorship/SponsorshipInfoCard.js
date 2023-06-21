@@ -26,10 +26,10 @@ const SponsorshipInfoCard = ({sponsor_code}) => {
         <Text style={styles.greyText}>Tu as parrainé</Text>
         <Text style={styles.blackText}>{numberOfSponsors} / 3</Text>
       </View>
-      <View style={styles.textContainer}>
+      {/* <View style={styles.textContainer}>
         <Text style={styles.greyText}>1 kit à gagner</Text>
         <Text style={styles.blackText}>{numberOfSponsors >= 3 ? 1 : 0}</Text>
-      </View>
+      </View> */}
     </View>
   );
 };

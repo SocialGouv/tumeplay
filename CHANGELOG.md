@@ -1,3 +1,33 @@
+## [1.161.2](https://github.com/SocialGouv/Tumeplay/compare/v1.161.1...v1.161.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* auto open tiktok on page ([#470](https://github.com/SocialGouv/Tumeplay/issues/470)) ([c2c7adc](https://github.com/SocialGouv/Tumeplay/commit/c2c7adcfc30ca8784f4dc2e5a7bd9d4397e6f644))
+
+## [1.161.1](https://github.com/SocialGouv/Tumeplay/compare/v1.161.0...v1.161.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* buildenv preprod.aime ([2410164](https://github.com/SocialGouv/Tumeplay/commit/2410164684dfcb7d0503bee8c8bda6ad98e32e7e))
+
+# [1.161.0](https://github.com/SocialGouv/Tumeplay/compare/v1.160.3...v1.161.0) (2023-06-19)
+
+
+### Bug Fixes
+
+* broken/unmaintained strapi image ([1160b8b](https://github.com/SocialGouv/Tumeplay/commit/1160b8b6ede6b6ad11578138f3ced42e5d7e53e7))
+* frontend probe ([142116d](https://github.com/SocialGouv/Tumeplay/commit/142116d8d84b2dc865764fb23d7c55527aa242ee))
+* needs frontend-metropole need backend strapi ([64c77b9](https://github.com/SocialGouv/Tumeplay/commit/64c77b99ed359589a660dfb7a1b095071ebc87a4))
+* optimize strapi dockerfile ([83cd690](https://github.com/SocialGouv/Tumeplay/commit/83cd690bc3ab765376fd1b0603027c1e8b9ab4e5))
+* optimize strapi dockerfile multistage ([5e0ed74](https://github.com/SocialGouv/Tumeplay/commit/5e0ed749c4dc0f474c362c97cd74608c92c285cb))
+
+
+### Features
+
+* ci on kontinuous ([dc31a3c](https://github.com/SocialGouv/Tumeplay/commit/dc31a3cb895d9ec68ed84f3b7a19f0e2742fcd53))
+
 ## [1.160.3](https://github.com/SocialGouv/Tumeplay/compare/v1.160.2...v1.160.3) (2022-11-29)
 
 

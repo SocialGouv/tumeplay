@@ -23,15 +23,15 @@ const QuizzAllRight = ({navigation, theme}) => {
       <Text style={styles.subtitle}>Bravo</Text>
       <Image source={thumbsup} style={styles.imageThumb} />
       <Text style={styles.description}>
-        Aucune mauvaise réponse dans cette série de questions :)
+        Aucune mauvaise réponse dans cette série de questions {':)'}
       </Text>
       <View style={styles.bottomContainer}>
         {!user.pending_module ? (
           <>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => navigation.navigate('Home', {screen: 'Parcours'})}>
               <Text style={styles.text}>Non, pas tout de suite</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Button
               icon={true}
               text={'Je continue'}
