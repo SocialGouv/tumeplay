@@ -12,13 +12,22 @@ const HealthCenter = props => {
       if (elements.length > 0) {
         elements[0].style.display = 'none';
       }
+      var controlElement = document.getElementsByClassName('leaflet-top');
+      if (controlElement.length > 0) {
+        controlElement[0].style.top = '50%';
+      }
+
       var filterElement = document.getElementsByClassName('dialog-off-canvas-main-canvas');
       if (filterElement.length > 0) {
         var nestedElements = filterElement[0].getElementsByClassName('filter');
         if (nestedElements.length > 0) {
           nestedElements[0].style.background = '#FBF7F2';
-          nestedElements[0].style.margin = "0"
-          nestedElements[0].style.padding = "15px 0"
+          nestedElements[0].style.margin = "0";
+          nestedElements[0].style.paddingTop = "15px";
+          nestedElements[0].style.position = "fixed"
+          nestedElements[0].style.top = "0";
+          nestedElements[0].style.zIndex = "999"
+          nestedElements[0].style.width = "100%"
         }
       }
     `;
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingTop: 21,
   },
-  iframeStyle: {flex: 1, height: 920, marginTop: 20},
+  iframeStyle: {flex: 1, height: 500, marginTop: 20},
 });
 
 export default HealthCenter;
