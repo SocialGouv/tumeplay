@@ -92,12 +92,12 @@ const Copilot = props => {
       text: 'Observe ta progression dans le jeu et relève les défis',
     },
     {
-      name: 'Paramètres',
+      name: 'Centres',
       zone: 5,
       shape: 'circle',
-      component: <Text style={styles.text}>Paramètres</Text>,
-      icon: <MaterialIcons name="settings" size={25} color="black" />,
-      text: 'Et enfin, retrouve les réglages de ton profil',
+      component: <Text style={styles.text}>Centres</Text>,
+      icon: <MaterialIcons name="map" size={25} color="black" />,
+      text: 'Et enfin, retrouve les centres de santé près de chez toi',
     },
   ];
 

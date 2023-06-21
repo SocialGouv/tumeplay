@@ -138,6 +138,15 @@ const HomePage = ({navigation}) => {
           <Icon name="search" size={30} />
         </TouchableOpacity>
         <Title />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() =>
+            navigation.navigate('Menu', {
+              user: user,
+            })
+          }>
+          <Icon name="settings" size={30} />
+        </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}
           onPress={() => navigation.navigate('Parcours')}
