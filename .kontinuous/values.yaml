@@ -1,0 +1,132 @@
+backend:
+  ~chart: app
+  ~needs: [build-backend]
+  host: "backend-{{ $.Values.global.host }}"
+  imagePackage: backend
+  containerPort: 1337
+  probesPath: /_health
+  resources:
+    requests:
+      cpu: 0.3
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  env:
+    - name: DATABASE_CLIENT
+      value: "postgres"
+    - name: DATABASE_NAME
+      value: "$(PGDATABASE)"
+    - name: DATABASE_HOST
+      value: "$(PGHOST)"
+    - name: DATABASE_PORT
+      value: "$(PGPORT)"
+    - name: DATABASE_USERNAME
+      value: "$(PGUSER)"
+    - name: DATABASE_PASSWORD
+      value: "$(PGPASSWORD)"
+    - name: DATABASE_SSL
+      value: "true"
+  envFrom:
+    - secretRef:
+        name: pg-user
+    - secretRef:
+        name: backend-sealed-secret
+    - secretRef:
+        name: azure-tumeplay-volume
+    - configMapRef:
+        name: backend-configmap
+  volumeMounts:
+    - name: uploads
+      mountPath: /app/public/uploads
+  volumes:
+    - name: uploads
+      persistentVolumeClaim:
+        claimName: uploads
+
+frontend-metropole:
+  ~chart: app
+  ~needs: [build-frontend-metropole,backend]
+  imagePackage: frontend-metropole
+  containerPort: 3000
+  host: "{{ $.Values.global.host }}"
+  probesPath: /api/health
+
+frontend-guyane:
+  ~chart: app
+  ~needs: [build-frontend-guyane]
+  imagePackage: frontend-guyane
+  containerPort: 8080
+  host: "guyane-{{ $.Values.global.host }}"
+
+frontend-aime:
+  ~chart: app
+  ~needs: [build-frontend-aime]
+  imagePackage: frontend-aime
+  containerPort: 8080
+  host: "aime-{{ $.Values.global.host }}"
+
+dashboard:
+  ~chart: app
+  ~needs: [build-dashboard]
+  host: "dashboard-{{ $.Values.global.host }}"
+  imagePackage: dashboard
+  containerPort: 8080
+
+metabase:
+  ~chart: metabase
+  enabled: false
+
+jobs:
+  ~chart: jobs
+  runs:
+    build-backend:
+      use: build
+      with:
+        imagePackage: backend
+        context: back-strapi
+
+    build-frontend-guyane:
+      use: build
+      with:
+        imagePackage: frontend-guyane
+        context: tumeplay-app
+        buildArgs:
+          REACT_APP_MATOMO_ID: "49"
+          REACT_APP_ZONE: guyane
+          REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
+          REACT_APP_OTHER_ZONE_URL: https://{{ .Values.global.host }}
+          
+    build-frontend-aime:
+      use: build
+      with:
+        imagePackage: frontend-aime
+        context: tumeplay-app
+        buildArgs:
+          REACT_APP_MATOMO_ID: "78"
+          REACT_APP_ZONE: aime
+          REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
+          REACT_APP_OTHER_ZONE_URL: https://{{ .Values.global.host }}
+          
+    build-frontend-metropole:
+      use: build
+      with:
+        imagePackage: frontend-metropole
+        context: tumeplay-vitrine
+        buildArgs:
+          NEXT_PUBLIC_STRAPI_URL: https://backend-{{ .Values.global.host }}
+
+    build-dashboard:
+      use: build
+      with:
+        imagePackage: dashboard
+        context: tumeplay-dashboard
+        buildArgs:
+          REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
+
+deactivate:
+  jobs-deactivate:
+    runs:
+      deactivate:
+        with:
+          db: true

@@ -1,5 +1,5 @@
-app-backend:
-  needs: [db]
+backend:
+  ~needs: [build-backend,db]
   volumes:
     - name: uploads
       emptyDir: {}
@@ -16,7 +16,15 @@ app-backend:
 
 jobs:
   runs:
-    - name: db
-      use: SocialGouv/kube-workflow/jobs/create-db@v1
+    db:
+      use: create-db
+
+    build-frontend-guyane:
       with:
-        pgAdminSecretRefName: azure-pg-admin-user
+        buildArgs:
+          buildenv: dev.guyane
+          
+    build-frontend-aime:
+      with:
+        buildArgs:
+          buildenv: dev.aime

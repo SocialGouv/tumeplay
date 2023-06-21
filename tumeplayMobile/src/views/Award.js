@@ -29,8 +29,9 @@ const Award = props => {
             <Text style={styles.textLevel}>
               Niveau {user.level - 1} terminé
             </Text>
-            <Text style={styles.textAward}>Tu as gagné une récompense </Text>
-            <Image style={styles.giftImg} source={gift} />
+            <Text style={styles.textAward}>
+              Découvrez d'autres défis sur le parcours de santé sexuelle.
+            </Text>
           </>
         ) : (
           <>
@@ -41,40 +42,28 @@ const Award = props => {
             </Text>
             <Text style={styles.question}>Que souhaites-tu faire ?</Text>
             <Button
-              text={'Commande ton kit'}
+              text={'Je continue'}
               size={'medium'}
               style={styles.buttonContent}
               icon
               left={false}
               onPress={() => {
-                Event.orderPageEvent('quizzOrderButton');
-                navigation.navigate('Home', {screen: 'Kit'});
+                navigation.navigate('Home', {screen: 'Parcours'});
               }}
             />
           </>
         )}
       </View>
-      {!user.hasFinished ? (
-        <Button
-          text={'Commande ton kit'}
-          size={'large'}
-          style={styles.button}
-          icon={true}
-          onPress={() => {
-            navigation.navigate('Home', {screen: 'Kit'});
-          }}
-        />
-      ) : (
-        <Button
-          text="Rejouer"
-          size="medium"
-          icon
-          special
-          onPress={() => {
-            navigation.navigate('Home', {screen: 'Parcours'});
-          }}
-        />
-      )}
+
+      <Button
+        text={'Je continue'}
+        size={'large'}
+        style={styles.button}
+        icon={true}
+        onPress={() => {
+          navigation.navigate('Home', {screen: 'Parcours'});
+        }}
+      />
     </Container>
   );
 };

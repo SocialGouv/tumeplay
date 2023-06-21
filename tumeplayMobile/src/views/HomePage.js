@@ -72,17 +72,17 @@ const HomePage = ({navigation}) => {
         // container.style.display = 'block'`}
         style={styles.webview}
         javaScriptEnabled={true}
-        // scalesPageToFit={true}
+        scalesPageToFit={true}
         // viewportContent={`width=${
         //   Dimensions.get('window').width
         // }, user-scalable=yes`}
-        // onShouldStartLoadWithRequest={this.openExternalLink}
+        onShouldStartLoadWithRequest={this.openExternalLink}
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         scrollEnabledWithZoomedin={false}
         allowsFullscreenVideo={false}
-        allowsInlineMediaPlayback={false}
+        allowsInlineMediaPlayback={true}
         androidHardwareAccelerationDisabled={false}
         mixedContentMode="always"
         source={{
@@ -183,7 +183,7 @@ const HomePage = ({navigation}) => {
         <View style={styles.carouselContainer}>
           <Carousel
             data={tiktokHtmls}
-            renderItem={video}
+            renderItem={item => video(item)}
             sliderWidth={config.deviceWidth}
             itemWidth={200}
             keyExtractor={item => item.title}

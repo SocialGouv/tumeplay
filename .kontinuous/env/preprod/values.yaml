@@ -1,0 +1,14 @@
+dashboard:
+  host: "bo-tumeplay-preprod.dev.fabrique.social.gouv.fr"
+
+jobs:
+  runs:
+    build-frontend-guyane:
+      with:
+        buildArgs:
+          buildenv: preprod.guyane
+          
+    build-frontend-aime:
+      with:
+        buildArgs:
+          buildenv: preprod.aime

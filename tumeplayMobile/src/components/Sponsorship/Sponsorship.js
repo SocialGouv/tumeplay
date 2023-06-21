@@ -19,7 +19,7 @@ const Sponsorship = ({route}) => {
     if (path === 'Order') {
       navigation.navigate('OrderFinalStep');
     } else {
-      navigation.navigate('Menu');
+      navigation.goBack();
     }
   };
 

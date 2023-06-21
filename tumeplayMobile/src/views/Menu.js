@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Container from '../components/global/Container';
 import React from 'react';
 import Text from '../components/Text';
@@ -12,12 +12,6 @@ const Menu = () => {
   const navigation = useNavigation();
   return (
     <Container style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}>
-        <Icon name="close" size={25} />
-        <Text>Fermer</Text>
-      </TouchableOpacity>
       <SponsorCard navigation={navigation} />
       <View style={styles.linkContainer}>
         <LinkOpenner
