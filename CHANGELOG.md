@@ -1,3 +1,10 @@
+# [1.163.0](https://github.com/SocialGouv/Tumeplay/compare/v1.162.0...v1.163.0) (2023-06-21)
+
+
+### Features
+
+* health center map ([#471](https://github.com/SocialGouv/Tumeplay/issues/471)) ([ef894a8](https://github.com/SocialGouv/Tumeplay/commit/ef894a865293220d08edfb01869c617acf561678))
+
 # [1.162.0](https://github.com/SocialGouv/Tumeplay/compare/v1.161.2...v1.162.0) (2023-06-21)
 
 
