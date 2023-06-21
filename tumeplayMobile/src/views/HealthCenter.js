@@ -4,7 +4,7 @@ import {WebView} from 'react-native-webview';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
 
-const HealthCenter = props => {
+const HealthCenter = () => {
   const webViewRef = useRef(null);
   const mapStyle = () => {
     const script = `

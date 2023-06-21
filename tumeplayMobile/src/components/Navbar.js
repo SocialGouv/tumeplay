@@ -1,14 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomePage from '../views/HomePage';
 import Thematiques from '../views/Thematiques';
-import Box from '../views/Box';
 import {Colors} from '../styles/Style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AppContext from '../../AppContext';
 import diceIcon from '../assets/diceIcon.png';
-import {Image, Alert} from 'react-native';
-import Event from '../services/api/matomo';
+import {Image} from 'react-native';
 import Journey2 from '../views/Journey2';
 import GameChoice from '../views/GameChoice';
 import HealthCenter from '../views/HealthCenter';
@@ -16,8 +13,6 @@ import HealthCenter from '../views/HealthCenter';
 const Tab = createBottomTabNavigator();
 
 const Navbar = ({navigation}) => {
-  const {user} = useContext(AppContext);
-
   return (
     <Tab.Navigator
       initialRouteName="Accueil"
