@@ -1,13 +1,19 @@
 import React, {useRef} from 'react';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {WebView} from 'react-native-webview';
 import Container from '../components/global/Container';
 import Title from '../components/Title';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import config from '../../config';
 
 const HealthCenter = () => {
   const webViewRef = useRef(null);
   const mapStyle = () => {
     const script = `
+        const meta = document.createElement('meta');
+    meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
+    meta.setAttribute('name', 'viewport');
+    document.head.appendChild(meta);
       var elements = document.getElementsByClassName('descriptif-bas');
       if (elements.length > 0) {
         elements[0].style.display = 'none';
@@ -34,13 +40,16 @@ const HealthCenter = () => {
     webViewRef.current.injectJavaScript(script);
   };
 
+  const size =
+    Platform.OS === 'ios' && config.deviceHeight >= 667 ? '650' : '500';
+
   return (
     <Container style={styles.container}>
       <Title title="Centres" />
       <WebView
         ref={webViewRef}
         source={{
-          uri: 'https://www.sante.fr/ressources/iframe-6734099?partenaire=Onsexprime&s=580&l=600&xl=600',
+          uri: `https://www.sante.fr/ressources/iframe-6734099?partenaire=Onsexprime&s=${size}&l=600&xl=600`,
         }}
         style={styles.iframeStyle}
         geolocationEnabled={true}
@@ -51,11 +60,8 @@ const HealthCenter = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    paddingTop: 21,
-  },
-  iframeStyle: {flex: 1, height: 500, marginTop: 20},
+  container: {flex: 1, backgroundColor: '#FBF7F2'},
+  iframeStyle: {flex: 1, minHeigt: '100%', marginTop: 20},
 });
 
 export default HealthCenter;
