@@ -41,8 +41,12 @@ const HomePage = ({navigation}) => {
 
   useEffect(() => {
     if (data && !loading) {
+      const shuffledContents = [...data.contents].sort(
+        () => Math.random() - 0.5,
+      );
+
       setFreshContents(
-        data.contents.map(c => {
+        shuffledContents.slice(0, 10).map(c => {
           let tmpContent = JSON.parse(JSON.stringify(c));
           tmpContent.image = {
             url: tmpContent.etiquette?.image?.url
@@ -166,7 +170,7 @@ const HomePage = ({navigation}) => {
             icon
           />
         </View>
-        <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
+        <Text style={styles.subtitle}> Contenus à la une</Text>
         <View style={styles.carouselContainer}>
           <Carousel
             data={freshContents}
