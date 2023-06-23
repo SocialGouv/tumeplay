@@ -39,18 +39,29 @@ const HomePage = ({navigation}) => {
     },
   });
 
+  const shuffleArray = array => {
+    const crypto = window.crypto || window.msCrypto;
+    const length = array.length;
+
+    for (let i = length - 1; i > 0; i--) {
+      const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+  };
+
   useEffect(() => {
     if (data && !loading) {
+      const shuffledContents = shuffleArray([...data.contents]);
+
       setFreshContents(
-        data.contents.map(c => {
-          let tmpContent = JSON.parse(JSON.stringify(c));
-          tmpContent.image = {
-            url: tmpContent.etiquette?.image?.url
-              ? tmpContent.etiquette?.image?.url
-              : tmpContent.image?.url,
-          };
-          return tmpContent;
-        }),
+        shuffledContents.slice(0, 10).map(c => ({
+          ...c,
+          image: {
+            url: c.etiquette?.image?.url || c.image?.url,
+          },
+        })),
       );
     }
   }, [data, loading, randomLevel]);
@@ -166,7 +177,7 @@ const HomePage = ({navigation}) => {
             icon
           />
         </View>
-        <Text style={styles.subtitle}> Derniers contenus ajoutés</Text>
+        <Text style={styles.subtitle}> Contenus à la une</Text>
         <View style={styles.carouselContainer}>
           <Carousel
             data={freshContents}
