@@ -1,3 +1,10 @@
+# [1.164.0](https://github.com/SocialGouv/Tumeplay/compare/v1.163.0...v1.164.0) (2023-06-23)
+
+
+### Features
+
+* display content randomly ([#472](https://github.com/SocialGouv/Tumeplay/issues/472)) ([59e7675](https://github.com/SocialGouv/Tumeplay/commit/59e767570d5f3fe0ddcf00aa67fa5871bf47478e))
+
 # [1.163.0](https://github.com/SocialGouv/Tumeplay/compare/v1.162.0...v1.163.0) (2023-06-21)
 
 
