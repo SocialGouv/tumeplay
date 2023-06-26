@@ -1,4 +1,4 @@
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Linking} from 'react-native';
 import Container from '../components/global/Container';
 import React from 'react';
 import Text from '../components/Text';
@@ -10,6 +10,10 @@ import LinkOpenner from '../components/global/LinkOpenner';
 
 const Menu = () => {
   const navigation = useNavigation();
+  const handleCall = () => {
+    const phoneNumber = '0800081111';
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
   return (
     <Container style={styles.container}>
       <TouchableOpacity
@@ -38,6 +42,19 @@ const Menu = () => {
           <Icon name="open-in-new" size={15} style={styles.icon} />
           <Text>Conditions Générales d'Utilisation</Text>
         </LinkOpenner>
+        <View style={styles.sosContainer}>
+          <TouchableOpacity style={styles.sosButton} onPress={handleCall}>
+            <Icon color="#ffffff" name="call" size={24} />
+            <Text style={styles.sosContent}>SOS Sexualité</Text>
+          </TouchableOpacity>
+          <Text style={styles.sosDescription}>
+            Sexualité / Contraception / IVG - 0 800 08 11 11 :
+          </Text>
+          <Text>
+            Numéro gratuit pour répondre à toutes les questions sur les
+            sexualités, la contraception et l’IVG.
+          </Text>
+        </View>
       </View>
     </Container>
   );
@@ -65,6 +82,31 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  sosContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  sosButton: {
+    flexDirection: 'row',
+    backgroundColor: '#000000',
+    borderRadius: 16,
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 10,
+    justifyContent: 'center',
+    color: 'white',
+    width: '50%',
+  },
+  sosContent: {
+    color: 'white',
+    paddingLeft: 10,
+    fontWeight: '600',
+  },
+  sosDescription: {
+    fontWeight: '600',
   },
 });
 
