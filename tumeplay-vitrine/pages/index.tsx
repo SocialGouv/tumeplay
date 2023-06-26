@@ -124,8 +124,6 @@ const Home = ({
       params.search = search;
     }
 
-    console.log(params);
-
     axios
       .get("/api/posts", { params })
       .then((response) => {
