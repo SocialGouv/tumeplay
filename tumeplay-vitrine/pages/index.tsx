@@ -124,8 +124,6 @@ const Home = ({
       params.search = search;
     }
 
-    console.log(params);
-
     axios
       .get("/api/posts", { params })
       .then((response) => {
@@ -286,6 +284,7 @@ const Home = ({
       <Container maxW="6xl" pt={5} role="main" aria-label="Content-Display">
         <Head>
           <title>Tumeplay</title>
+          <script src="//embed.typeform.com/next/embed.js"></script>
           <meta
             httpEquiv="Content-Security-Policy"
             content="default-src *  data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval';
