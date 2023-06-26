@@ -12,7 +12,14 @@ const Menu = () => {
   const navigation = useNavigation();
   const handleCall = () => {
     const phoneNumber = '0800081111';
-    Linking.openURL(`tel:${phoneNumber}`);
+    const dialNumber = `tel:${phoneNumber}`;
+
+    Linking.openURL(dialNumber).catch(error => {
+      console.log(
+        "Erreur lors de l'ouverture du composeur téléphonique:",
+        error,
+      );
+    });
   };
   return (
     <Container style={styles.container}>
