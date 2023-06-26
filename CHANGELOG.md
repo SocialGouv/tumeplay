@@ -1,3 +1,10 @@
+# [1.166.0](https://github.com/SocialGouv/Tumeplay/compare/v1.165.0...v1.166.0) (2023-06-26)
+
+
+### Features
+
+* updating yarn lock file ([2107651](https://github.com/SocialGouv/Tumeplay/commit/2107651d0d6f4a31cd6b567f6d5af99f6419e28d))
+
 # [1.165.0](https://github.com/SocialGouv/Tumeplay/compare/v1.164.0...v1.165.0) (2023-06-26)
 
 
