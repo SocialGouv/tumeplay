@@ -54,10 +54,10 @@ const Menu = () => {
             <Icon color="#ffffff" name="call" size={24} />
             <Text style={styles.sosContent}>SOS Sexualité</Text>
           </TouchableOpacity>
-          <Text style={styles.sosDescription}>
+          <Text style={styles.sosTitle}>
             Sexualité / Contraception / IVG - 0 800 08 11 11 :
           </Text>
-          <Text>
+          <Text style={styles.sosDescription}>
             Numéro gratuit pour répondre à toutes les questions sur les
             sexualités, la contraception et l’IVG.
           </Text>
@@ -112,8 +112,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontWeight: '600',
   },
-  sosDescription: {
+  sosTitle: {
     fontWeight: '600',
+  },
+  sosDescription: {
+    textAlign: 'center',
   },
 });
 
