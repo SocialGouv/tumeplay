@@ -12,7 +12,7 @@ import Event from '../services/api/matomo';
 const Menu = () => {
   const navigation = useNavigation();
   const handleCall = () => {
-    const phoneNumber = '0800081111';
+    const phoneNumber = '0800235236';
     const dialNumber = `tel:${phoneNumber}`;
 
     Linking.openURL(dialNumber).catch(error => {
