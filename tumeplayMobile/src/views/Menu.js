@@ -7,6 +7,7 @@ import SponsorCard from '../components/Menu/SponsorCard';
 import config from '../../config';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinkOpenner from '../components/global/LinkOpenner';
+import Event from '../services/api/matomo';
 
 const Menu = () => {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ const Menu = () => {
         error,
       );
     });
+    Event.sosButtonClickEvent();
   };
   return (
     <Container style={styles.container}>

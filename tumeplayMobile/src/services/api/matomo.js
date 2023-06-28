@@ -25,6 +25,9 @@ const Event = {
   orderConfirmEvent: label => {
     Matomo.trackEvent('Order', 'Confirm', label, 1);
   },
+  sosButtonClickEvent: label => {
+    Matomo.trackEvent('SOS_CALL', 'Clic', label, 1);
+  },
   quizzDone: () => {
     Matomo.trackScreen('/quizz-all-right', 'Quizz terminé');
   },
@@ -39,6 +42,6 @@ const Event = {
   },
   wheelThematicsSeen: label => {
     Matomo.trackEvent('Journey2', 'Thematique', label, 1);
-  },
+  }
 };
 export default Event;
