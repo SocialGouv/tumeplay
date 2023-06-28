@@ -57,7 +57,7 @@ const Menu = () => {
             <Text style={styles.sosContent}>SOS Sexualité</Text>
           </TouchableOpacity>
           <Text style={styles.sosTitle}>
-            Sexualité / Contraception / IVG - 0 800 08 11 11 :
+            Sexualité / Contraception / IVG - 0 800 235 236 :
           </Text>
           <Text style={styles.sosDescription}>
             Numéro gratuit pour répondre à toutes les questions sur les
