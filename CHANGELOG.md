@@ -1,3 +1,10 @@
+# [1.167.0](https://github.com/SocialGouv/Tumeplay/compare/v1.166.0...v1.167.0) (2023-07-18)
+
+
+### Features
+
+* add sos button in menu page ([#473](https://github.com/SocialGouv/Tumeplay/issues/473)) ([4725643](https://github.com/SocialGouv/Tumeplay/commit/47256430ebc553531640822ca9762c0e2526c48a))
+
 # [1.166.0](https://github.com/SocialGouv/Tumeplay/compare/v1.165.0...v1.166.0) (2023-06-26)
 
 
