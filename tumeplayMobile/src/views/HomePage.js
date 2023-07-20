@@ -146,7 +146,7 @@ const HomePage = ({navigation}) => {
           onPress={() => {
             navigation.navigate('Search');
           }}>
-          <Icon name="search" size={30} />
+          <Icon name="search" color="#000" size={30} />
         </TouchableOpacity>
         <Title />
         <TouchableOpacity
@@ -156,7 +156,7 @@ const HomePage = ({navigation}) => {
               user: user,
             })
           }>
-          <Icon name="settings" size={30} />
+          <Icon name="settings" color="#000" size={30} />
         </TouchableOpacity>
         <LevelPointsIndicator
           style={styles.levelIndicator}

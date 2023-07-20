@@ -28,7 +28,7 @@ const Menu = () => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.goBack()}>
-        <Icon name="close" size={25} />
+        <Icon name="close" color="#000" size={25} />
         <Text>Fermer</Text>
       </TouchableOpacity>
       <SponsorCard navigation={navigation} />
