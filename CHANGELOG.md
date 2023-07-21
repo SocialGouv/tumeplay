@@ -1,3 +1,10 @@
+# [1.169.0](https://github.com/SocialGouv/Tumeplay/compare/v1.168.0...v1.169.0) (2023-07-21)
+
+
+### Features
+
+* tracking version / spacing in menu ([872d7e8](https://github.com/SocialGouv/Tumeplay/commit/872d7e819a6e01cbf3975bcb3327c2342086c37a))
+
 # [1.168.0](https://github.com/SocialGouv/Tumeplay/compare/v1.167.0...v1.168.0) (2023-07-20)
 
 
