@@ -1,4 +1,10 @@
-import {StyleSheet, View, TouchableOpacity, Linking} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Linking,
+  Platform,
+} from 'react-native';
 import Container from '../components/global/Container';
 import React from 'react';
 import Text from '../components/Text';
@@ -10,6 +16,63 @@ import LinkOpenner from '../components/global/LinkOpenner';
 import Event from '../services/api/matomo';
 
 const Menu = () => {
+  const styles = StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+    },
+    button: {
+      position: 'absolute',
+      top:
+        Platform.OS === 'ios'
+          ? config.deviceHeight * 0.06
+          : config.deviceHeight * 0.04,
+      right: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    linkContainer: {
+      flex: 1,
+      width: '100%',
+      paddingHorizontal: 20,
+      marginVertical: 20,
+      justifyContent: 'flex-start',
+    },
+    icon: {
+      marginRight: 10,
+      color: '#000000',
+    },
+    sosContainer: {
+      marginTop: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+    },
+    sosButton: {
+      flexDirection: 'row',
+      backgroundColor: '#000000',
+      borderRadius: 16,
+      alignItems: 'center',
+      padding: 10,
+      marginBottom: 10,
+      justifyContent: 'center',
+      color: 'white',
+      width: '50%',
+    },
+    sosContent: {
+      color: 'white',
+      paddingLeft: 10,
+      fontWeight: '600',
+    },
+    sosTitle: {
+      fontWeight: '600',
+    },
+    sosDescription: {
+      textAlign: 'center',
+    },
+  });
+
   const navigation = useNavigation();
   const handleCall = () => {
     const phoneNumber = '0800235236';
@@ -68,58 +131,5 @@ const Menu = () => {
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-  },
-  button: {
-    position: 'absolute',
-    top: config.deviceHeight * 0.06,
-    right: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  linkContainer: {
-    flex: 1,
-    width: '100%',
-    paddingHorizontal: 20,
-    marginVertical: 20,
-    justifyContent: 'flex-start',
-  },
-  icon: {
-    marginRight: 10,
-  },
-  sosContainer: {
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  sosButton: {
-    flexDirection: 'row',
-    backgroundColor: '#000000',
-    borderRadius: 16,
-    alignItems: 'center',
-    padding: 10,
-    marginBottom: 10,
-    justifyContent: 'center',
-    color: 'white',
-    width: '50%',
-  },
-  sosContent: {
-    color: 'white',
-    paddingLeft: 10,
-    fontWeight: '600',
-  },
-  sosTitle: {
-    fontWeight: '600',
-  },
-  sosDescription: {
-    textAlign: 'center',
-  },
-});
 
 export default Menu;
