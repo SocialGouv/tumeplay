@@ -29,7 +29,7 @@ backend:
     - name: DATABASE_PASSWORD
       value: "$(PGPASSWORD)"
     - name: DATABASE_SSL
-      value: "true"
+      value: "false"
   envFrom:
     - secretRef:
         name: pg-app
