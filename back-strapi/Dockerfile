@@ -3,6 +3,8 @@ ARG NODE_VERSION=14.16.0
 
 FROM ubuntu:$UBUNTU_VERSION as node
 
+RUN chmod 1777 /tmp
+
 # install node
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \
@@ -36,8 +38,6 @@ COPY --chown=1001:1001 . .
 RUN yarn build
 
 FROM node as server
-
-RUN chmod 1777 /tmp
 
 RUN apt-get update && apt-get install -y libnss3 ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 \
   libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 \
