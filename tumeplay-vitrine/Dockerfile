@@ -1,10 +1,12 @@
-FROM node:lts as dependencies
+ARG NODE_VERSION=lts-alpine3.18@sha256:ef5e088232f803cadb83326edb4731015f42961d23a11510b109c2c98cfbb945
+
+FROM node:$NODE_VERSION as dependencies
 WORKDIR /app
 ARG PRODUCTION
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-FROM node:lts as builder
+FROM node:$NODE_VERSION as builder
 WORKDIR /app
 ARG PRODUCTION
 
@@ -19,7 +21,7 @@ COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN yarn build
 
-FROM node:lts as runner
+FROM node:$NODE_VERSION as runner
 WORKDIR /app
 ARG PRODUCTION
 ENV NODE_ENV production
