@@ -1,5 +1,18 @@
+pg:
+  ~chart: pg
+
 dashboard:
   host: "bo-tumeplay-preprod.dev.fabrique.social.gouv.fr"
+
+backend:
+  ~needs: [build-backend, pg]
+  envFrom:
+    - secretRef:
+        name: "pg-app"
+    - secretRef:
+        name: backend-sealed-secret
+    - configMapRef:
+        name: backend-configmap
 
 jobs:
   runs:
@@ -7,7 +20,7 @@ jobs:
       with:
         buildArgs:
           buildenv: preprod.guyane
-          
+
     build-frontend-aime:
       with:
         buildArgs:

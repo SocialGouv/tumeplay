@@ -1,9 +1,6 @@
-pg:
-  ~chart: pg
-
 backend:
   ~chart: app
-  ~needs: [build-backend, pg]
+  ~needs: [build-backend]
   host: "backend-{{ $.Values.global.host }}"
   imagePackage: backend
   containerPort: 1337
@@ -29,10 +26,10 @@ backend:
     - name: DATABASE_PASSWORD
       value: "$(PGPASSWORD)"
     - name: DATABASE_SSL
-      value: "false"
+      value: "true"
   envFrom:
     - secretRef:
-        name: pg-app
+        name: pg-user
     - secretRef:
         name: backend-sealed-secret
     - secretRef:
@@ -57,21 +54,21 @@ frontend-metropole:
 
 frontend-guyane:
   ~chart: app
-  ~needs: [build-frontend-guyane]
+  ~needs: [build-frontend-guyane, backend]
   imagePackage: frontend-guyane
   containerPort: 8080
   host: "guyane-{{ $.Values.global.host }}"
 
 frontend-aime:
   ~chart: app
-  ~needs: [build-frontend-aime]
+  ~needs: [build-frontend-aime, backend]
   imagePackage: frontend-aime
   containerPort: 8080
   host: "aime-{{ $.Values.global.host }}"
 
 dashboard:
   ~chart: app
-  ~needs: [build-dashboard]
+  ~needs: [build-dashboard, backend]
   host: "dashboard-{{ $.Values.global.host }}"
   imagePackage: dashboard
   containerPort: 8080
