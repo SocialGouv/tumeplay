@@ -1,3 +1,10 @@
+## [1.171.2](https://github.com/SocialGouv/Tumeplay/compare/v1.171.1...v1.171.2) (2023-08-08)
+
+
+### Bug Fixes
+
+* **k8s:** fix preprod url ([1afb47d](https://github.com/SocialGouv/Tumeplay/commit/1afb47d6dfa16de58d117faa4aea33baacdfc26b))
+
 ## [1.171.1](https://github.com/SocialGouv/Tumeplay/compare/v1.171.0...v1.171.1) (2023-08-08)
 
 
