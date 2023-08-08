@@ -1,5 +1,5 @@
 backend:
-  ~needs: [build-backend,db]
+  ~needs: [build-backend, pg]
   volumes:
     - name: uploads
       emptyDir: {}
@@ -8,7 +8,7 @@ backend:
       name: uploads
   envFrom:
     - secretRef:
-        name: "{{ $.Values.global.pgSecretName }}"
+        name: "pg-app"
     - secretRef:
         name: backend-sealed-secret
     - configMapRef:
@@ -16,14 +16,11 @@ backend:
 
 jobs:
   runs:
-    db:
-      use: create-db
-
     build-frontend-guyane:
       with:
         buildArgs:
           buildenv: dev.guyane
-          
+
     build-frontend-aime:
       with:
         buildArgs:
