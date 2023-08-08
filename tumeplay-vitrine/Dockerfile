@@ -49,6 +49,9 @@ COPY --from=builder /app/node_modules ./node_modules
 RUN if [ -z "$PRODUCTION" ]; then mv -f public/robots.staging.txt public/robots.txt; \
     else rm -f public/robots.staging.txt; fi
 
+RUN chmod 1777 /tmp
+RUN chmod 1777 /app
+
 USER 1001
 
 EXPOSE 3000

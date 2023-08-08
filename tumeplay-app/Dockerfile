@@ -34,4 +34,4 @@ RUN npm run build
 
 FROM ghcr.io/socialgouv/docker/nginx4spa:8.1.1
 
-COPY --from=builder /build /usr/share/nginx/html
+COPY --from=builder --chown=nginx:nginx  /build /usr/share/nginx/html
