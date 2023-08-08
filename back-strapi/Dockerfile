@@ -24,6 +24,8 @@ USER 1001
 
 WORKDIR /app
 
+RUN chmod 1777 /tmp
+
 COPY --chown=1001:1001 package.json yarn.lock ./
 
 RUN yarn install --production --frozen-lockfile --prefer-offline && \
