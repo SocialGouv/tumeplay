@@ -1,6 +1,9 @@
+pg:
+  ~chart: pg
+
 backend:
   ~chart: app
-  ~needs: [build-backend]
+  ~needs: [build-backend, pg]
   host: "backend-{{ $.Values.global.host }}"
   imagePackage: backend
   containerPort: 1337
@@ -26,10 +29,10 @@ backend:
     - name: DATABASE_PASSWORD
       value: "$(PGPASSWORD)"
     - name: DATABASE_SSL
-      value: "true"
+      value: "false"
   envFrom:
     - secretRef:
-        name: pg-user
+        name: pg-app
     - secretRef:
         name: backend-sealed-secret
     - secretRef:
@@ -46,7 +49,7 @@ backend:
 
 frontend-metropole:
   ~chart: app
-  ~needs: [build-frontend-metropole,backend]
+  ~needs: [build-frontend-metropole, backend]
   imagePackage: frontend-metropole
   containerPort: 3000
   host: "{{ $.Values.global.host }}"
@@ -96,7 +99,7 @@ jobs:
           REACT_APP_ZONE: guyane
           REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
           REACT_APP_OTHER_ZONE_URL: https://{{ .Values.global.host }}
-          
+
     build-frontend-aime:
       use: build
       with:
@@ -107,7 +110,7 @@ jobs:
           REACT_APP_ZONE: aime
           REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
           REACT_APP_OTHER_ZONE_URL: https://{{ .Values.global.host }}
-          
+
     build-frontend-metropole:
       use: build
       with:
