@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     domains: [
       "backend-tumeplay.fabrique.social.",
-      "backend-tumeplay-preprod.dev.fabrique.social.",
+      "backend-tumeplay-preprod.ovh.fabrique.social.",
     ],
   },
 };

@@ -2,7 +2,7 @@ pg:
   ~chart: pg
 
 dashboard:
-  host: "bo-tumeplay-preprod.dev.fabrique.social.gouv.fr"
+  host: "bo-tumeplay-preprod.ovh.fabrique.social.gouv.fr"
 
 backend:
   ~needs: [build-backend, pg]
