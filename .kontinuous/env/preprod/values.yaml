@@ -1,5 +1,7 @@
 pg:
   ~chart: pg
+  backup:
+    enabled: true
 
 dashboard:
   host: "bo-tumeplay-preprod.ovh.fabrique.social.gouv.fr"

@@ -8,3 +8,13 @@ dependencies:
         ifEnv: [dev, preprod]
       - name: buildkit-service
         ifEnv: [dev, preprod]
+    dependencies:
+      contrib:
+        preDeploy:
+          importSecrets:
+            options:
+              secrets:
+                kubeconfig:
+                harbor:
+                buildkit-client-certs:
+                tumeplay-dev-backups-access-key:
