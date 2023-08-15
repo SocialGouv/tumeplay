@@ -1,3 +1,10 @@
+## [1.171.4](https://github.com/SocialGouv/Tumeplay/compare/v1.171.3...v1.171.4) (2023-08-15)
+
+
+### Bug Fixes
+
+* **k8s:** fix preprod PVC ([#478](https://github.com/SocialGouv/Tumeplay/issues/478)) ([582d2d8](https://github.com/SocialGouv/Tumeplay/commit/582d2d86151fa2e082789d608013340a246857cf))
+
 ## [1.171.3](https://github.com/SocialGouv/Tumeplay/compare/v1.171.2...v1.171.3) (2023-08-09)
 
 
