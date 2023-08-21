@@ -1,3 +1,10 @@
+## [1.171.5](https://github.com/SocialGouv/Tumeplay/compare/v1.171.4...v1.171.5) (2023-08-21)
+
+
+### Bug Fixes
+
+* **k9s:** prod db ssl ([b70a00d](https://github.com/SocialGouv/Tumeplay/commit/b70a00dfafa3dc7d57d82798d558bbf496cbee9f))
+
 ## [1.171.4](https://github.com/SocialGouv/Tumeplay/compare/v1.171.3...v1.171.4) (2023-08-15)
 
 
