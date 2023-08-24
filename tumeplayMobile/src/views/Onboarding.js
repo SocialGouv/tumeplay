@@ -28,11 +28,6 @@ export default function Onboarding({user, setUser}) {
       img: '🤓',
       html: "Joue et <span style='color:red;'>teste tes connaissances</span> sur la sexualité. Prêt.e ?</span>",
     },
-    {
-      title: 'EN APPRENDRE PLUS SUR LA SEXUALITÉ',
-      img: '🎉',
-      html: 'Grâce aux badges remportés, joue et accumule des récompenses',
-    },
   ]);
 
   const [customBackground, setCustomBackground] = useState(bg1);
