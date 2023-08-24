@@ -1,3 +1,10 @@
+# [1.172.0](https://github.com/SocialGouv/Tumeplay/compare/v1.171.5...v1.172.0) (2023-08-24)
+
+
+### Features
+
+* removing kit mention in onboarding ([#479](https://github.com/SocialGouv/Tumeplay/issues/479)) ([0f79cd6](https://github.com/SocialGouv/Tumeplay/commit/0f79cd67aca6f1f4bed392f1f073cef51554e0af))
+
 ## [1.171.5](https://github.com/SocialGouv/Tumeplay/compare/v1.171.4...v1.171.5) (2023-08-21)
 
 
