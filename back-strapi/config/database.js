@@ -10,7 +10,7 @@ module.exports = ({ env }) => ({
         database: env("DATABASE_NAME", "tumeplay_dev"),
         username: env("DATABASE_USERNAME", "db_user"),
         password: env("DATABASE_PASSWORD", "Mjolnir64"),
-        ssl: getSslConfig() 
+        ssl: getSslConfig(env) 
       },
       options: {},
     },
@@ -18,7 +18,7 @@ module.exports = ({ env }) => ({
 });
 
 
-function getSslConfig() {
+function getSslConfig(env) {
   if (env.bool("DATABASE_SSL", false)) {
     return {rejectUnauthorized: false} // For self-signed certificates
   } 
