@@ -26,7 +26,7 @@ backend:
     - name: DATABASE_PASSWORD
       value: "$(PGPASSWORD)"
     - name: DATABASE_SSL
-      ~tpl~value: '"{{ .Values.global.isProd | ternary "true" "false" }}"'
+      value: "true"
   envFrom:
     - secretRef:
         name: pg-user
