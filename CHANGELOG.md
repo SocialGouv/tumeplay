@@ -1,3 +1,10 @@
+# [1.173.0](https://github.com/SocialGouv/Tumeplay/compare/v1.172.0...v1.173.0) (2023-09-04)
+
+
+### Features
+
+* onbarding version tracking and fix bug ([a4a1129](https://github.com/SocialGouv/Tumeplay/commit/a4a1129b7799a13535695d5eb3b37c930e46bcbe))
+
 # [1.172.0](https://github.com/SocialGouv/Tumeplay/compare/v1.171.5...v1.172.0) (2023-08-24)
 
 
