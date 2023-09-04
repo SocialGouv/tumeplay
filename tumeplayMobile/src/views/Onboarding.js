@@ -40,9 +40,6 @@ export default function Onboarding({user, setUser}) {
     if (index === 1) {
       setCustomBackground(bg2);
     }
-    if (index === 2) {
-      setCustomBackground(bg3);
-    }
   };
 
   const title = 'EN APPRENDRE PLUS SUR LA SEXUALITÉ';
@@ -89,7 +86,7 @@ export default function Onboarding({user, setUser}) {
           icon={true}
           style={styles.button}
           onPress={() => {
-            if (currentIndex === 2) {
+            if (currentIndex === 1) {
               finishOnboarding();
             } else {
               swiper.current.scrollBy(currentIndex + 1, true);
