@@ -29,7 +29,7 @@ const MobileLegal = () => {
           Directeur de publication
         </Text>
         <Stack py={2}>
-          <Text>Monsieur Jérôme SALOMON - Directeur général de la Santé</Text>
+          <Text>Monsieur Grégory Emery - Directeur général de la Santé</Text>
         </Stack>
         <Text fontFamily="heading" fontWeight="bold" as="u" fontSize="xl">
           Hébergement de la plateforme
