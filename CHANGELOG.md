@@ -1,3 +1,10 @@
+## [1.173.1](https://github.com/SocialGouv/Tumeplay/compare/v1.173.0...v1.173.1) (2023-10-02)
+
+
+### Bug Fixes
+
+* maj nom du dgs ([968ad32](https://github.com/SocialGouv/Tumeplay/commit/968ad322343644a0c1463fdcb04b33f1d2774e55))
+
 # [1.173.0](https://github.com/SocialGouv/Tumeplay/compare/v1.172.0...v1.173.0) (2023-09-04)
 
 
