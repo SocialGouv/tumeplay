@@ -34,23 +34,21 @@ pg-metabase:
 metabase:
   enabled: true
   ~chart: metabase
-  ~needs: ["pg-metabase"]
+  #~needs: ["pg-metabase"]
   # ingress:
   #   enabled: false
   envFrom:
     - secretRef:
-        name: metabase-secret
-    # - secretRef:
-    #     name: pg-metabase-app
+        name: metabase-pg-user
     - configMapRef:
         name: metabase-configmap
-  env:
-    - name: MB_DB_CONNECTION_URI
-      valueFrom:
-        - secretKeyRef:
-            name: pg-metabase-app
-            key: DATABASE_URL
-      #postgresql://${PG_HOST}/metabase?user=xxx&password=yyy&ssl=require"
+  #env:
+  # - name: MB_DB_CONNECTION_URI
+  #   valueFrom:
+  #     - secretKeyRef:
+  #         name: pg-metabase-app
+  #         key: DATABASE_URL
+  #postgresql://${PG_HOST}/metabase?user=xxx&password=yyy&ssl=require"
 
 jobs:
   runs:
