@@ -14,7 +14,6 @@ import {Colors} from '../styles/Style';
 import {GET_LEVELS} from '../services/api/levels';
 import config from '../../config';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import Snackbar from '../components/Contents/Snackbar';
 import handleRedirection from '../services/handleRedirection';
 import Event from '../services/api/matomo';
 import {useFocusEffect} from '@react-navigation/native';
