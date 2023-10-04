@@ -1,3 +1,15 @@
+# [1.174.0](https://github.com/SocialGouv/Tumeplay/compare/v1.173.1...v1.174.0) (2023-10-04)
+
+
+### Bug Fixes
+
+* filtering content without theme-id ([#482](https://github.com/SocialGouv/Tumeplay/issues/482)) ([00eb9e9](https://github.com/SocialGouv/Tumeplay/commit/00eb9e96d200e92665096462101996cf6c9128f5))
+
+
+### Features
+
+* tracking releases ([#483](https://github.com/SocialGouv/Tumeplay/issues/483)) ([25eb7aa](https://github.com/SocialGouv/Tumeplay/commit/25eb7aa12441ce3631dafb60211efccdc8d33c13))
+
 ## [1.173.1](https://github.com/SocialGouv/Tumeplay/compare/v1.173.0...v1.173.1) (2023-10-02)
 
 
