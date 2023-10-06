@@ -1,3 +1,10 @@
+## [1.174.4](https://github.com/SocialGouv/Tumeplay/compare/v1.174.3...v1.174.4) (2023-10-06)
+
+
+### Bug Fixes
+
+* try enable back postgis via default extensions ([f7ca77c](https://github.com/SocialGouv/Tumeplay/commit/f7ca77c275e82c7f6371471f4fa738e0d2b2f909))
+
 ## [1.174.3](https://github.com/SocialGouv/Tumeplay/compare/v1.174.2...v1.174.3) (2023-10-06)
 
 
