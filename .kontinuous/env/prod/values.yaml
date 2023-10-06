@@ -2,7 +2,7 @@ backend:
   host: backend-tumeplay.fabrique.social.gouv.fr
   envFrom:
     - secretRef:
-        name: pg-user # temporary
+        name: pg-app
     - secretRef:
         name: backend-sealed-secret
     - configMapRef:
