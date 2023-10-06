@@ -1,3 +1,10 @@
+## [1.174.6](https://github.com/SocialGouv/Tumeplay/compare/v1.174.5...v1.174.6) (2023-10-06)
+
+
+### Bug Fixes
+
+* switch to cnpg ([904b1dd](https://github.com/SocialGouv/Tumeplay/commit/904b1ddd5a4efef811f4a91e9e3981679ad2bb99))
+
 ## [1.174.5](https://github.com/SocialGouv/Tumeplay/compare/v1.174.4...v1.174.5) (2023-10-06)
 
 
