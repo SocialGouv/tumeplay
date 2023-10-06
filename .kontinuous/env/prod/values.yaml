@@ -47,11 +47,14 @@ metabase:
   envFrom:
     - secretRef:
         name: pg-metabase-app
-    - configMapRef:
-        name: metabase-configmap
+    - secretRef:
+        name: metabase-secret
   env:
-   - name: MB_DB_CONNECTION_URI
-     value: '$(DATABASE_URL)'
+    - name: MB_DB_CONNECTION_URI
+      value: "$(DATABASE_URL)"
+    - name: MB_APPLICATION_NAME
+      value: metabase-TuMePlay
+
   #     - secretKeyRef:
   #         name: pg-metabase-app
   #         key: DATABASE_URL
