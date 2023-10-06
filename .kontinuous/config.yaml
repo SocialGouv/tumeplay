@@ -7,7 +7,6 @@ dependencies:
       - name: ovh
         ifEnv: [dev, preprod]
       - name: buildkit-service
-        ifEnv: [dev, preprod]
     dependencies:
       contrib:
         preDeploy:
@@ -18,3 +17,4 @@ dependencies:
                 harbor:
                 buildkit-client-certs:
                 tumeplay-dev-backups-access-key:
+                tumeplay-prod-backups-access-key:
