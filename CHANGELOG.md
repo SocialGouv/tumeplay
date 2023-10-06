@@ -1,3 +1,10 @@
+## [1.174.5](https://github.com/SocialGouv/Tumeplay/compare/v1.174.4...v1.174.5) (2023-10-06)
+
+
+### Bug Fixes
+
+* **k8s:** fix metabase ([961cdff](https://github.com/SocialGouv/Tumeplay/commit/961cdff1d85142b1e72ccee9882bc2dc3a354d6e))
+
 ## [1.174.4](https://github.com/SocialGouv/Tumeplay/compare/v1.174.3...v1.174.4) (2023-10-06)
 
 
