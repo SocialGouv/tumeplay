@@ -1,3 +1,10 @@
+## [1.174.3](https://github.com/SocialGouv/Tumeplay/compare/v1.174.2...v1.174.3) (2023-10-06)
+
+
+### Bug Fixes
+
+* overwrite extensions and fix secret and coonection uri ([286d11b](https://github.com/SocialGouv/Tumeplay/commit/286d11b68367e29423a521ebbaefec42816f6f24))
+
 ## [1.174.2](https://github.com/SocialGouv/Tumeplay/compare/v1.174.1...v1.174.2) (2023-10-06)
 
 
