@@ -30,21 +30,28 @@ dashboard:
 
 pg-metabase:
   ~chart: pg
+  cnpg-cluster:
+    extensions:
+    - fuzzystrmatch
+    - uuid-ossp
+    - citext
+    - pgcrypto
+    - hstore
 
 metabase:
   enabled: true
   ~chart: metabase
-  #~needs: ["pg-metabase"]
+  ~needs: ["pg-metabase"]
   # ingress:
   #   enabled: false
   envFrom:
     - secretRef:
-        name: metabase-pg-user
+        name: pg-metabase-app
     - configMapRef:
         name: metabase-configmap
-  #env:
-  # - name: MB_DB_CONNECTION_URI
-  #   valueFrom:
+  env:
+   - name: MB_DB_CONNECTION_URI
+     value: '$(DATABASE_URL)'
   #     - secretKeyRef:
   #         name: pg-metabase-app
   #         key: DATABASE_URL
