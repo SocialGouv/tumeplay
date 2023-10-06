@@ -28,15 +28,21 @@ frontend-aime:
 dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
 
+
+pg: 
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 1Gi
+
 pg-metabase:
   ~chart: pg
-  # cnpg-cluster:
-  #   extensions:
-  #   - fuzzystrmatch
-  #   - uuid-ossp
-  #   - citext
-  #   - pgcrypto
-  #   - hstore
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 1Gi
 
 metabase:
   enabled: true
