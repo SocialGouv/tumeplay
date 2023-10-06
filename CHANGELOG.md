@@ -1,3 +1,10 @@
+## [1.174.2](https://github.com/SocialGouv/Tumeplay/compare/v1.174.1...v1.174.2) (2023-10-06)
+
+
+### Bug Fixes
+
+* use buildkit service in prod and copy cnpg backup secret ([e3c3088](https://github.com/SocialGouv/Tumeplay/commit/e3c3088e7275a21d29aa64502a46f9896de58a53))
+
 ## [1.174.1](https://github.com/SocialGouv/Tumeplay/compare/v1.174.0...v1.174.1) (2023-10-06)
 
 
