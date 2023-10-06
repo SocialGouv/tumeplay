@@ -1,20 +1,5 @@
-pg:
-  ~chart: pg
-  backup:
-    enabled: true
-
 dashboard:
   host: "bo-tumeplay-preprod.ovh.fabrique.social.gouv.fr"
-
-backend:
-  ~needs: [build-backend, pg]
-  envFrom:
-    - secretRef:
-        name: "pg-app"
-    - secretRef:
-        name: backend-sealed-secret
-    - configMapRef:
-        name: backend-configmap
 
 jobs:
   runs:

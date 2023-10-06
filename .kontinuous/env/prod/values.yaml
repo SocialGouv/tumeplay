@@ -1,5 +1,14 @@
 backend:
   host: backend-tumeplay.fabrique.social.gouv.fr
+  envFrom:
+    - secretRef:
+        name: pg-user # temporary
+    - secretRef:
+        name: backend-sealed-secret
+    - configMapRef:
+        name: backend-configmap
+    - secretRef:
+        name: azure-tumeplay-volume
 
 frontend-metropole:
   host: tumeplay.fabrique.social.gouv.fr
@@ -19,8 +28,13 @@ frontend-aime:
 dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
 
+pg-metabase:
+  ~chart: pg
+
 metabase:
   enabled: true
+  ~chart: metabase
+  #~needs: ["pg-metabase"]
   # ingress:
   #   enabled: false
   envFrom:
@@ -28,6 +42,13 @@ metabase:
         name: metabase-pg-user
     - configMapRef:
         name: metabase-configmap
+  #env:
+  # - name: MB_DB_CONNECTION_URI
+  #   valueFrom:
+  #     - secretKeyRef:
+  #         name: pg-metabase-app
+  #         key: DATABASE_URL
+  #postgresql://${PG_HOST}/metabase?user=xxx&password=yyy&ssl=require"
 
 jobs:
   runs:
@@ -36,9 +57,8 @@ jobs:
         buildArgs:
           buildenv: preprod.guyane
           REACT_APP_MATOMO_ID: "45"
-          
+
     build-frontend-aime:
       with:
         buildArgs:
           buildenv: preprod.aime
-          

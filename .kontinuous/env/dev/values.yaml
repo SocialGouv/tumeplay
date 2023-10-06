@@ -1,8 +1,4 @@
-pg:
-  ~chart: pg
-
 backend:
-  ~needs: [build-backend, pg]
   volumes:
     - name: uploads
       emptyDir: {}
@@ -11,12 +7,11 @@ backend:
       name: uploads
   envFrom:
     - secretRef:
-        name: "pg-app"
+        name: pg-app
     - secretRef:
         name: backend-sealed-secret
     - configMapRef:
         name: backend-configmap
-
 jobs:
   runs:
     build-frontend-guyane:

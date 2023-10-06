@@ -1,6 +1,6 @@
 backend:
   ~chart: app
-  ~needs: [build-backend]
+  ~needs: [build-backend, pg]
   host: "backend-{{ $.Values.global.host }}"
   imagePackage: backend
   containerPort: 1337
@@ -29,7 +29,7 @@ backend:
       value: "true"
   envFrom:
     - secretRef:
-        name: pg-user
+        name: pg-app
     - secretRef:
         name: backend-sealed-secret
     - secretRef:
@@ -73,12 +73,10 @@ dashboard:
   imagePackage: dashboard
   containerPort: 8080
 
-metabase:
-  ~chart: metabase
-  enabled: false
+pg:
+  ~chart: pg
 
 jobs:
-  ~chart: jobs
   runs:
     build-backend:
       use: build
@@ -123,10 +121,3 @@ jobs:
         context: tumeplay-dashboard
         buildArgs:
           REACT_APP_API_URL: https://backend-{{ .Values.global.host }}
-
-deactivate:
-  jobs-deactivate:
-    runs:
-      deactivate:
-        with:
-          db: true
