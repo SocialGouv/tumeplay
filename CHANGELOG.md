@@ -1,3 +1,10 @@
+## [1.174.8](https://github.com/SocialGouv/Tumeplay/compare/v1.174.7...v1.174.8) (2023-10-06)
+
+
+### Bug Fixes
+
+* **k9s:** resources ([#484](https://github.com/SocialGouv/Tumeplay/issues/484)) ([654dd68](https://github.com/SocialGouv/Tumeplay/commit/654dd680dfc4cc3b00f71f2c02199b01fdd58e30))
+
 ## [1.174.7](https://github.com/SocialGouv/Tumeplay/compare/v1.174.6...v1.174.7) (2023-10-06)
 
 
