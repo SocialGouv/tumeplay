@@ -1,3 +1,10 @@
+## [1.174.7](https://github.com/SocialGouv/Tumeplay/compare/v1.174.6...v1.174.7) (2023-10-06)
+
+
+### Bug Fixes
+
+* add cnpg limits ([7d19e20](https://github.com/SocialGouv/Tumeplay/commit/7d19e205b05887fd6c7d2f46ab89e39e27a63f67))
+
 ## [1.174.6](https://github.com/SocialGouv/Tumeplay/compare/v1.174.5...v1.174.6) (2023-10-06)
 
 
