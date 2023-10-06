@@ -30,13 +30,13 @@ dashboard:
 
 pg-metabase:
   ~chart: pg
-  cnpg-cluster:
-    extensions:
-    - fuzzystrmatch
-    - uuid-ossp
-    - citext
-    - pgcrypto
-    - hstore
+  # cnpg-cluster:
+  #   extensions:
+  #   - fuzzystrmatch
+  #   - uuid-ossp
+  #   - citext
+  #   - pgcrypto
+  #   - hstore
 
 metabase:
   enabled: true
