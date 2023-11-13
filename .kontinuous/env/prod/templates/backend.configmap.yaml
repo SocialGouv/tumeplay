@@ -6,7 +6,7 @@ data:
   CRON_ENABLE: "true"
   URL: "https://backend-tumeplay.fabrique.social.gouv.fr"
   DOMAIN_API: "https://backend-tumeplay.fabrique.social.gouv.fr/"
-  EMAIL_PROVIDER_HOST: "pro2.mail.ovh.net"
+  EMAIL_PROVIDER_HOST: "ex5.mail.ovh.net"
   EMAIL_PROVIDER_PORT: "587"
   EMAIL_PROVIDER_SECURE: "false"
   EMAIL_PROVIDER_USERNAME: "info.tumeplay@fabrique.social.gouv.fr"
