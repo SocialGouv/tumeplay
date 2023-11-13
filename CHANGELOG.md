@@ -1,3 +1,10 @@
+# [1.175.0](https://github.com/SocialGouv/Tumeplay/compare/v1.174.8...v1.175.0) (2023-11-13)
+
+
+### Features
+
+* update smtp config ([#485](https://github.com/SocialGouv/Tumeplay/issues/485)) ([d84d8f3](https://github.com/SocialGouv/Tumeplay/commit/d84d8f3bcf5aee6144e38b56672c5df846c99f15))
+
 ## [1.174.8](https://github.com/SocialGouv/Tumeplay/compare/v1.174.7...v1.174.8) (2023-10-06)
 
 
