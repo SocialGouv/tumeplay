@@ -1,3 +1,10 @@
+## [1.175.1](https://github.com/SocialGouv/Tumeplay/compare/v1.175.0...v1.175.1) (2023-11-14)
+
+
+### Bug Fixes
+
+* adjusting sealed with namespace changes ([#486](https://github.com/SocialGouv/Tumeplay/issues/486)) ([157ed61](https://github.com/SocialGouv/Tumeplay/commit/157ed61520920ee58186401065ded5e768d8a1ad))
+
 # [1.175.0](https://github.com/SocialGouv/Tumeplay/compare/v1.174.8...v1.175.0) (2023-11-13)
 
 
