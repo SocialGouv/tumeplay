@@ -1,3 +1,10 @@
+# [1.176.0](https://github.com/SocialGouv/Tumeplay/compare/v1.175.2...v1.176.0) (2023-11-15)
+
+
+### Features
+
+* add tipimail smtp ([#488](https://github.com/SocialGouv/Tumeplay/issues/488)) ([1fd58ed](https://github.com/SocialGouv/Tumeplay/commit/1fd58ed655689cdfb07eb5e350c0dc0551b3046e))
+
 ## [1.175.2](https://github.com/SocialGouv/Tumeplay/compare/v1.175.1...v1.175.2) (2023-11-14)
 
 
