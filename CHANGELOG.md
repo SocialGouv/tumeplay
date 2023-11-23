@@ -1,3 +1,10 @@
+## [1.176.2](https://github.com/SocialGouv/Tumeplay/compare/v1.176.1...v1.176.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* smtp secrets ([#490](https://github.com/SocialGouv/Tumeplay/issues/490)) ([09c3574](https://github.com/SocialGouv/Tumeplay/commit/09c357459008efbcfe08b26c14c765f49f048e44))
+
 ## [1.176.1](https://github.com/SocialGouv/Tumeplay/compare/v1.176.0...v1.176.1) (2023-11-23)
 
 
