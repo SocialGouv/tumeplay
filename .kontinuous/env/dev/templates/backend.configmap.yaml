@@ -5,11 +5,10 @@ metadata:
 data:
   RANCHER_PROJECT_ID: c-gjtkk:p-m77bc
   CRON_ENABLE: "false"
-  EMAIL_PROVIDER_HOST: "ex5.mail.ovh.net"
+  EMAIL_PROVIDER_HOST: "smtp.tipimail.com"
   EMAIL_PROVIDER_PORT: "587"
-  EMAIL_PROVIDER_SECURE: "false"
-  EMAIL_PROVIDER_USERNAME: "info.tumeplay@fabrique.social.gouv.fr"
-  EMAIL_PROVIDER_TLS: "false"
+  EMAIL_PROVIDER_SECURE: "true"
+  EMAIL_PROVIDER_TLS: "true"
   EMAIL_PROVIDER_FROM: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>"
   EMAIL_PROVIDER_REPLY_TO: "info.tumeplay@fabrique.social.gouv.fr"
   EMAIL_CONFIG_ADMIN: "clement@numericite.eu"
