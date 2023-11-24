@@ -1,3 +1,10 @@
+## [1.176.6](https://github.com/SocialGouv/Tumeplay/compare/v1.176.5...v1.176.6) (2023-11-24)
+
+
+### Bug Fixes
+
+* add smtp from ([4c0f339](https://github.com/SocialGouv/Tumeplay/commit/4c0f3394a7c9d050d087d937fe6df488e91c6c55))
+
 ## [1.176.5](https://github.com/SocialGouv/Tumeplay/compare/v1.176.4...v1.176.5) (2023-11-24)
 
 
