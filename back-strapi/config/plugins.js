@@ -9,6 +9,7 @@ module.exports = ({ env }) => ({
       rejectUnauthorized: true,
       requireTLS: "true",
       connectionTimeout: 1,
+      secure: false
     },
     settings: {
       defaultFrom: env("EMAIL_PROVIDER_FROM"),
