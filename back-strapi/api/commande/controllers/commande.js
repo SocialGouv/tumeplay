@@ -422,32 +422,35 @@ module.exports = {
           );
 
           if (!referent.openingHours) referent.openingHours = {};
-
-          await strapi.plugins["email"].services.email.sendTemplatedEmail(
-            {
-              to: entity.email,
-            },
-            EMAIL_ORDER_CONFIRM_REF,
-            {
-              order: Object.assign(
-                _.pick(entity, [
-                  "name",
-                  "first_name",
-                  "last_name",
-                  "id",
-                  "address",
-                  "address_zipcode",
-                  "address_city",
-                ]),
-                {
-                  delivery_name: delivery_name,
-                  custom_text: custom_text,
-                  box: _.pick(box, ["title"]),
-                }
-              ),
-              referent: Object.assign(_.pick(referent, ["openingHours"])),
-            }
-          );
+          try {
+            await strapi.plugins["email"].services.email.sendTemplatedEmail(
+              {
+                to: entity.email,
+              },
+              EMAIL_ORDER_CONFIRM_REF,
+              {
+                order: Object.assign(
+                  _.pick(entity, [
+                    "name",
+                    "first_name",
+                    "last_name",
+                    "id",
+                    "address",
+                    "address_zipcode",
+                    "address_city",
+                  ]),
+                  {
+                    delivery_name: delivery_name,
+                    custom_text: custom_text,
+                    box: _.pick(box, ["title"]),
+                  }
+                ),
+                referent: Object.assign(_.pick(referent, ["openingHours"])),
+              }
+            );
+          } catch(e) {
+            console.error("Email referent error", e);
+          }
         }
         if (users_email.length > 0) {
           strapi.log.info(
