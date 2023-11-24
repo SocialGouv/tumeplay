@@ -415,7 +415,7 @@ module.exports = {
         };
         if (ctx.request.body.email) {
           strapi.log.info(
-            "SENDING EMAIL TO : ",
+            "SENDING EMAIL REF1 TO : ",
             entity.email,
             " - ORDER NUMBER ",
             entity.id
@@ -423,7 +423,7 @@ module.exports = {
 
           if (!referent.openingHours) referent.openingHours = {};
           try {
-            await strapi.plugins["email"].services.email.sendTemplatedEmail(
+            const sendResult = await strapi.plugins["email"].services.email.sendTemplatedEmail(
               {
                 to: entity.email,
               },
@@ -448,6 +448,8 @@ module.exports = {
                 referent: Object.assign(_.pick(referent, ["openingHours"])),
               }
             );
+            console.log(sendResult);
+            console.log(JSON.stringify(sendResult,null,2));
           } catch(e) {
             console.error("Email referent error", e);
           }
