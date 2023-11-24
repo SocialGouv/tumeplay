@@ -359,6 +359,7 @@ module.exports = {
             await strapi.plugins["email"].services.email.sendTemplatedEmail(
               {
                 to: entity.email,
+                from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
               },
               EMAIL_ORDER_CONFIRM,
               {
@@ -380,7 +381,7 @@ module.exports = {
                 ),
               }
             );
-          } catch(e) {
+          } catch (e) {
             console.error("EMAIL ERR", e);
           }
         }
@@ -423,9 +424,12 @@ module.exports = {
 
           if (!referent.openingHours) referent.openingHours = {};
           try {
-            const sendResult = await strapi.plugins["email"].services.email.sendTemplatedEmail(
+            const sendResult = await strapi.plugins[
+              "email"
+            ].services.email.sendTemplatedEmail(
               {
                 to: entity.email,
+                from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
               },
               EMAIL_ORDER_CONFIRM_REF,
               {
@@ -449,8 +453,8 @@ module.exports = {
               }
             );
             console.log(sendResult);
-            console.log(JSON.stringify(sendResult,null,2));
-          } catch(e) {
+            console.log(JSON.stringify(sendResult, null, 2));
+          } catch (e) {
             console.error("Email referent error", e);
           }
         }
@@ -464,6 +468,7 @@ module.exports = {
           await strapi.plugins["email"].services.email.sendTemplatedEmail(
             {
               to: users_email.join(","),
+              from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
             },
             REFERENT_ORDER_CONFIRM,
             {
@@ -605,6 +610,7 @@ module.exports = {
       await strapi.plugins["email"].services.email.sendTemplatedEmail(
         {
           to: entity.email,
+          from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
         },
         ORDER_REFERENT_NOTIFY_USER,
         {

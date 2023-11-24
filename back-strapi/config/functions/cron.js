@@ -314,6 +314,7 @@ module.exports = {
 
     await strapi.plugins["email"].services.email.sendTemplatedEmail(
       {
+        from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
         to: strapi.config.get("server.emails.cat"),
         cc: strapi.config.get("server.emails.admin"),
         attachments: attachments,
@@ -375,6 +376,7 @@ module.exports = {
       strapi.plugins["email"].services.email.sendTemplatedEmail(
         {
           to: user.email,
+          from: "Tumeplay <info.tumeplay@fabrique.social.gouv.fr>",
         },
         CAT_TEMPLATE
       );
