@@ -1,3 +1,10 @@
+## [1.176.3](https://github.com/SocialGouv/Tumeplay/compare/v1.176.2...v1.176.3) (2023-11-24)
+
+
+### Bug Fixes
+
+* add debug ([#491](https://github.com/SocialGouv/Tumeplay/issues/491)) ([50819b6](https://github.com/SocialGouv/Tumeplay/commit/50819b6f20bcfb13eff09611a55e1a3daec006a5))
+
 ## [1.176.2](https://github.com/SocialGouv/Tumeplay/compare/v1.176.1...v1.176.2) (2023-11-23)
 
 
