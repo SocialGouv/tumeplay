@@ -6,9 +6,9 @@ import {
   Text,
   Flex,
   Divider,
-  UnorderedList,
-  ListItem,
+  Heading,
   Link as ChakraLink,
+  Image,
 } from "@chakra-ui/react";
 import Header from "../components/header";
 import Link from "next/link";
@@ -25,9 +25,26 @@ const Home = () => {
   };
 
   const siteData = [
-    { url: "https://www.onsexprime.fr/", name: "Onsexprime" },
-    { url: "https://questionsexualite.fr/", name: "Questions Sexualité" },
-    { url: "https://ivg.gouv.fr/", name: "Le site officiel sur l'IVG" },
+    {
+      url: "https://www.onsexprime.fr/",
+      name: "Onsexprime",
+      img: "logo-onsex.svg",
+    },
+    {
+      url: "https://questionsexualite.fr/",
+      name: "Questions Sexualité",
+      img: "questionsex_logo.svg",
+    },
+    {
+      url: "https://ivg.gouv.fr/",
+      name: "Le site officiel sur l'IVG",
+      img: "gouvernement_logo.png",
+    },
+    {
+      url: "https://www.filsantejeunes.com/",
+      name: "Filsantéjeunes",
+      img: "numero_vert.png",
+    },
   ];
 
   useEffect(() => {
@@ -204,30 +221,49 @@ const Home = () => {
           <meta name="robots" content="all" />
         </Head>
         <Header />
-        <Flex flexDir={"column"} align={"center"} fontSize={18}>
-          <Text fontWeight={"bold"} textAlign={"center"}>
+        <Flex flexDir={"column"} align={"center"} fontSize={18} mt={4}>
+          <Heading
+            as="h1"
+            mb={[4, 4, 6]}
+            fontSize={["2xl", "2xl", "xl"]}
+            textAlign={"center"}
+          >
             Tumeplay c’est terminé ! Mais tu peux retrouver d’autres contenus
             sur les sites suivants :
-          </Text>
+          </Heading>
 
-          <UnorderedList mt={4}>
+          <Flex
+            gap={5}
+            width={"100%"}
+            flexWrap={["wrap", "wrap", "nowrap"]}
+            justifyContent={"space-around"}
+            align={"center"}
+            padding={10}
+          >
             {siteData.map((site, index) => (
-              <ListItem key={index}>
-                <ChakraLink
-                  href={site.url}
-                  color={"blue.600"}
-                  target="_blank"
-                  _hover={{ textDecoration: "underline" }}
+              <ChakraLink
+                target="_blank"
+                w={"100%"}
+                href={site.url}
+                key={index}
+              >
+                <Box
+                  background={"#F4F0EB"}
+                  w={"100%"}
+                  p={4}
+                  borderRadius="lg"
+                  height={"200px"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  cursor={"pointer"}
+                  _hover={{ transform: "scale(1.05)" }}
+                  transition="transform 0.3s ease-in-out"
                 >
-                  {site.name}
-                </ChakraLink>
-              </ListItem>
+                  <Image src={site.img} alt={site.name} width={"100%"} />
+                </Box>
+              </ChakraLink>
             ))}
-          </UnorderedList>
-          <Box mt={10} textAlign={"center"}>
-            <Text fontWeight={"bold"}>Numéro vert fil santé jeune :</Text>
-            <Text>0 800 235 236</Text>
-          </Box>
+          </Flex>
         </Flex>
       </Container>
     </Box>
