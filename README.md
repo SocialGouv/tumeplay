@@ -30,7 +30,7 @@ yarn start
 
 Développer une application visant à augmenter les connaissances et compétences des jeunes en matière de santé sexuelle. Contient des informations sur la sexualité, des quizzs et possibilité de commander des kits.
 
-Créer un fichier .env avec les informations du .env.example du repo
+Créer un fichier .env et un fichier .env.example. Récupérer les informations des fichiers env du dossier environnements.
 
 ```bash
 npm start
