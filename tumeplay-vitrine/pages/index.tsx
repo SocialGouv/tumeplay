@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Post, Theme } from "./api/posts/types";
 import Head from "next/head";
 import {
   Box,
@@ -16,7 +14,6 @@ import Header from "../components/header";
 import Link from "next/link";
 
 const Home = () => {
-  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
   const [country, setCountry] = useState<string>("");
 
   const getCountryLocation = () => {

@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Text } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import Image from "next/image";
 
 const Header = () => {
