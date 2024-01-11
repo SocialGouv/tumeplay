@@ -1,3 +1,10 @@
+# [1.177.0](https://github.com/SocialGouv/Tumeplay/compare/v1.176.6...v1.177.0) (2024-01-11)
+
+
+### Features
+
+* update home page and readme ([#492](https://github.com/SocialGouv/Tumeplay/issues/492)) ([b3e34fa](https://github.com/SocialGouv/Tumeplay/commit/b3e34fac332b8f3df2cee9ffd112ff6ed537dd77))
+
 ## [1.176.6](https://github.com/SocialGouv/Tumeplay/compare/v1.176.5...v1.176.6) (2023-11-24)
 
 
