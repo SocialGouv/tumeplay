@@ -1,95 +1,20 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Post, Theme, ZPost } from "./api/posts/types";
 import Head from "next/head";
 import {
   Box,
   Container,
-  Spinner,
   Text,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputRightElement,
+  Flex,
   Divider,
+  Heading,
   Link as ChakraLink,
-  FormLabel,
-  FormControl,
+  Image,
 } from "@chakra-ui/react";
-import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import Header from "../components/header";
-import Themes from "../components/themes";
-import PostCard from "../components/PostCard";
-import { useDebounce } from "usehooks-ts";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Link from "next/link";
 
-const Home = ({
-  initialPosts,
-  initialThemes,
-}: {
-  initialPosts: Post[];
-  initialThemes: Theme[];
-}) => {
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
-  const [selectedThemesIds, setSelectedThemesIds] = useState<number[]>([]);
-  const [themes] = useState<Theme[]>(initialThemes);
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState<string | null>(null);
-  const debouncedValue = useDebounce<string>(search as string, 500);
-  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
-  const [isFetching, setIsFetching] = useState<boolean>(false);
+const Home = () => {
   const [country, setCountry] = useState<string>("");
-
-  const handleScroll = () => {
-    const windowH = window.innerHeight;
-    const documentH = document.documentElement.scrollTop;
-    const documentOffset = document.documentElement.offsetHeight;
-    if (documentH + windowH <= documentOffset - 2500) {
-      return;
-    }
-    setIsFetching(true);
-  };
-
-  const loadmoreContent = () => {
-    axios
-      .get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
-        params: {
-          _start: posts.length + 1,
-          _limit: 15,
-          title_mobile_null: false,
-          thematique_mobile_null: false,
-        },
-      })
-      .then((res) => {
-        const adjustedRes = (res.data || []).map((c: Post) => ({
-          ...c,
-          image: {
-            ...c.image,
-            url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
-          },
-          thematique_mobile: {
-            ...c.thematique_mobile,
-            image: {
-              ...c.thematique_mobile?.image,
-              url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile?.image?.url,
-            },
-          },
-          etiquette: {
-            ...c.etiquette,
-            image: {
-              ...c.etiquette?.image,
-              url:
-                NEXT_PUBLIC_STRAPI_URL +
-                c.etiquette?.image.formats?.thumbnail?.url,
-            },
-          },
-        }));
-        const tmpPosts = [...posts, ...adjustedRes];
-        setPosts(tmpPosts);
-        setIsFetching(false);
-      });
-  };
 
   const getCountryLocation = () => {
     fetch("https://ipapi.co/json/").then((res) => {
@@ -99,58 +24,32 @@ const Home = ({
     });
   };
 
+  const siteData = [
+    {
+      url: "https://www.onsexprime.fr/",
+      name: "Onsexprime",
+      img: "logo-onsex.svg",
+    },
+    {
+      url: "https://questionsexualite.fr/",
+      name: "Questions Sexualité",
+      img: "questionsex_logo.svg",
+    },
+    {
+      url: "https://ivg.gouv.fr/",
+      name: "Le site officiel sur l'IVG",
+      img: "gouvernement_logo.png",
+    },
+    {
+      url: "https://www.filsantejeunes.com/",
+      name: "Filsantéjeunes",
+      img: "numero_vert.png",
+    },
+  ];
+
   useEffect(() => {
     getCountryLocation();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (!isFetching) return;
-    loadmoreContent();
-  }, [isFetching]);
-
-  const fetchPosts = (themeIds: number[]) => {
-    setIsLoading(true);
-    let params: {
-      [key: string]: string | string[] | boolean | number | number[];
-    } = {};
-
-    if (themeIds.length > 0) {
-      params.theme = themeIds;
-    }
-
-    if (search) {
-      params.search = search;
-    }
-
-    axios
-      .get("/api/posts", { params })
-      .then((response) => {
-        setPosts((response.data || []).map((p: any) => ZPost.parse(p)));
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const handleThemeClick = (id: number) => {
-    if (selectedThemesIds.includes(id)) {
-      let newThemeIds = selectedThemesIds.filter((tId) => tId !== id);
-      setSelectedThemesIds(newThemeIds);
-      fetchPosts(newThemeIds);
-    } else {
-      let newThemeIds = [...selectedThemesIds, id];
-      setSelectedThemesIds(newThemeIds);
-      fetchPosts(newThemeIds);
-    }
-  };
-
-  useEffect(() => {
-    if (search !== null) {
-      fetchPosts(selectedThemesIds);
-    }
-  }, [debouncedValue]);
 
   if (country === "French Guiana") {
     window.location.href =
@@ -322,120 +221,53 @@ const Home = ({
           <meta name="robots" content="all" />
         </Head>
         <Header />
-        <FormControl>
-          <FormLabel htmlFor="input-search" fontWeight="bold">
-            Rechercher un contenu :
-          </FormLabel>
-          <InputGroup size="lg" mb={10}>
-            <InputLeftAddon>
-              <SearchIcon />
-            </InputLeftAddon>
-            <Input
-              id="input-search"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearch(e.target.value)
-              }
-              placeholder="Tape un mot clé : contraception, clitoris, consentement..."
-              value={search || ""}
-            />
-            {search && (
-              <InputRightElement cursor="pointer" onClick={() => setSearch("")}>
-                <CloseIcon />
-              </InputRightElement>
-            )}
-          </InputGroup>
-        </FormControl>
-        <Themes
-          onClick={handleThemeClick}
-          selectedThemesIds={selectedThemesIds}
-          themes={themes}
-        />
-        {isLoading ? (
-          <Box h="100vh">
-            <Spinner
-              size="xl"
-              color="primary"
-              mx="auto"
-              display="block"
-              mt={16}
-            />
-          </Box>
-        ) : posts.length > 0 ? (
-          <Box mt={4}>
-            <ResponsiveMasonry
-              columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-            >
-              <Masonry gutter="1rem">
-                {posts.map((p) => (
-                  <Box key={p.id}>
-                    <PostCard post={p} />
-                  </Box>
-                ))}
-              </Masonry>
-            </ResponsiveMasonry>
-          </Box>
-        ) : (
-          <Text fontSize="xl" textAlign="center" mt={10}>
-            <Box as="span" fontSize="4xl">
-              😢
-            </Box>
-            <br />
-            Aucun élement à afficher
-          </Text>
-        )}
+        <Flex flexDir={"column"} align={"center"} fontSize={18} mt={4}>
+          <Heading
+            as="h1"
+            mb={[4, 4, 6]}
+            fontSize={["2xl", "2xl", "xl"]}
+            textAlign={"center"}
+          >
+            Tumeplay c’est terminé ! Mais tu peux retrouver d’autres contenus
+            sur les sites suivants :
+          </Heading>
+
+          <Flex
+            gap={5}
+            width={"100%"}
+            flexWrap={["wrap", "wrap", "nowrap"]}
+            justifyContent={"space-around"}
+            align={"center"}
+            padding={10}
+          >
+            {siteData.map((site, index) => (
+              <ChakraLink
+                target="_blank"
+                w={"100%"}
+                href={site.url}
+                key={index}
+              >
+                <Box
+                  background={"#F4F0EB"}
+                  w={"100%"}
+                  p={4}
+                  borderRadius="lg"
+                  height={"200px"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  cursor={"pointer"}
+                  _hover={{ transform: "scale(1.05)" }}
+                  transition="transform 0.3s ease-in-out"
+                >
+                  <Image src={site.img} alt={site.name} width={"100%"} />
+                </Box>
+              </ChakraLink>
+            ))}
+          </Flex>
+        </Flex>
       </Container>
     </Box>
   );
 };
-
-export async function getServerSideProps() {
-  const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL as string;
-  let response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/contents`, {
-    params: {
-      _start: 0,
-      _limit: 15,
-      title_mobile_null: false,
-      thematique_mobile_null: false,
-    },
-  });
-  const posts = (response.data || []).map((c: Post) => ({
-    ...c,
-    image: {
-      ...c.image,
-      url: NEXT_PUBLIC_STRAPI_URL + c.image?.formats?.thumbnail?.url,
-    },
-    thematique_mobile: {
-      ...c.thematique_mobile,
-      image: {
-        ...c.thematique_mobile.image,
-        url: NEXT_PUBLIC_STRAPI_URL + c.thematique_mobile.image.url,
-      },
-    },
-    etiquette: {
-      ...c.etiquette,
-      image: {
-        ...c.etiquette?.image,
-        url:
-          NEXT_PUBLIC_STRAPI_URL + c.etiquette?.image.formats?.thumbnail?.url,
-      },
-    },
-  }));
-
-  response = await axios.get(`${NEXT_PUBLIC_STRAPI_URL}/thematique-mobiles`, {
-    params: {
-      _start: 0,
-      _limit: 100,
-    },
-  });
-  const themes = (response.data || []).map((t: Theme) => ({
-    ...t,
-    image: {
-      ...t.image,
-      url: NEXT_PUBLIC_STRAPI_URL + t.image?.url,
-    },
-  }));
-
-  return { props: { initialPosts: posts, initialThemes: themes } };
-}
 
 export default Home;
