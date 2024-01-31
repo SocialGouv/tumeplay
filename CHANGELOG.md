@@ -1,3 +1,10 @@
+## [1.177.1](https://github.com/SocialGouv/Tumeplay/compare/v1.177.0...v1.177.1) (2024-01-31)
+
+
+### Bug Fixes
+
+* pvc ([1ff6d18](https://github.com/SocialGouv/Tumeplay/commit/1ff6d189c15cd7e78996b282c41929eb8d94c6e8))
+
 # [1.177.0](https://github.com/SocialGouv/Tumeplay/compare/v1.176.6...v1.177.0) (2024-01-11)
 
 
