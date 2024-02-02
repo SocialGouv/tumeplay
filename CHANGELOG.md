@@ -1,3 +1,10 @@
+## [1.177.2](https://github.com/SocialGouv/Tumeplay/compare/v1.177.1...v1.177.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* clean rm preprod pvc ([6e751a5](https://github.com/SocialGouv/Tumeplay/commit/6e751a537ef7f04a22e6d4a8627b7c11b7791a78))
+
 ## [1.177.1](https://github.com/SocialGouv/Tumeplay/compare/v1.177.0...v1.177.1) (2024-01-31)
 
 
