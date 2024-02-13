@@ -29,43 +29,31 @@ dashboard:
   host: bo-tumeplay.fabrique.social.gouv.fr
 
 pg:
+  backup:
+    name: ovh # backup on a new folder
   cnpg-cluster:
+    recovery:
+      enabled: true
+      ~tpl~database: "{{ .Values.global.pgDatabase }}"
+      ~tpl~owner: "{{ .Values.global.pgUser }}"
+      secretName: "pg-db"
+      barmanObjectStore:
+        ~tpl~destinationPath: "s3://tumeplay-prod-backups/tumeplay"
+        s3Credentials:
+          accessKeyId:
+            ~tpl~name: "tumeplay-prod-backups-access-key"
+            key: bucket_access_key
+          secretAccessKey:
+            ~tpl~name: "tumeplay-prod-backups-access-key"
+            key: bucket_secret_key
+          region:
+            ~tpl~name: "tumeplay-prod-backups-access-key"
+            key: bucket_region
     resources:
       requests:
         memory: 128Mi
       limits:
         memory: 1Gi
-
-pg-metabase:
-  ~chart: pg
-  cnpg-cluster:
-    resources:
-      requests:
-        memory: 128Mi
-      limits:
-        memory: 1Gi
-
-metabase:
-  enabled: true
-  ~chart: metabase
-  ~needs: ["pg-metabase"]
-  # ingress:
-  #   enabled: false
-  envFrom:
-    - secretRef:
-        name: pg-metabase-app
-    - secretRef:
-        name: metabase-secret
-  env:
-    - name: MB_DB_CONNECTION_URI
-      value: "$(DATABASE_URL)"
-    - name: MB_APPLICATION_NAME
-      value: metabase-TuMePlay
-
-  #     - secretKeyRef:
-  #         name: pg-metabase-app
-  #         key: DATABASE_URL
-  #postgresql://${PG_HOST}/metabase?user=xxx&password=yyy&ssl=require"
 
 jobs:
   runs:
