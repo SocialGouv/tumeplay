@@ -1,3 +1,10 @@
+## [1.177.5](https://github.com/SocialGouv/Tumeplay/compare/v1.177.4...v1.177.5) (2024-10-10)
+
+
+### Bug Fixes
+
+* remove duplicated image ([da9ca09](https://github.com/SocialGouv/Tumeplay/commit/da9ca099ee24d8bc537cab1316448bdf5aee3502))
+
 ## [1.177.4](https://github.com/SocialGouv/Tumeplay/compare/v1.177.3...v1.177.4) (2024-02-13)
 
 
