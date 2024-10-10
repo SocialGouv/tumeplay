@@ -180,7 +180,7 @@ export default function ChartScreen(props) {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Text style={contentStyle.text}>Microsoft Azure</Text>
+                <Text style={contentStyle.text}>OVH Cloud</Text>
               </TableCell>
               <TableCell>
                 <Text style={contentStyle.text}>France</Text>
