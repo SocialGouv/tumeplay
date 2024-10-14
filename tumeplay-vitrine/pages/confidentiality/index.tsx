@@ -187,7 +187,7 @@ const Confidentiatily = () => {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>Microsoft Azure</Td>
+              <Td>OVH Cloud</Td>
               <Td>France</Td>
               <Td>Hébergement</Td>
               <Td>

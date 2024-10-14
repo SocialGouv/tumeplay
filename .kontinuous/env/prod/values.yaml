@@ -7,8 +7,8 @@ backend:
         name: backend-sealed-secret
     - configMapRef:
         name: backend-configmap
-    - secretRef:
-        name: azure-tumeplay-volume
+    # - secretRef:
+    #     name: azure-tumeplay-volume
 
 frontend-metropole:
   host: tumeplay.fabrique.social.gouv.fr

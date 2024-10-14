@@ -32,8 +32,8 @@ backend:
         name: pg-app
     - secretRef:
         name: backend-sealed-secret
-    - secretRef:
-        name: azure-tumeplay-volume
+    # - secretRef:
+    #     name: azure-tumeplay-volume
     - configMapRef:
         name: backend-configmap
   volumeMounts:
