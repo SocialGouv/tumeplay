@@ -1,3 +1,10 @@
+## [1.177.6](https://github.com/SocialGouv/Tumeplay/compare/v1.177.5...v1.177.6) (2024-10-14)
+
+
+### Bug Fixes
+
+* remove azure config ([#494](https://github.com/SocialGouv/Tumeplay/issues/494)) ([c8e21c1](https://github.com/SocialGouv/Tumeplay/commit/c8e21c13bb6454ee00411ca1503721ba4b2e56d7))
+
 ## [1.177.5](https://github.com/SocialGouv/Tumeplay/compare/v1.177.4...v1.177.5) (2024-10-10)
 
 
